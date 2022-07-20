@@ -1,7 +1,6 @@
 {
   "name": "zenn-repo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,6 +18,7 @@
   },
   "homepage": "https://github.com/ryoppippi/zenn-repo#readme",
   "dependencies": {
-    "zenn-cli": "^0.1.93"
-  }
+    "zenn-cli": "^0.1.115"
+  },
+  "description": ""
 }
