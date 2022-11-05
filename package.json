@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "zenn": "zenn",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "zenn preview"
   },
@@ -18,7 +19,7 @@
   },
   "homepage": "https://github.com/ryoppippi/zenn-repo#readme",
   "dependencies": {
-    "zenn-cli": "^0.1.115"
+    "zenn-cli": "^0.1.131"
   },
   "description": ""
 }
