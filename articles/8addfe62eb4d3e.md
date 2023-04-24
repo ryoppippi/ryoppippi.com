@@ -130,7 +130,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
  私たちは皆、1ミリ秒の遅延ごとにアマゾンが10億ドルの損失を被るという研究結果を見たことがあります。
  JavaScriptを少なくすることでスタートアップのパフォーマンスを改善できる場合もありますが、そうすることは常に他の目的のためです。
 
- まとめてみると、我々は手段と目的を取り違えている危険性があります。後述するように、最高のパフォーマンスを求めるなら、実はJavaScriptは必要不可欠なのです。
+ まとめてみると、私たちは手段と目的を取り違えている危険性があります。後述するように、最高のパフォーマンスを求めるなら、実はJavaScriptは必要不可欠なのです。
 
 ![IMHO](/images/imho_rich/3_1.png)
 
@@ -246,9 +246,12 @@ JavaScriptなしで自分の予定を見たり、新しい予定を作成した�
 
 SvelteKitは箱から出してすぐにこれができます。
 クライアントサイドのルーターは、起動時にベースとなるURLをとびきり上手に扱うことができます。
-また、SvelteKitはかなり過酷なネットワーク環境下でも動作するように設計されていることがポイントです。
+また、SvelteKitはかなり過酷なネットワーク環境下でも動作するように設計されていることがポイントです。(訳注: [ここでデモを行う](https://youtu.be/uXCipjbcQfM?t=490))
 
-(訳注: [ここでデモを行う](https://youtu.be/uXCipjbcQfM?t=490))
+::: details 訳注
+Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelteflix-rich-harris.vercel.app/)を作成しています。
+是非ともお使いのブラウザでJavScriptの有効/無効を切り替えて開いてみて下さい。
+:::
 
 # MPAは死んだ [MPAs are dead (🌶🌶🌶)]
 ::: details 原文
@@ -340,15 +343,16 @@ SvelteKitは箱から出してすぐにこれができます。
  ![IMHO](/images/imho_rich/5_4.png)
  こんなことを言うとAstroの友人たちに怒られそうですが、これがその証拠です。
  先週の時点で、Astroのロードマップには、Astroアプリをシングルページアプリにするクライアントサイドルータが含まれています。
- Nate Mooreの言葉を借りれば、UIの永続性が完全なAstroのストーリーに欠けていることが明らかになっています。
- 現在、クライアントサイドルーティングは、ナビゲーション間のUIの永続性を実現する唯一の方法です。
- これはオプトインであり、デフォルトではないこと私は付け加えておきます。
+ Nate Mooreの言葉を借りれば、UIにおける永続性がAstroの全貌を語る上で、明らかに欠けているピースとして浮上したのです。
+ 現在、クライアントサイド・ルーティングは、ナビゲーション間のUIにおける永続性を実現する唯一の方法です。
+ 念の為、これはオプトインであり、デフォルトではないことを付け加えておきます。
 
  しかし、これから起こることはこうでしょう。
- 彼らはこれを完璧に構築、実現するでしょう。
- もしそれが簡単な構成変更である場合、UIの永続性が必要なくても、人々はそれを試してみるでしょう。
- そして、クライアントサイドルーターというとても小さな代償が自分のアプリに突然より良いユーザー体験をもたらすことに気づくはずです
- 私はAstro 3または4でこの設定のデフォルトが逆転しても驚かないでしょう。
+ 彼らはこのクライアントサイドルーターを完璧に構築し、実現させるでしょう。
+ もしそれが設定を少し変えるだけで動かせるのなら、UIにおける永続性が必要なくても人々はそれを試してみるでしょう。
+ そして、ルーターというとても小さな代償が自分のアプリに突然より良いユーザー体験をもたらすことに気づくはずです
+ <!-- 私はAstro 3または4でこの設定のデフォルトが逆転しても驚かないでしょう。 -->
+ 私はAstro 3または4でこれがデフォルト化されても驚かないでしょう。
 
  ![IMHO](/images/imho_rich/5_5.png)
  SvelteKit側では、デフォルトでクライアントサイド・ルーティングを使用することにしました。
@@ -429,10 +433,507 @@ JSX、フック、シグナル、そして過去10年間におけるフロント
 それがSvelteです。
 
 ![IMHO](/images/imho_rich/7_1.png)
-私たちはSvelteで、HTMLは状態と制御フローを備えたものに、CSSはスコープスタイルなものに、JavaScriptをリアクティブなものに拡張しています。
-一部の人々はこれに対して本当に反感を抱いているかもしれませんが、それはそれでいいんです。
+私たちはSvelteで、HTMLを状態と制御フローを備えたものに、CSSをスコープスタイルなものに、JavaScriptをリアクティブなものに拡張しています。
+一部の人々はこれに対して本当にがっかりしているかもしれませんが、それはそれでいいんです。
 DSLに抵抗がない人たちにとっては、Svelteは親しみやすさと新しさの間のスイートスポットであることがわかりました。
-我々がよく知っている言語を便利に拡張することで、Lucyが成し遂げたように、SvelteではUIをより簡潔に表現することができるのです。
+私たちがよく知っている言語を便利に拡張することで、Lucyが成し遂げたように、SvelteではUIをより簡潔に表現することができるのです。
+
+## ## 暗黙のDSLは...あまり良くないです (🌶🌶🌶) [Implicit DSLs are... less good (🌶🌶🌶)]
+::: details 原文
+So I am pro-DSL, but there is a crucial caveat.
+ You have to be honest about it.
+ In the Svelte case, we're using .svelte files.
+ When you open a .svelte file, you're entering a kind of liminal space where the normal rules of programming are briefly suspended, and again, some people want nothing to do with that, and that's fine.
+ I think most of us like having a little magic in our lives from time to time.
+ Here's where it starts to get a little bit too weird for me.
+ If you start changing the semantics of JavaScript inside JavaScript files, I'm out.
+ This has been a recurring theme recently across a whole bunch of different projects, and it's a phenomenon that I think deserves a little bit more scrutiny than it's currently getting.
+ Before I give you an example of this, I'm going to tell a little story.
+ Back in 2015, I was working on Rollup, the JavaScript module bundler, and I implemented a heuristic that I thought was pretty clever.
+ If you weren't using the imports from a given module, like ease and transition from D3 transition there, then Rollup simply wouldn't add it to the module graph, it would just discard it.
+ As an escape hatch, if you did need to add the module to the module graph anyway because of some side effects, then you could add the import without any specifiers, and then Rollup would include it.
+ I was young, and I was naive, and this seemed like a really smart optimization.
+ Around the same time, the D3 community had browbeaten Mike Bostock into using a module bundler, and he basically said, fine, I'll rewrite everything in CommonJS and use Browserify.
+ I was horrified by this, because that meant the D3 bundle was going to get slow and large, and so I cold emailed him and said, hey, I really think you should use JavaScript modules for this, and tooling isn't quite there yet, but, like, here's the thing that I'm working on.
+ And that was on May 27th, 2015, and on May 29th, he started filing issues on Rollup, which I didn't even expect and was kind of terrified by, and this is an example of one of them.
+ Now, Mike is the nicest, most wonderful man, and he is much too kind to put it like this, but what he's saying in this issue is JavaScript doesn't work like that, you numpty, and he's right, it doesn't.
+ You can't just remove modules from the graph without fundamentally altering the semantics of the code.
+ I've fast-forwarded a few years, and some frameworks have decided that ignoring the semantics of JavaScript isn't just okay, it's actually a core selling point of the framework.
+ I'm going to use Remix as an example, but it's not the only one.
+ Prior to version 13 in the introduction of the app router, Next.js did something similar for example.
+ This is a Remix route.
+ The idea is that your server code, which loads data, can be co-located with your view code.
+ When the client app is built, the loader, and anything that it depends on, is tree-shaken away.
+ But this isn't tree-shaking, this is made-up, non-standard JavaScript semantics.
+ You might think, all right, Rich, you poindexter, who made you the JavaScript hall monitor? And you'd have a point, but it does have real-world impacts.
+ There is actually a whole page in the Remix doc about working around the problems created by this design.
+ And aside from the practical impacts, there's something about the blurring of boundaries between server and client that I think is inherently confusing.
+ I've heard multiple people say that they're often not entirely sure where their code is going to end up running.
+ More alarming to me is the possibility that you could end up with server code in your client bundle.
+ Even Michael, who invented Remix, acknowledges that this is a real-world problem.
+ You're one sleep-deprived mistake away from accidentally including something sensitive in the JavaScript that you serve to users.
+ And even if you don't make that mistake, you're still prohibited from using source maps to debug your app in production because the source maps will contain the entire module, including your database queries or whatever.
+ So why am I talking about other frameworks' design decisions?
+ I'm not telling you don't use Remix.
+ And I'm not saying the Remix team should make different choices.
+ That's not my business.
+ But oftentimes, people will say, other frameworks are doing X, should SvelteKit do the same
+ thing?
+ And then it becomes my business.
+ The reason for the design choice is that it's convenient to co-locate related pieces of code.
+ Now, you don't need to sell me on the benefits of co-location.
+ I was doing single file components back in 2014 before Vue or anyone else.
+ I am Mr. Co-location.
+ I love it.
+ But co-locating code that crosses a server client boundary in a single file is too much for me.
+ We prototyped it in Svelte, and it's always given us bad vibes.
+ So in SvelteKit, we don't co-locate in files.
+ We co-locate in directories.
+ This is a screenshot of a SvelteKit code base.
+ In a SvelteKit app, each directory is a route.
+ And each route can contain server code for loading data and view code that runs on both the server and the client.
+ So this is actually the demo app that you get when you do `npm create svelte`.
+ Inside `src/route`, might be hard to see because it's kind of small.
+ There's a lot going on here.
+ But inside `src/route`, we've got an `about` route and a `sverdle` route, which is a Wordle clone that works without JavaScript.
+ The page's server code for the Svelte clone goes in a `+page.server.js` on the left here.
+ And any file with that suffix cannot be imported into client-side code.
+ Your app will simply fail to build.
+ And directory-based routing is something that we stole from Next.js.
+ And it has a list of other benefits that's too long to get into right now.
+ But I strongly believe that this is the way.
+ One little easter egg that I'll show you is that on the right in `+page.svelte` on line 16, we're hovering over data.guesses.
+ And it's giving us the type and the inline documentation that we wrote on the left on line 9.
+ So we get type safety across the network.
+ This is the sort of thing that's made possible by embracing strong conventions.
+ And far from being a worst developer experience, I actually find this preferable.
+ I'll often have my data loading server code open on one side and the view code that uses it on the other.
+ Screens are wide.
+ But files are tall.
+ And so it's just a bad use of real estate to try and stack everything into a single file.
+ Okay.
+ Another example of nonstandard semantics.
+ This slide from the Qwik team.
+ Qwik is a framework that transforms your code in such a way that it can lazily load individual functions when it needs them and then recreate their lexical scope.
+ It is extremely clever stuff and is worth paying attention to.
+ I personally have some reservations about stuff like this.
+ If you move the increment function out of the block of JSX, the app breaks.
+ If it was JavaScript, that would be fine.
+ But it's not JavaScript.
+ It's Qwik.
+ It's effectively a DSL for more granular code splitting.
+ By the same token, you have to be careful about what values you reference inside that function because in order to recreate the lexical scope, the framework has to serialize it.
+ I mentioned this on Twitter a while back.
+ Within a few hours, Manu from the Qwik team had added a much more helpful error message so that you can diagnose the problem because they are brilliant and dedicated.
+ But this is really just one example of a more wide-ranging trend that I'm seeing where in order to successfully work with JavaScript or TypeScript, you have to understand some very sophisticated transformations that are happening behind the scenes.
+ There are some other drawbacks to the lazy loading approach like you can't conditionally prevent an event default, which is something I do all the time, without opting out of the programming model altogether.
+ But fundamentally, it's this mismatch between what the code does and what it looks like it does that I get hung up on.
+ For an experiment, I asked ChatGPT to refactor the component and at first it tried to enforce React idioms.
+ But when I explained that we can't use `useState` here, it made the exact same mistake, hoisting the increment function out of the JSX because it thought it was dealing with JavaScript.
+ Another example from Solid.
+ It looks very much like these two components should behave the same way based on our understanding of JSX and JavaScript, but they're actually very different.
+ If you're familiar with Solid, then this makes total sense.
+ But there's no obvious signpost here.
+ So will people with less familiarity be able to successfully maintain this code base five years from now?
+ I don't know.
+ Maybe.
+ I don't mean to pick on these frameworks because they're all doing really interesting and cool stuff.
+ These are just some particularly notable examples.
+ And they will all point out elements of Svelte's programming model that they're not very keen on.
+ And nor am I telling you what to think.
+ I do encourage you to play around with these frameworks and develop your own opinion.
+ I'm just telling you what I think.
+ And what I think is that your scientists were so preoccupied with whether or not they could that they didn't stop to think if they should.
+:::
+
+![IMHO](/images/imho_rich/8_0.png)
+
+私はDSLに肯定的ですが、重要な注意点があります。
+正直である必要があるのです。
+
+Svelteの場合、.svelteファイルを使用しています。
+.svelteファイルを開くと、通常のプログラミングのルールが一時的に中断されるような、ある種のLiminal Space^[現実空間と異空間の狭間のこと。[Liminal space (aesthetic)](https://en.wikipedia.org/wiki/Liminal_space_(aesthetic))]に入ることになります。
+こういった空間が嫌な人もいるでしょうが、それはそれでいいのです。
+私たちのほとんどは、時には人生に魔法を感じたいと思うのではないでしょうか。
+
+![IMHO](/images/imho_rich/8_1.png)
+ここで、私にとっては空間が少し嫌なものになってきます。
+もし誰かがJavaScriptファイルの中でJavaScriptのセマンティクスを変え始めたら、私は逃げ出してしまうでしょう。
+これは最近、さまざまなプロジェクトで繰り返されているテーマで、現在よりももう少し精査されてしかるべき現象だと私は考えています。  
+
+![IMHO](/images/imho_rich/8_2.png)
+これについての例を示す前に、少し物語をしましょう。
+2015年のことですが、私はJavaScriptモジュールバンドルラーのRollupに取り組んでいて、かなり賢いと思われるヒューリスティックを実装しました。
+それは、もし、あるモジュールのimportを使用していない場合（たとえばD3 transitionに含まれる未使用のeaseやtransition）、Rollupはそれを単にモジュールグラフに追加せずに、破棄するという仕組みでした。
+念の為に、逃げ道として、副作用のためにモジュールをモジュールグラフに追加する必要がある場合は、指定子なしでインポートを追加すればRollupがそれをバンドルに含めることができました。
+私は若かったし、世間知らずだったので、これは本当に賢い最適化だと思いました。
+
+同じ頃、D3コミュニティがMike Bostockにモジュールバンドラーを使うように説得し、彼はつまるところ、「了解。すべてをCommonJSで書き換えてBrowserifyを使うね」と言いました。
+私はこれにぞっとしました。というのもこの変更はD3バンドルが遅くて大きくなることを意味していたからです。
+そこで私は彼にこのようにメールを送りました、「やあ、これにはJavaScriptモジュールを使うべきだと思うんだ。ツールはまだないんだけど、実は今その最適化に取り組んでるんだよね」と。
+それが2015年5月27日のことで5月29日には彼はRollupで問題を報告し始めました。それは私が予想もしていなかったし、恐ろしかったので、これがその1つの例です。これはそのうちの1つの例です。
+Mikeはとても親切で素晴らしい人で、彼とても親切なのでこんなことを言うとは思いませんが、つまるところ彼がこの問題について言いたいことは、「JavaScriptはそんな風には動かないよ、このバカ」、ということです。
+実際彼は正しいのです。モジュールをグラフから削除することなく、コードの意味を根本的に変えることはできません。
 
 
+時を少し進めましょう。
+いくつかのフレームワークがJavaScriptのセマンティクスを無視することは、単に問題ではなく、むしろフレームワークのコアセリングポイントであると判断しました。
+ここではRemixを例に挙げますが、これは他のフレームワークにも見られます。
+たとえばNext.jsでも、バージョン13でApp Routerが発表されるまでは似たようなことをしていました。
 
+![IMHO](/images/imho_rich/8_3.png)
+これはRemixのルーターです。
+これは、データをロードするサーバー上のコードをViewのコードと一緒に書けると言うものです。
+クライアントアプリがビルドされると、ローダーとそれに依存するものはtree-shaking^[[使われていないコードを削除すること](https://developer.mozilla.org/ja/docs/Glossary/Tree_shaking)]されます。
+しかし、これは本物のtree-shakingではありません。これはでっち上げの、非標準のJavaScriptセマンティくすです。
+「ちょっと待て生真面目Rich君、君はいつからJS界の学級委員になったんだい？」と思うかもしれません。
+ですが、これは現実世界では大いに影響を与えるものです。
+
+![IMHO](/images/imho_rich/8_4.png)
+Remixのドキュメントには、このデザインで発生した問題を回避するためのページがあります。
+現実的な影響とは別に、サーバーとクライアントの境界が曖昧になることが混乱のもとだと思います。
+
+複数の人が、自分のコードが最終的にどこで実行されるのか、まったくわからないと言うのを聞いたことがあります。
+
+![IMHO](/images/imho_rich/8_5.png)
+さらに心配なのは、クライアントのバンドルにサーバーのコードが含まれてしまう可能性があることです。
+Remixを考案したMichaelでさえ、これが現実的な問題であることを認めています。
+ユーザーに提供するJavaScriptの中に、誤って機密性の高いものを入れてしまうというのは、寝不足でちょっと1度失敗をしただけでも起こりうることです。
+また、たとえそのようなミスをしなかったとしても、本番環境のアプリをデバッグするためにソースマップを使用することは避けるべきです。なぜならソースマップにはデータベースクエリなどを含むモジュール全体が含まれているためです。
+
+なぜ私は他のフレームワークの設計について話しているのでしょうか？
+Remixを使うなと言っているわけではありません。
+また、Remixチームが別の選択をするべきだとも言いません。
+それは私の仕事ではありません。
+しかし、しばしば人々は、「他のフレームワークがXをやっているので、SvelteKitも同じようにすべきではないか？」と言います。
+そして、それが私の仕事になります。
+
+この設計（訳注:サーバーとクライアントのコードを一緒に書くことができる設計）の理由は、関連するコードを共有することが便利だからです。
+この「関連するコードを同居させる利点」を私はよく知っています。
+
+![IMHO](/images/imho_rich/8_6.png)
+私は、Vueや他の誰よりも、2014年にはすでにシングルファイルコンポーネントを使用していました。
+私はこれが大好きです。
+
+しかし、サーバークライアントの境界を越えるコードを単一のファイルに共有することはやりすぎでした。
+現に、Svelteでプロトタイプを作ったのですが、筋があまり良くなかったのです。
+
+![IMHO](/images/imho_rich/8_7.png)
+ですので、SvelteKitでは、ファイルではなくディレクトリに共有します。
+これは、SvelteKitコードベースのスクリーンショットです。
+SvelteKitアプリでは、各ディレクトリがルートであり、各ルートにはデータのロードに使用するサーバーコードと、サーバーとクライアントの両方で実行されるViewコードが含まれます。
+これは、`npm create svelte`を実行したときに作られるデモアプリです。
+`src/route`の中には`about`ルートと`sverdle`ルートがあり、これはJavaScriptなしで動作するWordleクローンです。
+このSvelteクローンのページのサーバーコードは、左の`+page.server.js`に格納されています。
+ファイル名に `.server`がついているファイルは、クライアントサイドのコードにインポートすることができません^[[Server-only modules • Docs • SvelteKit](https://kit.svelte.jp/docs/server-only-modules)]。ビルドに失敗します。
+ディレクトリベースのルーティングは、Next.jsから盗んだものであり、その他のメリットがありますが、今は詳しく説明できません。
+しかし、私は強くこれが正しい方法だと信じています。
+
+ちょっとしたイースターエッグもあります。
+この画面では、右側の`+page.svelte`の16行目のdata.guessesにカーソルを合わせていますが、そこには左側の`+page.server.js`の9行目に書いた型情報とInline Documentが表示されます。
+つまり、ネットワーク全体で型安全性を保証しているのです。
+
+これらは、強力な規則を採用することで可能になり、最悪の開発者体験とは程遠いものになります。
+私は実際にこの方法が好ましいと思っています。
+
+私はよく、データを読み込むサーバーのコードを一方に開き、ビューのコードをもう一方に開くことがあります。
+スクリーンは広いが、ファイルは縦に長くなりがちです。
+だから、1つのファイルにすべてを詰め込もうとするととても見辛くなります。
+
+![IMHO](/images/imho_rich/8_8.png)
+さて、もう1つ非標準的なセマンティックスの例をお見せしましょう。
+このスライドは[Qwik](https://qwik.builder.io/)チームによるものです。
+QwikはQwikは、個々の関数を遅延ロードして、Lexical Scope^[参考: [僕らは JavaScript を知らない - レキシカルスコープとクロージャとガベージコレクション Lexical Scope, Closure and Garbage Collection](https://uraway.hatenablog.com/entry/2018/01/24/120000)]を再作成できるようにコードを変換するフレームワークです。
+これはとても賢い方法であり、注目する価値があります。
+
+私自身は、このようなものには少し抵抗があります。
+たとえば、JSXのブロックからincrement関数を移動すると、アプリが壊れます。
+通常のJavaScriptなら問題なく動きます。
+でも、JavaScriptじゃないんです。
+これはQwikです。
+Qwikは実質的に、より細かいコード分割のためのDSLです。
+同じ理由で、その関数内で参照する値については注意が必要です。なぜなら、Lexical Scopeを再現するために、フレームワークがそれをシリアライズする必要があるからです。
+
+![IMHO](/images/imho_rich/8_9.png)
+私はしばらく前にこれをTwitterで言及しました。
+数時間後、QwikチームのManuは、問題を診断できるように、より役立つエラーメッセージを追加してくれました。
+彼らは優れた専門知識を持ち、とても献身的ですね。
+
+しかし、これは私が見ているより広範な傾向の1つの例にすぎません。JavaScriptまたはTypeScriptをうまく扱うためには、裏側で起こっている非常に洗練された高度な変換を理解する必要があります。
+遅延ロードには他にも欠点があります。
+私がよく行うような条件付きでイベントのデフォルトを防止することができないことが挙げられます。
+これは、プログラミングモデル全体をオプトアウトしなければならないということです。
+しかし根本的には、コードが何をするのかとコードがどのように見えるかとの間のミスマッチが、私の悩みの種なのです。
+
+![IMHO](/images/imho_rich/8_10.png)
+ここで試しにChatGPTにコンポーネントをリファクタリングしてもらいましたが、最初はReactのイディオムを適用しようとしました。
+ここで`useState`は使えないと説明しました。
+すると、ChatGPTはJavaScriptを扱っていると勘違いしてしまい、increment関数をJSXの外に出すという、先ほどとまったく同じミスを犯してしまいました。
+
+![IMHO](/images/imho_rich/8_11.png)
+今度は[Solid.js](https://www.solidjs.com/)の例です。
+JSXとJavaScriptの理解に基づくと、これらの2つのコンポーネントが同じように動作するはずです。しかし実際には全然違います。
+Solid.jsをよくご存知な人なら、これは完全に理解できることでしょう。
+でも、ここには明確な道標がありません。
+したがって、5年後にこれらのコードベースをうまく保守できるようになるでしょうか？
+わかりません。多分できるかもしれません。
+
+これらのフレームワークは、どれも本当に面白くてクールなことをやっているので、非難するつもりはありません。
+これらはとくに注目すべき例です。
+そして、彼らは同じように、Svelteのプログラミングモデルのいくつかの要素はあまり好ましくないと考えています。
+また、私はあなたにどう思えというわけではありません。
+これらのフレームワークで遊んでみて、自分なりの意見を持つことをオススメします。
+私はただ、私の考えをお伝えしているだけです。
+私が言いたいのは、あなたの科学者たちは、「できること」に気を取られていて、「すべきこと」について考え、立ち止まることをしなかったのだと思います。
+
+# コードはユーザーに近い場所で実行すべきです (🌶🌶) [Code should run close to the user (🌶🌶)]
+
+::: details 原文
+ Okay.
+ This doesn't feel like it should be a particularly spicy take, but it does have some moderately spicy implications.
+ Other things being equal, code should run as close to the user as possible.
+ So the edge is better than a central server, but on device is better than the edge.
+ Now other things are not always equal.
+ Sometimes you need to access your database, in which case your code should run near your database.
+ And sometimes you need to have access to sensitive information that can't be exposed to the client.
+ But there's a lot of stuff that doesn't fall into that category.
+ For example, if I add a product to my shopping cart, I should be able to see that reflected immediately.
+ Another example that we're all familiar with.
+ When you're writing a comment in GitHub, you can't preview it without sending the comment to the server so that it can render the markdown.
+ Sometimes it's pretty slow.
+ You can absolutely do markdown rendering and syntax highlighting in the browser.
+ Maybe you don't want to be lazy about loading the grammars that you use for the syntax highlighting,
+ but it is a very solvable problem and it will provide a much nicer user experience.
+ And this isn't just about latency.
+ It's also about resilience.
+ I travel by Amtrak a fair bit and every time I do, I'm like, great, three hours of uninterrupted work.
+ But then I keep running into things like that because my connection is so flaky and most times I'll just give up and read a book instead.
+ This is not just Amtrak.
+ It's also every time I'm on the subway or even when I'm walking down the stairs to leave my flat and my phone switches from Wi-Fi to cellular, just as I'm trying to look at the details of where I'm supposed to be going.
+ Turns out we're pretty bad at building things in an offline first way at the best of times.
+ All of this is why I'm personally a little bit nervous about React server components.
+ For those of you who aren't aware, RSC means that your UI is rendered on the server by default and only components that have a special use client directive will run in the browser and have access to things like `useState` and `useEffect`.
+ Server components and client components have different APIs, they can use different hooks and there are restrictions on how you can combine them, but the upshot is that by default in the future, your React app will run entirely on the server and you will opt in to client rendering for specific parts of your app.
+ Now clearly this has some very substantial benefits.
+ This is hugely important work and frankly it blows my mind, but I do worry that we'll become so paranoid about serving JavaScript to our users that we'll overcorrect.
+ If the default interaction is to require a server round trip, for client components to be implicitly regarded as something to avoid, then the net result could be slower and less resilient web apps.
+ I might just be fair mongering here, I don't know.
+ Dan Abramov is probably going to do a withering tweet thread on why I'm wrong about this, but I'm very curious to see how this is all going to look in a couple of years with the benefit of hindsight.
+:::
+
+![IMHO](/images/imho_rich/9_0.png)
+
+さて、次は特段スパイシーではないでしょうが、少々辛辣ですね。
+他の条件が同じであれば、コードは可能な限りユーザーに近い場所で実行すべきです。
+つまり、中央のサーバーよりもエッジの方がいいし、エッジよりもデバイスの方がいいのです。
+
+しかし、それも場合によります。
+場合によっては、データベースにアクセスする必要があるため、コードはデータベースの近くで実行する必要があります。
+そして、クライアントに公開できない機密情報へのアクセスが必要な場合もあります。
+しかし、そのカテゴリに当てはまらないものもあります。
+
+![IMHO](/images/imho_rich/9_1.png)
+たとえば、ショッピングカートに商品を入れたら、その反映をすぐに確認できるようにしたいですよね。
+もうひとつ、私たちがよく知っている例を挙げます。
+GitHubでコメントを書いているときに、コメントをサーバーに送信してmarkdownをレンダリングするまで、それをプレビューすることはできません。
+時にはかなり遅いこともあります。
+ブラウザでマークダウンのレンダリングやシンタックスハイライトを行うことは絶対にできます。
+あなたはシンタックスハイライトのロードしを待ちたくないかもしれませんが、これは解決可能な問題であり、結果としてより良いユーザーエクスペリエンスを提供します。
+
+![IMHO](/images/imho_rich/9_2.png)
+また、これはレイテンシーの問題だけではありません。
+レジリエンス（回復力）の問題でもあるのです。
+私はよくAmtrakで移動します。私はそのたびに、「いいね、3時間連続で作業ができる」と思っているのですが、接続が不安定なために大抵は仕事を諦めて本を読むことになります。
+これはAmtrakだけの問題ではありません。地下鉄に乗っているときや、自宅を出て階段を降りるときに、私の電話がWi-Fiからセルラーに切り替わってしまい、行き先の詳細を見ようとしている最中に接続が切れてしまうこともあります。
+結局、私たちはOffline Firstな方法で物を構築するのにあまりにも下手なようです。
+
+![IMHO](/images/imho_rich/9_3.png)
+これらを踏まえて、私は個人的に[React Server Components(RSC)](https://nextjs.org/docs/advanced-features/react-18/server-components)について少し心配しています。
+RSCとは、UIがデフォルトでサーバー上でレンダリングされ、特別なclient属性を持つコンポーネントのみがブラウザー上で実行され、`useState`や`useEffect`などにアクセスできることを意味します。
+Server ComponentとClient Componentは異なるAPIを持ち、異なるフックを使用することができ、それらを組み合わせる方法に制限がありますが、要約すると、将来的にはReactアプリケーション全体がサーバー上で実行され、アプリケーションの特定の部分に対してのみクライアント・レンダリングがオプトインされることになります。
+これは明らかに、非常に大きなメリットがありますし、率直にいってとてもワクワクしています。
+しかし、これによって私たちはユーザーにJavaScriptを提供することに対して過剰に慎重になりすぎる可能性があると心配しています。
+
+もし、デフォルトのインタラクションが、サーバーのラウンドトリップを必要とし、クライアントコンポーネントが暗黙のうちに避けるべきものとみなされるならば、結果的により遅く、より回復力のないウェブアプリケーションを生み出す可能性があります。
+
+私はここで不安を煽っているだけかもしれませんが、私はわかりません。
+Dan Abramovは、私が間違っている理由について鋭いツイートスレッド投稿するかもしれませんが、これらすべてが数年後にどのようになるかは楽しみです。
+
+
+# RPCを再発明することを後悔することになる (🌶🌶🌶) [We will regret reinventing RPC (🌶🌶🌶)]
+::: details 原文
+Okay, another spicy to take, we will regret reinventing RPC.
+ RPC stands for Remote Procedure Call, it's an idea that has been around since the 70s.
+ Basically what it means is that instead of passing a message to a server and waiting for a response, you call a function on the server instead and the RPC protocol takes care of the actual message passing.
+ In effect, it allows you to pretend that a distributed system is not distributed, you're just calling functions.
+ Back in the 80s, people were calling the wisdom of this idea into question.
+ This 1988 paper by Andrew Tannenbaum called A Critique of the Remote Procedure Call Paradigm is very much of its time, but it's still worth reading.
+ Some arguments can't be serialized correctly, serializing closures is particularly hairy.
+ If the server mutates arguments, that mutation won't be respected on the client.
+ Network errors and logic errors all kind of get smushed together.
+ All of these things are easy to deal with if you're not hiding the implementation details.
+ But over the past few months, RPC has had a bit of a renaissance in the front-end world, except that we now call it server functions.
+ I first saw it in `Solid Start`.
+ The idea is that you write code like this, and oh, hang on, they write code like this.
+ I'm going to have to try and remember my slides because I messed this up.
+ And the compiler sort of waves a magic wand and you can call code on your server as though it were a local function.
+ And so the ergonomics of this are undeniably really nice.
+ You even get type safety because as far as TypeScript is concerned, it is just a local function.
+ But a while back, Jason Miller, the creator of PReact, did a tweet that I found quite interesting.
+ He said, in effect, that these abstractions are dangerous.
+ I hope he's wrong, but I think he might be right.
+ I can retell you this example here.
+ This server function looks and feels like an internal implementation detail, but it's not.
+ We've actually made an HTTP endpoint that anyone can call with any data.
+ So TypeScript is telling us that fields can be name or quantity, but in reality, it could be name semicolon drop table users.
+ If you know, you know.
+ So when you make an endpoint explicit and you're working with full data, you're aware on some level that the data is untrusted.
+ And so, you know, I think you're much less likely to make this sort of error than if it looks like a private function call.
+ And you might be thinking, Rich, come on, I would never make that mistake.
+ But look to your left and look to your right at the people around you.
+ Do you trust them not to make that mistake?
+ I don't know.
+ Bear in mind also that if you use source maps for debugging and they contain the original server code, you're basically handing attackers a diagram of your defenses.
+ This shit makes me very nervous.
+ So people have asked us to add this to Sveltekit, and we've said no.
+ Maybe one day, once enough people have fucked around and found out, we'll do it.
+ But not yet.
+ We think that part of our responsibility as toolmakers is to the extent that we're able to help protect you and your users against these sorts of issues.
+ So Sveltekit has built-in CSRF protection, it has CSP primitives, and we don't do things like that just because they feel convenient.
+:::
+
+![IMHO](/images/imho_rich/10_0.png)
+さて、もう1つの刺激的な話題ですが、私たちはRPCを再発明することを後悔するでしょう。
+RPCとはRemote Procedure Callの略で、70年代からあるアイデアです。
+基本的には、サーバーにメッセージを渡して応答を待つ代わりに、サーバー上の関数を呼び出し、RPCプロトコルが実際のメッセージのやり取りを処理します。
+
+これを使うと、分散システムをあたかも分散していないように扱うことができます。
+単に関数を呼び出せば良いのです。
+80年代には、人々はこのアイデアの賢明さに疑問を呈していました。
+Andrew Tanenbaumの1988年の論文「[A Critique of the Remote Procedure Call Paradigm](https://www.cs.vu.nl/~ast/Publications/Papers/euteco-1988.pdf)」はかなり昔の論文ですが、今でも読む価値があります。
+
+RPCでは一部の引数は正しくシリアライズできず、クロージャのシリアライズは特に厄介です。
+サーバーが引数を変更した場合でも、その変更はクライアント側では尊重されません。
+ネットワークエラーやロジックエラーなどがすべて混在してしまいます。
+これらのことは、実装の詳細を隠さないのであれば、簡単に対処できます。
+
+![IMHO](/images/imho_rich/10_1.png)
+直近の数か月間で、RPCはフロントエンドの世界で再び注目されるようになりました。**サーバー関数**と呼ばれるものです。
+私は最初に[Solid Start](https://start.solidjs.com/getting-started/what-is-solidstart)でそれを見ました。
+そして、コンパイラが魔法の杖を振りかざすと、サーバー上のコードをあたかもローカル関数のように呼び出すことができます。
+人間工学的に非常に優れていますね。
+TypeScriptに関しては、ローカル関数であるかのように扱われるため、型安全性さえ得られます。
+
+![IMHO](/images/imho_rich/10_2.png)
+しかし、数か月前、PReactの作者であるJason Millerは、かなり興味深いツイートをしました。
+彼は、これらの抽象化は危険であると実質的に言いました。
+彼が間違っていることを願っていますが、彼が正しいかもしれません。
+
+![IMHO](/images/imho_rich/10_1.png)
+この例を再度説明します。
+このサーバー関数は内部の実装のように見えますが、実際にはそうではありません。
+誰でも任意のデータでHTTPエンドポイントを呼び出せるようになっています。
+TypeScriptは、フィールドが`name`または`qty`であることを示していますが、実際には`NAME; DROP TABLE USERS`である可能性もあります。
+お分かりだった方もいらっしゃいますよね？
+
+対して、明示的にエンドポイントを設計し、完全なデータを扱うならば、受信するデータが信頼できないものであることをある程度認識していることになります。
+またもしそれが非公開の関数呼び出しだったとしても、この種のエラーを作る可能性がずっと低いと思います。
+
+「おいおいRich、俺はそんなミスはしないぞ」と思うかもしれません。
+ しかし、左を見て、右を見て、あなたの周りの人たちを見てください。
+ その人たちがこのような間違いをしないと信じているのでしょうか？
+ 私にはわかりません。
+
+また、デバッグのためにソースマップを使用し、そのソースマップにオリジナルのサーバーコードが含まれている場合、基本的に攻撃者に防御の図を渡していることになることも念頭に置いておいてください。
+私はとても不安になります。
+だから、Sveltekitにこの機能を追加してほしいという要望がありますが、私たちの答えは「ノー」です。
+もしかしたら、十分に多くの人々が試行錯誤した結果いつか実装するかもしれません。
+しかし、まだです。
+ツールメーカーとしての私たちの責任の一部は、この種の問題に対してあなたとあなたのユーザーを保護するためにできる限りのことをすることです。
+Sveltekitには、組み込みのCSRF保護があり、CSPプリミティブがあります。
+私たちは「ただ便利だから」という理由で動いてはいないのです。
+
+# ビルドステップは良いゾ (🌶) [Build steps are good (🌶)]
+::: details 原文
+ Again, I'm rating this one low on the Scoville scale, even though it seems like an unpopular opinion, because I think it's actually pretty obvious.
+ Build steps are good.
+ This idea that comes up every now and again in front-end, that build tools are the devil's work and that we would all be much better off without them.
+ This is a recent example that gained some traction from the Deno blog, and it's one of the better versions of this argument that I've seen.
+ Normally they're a lot angrier, but the thing that often gets missed in discussions about build steps is that they primarily exist for a user's benefit, not for ours.
+ Build steps let us minify code, they let us combine 100 small modules into 10 core screen chunks that load faster, they remove unused code from client-side bundles, they optimize images, they hash assets so that they can be cached immutably, they guard against bugs by type-checking and linting.
+ This is all stuff that directly results in a better user experience.
+ It's true that build steps also benefit developers by letting us use non-standard dialects, easily import dependencies and things like that, but if you remove build steps, a user experience that suffers more than developer experience.
+ And yet, interestingly, if you look at the people who complain most vociferously that our industry prizes DX over UX, and then look at the people who want to get rid of build tooling, there is a striking overlap.
+ It's hard not to conclude that it comes more from a reflexively anti-tooling mindset than a genuine concern for users.
+ Here's another example of a build step being really beneficial that I didn't get around to doing a slide for.
+ And all of the code snippets in SvelteKit's documentation are type-checked against the SvelteKit source code.
+ So for example, this code down here is checked at deploy time to make sure that it doesn't contain any errors and that it's up to date with current types in SvelteKit itself.
+ And that unavoidably takes time.
+ One of these pages might take several seconds to render on this M1 MacBook Pro.
+ So we pre-render this content at build time, as well as ensuring that we don't publish incorrect documentation, because if we do, the deployment will fail.
+ It means that everyone visiting this site gets content instantly.
+ If we did that rendering on demand instead, then even if we had incredibly sophisticated caching, some users would end up having to wait multiple seconds for the page to load, and that is just not acceptable.
+ So build steps.
+ You might not need one, but you should probably have one anyway.
+:::
+
+![IMHO](/images/imho_rich/11_0.png)
+
+さて、次の意見はスコヴィル値^[辛さの単位: [スコヴィル値](https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%B3%E3%83%B4%E3%82%A3%E3%83%AB%E5%80%A4)]を低めにしています。
+なぜなら私はこの意見はあまり世間で受け入れられていないにもかかわらず、実は結構当たり前のことだと思うからです。
+
+**ビルドステップが非常に重要です。**
+
+![IMHO](/images/imho_rich/11_1.png)
+ビルドツールは悪魔の所業であり、ビルドツールがない方がずっと良いという考え方は、フロントエンドで時々出てきます。
+最近の例では、Denoブログから広がった議論がありますが、これは私が見た中でもかなり優れた議論の1つです。
+通常、彼らはもっと怒っていますが、ビルドステップについての議論でしばしば見落とされるのは、ビルドステップは主にユーザーの利益のために存在するのであって、私たちのために存在するのではないということです。
+
+![IMHO](/images/imho_rich/11_2.png)
+ビルドステップはコードを最小化し、100個の小さなモジュールを10個のコアスクリーンの塊にまとめ、より高速に読み込めるようにします。
+また、クライアント側のバンドルから未使用のコードを削除したり、画像を最適化したり、アセットをハッシュ化してキャッシュできるようにします。
+Type CheckやLintによってバグを防止することもできます。
+これらはすべて、より良いユーザーエクスペリエンスに直接つながるものです。
+
+確かにビルドステップは、非標準の方言を使ったり依存関係を簡単にインポートできたりと、開発者にもメリットがあります。
+しかし、ビルドステップを削除すると、開発者の経験よりもユーザーの経験の方が損なわれます。
+
+![IMHO](/images/imho_rich/11_3.png)
+興味深いことに、この業界でUXよりDXの方が大事であると声高に叫んでいる層と、ビルドツールは悪だと主張している層は見事に重なっています。
+これは、ユーザーに対する純粋な関心というよりも、反射的に反ツール化のマインドセットから来ていると結論づけざるを得ません。
+
+![IMHO](/images/imho_rich/11_4.png)
+もう1つ、ビルドステップが本当に有益である例を紹介します。
+SvelteKitのドキュメンテーション内のすべてのコードスニペットは、SvelteKitのソースコードに対して型チェックが行われています。
+
+たとえば、このページにあるコードはデプロイ時にエラーがないか、、SvelteKit自体の型が最新かどうかチェックされます。
+そのため、デプロイにはどうしても時間がかかってしまいます。
+このM1 MacBook Proでは、1ページのレンダリングに数秒かかることもあります。
+それでも、このコンテンツをビルド時に事前にレンダリングし、不正確なドキュメントを公開しないようにすることで、サイトを訪問する人全員が瞬時にコンテンツを取得できるようにしています。
+もしオンデマンドでレンダリングを行った場合、キャッシングを頑張ったとしても、ページの読み込みに何秒も待たされるユーザーが出てくることになります。
+ですので、ビルドステップは必要がないかもしれませんが、それでもおそらく必要です。
+
+# ぶっちゃけどうでもいい [None of this matters (🌶🌶🌶🌶)]
+::: details 原文
+ Okay, my final take of the evening is that none of this matters.
+ I don't think AI is going to take all our jobs, but I do think there's a better than even chance that it is going to change them beyond all recognition.
+ Might not be long before talking about these sorts of code preferences feel like talking about what implement you want to use to make holes in your punch cards.
+ So for the few weeks in which any of this is still relevant, let's have interesting debates and share our ideas, but let's not take ourselves too seriously.
+ And let's have fun building stuff whatever we like to build stuff!
+ That is my time.
+ Thank you for hearing me.
+:::
+![IMHO](/images/imho_rich/12_0.png)
+
+**さて、今夜私が最後に言いたいことは、「ぶっちゃけこんなのはどうでも良い！」です。**
+
+![IMHO](/images/imho_rich/12_1.png)
+私は、AIが全ての仕事を奪うとは思いませんが、AIが私たちの仕事をガラリと変えてしまう可能性は十二分にある、と考えています。
+
+なので、この種のコード環境について話すことが、パンチカードに穴をあけるためにどんな道具を使うかについて話すような感じになるのも、そう遠くないかもしれないですね。
+ですから、このAIブームの数週間、面白い議論をして、アイデアを共有して下さい。
+あまり思い詰めないでください。
+
+ものづくりを楽しもう！
+
+ご清聴ありがとうございました。
