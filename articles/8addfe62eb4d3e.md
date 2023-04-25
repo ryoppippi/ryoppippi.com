@@ -20,7 +20,6 @@ https://youtu.be/uXCipjbcQfM
 
 # はじめに [Introduction]
 
-![IMHO](/images/imho_rich/0_0.png)
 :::details 原文
 So, I'm going to be giving a talk tonight called In My Humble Opinion, and it's a collection of loosely connected thoughts about recent trends in front-end development.
 There's a lot of really interesting and innovative stuff happening in the front-end world at the moment, and this is a good time as any to take stock of it.
@@ -32,6 +31,8 @@ And finally, while I think that the Svelte team would broadly agree with the thi
 I'm also not speaking for Vercel, which is a healthfully pluralistic company, even if we all dress the same.
 These are my humble opinions.
 :::
+
+![IMHO](/images/imho_rich/0_0.png)
 
 今夜は「In My Humble Opinion（私の謙虚な意見）」というタイトルで、フロントエンド開発の最近のトレンドについて、ゆるやかにつながった考えをまとめたものです。
 現在、フロントエンド界隈で非常に興味深く、革新的なことがたくさん起こっているため、それを把握するのにいい機会だと思います。
@@ -50,8 +51,6 @@ These are my humble opinions.
 
 # フレームワークは問題ない [Your framework is fine] （🌶）
 
-![IMHO](/images/imho_rich/1_0.png)
-
 :::details 原文
 I'm going to start with a fairly non-spicy opinion.
 There's too much thought leadership that would have you believe that JavaScript frameworks are the root of all that is wrong with the web, and if only people would make better technology choices, the web would be perfect.
@@ -59,13 +58,14 @@ The only problem with it is it is absolute horseshit. When you last went on a re
 No, you don't.
 :::
 
+![IMHO](/images/imho_rich/1_0.png)
+
 まず、比較的スパイシー度の小さい意見から始めます。
 JavaScriptフレームワークがウェブの諸悪の根源であり、人々がより良い技術選択をすればウェブは完璧になると信じ込ませるようなソートリーダーシップ^[[ソートリーダーシップ](https://adv.asahi.com/marketing/keyword/11053380)]が多すぎるように思います。
 ただ、それは完全に出鱈目です。あなたがレシピサイトを訪れた際に、広告やニュースレターやクッキーの同意バナーやレシピ作者の幼少期の思い出話に苦戦した時、別のDOM要素の抽象化を使用していれば良かったのにと思ったことがありますか？
 いいえ、そんなことはありません。
 
 # なぜ Web はクソなのか [Why web sucks]
-
 
 :::details 原文
 The web doesn't suck because of JavaScript frameworks.
