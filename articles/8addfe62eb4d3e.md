@@ -290,7 +290,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
  So on the SvelteKit side, we use client-side routing by default.
  Unlike some frameworks, we don't use a link component.
  We just use regular A tags and intercept clicks on them.
- If you want to disable client-side routing for some reason, you can do it on an individual link by adding a data SvelteKit reload attribute, or you can do it for a whole group of links or even the entire document.
+ If you want to disable client-side routing for some reason, you can do it on an individual link by adding a `data-sveltekit-reload` attribute, or you can do it for a whole group of links or even the entire document.
  Now one thing that people have rightly criticized SPAs for is that they encourage longer sessions, meaning it's more likely that a new version of the app will be deployed while you're using the old one, which can cause client-side routing to fail because all of the files have moved around.
  So in SvelteKit, if we detect that case, we will fall back to a full page navigation, which usually fixes it, but we also make it easy to proactively detect new deployments and disable client-side routing when that happens.
 :::
@@ -358,7 +358,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
  SvelteKit側では、デフォルトでクライアントサイド・ルーティングを使用することにしました。
  ここでは、いくつかのフレームワークとは異なり、リンクコンポーネントを使用しません。
  通常のaタグを使用し、それがクリックされたときに適切にこれを処理します。
- もし何らかの理由でクライアントサイド・ルーティングを無効にしたい場合は、SvelteKitのリロード属性を追加することで個々のリンクに対して行うことができますし、リンクのグループ全体やドキュメント全体に対して行うことも可能です。
+ もし何らかの理由でクライアントサイド・ルーティングを無効にしたい場合は、`data-sveltekit-reload`という属性を追加します。これは個々のリンクに追加することもできますし、リンクのグループ全体、またはドキュメント全体にも追加することができます。
 
 ![IMHO](/images/imho_rich/5_6.png)
  SPAはセッションが長くなるため、古いアプリを使用している間に新しいバージョンのアプリがデプロイされる可能性が高く、すべてのファイルの場所が変わってしまってクライアントサイドのルーティングが失敗する可能性がある、と批判されることがあります。
