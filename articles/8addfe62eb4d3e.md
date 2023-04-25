@@ -183,7 +183,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
  And maybe you don't care what Kim Kardashian was wearing in 2017, but so much of modern culture is mediated through ephemeral digital platforms that there is a real possibility that future historians will have an easier time answering the question, what was it like to live through the space race, than answering the question, what was it like to live through the AI revolution?
  I think that's a tragedy.
  2016 is an interesting case because the content is actually there when you first load the page, but when the JS loads, it looks at the URL bar, says, hey, this isn't Kim Kardashian's profile, and just nukes the entire page.
- And we can go back to 2016 and fix that.
+ And we can't go back to 2016 and fix that.
  Frankly, if we could go back to 2016, we might have some other priorities.
  But what we can do is ensure that our tools today are flexible enough to continue working when unexpected things happen.
  So this is something that SvelteKit actually does out-of-the-box.
@@ -240,7 +240,7 @@ JavaScriptなしで自分の予定を見たり、新しい予定を作成した�
 しかし、現代文化の多くは短命なデジタルプラットフォームを通じて媒介されているため、将来の歴史家は、「宇宙開発競争を生き抜くとはどういうことか」という質問に答える方が、「AI革命を生き抜くとはどういうことか」という質問に答えるより簡単になってしまう可能性があるのです。
 私はそれが悲劇だと思います。 
 2016年は興味深いケースです。最初にページを読み込むと実際にコンテンツがあるのですが、JSがロードされると「これはKim Kardashianのプロファイルではない」と表示されページ全体が削除されます。
-2016年に戻って修正できるかもしれません。
+そして、2016年に戻って修正することはできないのです。
 正直言って、2016年に戻ることができたら、他にも優先事項があるかもしれません。
 ですが、私たちができることは、今日のツールを柔軟に、かつ予期しないことが起こった場合でも継続的に機能させるようにすることです。
 
