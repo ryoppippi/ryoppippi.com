@@ -3,7 +3,8 @@ title: "🌶️ IMHO 🌶️ - Rich Harris on frameworks, the web, and the edge.
 emoji: "🌶️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["翻訳", "javascript", "svelte", "sveltekit", "フロントエンド"]
-published: false
+published: true
+published_at: 2023-04-26 00:00
 ---
 
 :::message
