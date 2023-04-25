@@ -644,7 +644,7 @@ SvelteKitアプリでは、各ディレクトリがルートであり、各ル�
 ![IMHO](/images/imho_rich/8_8.png)
 さて、もう1つ非標準的なセマンティックスの例をお見せしましょう。
 このスライドは[Qwik](https://qwik.builder.io/)チームによるものです。
-QwikはQwikは、個々の関数を遅延ロードして、Lexical Scope^[参考: [僕らは JavaScript を知らない - レキシカルスコープとクロージャとガベージコレクション Lexical Scope, Closure and Garbage Collection](https://uraway.hatenablog.com/entry/2018/01/24/120000)]を再作成できるようにコードを変換するフレームワークです。
+Qwikは、個々の関数を遅延ロードして、Lexical Scope^[参考: [僕らは JavaScript を知らない - レキシカルスコープとクロージャとガベージコレクション Lexical Scope, Closure and Garbage Collection](https://uraway.hatenablog.com/entry/2018/01/24/120000)]を再作成できるようにコードを変換するフレームワークです。
 これはとても賢い方法であり、注目する価値があります。
 
 私自身は、このようなものには少し抵抗があります。
