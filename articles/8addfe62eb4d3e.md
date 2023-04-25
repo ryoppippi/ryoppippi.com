@@ -48,7 +48,7 @@ These are my humble opinions.
 また、Vercelの代弁者でもありません。Vercelは健全な多元的企業であり、たとえ私たち全員が同じ服を着ていたとしてもです。
 これらは、**私の謙虚な意見**です。
 
-# フレームワークは問題ない（🌶）[Your framework is fine (🌶)]
+# フレームワークは問題ない [Your framework is fine] （🌶）
 
 ![IMHO](/images/imho_rich/1_0.png)
 
@@ -100,7 +100,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
 
 つまり、私たちは技術の選択について話すのが大好きですが、ほとんどの場合、ソフトウェア開発で今使用している生産性の高いツールから乗り換えるように私や他の誰かから迫られている、と感じる必要はありません。
 
-## 0kbのJavaScriptは目標ではない (🌶🌶) [0kb JS is not a goal (🌶🌶)]
+# 0kbのJavaScriptは目標ではない [0kb JS is not a goal] (🌶🌶)
 :::details 原文
  Next take something I've seen more and more of lately is people talking about zero kilobytes of JavaScript, as in, this framework ships zero kilobytes of JavaScript by default.
  The implication is that JavaScript is inherently bad, and so a framework that doesn't serve JavaScript is inherently good, but zero kilobytes of JavaScript is not a goal.
@@ -154,7 +154,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
  私はこれをあらゆる種類のサイトで何度も見ています。
  単一の数字ではその微妙なニュアンスを捉えきれないため、それらの数字を使って何かを説得しようとする人には警戒すべきです。
 
-# ほとんどのサイトはJavaScriptなしでも動作するべきである (🌶🌶) [Most sites should work without JavaScript (🌶🌶)]
+# ほとんどのサイトはJavaScriptなしでも動作するべきである [Most sites should work without JavaScript]  (🌶🌶)
 
 :::details 原文
  Most sites should work without JavaScript.
@@ -255,7 +255,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
 是非ともお使いのブラウザでJavScriptの有効/無効を切り替えて開いてみて下さい。
 :::
 
-# MPAは死んだ [MPAs are dead (🌶🌶🌶)]
+# MPAは死んだ [MPAs are dead] (🌶🌶🌶)
 ::: details 原文
  Okay, getting a little spicier.
  This is the first opinion that's probably going to make people yell at me when the recording of this goes on on YouTube in a couple of weeks.
@@ -372,7 +372,7 @@ Astroは、登場時にはZero JSを掲げていましたが、その文言は�
 https://twitter.com/FredKSchott/status/1648963240779558915?s=20
 :::
 
-# 明示的なDSLは良いものです（🌶🌶）[Explicit DSLs are good (🌶🌶)]
+# 明示的なDSLは良いものです[Explicit DSLs are good] (🌶🌶)
 ::: details 原文
  Alright, next opinion is that explicit DSLs, domain-specific languages, are good.
  DSLs get a bad rap.
@@ -440,7 +440,7 @@ JSX、フック、シグナル、そして過去10年間におけるフロント
 DSLに抵抗がない人たちにとっては、Svelteは親しみやすさと新しさの間のスイートスポットであることがわかりました。
 私たちがよく知っている言語を便利に拡張することで、Lucyが成し遂げたように、SvelteではUIをより簡潔に表現することができるのです。
 
-## 暗黙のDSLは...あまり良くないです (🌶🌶🌶) [Implicit DSLs are... less good (🌶🌶🌶)]
+# 暗黙のDSLは...あまり良くないです [Implicit DSLs are... less good] (🌶🌶🌶)
 ::: details 原文
 So I am pro-DSL, but there is a crucial caveat.
  You have to be honest about it.
@@ -689,7 +689,7 @@ Solid.jsをよくご存知な人なら、これは完全に理解できること
 私はただ、私の考えをお伝えしているだけです。
 私が言いたいのは、あなたの科学者たちは、「できること」に気を取られていて、「すべきこと」について考え、立ち止まることをしなかったのだと思います。
 
-# コードはユーザーに近い場所で実行すべきです (🌶🌶) [Code should run close to the user (🌶🌶)]
+# コードはユーザーに近い場所で実行すべきです [Code should run close to the user] (🌶🌶)
 
 ::: details 原文
  Okay.
@@ -763,7 +763,7 @@ Server ComponentとClient Componentは異なるAPIを持ち、異なるフック
 Dan Abramovは、私が間違っている理由について鋭いツイートスレッド投稿するかもしれませんが、これらすべてが数年後にどのようになるかは楽しみです。
 
 
-# RPCを再発明することを後悔することになる (🌶🌶🌶) [We will regret reinventing RPC (🌶🌶🌶)]
+# RPCを再発明することを後悔することになる [We will regret reinventing RPC] (🌶🌶🌶)
 ::: details 原文
 Okay, another spicy to take, we will regret reinventing RPC.
  RPC stands for Remote Procedure Call, it's an idea that has been around since the 70s.
@@ -856,7 +856,7 @@ TypeScriptは、フィールドが`name`または`qty`であることを示し�
 Sveltekitには、組み込みのCSRF保護があり、CSPプリミティブがあります。
 私たちは「ただ便利だから」という理由で動いてはいないのです。
 
-# ビルドステップは良いゾ (🌶) [Build steps are good (🌶)]
+# ビルドステップは良いゾ [Build steps are good] (🌶)
 ::: details 原文
  Again, I'm rating this one low on the Scoville scale, even though it seems like an unpopular opinion, because I think it's actually pretty obvious.
  Build steps are good.
@@ -916,7 +916,7 @@ SvelteKitのドキュメンテーション内のすべてのコードスニペ�
 もしオンデマンドでレンダリングを行った場合、キャッシングを頑張ったとしても、ページの読み込みに何秒も待たされるユーザーが出てくることになります。
 ですので、ビルドステップは必要がないかもしれませんが、それでもおそらく必要です。
 
-# ぶっちゃけどうでもいい [None of this matters (🌶🌶🌶🌶)]
+# ぶっちゃけどうでもいい [None of this matters] (🌶🌶🌶🌶)
 ::: details 原文
  Okay, my final take of the evening is that none of this matters.
  I don't think AI is going to take all our jobs, but I do think there's a better than even chance that it is going to change them beyond all recognition.
