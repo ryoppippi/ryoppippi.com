@@ -324,7 +324,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
 
  ![IMHO](/images/imho_rich/5_2.png))
  SPAでは、ナビゲーションは他の状態変更と同じように扱われるため、連続的なトランジションのようなことができます。 
- 先日View Transitions APIが追加され、CSSでこのような繊維を行えるようになりm下。
+ 先日View Transitions APIが追加され、CSSでこのような遷移を行えるようになりました。
  たとえば、サーベイのアプリを作る場合、このような進捗インジケーターでTween Animationを使って数値を動かすことができます。
 
  また、SPAは統一された開発モデルを提供します。
