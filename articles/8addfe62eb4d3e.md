@@ -394,7 +394,7 @@ DSLはJavaScriptのような汎用プログラミング言語と対照的です�
 HTML、CSS、JSON、SQL、正規表現、これらはすべてDSLです。
 私たちはこれらをすでに広く使っているため、それらをDSLと考える傾向はありませんが、DSLを使ってかなりクールなことができます。
 
-![IMHO](/images/imho_rich/6_0.png)
+![IMHO](/images/imho_rich/6_1.png)
 たとえばMatthew Phillips氏が開発している[LuCy](https://lucylang.org/)は私の最近のお気に入りの例の1つです。
 これはステートマシンを記述するためのDSLであり、汎用言語よりもDSL版の方がどれだけ表現力が高いかがよくわかると思います。
 私はこのようなクールなものをもっと見たいと思っています。
