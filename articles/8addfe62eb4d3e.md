@@ -13,7 +13,7 @@ published_at: 2023-04-26 00:00
 この記事の作成には、Whisperによる書き起こし、DeepLおよびChatGPTによる翻訳を補助的に使用しています。
 また、本文中には適宜訳注を入れています。
 
-翻訳を許可していただいたRich氏、 またこの翻訳をきめ細かくレビューしていただいた[tomoam](https://zenn.dev/tomoam)氏、英文解釈の相談に乗っていただいた[shamokit](https://shamokit.com/)氏へ感謝を表明したいと思います。
+この場を借りて、翻訳を許可していただいたRich氏、 またこの翻訳をきめ細かくレビューしていただいた[tomoam](https://zenn.dev/tomoam)氏、英文解釈の相談に乗っていただいた[shamokit](https://shamokit.com/)氏へ感謝を表明したいと思います。
 :::
 
 https://youtu.be/uXCipjbcQfM
