@@ -278,7 +278,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
  Instead of having one language for your HTML and another for your DOM, SPAs are much more cohesive.
  Now, looking at these two lists, you might say, well, the stuff on the right is nice, but the stuff on the left is non-negotiable, and you'd be right, but the reality is that that list is very out of date.
  Modern frameworks like Next and Remix and Sveltekit don't suffer from the problems that afflicted early SPAs, and as we've seen, the claim that MPAs are faster than modern SPAs is highly suspect.
- I've tried to argue in the past that the distinction is actually rather unhelpful, since modern frameworks use techniques from both sides, and I've taken to calling them transitional apps, because we do not need any more moronic acronyms, but this isn't why I'm saying that MPAs are dead.
+ I've tried to argue in the past that the distinction is actually rather unhelpful, since modern frameworks use techniques from both sides, and I've taken to calling them Transitional Apps, because we do not need any more moronic acronyms, but this isn't why I'm saying that MPAs are dead.
  I'm saying that MPAs are dead because Astro killed them.
  My Astro friends will be mad at me for saying this, but here's the proof.
  As of last week, Astro's roadmap includes a client-side router that would turn your Astro app into a single-page app.
@@ -324,7 +324,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
 
  ![IMHO](/images/imho_rich/5_2.png))
  SPAでは、ナビゲーションは他の状態変更と同じように扱われるため、連続的なトランジションのようなことができます。 
- 先日View Transitions APIが追加され、CSSでこのような遷移を行えるようになりました。
+ 先日View Transitions API^[[SPA view transitions land in Chrome 111](https://developer.chrome.com/blog/spa-view-transitions-land/)]が追加され、CSSでこのような遷移を行えるようになりました。
  たとえば、サーベイのアプリを作る場合、このような進捗インジケーターでTween Animationを使って数値を動かすことができます。
 
  また、SPAは統一された開発モデルを提供します。
@@ -336,7 +336,7 @@ Progressive Enhancementの例として、Harris氏は[Svelteflix](https://svelte
  ![IMHO](/images/imho_rich/5_3.png)
  NextやRemix、Sveltekitといった最新のフレームワークには、初期のSPAを苦しめた問題はありませんし、これまで見てきたように、MPAが最新のSPAよりも速いという主張は非常に疑わしいです。
 
- 過去に私は、現代のフレームワークが両方の側面の技術を使用しているため、区別は実際にはあまり役に立たないと主張してきました。私はそれらを「移行期のアプリケーション」と呼ぶようになりました。
+ 過去に私は、現代のフレームワークが両方の側面の技術を使用しているため、区別は実際にはあまり役に立たないと主張してきました。私はそれらを「Transitional Apps^[Rich氏による[Jamstack Confの講演](https://youtu.be/860d8usGC0o?t=535)にて発表された用語。従来のデザインとモダンなデザインの両方の良さを併せ持つ、という意味のようだ。]」と呼ぶようになりました。
  しかし、MPAが死んだのはこれらが原因ではありません。
  **MPAはAstroに殺されたのです**
 
