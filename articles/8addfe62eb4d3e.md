@@ -372,7 +372,7 @@ Astroは、登場時にはZero JSを掲げていましたが、その文言は�
 https://twitter.com/FredKSchott/status/1648963240779558915?s=20
 :::
 
-# 明示的なDSLは良いものです[Explicit DSLs are good] (🌶🌶)
+# 明示的なDSLは良いものです [Explicit DSLs are good] (🌶🌶)
 ::: details 原文
  Alright, next opinion is that explicit DSLs, domain-specific languages, are good.
  DSLs get a bad rap.
