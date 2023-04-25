@@ -713,7 +713,7 @@ Solid.jsをよくご存知な人なら、これは完全に理解できること
  It's also every time I'm on the subway or even when I'm walking down the stairs to leave my flat and my phone switches from Wi-Fi to cellular, just as I'm trying to look at the details of where I'm supposed to be going.
  Turns out we're pretty bad at building things in an offline first way at the best of times.
  All of this is why I'm personally a little bit nervous about React server components.
- For those of you who aren't aware, RSC means that your UI is rendered on the server by default and only components that have a special use client directive will run in the browser and have access to things like `useState` and `useEffect`.
+ For those of you who aren't aware, RSC means that your UI is rendered on the server by default and only components that have a special `use client` directive will run in the browser and have access to things like `useState` and `useEffect`.
  Server components and client components have different APIs, they can use different hooks and there are restrictions on how you can combine them, but the upshot is that by default in the future, your React app will run entirely on the server and you will opt in to client rendering for specific parts of your app.
  Now clearly this has some very substantial benefits.
  This is hugely important work and frankly it blows my mind, but I do worry that we'll become so paranoid about serving JavaScript to our users that we'll overcorrect.
@@ -750,7 +750,7 @@ GitHubでコメントを書いているときに、コメントをサーバー�
 
 ![IMHO](/images/imho_rich/9_3.png)
 これらを踏まえて、私は個人的に[React Server Components(RSC)](https://nextjs.org/docs/advanced-features/react-18/server-components)について少し心配しています。
-RSCとは、UIがデフォルトでサーバー上でレンダリングされ、特別なclient属性を持つコンポーネントのみがブラウザー上で実行され、`useState`や`useEffect`などにアクセスできることを意味します。
+RSCとは、UIがデフォルトでサーバー上でレンダリングされ、特別な`use client`ディレクティブを持つコンポーネントのみがブラウザー上で実行され、`useState`や`useEffect`などにアクセスできることを意味します。
 Server ComponentとClient Componentは異なるAPIを持ち、異なるフックを使用することができ、それらを組み合わせる方法に制限がありますが、要約すると、将来的にはReactアプリケーション全体がサーバー上で実行され、アプリケーションの特定の部分に対してのみクライアント・レンダリングがオプトインされることになります。
 これは明らかに、非常に大きなメリットがありますし、率直にいってとてもワクワクしています。
 しかし、これによって私たちはユーザーにJavaScriptを提供することに対して過剰に慎重になりすぎる可能性があると心配しています。
