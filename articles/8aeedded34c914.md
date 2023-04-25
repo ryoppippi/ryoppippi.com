@@ -132,7 +132,6 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.lsp.start({
       name = 'lua_ls',
-      cmd = {'pylsp'},
       capabilities = vim.lsp.protocol.make_client_capabilities(),
       cmd = {'lua-language-server'},
       root_dir = vim.fs.dirname(vim.fs.find({'.git'}, { upward = true })[1]),
@@ -153,8 +152,8 @@ vim.api.nvim_create_autocmd('FileType', {
 - 有効にするファイルの種類から、root判定のファイルの指定、さらにそもそものLSP Serverの起動コマンドの指定までが必要になること
 
 nvim-lspconfigはこの設定が大変な部分をうまくやってくれているので、基本的にはnvim-lspconfigを使うのが良いと思います。
-ただ、一部自分にとっても気に食わない部分があるので(tsserverとdenolsの共存等)、その部分のみ`vim.lsp.start`を使うのが良いかなと思います。
-(このtsserverとdenolsの共存にに関してはnvim-lspconfigのroot_patternを使う方法もありますが、必ずしもうまくいくとは限りません。
+ただ、いくつかのServerのデフォルトでの挙動の一部が自分にとってはしっくりきていない部分があるので(tsserverとdenolsの共存等)、その部分のみ`vim.lsp.start`を使って書き直そうかなと思っています。
+(締め切りまでに間に合わなかったので、後日追記します）
 
 # まとめ
 Neovim 0.8以降で可能なLSPの設定方法を紹介してみました。
