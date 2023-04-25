@@ -8,10 +8,11 @@ published: false
 
 :::message
 この記事はSvelte/Sveltekitの作者である[Rich Harris](https://twitter.com/Rich_Harris)氏による講演「🌶️ IMHO 🌶️」を翻訳したものです。  
-翻訳を許可していただいたRich氏に感謝を表明したいと思います。  
-また、適宜訳注を入れています。
+本文中には適宜訳注を入れています。
 
-記事の作成にあたり、Whisperによる書き起こし、DeepLおよびChatGPTによる翻訳を使用しています。
+記事の作成にあたり、Whisperによる書き起こし、DeepLおよびChatGPTによる翻訳を補助的に使用しています。
+
+翻訳を許可していただいたRich氏、 またこの翻訳をレビューしていただいた[tomoam](https://zenn.dev/tomoam)氏に感謝を表明したいと思います。
 :::
 
 https://youtu.be/uXCipjbcQfM
