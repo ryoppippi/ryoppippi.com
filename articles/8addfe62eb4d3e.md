@@ -75,7 +75,7 @@ The other stuff matters, but probably less than we think, because every now and 
 This is a chart that shows how the main JavaScript-centric application frameworks score on Core Web Vitals measurements.
 You can see that only Astro and SvelteKit outperform the average website, but we have to be careful how we interpret this.
 For example, Astro explicitly markets itself as being designed for content sites that don't require much interactivity, and so it has a natural advantage over frameworks that are typically used for more demanding workloads.
-All of which is to say that, as much as we love to talk about technology choices, for the most part, you shouldn't feel pressured by me or anybody else to switch away from whatever makes you productive shipping software.
+All of which is to say that, as much as we love to talk about technology choices, for the most part, you shouldn't feel pressured by me or anybody else to switch away from whatever makes you productive at shipping software.
 :::
 
 ![IMHO](/images/imho_rich/2_0.png)
