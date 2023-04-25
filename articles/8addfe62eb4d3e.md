@@ -438,7 +438,7 @@ JSX、フック、シグナル、そして過去10年間におけるフロント
 DSLに抵抗がない人たちにとっては、Svelteは親しみやすさと新しさの間のスイートスポットであることがわかりました。
 私たちがよく知っている言語を便利に拡張することで、Lucyが成し遂げたように、SvelteではUIをより簡潔に表現することができるのです。
 
-## ## 暗黙のDSLは...あまり良くないです (🌶🌶🌶) [Implicit DSLs are... less good (🌶🌶🌶)]
+## 暗黙のDSLは...あまり良くないです (🌶🌶🌶) [Implicit DSLs are... less good (🌶🌶🌶)]
 ::: details 原文
 So I am pro-DSL, but there is a crucial caveat.
  You have to be honest about it.
