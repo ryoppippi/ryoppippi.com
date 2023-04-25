@@ -788,7 +788,7 @@ Okay, another spicy to take, we will regret reinventing RPC.
  I can retell you this example here.
  This server function looks and feels like an internal implementation detail, but it's not.
  We've actually made an HTTP endpoint that anyone can call with any data.
- So TypeScript is telling us that fields can be name or quantity, but in reality, it could be name semicolon drop table users.
+ So TypeScript is telling us that fields can be name or quantity, but in reality, it could be `NAME; DROP TABLE "USERS"`
  If you know, you know.
  So when you make an endpoint explicit and you're working with full data, you're aware on some level that the data is untrusted.
  And so, you know, I think you're much less likely to make this sort of error than if it looks like a private function call.
@@ -836,7 +836,7 @@ TypeScriptに関しては、ローカル関数であるかのように扱われ�
 この例を再度説明します。
 このサーバー関数は内部の実装のように見えますが、実際にはそうではありません。
 誰でも任意のデータでHTTPエンドポイントを呼び出せるようになっています。
-TypeScriptは、フィールドが`name`または`qty`であることを示していますが、実際には`NAME; DROP TABLE USERS`である可能性もあります。
+TypeScriptは、フィールドが`name`または`qty`であることを示していますが、実際には`NAME; DROP TABLE "USERS"`である可能性もあります。
 お分かりだった方もいらっしゃいますよね？
 
 対して、明示的にエンドポイントを設計し、完全なデータを扱うならば、受信するデータが信頼できないものであることをある程度認識していることになります。
