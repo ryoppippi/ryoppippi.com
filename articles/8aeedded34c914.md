@@ -8,7 +8,7 @@ published_at: 2023-04-26 09:00
 ---
 
 ::: message 
-この記事は[Vim駅伝](https://vim-jp.org/ekiden/)の4/25の記事です。
+この記事は[Vim駅伝](https://vim-jp.org/ekiden/)の4/26の記事です。
 :::
 
 実はNeovim 0.8以降でいろいろと進化したLsp on Neovimについての記事がなかったので、書いてみます。
