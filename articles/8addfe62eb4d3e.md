@@ -115,7 +115,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
  That's not how Lighthouse was originally supposed to be used.
  Lighthouse is a diagnostic tool to help us identify and fix issues.
  It is not a scorecard.
- So this is [learn.svelte.dev](https://learn.svelte.dev/tutorial/welcome-to-svelte), our interactive platform for learning Svelte and SvelteKit.
+ So this is [learn.svelte.dev](https://learn.svelte.dev), our interactive platform for learning Svelte and SvelteKit.
  It gets a pretty lousy performance score, because in order to work, it needs to download and install Node inside your browser along with SvelteKit and Vite, and then it needs to start a development server.
  It is doing a lot of work, and it does it pretty quickly, but not quickly enough for Lighthouse.
  You could get a better score by only doing that work when you start interacting with the site, but that would be a pretty serious regression in user experience.
@@ -147,7 +147,7 @@ AstroとSvelteKitだけが平均的なウェブサイトを上回っているこ
 
 ![IMHO](/images/imho_rich/3_2.png)
 
- これは、SvelteとSvelteKitを学ぶための私たちのインタラクティブプラットフォームである[learn.svelte.dev](https://learn.svelte.dev/tutorial/welcome-to-svelte)です。
+ これは、SvelteとSvelteKitを学ぶための私たちのインタラクティブプラットフォームである[learn.svelte.dev](https://learn.svelte.dev)(訳注: 日本語版は[learn.svelte.jp](https://learn.svelte.jp))です。
  このLighthouseのスコアはとても低いですが、これはSvelteとSvelteKitを含むNodeをダウンロードしてブラウザー内にインストールし、開発サーバーを起動する必要があるためです。
  多くの作業を行っており、かなり速く行っているのですが、Lighthouseの基準では十分な速さではありません。
  
