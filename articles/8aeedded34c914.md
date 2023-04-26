@@ -11,7 +11,7 @@ published_at: 2023-04-26 09:00
 この記事は[Vim駅伝](https://vim-jp.org/ekiden/)の4/26の記事です。
 :::
 
-実はNeovim 0.8以降でいろいろと進化したLsp on Neovimについての記事がなかったので、書いてみます。
+実はNeovim 0.8以降でいろいろと進化したLSP on Neovimについての記事がなかったので、書いてみます。
 
 長らくNeovimでLSPを導入するにはnvim-lspconfigを使うことが推奨されてきました。
 というか、nvim-lspconfigを使う前提の解説がほとんどでした。
@@ -46,24 +46,26 @@ LspAttachは、LSP Serverが開いたBufferにAttachされたときに発火し�
 これをうまく使うと、設定ファイルを書くのが楽になります。
 
 さて、Neovim 0.7以前でLSP ServerのAttach時に何か処理を行いたい場合は、nvim-lspconfigの`on_attach`オプションに関数を渡していました。
-つまり、lsp serverに関する設定を１箇所にまとめる必要があったのです。
-そのため、設定ファイルに巨大な`on_attach`関数を書いていました(keymapから外部プラグインの設定から)。
+つまり、巨大な`on_attach`関数を書いて、それを渡す必要があったのです(keymapから外部プラグインの設定から)。
+そのため、LSP Server起動時の設定はLSPの設定とまとめて１箇所に記述する必要があったのです。
 
 
 ```lua
 local lspconfig = require("lspconfig")
 
-function setKeymap(client, bufnr)
-  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { silent = true, buffer = bufnr }) -- キーマップを設定する
+-- キーマップを設定する
+function setKeymap(client, buffer)
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { silent = true, buffer = buffer })
 end
 
-function setPlugin(client, bufnr)
-  require("illuminate").attach(client, bufnr) -- 外部プラグインをlsp serverを連携させる
+-- 外部プラグインをlsp serverを連携させる
+function setPlugin(client, buffer)
+  require("illuminate").attach(client, buffer)
 end
 
-function on_attach(client, bufnr)
-  setKeymap(client, bufnr)
-  setPlugin(client, bufnr)
+function on_attach(client, buffer)
+  setKeymap(client, buffer)
+  setPlugin(client, buffer)
 end
 
 lspconfig.lua_ls.setup({
@@ -71,6 +73,8 @@ lspconfig.lua_ls.setup({
 })
 ```
 
+しかも、この`on_attach`関数は、LSP Serverごとに設定する必要がありました。
+まあめんどくさいですよね。
 
 これが、LspAttachが追加されたことで、設定ファイルをうまく分割することができるようになりました。
 試しに書いてみましょう。
@@ -88,12 +92,14 @@ function on_attach(on_attach)
   })
 end
 
-on_attach(function(client, bufnr)
-  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { silent = true, buffer = bufnr }) -- キーマップを設定する
+-- キーマップを設定する
+on_attach(function(client, buffer)
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { silent = true, buffer = buffer })
 end)
 
-on_attach(function(client, bufnr)
-  require("illuminate").attach(client, bufnr) -- 外部プラグインをlsp serverを連携させる
+-- 外部プラグインをlsp serverを連携させる
+on_attach(function(client, buffer)
+  require("illuminate").attach(client, buffer) 
 end)
 
 lspconfig.lua_ls.setup({})
@@ -101,11 +107,15 @@ lspconfig.lua_ls.setup({})
 
 上のコードでは、`on_attach`関数でautocmdをラップして使いやすくしています。
 0.7以前のコードと違って、このラップ関数を用いればLSP Server起動時の処理を設定ファイルのどこに書いても良くなりました。
+また、LSP Serverごとに設定する必要もなくなりました。
+特定のLSP Serverに対して何か特別に処理を行いたい場合は、`on_attach`関数の引数を使って`client.name == 'lua_ls'`などのような条件分岐を使うこともできます。
 
 自分はlazy.nvimを用いてプラグインを管理しています。そして設定ファイルはプラグインごとに分割しています。
 そのため、`LspAttach`を用いることで綺麗に設定ファイルを分割することができました。
 
 https://github.com/ryoppippi/dotfiles/blob/1c1a2e4c7759fadff15612e20a6025e1db40114c/nvim/lua/plugin/vim-illuminate.lua
+
+https://github.com/ryoppippi/dotfiles/blob/1c1a2e4c7759fadff15612e20a6025e1db40114c/nvim/lua/plugin/nvim-navic.lua
 
 
 また、LspDetachはLSP Serverが開いたBufferからDetachされたときに発火します。
@@ -141,7 +151,7 @@ vim.api.nvim_create_autocmd('FileType', {
 ```
 
 このように、`Filetype`のautocmdを用いて、`lua`ファイルが開かれたときに`lua_ls`を起動しています。  
-また、`ftplugin/python.lua`というファイルを作成して、そこに設定を書くこともできますね。
+また、例えば`ftplugin/python.lua`というファイルを作成して、そこに設定を書くこともできますね。
 
 メリット・デメリットは以下の通りです。
 
