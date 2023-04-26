@@ -45,7 +45,7 @@ Neovim 0.8より、`LspAttach`、そして`LspDetach`という`autocmd`が追加
 LspAttachは、LSP Serverが開いたBufferにAttachされたときに発火します。
 これをうまく使うと、設定ファイルを書くのが楽になります。
 
-前述の通り、Neovim 0.7以前では、nvim-lspconfigの`on_attach`オプションに関数を渡していました。
+さて、Neovim 0.7以前でLSP ServerのAttach時に何か処理を行いたい場合は、nvim-lspconfigの`on_attach`オプションに関数を渡していました。
 つまり、lsp serverに関する設定を１箇所にまとめる必要があったのです。
 そのため、設定ファイルに巨大な`on_attach`関数を書いていました(keymapから外部プラグインの設定から)。
 
