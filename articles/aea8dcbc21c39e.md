@@ -3,7 +3,7 @@ title: "Sveltekit, Progressive Enhancement, Form, Type Safety, そしてSuperfor
 emoji: "💎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["sveltekit", "svelte", "zod", "superforms"]
-published: false
+published: true
 ---
 
 SvelteKit で最近さまざまな案件ができていて嬉しい限りである。
@@ -52,11 +52,6 @@ Progressive Enhancementの考え方は、ユーザーのそれぞれの環境で
 
 # Form についておさらい
 
-https://drewdevault.com/2021/10/17/Reliability.html
-
-> some stupid reason some asshole developer decided to reimplement all of the form semantics in JavaScript, and now I can’t pay my electricity bill without opening up the dev tools
-
-https://kit.svelte.jp/docs/form-actions
 Form は HTML のタグであり、Form タグを使えばユーザーからの入力をサーバーに送ることができる。
 例えば、以下は Form タグを使った簡単なログイン画面のコードである。
 Form 内ではおなじみ`input`タグを用いてユーザーからの入力を受け取り、submit 属性のある`button`タグを用いて、その入力をサーバーに送信する。
@@ -87,6 +82,11 @@ export const actions = {
 ```
 
 # Form + Fetch API = 💔
+
+https://drewdevault.com/2021/10/17/Reliability.html
+
+> some stupid reason some asshole developer decided to reimplement all of the form semantics in JavaScript, and now I can’t pay my electricity bill without opening up the dev tools
+
 
 さて、この Form によるデータの送信は、JavaScript が動作しない環境でも動作する。
 しかし、この Form の実装では、送信時に画面が遷移してしまうという問題がある。
