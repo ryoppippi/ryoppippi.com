@@ -1,5 +1,5 @@
 ---
-title: "Sveltekit, Progressive Enhancement, Form, Type Safety, そしてSuperforms"
+title: "SvelteKit, Progressive Enhancement, Form, Type Safety, そしてSuperforms"
 emoji: "💎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["sveltekit", "svelte", "zod", "superforms"]
@@ -155,12 +155,11 @@ SvelteKit では、`use:enhance`action を Form に付与するだけで、Progr
 このように簡単な実装で、Project Enhancement を実現できる。
 また、アニメーションやデータ加工等の処理を Client Side で行いたい場合は、`use:enhance`の代わりに`use:enhance={options}`を用いることで、より複雑な処理を行うことができる。
 
-以下に Form を用いた簡単なデモを用意した。
+以下に、`use:enhance`を適用させたForm を用いた簡単なデモを用意した。
 https://sveltekit-form-examples.vercel.app/
 https://github.com/ryoppippi/sveltekit-form-examples
 
 このサイトは、名前と何秒後にレスポンスを返すかを入力すると、その秒数後に `Hello {name}!` というメッセージを返す。
-このサイトでは、`use:enhance`が付与されている Form を用いている。
 是非ともブラウザで JavaScript を無効化したり、遅い回線をエミュレートして試していただきたい。
 
 ![form_1](/images/aea8dcbc21c39e/form_1.gif)
@@ -213,7 +212,7 @@ https://sveltekit-form-examples.vercel.app/superforms
 
 https://github.com/ryoppippi/sveltekit-form-examples/blob/82bd6695798b027c3b7abfd052092e8793144066/src/routes/superforms/%2Bpage.server.js#L6-L14
 
-SuperformsではZodによりForm Schemaを定義する。そしてその情報を`load`関数の返り値に渡すことで、`+page.svelte`にFormの定義を渡している。
+SuperformsではZodを用いてForm Schemaを定義する。そしてその情報を`load`関数の返り値に渡すことで、`+page.svelte`にFormの定義を渡している。
 
 https://github.com/ryoppippi/sveltekit-form-examples/blob/82bd6695798b027c3b7abfd052092e8793144066/src/routes/superforms/%2Bpage.svelte#L1C1-L15
 
