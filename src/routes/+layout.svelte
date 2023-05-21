@@ -24,7 +24,18 @@
 	<link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
 	<link rel="manifest" href={siteWebmanifest} />
 </svelte:head>
-<MetaTags title="ryoppippi.com" description="Portfolio of ryoppippi" />
+<MetaTags
+	title="ryoppippi.com"
+	description="Portfolio of ryoppippi"
+	robotsProps={{
+		noarchive: true,
+		nosnippet: true,
+		maxSnippet: -1,
+		maxImagePreview: 'none',
+		maxVideoPreview: -1,
+		notranslate: true,
+		noimageindex: true
+	}} />
 
 <main class="dark">
 	<Nav />
