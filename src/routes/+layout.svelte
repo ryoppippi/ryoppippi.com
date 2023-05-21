@@ -1,10 +1,40 @@
-<script lang="ts">
-	// The ordering of these imports is critical to your app working properly
-	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
-	import '@skeletonlabs/skeleton/styles/all.css';
-	// Most of your app wide CSS should be put in this file
-	import '../app.postcss';
+<script>
+	import '../theme.postcss';
+	import '@skeletonlabs/skeleton/styles/skeleton.css';
+	import '../app.css';
+
+	import hljs from 'highlight.js';
+	import 'highlight.js/styles/github-dark.css';
+
+	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+
+	import { page } from '$app/stores';
+	import { preparePageTransition } from '$lib/page-transition';
+
+	import Nav from '$lib/Nav.svelte';
+
+	import appleTouchIcon from '$lib/assets/favicons/apple-touch-icon.png';
+	import favicon32 from '$lib/assets/favicons/favicon-32x32.png';
+	import favicon16 from '$lib/assets/favicons/favicon-16x16.png';
+	import siteWebmanifest from '$lib/assets/favicons/site.webmanifest';
+
+	storeHighlightJs.set(hljs);
+
+	preparePageTransition();
 </script>
 
-<slot />
+<svelte:head>
+	<link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon} />
+	<link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
+	<link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
+	<link rel="manifest" href={siteWebmanifest} />
+</svelte:head>
+
+<main class="dark">
+	<Nav />
+	{#key $page.url}
+		<article>
+			<slot />
+		</article>
+	{/key}
+</main>
