@@ -67,6 +67,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.3.2
     version: 3.3.2(postcss@8.4.23)(svelte@3.59.1)
+  svelte-meta-tags:
+    specifier: ^2.7.2
+    version: 2.7.2(svelte@3.59.1)(typescript@5.0.4)
   tailwindcss:
     specifier: ^3.3.2
     version: 3.3.2
@@ -1886,6 +1889,14 @@ packages:
       rimraf: 2.7.1
     dev: true
 
+  /schema-dts@1.1.2(typescript@5.0.4):
+    resolution: {integrity: sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: 5.0.4
+    dev: true
+
   /semver@7.5.1:
     resolution: {integrity: sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==}
     engines: {node: '>=10'}
@@ -2029,6 +2040,17 @@ packages:
       svelte: '>=3.19.0'
     dependencies:
       svelte: 3.59.1
+    dev: true
+
+  /svelte-meta-tags@2.7.2(svelte@3.59.1)(typescript@5.0.4):
+    resolution: {integrity: sha512-CLUrgpT1sGUqKWOXtAdSDWULcxk6YKBIl/9HD0NdGzMRX4HmGq158gHVkww5N8fY/gCbhcwEnsACQUHnPzCFXg==}
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      schema-dts: 1.1.2(typescript@5.0.4)
+      svelte: 3.59.1
+    transitivePeerDependencies:
+      - typescript
     dev: true
 
   /svelte-preprocess@5.0.3(postcss@8.4.23)(svelte@3.59.1)(typescript@5.0.4):

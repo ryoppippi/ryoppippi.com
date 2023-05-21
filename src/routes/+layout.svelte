@@ -11,6 +11,8 @@
 	import { page } from '$app/stores';
 	import { preparePageTransition } from '$lib/page-transition';
 
+	import { MetaTags } from 'svelte-meta-tags';
+
 	import Nav from '$lib/Nav.svelte';
 
 	import appleTouchIcon from '$lib/assets/favicons/apple-touch-icon.png';
@@ -28,8 +30,8 @@
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
 	<link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
 	<link rel="manifest" href={siteWebmanifest} />
-	<title>ryoppippi.com</title>
 </svelte:head>
+<MetaTags title="ryoppippi.com" description="Portfolio of ryoppippi" />
 
 <main class="dark">
 	<Nav />
