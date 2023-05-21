@@ -3,10 +3,10 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="grid h-screen w-screen place-content-center place-items-center pt-10">
+<div class="grid place-content-center place-items-center pt-10">
 	<CodeBlock
 		buttonLabel=""
-		language="bash"
+		language="sh"
 		code={`
 > curl -s -o /dev/null -w "%{http_code}" ${$page.url}
 ${$page.status} 

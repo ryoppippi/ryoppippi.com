@@ -3,11 +3,6 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.css';
 
-	import hljs from 'highlight.js';
-	import 'highlight.js/styles/github-dark.css';
-
-	import { storeHighlightJs } from '@skeletonlabs/skeleton';
-
 	import { page } from '$app/stores';
 	import { preparePageTransition } from '$lib/page-transition';
 
@@ -19,8 +14,6 @@
 	import favicon32 from '$lib/assets/favicons/favicon-32x32.png';
 	import favicon16 from '$lib/assets/favicons/favicon-16x16.png';
 	import siteWebmanifest from '$lib/assets/favicons/site.webmanifest';
-
-	storeHighlightJs.set(hljs);
 
 	preparePageTransition();
 </script>
