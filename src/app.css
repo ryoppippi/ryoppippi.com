@@ -1,0 +1,12 @@
+/* you don't need this tailwind config because of skeleton.css */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; 
+ */
+
+/* Only do the FLIP-style animations when no reduced-motion preference */
+@media (prefers-reduced-motion: no-preference) {
+	[style*='--tag'] {
+		view-transition-name: var(--tag);
+	}
+}
