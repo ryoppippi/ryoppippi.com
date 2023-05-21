@@ -19,8 +19,8 @@
 	{#each ICONS as icon}
 		{@const { name, url } = icon}
 		<div>
-			<a href={url} target="_blank" rel="noopener noreferrer">
-				<Icon title={url} icon={name} aria-label="link to {url}" style="font-size: {size}vh" />
+			<a href={url} target="_blank" aria-label="link to {url}" rel="noopener noreferrer">
+				<Icon title={url} icon={name} style="font-size: {size}vh" />
 			</a>
 		</div>
 	{/each}
