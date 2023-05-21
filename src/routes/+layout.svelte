@@ -28,6 +28,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
 	<link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
 	<link rel="manifest" href={siteWebmanifest} />
+	<title>ryoppippi.com</title>
 </svelte:head>
 
 <main class="dark">
