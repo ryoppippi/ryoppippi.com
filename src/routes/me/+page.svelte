@@ -5,7 +5,7 @@
 	import Skills from './Skills.svelte';
 </script>
 
-<div class="container mx-auto my-3 mt-8 grid place-content-center">
+<div class="container mx-auto mt-8 grid place-content-center">
 	<Profile />
 
 	<div class="mx-10">

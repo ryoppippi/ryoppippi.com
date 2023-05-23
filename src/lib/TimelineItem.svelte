@@ -1,5 +1,5 @@
 <script>
-	/** @type {string} */
+	/** @type {ConstructorOfATypedSvelteComponent} */
 	export let icon;
 
 	/** @type {string} */
@@ -10,14 +10,12 @@
 
 	/** @type {boolean} */
 	export let hidden = false;
-
-	import Icon from '@iconify/svelte';
 </script>
 
 <li class="mb-10 ml-6 transition-opacity" class:opacity-20={hidden}>
 	<span
 		class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
-		<Icon {icon} />
+		<svelte:component this={icon} />
 	</span>
 
 	<h3 class="mb-1 flex items-center text-lg font-semibold text-me-text-100">

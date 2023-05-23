@@ -1,13 +1,5 @@
 <script>
-	/** @type {number} */
-	export let height = 5;
-
-	/** @type {number} */
-	export let ratio = 2;
-
 	const name = /** @type {const} */ 'ryoppippi';
-
-	$: width = height * ratio;
 
 	import img from '$lib/assets/ryoppippi.jpg';
 </script>
