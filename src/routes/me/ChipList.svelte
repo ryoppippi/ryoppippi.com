@@ -6,10 +6,10 @@
 		'Good w/ ChatGPT': true
 	};
 
-	import Icon from '@iconify/svelte';
+	import IconCheck from '~icons/mdi/check';
 </script>
 
-<div class="justify-begin mb-5 flex space-x-2">
+<div class="justify-begin mb-5 flex select-none space-x-2">
 	{#each Object.keys(items) as i}
 		<span
 			class="chip {items[i] ? 'variant-filled' : 'variant-glass-soft'}"
@@ -17,10 +17,10 @@
 				items[i] = !items[i];
 			}}
 			on:keypress>
-			{#if items[i]}
-				<span><Icon icon="mdi:check" /></span>
-			{/if}
 			<span class="">{i}</span>
+			{#if items[i]}
+				<span><IconCheck /></span>
+			{/if}
 		</span>
 	{/each}
 </div>

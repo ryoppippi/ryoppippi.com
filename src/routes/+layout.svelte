@@ -64,7 +64,7 @@
 		noimageindex: true
 	}} />
 
-<main class="dark">
+<main class="dark my-3">
 	<Nav />
 	{#key $page.url}
 		<article>
