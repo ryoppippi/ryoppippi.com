@@ -16,7 +16,7 @@
 			{TITLE}
 		</a>
 		<nav class="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
-			{#each LINKS as l}
+			{#each LINKS as l (l.name)}
 				{@const { link, name } = l}
 				<a
 					href={link}

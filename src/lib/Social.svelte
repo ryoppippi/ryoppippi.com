@@ -22,7 +22,7 @@
 </script>
 
 <article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade={{ duration: 3000 }}>
-	{#each ICONS as icon}
+	{#each ICONS as icon (icon.url)}
 		{@const { component, url } = icon}
 		<div class="animation cursor-pointer">
 			<a href={url} target="_blank" aria-label="link to ryoppippi's {new URL(url).hostname}" rel="noopener noreferrer">
