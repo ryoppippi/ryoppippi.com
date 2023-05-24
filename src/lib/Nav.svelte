@@ -12,7 +12,7 @@
 
 <header class="py-6">
 	<div class="max-w-8xl container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
-		<a class="text-xl font-bold title-font flex items-center text-me-text-100 md:mb-0" href="/">
+		<a class="title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0" href="/">
 			{TITLE}
 		</a>
 		<nav class="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
