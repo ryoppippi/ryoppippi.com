@@ -27,7 +27,7 @@
 			{/each}
 		</nav>
 		<a
-			href="http://cv.ryoppippi.com"
+			href="https://cv.ryoppippi.com"
 			target="_blank"
 			class="bg-base btn variant-glass-primary mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0">
 			{'My CV '}
