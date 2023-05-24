@@ -56,7 +56,7 @@
 		],
 		Frontend: [
 			{ icon: IconSvelte, title: 'Svelte / SvelteKit', value: 96 },
-			{ icon: IconReact, title: 'React', value: 70 },
+			{ icon: IconReact, title: 'React / Next.js', value: 75 },
 			{ icon: IconAngular, title: 'Angular', value: 75 }
 		],
 		Backend: [
