@@ -1,0 +1,13 @@
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run cron
+        run: |
+          curl -X POST ${{ secrets.BUILD_HOOK_URL }}
