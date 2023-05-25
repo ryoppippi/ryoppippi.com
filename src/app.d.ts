@@ -9,3 +9,9 @@ declare namespace App {
 	// interface Error {}
 	// interface Platform {}
 }
+
+type Post = {
+	title: string;
+	slug: string;
+	pubDate: string;
+};
