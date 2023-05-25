@@ -2,24 +2,19 @@
 	export let data;
 
 	import IconLinkOut from '~icons/quill/link-out';
-	import { format } from 'date-fns';
+	import { formatDate } from '$lib/util.js';
+	$: console.log({ data });
 </script>
 
-<div class="mx-5 grid place-items-start">
-	{#each data.rss as item (item.link)}
-		{@const external = item.link.startsWith('http')}
-		{@const pubDate = new Date(item.pubDate)}
-		<p class="flex">
-			{format(pubDate, 'dd MMM Y: ')}
-			<a
-				href={item.link}
-				target={external ? '_blank' : ''}
-				class="border-b-2 border-transparent hover:border-me-primary-100">
-				{item.title}
-				{#if external}
-					<IconLinkOut class="inline" />
-				{/if}
-			</a>
-		</p>
-	{/each}
-</div>
+{#each data.posts as item (item.title)}
+	{@const external = item.link?.startsWith('http')}
+	{@const pubDate = new Date(item.pubDate)}
+	<p class="text-me-text-200 opacity-70">{formatDate(pubDate)}</p>
+	<a
+		href={item?.link ?? `/blog/${item.slug}`}
+		target={external ? '_blank' : ''}
+		class="flex border-b-2 border-transparent text-me-text-100 hover:border-me-primary-100 md:overflow-hidden">
+		<p class="md:truncate">{item.title}</p>
+		{#if external} <IconLinkOut class="my-auto hidden md:inline" /> {/if}
+	</a>
+{/each}

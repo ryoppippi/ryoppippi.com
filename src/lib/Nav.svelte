@@ -14,12 +14,12 @@
 		<a class="title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0" href="/">
 			{TITLE}
 		</a>
-		<nav class="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
+		<nav class="flex flex-wrap items-center justify-center gap-3 text-base md:mx-auto">
 			{#each LINKS as l (l.name)}
 				{@const { link, name } = l}
 				<a
 					href={link}
-					class="block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100 lg:p-4"
+					class="block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100"
 					class:border-me-primary-100={$page.url.pathname === link}>
 					{name}
 				</a>
