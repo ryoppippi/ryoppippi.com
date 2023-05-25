@@ -19,41 +19,36 @@
 	preparePageTransition();
 </script>
 
+<svelte:head>
+	<title>ryoppippi.com</title>
+	<meta name="description" content="Portfolio of @ryoppippi" />
+
+	<!-- favicon -->
+	<link rel="apple-touch-icon" href={appleTouchIcon} sizes="180x180" />
+	<link rel="icon" type="image/png" href={favicon32} sizes="32x32" />
+	<link rel="icon" type="image/png" href={favicon16} sizes="16x16" />
+	<link rel="manifest" href={siteWebmanifest} />
+
+	<!-- og -->
+	<meta property="og:url" content="https://ryoppippi.com" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="ryoppippi.com" />
+	<meta property="og:site_name" content="ryoppippi.com" />
+	<meta property="og:description" content="Portfolio of @ryoppippi" />
+	<meta property="og:image" content={ryoppippi} />
+	<meta property="og:image:alt" content="ryoppippi's icon" />
+
+	<!-- twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@ryoppippi" />
+	<meta name="twitter:creator" content="@ryoppippi" />
+	<meta name="twitter:title" content="ryoppippi.com" />
+	<meta name="twitter:description" content="Portfolio of @ryoppippi" />
+	<meta name="twitter:image" content={ryoppippi} />
+	<meta name="twitter:image:alt" content="ryoppippi's icon" />
+</svelte:head>
+
 <MetaTags
-	title="ryoppippi.com"
-	description="Portfolio of @ryoppippi"
-	twitter={{
-		handle: '@ryoppippi',
-		site: '@ryoppippi',
-		cardType: 'summary_large_image',
-		title: 'ryoppippi.com',
-		description: 'Portfolio of @ryoppippi',
-		image: ryoppippi,
-		imageAlt: "ryoppippi's icon"
-	}}
-	additionalLinkTags={[
-		{
-			rel: 'apple-touch-icon',
-			sizes: '180x180',
-			href: appleTouchIcon
-		},
-		{
-			rel: 'icon',
-			type: 'image/png',
-			sizes: '32x32',
-			href: favicon32
-		},
-		{
-			rel: 'icon',
-			type: 'image/png',
-			sizes: '16x16',
-			href: favicon16
-		},
-		{
-			rel: 'manifest',
-			href: siteWebmanifest
-		}
-	]}
 	robotsProps={{
 		noarchive: true,
 		nosnippet: true,
