@@ -22,11 +22,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version-file: package.json
           cache: 'pnpm'
 
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
       - name: Install dependencies
-        run: pnpm i
+        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        run: pnpm i --frozen-lockfile
 
       - name: secretlint
         run: pnpm secretlint **/*

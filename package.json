@@ -17,6 +17,10 @@
 		"yarn": "use pnpm please!",
 		"pnpm": ">=7.19.0"
 	},
+	"volta": {
+		"node": "18.16.0",
+		"pnpm": "8.5.0"
+	},
 	"devDependencies": {
 		"@iconify-json/akar-icons": "^1.1.17",
 		"@iconify-json/carbon": "^1.1.16",
