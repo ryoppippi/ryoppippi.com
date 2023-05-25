@@ -1,7 +1,7 @@
 <script>
 	import Timeline from '$lib/Timeline.svelte';
 	import TimelineItem from '$lib/TimelineItem.svelte';
-	import ChipList from './ChipList.svelte';
+	import ChipList from '$lib/ChipList.svelte';
 
 	import IconPajamas from '~icons/pajamas/machine-learning';
 	import IconRunning from '~icons/fa-solid/running';

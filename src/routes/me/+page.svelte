@@ -8,9 +8,7 @@
 <div class="container mx-auto mt-8 grid place-content-center">
 	<Profile />
 
-	<div class="mx-10">
-		<Education />
-		<Experience />
-		<Skills />
-	</div>
+	<Education />
+	<Experience />
+	<Skills />
 </div>
