@@ -86,8 +86,9 @@
 	// $: ({ Expert: expert, Middle: middle, 'Good w/ ChatGPT': good } = levels);
 </script>
 
-<article>
-	<h1 class="my-5 text-3xl" id="experience">Computing Skills</h1>
+<article class="mx-6 md:mx-0">
+	<div class="flex"><h1 class="mx-auto my-5 text-3xl md:ml-0" id="education">Computing Skills</h1></div>
+
 	<!-- <ChipList bind:items={levels} /> -->
 
 	{#each Object.entries(contents) as [category, items]}

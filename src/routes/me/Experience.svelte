@@ -19,8 +19,12 @@
 </script>
 
 <article>
-	<h1 class="my-5 text-3xl" id="experience">Working Experience</h1>
-	<ChipList bind:items />
+	<div class="flex"><h1 class=" mx-auto my-5 text-3xl md:ml-0" id="education">Working Experience</h1></div>
+	<div class="flex">
+		<div class=" mx-auto text-3xl md:ml-0">
+			<ChipList bind:items />
+		</div>
+	</div>
 	<Timeline>
 		<TimelineItem icon={IconPajamas} date="Oct 2018 - now" hidden={!items.Industrial}>
 			<span slot="title">

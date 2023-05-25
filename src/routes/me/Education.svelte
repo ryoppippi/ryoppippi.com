@@ -5,8 +5,8 @@
 	import IconAcademicCap from '~icons/mdi/academic-cap';
 </script>
 
-<article>
-	<h1 class="my-5 text-3xl" id="education">Education</h1>
+<article class="">
+	<div class="flex"><h1 class="mx-auto my-5 text-3xl md:ml-0" id="education">Education</h1></div>
 	<Timeline>
 		<TimelineItem icon={IconAcademicCap} title="Ph.D. candidate, University of Tokyo, Japan" date="Apr 2022 - now">
 			<span slot="main">Applied Computer Science</span>
