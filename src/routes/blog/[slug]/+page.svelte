@@ -2,8 +2,6 @@
 	export let data;
 
 	import { formatDate } from '$lib/util.js';
-
-	$: date = new Date(data.meta.date);
 </script>
 
 <svelte:head>

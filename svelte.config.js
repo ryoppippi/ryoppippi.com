@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
-import { mdsvex, escapeSvelte } from 'mdsvex';
+import { mdsvex } from 'mdsvex';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { importAssets } from 'svelte-preprocess-import-assets';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
