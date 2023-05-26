@@ -1,7 +1,8 @@
 import { json } from '@sveltejs/kit';
+import { parse } from 'date-fns';
 
 async function getPosts() {
-	/** @type {Post[]} */
+	/** @type { Post[] } */
 	let posts = [];
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
@@ -14,7 +15,11 @@ async function getPosts() {
 			/** @type {?} */
 			const metadata = file.metadata;
 			/** @satisfies {Post} */
-			const post = { ...metadata, slug };
+			const post = {
+				slug,
+				title: metadata.title,
+				pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
+			};
 			posts = [...posts, post];
 		}
 	}

@@ -1,6 +1,6 @@
 ---
 title: First post
-pubDate: '2023-5-26'
+date: '2023-5-26'
 ---
 
 ## First post

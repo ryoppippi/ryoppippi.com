@@ -3,7 +3,6 @@
 
 	import IconLinkOut from '~icons/quill/link-out';
 	import { formatDate } from '$lib/util.js';
-	$: console.log({ data });
 </script>
 
 {#each data.posts as item (item.title)}
