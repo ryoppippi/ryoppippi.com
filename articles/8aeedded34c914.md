@@ -47,7 +47,7 @@ LspAttach は、LSP Server が開いた Buffer に Attach されたときに発�
 
 さて、Neovim 0.7 以前で LSP Server の Attach 時に何か処理を行いたい場合は、nvim-lspconfig の`on_attach`オプションに関数を渡していました。
 つまり、巨大な`on_attach`関数を書いて、それを渡す必要があったのです(keymap から外部プラグインの設定から)。
-そのため、LSP Server 起動時の設定は LSP の設定とまとめて１箇所に記述する必要があったのです。
+そのため、LSP Server 起動時の設定は LSP の設定とまとめて１箇所に記述しなければなりませんでした。
 
 ```lua
 local lspconfig = require("lspconfig")
