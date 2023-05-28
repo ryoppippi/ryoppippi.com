@@ -2,6 +2,7 @@
 	import Timeline from '$lib/Timeline.svelte';
 	import TimelineItem from '$lib/TimelineItem.svelte';
 	import ChipList from '$lib/ChipList.svelte';
+	import ExperienceTitle from './ExperienceTitle.svelte';
 
 	import IconPajamas from '~icons/pajamas/machine-learning';
 	import IconRunning from '~icons/fa-solid/running';
@@ -28,50 +29,53 @@
 	<Timeline>
 		<TimelineItem icon={IconPajamas} date="Oct 2018 - now" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
-				Co-Founder and Chief Research Officer (CRO) @<a href="http://qcore.co.jp" class={linkClass} target="_blank"
-					>QuantumCore Inc.</a>
+				<ExperienceTitle
+					title="Co-Founder and Chief Research Officer (CRO)"
+					place="QuantumCore Inc."
+					link="http://qcore.co.jp" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconRunning} date="Apr 2022 - now" hidden={!items.Industrial}>
-			<svelte:fragment slot="title">Research Assistant @ The University of Tokyo</svelte:fragment>
+			<svelte:fragment slot="title">
+				<ExperienceTitle title="Research Assistant" place="The University of Tokyo" />
+			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconRunning} date="July 2022 - now" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
-				Full-Stack Engineer @ <a href="https://eightis.co.jp/" class={linkClass} target="_blank">Eightis Inc.</a>
+				<ExperienceTitle title="Full-Stack Engineer" place="Eightis Inc." link="https://eightis.co.jp/" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconTeaching} date="May 2021 - now" hidden={!items.Teaching}>
 			<svelte:fragment slot="title">
-				Instructor @ <a href="https://aiacademy.jp" class={linkClass} target="_blank">AI Academy Inc.</a>
+				<ExperienceTitle title="Instructor" place="AI Academy Inc." link="https://aiacademy.jp" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconTeaching} date="Sep 2018 - Nov 2018" hidden={!items.Teaching}>
 			<svelte:fragment slot="title">
-				Teaching Assistant @<span>International Christian University</span>
+				<ExperienceTitle title="Teaching Assistant" place="International Christian University" />
 			</svelte:fragment>
-			<svelte:fragment slot="main">ISC104 Foundation of Programming</svelte:fragment>
+			<div slot="main">ISC104 Foundation of Programming</div>
 		</TimelineItem>
 		<TimelineItem icon={IconCamera} date="June 2018" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
-				Research Internship @<a href="https://www.dglab.com/en/" class={linkClass} target="_blank">DG Lab.</a>
+				<ExperienceTitle title="Research Internship" place="DG Lab." link="https://www.dglab.com/en/" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconTeaching} date="Sep 2017 - Apr 2018" hidden={!items.Teaching}>
 			<svelte:fragment slot="title">
-				Teaching Assistant @<span>Japan Society at The University of Edinburgh</span>
+				<ExperienceTitle title="Teaching Assistant" place="Japan Society at The University of Edinburgh" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconLine} date="Aug 2017" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
-				Engineer Internship @ <a href="https://line.me/en/" class={linkClass} target="_blank">Line Corp.</a>
+				<ExperienceTitle title="Engineer Internship" place="Line Corp." link="https://line.me/en/" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconTeaching} date="June 2016 - Aug 2016" hidden={!items.Teaching}>
 			<svelte:fragment slot="title">
-				Culture Staff @<span>International Christian University</span>
+				<ExperienceTitle title="Culture Staff" place="International Christian University" />
 			</svelte:fragment>
-			<svelte:fragment slot="main"
-				>Introduced Japanese culture and Japanese to students learning Japanese</svelte:fragment>
+			<div slot="main">Introduced Japanese culture and Japanese to students learning Japanese</div>
 		</TimelineItem>
 	</Timeline>
 </article>
