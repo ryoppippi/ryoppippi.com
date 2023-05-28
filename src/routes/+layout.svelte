@@ -8,6 +8,8 @@
 
 	import { MetaTags } from 'svelte-meta-tags';
 
+	import { updated } from '$app/stores';
+
 	import Nav from '$lib/Nav.svelte';
 
 	import appleTouchIcon from '$lib/assets/favicons/apple-touch-icon.png';
@@ -59,7 +61,7 @@
 		noimageindex: true
 	}} />
 
-<main class="my-3 dark">
+<main class="my-3 dark" data-sveltekit-reload={$updated ? '' : 'off'}>
 	<Nav />
 	{#key $page.url}
 		<article>
