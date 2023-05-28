@@ -26,7 +26,6 @@ jobs:
           cache: 'pnpm'
 
       - uses: actions/cache@v3
-        id: node_modules_cache_id
         env:
           cache-name: cache-node-modules
         with:
@@ -34,7 +33,6 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install dependencies
-        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: pnpm i --frozen-lockfile
 
       - name: secretlint

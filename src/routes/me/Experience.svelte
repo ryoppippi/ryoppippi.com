@@ -10,8 +10,6 @@
 	import IconCamera from '~icons/mdi/camera';
 	import IconLine from '~icons/simple-icons/line';
 
-	const linkClass = 'underline hover:no-underline';
-
 	/** @type{Record<string, boolean>} */
 	let items = {
 		Industrial: true,
