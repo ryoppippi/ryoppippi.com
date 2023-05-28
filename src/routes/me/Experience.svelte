@@ -32,6 +32,9 @@
 					>QuantumCore Inc.</a>
 			</svelte:fragment>
 		</TimelineItem>
+		<TimelineItem icon={IconRunning} date="Apr 2022 - now" hidden={!items.Industrial}>
+			<svelte:fragment slot="title">Research Assistant @ The University of Tokyo</svelte:fragment>
+		</TimelineItem>
 		<TimelineItem icon={IconRunning} date="July 2022 - now" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
 				Full-Stack Engineer @ <a href="https://eightis.co.jp/" class={linkClass} target="_blank">Eightis Inc.</a>
