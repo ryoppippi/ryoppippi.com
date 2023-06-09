@@ -68,6 +68,7 @@
 		"svelte-check": "^3.3.2",
 		"svelte-meta-tags": "^2.7.2",
 		"svelte-preprocess-import-assets": "^1.0.0",
+		"svelte-vertical-timeline": "^1.0.0",
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.5.2",
 		"typescript": "^5.0.4",

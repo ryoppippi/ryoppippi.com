@@ -139,6 +139,9 @@ devDependencies:
   svelte-preprocess-import-assets:
     specifier: ^1.0.0
     version: 1.0.0(svelte@3.59.1)
+  svelte-vertical-timeline:
+    specifier: ^1.0.0
+    version: 1.0.0
   tailwindcss:
     specifier: ^3.3.2
     version: 3.3.2
@@ -3371,6 +3374,10 @@ packages:
       strip-indent: 3.0.0
       svelte: 3.59.1
       typescript: 5.0.4
+    dev: true
+
+  /svelte-vertical-timeline@1.0.0:
+    resolution: {integrity: sha512-o//Dhy6UTk9sNS5WZ6hPalBL+DHnFozY1T6cb4vKxOEbqAFlJyCQWYtLHBcE3zIxpclx0TtBCxQayZ4fHZ2aDg==}
     dev: true
 
   /svelte2tsx@0.6.14(svelte@3.59.1)(typescript@5.0.4):
