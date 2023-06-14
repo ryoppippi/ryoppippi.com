@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "zenn": "zenn",
+    "new:article": "zenn new:article",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preview": "zenn preview"
   },
@@ -19,7 +20,7 @@
   },
   "homepage": "https://github.com/ryoppippi/zenn-repo#readme",
   "dependencies": {
-    "zenn-cli": "^0.1.131"
+    "zenn-cli": "^0.1.144"
   },
   "description": ""
 }
