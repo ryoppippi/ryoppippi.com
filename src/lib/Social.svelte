@@ -21,7 +21,7 @@
 	];
 </script>
 
-<article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade={{ duration: 3000 }}>
+<article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade|global={{ duration: 3000 }}>
 	{#each ICONS as icon (icon.url)}
 		{@const { component, url } = icon}
 		<div class="animation cursor-pointer">
