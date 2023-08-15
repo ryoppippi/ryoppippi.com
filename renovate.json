@@ -1,12 +1,18 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:base"],
-	"automerge": true,
-	"platformAutomerge": true,
-	"prHourlyLimit": 0,
-	"prConcurrentLimit": 5,
-	"branchConcurrentLimit": 5,
-	"major": {
-		"automerge": false
-	}
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security"
+    ]
+  },
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "rangeStrategy": "bump",
+  "platformAutomerge": true,
+  "dependencyDashboard": false,
+  "automerge": true,
+  "branchConcurrentLimit": 0,
+  "stabilityDays": 3
 }
