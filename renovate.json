@@ -10,6 +10,9 @@
   ],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "rangeStrategy": "bump",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "platformAutomerge": true,
   "dependencyDashboard": false,
   "automerge": true,
