@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@iconify-json/akar-icons':
-    specifier: ^1.1.17
-    version: 1.1.17
+    specifier: ^1.1.18
+    version: 1.1.18
   '@iconify-json/carbon':
     specifier: ^1.1.19
     version: 1.1.19
@@ -484,8 +484,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify-json/akar-icons@1.1.17:
-    resolution: {integrity: sha512-IboWKhRvc9eGEonPNqBzZTV9pheP8/p+JyiT2L6oOgD9jF3oKoe61CChUuK1yvEWvwK7Q3JmeIhD0YoYFkxERg==}
+  /@iconify-json/akar-icons@1.1.18:
+    resolution: {integrity: sha512-YHrn2QVAu3siU7xMl+s3WcOQi/fSiXcjA7LhT6U40EazoJgUcrl1Heo241xMpoD4E0pOnIFcLwTtXn5BBs6XBg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
