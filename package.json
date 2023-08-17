@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"@iconify-json/akar-icons": "^1.1.17",
-		"@iconify-json/carbon": "^1.1.16",
+		"@iconify-json/carbon": "^1.1.19",
 		"@iconify-json/fa-solid": "^1.1.4",
 		"@iconify-json/grommet-icons": "^1.1.6",
 		"@iconify-json/line-md": "^1.1.24",
