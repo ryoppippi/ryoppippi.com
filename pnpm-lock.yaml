@@ -15,8 +15,8 @@ devDependencies:
     specifier: ^1.1.5
     version: 1.1.5
   '@iconify-json/grommet-icons':
-    specifier: ^1.1.6
-    version: 1.1.6
+    specifier: ^1.1.7
+    version: 1.1.7
   '@iconify-json/line-md':
     specifier: ^1.1.24
     version: 1.1.24
@@ -502,8 +502,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/grommet-icons@1.1.6:
-    resolution: {integrity: sha512-5rSWj7mYxSSUbCYh0/KX7fQo0PSd2qh73zhzmkpOzVmCJRatukwMxQSvyInKEkyW7Few2gI+p8dWwg1I5sTi5w==}
+  /@iconify-json/grommet-icons@1.1.7:
+    resolution: {integrity: sha512-2I4ZMKp26ySyZB8ZkfY0goPdRmOqs0ZZFHi+2OB49v7XIi10n9wKncDdvlF3Gmb5Ct9YcM2BwGd7prc0S07gNQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
