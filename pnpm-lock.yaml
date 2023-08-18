@@ -30,8 +30,8 @@ devDependencies:
     specifier: ^1.1.6
     version: 1.1.6
   '@iconify-json/quill':
-    specifier: ^1.1.6
-    version: 1.1.6
+    specifier: ^1.1.7
+    version: 1.1.7
   '@iconify-json/ri':
     specifier: ^1.1.9
     version: 1.1.9
@@ -532,8 +532,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/quill@1.1.6:
-    resolution: {integrity: sha512-6zw3SJ7yUqvQKhhNABf19aU6+EVIT6lwcRNhxbtUlqoh2T7UG90NJR9Vgkp20wb1SEZBAfC3Zz8uqGkbaKqkUQ==}
+  /@iconify-json/quill@1.1.7:
+    resolution: {integrity: sha512-qb4AQZEjGgS5zYPqUjmh7hvgt9c5p9yw5ukzOZAJLmwn/um9544xnz2ArOLmQPVimtCt6G+OnW/1viFQUyJegA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
