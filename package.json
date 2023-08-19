@@ -53,7 +53,7 @@
 		"eslint": "^8.41.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte": "^2.30.0",
-		"husky": "^8.0.0",
+		"husky": "^8.0.3",
 		"mdsvex": "^0.10.6",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.8",
