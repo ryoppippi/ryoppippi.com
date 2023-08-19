@@ -48,8 +48,8 @@ devDependencies:
     specifier: ^6.2.4
     version: 6.2.4
   '@skeletonlabs/skeleton':
-    specifier: ^1.5.1
-    version: 1.5.1
+    specifier: ^1.12.0
+    version: 1.12.0(svelte@4.0.0)
   '@sveltejs/adapter-auto':
     specifier: ^2.0.1
     version: 2.0.1(@sveltejs/kit@1.20.4)
@@ -811,11 +811,13 @@ packages:
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: true
 
-  /@skeletonlabs/skeleton@1.5.1:
-    resolution: {integrity: sha512-b5D6vyUgE69XRbe9D3ImqJZHIRzEKwIa4HQik6LckjzgrfgUmTSeZXRdZeCuEVNI+6hdDcgTx4Brg9/8phcEeg==}
+  /@skeletonlabs/skeleton@1.12.0(svelte@4.0.0):
+    resolution: {integrity: sha512-NCGy6WT3LUqu6EaFEG7J6lFQNB/DHlqFQpXMWkSpwdZIZ005OEVoZznNgdATYdTet++nS6LymBGVUQK00z82gw==}
+    peerDependencies:
+      svelte: ^3.56.0 || ^4.0.0
     dependencies:
       esm-env: 1.0.0
-      svelte: 3.59.2
+      svelte: 4.0.0
     dev: true
 
   /@sveltejs/adapter-auto@2.0.1(@sveltejs/kit@1.20.4):
@@ -3530,11 +3532,6 @@ packages:
       pascal-case: 3.1.2
       svelte: 4.0.0
       typescript: 5.0.2
-    dev: true
-
-  /svelte@3.59.2:
-    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
-    engines: {node: '>= 8'}
     dev: true
 
   /svelte@4.0.0:
