@@ -141,8 +141,8 @@ devDependencies:
     specifier: ^2.7.2
     version: 2.7.2(svelte@4.0.0)(typescript@5.0.2)
   svelte-preprocess-import-assets:
-    specifier: ^1.0.0
-    version: 1.0.0(svelte@4.0.0)
+    specifier: ^1.0.1
+    version: 1.0.1(svelte@4.0.0)
   svelte-vertical-timeline:
     specifier: ^1.0.0
     version: 1.0.0
@@ -3458,10 +3458,10 @@ packages:
       svelte: 4.0.0
     dev: true
 
-  /svelte-preprocess-import-assets@1.0.0(svelte@4.0.0):
-    resolution: {integrity: sha512-iuRDcuTtZnqDnq+50LWGj6YF0tziqM7QK3X+o63uKfpsZw4sFnYzb8uerEY1s9EulPa4GVeMjWZDCPgOZu1chA==}
+  /svelte-preprocess-import-assets@1.0.1(svelte@4.0.0):
+    resolution: {integrity: sha512-aHPd8SQhWfzC+Av6/nnlBdIj8zBdfbp5sC26/tXvZD3sBl4+x+rgf9qSgHI8aAi3gO7QyTu3xsvVc//VPsipHQ==}
     peerDependencies:
-      svelte: ^3.37.0
+      svelte: ^3.37.0 || ^4.0.0
     dependencies:
       magic-string: 0.30.0
       svelte: 4.0.0
