@@ -72,8 +72,8 @@ devDependencies:
     specifier: ^5.62.0
     version: 5.62.0(eslint@8.47.0)(typescript@5.0.2)
   '@wooorm/starry-night':
-    specifier: ^2.0.0
-    version: 2.0.0
+    specifier: ^2.1.1
+    version: 2.1.1
   autoprefixer:
     specifier: ^10.4.15
     version: 10.4.15(postcss@8.4.28)
@@ -1145,8 +1145,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@wooorm/starry-night@2.0.0:
-    resolution: {integrity: sha512-7CUPjVkpjCmjCzQ34TrDcHqUMpriqVEJZLVL+PUDsL3yWxHO6COg6xgzdpg6clvr+6jbjb8ZV4NxlozdWiyJ4A==}
+  /@wooorm/starry-night@2.1.1:
+    resolution: {integrity: sha512-6WL3NW7ImGbmZ4qu8StJOkSS7ee2ZwbqtCfaQogCLWKJPbg989dmZLXcdTW9GNc/XI1nCiVyjR1Z0yRoChqLRA==}
     dependencies:
       '@types/hast': 2.3.4
       import-meta-resolve: 2.2.2
