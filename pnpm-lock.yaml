@@ -51,8 +51,8 @@ devDependencies:
     specifier: ^1.12.0
     version: 1.12.0(svelte@4.0.0)
   '@sveltejs/adapter-auto':
-    specifier: ^2.0.1
-    version: 2.0.1(@sveltejs/kit@1.20.4)
+    specifier: ^2.1.0
+    version: 2.1.0(@sveltejs/kit@1.20.4)
   '@sveltejs/adapter-static':
     specifier: ^2.0.3
     version: 2.0.3(@sveltejs/kit@1.20.4)
@@ -820,8 +820,8 @@ packages:
       svelte: 4.0.0
     dev: true
 
-  /@sveltejs/adapter-auto@2.0.1(@sveltejs/kit@1.20.4):
-    resolution: {integrity: sha512-anxxYMcQy7HWSKxN4YNaVcgNzCHtNFwygq72EA1Xv7c+5gSECOJ1ez1PYoLciPiFa7A3XBvMDQXUFJ2eqLDtAA==}
+  /@sveltejs/adapter-auto@2.1.0(@sveltejs/kit@1.20.4):
+    resolution: {integrity: sha512-o2pZCfATFtA/Gw/BB0Xm7k4EYaekXxaPGER3xGSY3FvzFJGTlJlZjBseaXwYSM94lZ0HniOjTokN3cWaLX6fow==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
