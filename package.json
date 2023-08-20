@@ -44,7 +44,7 @@
 		"@tailwindcss/typography": "^0.5.9",
 		"@typescript-eslint/eslint-plugin": "^5.62.0",
 		"@typescript-eslint/parser": "^5.62.0",
-		"@wooorm/starry-night": "^2.0.0",
+		"@wooorm/starry-night": "^2.1.1",
 		"autoprefixer": "^10.4.15",
 		"buffer": "^6.0.3",
 		"daisyui": "^2.51.6",
