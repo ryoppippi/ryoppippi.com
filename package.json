@@ -47,7 +47,7 @@
 		"@wooorm/starry-night": "^2.1.1",
 		"autoprefixer": "^10.4.15",
 		"buffer": "^6.0.3",
-		"daisyui": "^2.51.6",
+		"daisyui": "^2.52.0",
 		"date-fns": "^2.30.0",
 		"dayjs": "^1.11.9",
 		"eslint": "^8.47.0",
