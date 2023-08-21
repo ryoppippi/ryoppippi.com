@@ -1,45 +1,90 @@
 on:
-  - push
-  - pull_request
-
-permissions: read-all
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 */6 * * *'
 
 jobs:
-  ci:
+  setup:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: read-all
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/build-setup
 
-      - name: Launch Turbo Remote Cache Server
-        uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: package.json
-          cache: 'pnpm'
-
-      - uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Install dependencies
-        run: pnpm i --frozen-lockfile
-
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/build-setup
       - name: secretlint
         run: pnpm secretlint **/*
-
-      - name: linting
+      - name: lint
         run: pnpm lint
 
+  check:
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/build-setup
       - name: check
         run: pnpm check
+
+  build-and-deploy:
+    needs:
+      - setup
+      - lint
+      - check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        working-directory: ['./']
+        project-deploy-name: ['ryoppippi-com']
+        build-output-directory: ['build']
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      deployments: write
+      statuses: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup
+        uses: ./.github/actions/build-setup
+      - name: build @ ${{ matrix.working-directory }}
+        working-directory: ${{ matrix.working-directory }}
+        run: pnpm build
+      - name: Deploy ${{ matrix.project-deploy-name }} to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        id: cloudflare_pages_deploy
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: ${{ matrix.project-deploy-name }}
+          directory: ${{ matrix.build-output-directory }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          workingDirectory: ${{ matrix.working-directory }}
+          wranglerVersion: '3'
+      - name: Add publish URL as commit status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const sha = context.payload.pull_request?.head.sha ?? context.sha;
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              context: 'Deploy on Cloudflare Pages',
+              description: 'Cloudflare Pages Deployement',
+              state: 'success',
+              sha,
+              target_url: "${{ steps.cloudflare_pages_deploy.outputs.url }}",
+            });
