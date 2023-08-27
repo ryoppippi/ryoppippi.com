@@ -51,7 +51,7 @@
 </svelte:head>
 
 <MetaTags
-	robotsProps={{
+	additionalRobotsProps={{
 		noarchive: true,
 		nosnippet: true,
 		maxSnippet: -1,
