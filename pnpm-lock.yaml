@@ -11,6 +11,9 @@ devDependencies:
   '@iconify-json/carbon':
     specifier: ^1.1.20
     version: 1.1.20
+  '@iconify-json/devicon-plain':
+    specifier: ^1.1.14
+    version: 1.1.14
   '@iconify-json/fa-solid':
     specifier: ^1.1.5
     version: 1.1.5
@@ -497,6 +500,12 @@ packages:
 
   /@iconify-json/carbon@1.1.20:
     resolution: {integrity: sha512-ed/3FDCjicQARWaSGIDZpaF+rWmxoSqrmHYZV2aEicufp0yciG44y9OEmArxxr/0U6bEC3zJbKMSOSw4CKeBJg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/devicon-plain@1.1.14:
+    resolution: {integrity: sha512-+Sesi6AxqMwqmSsuol6U9QJ/z39J/jDx49xBJ0iuNJZyRPY7zTcy8iOELDdY9ah19NZ4M5lyhctvOmPr1wlG1w==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

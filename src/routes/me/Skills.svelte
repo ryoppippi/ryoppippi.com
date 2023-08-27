@@ -21,7 +21,7 @@
 	import IconSwift from '~icons/grommet-icons/swift';
 	import IconCpp from '~icons/mdi/language-cpp';
 	import IconSQL from '~icons/ph/file-sql';
-	import IconJava from '~icons/simple-icons/java';
+	import IconJava from '~icons/devicon-plain/java';
 
 	import IconNumPy from '~icons/simple-icons/numpy';
 	import IconPyTorch from '~icons/simple-icons/pytorch';
@@ -96,7 +96,8 @@
 		<dl class="list-dl mb-2">
 			{#each items as { icon, title, value }}
 				<div>
-					<span class="flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
+					<span
+						class="flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
 						<svelte:component this={icon} style="font-size: {1.7}vh" />
 					</span>
 					<span class="flex-auto">
