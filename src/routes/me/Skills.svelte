@@ -96,8 +96,7 @@
 		<dl class="list-dl mb-2">
 			{#each items as { icon, title, value }}
 				<div>
-					<span
-						class="flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
+					<span class="flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
 						<svelte:component this={icon} style="font-size: {1.7}vh" />
 					</span>
 					<span class="flex-auto">
