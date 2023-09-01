@@ -27,7 +27,7 @@ runs:
       uses: dtinth/setup-github-actions-caching-for-turbo@v1.1.0
 
     - name: cache node_modules
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ inputs.node_module_cache_name }}
