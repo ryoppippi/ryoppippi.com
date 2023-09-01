@@ -7,7 +7,7 @@
 	import IconGithub from '~icons/line-md/github-loop';
 	import IconZenn from '~icons/simple-icons/zenn';
 	import IconLinkedin from '~icons/line-md/linkedin';
-	import IconTwitter from '~icons/line-md/twitter';
+	// import IconTwitter from '~icons/line-md/twitter';
 	import IconReddit from '~icons/line-md/reddit-loop';
 	import IconYoutube from '~icons/ri/youtube-line';
 
@@ -15,7 +15,7 @@
 		{ component: IconGithub, url: 'https://github.com/ryoppippi' },
 		{ component: IconZenn, url: 'https://zenn.dev/ryoppippi' },
 		{ component: IconLinkedin, url: 'https://www.linkedin.com/in/ryoppippi/' },
-		{ component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
+		// { component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
 		{ component: IconReddit, url: 'https://www.reddit.com/user/ryoppippi' },
 		{ component: IconYoutube, url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' }
 	];
@@ -25,7 +25,11 @@
 	{#each ICONS as icon (icon.url)}
 		{@const { component, url } = icon}
 		<div class="animation cursor-pointer">
-			<a href={url} target="_blank" aria-label="link to ryoppippi's {new URL(url).hostname}" rel="noopener noreferrer">
+			<a
+				href={url}
+				target="_blank"
+				aria-label="link to ryoppippi's {new URL(url).hostname}"
+				rel="noopener noreferrer">
 				<svelte:component this={component} style="font-size: {size}vh" />
 			</a>
 		</div>
