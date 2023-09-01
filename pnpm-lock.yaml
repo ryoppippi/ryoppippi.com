@@ -159,8 +159,8 @@ devDependencies:
     specifier: ^5.2.2
     version: 5.2.2
   typescript-svelte-plugin:
-    specifier: ^0.3.30
-    version: 0.3.30(svelte@4.2.0)(typescript@5.2.2)
+    specifier: ^0.3.31
+    version: 0.3.31(svelte@4.2.0)(typescript@5.2.2)
   unplugin-icons:
     specifier: ^0.16.6
     version: 0.16.6
@@ -3390,8 +3390,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /typescript-svelte-plugin@0.3.30(svelte@4.2.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-NnDayagQ4uLKnTq+b27BIuQpF2QKqLa0O7EldRahqPo7H/j/FyoPeOe+WSD1EHj8+SqO5hHyurWivoi22DUcvg==}
+  /typescript-svelte-plugin@0.3.31(svelte@4.2.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-K3XPdOrpj/61JXqgFTltbYH+uxWvYXRAYSX1cFrmJ+4UrTIAY1d4azgCwi/RrIbQFonNazvfOnDaKGT5fcOjoA==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
       svelte2tsx: 0.6.16(svelte@4.2.0)(typescript@5.2.2)
