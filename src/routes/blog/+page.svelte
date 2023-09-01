@@ -15,7 +15,9 @@
 			target={external ? '_blank' : ''}
 			class="mr-5 flex border-b-2 border-transparent text-me-text-100 hover:border-me-primary-100 md:overflow-hidden">
 			<p class="md:truncate">{item.title}</p>
-			{#if external} <IconLinkOut class="my-auto hidden md:inline" /> {/if}
+			{#if external}
+				<IconLinkOut class="my-auto hidden md:inline" />
+			{/if}
 		</a>
 	{/each}
 </div>
