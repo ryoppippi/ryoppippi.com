@@ -1,7 +1,5 @@
 <script>
-	import '../theme.postcss';
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	import '../app.css';
+	import '../app.postcss';
 
 	import { page } from '$app/stores';
 	import { preparePageTransition } from '$lib/page-transition';
