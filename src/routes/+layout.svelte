@@ -2,11 +2,12 @@
 	import '../app.postcss';
 
 	import { page } from '$app/stores';
-	import { preparePageTransition } from '$lib/page-transition';
 
 	import { MetaTags } from 'svelte-meta-tags';
 
 	import { updated } from '$app/stores';
+
+	import { onNavigate } from '$app/navigation';
 
 	import Nav from '$lib/Nav.svelte';
 
@@ -16,7 +17,16 @@
 	import siteWebmanifest from '$lib/assets/favicons/site.webmanifest';
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 
-	preparePageTransition();
+	onNavigate((navigation) => {
+		if (!document?.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
