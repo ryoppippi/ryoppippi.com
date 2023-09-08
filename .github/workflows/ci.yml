@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 10
     permissions: read-all
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/build-setup
 
@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 10
     permissions: read-all
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/build-setup
       - name: secretlint
@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 10
     permissions: read-all
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/build-setup
       - name: check
@@ -57,7 +57,7 @@ jobs:
       deployments: write
       statuses: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/build-setup
       - name: build @ ${{ matrix.working-directory }}
