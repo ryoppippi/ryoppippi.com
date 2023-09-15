@@ -69,7 +69,7 @@
 		noimageindex: true
 	}} />
 
-<main class="my-3 dark" data-sveltekit-reload={$updated ? '' : 'off'}>
+<main class="dark my-3" data-sveltekit-reload={$updated ? '' : 'off'}>
 	<Nav />
 	{#key $page.url}
 		<article>

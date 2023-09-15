@@ -12,5 +12,5 @@
 ${$page.status}
     `} />
 	<hr class="mb-4 divide-solid !border-t-8" />
-	<a href="/" class="btn variant-filled-primary">Return to Home</a>
+	<a href="/" class="variant-filled-primary btn">Return to Home</a>
 </div>

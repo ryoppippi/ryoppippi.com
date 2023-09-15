@@ -13,13 +13,12 @@
 		"prepare": "husky install"
 	},
 	"engines": {
-		"npm": "use pnpm please!",
-		"yarn": "use pnpm please!",
-		"pnpm": ">=8.7.5"
+		"npm": "use bun please!",
+		"yarn": "use bun please!",
+		"pnpm": "use bun please!"
 	},
 	"volta": {
-		"node": "18.17.1",
-		"pnpm": "8.7.5"
+		"node": "18.17.1"
 	},
 	"devDependencies": {
 		"@iconify-json/akar-icons": "^1.1.19",
