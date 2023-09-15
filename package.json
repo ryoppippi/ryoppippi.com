@@ -1,7 +1,5 @@
 {
-  "name": "zenn-repo",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@ryoppippi/zenn-repo",
   "scripts": {
     "zenn": "bun --bun x zenn",
     "new:article": "bun --bun x zenn new:article",
@@ -11,15 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/ryoppippi/zenn-repo.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ryoppippi/zenn-repo/issues"
-  },
-  "homepage": "https://github.com/ryoppippi/zenn-repo#readme",
   "dependencies": {
     "zenn-cli": "^0.1.144"
-  },
-  "description": ""
+  }
 }
