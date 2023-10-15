@@ -1,9 +1,9 @@
 {
   "name": "@ryoppippi/zenn-repo",
   "scripts": {
-    "zenn": "bun --bun x zenn",
-    "new:article": "bun --bun x zenn new:article",
-    "preview": "bun --bun x zenn preview"
+    "zenn": "zenn",
+    "new": "zenn new:article",
+    "preview": "zenn preview"
   },
   "repository": {
     "type": "git",
