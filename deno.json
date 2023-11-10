@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "zenn": "deno run -A npm:zenn-cli@latest",
+    "new": "deno run -A npm:zenn-cli@latest new:article",
+    "preview": "deno run -A npm:zenn-cli@latest preview"
+  }
+}
