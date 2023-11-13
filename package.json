@@ -15,8 +15,7 @@
 	},
 	"engines": {
 		"npm": "use bun please!",
-		"yarn": "use bun please!",
-		"pnpm": "use bun please!"
+		"yarn": "use bun please!"
 	},
 	"volta": {
 		"node": "20.9.0"
