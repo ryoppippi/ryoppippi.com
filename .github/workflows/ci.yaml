@@ -11,13 +11,17 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
+      - uses: pnpm/action-setup@v2
         with:
-          bun-version: latest
-      - run: bun i --frozen-lockfile
-      - run: bun secretlint **/*
-      - run: bun run sync
-      - run: bun run lint
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm i
+      - run: pnpm secretlint **/*
+      - run: pnpm run sync
+      - run: pnpm run lint
 
   check:
     runs-on: ubuntu-latest
@@ -25,12 +29,16 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
+      - uses: pnpm/action-setup@v2
         with:
-          bun-version: latest
-      - run: bun i --frozen-lockfile
-      - run: bun run sync
-      - run: bun run check
+          version: 8
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm i --frozen-lockfile
+      - run: pnpm run sync
+      - run: pnpm run check
 
   # build-and-deploy:
   #   needs:
