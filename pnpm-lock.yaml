@@ -144,7 +144,7 @@ devDependencies:
     specifier: ^3.6.0
     version: 3.6.0(postcss@8.4.31)(svelte@4.2.3)
   svelte-meta-tags:
-    specifier: ^3.0.4
+    specifier: ^3.1.0
     version: 3.1.0(svelte@4.2.3)(typescript@5.2.2)
   svelte-preprocess-import-assets:
     specifier: ^1.0.1
