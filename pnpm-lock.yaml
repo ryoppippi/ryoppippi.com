@@ -137,6 +137,9 @@ devDependencies:
   secretlint:
     specifier: ^7.1.0
     version: 7.1.0
+  sort-on:
+    specifier: ^6.0.0
+    version: 6.0.0
   svelte:
     specifier: ^4.2.3
     version: 4.2.3
@@ -1574,6 +1577,13 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: true
+
+  /dot-prop@8.0.2:
+    resolution: {integrity: sha512-xaBe6ZT4DHPkg0k4Ytbvn5xoxgpG0jOS1dYxSOwAHPuNLjP3/OzN0gH55SrLqpx8cBfSaVt91lXYkApjb+nYdQ==}
+    engines: {node: '>=16'}
+    dependencies:
+      type-fest: 3.13.1
     dev: true
 
   /electron-to-chromium@1.4.582:
@@ -3243,6 +3253,13 @@ packages:
       buffer-crc32: 0.2.13
       minimist: 1.2.8
       sander: 0.5.1
+    dev: true
+
+  /sort-on@6.0.0:
+    resolution: {integrity: sha512-d51VlJWoFQjp+cIZRyNusCyJdP5pLAw+H+sC4C2q6RhPBv+RAb/QXXck5q3Kdm7h/ot/kD2AlpGPDee8v+0qiA==}
+    engines: {node: '>=18'}
+    dependencies:
+      dot-prop: 8.0.2
     dev: true
 
   /source-map-js@1.0.2:
