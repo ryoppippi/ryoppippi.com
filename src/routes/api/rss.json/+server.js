@@ -1,7 +1,8 @@
 import Parser from 'rss-parser';
 import { json } from '@sveltejs/kit';
-import rss from './rss.json';
 import { is, ensure } from 'unknownutil';
+
+import rss from './rss.json';
 
 const parser = new Parser();
 
