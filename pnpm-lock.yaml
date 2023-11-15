@@ -135,7 +135,7 @@ devDependencies:
     specifier: ^3.13.0
     version: 3.13.0
   secretlint:
-    specifier: ^7.0.7
+    specifier: ^7.1.0
     version: 7.1.0
   svelte:
     specifier: ^4.2.3
