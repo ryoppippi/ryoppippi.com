@@ -1,4 +1,5 @@
 import Parser from 'rss-parser';
+import sortOn from 'sort-on';
 import { json } from '@sveltejs/kit';
 import { is, ensure } from 'unknownutil';
 
@@ -22,9 +23,7 @@ export const GET = async () => {
 		)
 	).flat();
 
-	const sortedFeeds = feeds.sort((a, b) => {
-		return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
-	});
+	const sortedFeeds = sortOn(feeds, ['-pubDate']);
 
 	return json(sortedFeeds);
 };
