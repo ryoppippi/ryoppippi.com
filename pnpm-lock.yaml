@@ -164,6 +164,9 @@ devDependencies:
   typescript-svelte-plugin:
     specifier: ^0.3.35
     version: 0.3.35(svelte@4.2.3)(typescript@5.2.2)
+  unknownutil:
+    specifier: ^3.10.0
+    version: 3.10.0
   unplugin-icons:
     specifier: ^0.17.3
     version: 0.17.4
@@ -3805,6 +3808,10 @@ packages:
       '@types/unist': 3.0.2
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
+    dev: true
+
+  /unknownutil@3.10.0:
+    resolution: {integrity: sha512-VxyNH35LpKqDps2jFc/jOpPghzZM8ioqKg1RjRzRwZ1DaxW3sWbq/mqZ6enRUynb+z17I0p+oehiOHeZBaHufA==}
     dev: true
 
   /unplugin-icons@0.17.4:
