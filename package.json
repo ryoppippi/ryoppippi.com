@@ -74,6 +74,7 @@
 		"tslib": "^2.6.2",
 		"typescript": "^5.2.2",
 		"typescript-svelte-plugin": "^0.3.35",
+		"unknownutil": "^3.10.0",
 		"unplugin-icons": "^0.17.3",
 		"vite": "^4.5.0"
 	},
