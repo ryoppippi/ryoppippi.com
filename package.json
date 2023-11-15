@@ -35,7 +35,7 @@
 		"@iconify-json/simple-icons": "^1.1.77",
 		"@iconify/iconify": "^3.1.1",
 		"@iconify/svelte": "^3.1.4",
-		"@secretlint/secretlint-rule-preset-recommend": "^7.0.7",
+		"@secretlint/secretlint-rule-preset-recommend": "^7.1.0",
 		"@skeletonlabs/skeleton": "^2.5.0",
 		"@skeletonlabs/tw-plugin": "^0.2.4",
 		"@sveltejs/adapter-auto": "^2.1.1",
