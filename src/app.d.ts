@@ -8,12 +8,6 @@ declare namespace App {
 }
 
 declare global {
-	type Post = {
-		title: string;
-		slug: string;
-		pubDate: string;
-	};
-
 	interface ViewTransition {
 		updateCallbackDone: Promise<void>;
 		ready: Promise<void>;
