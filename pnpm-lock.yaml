@@ -63,8 +63,8 @@ devDependencies:
     specifier: ^2.0.3
     version: 2.0.3(@sveltejs/kit@1.27.5)
   '@sveltejs/enhanced-img':
-    specifier: ^0.1.1
-    version: 0.1.1(svelte@4.2.3)
+    specifier: ^0.1.2
+    version: 0.1.4(svelte@4.2.3)
   '@sveltejs/kit':
     specifier: ^1.27.5
     version: 1.27.5(svelte@4.2.3)(vite@4.5.0)
@@ -807,8 +807,8 @@ packages:
       '@sveltejs/kit': 1.27.5(svelte@4.2.3)(vite@4.5.0)
     dev: true
 
-  /@sveltejs/enhanced-img@0.1.1(svelte@4.2.3):
-    resolution: {integrity: sha512-euWs+GU6F3f7tqtwrDCW5AOFwRMTusHcW4uyD/0AMBJVftj2/N0scoB6hEtTk8rkwIOT/AkawZhmL+GGketVig==}
+  /@sveltejs/enhanced-img@0.1.4(svelte@4.2.3):
+    resolution: {integrity: sha512-R0nbA8U5q+j0oPxNh7i8qlQIEBtGxWDbI5T4O07U9v0ACxdAxI9Tybup6FBRph5JXSRVzf7BMy8S2mjPJYd3dQ==}
     dependencies:
       magic-string: 0.30.5
       svelte-parse-markup: 0.1.2(svelte@4.2.3)
