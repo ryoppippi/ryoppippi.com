@@ -18,7 +18,9 @@ export const GET = async () => {
 		await Promise.all(
 			rss.map(async (url) => {
 				const feed = await parser.parseURL(url);
-				return feed.items.map(({ title, link, pubDate }) => ensure({ title, link, pubDate }, isItem));
+				return feed.items
+					.map(({ title, link, pubDate }) => ensure({ title, link, pubDate }, isItem))
+					.map((item) => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
 			})
 		)
 	).flat();

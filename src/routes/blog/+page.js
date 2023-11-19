@@ -1,4 +1,5 @@
 import sortOn from 'sort-on';
+import { parseJSON } from 'date-fns';
 
 export async function load({ fetch }) {
 	const rss = fetch('/api/rss.json').then((res) => {
@@ -12,7 +13,7 @@ export async function load({ fetch }) {
 	});
 
 	const posts = await Promise.all([rss, localPosts]).then(([rss, localPosts]) => {
-		const posts = [...rss, ...localPosts];
+		const posts = [...rss, ...localPosts].map((item) => ({ ...item, pubDate: parseJSON(item.pubDate) }));
 		return sortOn(posts, ['-pubDate']);
 	});
 
