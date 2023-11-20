@@ -65,7 +65,7 @@
 		"rss-parser": "^3.13.0",
 		"secretlint": "^7.1.0",
 		"sort-on": "^6.0.0",
-		"svelte": "^4.2.3",
+		"svelte": "^4.2.4",
 		"svelte-check": "^3.6.0",
 		"svelte-meta-tags": "^3.1.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
