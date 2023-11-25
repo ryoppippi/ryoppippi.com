@@ -75,7 +75,7 @@ devDependencies:
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.5)
   '@types/node':
-    specifier: ^20.9.3
+    specifier: ^20.9.4
     version: 20.9.5
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.12.0
