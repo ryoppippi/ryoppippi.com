@@ -132,7 +132,7 @@ devDependencies:
     specifier: ^3.13.0
     version: 3.13.0
   secretlint:
-    specifier: ^7.1.0
+    specifier: ^7.2.0
     version: 7.2.0
   sort-on:
     specifier: ^6.0.0
