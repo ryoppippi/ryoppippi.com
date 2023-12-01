@@ -15,8 +15,8 @@ devDependencies:
     specifier: ^1.1.26
     version: 1.1.26
   '@iconify-json/fa-solid':
-    specifier: ^1.1.6
-    version: 1.1.6
+    specifier: ^1.1.7
+    version: 1.1.7
   '@iconify-json/grommet-icons':
     specifier: ^1.1.8
     version: 1.1.8
@@ -522,8 +522,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/fa-solid@1.1.6:
-    resolution: {integrity: sha512-1KQhkL8k4U+UTFbNl9gIxlvor3cdls7lq8Ew9rDxLG2H7OHI2ocCHkBGZXXKbfaR8mWcJCyQnwa2BuTpvzKQ7Q==}
+  /@iconify-json/fa-solid@1.1.7:
+    resolution: {integrity: sha512-1+fqOdX+DOZJpRFWb+TsmuDDIYk8wS1jw9Yh+qqpOa/kMvwjh2CYiN3ISetKmN/agWE2pZ3Ckt5B+sIB59mRsA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
