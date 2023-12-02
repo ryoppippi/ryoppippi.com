@@ -73,7 +73,7 @@
 		"tailwindcss": "^3.3.5",
 		"tslib": "^2.6.2",
 		"typescript": "^5.3.2",
-		"typescript-svelte-plugin": "^0.3.35",
+		"typescript-svelte-plugin": "^0.3.36",
 		"unknownutil": "^3.10.0",
 		"unplugin-icons": "^0.17.4",
 		"vite": "^5.0.2"
