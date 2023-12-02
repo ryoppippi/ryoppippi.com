@@ -27,8 +27,8 @@ devDependencies:
     specifier: ^1.1.57
     version: 1.1.57
   '@iconify-json/pajamas':
-    specifier: ^1.1.37
-    version: 1.1.37
+    specifier: ^1.1.38
+    version: 1.1.38
   '@iconify-json/ph':
     specifier: ^1.1.7
     version: 1.1.7
@@ -546,8 +546,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/pajamas@1.1.37:
-    resolution: {integrity: sha512-3jRY+IC5xyqGIewGZCkozgamDsjZ5fXh9qUj2l0oIl0Z65dM9hBwrYrswvmunUurOr3f1TVGWHBwfjBC+t9cHQ==}
+  /@iconify-json/pajamas@1.1.38:
+    resolution: {integrity: sha512-ThTEOIHMV0lv90CvCWg8eFs2C+0T0pgS6Yxe+pU8wMH3unCFp5Kl3PFJgV+uFrVxdP4gfwCv+6saAaFI5SW+3g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
