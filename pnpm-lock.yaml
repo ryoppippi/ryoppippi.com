@@ -48,8 +48,8 @@ devDependencies:
     specifier: ^3.1.4
     version: 3.1.4(svelte@4.2.8)
   '@secretlint/secretlint-rule-preset-recommend':
-    specifier: ^7.2.0
-    version: 7.2.0
+    specifier: ^8.0.0
+    version: 8.0.0
   '@skeletonlabs/skeleton':
     specifier: ^2.5.1
     version: 2.5.1(svelte@4.2.8)
@@ -852,8 +852,8 @@ packages:
     resolution: {integrity: sha512-rIqc++BvchXSp0S5T5hngjJE0kwbScpTAWmKYwZGgv6BW25A7azvpI1zq4S3EGm+y1YsfGG0po/qVMgzln6iXA==}
     dev: true
 
-  /@secretlint/secretlint-rule-preset-recommend@7.2.0:
-    resolution: {integrity: sha512-wEtTqV66j7rMuALKIIA6jWQc+GsjA6L998uCsUk6ma560u4E+HciKXt127UF6LJG+XdrgRx3Xfxg7mMYsVQ28w==}
+  /@secretlint/secretlint-rule-preset-recommend@8.0.0:
+    resolution: {integrity: sha512-V80PUPaUv+oDi00w+ZEE6YmxdNHoM0/CRWaAG/cC/wO7RIYMlHoZqsacMt3GEuzkOfAGnNENnOzDYsq08Z6u3Q==}
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: true
 
