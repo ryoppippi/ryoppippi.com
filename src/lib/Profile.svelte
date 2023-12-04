@@ -1,12 +1,12 @@
 <script>
 	const name = /** @type {const} */ 'ryoppippi';
 
-	import img from '$lib/assets/ryoppippi.jpg?enhanced';
+	import img from '$lib/assets/ryoppippi.png?enhanced';
 </script>
 
 <div class="grid place-content-center">
 	<enhanced:img
-		class="profile h-40 rounded-full object-cover md:h-64 lg:h-80"
+		class=" object-fit aspect-square rounded-full md:h-64 md:w-64"
 		src={img}
 		alt="profile"
 		style:--tag={name} />
