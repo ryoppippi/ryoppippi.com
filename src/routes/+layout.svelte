@@ -49,7 +49,7 @@
 	<meta property="og:image:alt" content="ryoppippi's icon" />
 
 	<!-- twitter -->
-	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="@ryoppippi" />
 	<meta name="twitter:creator" content="@ryoppippi" />
 	<meta name="twitter:title" content="ryoppippi.com" />
