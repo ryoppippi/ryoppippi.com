@@ -15,7 +15,7 @@
 	import favicon32 from '$lib/assets/favicons/favicon-32x32.png';
 	import favicon16 from '$lib/assets/favicons/favicon-16x16.png';
 	import siteWebmanifest from '$lib/assets/favicons/site.webmanifest';
-	import ryoppippi from '$lib/assets/ryoppippi.jpg';
+	import ryoppippi from '$lib/assets/ryoppippi.png';
 
 	onNavigate((navigation) => {
 		if (!document?.startViewTransition) return;
@@ -27,38 +27,54 @@
 			});
 		});
 	});
+
+	const title = 'ryoppippi.com';
 </script>
 
-<svelte:head>
-	<title>ryoppippi.com</title>
-	<meta name="description" content="Portfolio of @ryoppippi" />
-
-	<!-- favicon -->
-	<link rel="apple-touch-icon" href={appleTouchIcon} sizes="180x180" />
-	<link rel="icon" type="image/png" href={favicon32} sizes="32x32" />
-	<link rel="icon" type="image/png" href={favicon16} sizes="16x16" />
-	<link rel="manifest" href={siteWebmanifest} />
-
-	<!-- og -->
-	<meta property="og:url" content="https://ryoppippi.com" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="ryoppippi.com" />
-	<meta property="og:site_name" content="ryoppippi.com" />
-	<meta property="og:description" content="Portfolio of @ryoppippi" />
-	<meta property="og:image" content={ryoppippi} />
-	<meta property="og:image:alt" content="ryoppippi's icon" />
-
-	<!-- twitter -->
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:site" content="@ryoppippi" />
-	<meta name="twitter:creator" content="@ryoppippi" />
-	<meta name="twitter:title" content="ryoppippi.com" />
-	<meta name="twitter:description" content="Portfolio of @ryoppippi" />
-	<meta name="twitter:image" content={ryoppippi} />
-	<meta name="twitter:image:alt" content="ryoppippi's icon" />
-</svelte:head>
-
 <MetaTags
+	{title}
+	openGraph={{
+		url: 'https://ryoppippi.com',
+		type: 'website',
+		description: 'Portfolio of @ryoppippi',
+		images: [
+			{
+				url: ryoppippi,
+				alt: "ryoppippi's icon"
+			}
+		]
+	}}
+	twitter={{
+		cardType: 'summary',
+		site: '@ryoppippi',
+		title,
+		description: 'Portfolio of @ryoppippi',
+		image: ryoppippi,
+		imageAlt: "ryoppippi's icon"
+	}}
+	additionalLinkTags={[
+		{
+			rel: 'apple-touch-icon',
+			href: appleTouchIcon,
+			sizes: '180x180'
+		},
+		{
+			rel: 'icon',
+			type: 'image/png',
+			href: favicon32,
+			sizes: '32x32'
+		},
+		{
+			rel: 'icon',
+			type: 'image/png',
+			href: favicon16,
+			sizes: '16x16'
+		},
+		{
+			rel: 'manifest',
+			href: siteWebmanifest
+		}
+	]}
 	additionalRobotsProps={{
 		noarchive: true,
 		nosnippet: true,
