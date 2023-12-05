@@ -24,7 +24,7 @@ devDependencies:
     specifier: ^1.1.33
     version: 1.1.33
   '@iconify-json/mdi':
-    specifier: ^1.1.57
+    specifier: ^1.1.58
     version: 1.1.58
   '@iconify-json/pajamas':
     specifier: ^1.1.38
