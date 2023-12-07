@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^1.1.24
     version: 1.1.24
   '@iconify-json/devicon-plain':
-    specifier: ^1.1.26
-    version: 1.1.26
+    specifier: ^1.1.27
+    version: 1.1.28
   '@iconify-json/fa-solid':
     specifier: ^1.1.7
     version: 1.1.7
@@ -522,8 +522,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/devicon-plain@1.1.26:
-    resolution: {integrity: sha512-4d1McWU6OTr9PVR88AUUAiJwkcJf7fhQZIkrZU/RFLYlRS6zi3lfK5CVvf9kGc/+CGDCaQYR7PArrD3se6vGiQ==}
+  /@iconify-json/devicon-plain@1.1.28:
+    resolution: {integrity: sha512-RNdhKStvEB9LIlERl625W8Rum7BK7re2wMoOJfhkicO95k+DJV/9PE4sV8BdFp8S17IgGf8jChGB6+Yi2YURNw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
