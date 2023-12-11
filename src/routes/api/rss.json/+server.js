@@ -7,7 +7,7 @@ import rss from './rss.json';
 
 const parser = new Parser();
 
-const isItem = is.ObjectOf({
+export const _isItem = is.ObjectOf({
 	title: is.String,
 	link: is.String,
 	pubDate: is.String
@@ -19,7 +19,7 @@ export const GET = async () => {
 			rss.map(async (url) => {
 				const feed = await parser.parseURL(url);
 				return feed.items
-					.map(({ title, link, pubDate }) => ensure({ title, link, pubDate }, isItem))
+					.map(({ title, link, pubDate }) => ensure({ title, link, pubDate }, _isItem))
 					.map((item) => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
 			})
 		)

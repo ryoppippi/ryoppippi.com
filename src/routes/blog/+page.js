@@ -1,15 +1,22 @@
 import sortOn from 'sort-on';
 import { parseJSON } from 'date-fns';
+import { assert, is } from 'unknownutil';
+import { _isItem as isItemPost } from '../api/posts.json/+server.js';
+import { _isItem as isItemRSS } from '../api/rss.json//+server.js';
 
 export async function load({ fetch }) {
-	const rss = fetch('/api/rss.json').then((res) => {
+	const rss = fetch('/api/rss.json').then(async (res) => {
 		if (!res.ok) throw new Error('Failed to load feed');
-		return res.json();
+		const posts = await res.json();
+		assert(posts, is.ArrayOf(isItemRSS));
+		return posts;
 	});
 
-	const localPosts = fetch('/api/posts.json').then((res) => {
+	const localPosts = fetch('/api/posts.json').then(async (res) => {
 		if (!res.ok) throw new Error('Failed to load posts');
-		return res.json();
+		const posts = await res.json();
+		assert(posts, is.ArrayOf(isItemPost));
+		return posts;
 	});
 
 	const posts = await Promise.all([rss, localPosts]).then(([rss, localPosts]) => {

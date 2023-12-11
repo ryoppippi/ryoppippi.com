@@ -3,14 +3,14 @@ import { is, ensure } from 'unknownutil';
 import { json } from '@sveltejs/kit';
 import { parse } from 'date-fns';
 
-const isItem = is.ObjectOf({
+export const _isItem = is.ObjectOf({
 	slug: is.String,
 	title: is.String,
 	pubDate: is.String
 });
 
 async function getPosts() {
-	let posts = ensure([], is.ArrayOf(isItem));
+	let posts = ensure([], is.ArrayOf(_isItem));
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
 
@@ -27,7 +27,7 @@ async function getPosts() {
 					title: metadata.title,
 					pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
 				},
-				isItem
+				_isItem
 			);
 			posts = [...posts, post];
 		}
