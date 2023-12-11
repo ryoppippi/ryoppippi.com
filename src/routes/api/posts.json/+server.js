@@ -42,3 +42,5 @@ export async function GET() {
 	const posts = await getPosts();
 	return json(posts);
 }
+
+export const prerender = true;

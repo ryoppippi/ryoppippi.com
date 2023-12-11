@@ -29,3 +29,5 @@ export const GET = async () => {
 
 	return json(sortedFeeds);
 };
+
+export const prerender = true;
