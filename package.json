@@ -77,7 +77,7 @@
 		"typescript-svelte-plugin": "^0.3.36",
 		"unknownutil": "^3.11.0",
 		"unplugin-icons": "^0.18.1",
-		"vite": "^5.0.6"
+		"vite": "^5.0.7"
 	},
 	"type": "module"
 }
