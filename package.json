@@ -21,7 +21,7 @@
 		"node": "20.10.0"
 	},
 	"devDependencies": {
-		"@iconify-json/akar-icons": "^1.1.22",
+		"@iconify-json/akar-icons": "^1.1.23",
 		"@iconify-json/carbon": "^1.1.25",
 		"@iconify-json/devicon-plain": "^1.1.29",
 		"@iconify-json/fa-solid": "^1.1.7",
