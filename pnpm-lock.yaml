@@ -15,7 +15,7 @@ devDependencies:
     specifier: ^1.1.30
     version: 1.1.30
   '@iconify-json/fa-solid':
-    specifier: ^1.1.7
+    specifier: ^1.1.8
     version: 1.1.8
   '@iconify-json/grommet-icons':
     specifier: ^1.1.9
