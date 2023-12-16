@@ -87,8 +87,8 @@ devDependencies:
     specifier: ^6.14.0
     version: 6.14.0(eslint@8.55.0)(typescript@5.3.3)
   '@wooorm/starry-night':
-    specifier: ^3.1.0
-    version: 3.1.0
+    specifier: ^3.2.0
+    version: 3.2.0
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.32)
@@ -1436,8 +1436,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@wooorm/starry-night@3.1.0:
-    resolution: {integrity: sha512-EHhyqD62/BZzceh0r38gqdna/9ljRTfbzg/qYdiaEkK8FFNUi2sCb2nBs7AUqHGZKxu+cFe8QFFcld+SzSSK/g==}
+  /@wooorm/starry-night@3.2.0:
+    resolution: {integrity: sha512-SDIMYfhmfJXUzfXfG/0b8WuPLVmPVmx18sE3Q+Udm8M1yCm2rnAEN5OafFmAb7rwOf4W3SDR8fEFHzrE9AyYkA==}
     dependencies:
       '@types/hast': 3.0.3
       import-meta-resolve: 4.0.0
