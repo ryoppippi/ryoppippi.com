@@ -58,16 +58,16 @@ devDependencies:
     version: 0.3.0(tailwindcss@3.3.6)
   '@sveltejs/adapter-auto':
     specifier: ^2.1.1
-    version: 2.1.1(@sveltejs/kit@1.28.0)
+    version: 2.1.1(@sveltejs/kit@1.30.3)
   '@sveltejs/adapter-static':
     specifier: ^2.0.3
-    version: 2.0.3(@sveltejs/kit@1.28.0)
+    version: 2.0.3(@sveltejs/kit@1.30.3)
   '@sveltejs/enhanced-img':
     specifier: ^0.1.5
     version: 0.1.5(svelte@4.2.8)
   '@sveltejs/kit':
-    specifier: ^1.28.0
-    version: 1.28.0(svelte@4.2.8)(vite@5.0.10)
+    specifier: ^1.30.2
+    version: 1.30.3(svelte@4.2.8)(vite@5.0.10)
   '@tailwindcss/forms':
     specifier: ^0.5.7
     version: 0.5.7(tailwindcss@3.3.6)
@@ -1099,21 +1099,21 @@ packages:
       tailwindcss: 3.3.6
     dev: true
 
-  /@sveltejs/adapter-auto@2.1.1(@sveltejs/kit@1.28.0):
+  /@sveltejs/adapter-auto@2.1.1(@sveltejs/kit@1.30.3):
     resolution: {integrity: sha512-nzi6x/7/3Axh5VKQ8Eed3pYxastxoa06Y/bFhWb7h3Nu+nGRVxKAy3+hBJgmPCwWScy8n0TsstZjSVKfyrIHkg==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@sveltejs/kit': 1.28.0(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 1.30.3(svelte@4.2.8)(vite@5.0.10)
       import-meta-resolve: 4.0.0
     dev: true
 
-  /@sveltejs/adapter-static@2.0.3(@sveltejs/kit@1.28.0):
+  /@sveltejs/adapter-static@2.0.3(@sveltejs/kit@1.30.3):
     resolution: {integrity: sha512-VUqTfXsxYGugCpMqQv1U0LIdbR3S5nBkMMDmpjGVJyM6Q2jHVMFtdWJCkeHMySc6mZxJ+0eZK3T7IgmUCDrcUQ==}
     peerDependencies:
       '@sveltejs/kit': ^1.5.0
     dependencies:
-      '@sveltejs/kit': 1.28.0(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 1.30.3(svelte@4.2.8)(vite@5.0.10)
     dev: true
 
   /@sveltejs/enhanced-img@0.1.5(svelte@4.2.8):
@@ -1127,8 +1127,8 @@ packages:
       - svelte
     dev: true
 
-  /@sveltejs/kit@1.28.0(svelte@4.2.8)(vite@5.0.10):
-    resolution: {integrity: sha512-T9hoS6XM840W4ZUgf3kKAoBt2dsupumUxBtlxt3ddu2yRLrqsKcC3gledBB/e5NtTC8zEZyR5qWBNFT9WAWmIA==}
+  /@sveltejs/kit@1.30.3(svelte@4.2.8)(vite@5.0.10):
+    resolution: {integrity: sha512-0DzVXfU4h+tChFvoc8C61IqErCyskD4ydSIDjpKS2lYlEzIYrtYrY7juSqACFxqcvZAnOEXvSY+zZ8br0+ZMMg==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
