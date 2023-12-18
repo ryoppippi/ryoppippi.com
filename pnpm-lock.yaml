@@ -27,7 +27,7 @@ devDependencies:
     specifier: ^1.1.63
     version: 1.1.63
   '@iconify-json/pajamas':
-    specifier: ^1.1.39
+    specifier: ^1.1.40
     version: 1.1.40
   '@iconify-json/ph':
     specifier: ^1.1.9
