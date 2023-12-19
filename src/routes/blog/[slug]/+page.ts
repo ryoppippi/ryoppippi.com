@@ -15,6 +15,6 @@ export async function load({ params }) {
 		};
 	} catch (e) {
 		console.error(e);
-		throw error(404, 'Post not found');
+		error(404, 'Post not found');
 	}
 }
