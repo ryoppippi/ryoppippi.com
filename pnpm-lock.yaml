@@ -45,7 +45,7 @@ devDependencies:
     specifier: ^3.1.1
     version: 3.1.1
   '@iconify/svelte':
-    specifier: ^3.1.4
+    specifier: ^3.1.6
     version: 3.1.6(svelte@4.2.8)
   '@secretlint/secretlint-rule-preset-recommend':
     specifier: ^8.0.0
