@@ -39,7 +39,7 @@
 		"@skeletonlabs/skeleton": "^2.6.0",
 		"@skeletonlabs/tw-plugin": "^0.3.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/adapter-static": "^3.0.0",
+		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/enhanced-img": "^0.1.6",
 		"@sveltejs/kit": "^2.0.3",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
