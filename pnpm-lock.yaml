@@ -63,8 +63,8 @@ devDependencies:
     specifier: ^3.0.1
     version: 3.0.1(@sveltejs/kit@2.0.3)
   '@sveltejs/enhanced-img':
-    specifier: ^0.1.6
-    version: 0.1.6(svelte@4.2.8)
+    specifier: ^0.1.7
+    version: 0.1.7(svelte@4.2.8)
   '@sveltejs/kit':
     specifier: ^2.0.3
     version: 2.0.3(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
@@ -1107,12 +1107,12 @@ packages:
       '@sveltejs/kit': 2.0.3(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
     dev: true
 
-  /@sveltejs/enhanced-img@0.1.6(svelte@4.2.8):
-    resolution: {integrity: sha512-6YBXGcY/Fh2dGtxNp5pg3m9TxbJc4T+lWXnZjM1o1kuDYDPERViKhnVPBcRcv0EY/66jdiLWBXA6tmstLngSJw==}
+  /@sveltejs/enhanced-img@0.1.7(svelte@4.2.8):
+    resolution: {integrity: sha512-7hxH9vcxeEckOT+Iu/jPGrppIORia65BCF0SuJvjSjhOuJsoI0ycPxLLoD7XnOg3zor71gjXl3aPtghvRPucPw==}
     dependencies:
       magic-string: 0.30.5
       svelte-parse-markup: 0.1.2(svelte@4.2.8)
-      vite-imagetools: 6.2.7
+      vite-imagetools: 6.2.8
     transitivePeerDependencies:
       - rollup
       - svelte
@@ -4083,8 +4083,8 @@ packages:
       vfile-message: 4.0.2
     dev: true
 
-  /vite-imagetools@6.2.7:
-    resolution: {integrity: sha512-7rE6xM93kf7OIVUSrQBIP363fSToUHpIwnuxdqHuVU6SdysksQF06g8SBezIsFegZY+OJgW1e3dprcBalEtRTg==}
+  /vite-imagetools@6.2.8:
+    resolution: {integrity: sha512-52r/BvprawSlUXayDn5ncX3mqaoxBbOaYG4eakzwREoCXEOTvp+A4HDXrDoeS6PM9T/3ZH7CqBhgmIYm6B/mpQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@rollup/pluginutils': 5.1.0
