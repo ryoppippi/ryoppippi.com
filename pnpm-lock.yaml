@@ -159,7 +159,7 @@ devDependencies:
     specifier: ^1.0.0
     version: 1.0.0
   tailwindcss:
-    specifier: ^3.3.7
+    specifier: ^3.4.0
     version: 3.4.0
   tslib:
     specifier: ^2.6.2
