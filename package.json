@@ -37,7 +37,7 @@
 		"@iconify/svelte": "^3.1.6",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.1.0",
 		"@skeletonlabs/skeleton": "^2.6.1",
-		"@skeletonlabs/tw-plugin": "^0.3.0",
+		"@skeletonlabs/tw-plugin": "^0.3.1",
 		"@sveltejs/adapter-auto": "^3.0.1",
 		"@sveltejs/adapter-static": "^3.0.1",
 		"@sveltejs/enhanced-img": "^0.1.7",
