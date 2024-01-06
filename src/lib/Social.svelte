@@ -10,12 +10,14 @@
 	// import IconTwitter from '~icons/line-md/twitter';
 	import IconReddit from '~icons/line-md/reddit-loop';
 	import IconYoutube from '~icons/ri/youtube-line';
+	import IconBluesky from '~icons/simple-icons/bluesky';
 
 	const ICONS = [
 		{ component: IconGithub, url: 'https://github.com/ryoppippi' },
 		{ component: IconZenn, url: 'https://zenn.dev/ryoppippi' },
 		{ component: IconLinkedin, url: 'https://www.linkedin.com/in/ryoppippi/' },
 		// { component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
+		{ component: IconBluesky, url: 'https://bsky.app/profile/ryoppippi.com' },
 		{ component: IconReddit, url: 'https://www.reddit.com/user/ryoppippi' },
 		{ component: IconYoutube, url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' }
 	];
