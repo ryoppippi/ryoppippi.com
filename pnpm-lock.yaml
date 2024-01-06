@@ -57,8 +57,8 @@ devDependencies:
     specifier: ^0.3.1
     version: 0.3.1(tailwindcss@3.4.0)
   '@sveltejs/adapter-auto':
-    specifier: ^3.0.1
-    version: 3.0.1(@sveltejs/kit@2.0.6)
+    specifier: ^3.1.0
+    version: 3.1.0(@sveltejs/kit@2.0.6)
   '@sveltejs/adapter-static':
     specifier: ^3.0.1
     version: 3.0.1(@sveltejs/kit@2.0.6)
@@ -1121,8 +1121,8 @@ packages:
       tailwindcss: 3.4.0
     dev: true
 
-  /@sveltejs/adapter-auto@3.0.1(@sveltejs/kit@2.0.6):
-    resolution: {integrity: sha512-OpilmvRN136lUgOa9F0zpSI6g+PouOmk+YvJQrB+/hAtllLghjjYuoyfUsrF7U6oJ52cxCtAJTPXgZdyyCffrQ==}
+  /@sveltejs/adapter-auto@3.1.0(@sveltejs/kit@2.0.6):
+    resolution: {integrity: sha512-igS5hqCwdiXWb8NoWzThKCVQQj9tKgUkbTtzfxBPgSLOyFjkiGNDX0SgCoY2QIUWBqOkfGTOqGlrW5Ynw9oUvw==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
