@@ -3,6 +3,7 @@
 	export let size = 4.5;
 
 	import { fade } from 'svelte/transition';
+	import { parseURL } from 'ufo';
 
 	import IconGithub from '~icons/line-md/github-loop';
 	import IconZenn from '~icons/simple-icons/zenn';
@@ -24,10 +25,10 @@
 </script>
 
 <article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade|global={{ duration: 3000 }}>
-	{#each ICONS as icon (icon.url)}
-		{@const { component, url } = icon}
+	{#each ICONS as { component, url } (url)}
+		{@const { host } = parseURL(url)}
 		<div class="animation cursor-pointer">
-			<a href={url} target="_blank" aria-label="link to ryoppippi's {new URL(url).hostname}" rel="noopener noreferrer">
+			<a href={url} target="_blank" aria-label="link to ryoppippi's {host}" rel="noopener noreferrer">
 				<svelte:component this={component} style="font-size: {size}vh" />
 			</a>
 		</div>
