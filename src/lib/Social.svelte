@@ -1,13 +1,13 @@
-<script>
-	/** @type {number} */
+<script lang="ts">
 	export let size = 4.5;
 
 	import { fade } from 'svelte/transition';
+	import { parseURL } from 'ufo';
 
 	import IconGithub from '~icons/line-md/github-loop';
 	import IconZenn from '~icons/simple-icons/zenn';
 	import IconLinkedin from '~icons/line-md/linkedin';
-	// import IconTwitter from '~icons/line-md/twitter';
+	import IconTwitter from '~icons/line-md/twitter';
 	import IconReddit from '~icons/line-md/reddit-loop';
 	import IconYoutube from '~icons/ri/youtube-line';
 	import IconBluesky from '~icons/simple-icons/bluesky';
@@ -16,18 +16,18 @@
 		{ component: IconGithub, url: 'https://github.com/ryoppippi' },
 		{ component: IconZenn, url: 'https://zenn.dev/ryoppippi' },
 		{ component: IconLinkedin, url: 'https://www.linkedin.com/in/ryoppippi/' },
-		// { component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
+		{ component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
 		{ component: IconBluesky, url: 'https://bsky.app/profile/ryoppippi.com' },
 		{ component: IconReddit, url: 'https://www.reddit.com/user/ryoppippi' },
 		{ component: IconYoutube, url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' }
-	];
+	] as const;
 </script>
 
-<article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade|global={{ duration: 3000 }}>
-	{#each ICONS as icon (icon.url)}
-		{@const { component, url } = icon}
+<article class="grid grid-cols-3 place-items-center gap-3 sm:grid-cols-7" in:fade|global={{ duration: 3000 }}>
+	{#each ICONS as { component, url } (url)}
+		{@const { host } = parseURL(url)}
 		<div class="animation cursor-pointer">
-			<a href={url} target="_blank" aria-label="link to ryoppippi's {new URL(url).hostname}" rel="noopener noreferrer">
+			<a href={url} target="_blank" aria-label="link to ryoppippi's {host}" rel="noopener noreferrer">
 				<svelte:component this={component} style="font-size: {size}vh" />
 			</a>
 		</div>

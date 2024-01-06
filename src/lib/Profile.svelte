@@ -4,9 +4,9 @@
 	import img from '$lib/assets/ryoppippi.png?enhanced';
 </script>
 
-<div class="grid place-content-center">
+<div>
 	<enhanced:img
-		class=" object-fit aspect-square rounded-full md:h-64 md:w-64"
+		class="object-fit mx-auto aspect-square w-1/2 rounded-full md:h-64 md:w-64"
 		src={img}
 		alt="profile"
 		style:--tag={name} />
