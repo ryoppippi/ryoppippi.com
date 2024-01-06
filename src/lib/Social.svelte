@@ -1,5 +1,4 @@
-<script>
-	/** @type {number} */
+<script lang="ts">
 	export let size = 4.5;
 
 	import { fade } from 'svelte/transition';
@@ -21,10 +20,10 @@
 		{ component: IconBluesky, url: 'https://bsky.app/profile/ryoppippi.com' },
 		{ component: IconReddit, url: 'https://www.reddit.com/user/ryoppippi' },
 		{ component: IconYoutube, url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' }
-	];
+	] as const;
 </script>
 
-<article class="container mx-auto flex h-full items-center justify-center gap-3" in:fade|global={{ duration: 3000 }}>
+<article class="grid grid-cols-3 place-items-center gap-3 sm:grid-cols-7" in:fade|global={{ duration: 3000 }}>
 	{#each ICONS as { component, url } (url)}
 		{@const { host } = parseURL(url)}
 		<div class="animation cursor-pointer">
