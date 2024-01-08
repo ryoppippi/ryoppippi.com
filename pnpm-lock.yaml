@@ -180,7 +180,7 @@ devDependencies:
     specifier: ^0.18.1
     version: 0.18.1
   vite:
-    specifier: ^5.0.10
+    specifier: ^5.0.11
     version: 5.0.11(@types/node@20.10.7)
 
 packages:
