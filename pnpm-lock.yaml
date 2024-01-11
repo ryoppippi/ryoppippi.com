@@ -177,8 +177,8 @@ devDependencies:
     specifier: ^3.13.0
     version: 3.13.0
   unplugin-icons:
-    specifier: ^0.18.1
-    version: 0.18.1
+    specifier: ^0.18.2
+    version: 0.18.2
   vite:
     specifier: ^5.0.11
     version: 5.0.11(@types/node@20.10.7)
@@ -4100,8 +4100,8 @@ packages:
     resolution: {integrity: sha512-6qe7Av5P4YyXUcaHN3Xz6QLgTrIRKXRwm45qUwfW/eYjHYmRHm1bgP+CboJA4Z6BApMDJZCRel9WD2meMk1odg==}
     dev: true
 
-  /unplugin-icons@0.18.1:
-    resolution: {integrity: sha512-WzKu/eoq74YC7vyEAGsFebkRzsZrRkR4FUzLU6gbpfa7WRaVVpQS2n7LSxE1iRUN0scKL5b9bq+i0wucR+ttFQ==}
+  /unplugin-icons@0.18.2:
+    resolution: {integrity: sha512-OgZoIJHGubeJmc3KePMOy62ovtxPEJfNMlr5tU+1ZqHGpSXubg3fnqq28VPvLL0D5vKj2PRCJF9tVGbQ7vBXJQ==}
     peerDependencies:
       '@svgr/core': '>=7.0.0'
       '@svgx/core': ^1.0.1
