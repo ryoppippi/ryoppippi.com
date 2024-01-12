@@ -47,7 +47,7 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"@total-typescript/ts-reset": "^0.5.1",
 		"@types/node": "^20.10.7",
-		"@typescript-eslint/eslint-plugin": "^6.18.0",
+		"@typescript-eslint/eslint-plugin": "^6.18.1",
 		"@typescript-eslint/parser": "^6.18.0",
 		"@wooorm/starry-night": "^3.2.0",
 		"autoprefixer": "^10.4.16",
