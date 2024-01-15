@@ -147,7 +147,7 @@ devDependencies:
     specifier: ^4.2.8
     version: 4.2.8
   svelte-check:
-    specifier: ^3.6.2
+    specifier: ^3.6.3
     version: 3.6.3(postcss@8.4.33)(svelte@4.2.8)
   svelte-meta-tags:
     specifier: ^3.1.0
