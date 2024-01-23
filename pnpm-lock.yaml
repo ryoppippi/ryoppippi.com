@@ -99,7 +99,7 @@ devDependencies:
     specifier: ^6.0.3
     version: 6.0.3
   date-fns:
-    specifier: ^3.2.0
+    specifier: ^3.3.0
     version: 3.3.0
   eslint:
     specifier: ^8.56.0
