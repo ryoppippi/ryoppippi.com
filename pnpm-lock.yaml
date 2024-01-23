@@ -57,7 +57,7 @@ devDependencies:
     specifier: ^0.3.1
     version: 0.3.1(tailwindcss@3.4.1)
   '@sveltejs/adapter-auto':
-    specifier: ^3.1.0
+    specifier: ^3.1.1
     version: 3.1.1(@sveltejs/kit@2.4.1)
   '@sveltejs/adapter-static':
     specifier: ^3.0.1
