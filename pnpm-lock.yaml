@@ -81,7 +81,7 @@ devDependencies:
     specifier: ^0.5.1
     version: 0.5.1
   '@types/node':
-    specifier: ^20.11.6
+    specifier: ^20.11.7
     version: 20.11.7
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.19.1
