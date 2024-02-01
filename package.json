@@ -32,7 +32,7 @@
 		"@iconify-json/ph": "^1.1.10",
 		"@iconify-json/quill": "^1.1.10",
 		"@iconify-json/ri": "^1.1.19",
-		"@iconify-json/simple-icons": "^1.1.89",
+		"@iconify-json/simple-icons": "^1.1.90",
 		"@iconify/iconify": "^3.1.1",
 		"@iconify/svelte": "^3.1.6",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.1.0",
