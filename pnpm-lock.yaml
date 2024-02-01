@@ -39,7 +39,7 @@ devDependencies:
     specifier: ^1.1.19
     version: 1.1.19
   '@iconify-json/simple-icons':
-    specifier: ^1.1.89
+    specifier: ^1.1.90
     version: 1.1.90
   '@iconify/iconify':
     specifier: ^3.1.1
