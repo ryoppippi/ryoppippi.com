@@ -11,16 +11,12 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: oven-sh/setup-bun@v1
         with:
-          version: 8
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-      - run: pnpm i
-      - run: pnpm secretlint **/*
-      - run: pnpm run lint
+          bun-version: latest
+      - run: bun i
+      - run: bun secretlint **/*
+      - run: bun run lint
 
   check:
     runs-on: ubuntu-latest
@@ -28,15 +24,11 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: oven-sh/setup-bun@v1
         with:
-          version: 8
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-      - run: pnpm i
-      - run: pnpm run check
+          bun-version: latest
+      - run: bun i
+      - run: bun run check
 
   # build-and-deploy:
   #   needs:
