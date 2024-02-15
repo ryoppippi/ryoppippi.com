@@ -77,7 +77,7 @@
 		"typescript": "^5.3.3",
 		"typescript-svelte-plugin": "^0.3.37",
 		"ufo": "^1.4.0",
-		"unknownutil": "^3.15.0",
+		"unknownutil": "^3.16.0",
 		"unplugin-icons": "^0.18.5",
 		"vite": "^5.1.1"
 	},
