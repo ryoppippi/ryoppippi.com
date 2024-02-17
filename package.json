@@ -79,7 +79,7 @@
 		"ufo": "^1.4.0",
 		"unknownutil": "^3.16.1",
 		"unplugin-icons": "^0.18.5",
-		"vite": "^5.1.1"
+		"vite": "^5.1.2"
 	},
 	"type": "module"
 }
