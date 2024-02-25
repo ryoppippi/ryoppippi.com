@@ -5,5 +5,5 @@ import { format } from 'date-fns';
  * @returns {string}
  */
 export function formatDate(date) {
-	return format(date, 'dd MMM Y');
+	return format(date, 'dd MMM y');
 }

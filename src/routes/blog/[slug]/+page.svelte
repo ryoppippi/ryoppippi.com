@@ -2,6 +2,8 @@
 	export let data;
 
 	import { formatDate } from '$lib/util.js';
+
+	/* eslint svelte/no-at-html-tags: 0 */
 </script>
 
 <svelte:head>
@@ -17,6 +19,6 @@
 	</hgroup>
 
 	<div class="prose">
-		<svelte:component this={data.content} />
+		{@html data.content}
 	</div>
 </article>
