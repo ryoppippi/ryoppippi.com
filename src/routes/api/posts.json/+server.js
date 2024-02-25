@@ -1,7 +1,10 @@
 import sortOn from 'sort-on';
-import { is, ensure } from 'unknownutil';
+import { is, ensure, assert } from 'unknownutil';
 import { json } from '@sveltejs/kit';
 import { parse } from 'date-fns';
+
+import markdown from 'markdown-it';
+import matter from 'gray-matter';
 
 export const _isItem = is.ObjectOf({
 	slug: is.String,
@@ -9,29 +12,38 @@ export const _isItem = is.ObjectOf({
 	pubDate: is.String
 });
 
+export const _isMetadata = is.ObjectOf({
+	title: is.String,
+	date: is.String
+});
+
+const mdParser = new markdown();
+
 async function getPosts() {
 	let posts = ensure([], is.ArrayOf(_isItem));
 
-	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
+	const paths = import.meta.glob('/src/posts/*.md', { eager: true, as: 'raw' });
 
-	for (const path in paths) {
-		const file = paths[path];
-		const slug = path.split('/').at(-1)?.replace('.md', '');
+	Object.entries(paths).forEach(([filepath, contentRaw]) => {
+		const slug = filepath.split('/').at(-1)?.replace('.md', '');
 
-		if (file && typeof file === 'object' && 'metadata' in file && slug) {
-			/** @type {?} */
-			const metadata = file.metadata;
-			const post = ensure(
-				{
-					slug,
-					title: metadata.title,
-					pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
-				},
-				_isItem
-			);
+		/** parse markdown and convert to html */
+		const content = mdParser.render(contentRaw);
+
+		/** parse metadata */
+		const { data: metadata } = matter(contentRaw);
+		assert(metadata, _isMetadata);
+
+		if (content !== '') {
+			const post = {
+				slug,
+				title: metadata.title,
+				pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
+			};
+			assert(post, _isItem);
 			posts = [...posts, post];
 		}
-	}
+	});
 
 	posts = sortOn(posts, ['-pubDate']);
 
