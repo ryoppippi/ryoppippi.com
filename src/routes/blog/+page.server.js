@@ -1,8 +1,8 @@
 import sortOn from 'sort-on';
 import { parseJSON } from 'date-fns';
 import { assert, is } from 'unknownutil';
-import { _isItem as isItemPost } from '../api/posts.json/+server.js';
-import { _isItem as isItemRSS } from '../api/rss.json//+server.js';
+import { isItem as isItemPost } from '$lib/markdown.server';
+import { _isItem as isItemRSS } from '../api/rss.json/+server.js';
 
 export async function load({ fetch }) {
 	const rss = fetch('/api/rss.json').then(async (res) => {

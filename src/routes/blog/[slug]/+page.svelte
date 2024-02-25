@@ -17,6 +17,6 @@
 	</hgroup>
 
 	<div class="prose">
-		<svelte:component this={data.content} />
+		{@html data.content}
 	</div>
 </article>
