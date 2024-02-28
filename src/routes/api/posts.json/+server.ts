@@ -7,7 +7,7 @@ async function getPosts() {
 	const originals = import.meta.glob('/src/posts/*.md', { eager: true, as: 'raw' });
 
 	const posts = Object.entries(originals).flatMap(([filepath, contentRaw]) => {
-		const post = parseMarkdown(filepath, contentRaw, { parseContent: false });
+		const post = parseMarkdown(filepath, contentRaw);
 		if (!post.isPublished) {
 			return [];
 		}
