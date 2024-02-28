@@ -26,7 +26,7 @@ export function parseMarkdown(
 	options: { parseContent: true }
 ): Item & { content: string };
 export function parseMarkdown(filepath: string, contentRaw: string, options?: { parseContent?: false }): Item;
-export function parseMarkdown<T extends boolean | undefined>(
+export function parseMarkdown<T extends boolean>(
 	filepath: string,
 	contentRaw: string,
 	options?: {
@@ -55,7 +55,7 @@ export function parseMarkdown<T extends boolean | undefined>(
 
 	assert(item, isItem);
 
-	if (options?.parseContent) {
+	if (options?.parseContent ?? false) {
 		const md = markdown();
 		const content = md.render(parsedRawMdContent);
 
