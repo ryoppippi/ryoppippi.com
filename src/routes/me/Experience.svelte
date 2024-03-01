@@ -25,11 +25,6 @@
 		</div>
 	</div>
 	<Timeline>
-		<TimelineItem icon={IconRunning} date="Jan 2024 - Mar 2024" hidden={!items.Industrial}>
-			<svelte:fragment slot="title">
-				<ExperienceTitle title="Engineer" place="NOT A HOTEL Inc." link="https://notahotel.com/" />
-			</svelte:fragment>
-		</TimelineItem>
 		<TimelineItem icon={IconRunning} date="Apr 2022 - now" hidden={!items.Industrial}>
 			<svelte:fragment slot="title">
 				<ExperienceTitle title="Research Assistant" place="The University of Tokyo" />
@@ -38,6 +33,11 @@
 		<TimelineItem icon={IconTeaching} date="May 2021 - now" hidden={!items.Teaching}>
 			<svelte:fragment slot="title">
 				<ExperienceTitle title="Instructor" place="AI Academy Inc." link="https://aiacademy.jp" />
+			</svelte:fragment>
+		</TimelineItem>
+		<TimelineItem icon={IconRunning} date="Jan 2024 - Mar 2024" hidden={!items.Industrial}>
+			<svelte:fragment slot="title">
+				<ExperienceTitle title="Engineer" place="NOT A HOTEL Inc." link="https://notahotel.com/" />
 			</svelte:fragment>
 		</TimelineItem>
 		<TimelineItem icon={IconRunning} date="July 2022 - Aug 2023" hidden={!items.Industrial}>
