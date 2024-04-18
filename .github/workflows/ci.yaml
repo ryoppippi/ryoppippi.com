@@ -6,7 +6,7 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     timeout-minutes: 10
     permissions: read-all
     steps:
@@ -19,7 +19,7 @@ jobs:
       - run: bun run lint
 
   check:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     timeout-minutes: 10
     permissions: read-all
     steps:
@@ -34,7 +34,7 @@ jobs:
   #   needs:
   #     - lint
   #     - check
-  #   runs-on: ubuntu-latest
+  #   runs-on: macos-14
   #   strategy:
   #     matrix:
   #       working-directory: ['./']
