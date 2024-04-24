@@ -1,0 +1,19 @@
+{
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security"
+    ]
+  },
+  "extends": [
+    "github>Omochice/renovate-config:deno"
+  ],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "platformAutomerge": true,
+  "dependencyDashboard": false,
+  "automerge": true,
+  "branchConcurrentLimit": 0,
+  "stabilityDays": 3
+}
