@@ -80,5 +80,11 @@
 		"unplugin-icons": "^0.18.5",
 		"vite": "^5.1.6"
 	},
-	"type": "module"
+	"type": "module",
+	"trustedDependencies": [
+		"@sveltejs/kit",
+		"esbuild",
+		"sharp",
+		"svelte-preprocess"
+	]
 }
