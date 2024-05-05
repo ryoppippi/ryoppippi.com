@@ -59,7 +59,7 @@
 		"eslint-plugin-svelte": "^2.35.1",
 		"gray-matter": "^4.0.3",
 		"markdown-it": "^14.0.0",
-		"postcss": "^8.4.35",
+		"postcss": "^8.4.38",
 		"prettier": "^3.2.5",
 		"prettier-plugin-svelte": "^3.2.2",
 		"prettier-plugin-tailwindcss": "^0.5.12",
