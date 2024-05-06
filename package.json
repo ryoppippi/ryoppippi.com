@@ -71,7 +71,7 @@
 		"svelte-meta-tags": "^3.1.2",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.0",
-		"tailwindcss": "^3.4.1",
+		"tailwindcss": "^3.4.3",
 		"tslib": "^2.6.2",
 		"typescript": "^5.4.2",
 		"typescript-svelte-plugin": "^0.3.37",
