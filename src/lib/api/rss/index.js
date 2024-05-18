@@ -1,6 +1,5 @@
 import Parser from 'rss-parser';
 import sortOn from 'sort-on';
-import { json } from '@sveltejs/kit';
 import { is, ensure } from 'unknownutil';
 
 import rss from './rss.json';
@@ -13,7 +12,7 @@ export const _isItem = is.ObjectOf({
 	pubDate: is.String
 });
 
-export const GET = async () => {
+export const getPosts = async () => {
 	const feeds = (
 		await Promise.all(
 			rss.map(async (url) => {
@@ -27,7 +26,7 @@ export const GET = async () => {
 
 	const sortedFeeds = sortOn(feeds, ['-pubDate']);
 
-	return json(sortedFeeds);
+	return sortedFeeds;
 };
 
-export const prerender = true;
+export const posts = await getPosts();

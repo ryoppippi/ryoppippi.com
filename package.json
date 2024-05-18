@@ -50,6 +50,7 @@
 		"@types/node": "^20.12.12",
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
+		"@unplugin/macros": "npm:@jsr/unplugin__macros",
 		"@wooorm/starry-night": "^3.3.0",
 		"autoprefixer": "^10.4.19",
 		"buffer": "^6.0.3",

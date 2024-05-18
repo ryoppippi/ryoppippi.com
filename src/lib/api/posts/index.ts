@@ -1,5 +1,4 @@
 import sortOn from 'sort-on';
-import { json } from '@sveltejs/kit';
 
 import { parseMarkdown } from '$lib/markdown.server';
 
@@ -20,9 +19,4 @@ async function getPosts() {
 	return sortedPost;
 }
 
-export async function GET() {
-	const posts = await getPosts();
-	return json(posts);
-}
-
-export const prerender = true;
+export const posts = await getPosts();
