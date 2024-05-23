@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "zenn": "deno run --unstable-fs --allow-run --allow-net --allow-read --allow-env --allow-write npm:zenn-cli@latest",
+    "zenn": "deno run --unstable-fs --allow-sys --allow-run --allow-net --allow-read --allow-env --allow-write npm:zenn-cli@latest",
     "new": "deno task zenn new:article",
     "preview": "deno task zenn preview --open"
   }
