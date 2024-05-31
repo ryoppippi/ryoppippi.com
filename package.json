@@ -18,7 +18,7 @@
 		"yarn": "use bun please!"
 	},
 	"volta": {
-		"node": "20.13.1"
+		"node": "20.14.0"
 	},
 	"devDependencies": {
 		"@iconify-json/akar-icons": "^1.1.24",
