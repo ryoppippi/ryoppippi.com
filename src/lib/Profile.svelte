@@ -1,6 +1,7 @@
 <script>
 	const name = /** @type {const} */ 'ryoppippi';
 
+	// @ts-expect-error any
 	import img from '$lib/assets/ryoppippi.png?enhanced';
 </script>
 
