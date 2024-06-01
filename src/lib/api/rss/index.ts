@@ -1,16 +1,16 @@
 import Parser from 'rss-parser';
 import sortOn from 'sort-on';
-import { is, ensure } from 'unknownutil';
+import typia from 'typia';
 
 import rss from './rss.json';
 
 const parser = new Parser();
 
-export const _isItem = is.ObjectOf({
-	title: is.String,
-	link: is.String,
-	pubDate: is.String
-});
+type Item = {
+	title: string;
+	link: string;
+	pubDate: string;
+};
 
 export const getPosts = async () => {
 	const feeds = (
@@ -18,7 +18,11 @@ export const getPosts = async () => {
 			rss.map(async (url) => {
 				const feed = await parser.parseURL(url);
 				return feed.items
-					.map(({ title, link, pubDate }) => ensure({ title, link, pubDate }, _isItem))
+					.map(({ title, link, pubDate }) => {
+						const item = { title, link, pubDate };
+						typia.assertGuard<Item>(item);
+						return item;
+					})
 					.map((item) => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
 			})
 		)

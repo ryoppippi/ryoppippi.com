@@ -1,24 +1,20 @@
 import markdown from 'markdown-it';
 import matter from 'gray-matter';
-import { is, assert, type PredicateType } from 'unknownutil';
 import { parse } from 'date-fns';
+import typia from 'typia';
 
-export const isItem = is.ObjectOf({
-	slug: is.String,
-	title: is.String,
-	pubDate: is.String,
-	isPublished: is.Boolean
-});
+type Item = {
+	slug: string;
+	title: string;
+	pubDate: string;
+	isPublished: boolean;
+};
 
-export type Item = PredicateType<typeof isItem>;
-
-export const isMetadata = is.ObjectOf({
-	title: is.String,
-	date: is.String,
-	isPublished: is.Boolean
-});
-
-export type Metadata = PredicateType<typeof isMetadata>;
+type Metadata = {
+	title: string;
+	date: string;
+	isPublished: boolean;
+};
 
 export function parseMarkdown(
 	filepath: string,
@@ -44,7 +40,7 @@ export function parseMarkdown<T extends boolean>(
 
 	const { data: metadata, content: parsedRawMdContent } = matter(contentRaw);
 
-	assert(metadata, isMetadata);
+	typia.assertGuard<Metadata>(metadata);
 
 	const item = {
 		slug,
@@ -53,7 +49,7 @@ export function parseMarkdown<T extends boolean>(
 		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
 	} satisfies Item;
 
-	assert(item, isItem);
+	typia.assertGuard<Item>(item);
 
 	if (options?.parseContent ?? false) {
 		const md = markdown();
