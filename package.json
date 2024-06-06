@@ -32,7 +32,7 @@
 		"@iconify-json/ph": "^1.1.13",
 		"@iconify-json/quill": "^1.1.10",
 		"@iconify-json/ri": "^1.1.20",
-		"@iconify-json/simple-icons": "^1.1.103",
+		"@iconify-json/simple-icons": "^1.1.104",
 		"@iconify/iconify": "^3.1.1",
 		"@iconify/svelte": "^4.0.2",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
