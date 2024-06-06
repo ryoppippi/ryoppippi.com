@@ -2,11 +2,11 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "npm:zenn-cli@latest": "npm:zenn-cli@0.1.153"
+      "npm:zenn-cli@latest": "npm:zenn-cli@0.1.154"
     },
     "npm": {
-      "zenn-cli@0.1.153": {
-        "integrity": "sha512-MLIdtRW2arQBuVCKlWrMF4eFZGkvmswrcc0OvgxmQs9w9/9rODfoyFK9nQQwrgyUwlxDzhUa/oAO6nks4GY5DA==",
+      "zenn-cli@0.1.154": {
+        "integrity": "sha512-s9SZst7TWiA2VS+40CWUS7pu5cl2OAIhNPyiAtqIwjDFzqB47vVsN78G8VK7VZ7ov6B4gqQrQHcgMHVqvoLN8g==",
         "dependencies": {}
       }
     }
