@@ -52,7 +52,7 @@
 		"@typescript-eslint/eslint-plugin": "^7.13.0",
 		"@typescript-eslint/parser": "^7.13.0",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros",
-		"@wooorm/starry-night": "^3.3.0",
+		"@wooorm/starry-night": "^3.4.0",
 		"autoprefixer": "^10.4.19",
 		"buffer": "^6.0.3",
 		"date-fns": "^3.6.0",
