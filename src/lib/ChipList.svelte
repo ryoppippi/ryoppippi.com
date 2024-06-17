@@ -6,16 +6,9 @@
 	import Chip from '$lib/Chip.svelte';
 </script>
 
-<div
-	class='
-		justify-begin
-		mb-5
-		flex
-		select-none
-		space-x-2
-	'>
-	{#each Object.keys(items) as i (i)}
+<div class='justify-begin mb-5 flex select-none space-x-2'>
+	{#each Object.keys(items) as i}
 		{@const id = `cb-${i}`}
-		<Chip {id} icon={IconCheck} text={i} bind:checked={items[i]} />
+		<Chip {id} text={i} bind:checked={items[i]} icon={IconCheck} />
 	{/each}
 </div>

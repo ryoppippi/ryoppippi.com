@@ -18,78 +18,65 @@
 </script>
 
 <article>
-	<div class='flex'><h1
-		id='education' class='
-			mx-auto
-			my-5
-			text-3xl
-
-			md:ml-0
-		'>Working Experience</h1></div>
+	<div class='flex'><h1 class=' mx-auto my-5 text-3xl md:ml-0' id='education'>Working Experience</h1></div>
 	<div class='flex'>
-		<div
-			class='
-				mx-auto
-				text-3xl
-
-				md:ml-0
-			'>
+		<div class=' mx-auto text-3xl md:ml-0'>
 			<ChipList bind:items />
 		</div>
 	</div>
 	<Timeline>
-		<TimelineItem date='Apr 2022 - now' hidden={!items.Industrial} icon={IconRunning}>
+		<TimelineItem icon={IconRunning} date='Apr 2022 - now' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link={null} place='The University of Tokyo' title='Research Assistant' />
+				<ExperienceTitle title='Research Assistant' place='The University of Tokyo' link={null} />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='May 2021 - now' hidden={!items.Teaching} icon={IconTeaching}>
+		<TimelineItem icon={IconTeaching} date='May 2021 - now' hidden={!items.Teaching}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link='https://aiacademy.jp' place='AI Academy Inc.' title='Instructor' />
+				<ExperienceTitle title='Instructor' place='AI Academy Inc.' link='https://aiacademy.jp' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='Jan 2024 - Mar 2024' hidden={!items.Industrial} icon={IconRunning}>
+		<TimelineItem icon={IconRunning} date='Jan 2024 - Mar 2024' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link='https://notahotel.com/' place='NOT A HOTEL Inc.' title='Engineer' />
+				<ExperienceTitle title='Engineer' place='NOT A HOTEL Inc.' link='https://notahotel.com/' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='July 2022 - Aug 2023' hidden={!items.Industrial} icon={IconRunning}>
+		<TimelineItem icon={IconRunning} date='July 2022 - Aug 2023' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link='https://eightis.co.jp/' place='Eightis Inc.' title='Full-Stack Engineer' />
+				<ExperienceTitle title='Full-Stack Engineer' place='Eightis Inc.' link='https://eightis.co.jp/' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='Oct 2018 - June 2023' hidden={!items.Industrial} icon={IconPajamas}>
+		<TimelineItem icon={IconPajamas} date='Oct 2018 - June 2023' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
 				<ExperienceTitle
-					link='http://qcore.co.jp'
+					title='Co-Founder and Chief Research Officer (CRO)'
 					place='QuantumCore Inc.'
-					title='Co-Founder and Chief Research Officer (CRO)' />
+					link='http://qcore.co.jp' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='Sep 2018 - Nov 2018' hidden={!items.Teaching} icon={IconTeaching}>
+		<TimelineItem icon={IconTeaching} date='Sep 2018 - Nov 2018' hidden={!items.Teaching}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link={null} place='International Christian University' title='Teaching Assistant' />
+				<ExperienceTitle title='Teaching Assistant' place='International Christian University' link={null} />
 			</svelte:fragment>
 			<div slot='main'>ISC104 Foundation of Programming</div>
 		</TimelineItem>
-		<TimelineItem date='June 2018' hidden={!items.Industrial} icon={IconCamera}>
+		<TimelineItem icon={IconCamera} date='June 2018' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link='https://www.dglab.com/en/' place='DG Lab.' title='Research Internship' />
+				<ExperienceTitle title='Research Internship' place='DG Lab.' link='https://www.dglab.com/en/' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='Sep 2017 - Apr 2018' hidden={!items.Teaching} icon={IconTeaching}>
+		<TimelineItem icon={IconTeaching} date='Sep 2017 - Apr 2018' hidden={!items.Teaching}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link={null} place='Japan Society at The University of Edinburgh' title='Teaching Assistant' />
+				<ExperienceTitle title='Teaching Assistant' place='Japan Society at The University of Edinburgh' link={null} />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='Aug 2017' hidden={!items.Industrial} icon={IconLine}>
+		<TimelineItem icon={IconLine} date='Aug 2017' hidden={!items.Industrial}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link='https://line.me/en/' place='Line Corp.' title='Engineer Internship' />
+				<ExperienceTitle title='Engineer Internship' place='Line Corp.' link='https://line.me/en/' />
 			</svelte:fragment>
 		</TimelineItem>
-		<TimelineItem date='June 2016 - Aug 2016' hidden={!items.Teaching} icon={IconTeaching}>
+		<TimelineItem icon={IconTeaching} date='June 2016 - Aug 2016' hidden={!items.Teaching}>
 			<svelte:fragment slot='title'>
-				<ExperienceTitle link={null} place='International Christian University' title='Culture Staff' />
+				<ExperienceTitle title='Culture Staff' place='International Christian University' link={null} />
 			</svelte:fragment>
 			<div slot='main'>Introduced Japanese culture and Japanese to students learning Japanese</div>
 		</TimelineItem>

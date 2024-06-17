@@ -10,34 +10,14 @@
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
 		{@const href = 'link' in item ? item.link : `/blog/${item?.slug}`}
-		<p
-			class='
-				text-me-text-200
-				opacity-70
-			'>{formatDate(pubDate)}</p>
+		<p class='text-me-text-200 opacity-70'>{formatDate(pubDate)}</p>
 		<a
-			class='
-				mr-5
-				flex
-				border-b-2
-				border-transparent
-				text-me-text-100
-
-				hover:border-me-primary-100
-
-				md:overflow-hidden
-			'
 			{href}
-			target={external ? '_blank' : ''}>
+			target={external ? '_blank' : ''}
+			class='mr-5 flex border-b-2 border-transparent text-me-text-100 hover:border-me-primary-100 md:overflow-hidden'>
 			<p class='md:truncate'>{item.title}</p>
 			{#if external}
-				<IconLinkOut
-					class='
-						my-auto
-						hidden
-
-						md:inline
-					' />
+				<IconLinkOut class='my-auto hidden md:inline' />
 			{/if}
 		</a>
 	{/each}

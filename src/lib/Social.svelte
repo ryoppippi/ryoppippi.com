@@ -23,23 +23,11 @@
 	] as const;
 </script>
 
-<article
-	class='
-		grid
-		grid-cols-3
-		place-items-center
-		gap-3
-
-		sm:grid-cols-7
-	' in:fade|global={{ duration: 3000 }}>
+<article class='grid grid-cols-3 place-items-center gap-3 sm:grid-cols-7' in:fade|global={{ duration: 3000 }}>
 	{#each ICONS as { component, url } (url)}
 		{@const { host } = parseURL(url)}
-		<div
-			class='
-				animation
-				cursor-pointer
-			'>
-			<a aria-label="link to ryoppippi's {host}" href={url} rel='noopener noreferrer' target='_blank'>
+		<div class='animation cursor-pointer'>
+			<a href={url} target='_blank' aria-label="link to ryoppippi's {host}" rel='noopener noreferrer'>
 				<svelte:component this={component} style='font-size: {size}vh' />
 			</a>
 		</div>
