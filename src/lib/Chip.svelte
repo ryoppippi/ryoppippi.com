@@ -12,8 +12,8 @@
 	export let icon;
 </script>
 
-<input type='checkbox' class='hidden' {id} bind:checked />
-<label for={id} class="chip {checked ? 'variant-filled' : 'variant-glass-soft'}">
+<input {id} class='hidden' type='checkbox' bind:checked />
+<label class="chip {checked ? 'variant-filled' : 'variant-glass-soft'}" for={id}>
 	<span class='flex'>
 		{text}
 		{#if checked}

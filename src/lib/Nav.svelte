@@ -20,17 +20,17 @@
 			{#each LINKS as l (l.name)}
 				{@const { link, name } = l}
 				<a
-					href={link}
 					class='block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100'
-					class:border-me-primary-100={$page.url.pathname === link}>
+					class:border-me-primary-100={$page.url.pathname === link}
+					href={link}>
 					{name}
 				</a>
 			{/each}
 		</nav>
 		<a
+			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'
 			href='https://cv.ryoppippi.com'
-			target='_blank'
-			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'>
+			target='_blank'>
 			{CVMessage}
 			<IconDownload style='font-size: 2vh' />
 		</a>

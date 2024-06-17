@@ -27,7 +27,7 @@
 	{#each ICONS as { component, url } (url)}
 		{@const { host } = parseURL(url)}
 		<div class='animation cursor-pointer'>
-			<a href={url} target='_blank' aria-label="link to ryoppippi's {host}" rel='noopener noreferrer'>
+			<a aria-label="link to ryoppippi's {host}" href={url} rel='noopener noreferrer' target='_blank'>
 				<svelte:component this={component} style='font-size: {size}vh' />
 			</a>
 		</div>
