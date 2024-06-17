@@ -3,22 +3,22 @@
 
 	import { formatDate } from '$lib/util.js';
 
-	/* eslint svelte/no-at-html-tags: 0 */
+/* eslint svelte/no-at-html-tags: 0 */
 </script>
 
 <svelte:head>
 	<title>{data.meta.title}</title>
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content={data.meta.title} />
+	<meta property='og:type' content='article' />
+	<meta property='og:title' content={data.meta.title} />
 </svelte:head>
 
 <article>
-	<hgroup class="flex flex-col">
-		<h1 class="justify-start text-5xl text-me-primary-100">{data.meta.title}</h1>
+	<hgroup class='flex flex-col'>
+		<h1 class='justify-start text-5xl text-me-primary-100'>{data.meta.title}</h1>
 		<p>{formatDate(new Date(data.meta.pubDate))}</p>
 	</hgroup>
 
-	<div class="prose">
+	<div class='prose'>
 		{@html data.content}
 	</div>
 </article>

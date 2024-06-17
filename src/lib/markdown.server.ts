@@ -3,18 +3,18 @@ import matter from 'gray-matter';
 import { parse } from 'date-fns';
 import typia from 'typia';
 
-type Item = {
+interface Item {
 	slug: string;
 	title: string;
 	pubDate: string;
 	isPublished: boolean;
-};
+}
 
-type Metadata = {
+interface Metadata {
 	title: string;
 	date: string;
 	isPublished: boolean;
-};
+}
 
 export function parseMarkdown(
 	filepath: string,
@@ -27,12 +27,12 @@ export function parseMarkdown<T extends boolean>(
 	contentRaw: string,
 	options?: {
 		parseContent?: T;
-	}
+	},
 ): (Item & { content: string }) | Item {
 	const filename = filepath.split('/').at(-1);
 
 	/** if not md file, throw error */
-	if (!filename?.endsWith('.md')) {
+	if (filename != null && !filename.endsWith('.md')) {
 		throw new Error('File is not a markdown file');
 	}
 
@@ -46,8 +46,8 @@ export function parseMarkdown<T extends boolean>(
 		slug,
 		title: metadata.title,
 		isPublished: metadata.isPublished,
-		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON()
-	} satisfies Item;
+		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON(),
+	} as const;
 
 	typia.assertGuard<Item>(item);
 

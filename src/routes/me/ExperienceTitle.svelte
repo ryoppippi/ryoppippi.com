@@ -1,19 +1,16 @@
-<script>
-	/** @type {string} */
-	export let title;
+<script lang='ts'>
+	export let title: string;
 
-	/** @type {string} */
-	export let place;
+	export let place: string;
 
-	/** @type {string | undefined} */
-	export let link = undefined;
+	export let link: string | null;
 </script>
 
 <div>
 	{title}
-	<span class="inline">
+	<span class='inline'>
 		{#if link !== undefined}
-			@<a href={link} class="underline hover:no-underline" target="_blank">{place}</a>
+			@<a href={link} class='underline hover:no-underline' target='_blank'>{place}</a>
 		{:else}
 			@{place}
 		{/if}

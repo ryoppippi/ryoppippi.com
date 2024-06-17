@@ -1,6 +1,6 @@
 // @ts-check
 
-import { join } from 'path';
+import { join } from 'node:path';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 import { ryoppippiTheme } from './theme.js';
 
@@ -9,15 +9,15 @@ module.exports = {
 	darkMode: 'class',
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
-		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
 	],
 	plugins: [
 		require('@tailwindcss/typography'),
 		skeleton({
 			themes: {
-				custom: [ryoppippiTheme]
-			}
-		})
+				custom: [ryoppippiTheme],
+			},
+		}),
 		// require('daisyui')
 	],
 	theme: {
@@ -33,11 +33,11 @@ module.exports = {
 					'text-200': '#e0e0e0',
 					'bg-100': '#1E1E1E',
 					'bg-200': '#2d2d2d',
-					'bg-300': '#454545'
-				}
-			}
-		}
-	}
+					'bg-300': '#454545',
+				},
+			},
+		},
+	},
 	// daisyui: {
 	// 	logs: false,
 	// 	themes: [

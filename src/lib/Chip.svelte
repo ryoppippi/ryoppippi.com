@@ -12,12 +12,12 @@
 	export let icon;
 </script>
 
-<input type="checkbox" class="hidden" {id} bind:checked />
+<input type='checkbox' class='hidden' {id} bind:checked />
 <label for={id} class="chip {checked ? 'variant-filled' : 'variant-glass-soft'}">
-	<span class="flex">
+	<span class='flex'>
 		{text}
 		{#if checked}
-			<span class="peer-checked/{id}:hidden inline">
+			<span class='peer-checked/{id}:hidden inline'>
 				<svelte:component this={icon} />
 			</span>
 		{/if}

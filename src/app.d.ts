@@ -16,6 +16,6 @@ declare global {
 	}
 
 	interface Document {
-		startViewTransition(updateCallback: () => Promise<void>): ViewTransition;
+		startViewTransition: (updateCallback: () => Promise<void>) => ViewTransition;
 	}
 }

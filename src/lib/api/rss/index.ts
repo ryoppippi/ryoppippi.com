@@ -6,13 +6,13 @@ import rss from './rss.json';
 
 const parser = new Parser();
 
-type Item = {
+interface Item {
 	title: string;
 	link: string;
 	pubDate: string;
-};
+}
 
-export const getPosts = async () => {
+export async function getPosts() {
 	const feeds = (
 		await Promise.all(
 			rss.map(async (url) => {
@@ -23,14 +23,14 @@ export const getPosts = async () => {
 						typia.assertGuard<Item>(item);
 						return item;
 					})
-					.map((item) => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
-			})
+					.map(item => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
+			}),
 		)
 	).flat();
 
 	const sortedFeeds = sortOn(feeds, ['-pubDate']);
 
 	return sortedFeeds;
-};
+}
 
 export const posts = await getPosts();
