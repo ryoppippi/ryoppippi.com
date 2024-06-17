@@ -30,26 +30,6 @@
 </script>
 
 <MetaTags
-	{title}
-	openGraph={{
-		url: 'https://ryoppippi.com',
-		type: 'website',
-		description: 'Portfolio of @ryoppippi',
-		images: [
-			{
-				url: ryoppippi,
-				alt: 'ryoppippi\'s icon',
-			},
-		],
-	}}
-	twitter={{
-		cardType: 'summary',
-		site: '@ryoppippi',
-		title,
-		description: 'Portfolio of @ryoppippi',
-		image: ryoppippi,
-		imageAlt: 'ryoppippi\'s icon',
-	}}
 	additionalLinkTags={[
 		{
 			rel: 'apple-touch-icon',
@@ -81,6 +61,26 @@
 		maxVideoPreview: -1,
 		notranslate: true,
 		noimageindex: true,
+	}}
+	openGraph={{
+		url: 'https://ryoppippi.com',
+		type: 'website',
+		description: 'Portfolio of @ryoppippi',
+		images: [
+			{
+				url: ryoppippi,
+				alt: 'ryoppippi\'s icon',
+			},
+		],
+	}}
+	{title}
+	twitter={{
+		cardType: 'summary',
+		site: '@ryoppippi',
+		title,
+		description: 'Portfolio of @ryoppippi',
+		image: ryoppippi,
+		imageAlt: 'ryoppippi\'s icon',
 	}} />
 
 <main class='dark my-3' data-sveltekit-reload={$updated ? '' : 'off'}>
