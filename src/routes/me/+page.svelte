@@ -5,14 +5,7 @@
 	import Profile from '$lib/Profile.svelte';
 </script>
 
-<div
-	class='
-		container
-		mx-auto
-		mt-8
-		grid
-		place-content-center
-	'>
+<div class='container mx-auto mt-8 grid place-content-center'>
 	<Profile />
 	<Education />
 	<Experience />

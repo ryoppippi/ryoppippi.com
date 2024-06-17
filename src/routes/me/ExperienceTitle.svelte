@@ -10,12 +10,7 @@
 	{title}
 	<span class='inline'>
 		{#if link !== undefined}
-			@<a
-				class='
-					underline
-
-					hover:no-underline
-				' href={link} target='_blank'>{place}</a>
+			@<a href={link} class='underline hover:no-underline' target='_blank'>{place}</a>
 		{:else}
 			@{place}
 		{/if}
