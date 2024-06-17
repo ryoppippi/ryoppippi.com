@@ -7,10 +7,19 @@
 
 <div>
 	<enhanced:img
-		class='object-fit mx-auto aspect-square w-1/2 rounded-full md:h-64 md:w-64'
-		src={img}
+		style:--tag={name}
+		class='
+			object-fit
+			mx-auto
+			aspect-square
+			w-1/2
+			rounded-full
+
+			md:h-64
+			md:w-64
+		'
 		alt='profile'
-		style:--tag={name} />
+		src={img} />
 </div>
 
 <style>
