@@ -40,8 +40,8 @@
 	}; */
 
 	/** @satisfies {Record<string, { icon: ConstructorOfATypedSvelteComponent, title: string, value: number }[]>} */
-	const contents = /** @type {const}*/ {
-		Languages: [
+	const contents = /** @type {const} */ {
+		'Languages': [
 			{ icon: IconTypeScript, title: 'TypeScript', value: 90 },
 			{ icon: IconCSS, title: 'CSS', value: 65 },
 			{ icon: IconPython, title: 'Python', value: 90 },
@@ -52,57 +52,57 @@
 			{ icon: IconC, title: 'C', value: 70 },
 			{ icon: IconCpp, title: 'C++', value: 70 },
 			{ icon: IconSQL, title: 'SQL', value: 70 },
-			{ icon: IconJava, title: 'Java', value: 66 }
+			{ icon: IconJava, title: 'Java', value: 66 },
 		],
-		Frontend: [
+		'Frontend': [
 			{ icon: IconSvelte, title: 'Svelte / SvelteKit', value: 96 },
 			{ icon: IconReact, title: 'React / Next.js', value: 75 },
-			{ icon: IconAngular, title: 'Angular', value: 75 }
+			{ icon: IconAngular, title: 'Angular', value: 75 },
 		],
-		Backend: [
+		'Backend': [
 			{ icon: IconFlask, title: 'Flask', value: 95 },
 			{ icon: IconFastAPI, title: 'FastAPI', value: 85 },
 			{ icon: IconMySQL, title: 'MySQL', value: 80 },
 			{ icon: IconPostgreSQL, title: 'PostgreSQL', value: 80 },
-			{ icon: IconRedis, title: 'Redis', value: 75 }
+			{ icon: IconRedis, title: 'Redis', value: 75 },
 		],
-		Mobile: [
+		'Mobile': [
 			/**/
-			{ icon: IconSwift, title: 'SwiftUI', value: 70 }
+			{ icon: IconSwift, title: 'SwiftUI', value: 70 },
 		],
 		'Machine Learning': [
 			{ icon: IconNumPy, title: 'NumPy', value: 99 },
 			{ icon: IconPyTorch, title: 'PyTorch', value: 90 },
 			{ icon: IconTensorFlow, title: 'TensorFlow', value: 80 },
-			{ icon: IconOpenAI, title: 'OpenAI', value: 75 }
+			{ icon: IconOpenAI, title: 'OpenAI', value: 75 },
 		],
-		Cloud: [
+		'Cloud': [
 			{ icon: IconCloudflare, title: 'Cloudflare', value: 90 },
 			{ icon: IconMicrosoftAzure, title: 'Microsoft Azure', value: 80 },
-			{ icon: IconAmazonAWS, title: 'Amazon AWS', value: 75 }
-		]
+			{ icon: IconAmazonAWS, title: 'Amazon AWS', value: 75 },
+		],
 	};
 
-	// $: ({ Expert: expert, Middle: middle, 'Good w/ ChatGPT': good } = levels);
+// $: ({ Expert: expert, Middle: middle, 'Good w/ ChatGPT': good } = levels);
 </script>
 
-<article class="mx-6 md:mx-0">
-	<div class="flex"><h1 class="mx-auto my-5 text-3xl md:ml-0" id="education">Computing Skills</h1></div>
+<article class='mx-6 md:mx-0'>
+	<div class='flex'><h1 class='mx-auto my-5 text-3xl md:ml-0' id='education'>Computing Skills</h1></div>
 
 	<!-- <ChipList bind:items={levels} /> -->
 
 	{#each Object.entries(contents) as [category, items]}
-		<h2 class="h2">{category}</h2>
-		<dl class="list-dl mb-2">
+		<h2 class='h2'>{category}</h2>
+		<dl class='list-dl mb-2'>
 			{#each items as { icon, title, value }}
 				<div>
-					<span class="flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900">
-						<svelte:component this={icon} style="font-size: {1.7}vh" />
+					<span class='flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900'>
+						<svelte:component this={icon} style='font-size: {1.7}vh' />
 					</span>
-					<span class="flex-auto">
-						<dt class="mb-1">{title}</dt>
-						<dd class="flex">
-							<ProgressBar class="max-w-[90%]" label="Progress Bar" {value} max={100} />
+					<span class='flex-auto'>
+						<dt class='mb-1'>{title}</dt>
+						<dd class='flex'>
+							<ProgressBar class='max-w-[90%]' label='Progress Bar' {value} max={100} />
 							<span>{value}%</span>
 						</dd>
 					</span>

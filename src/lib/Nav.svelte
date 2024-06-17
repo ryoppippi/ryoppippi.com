@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
 	import IconDownload from '~icons/line-md/download-outline';
 	import { page } from '$app/stores';
 
@@ -6,32 +6,33 @@
 	const LINKS = [
 		{ link: '/me', name: 'me' },
 		// { link: '/works', name: 'works' },
-		{ link: '/blog', name: 'blog' }
+		{ link: '/blog', name: 'blog' },
 	] as const satisfies Readonly<{ link: string; name: string }[]>;
+	const CVMessage = `My CV `;
 </script>
 
-<header class="py-6">
-	<div class="max-w-8xl container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
-		<a class="title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0" href="/">
+<header class='py-6'>
+	<div class='max-w-8xl container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row'>
+		<a class='title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0' href='/'>
 			{TITLE}
 		</a>
-		<nav class="flex flex-wrap items-center justify-center gap-3 text-base md:mx-auto">
+		<nav class='flex flex-wrap items-center justify-center gap-3 text-base md:mx-auto'>
 			{#each LINKS as l (l.name)}
 				{@const { link, name } = l}
 				<a
 					href={link}
-					class="block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100"
+					class='block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100'
 					class:border-me-primary-100={$page.url.pathname === link}>
 					{name}
 				</a>
 			{/each}
 		</nav>
 		<a
-			href="https://cv.ryoppippi.com"
-			target="_blank"
-			class="bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0">
-			{'My CV '}
-			<IconDownload style="font-size: 2vh" />
+			href='https://cv.ryoppippi.com'
+			target='_blank'
+			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'>
+			{CVMessage}
+			<IconDownload style='font-size: 2vh' />
 		</a>
 	</div>
 </header>

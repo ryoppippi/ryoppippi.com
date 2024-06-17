@@ -6,5 +6,5 @@ import Icons from 'unplugin-icons/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 
 export default defineConfig({
-	plugins: [UnpluginTypia(), enhancedImages(), Macros(), sveltekit(), Icons({ compiler: 'svelte', autoInstall: true })]
+	plugins: [UnpluginTypia(), enhancedImages(), Macros(), sveltekit(), Icons({ compiler: 'svelte', autoInstall: true })],
 });

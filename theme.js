@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 export const ryoppippiTheme = {
 	name: 'ryoppippi',
@@ -86,6 +86,6 @@ export const ryoppippiTheme = {
 		'--color-surface-600': '27 27 27',
 		'--color-surface-700': '23 23 23',
 		'--color-surface-800': '18 18 18',
-		'--color-surface-900': '15 15 15'
-	}
+		'--color-surface-900': '15 15 15',
+	},
 };

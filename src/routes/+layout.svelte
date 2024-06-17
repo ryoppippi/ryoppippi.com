@@ -1,11 +1,8 @@
 <script>
 	import '../app.postcss';
 
-	import { page } from '$app/stores';
-
 	import { MetaTags } from 'svelte-meta-tags';
-
-	import { updated } from '$app/stores';
+	import { page, updated } from '$app/stores';
 
 	import { onNavigate } from '$app/navigation';
 
@@ -18,7 +15,8 @@
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
 	onNavigate((navigation) => {
-		if (!document?.startViewTransition) return;
+		if (!document?.startViewTransition)
+			return;
 
 		return new Promise((resolve) => {
 			document.startViewTransition(async () => {
@@ -40,9 +38,9 @@
 		images: [
 			{
 				url: ryoppippi,
-				alt: "ryoppippi's icon"
-			}
-		]
+				alt: 'ryoppippi\'s icon',
+			},
+		],
 	}}
 	twitter={{
 		cardType: 'summary',
@@ -50,30 +48,30 @@
 		title,
 		description: 'Portfolio of @ryoppippi',
 		image: ryoppippi,
-		imageAlt: "ryoppippi's icon"
+		imageAlt: 'ryoppippi\'s icon',
 	}}
 	additionalLinkTags={[
 		{
 			rel: 'apple-touch-icon',
 			href: appleTouchIcon,
-			sizes: '180x180'
+			sizes: '180x180',
 		},
 		{
 			rel: 'icon',
 			type: 'image/png',
 			href: favicon32,
-			sizes: '32x32'
+			sizes: '32x32',
 		},
 		{
 			rel: 'icon',
 			type: 'image/png',
 			href: favicon16,
-			sizes: '16x16'
+			sizes: '16x16',
 		},
 		{
 			rel: 'manifest',
-			href: siteWebmanifest
-		}
+			href: siteWebmanifest,
+		},
 	]}
 	additionalRobotsProps={{
 		noarchive: true,
@@ -82,10 +80,10 @@
 		maxImagePreview: 'none',
 		maxVideoPreview: -1,
 		notranslate: true,
-		noimageindex: true
+		noimageindex: true,
 	}} />
 
-<main class="dark my-3" data-sveltekit-reload={$updated ? '' : 'off'}>
+<main class='dark my-3' data-sveltekit-reload={$updated ? '' : 'off'}>
 	<Nav />
 	{#key $page.url}
 		<article>

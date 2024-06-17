@@ -1,6 +1,7 @@
-import { posts } from '$lib/api' with { type: 'macro' };
-export const load = () => {
+import { posts as macroPosts } from '$lib/api' with { type: 'macro' };
+
+export function load() {
 	return {
-		posts: posts
+		posts: macroPosts,
 	};
-};
+}
