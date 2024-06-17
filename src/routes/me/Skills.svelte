@@ -86,23 +86,50 @@
 // $: ({ Expert: expert, Middle: middle, 'Good w/ ChatGPT': good } = levels);
 </script>
 
-<article class='mx-6 md:mx-0'>
-	<div class='flex'><h1 class='mx-auto my-5 text-3xl md:ml-0' id='education'>Computing Skills</h1></div>
+<article
+	class='
+		mx-6
+
+		md:mx-0
+	'>
+	<div class='flex'><h1
+		id='education' class='
+			mx-auto
+			my-5
+			text-3xl
+
+			md:ml-0
+		'>Computing Skills</h1></div>
 
 	<!-- <ChipList bind:items={levels} /> -->
 
-	{#each Object.entries(contents) as [category, items]}
+	{#each Object.entries(contents) as [category, items] (category)}
 		<h2 class='h2'>{category}</h2>
-		<dl class='list-dl mb-2'>
-			{#each items as { icon, title, value }}
+		<dl
+			class='
+				list-dl
+				mb-2
+			'>
+			{#each items as { icon, title, value } (title)}
 				<div>
-					<span class='flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900'>
+					<span
+						class='
+							flex
+							h-10
+							w-10
+							items-center
+							justify-center
+							rounded-full
+							bg-me-primary-200
+							ring-8
+							ring-gray-900
+						'>
 						<svelte:component this={icon} style='font-size: {1.7}vh' />
 					</span>
 					<span class='flex-auto'>
 						<dt class='mb-1'>{title}</dt>
 						<dd class='flex'>
-							<ProgressBar class='max-w-[90%]' label='Progress Bar' {value} max={100} />
+							<ProgressBar class='max-w-[90%]' label='Progress Bar' max={100} {value} />
 							<span>{value}%</span>
 						</dd>
 					</span>
