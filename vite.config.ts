@@ -8,7 +8,7 @@ import { isCI } from 'std-env';
 
 export default defineConfig({
 	plugins: [
-		UnpluginTypia({ cache: !isCI }),
+		UnpluginTypia({ cache: !isCI, log: 'verbose' }),
 		enhancedImages(),
 		Macros(),
 		sveltekit(),
