@@ -33,7 +33,7 @@
 		"@iconify-json/ph": "^1.1.13",
 		"@iconify-json/quill": "^1.1.10",
 		"@iconify-json/ri": "^1.1.21",
-		"@iconify-json/simple-icons": "^1.1.105",
+		"@iconify-json/simple-icons": "^1.1.106",
 		"@iconify/iconify": "^3.1.1",
 		"@iconify/svelte": "^4.0.2",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
