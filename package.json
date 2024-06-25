@@ -14,8 +14,8 @@
 		"sync": "svelte-kit sync",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint .",
-		"format": "eslint --fix .",
+		"lint": "eslint --cache .",
+		"format": "npm run lint -- --fix",
 		"prepare": "ts-patch install && git config --local core.hooksPath .githooks || echo 'Can not set git hooks'"
 	},
 	"volta": {
