@@ -58,7 +58,7 @@
 		"date-fns": "^3.6.0",
 		"eslint": "^9.5.0",
 		"eslint-plugin-format": "^0.1.2",
-		"eslint-plugin-svelte": "^2.40.0",
+		"eslint-plugin-svelte": "^2.41.0",
 		"gray-matter": "^4.0.3",
 		"markdown-it": "^14.1.0",
 		"postcss": "^8.4.38",
