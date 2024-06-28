@@ -26,7 +26,7 @@
 		});
 	});
 
-	const title = 'ryoppippi.com';
+	const title = `ryoppippi.com`;
 </script>
 
 <MetaTags
