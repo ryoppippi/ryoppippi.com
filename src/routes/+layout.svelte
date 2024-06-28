@@ -8,10 +8,7 @@
 
 	import Nav from '$lib/Nav.svelte';
 
-	import appleTouchIcon from '$lib/assets/favicons/apple-touch-icon.png';
-	import favicon32 from '$lib/assets/favicons/favicon-32x32.png';
-	import favicon16 from '$lib/assets/favicons/favicon-16x16.png';
-	import siteWebmanifest from '$lib/assets/favicons/site.webmanifest';
+	import faviconLinks from '$lib/assets/favicons.html?raw';
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
 	onNavigate((navigation) => {
@@ -30,30 +27,12 @@
 	const title = `ryoppippi.com`;
 </script>
 
+<svelte:head>
+	<!-- eslint-disable svelte/no-at-html-tags -->
+	{@html faviconLinks}
+</svelte:head>
+
 <MetaTags
-	additionalLinkTags={[
-		{
-			rel: 'apple-touch-icon',
-			href: appleTouchIcon,
-			sizes: '180x180',
-		},
-		{
-			rel: 'icon',
-			type: 'image/png',
-			href: favicon32,
-			sizes: '32x32',
-		},
-		{
-			rel: 'icon',
-			type: 'image/png',
-			href: favicon16,
-			sizes: '16x16',
-		},
-		{
-			rel: 'manifest',
-			href: siteWebmanifest,
-		},
-	]}
 	additionalRobotsProps={{
 		noarchive: true,
 		nosnippet: true,
