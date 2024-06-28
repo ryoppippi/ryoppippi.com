@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path, { join } from 'node:path';
-import favicons from 'favicons';
+import { favicons } from 'favicons';
 
 const staticDir = join(import.meta.dirname, '../static');
 const assetDir = join(staticDir, '../src/lib/assets/');
@@ -17,7 +17,7 @@ async function main() {
 	}
 	fs.mkdir(dest, { recursive: true });
 
-	// Configuration (see above in the README file).
+	/** @satisfies {import('favicons').FaviconOptions} */
 	const configuration = {
 		path: `/favicons`,
 	};
