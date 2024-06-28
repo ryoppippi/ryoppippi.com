@@ -3,18 +3,18 @@ import matter from 'gray-matter';
 import { parse } from 'date-fns';
 import typia from 'typia';
 
-interface Item {
+type Item = {
 	slug: string;
 	title: string;
 	pubDate: string;
 	isPublished: boolean;
-}
+};
 
-interface Metadata {
+type Metadata = {
 	title: string;
 	date: string;
 	isPublished: boolean;
-}
+};
 
 export function parseMarkdown(
 	filepath: string,

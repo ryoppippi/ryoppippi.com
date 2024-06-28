@@ -6,11 +6,11 @@ import rss from './rss.json';
 
 const parser = new Parser();
 
-interface Item {
+type Item = {
 	title: string;
 	link: string;
 	pubDate: string;
-}
+};
 
 export async function getPosts() {
 	const feeds = (

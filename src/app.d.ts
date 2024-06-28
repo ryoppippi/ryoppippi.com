@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'unplugin-icons/types/svelte';
 
 declare namespace App {
@@ -16,6 +17,10 @@ declare global {
 	}
 
 	interface Document {
-		startViewTransition: (updateCallback: () => Promise<void>) => ViewTransition;
+		startViewTransition: (
+			updateCallback: () => Promise<void>,
+		) => ViewTransition;
 	}
 }
+
+/* eslint-enable */

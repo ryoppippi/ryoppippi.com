@@ -15,8 +15,9 @@
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
 	onNavigate((navigation) => {
-		if (!document?.startViewTransition)
+		if (!document?.startViewTransition) {
 			return;
+		}
 
 		return new Promise((resolve) => {
 			document.startViewTransition(async () => {
