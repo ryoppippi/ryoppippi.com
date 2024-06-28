@@ -2,8 +2,9 @@ import process from 'node:process';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { importAssets } from 'svelte-preprocess-import-assets';
+import { isDevelopment } from 'std-env';
 
-const dev = process.env.NODE_ENV === 'development';
+const dev = isDevelopment;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,6 +21,9 @@ const config = {
 		}),
 		alias: {
 			$posts: './src/posts',
+		},
+		paths: {
+			assets: dev ? '' : process.env.CF_PAGES_URL,
 		},
 	},
 	vitePlugin: {
