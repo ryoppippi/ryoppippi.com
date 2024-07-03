@@ -1,9 +1,12 @@
-/* eslint-disable no-console */
+/* eslint-disable eslint-comments/no-unlimited-disable */
+/* eslint-disable */
 
-import fs from 'node:fs/promises';
-import { existsSync } from 'node:fs';
-import path, { join } from 'node:path';
-import { favicons } from 'favicons';
+import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
+import path, { join } from "node:path";
+import { createHash } from 'node:crypto';
+import { favicons } from "favicons";
+import { isProduction } from 'std-env';
 
 const staticDir = join(import.meta.dirname, '../static');
 const assetDir = join(staticDir, '../src/lib/assets/');
@@ -15,12 +18,21 @@ async function main() {
 	if (existsSync(dest)) {
 		fs.rm(dest, { recursive: true });
 	}
-	fs.mkdir(dest, { recursive: true });
 
 	/** @satisfies {import('favicons').FaviconOptions} */
 	const configuration = {
 		path: `/favicons`,
+		theme_color: '#001330',
 	};
+
+	const cacheKey = `<!-- ${createHash('md5').update(JSON.stringify(configuration) + await fs.readFile(src, 'utf-8')).digest('hex')} -->`;
+	if (existsSync(htmlDest) && !isProduction) {
+		const oldHTML = await fs.readFile(htmlDest, 'utf-8');
+		if (oldHTML.endsWith(cacheKey)) {
+			console.log('Cache Hit');
+			return;
+		}
+	}
 
 	const response = await favicons(src, configuration);
 	await fs.mkdir(dest, { recursive: true });
@@ -38,7 +50,7 @@ async function main() {
 		),
 	);
 
-	await fs.writeFile(htmlDest, response.html.join('\n'));
+	await fs.writeFile(htmlDest, response.html.join('\n') + cacheKey);
 }
 
 /** @type {import('vite').Plugin} */
