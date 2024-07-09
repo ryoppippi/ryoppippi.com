@@ -5,6 +5,7 @@ import Macros from '@unplugin/macros/vite';
 import Icons from 'unplugin-icons/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 import { isCI } from 'std-env';
+import { kitRoutes } from 'vite-plugin-kit-routes';
 import { faviconPlugin } from './plugins/favicons';
 
 export default defineConfig({
@@ -15,5 +16,6 @@ export default defineConfig({
 		Macros(),
 		sveltekit(),
 		Icons({ compiler: 'svelte', autoInstall: true }),
+		kitRoutes(),
 	],
 });
