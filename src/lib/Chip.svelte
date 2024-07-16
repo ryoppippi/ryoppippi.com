@@ -1,15 +1,15 @@
-<script>
-	/** @type{string} */
-	export let id;
-
-	/** @type{string} */
-	export let text;
-
-	/** @type{boolean} */
-	export let checked = false;
-
-	/** @type{ConstructorOfATypedSvelteComponent} */
-	export let icon;
+<script lang='ts'>
+	let {
+		id,
+		text,
+		checked = $bindable(false),
+		icon,
+	}: {
+		id: string;
+		text: string;
+		checked: boolean;
+		icon: ConstructorOfATypedSvelteComponent;
+	} = $props();
 </script>
 
 <input {id} class='hidden' type='checkbox' bind:checked />

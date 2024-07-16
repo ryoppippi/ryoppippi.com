@@ -1,8 +1,8 @@
 <script>
-	export let data;
-
 	import IconLinkOut from '~icons/quill/link-out';
 	import { formatDate } from '$lib/util.js';
+
+	const { data } = $props();
 </script>
 
 <div class='mx-6'>

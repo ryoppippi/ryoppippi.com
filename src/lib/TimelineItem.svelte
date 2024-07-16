@@ -1,15 +1,15 @@
-<script>
-	/** @type {ConstructorOfATypedSvelteComponent} */
-	export let icon;
-
-	/** @type {string} */
-	export let title = '';
-
-	/** @type {string} */
-	export let date;
-
-	/** @type {boolean} */
-	export let hidden = false;
+ <script lang='ts'>
+	const {
+		icon,
+		title = '',
+		date,
+		hidden,
+	}: {
+		icon: ConstructorOfATypedSvelteComponent;
+		title: string;
+		date: string;
+		hidden: boolean;
+	} = $props();
 </script>
 
 <li class='mb-10 ml-6 transition-opacity' class:opacity-20={hidden}>

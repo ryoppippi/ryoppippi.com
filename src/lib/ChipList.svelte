@@ -1,9 +1,8 @@
-<script>
-	/** @type{Record<string, boolean>} */
-	export let items = {};
-
+<script lang='ts'>
 	import IconCheck from '~icons/mdi/check';
 	import Chip from '$lib/Chip.svelte';
+
+	let { items = $bindable({}) }: { items: Record<string, boolean> } = $props();
 </script>
 
 <div class='justify-begin mb-5 flex select-none space-x-2'>
