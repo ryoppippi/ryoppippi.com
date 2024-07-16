@@ -1,6 +1,4 @@
 <script>
-	import '../app.postcss';
-
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page, updated } from '$app/stores';
 
