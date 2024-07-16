@@ -8,7 +8,6 @@
 
 	import Nav from '$lib/Nav.svelte';
 
-	import faviconLinks from '$lib/assets/favicons.html?raw';
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
 	onNavigate((navigation) => {
@@ -26,11 +25,6 @@
 
 	const title = `ryoppippi.com`;
 </script>
-
-<svelte:head>
-	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-	{@html faviconLinks}
-</svelte:head>
 
 <MetaTags
 	additionalRobotsProps={{
