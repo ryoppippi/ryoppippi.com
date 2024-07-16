@@ -1,15 +1,11 @@
 <script lang='ts'>
-	export let title: string;
-
-	export let place: string;
-
-	export let link: string | null;
+	const { title, place, link }: { title: string; place: string; link?: string } = $props();
 </script>
 
 <div>
 	{title}
 	<span class='inline'>
-		{#if link !== undefined}
+		{#if link != null}
 			@<a class='underline hover:no-underline' href={link} target='_blank'>{place}</a>
 		{:else}
 			@{place}

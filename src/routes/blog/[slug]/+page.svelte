@@ -1,8 +1,7 @@
 <script>
-	export let data;
-
 	import { formatDate } from '$lib/util.js';
 
+	const { data } = $props();
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 

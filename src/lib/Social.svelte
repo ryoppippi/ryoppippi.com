@@ -1,6 +1,4 @@
 <script lang='ts'>
-	export let size = 4.5;
-
 	import { fade } from 'svelte/transition';
 	import { parseURL } from 'ufo';
 
@@ -11,6 +9,8 @@
 	import IconReddit from '~icons/line-md/reddit-loop';
 	import IconYoutube from '~icons/ri/youtube-line';
 	import IconBluesky from '~icons/simple-icons/bluesky';
+
+	const { size = 4.5 } = $props();
 
 	const ICONS = [
 		{ component: IconGithub, url: 'https://github.com/ryoppippi' },
