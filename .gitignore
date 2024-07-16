@@ -10,5 +10,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .eslintcache
 /static/favicons/*
+/static/_redirects
 /src/lib/assets/favicons.html
 /.vite-inspect
