@@ -10,6 +10,8 @@
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
+	const { children } = $props();
+
 	onNavigate((navigation) => {
 		if (!document?.startViewTransition) {
 			return;
@@ -61,7 +63,7 @@
 	<Nav />
 	{#key $page.url}
 		<article>
-			<slot />
+			{@render children()}
 		</article>
 	{/key}
 </main>
