@@ -1,24 +1,13 @@
 // @ts-check
 
-import { join } from 'node:path';
-import { skeleton } from '@skeletonlabs/tw-plugin';
-import { ryoppippiTheme } from './theme.js';
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	darkMode: 'class',
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
-		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
 	],
 	plugins: [
 		require('@tailwindcss/typography'),
-		skeleton({
-			themes: {
-				custom: [ryoppippiTheme],
-			},
-		}),
-		// require('daisyui')
 	],
 	theme: {
 		extend: {

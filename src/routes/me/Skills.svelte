@@ -1,5 +1,5 @@
 <script>
-	import { ProgressBar } from '@skeletonlabs/skeleton';
+	import ProgressBar from './ProgressBar.svelte';
 
 	import IconSvelte from '~icons/simple-icons/svelte';
 	import IconReact from '~icons/simple-icons/react';
