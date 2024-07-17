@@ -2,6 +2,7 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:zenn-cli": "npm:zenn-cli@0.1.154",
       "npm:zenn-cli@latest": "npm:zenn-cli@0.1.154"
     },
     "npm": {
