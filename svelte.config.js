@@ -1,3 +1,4 @@
+import path from 'node:path';
 import process from 'node:process';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
@@ -29,6 +30,11 @@ const config = {
 		adapter: adapter({
 			precompress: true,
 		}),
+		typescript: {
+			config(config) {
+				config.include.push(path.join(import.meta.dirname, 'uno.config.ts'));
+			},
+		},
 		alias: {
 			$posts: './src/posts',
 		},
