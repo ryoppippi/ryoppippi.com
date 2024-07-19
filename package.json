@@ -40,7 +40,7 @@
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
-		"@skeletonlabs/skeleton": "^2.10.1",
+		"@skeletonlabs/skeleton": "^2.10.2",
 		"@skeletonlabs/tw-plugin": "^0.4.0",
 		"@sveltejs/adapter-auto": "^3.2.2",
 		"@sveltejs/adapter-static": "^3.0.2",
