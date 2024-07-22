@@ -29,7 +29,7 @@
 		</nav>
 		<a
 			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'
-			href='https://cv.ryoppippi.com'
+			href='/cv'
 			target='_blank'>
 			{CVMessage}
 			<IconDownload style='font-size: 2vh' />
