@@ -30,6 +30,13 @@ export default defineConfig({
 			mode: 'generate',
 			entries: [
 				{ from: '/cv', to: 'https://cv.ryoppippi.com' },
+				{ from: '/github', to: 'https://github.com/ryoppippi' },
+				{ from: '/zenn', to: 'https://zenn.dev/ryoppippi' },
+				{ from: '/linkedin', to: 'https://www.linkedin.com/in/ryoppippi/' },
+				{ from: '/twitter', to: 'https://twitter.com/ryoppippi' },
+				{ from: '/bsky', to: 'https://bsky.app/profile/ryoppippi.com' },
+				{ from: '/reddit', to: 'https://www.reddit.com/user/ryoppippi' },
+				{ from: '/youtube', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
 			],
 		}),
 		UnpluginTypia({ cache: !isCI, log: 'verbose' }),

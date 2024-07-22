@@ -13,13 +13,13 @@
 	const { size = 4.5 } = $props();
 
 	const ICONS = [
-		{ component: IconGithub, url: 'https://github.com/ryoppippi' },
-		{ component: IconZenn, url: 'https://zenn.dev/ryoppippi' },
-		{ component: IconLinkedin, url: 'https://www.linkedin.com/in/ryoppippi/' },
-		{ component: IconTwitter, url: 'https://twitter.com/ryoppippi' },
-		{ component: IconBluesky, url: 'https://bsky.app/profile/ryoppippi.com' },
-		{ component: IconReddit, url: 'https://www.reddit.com/user/ryoppippi' },
-		{ component: IconYoutube, url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
+		{ component: IconGithub, url: '/github' },
+		{ component: IconZenn, url: '/zenn' },
+		{ component: IconLinkedin, url: '/linkedin' },
+		{ component: IconTwitter, url: '/twitter' },
+		{ component: IconBluesky, url: '/bsky' },
+		{ component: IconReddit, url: '/reddit' },
+		{ component: IconYoutube, url: '/yolutube' },
 	] as const;
 </script>
 
