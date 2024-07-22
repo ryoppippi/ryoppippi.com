@@ -29,7 +29,7 @@ export default defineConfig({
 		cloudflareRedirect({
 			mode: 'generate',
 			entries: [
-				{ from: '/cv', to: 'https://cv.ryoppippi.com', status: 301 },
+				{ from: '/cv', to: 'https://cv.ryoppippi.com' },
 			],
 		}),
 		UnpluginTypia({ cache: !isCI, log: 'verbose' }),
