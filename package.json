@@ -78,7 +78,7 @@
 		"ts-patch": "^3.2.1",
 		"tslib": "^2.6.3",
 		"typescript": "~5.5.4",
-		"typescript-svelte-plugin": "^0.3.39",
+		"typescript-svelte-plugin": "^0.3.40",
 		"typia": "^6.6.1",
 		"ufo": "^1.5.4",
 		"unplugin-icons": "^0.19.1",
