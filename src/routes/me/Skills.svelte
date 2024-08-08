@@ -1,37 +1,6 @@
 <script>
 	import ProgressBar from './ProgressBar.svelte';
 
-	import IconSvelte from '~icons/simple-icons/svelte';
-	import IconReact from '~icons/simple-icons/react';
-	import IconAngular from '~icons/simple-icons/angular';
-
-	import IconFlask from '~icons/simple-icons/flask';
-	import IconFastAPI from '~icons/simple-icons/fastapi';
-	import IconMySQL from '~icons/simple-icons/mysql';
-	import IconPostgreSQL from '~icons/simple-icons/postgresql';
-	import IconRedis from '~icons/simple-icons/redis';
-
-	import IconTypeScript from '~icons/simple-icons/typescript';
-	import IconCSS from '~icons/akar-icons/css-fill';
-	import IconPython from '~icons/simple-icons/python';
-	import IconZig from '~icons/simple-icons/zig';
-	import IconOctave from '~icons/simple-icons/octave';
-	import IconJulia from '~icons/simple-icons/julia';
-	import IconC from '~icons/simple-icons/c';
-	import IconSwift from '~icons/grommet-icons/swift';
-	import IconCpp from '~icons/mdi/language-cpp';
-	import IconSQL from '~icons/ph/file-sql';
-	import IconJava from '~icons/devicon-plain/java';
-
-	import IconNumPy from '~icons/simple-icons/numpy';
-	import IconPyTorch from '~icons/simple-icons/pytorch';
-	import IconTensorFlow from '~icons/simple-icons/tensorflow';
-	import IconOpenAI from '~icons/simple-icons/openai';
-
-	import IconCloudflare from '~icons/simple-icons/cloudflare';
-	import IconMicrosoftAzure from '~icons/simple-icons/microsoftazure';
-	import IconAmazonAWS from '~icons/simple-icons/amazonaws';
-
 	/** @type {Record<string, boolean>} */
 	/* let levels = {
 		Expert: true,
@@ -39,47 +8,47 @@
 		'Good w/ ChatGPT': true
 	}; */
 
-	/** @satisfies {Record<string, { icon: ConstructorOfATypedSvelteComponent, title: string, value: number }[]>} */
+	/** @satisfies {Record<string, { icon: string, title: string, value: number }[]>} */
 	const contents = /** @type {const} */ {
 		'Languages': [
-			{ icon: IconTypeScript, title: 'TypeScript', value: 90 },
-			{ icon: IconCSS, title: 'CSS', value: 65 },
-			{ icon: IconPython, title: 'Python', value: 90 },
-			{ icon: IconZig, title: 'Zig', value: 75 },
-			{ icon: IconOctave, title: 'Octave', value: 75 },
-			{ icon: IconJulia, title: 'Julia', value: 75 },
-			{ icon: IconSwift, title: 'Swift', value: 70 },
-			{ icon: IconC, title: 'C', value: 70 },
-			{ icon: IconCpp, title: 'C++', value: 70 },
-			{ icon: IconSQL, title: 'SQL', value: 70 },
-			{ icon: IconJava, title: 'Java', value: 66 },
+			{ icon: 'i-simple-icons:typescript', title: 'TypeScript', value: 90 },
+			{ icon: 'i-akar-icons:css-fill', title: 'CSS', value: 65 },
+			{ icon: 'i-simple-icons:python', title: 'Python', value: 90 },
+			{ icon: 'i-simple-icons:zig', title: 'Zig', value: 75 },
+			{ icon: 'i-simple-icons:octave', title: 'Octave', value: 75 },
+			{ icon: 'i-simple-icons:julia', title: 'Julia', value: 75 },
+			{ icon: 'i-grommet-icons:swift', title: 'Swift', value: 70 },
+			{ icon: 'i-simple-icons:c', title: 'C', value: 70 },
+			{ icon: 'i-mdi:language-cpp', title: 'C++', value: 70 },
+			{ icon: 'i-ph:file-sql', title: 'SQL', value: 70 },
+			{ icon: 'i-devicon-plain:java', title: 'Java', value: 66 },
 		],
 		'Frontend': [
-			{ icon: IconSvelte, title: 'Svelte / SvelteKit', value: 96 },
-			{ icon: IconReact, title: 'React / Next.js', value: 75 },
-			{ icon: IconAngular, title: 'Angular', value: 75 },
+			{ icon: 'i-simple-icons:svelte', title: 'Svelte / SvelteKit', value: 96 },
+			{ icon: 'i-simple-icons:react', title: 'React / Next.js', value: 75 },
+			{ icon: 'i-simple-icons:angular', title: 'Angular', value: 75 },
 		],
 		'Backend': [
-			{ icon: IconFlask, title: 'Flask', value: 95 },
-			{ icon: IconFastAPI, title: 'FastAPI', value: 85 },
-			{ icon: IconMySQL, title: 'MySQL', value: 80 },
-			{ icon: IconPostgreSQL, title: 'PostgreSQL', value: 80 },
-			{ icon: IconRedis, title: 'Redis', value: 75 },
+			{ icon: 'i-simple-icons:flask', title: 'Flask', value: 95 },
+			{ icon: 'i-simple-icons:fastapi', title: 'FastAPI', value: 85 },
+			{ icon: 'i-simple-icons:mysql', title: 'MySQL', value: 80 },
+			{ icon: 'i-simple-icons:postgresql', title: 'PostgreSQL', value: 80 },
+			{ icon: 'i-simple-icons:redis', title: 'Redis', value: 75 },
 		],
 		'Mobile': [
 			/**/
-			{ icon: IconSwift, title: 'SwiftUI', value: 70 },
+			{ icon: 'i-grommet-icons:swift', title: 'SwiftUI', value: 70 },
 		],
 		'Machine Learning': [
-			{ icon: IconNumPy, title: 'NumPy', value: 99 },
-			{ icon: IconPyTorch, title: 'PyTorch', value: 90 },
-			{ icon: IconTensorFlow, title: 'TensorFlow', value: 80 },
-			{ icon: IconOpenAI, title: 'OpenAI', value: 75 },
+			{ icon: 'i-simple-icons:numpy', title: 'NumPy', value: 99 },
+			{ icon: 'i-simple-icons:pytorch', title: 'PyTorch', value: 90 },
+			{ icon: 'i-simple-icons:tensorflow', title: 'TensorFlow', value: 80 },
+			{ icon: 'i-simple-icons:openai', title: 'OpenAI', value: 75 },
 		],
 		'Cloud': [
-			{ icon: IconCloudflare, title: 'Cloudflare', value: 90 },
-			{ icon: IconMicrosoftAzure, title: 'Microsoft Azure', value: 80 },
-			{ icon: IconAmazonAWS, title: 'Amazon AWS', value: 75 },
+			{ icon: 'i-simple-icons:cloudflare', title: 'Cloudflare', value: 90 },
+			{ icon: 'i-simple-icons:microsoftazure', title: 'Microsoft Azure', value: 80 },
+			{ icon: 'i-simple-icons:amazonaws', title: 'Amazon AWS', value: 75 },
 		],
 	};
 
@@ -97,7 +66,8 @@
 			{#each items as { icon, title, value } (title)}
 				<div>
 					<span class='flex h-10 w-10 items-center justify-center rounded-full bg-me-primary-200 ring-8 ring-gray-900'>
-						<svelte:component this={icon} style='font-size: {1.7}vh' />
+						<!-- svelte-ignore element_invalid_self_closing_tag -->
+						<div this={icon} style:font-size='{1.7}vh' />
 					</span>
 					<span class='flex-auto'>
 						<dt class='mb-1'>{title}</dt>
