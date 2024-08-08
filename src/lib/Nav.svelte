@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import IconDownload from '~icons/line-md/download-outline';
 	import { page } from '$app/stores';
 
 	const TITLE = 'ryoppippi' as const satisfies string;
@@ -27,12 +26,13 @@
 				</a>
 			{/each}
 		</nav>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
 		<a
 			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'
 			href='https://cv.ryoppippi.com'
 			target='_blank'>
 			{CVMessage}
-			<IconDownload style='font-size: 2vh' />
+			<div class='i-line-md:download-outline' />
 		</a>
 	</div>
 </header>
