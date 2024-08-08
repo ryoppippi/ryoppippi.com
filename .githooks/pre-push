@@ -1,3 +1,11 @@
 #!/usr/bin/env sh
-bun lint
-bun check
+
+# get the list of staged files
+files=$(git diff --cached --name-only --diff-filter=ACM --relative="")
+
+# if files are not empty, run secretlint
+if [ -n "$files" ]; then
+  bunx @secretlint/quick-start $files
+  bun lint $files
+  bun check
+fi
