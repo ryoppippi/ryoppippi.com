@@ -18,9 +18,6 @@
 		"format": "npm run lint -- --fix",
 		"prepare": "ts-patch install && git config --local core.hooksPath .githooks || echo 'Can not set git hooks'"
 	},
-	"volta": {
-		"node": "20.16.0"
-	},
 	"devDependencies": {
 		"@iconify-json/akar-icons": "^1.1.26",
 		"@iconify-json/carbon": "^1.1.37",
