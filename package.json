@@ -69,7 +69,6 @@
 		"svelte-meta-tags": "^3.1.2",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.2",
-		"ts-node": "^10.9.2",
 		"ts-patch": "^3.2.1",
 		"tslib": "^2.6.3",
 		"typescript": "~5.5.3",
