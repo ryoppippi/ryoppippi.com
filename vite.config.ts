@@ -37,11 +37,18 @@ export default defineConfig({
 				{ from: '/icon', to: '/ryoppippi.png', status: 301 },
 			],
 		}),
-		UnpluginTypia({ cache: !isCI, log: 'verbose' }),
-		UnoCSS({ extractors: [extractorSvelte()] }),
+		UnpluginTypia({ log: 'verbose' }),
 		enhancedImages(),
 		Macros(),
+		UnoCSS({
+			extractors: [
+				extractorSvelte(),
+			],
+		}),
+		Icons({
+			compiler: 'svelte',
+			autoInstall: true,
+		}),
 		sveltekit(),
-		Icons({ compiler: 'svelte', autoInstall: true }),
 	],
 });
