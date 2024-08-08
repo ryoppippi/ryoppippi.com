@@ -22,6 +22,8 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.22.0",
+		"@iconify-json/line-md": "^1.1.39",
+		"@iconify-json/simple-icons": "^1.1.112",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect",
