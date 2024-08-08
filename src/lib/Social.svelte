@@ -15,10 +15,14 @@
 	] as const;
 </script>
 
-<article class='grid grid-cols-3 place-items-center gap-3 sm:grid-cols-7' in:fade|global={{ duration: 3000 }}>
+<article
+	gap-3
+	grid='~ cols-3 sm:cols-7'
+	place-items-center
+	in:fade|global={{ duration: 3000 }}>
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { host } = parseURL(url)}
-		<div class='animation cursor-pointer'>
+		<div class='animation' cursor-pointer>
 			<a aria-label="link to ryoppippi's {host}" href={url} rel='noopener noreferrer' target='_blank'>
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
 				<div style:font-size='{size}vh' class={_class} />
