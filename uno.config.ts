@@ -11,7 +11,7 @@ import {
 export default defineConfig({
 	presets: [
 		presetUno(),
-		presetAttributify({ prefix: 'uno-', prefixedOnly: true }),
+		presetAttributify(),
 		presetIcons({ autoInstall: isDevelopment }),
 	],
 	transformers: [
