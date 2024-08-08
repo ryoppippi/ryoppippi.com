@@ -5,8 +5,6 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { importAssets } from 'svelte-preprocess-import-assets';
 import { isDevelopment } from 'std-env';
 
-const dev = isDevelopment;
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
@@ -14,7 +12,7 @@ const config = {
 	preprocess: [vitePreprocess(), importAssets()],
 
 	vitePlugin: {
-		inspector: dev,
+		inspector: isDevelopment,
 		dynamicCompileOptions({ filename }) {
 			/* sveltekit-tweet が rune に対応していないので、user script のみ rune を強制する https://github.com/sveltejs/svelte/issues/9632#issuecomment-1825498213 */
 			if (!filename.includes('node_modules')) {
@@ -39,7 +37,15 @@ const config = {
 			$posts: './src/posts',
 		},
 		paths: {
-			assets: dev ? '' : process.env.CF_PAGES_URL,
+			/**
+			  @see https://developers.cloudflare.com/pages/configuration/build-configuration#environment-variables
+			  @see https://kit.svelte.jp/docs/configuration#paths
+			 */
+			assets: isDevelopment
+				? ''
+				: process.env.CF_PAGES_BRANCH === 'main'
+					? `https://ryoppippi.com`
+					: process.env.CF_PAGES_URL,
 		},
 	},
 };
