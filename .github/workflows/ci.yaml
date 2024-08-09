@@ -5,7 +5,7 @@ on:
     - cron: '0 */6 * * *'
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions: read-all
@@ -14,20 +14,10 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - run: bun i
+      - run: bun i --frozen-lockfile
       - run: bun secretlint **/*
+      - run: bun sync
       - run: bun run lint
-
-  check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions: read-all
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun i
       - run: bun run check
 
   # build-and-deploy:
