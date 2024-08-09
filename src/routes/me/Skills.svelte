@@ -1,15 +1,7 @@
-<script>
+<script lang='ts'>
 	import ProgressBar from './ProgressBar.svelte';
 
-	/** @type {Record<string, boolean>} */
-	/* let levels = {
-		Expert: true,
-		Middle: true,
-		'Good w/ ChatGPT': true
-	}; */
-
-	/** @satisfies {Record<string, { icon: string, title: string, value: number }[]>} */
-	const contents = /** @type {const} */ {
+	const contents = {
 		'Languages': [
 			{ icon: 'i-simple-icons:typescript', title: 'TypeScript', value: 90 },
 			{ icon: 'i-akar-icons:css-fill', title: 'CSS', value: 65 },
@@ -50,7 +42,7 @@
 			{ icon: 'i-simple-icons:microsoftazure', title: 'Microsoft Azure', value: 80 },
 			{ icon: 'i-simple-icons:amazonaws', title: 'Amazon AWS', value: 75 },
 		],
-	};
+	} as const satisfies Record<string, { icon: string; title: string; value: number }[]>;
 
 // $: ({ Expert: expert, Middle: middle, 'Good w/ ChatGPT': good } = levels);
 </script>
