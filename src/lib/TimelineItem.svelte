@@ -10,7 +10,7 @@
 		mainSlot,
 		otherSlot,
 	}: {
-		icon: string;
+		icon: `i-${string}:${string}`;
 		title?: string;
 		date: string;
 		hidden?: boolean;
