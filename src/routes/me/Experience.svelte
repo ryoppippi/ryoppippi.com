@@ -1,14 +1,13 @@
-<script>
+<script lang='ts'>
 	import ExperienceTitle from './ExperienceTitle.svelte';
 	import Timeline from '$lib/Timeline.svelte';
 	import TimelineItem from '$lib/TimelineItem.svelte';
 	import ChipList from '$lib/ChipList.svelte';
 
-	/** @type{Record<string, boolean>} */
 	let items = {
 		Industrial: true,
 		Teaching: true,
-	};
+	} satisfies Record<string, boolean>;
 </script>
 
 <article>
