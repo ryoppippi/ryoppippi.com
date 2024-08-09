@@ -16,6 +16,7 @@ jobs:
           bun-version: latest
       - run: bun i --frozen-lockfile
       - run: bun secretlint **/*
+      - run: bun sync
       - run: bun run lint
       - run: bun run check
 
