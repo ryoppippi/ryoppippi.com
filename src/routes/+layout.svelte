@@ -1,5 +1,6 @@
 <script>
-	import '../app.postcss';
+	import 'uno.css';
+	import '@unocss/reset/tailwind.css';
 
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page, updated } from '$app/stores';

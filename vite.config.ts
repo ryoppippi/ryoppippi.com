@@ -3,10 +3,12 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import Macros from '@unplugin/macros/vite';
-import Icons from 'unplugin-icons/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
-import { isCI } from 'std-env';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+
+import extractorSvelte from '@unocss/extractor-svelte';
+import UnoCSS from 'unocss/vite';
+
 import { faviconPlugin } from './plugins/favicons';
 
 function relativePath(...args: string[]): string {
@@ -32,10 +34,14 @@ export default defineConfig({
 				{ from: '/cv', to: 'https://cv.ryoppippi.com', status: 301 },
 			],
 		}),
-		UnpluginTypia({ cache: !isCI, log: 'verbose' }),
+		UnpluginTypia({ log: 'verbose' }),
 		enhancedImages(),
 		Macros(),
+		UnoCSS({
+			extractors: [
+				extractorSvelte(),
+			],
+		}),
 		sveltekit(),
-		Icons({ compiler: 'svelte', autoInstall: true }),
 	],
 });

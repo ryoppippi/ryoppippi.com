@@ -1,5 +1,4 @@
 <script>
-	import IconLinkOut from '~icons/quill/link-out';
 	import { formatDate } from '$lib/util.js';
 
 	const { data } = $props();
@@ -17,7 +16,8 @@
 			target={external ? '_blank' : ''}>
 			<p class='md:truncate'>{item.title}</p>
 			{#if external}
-				<IconLinkOut class='my-auto hidden md:inline' />
+				<!-- svelte-ignore element_invalid_self_closing_tag -->
+				<div class='i-quill:link-out my-auto hidden md:inline' />
 			{/if}
 		</a>
 	{/each}
