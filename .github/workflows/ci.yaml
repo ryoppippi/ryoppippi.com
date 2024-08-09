@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '0 */6 * * *'
 
+env:
+  BUN_VERSION: latest
+  NODE_VERSION: lts/*
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -11,9 +15,12 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: ${{ env.BUN_VERSION }}
       - run: bun i --frozen-lockfile
       - run: bun secretlint **/*
       - run: bun sync
