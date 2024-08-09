@@ -8,7 +8,7 @@
 		{ class: 'i-line-md:github-loop', url: 'https://github.com/ryoppippi' },
 		{ class: 'i-simple-icons:zenn', url: 'https://zenn.dev/ryoppippi' },
 		{ class: 'i-line-md:linkedin', url: 'https://www.linkedin.com/in/ryoppippi/' },
-		{ class: 'i-line-md:linkedin', url: 'https://twitter.com/ryoppippi' },
+		{ class: 'i-line-md:twitter', url: 'https://x.com/ryoppippi' },
 		{ class: 'i-simple-icons:bluesky', url: 'https://bsky.app/profile/ryoppippi.com' },
 		{ class: 'i-line-md:reddit-loop', url: 'https://www.reddit.com/user/ryoppippi' },
 		{ class: 'i-ri:youtube-line', url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
