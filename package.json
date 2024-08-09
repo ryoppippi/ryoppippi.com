@@ -22,7 +22,13 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.22.0",
+		"@iconify-json/akar-icons": "^1.1.26",
+		"@iconify-json/devicon-plain": "^1.1.47",
+		"@iconify-json/fa-solid": "^1.1.9",
 		"@iconify-json/line-md": "^1.1.39",
+		"@iconify-json/mdi": "^1.1.68",
+		"@iconify-json/quill": "^1.1.11",
+		"@iconify-json/ri": "^1.1.22",
 		"@iconify-json/simple-icons": "^1.1.112",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
