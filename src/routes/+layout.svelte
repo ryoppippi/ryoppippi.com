@@ -60,7 +60,11 @@
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
 
-<main class='dark my-3' data-sveltekit-reload={$updated ? '' : 'off'}>
+<main
+	data-sveltekit-reload={$updated ? '' : 'off'}
+	my-3
+	un-dark
+>
 	<Nav />
 	{#key $page.url}
 		<article>

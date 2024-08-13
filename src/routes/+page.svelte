@@ -19,7 +19,7 @@
 		>
 			<span
 				block
-				inline='xl:~'
+				inline='sm:~'
 				text-text-100
 			>
 				@ryoppippi
