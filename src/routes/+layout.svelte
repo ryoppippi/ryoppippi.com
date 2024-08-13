@@ -68,3 +68,8 @@
 		</article>
 	{/key}
 </main>
+<style>
+:global(html) {
+	--at-apply: "bg-bg-base";
+}
+</style>

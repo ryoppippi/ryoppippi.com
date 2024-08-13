@@ -27,6 +27,7 @@ export default defineConfig({
 			'accent-200': '#958500',
 			'text-100': '#FFFFFF',
 			'text-200': '#e0e0e0',
+			'bg-base': '#0F0F0F',
 			'bg-100': '#1E1E1E',
 			'bg-200': '#2d2d2d',
 			'bg-300': '#454545',
