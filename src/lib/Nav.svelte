@@ -12,15 +12,15 @@
 
 <header class='py-6'>
 	<div class='max-w-8xl container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row'>
-		<a class='title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0' href='/'>
+		<a class='title-font flex items-center text-xl font-bold text-text-100 md:mb-0' href='/'>
 			{TITLE}
 		</a>
 		<nav class='flex flex-wrap items-center justify-center gap-3 text-base md:mx-auto'>
 			{#each LINKS as l (l.name)}
 				{@const { link, name } = l}
 				<a
-					class='block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100'
-					class:border-me-primary-100={$page.url.pathname === link}
+					class='block border-b-2 border-transparent px-0 py-3 font-bold hover:border-primary-100'
+					class:border-primary-100={$page.url.pathname === link}
 					href={link}>
 					{name}
 				</a>
