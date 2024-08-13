@@ -3,16 +3,44 @@
 	import Social from '$lib/Social.svelte';
 </script>
 
-<article class='container mx-auto mt-8 grid place-content-center'>
+<article
+	container
+	grid
+	mt-8
+	mx-auto
+	place-content-center
+>
 	<Profile />
-	<div class='mt-8'>
-		<h1 class='mb-6 text-center text-4xl font-bold text-gray-800'>
-			<span class='block text-text-100 xl:inline'>@ryoppippi</span>
-			<span class='text-center text-xl font-medium text-text-200'>Engineer</span>
+	<div mt-8>
+		<h1
+			font-bold
+			mb-6
+			text='4xl center gray-800'
+		>
+			<span
+				block
+				inline='xl:~'
+				text-text-100
+			>
+				@ryoppippi
+			</span>
+			<span
+				font-medium
+				text='center text-200 xl'
+			>
+				Engineer
+			</span>
 		</h1>
 	</div>
 </article>
 
-<div class='container mx-auto flex h-full items-center justify-center'>
+<div
+	container
+	flex
+	h-full
+	items-center
+	justify-center
+	mx-auto
+>
 	<Social />
 </div>
