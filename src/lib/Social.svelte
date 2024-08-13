@@ -25,7 +25,11 @@
 		<div class='animation' cursor-pointer>
 			<a aria-label="link to ryoppippi's {host}" href={url} rel='noopener noreferrer' target='_blank'>
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div style:font-size='{size}vh' class={_class} />
+				<div
+					style:--size='{size}vh'
+					class={_class}
+					text='[--size] text-100'
+				/>
 			</a>
 		</div>
 	{/each}
