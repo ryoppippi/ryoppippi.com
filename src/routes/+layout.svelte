@@ -74,8 +74,9 @@
 </main>
 
 <style>
-:global(html) {
-	--at-apply: "bg-bg-base";
-	scroll-behavior: smooth;
+:global {
+	body {
+		--at-apply: bg-bg-base scroll-smooth;
+	}
 }
 </style>
