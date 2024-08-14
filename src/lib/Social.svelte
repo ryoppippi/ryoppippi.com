@@ -28,7 +28,7 @@
 				<div
 					style:--size='{size}vh'
 					class={_class}
-					text='[--size] text-100'
+					text='size-[--size] text-100'
 				/>
 			</a>
 		</div>
