@@ -1,23 +1,18 @@
+import path from 'node:path';
 import { error } from '@sveltejs/kit';
+import fs from 'fs-extra';
 import { parseMarkdown } from '$lib/markdown.server.js';
 
 export async function load({ params: { slug } }) {
 	console.log({ url: import.meta.url }); // eslint-disable-line no-console
-	const filepath = `/src/posts/${slug}.md` as const;
-	const contentRaw = (await import(`./../../../posts/${slug}.md?raw`)).default as string; // eslint-disable-line ts/no-unsafe-member-access
-	try {
-		const { content, ...meta } = parseMarkdown(filepath, contentRaw, {
-			parseContent: true,
-		});
 
-		if (!meta.isPublished) {
-			throw new Error('Post not found');
-		}
+	const filePath = path.resolve(import.meta.dirname, `../../../posts/${slug}.md`);
 
-		return { content, meta };
+	if (!fs.existsSync(filePath)) {
+		return error(404, 'Not found');
 	}
-	catch (e) {
-		console.error(e);
-		error(404, 'Post not found');
-	}
+
+	const mdRaw = await fs.readFile(filePath, 'utf-8');
+
+	return parseMarkdown(filePath, mdRaw);
 }

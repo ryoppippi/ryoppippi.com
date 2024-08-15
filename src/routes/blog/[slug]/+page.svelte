@@ -1,4 +1,5 @@
 <script>
+	import Markdown from 'svelte-exmarkdown';
 	import { formatDate } from '$lib/util.js';
 
 	const { data } = $props();
@@ -6,18 +7,23 @@
 </script>
 
 <svelte:head>
-	<title>{data.meta.title}</title>
+	<title>{data.title}</title>
 	<meta content='article' property='og:type' />
-	<meta content={data.meta.title} property='og:title' />
+	<meta content={data.title} property='og:title' />
 </svelte:head>
 
 <article>
-	<hgroup class='flex flex-col'>
-		<h1 class='justify-start text-5xl text-me-primary-100'>{data.meta.title}</h1>
-		<p>{formatDate(new Date(data.meta.pubDate))}</p>
+	<hgroup flex='~ clo'>
+		<h1
+			justify-start
+			text='5xl primary-100'
+		>
+			<!-- {data.meta.title} -->
+		</h1>
+		<p>{formatDate(new Date(data.pubDate))}</p>
 	</hgroup>
 
-	<div class='prose'>
-		{@html data.content}
+	<div text-text-100>
+		<Markdown md={data.content} />
 	</div>
 </article>
