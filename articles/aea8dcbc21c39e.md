@@ -214,7 +214,7 @@ https://github.com/ryoppippi/sveltekit-form-examples/blob/82bd6695798b027c3b7abf
 
 SuperformsではZodを用いてForm Schemaを定義する。そしてその情報を`load`関数の返り値に渡すことで、`+page.svelte`にFormの定義を渡している。
 
-https://github.com/ryoppippi/sveltekit-form-examples/blob/82bd6695798b027c3b7abfd052092e8793144066/src/routes/superforms/%2Bpage.svelte#L1C1-L15
+https://github.com/ryoppippi/sveltekit-form-examples/blob/82bd6695798b027c3b7abfd052092e8793144066/src/routes/superforms/%2Bpage.svelte#L1-L15
 
 そして、`+page.svelte`では`data`変数で受けたZod Schemaを用いてSvelte Store^[[Stores / Writable stores • Svelte Tutorial](https://svelte.jp/tutorial/writable-stores)]を生成している。
 
