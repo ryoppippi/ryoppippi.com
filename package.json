@@ -42,7 +42,7 @@
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
 		"@skeletonlabs/skeleton": "^2.10.2",
 		"@skeletonlabs/tw-plugin": "^0.4.0",
-		"@sveltejs/adapter-auto": "^3.2.2",
+		"@sveltejs/adapter-auto": "^3.2.4",
 		"@sveltejs/adapter-static": "^3.0.2",
 		"@sveltejs/enhanced-img": "^0.3.0",
 		"@sveltejs/kit": "^2.5.20",
