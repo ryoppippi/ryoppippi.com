@@ -63,7 +63,7 @@
 		"favicons": "^7.2.0",
 		"gray-matter": "^4.0.3",
 		"markdown-it": "^14.1.0",
-		"postcss": "^8.4.40",
+		"postcss": "^8.4.41",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^8.2.4",
 		"sort-on": "^6.0.0",
