@@ -30,6 +30,7 @@ export default defineConfig({
 			mode: 'generate',
 			entries: [
 				{ from: '/cv', to: 'https://cv.ryoppippi.com', status: 301 },
+				{ from: '/icon', to: '/ryoppippi.png', status: 301 },
 			],
 		}),
 		UnpluginTypia({ cache: !isCI, log: 'verbose' }),
