@@ -81,7 +81,7 @@
 		"typescript-svelte-plugin": "^0.3.40",
 		"typia": "^6.7.0",
 		"ufo": "^1.5.4",
-		"unplugin-icons": "^0.19.1",
+		"unplugin-icons": "^0.19.2",
 		"vite": "^5.3.3"
 	},
 	"trustedDependencies": [
