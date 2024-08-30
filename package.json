@@ -79,7 +79,7 @@
 		"tslib": "^2.6.3",
 		"typescript": "~5.5.4",
 		"typescript-svelte-plugin": "^0.3.40",
-		"typia": "^6.7.0",
+		"typia": "^6.9.0",
 		"ufo": "^1.5.4",
 		"unplugin-icons": "^0.19.1",
 		"vite": "^5.3.3"
