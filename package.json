@@ -44,7 +44,7 @@
 		"@skeletonlabs/tw-plugin": "^0.4.0",
 		"@sveltejs/adapter-auto": "^3.2.2",
 		"@sveltejs/adapter-static": "^3.0.2",
-		"@sveltejs/enhanced-img": "^0.3.0",
+		"@sveltejs/enhanced-img": "^0.3.4",
 		"@sveltejs/kit": "^2.5.20",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"@tailwindcss/forms": "^0.5.7",
