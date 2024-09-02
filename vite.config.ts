@@ -8,8 +8,7 @@ import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
-
-import { faviconPlugin } from './plugins/favicons';
+import { faviconsPlugin } from 'vite-plugin-favicons';
 
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
@@ -18,15 +17,12 @@ function relativePath(...args: string[]): string {
 export default defineConfig({
 	plugins: [
 		/* favicon と metadata の設定 */
-		faviconPlugin({
+		faviconsPlugin({
 			imgSrc: relativePath('./src/lib/assets/ryoppippi.png'),
-			faviconAssetsDest: relativePath('./static/favicons'),
-			htmlDest: relativePath('./src/lib/assets/favicons.html'),
 			/* ===== metadataの設定 ===== */
 			path: `/favicons`,
 			lang: 'ja-JP',
 			orientation: 'portrait',
-			/* ========================= */
 		}),
 		cloudflareRedirect({
 			mode: 'generate',

@@ -2,6 +2,7 @@
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
 
+	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page, updated } from '$app/stores';
 
@@ -59,6 +60,10 @@
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
+<svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html faviconLinks}
+</svelte:head>
 
 <main
 	data-sveltekit-reload={$updated ? '' : 'off'}
