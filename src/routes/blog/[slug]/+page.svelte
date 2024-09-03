@@ -18,7 +18,7 @@
 			justify-start
 			text='5xl primary-100'
 		>
-			<!-- {data.meta.title} -->
+			{data.title}
 		</h1>
 		<p>{formatDate(new Date(data.pubDate))}</p>
 	</hgroup>
