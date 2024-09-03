@@ -5,7 +5,7 @@
 	const { data } = $props();
 </script>
 
-<div class='mx-6'>
+<div max-w-xl>
 	{#each data.posts as item (item.title)}
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
@@ -17,24 +17,25 @@
 			{formatDate(pubDate)}
 		</p>
 		<a
+			class='group'
 			border='b-2 transparent hover:primary-100'
 			flex
+			gap-3
 			{href}
+			items-center
 			mr-5
 			overflow-hidden='md:~'
 			target={external ? '_blank' : ''}
 			text-text-100
 		>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
+			{#if external}<span
+				i-simple-icons-zenn
+				shrink-0
+				size-5
+				text='group-hover:[#3EA8FF]'
+			/>{/if}
 			<p md-truncate>{item.title}</p>
-			{#if external}
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div
-					hidden
-					i-quill-link-out
-					md-inline
-					my-auto
-				/>
-			{/if}
 		</a>
 	{/each}
 </div>
