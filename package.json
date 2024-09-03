@@ -36,7 +36,7 @@
 		"@iconify-json/simple-icons": "^1.2.1",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
-		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.1",
+		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.2",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
 		"@std/collections": "npm:@jsr/std__collections",
 		"@sveltejs/adapter-auto": "^3.2.4",
@@ -77,7 +77,7 @@
 		"ufo": "^1.5.4",
 		"unocss": "^0.62.3",
 		"unplugin-icons": "^0.19.2",
-		"vite": "^5.4.2",
+		"vite": "^5.4.3",
 		"vite-plugin-favicons": "^0.1.4"
 	},
 	"trustedDependencies": [
