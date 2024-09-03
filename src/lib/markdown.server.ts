@@ -15,7 +15,7 @@ type Metadata = {
 	isPublished: boolean;
 };
 
-export function parseMarkdown<T extends boolean>(
+export function parseMarkdown(
 	filepath: string,
 	contentRaw: string,
 ): (Item & { content: string }) {
