@@ -51,6 +51,7 @@ export default defineConfig({
 	rules: [
 	],
 	shortcuts: {
-		fcol: 'flex flex-col',
+		'fcol': 'flex flex-col',
+		'nav-underline': 'border-b-2 border-transparent border-primary-100',
 	},
 });

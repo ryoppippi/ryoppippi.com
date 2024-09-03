@@ -1,5 +1,5 @@
 <script lang='ts'>
-	// import { page } from '$app/stores';
+	import { page } from '$app/stores';
 
 	const TITLE = 'ryoppippi' as const satisfies string;
 	const LINKS = [
@@ -38,10 +38,11 @@
 	>
 		{#each LINKS as { href, name } (href)}
 			<a
+				class:nav-underline={$page.url.pathname === href}
 				block
-				border='b-2 transparent hover:primary-100'
 				font-bold
 				{href}
+				nav-underline='hover:~'
 				px-0
 				py-3
 				text-xl
@@ -70,3 +71,9 @@
 		</a>
 	</div>
 </header>
+
+<style>
+	a{
+		--at-apply: no-underline;
+	}
+</style>
