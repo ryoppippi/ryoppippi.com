@@ -1,6 +1,12 @@
 <script>
 	const { children } = $props();
 </script>
-<div class='container mt-8 grid place-content-center md:mx-auto'>
+<div
+	container
+	grid
+	mt-8
+	mx='md:a'
+	place-content-center
+>
 	{@render children()}
 </div>
