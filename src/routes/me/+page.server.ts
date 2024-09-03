@@ -1,5 +1,5 @@
-import { error } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 
 export function load() {
-	return error(404, 'Not found');
+	return redirect(301, '/');
 }
