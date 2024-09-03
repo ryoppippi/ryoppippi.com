@@ -7,12 +7,12 @@
 	const ICONS = [
 		{ class: 'i-line-md:github-loop', url: 'https://github.com/ryoppippi' },
 		{ class: 'i-ph-git-pull-request-duotone', url: 'https://ryoppippi.com/pr' },
-		{ class: 'i-simple-icons:zenn', url: 'https://zenn.dev/ryoppippi' },
-		{ class: 'i-line-md:linkedin', url: 'https://www.linkedin.com/in/ryoppippi/' },
-		{ class: 'i-line-md:twitter', url: 'https://x.com/ryoppippi' },
-		{ class: 'i-simple-icons:bluesky', url: 'https://bsky.app/profile/ryoppippi.com' },
-		// { class: 'i-line-md:reddit-loop', url: 'https://www.reddit.com/user/ryoppippi' },
-		{ class: 'i-ri:youtube-line', url: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
+		{ class: 'i-simple-icons:zenn', url: 'https://ryoppippi.com/zenn' },
+		{ class: 'i-line-md:linkedin', url: 'https://ryoppippi.com/linkedin' },
+		{ class: 'i-line-md:twitter', url: 'https://ryoppippi.com/twitter' },
+		{ class: 'i-simple-icons:bluesky', url: 'https://ryoppippi.com/bsky' },
+		// { class: 'i-line-md:reddit-loop', url: 'https://ryoppippi.com/reddit' },
+		{ class: 'i-ri:youtube-line', url: 'https://ryoppippi.com/youtube' },
 	] as const;
 </script>
 
