@@ -1,19 +1,19 @@
 <script lang='ts'>
 	import { fade } from 'svelte/transition';
-	import { parseURL } from 'ufo';
+	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
 
-	const ICONS = [
-		{ class: 'i-line-md:github-loop', url: 'https://github.com/ryoppippi' },
-		{ class: 'i-ph-git-pull-request-duotone', url: 'https://ryoppippi.com/pr' },
-		{ class: 'i-simple-icons:zenn', url: 'https://ryoppippi.com/zenn' },
-		{ class: 'i-line-md:linkedin', url: 'https://ryoppippi.com/linkedin' },
-		{ class: 'i-line-md:twitter', url: 'https://ryoppippi.com/twitter' },
-		{ class: 'i-simple-icons:bluesky', url: 'https://ryoppippi.com/bsky' },
-		// { class: 'i-line-md:reddit-loop', url: 'https://ryoppippi.com/reddit' },
-		{ class: 'i-ri:youtube-line', url: 'https://ryoppippi.com/youtube' },
-	] as const;
+	const ICONS = ([
+		{ class: 'i-line-md:github-loop', url: '/github' },
+		{ class: 'i-ph-git-pull-request-duotone', url: '/pr' },
+		{ class: 'i-simple-icons:zenn', url: '/zenn' },
+		{ class: 'i-line-md:linkedin', url: '/linkedin' },
+		{ class: 'i-line-md:twitter', url: '/twitter' },
+		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
+		// { class: 'i-line-md:reddit-loop', url: '/reddit' },
+		{ class: 'i-ri:youtube-line', url: '/youtube' },
+	] as const).map(({ url, ...rest }) => ({ url: ufo.joinURL('https://ryoppippi.com', url), ...rest }));
 </script>
 
 <article
@@ -22,9 +22,10 @@
 	place-items-center
 	in:fade|global={{ duration: 3000 }}>
 	{#each ICONS as { class: _class, url } (url)}
-		{@const { host } = parseURL(url)}
+		{@const { pathname } = ufo.parseURL(url)}
+		{@const path = pathname.replace('/', '')}
 		<div class='animation' cursor-pointer>
-			<a aria-label="link to ryoppippi's {host}" href={url} rel='noopener noreferrer' target='_blank'>
+			<a aria-label="link to ryoppippi's {path}" href={url} rel='noopener noreferrer' target='_blank'>
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
 				<div
 					style:--size='{size}vh'
