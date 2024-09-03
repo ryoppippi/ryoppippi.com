@@ -12,7 +12,7 @@
 <header
 	container
 	fcol
-	flex='wrap md:row'
+	grid='~ cols-1 md:cols-3'
 	items-center
 	max-w-8xl
 	mxa
@@ -20,20 +20,19 @@
 	py-6
 	text-text-100
 >
-	<a
-		flex
-		font-bold
-		href='/'
-		items-center
-		mb='md:0'
-	>
-		{TITLE}
-	</a>
+	<div flex justify-end>
+		<a
+			font-bold
+			href='/'
+			mb='md:0'
+			mx='a md:0'
+		>
+			{TITLE}
+		</a>
+	</div>
 	<nav
 		flex='~ wrap'
 		gap-3
-		items-center
-		justify-center
 		mxa
 		text-base
 	>
@@ -52,18 +51,22 @@
 		{/each}
 	</nav>
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
-	<a
-		flex='~'
-		font-bold
-		href='https://cv.ryoppippi.com'
-		items-center
-		mt='4 md:0'
-		opacity='90 hover:100'
-		px-6
-		py-2
-		target='_blank'
-		variant='glass-primary hover:filled-primary'
+	<div
+		flex
+		justify-start
+		mx='a md:0'
 	>
-		My CV <span class='i-line-md:download-outline' />
-	</a>
+		<a
+			flex='~'
+			font-bold
+			href='https://cv.ryoppippi.com'
+			items-center
+			opacity='90 hover:100'
+			px-6
+			py-2
+			target='_blank'
+		>
+			My CV <span class='i-line-md:download-outline' />
+		</a>
+	</div>
 </header>
