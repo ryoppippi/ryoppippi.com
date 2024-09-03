@@ -1,12 +1,14 @@
 import matter from 'gray-matter';
 import { parse } from 'date-fns';
 import typia from 'typia';
+import rt from 'reading-time';
 
 type Item = {
 	slug: string;
 	title: string;
 	pubDate: string;
 	isPublished: boolean;
+	readingTime: ReturnType<typeof rt>;
 };
 
 type Metadata = {
@@ -33,11 +35,12 @@ export function parseMarkdown(
 	typia.assertGuard<Metadata>(metadata);
 
 	const item = {
-		slug,
+		slug: slug as string,
 		title: metadata.title,
 		isPublished: metadata.isPublished,
 		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON(),
-	} as const;
+		readingTime: rt(content),
+	} as const satisfies Item;
 
 	typia.assertGuard<Item>(item);
 

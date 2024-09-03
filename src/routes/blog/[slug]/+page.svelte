@@ -13,15 +13,22 @@
 </svelte:head>
 
 <article>
-	<hgroup flex='~ clo'>
+	<hgroup fcol text-text-100>
 		<h1
 			justify-start
 			text='5xl primary-100'
 		>
 			{data.title}
 		</h1>
-		<p>{formatDate(new Date(data.pubDate))}</p>
+		<div flex gap-2>
+			<p>{formatDate(new Date(data.pubDate))}</p>
+			<p> Reading time: {data.readingTime.text}</p>
+		</div>
 	</hgroup>
+
+	<div p2>
+		<hr ma op25 w-50 />
+	</div>
 
 	<div text-text-100>
 		<Markdown md={data.content} />
