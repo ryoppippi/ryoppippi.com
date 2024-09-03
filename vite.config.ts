@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import Macros from '@unplugin/macros/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
-import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+// import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
@@ -24,13 +24,13 @@ export default defineConfig({
 			lang: 'ja-JP',
 			orientation: 'portrait',
 		}),
-		cloudflareRedirect({
-			mode: 'generate',
-			entries: [
-				{ from: '/cv', to: 'https://cv.ryoppippi.com', status: 301 },
-				{ from: '/icon', to: '/ryoppippi.png', status: 301 },
-			],
-		}),
+		// cloudflareRedirect({
+		// 	mode: 'generate',
+		// 	entries: [
+		// 		{ from: '/cv', to: 'https://cv.ryoppippi.com', status: 301 },
+		// 		{ from: '/icon', to: '/ryoppippi.png', status: 301 },
+		// 	],
+		// }),
 		UnpluginTypia({ log: 'verbose' }),
 		enhancedImages(),
 		Macros(),
