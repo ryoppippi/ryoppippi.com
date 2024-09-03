@@ -67,7 +67,7 @@
 			py-2
 			target='_blank'
 		>
-			My CV <span class='i-line-md:download-outline' />
+			CV <span class='i-line-md:download-outline' />
 		</a>
 	</div>
 </header>
