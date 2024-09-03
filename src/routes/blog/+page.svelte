@@ -29,12 +29,19 @@
 			text-text-100
 		>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			{#if external}<span
-				i-simple-icons-zenn
-				shrink-0
-				size-5
-				text='group-hover:[#3EA8FF]'
-			/>{/if}
+			{#if external}
+				{#if item.link.includes('zenn')}
+					<span
+						blog-list-icon
+						i-simple-icons-zenn
+						text='group-hover:[#3EA8FF]'
+					/>
+				{:else}
+					<span blog-list-icon i-quill-link-out />
+				{/if}
+			{:else}
+				<span blog-list-icon i-simple-icons-markdown />
+			{/if}
 			<p md-truncate>{item.title}</p>
 		</a>
 	{/each}
