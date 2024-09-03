@@ -15,6 +15,7 @@ type Metadata = {
 	title: string;
 	date: string;
 	isPublished: boolean;
+	lang: 'en' | 'ja';
 };
 
 export async function parseMarkdown(
@@ -32,9 +33,8 @@ export async function parseMarkdown(
 	typia.assertGuard<Metadata>(metadata);
 
 	const item = {
+		...metadata,
 		slug,
-		title: metadata.title,
-		isPublished: metadata.isPublished,
 		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON(),
 		readingTime: rt(content),
 	} as const satisfies Item;
