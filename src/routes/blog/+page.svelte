@@ -5,7 +5,10 @@
 	const { data } = $props();
 </script>
 
-<div max-w-xl>
+<div
+	max-w-xl
+	min-w-0
+>
 	{#each data.posts as item (item.title)}
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
@@ -24,7 +27,6 @@
 			{href}
 			items-center
 			mr-5
-			overflow-hidden='md:~'
 			target={external ? '_blank' : ''}
 			text-text-100
 		>
@@ -42,7 +44,7 @@
 			{:else}
 				<span blog-list-icon i-simple-icons-markdown />
 			{/if}
-			<p md-truncate>{item.title}</p>
+			<p truncate>{item.title}</p>
 		</a>
 	{/each}
 </div>

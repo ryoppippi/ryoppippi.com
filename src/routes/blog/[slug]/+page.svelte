@@ -12,22 +12,22 @@
 	<meta content={data.title} property='og:title' />
 </svelte:head>
 
-<article>
-	<hgroup fcol text-text-100>
-		<h1
-			justify-start
-			text='5xl primary-100'
-		>
+<article
+	max-w-xl
+	min-w-0
+	mxa
+	w-xl
+>
+	<hgroup fcol gap-1 items-center mb-3 text-text-100>
+		<h1 text='6xl primary-100'>
 			{data.title}
 		</h1>
-		<div flex gap-2>
-			<p>{formatDate(new Date(data.pubDate))}</p>
-			<p> Reading time: {data.readingTime.text}</p>
-		</div>
+		<p>Date: {formatDate(new Date(data.pubDate))}</p>
+		<p>Reading time: {data.readingTime.text}</p>
 	</hgroup>
 
 	<div p2>
-		<hr ma op25 w-50 />
+		<hr ma op25 w-100 />
 	</div>
 
 	<div text-text-100>

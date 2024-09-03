@@ -5,7 +5,7 @@
 	container
 	grid
 	mt-8
-	mx='md:a'
+	mxa
 	place-content-center
 >
 	{@render children()}
