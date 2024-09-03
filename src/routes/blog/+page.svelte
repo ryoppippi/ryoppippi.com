@@ -1,4 +1,5 @@
 <script>
+	import * as ufo from 'ufo';
 	import { formatDate } from '$lib/util.js';
 
 	const { data } = $props();
@@ -8,7 +9,7 @@
 	{#each data.posts as item (item.title)}
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
-		{@const href = 'link' in item ? item.link : `/blog/${item?.slug}`}
+		{@const href = 'link' in item ? item.link : ufo.joinURL('/blog', item.slug)}
 		<p
 			opacity-70
 			text-text-200
