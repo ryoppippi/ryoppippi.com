@@ -1,38 +1,69 @@
 <script lang='ts'>
-	import IconDownload from '~icons/line-md/download-outline';
-	import { page } from '$app/stores';
+	// import { page } from '$app/stores';
 
 	const TITLE = 'ryoppippi' as const satisfies string;
 	const LINKS = [
-		{ link: '/me', name: 'me' },
+		// { href: '/me', name: 'me' },
 		// { link: '/works', name: 'works' },
-		{ link: '/blog', name: 'blog' },
-	] as const satisfies Readonly<{ link: string; name: string }[]>;
-	const CVMessage = `My CV `;
+		{ href: '/blog', name: 'blog' },
+	] as const satisfies Readonly<{ href: string; name: string }[]>;
 </script>
 
-<header class='py-6'>
-	<div class='max-w-8xl container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row'>
-		<a class='title-font flex items-center text-xl font-bold text-me-text-100 md:mb-0' href='/'>
-			{TITLE}
-		</a>
-		<nav class='flex flex-wrap items-center justify-center gap-3 text-base md:mx-auto'>
-			{#each LINKS as l (l.name)}
-				{@const { link, name } = l}
-				<a
-					class='block border-b-2 border-transparent px-0 py-3 font-bold hover:border-me-primary-100'
-					class:border-me-primary-100={$page.url.pathname === link}
-					href={link}>
-					{name}
-				</a>
-			{/each}
-		</nav>
-		<a
-			class='bg-base variant-glass-primary btn mt-4 px-6 py-2 font-bold opacity-90 hover:variant-filled-primary hover:opacity-100 md:mt-0'
-			href='https://cv.ryoppippi.com'
-			target='_blank'>
-			{CVMessage}
-			<IconDownload style='font-size: 2vh' />
-		</a>
-	</div>
+<header
+	container
+	fcol
+	flex='wrap md:row'
+	items-center
+	max-w-8xl
+	mxa
+	p-5
+	py-6
+	text-text-100
+>
+	<a
+		flex
+		font-bold
+		href='/'
+		items-center
+		mb='md:0'
+	>
+		{TITLE}
+	</a>
+	<nav
+		flex='~ wrap'
+		gap-3
+		items-center
+		justify-center
+		mxa
+		text-base
+	>
+		{#each LINKS as { href, name } (href)}
+			<a
+				block
+				border='b-2 transparent hover:primary-100'
+				font-bold
+				{href}
+				px-0
+				py-3
+				text-xl
+			>
+				{name}
+			</a>
+		{/each}
+	</nav>
+	<!-- svelte-ignore element_invalid_self_closing_tag -->
+	<a
+		flex='~'
+		font-bold
+		href='https://cv.ryoppippi.com'
+		items-center
+		mt='4 md:0'
+		opacity='90 hover:100'
+		px-6
+		py-2
+		target='_blank'
+		variant='glass-primary hover:filled-primary'
+	>
+		My CV <span class='i-line-md:download-outline' />
+	</a>
 </header>

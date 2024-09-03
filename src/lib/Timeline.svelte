@@ -4,7 +4,11 @@
 	const { children }: { children: Snippet } = $props();
 </script>
 
-<ol class='relative border-gray-700 md:border-l'>
+<ol
+	border-gray-700
+	md-border-l
+	relative
+>
 	{#if children}
 		{@render children()}
 	{/if}

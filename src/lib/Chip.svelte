@@ -8,7 +8,7 @@
 		id: string;
 		text: string;
 		checked: boolean;
-		icon: ConstructorOfATypedSvelteComponent;
+		icon: string;
 	} = $props();
 </script>
 
@@ -17,8 +17,9 @@
 	<span class='flex'>
 		{text}
 		{#if checked}
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<span class='peer-checked/{id}:hidden inline'>
-				<svelte:component this={icon} />
+				<div class={icon} />
 			</span>
 		{/if}
 	</span>

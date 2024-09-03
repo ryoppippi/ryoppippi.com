@@ -1,5 +1,4 @@
 <script>
-	import IconLinkOut from '~icons/quill/link-out';
 	import { formatDate } from '$lib/util.js';
 
 	const { data } = $props();
@@ -10,14 +9,30 @@
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
 		{@const href = 'link' in item ? item.link : `/blog/${item?.slug}`}
-		<p class='text-me-text-200 opacity-70'>{formatDate(pubDate)}</p>
+		<p
+			opacity-70
+			text-text-200
+		>
+			{formatDate(pubDate)}
+		</p>
 		<a
-			class='mr-5 flex border-b-2 border-transparent text-me-text-100 hover:border-me-primary-100 md:overflow-hidden'
+			border='b-2 transparent hover:primary-100'
+			flex
 			{href}
-			target={external ? '_blank' : ''}>
-			<p class='md:truncate'>{item.title}</p>
+			mr-5
+			overflow-hidden='md:~'
+			target={external ? '_blank' : ''}
+			text-text-100
+		>
+			<p md-truncate>{item.title}</p>
 			{#if external}
-				<IconLinkOut class='my-auto hidden md:inline' />
+				<!-- svelte-ignore element_invalid_self_closing_tag -->
+				<div
+					hidden
+					i-quill-link-out
+					md-inline
+					my-auto
+				/>
 			{/if}
 		</a>
 	{/each}

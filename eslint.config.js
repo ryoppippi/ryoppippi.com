@@ -1,7 +1,8 @@
 import { ryoppippi } from '@ryoppippi/eslint-config';
 
 export default ryoppippi({
-	tailwind: true,
+	tailwind: false,
+	svelte: true,
 	typescript: {
 		tsconfigPath: './tsconfig.json',
 	},

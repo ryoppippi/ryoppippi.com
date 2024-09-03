@@ -1,6 +1,8 @@
 <script>
-	import '../app.postcss';
+	import 'uno.css';
+	import '@unocss/reset/tailwind.css';
 
+	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
 	import { page, updated } from '$app/stores';
 
@@ -13,11 +15,13 @@
 	const { children } = $props();
 
 	onNavigate((navigation) => {
+		// @ts-ignore
 		if (!document?.startViewTransition) {
 			return;
 		}
 
 		return new Promise((resolve) => {
+			// @ts-ignore
 			document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
@@ -58,8 +62,16 @@
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
+<svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html faviconLinks}
+</svelte:head>
 
-<main class='dark my-3' data-sveltekit-reload={$updated ? '' : 'off'}>
+<main
+	data-sveltekit-reload={$updated ? '' : 'off'}
+	my-3
+	un-dark
+>
 	<Nav />
 	{#key $page.url}
 		<article>
@@ -67,3 +79,11 @@
 		</article>
 	{/key}
 </main>
+
+<style>
+:global {
+	body {
+		--at-apply: bg-bg-base scroll-smooth;
+	}
+}
+</style>
