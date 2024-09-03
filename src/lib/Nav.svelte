@@ -11,7 +11,8 @@
 
 <header
 	container
-	flex='~ col wrap md:row'
+	fcol
+	flex='wrap md:row'
 	items-center
 	max-w-8xl
 	mxa

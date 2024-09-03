@@ -2,9 +2,15 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class='grid place-content-center place-items-center pt-10'>
+<div
+	fcol
+	grid
+	place='content-center items-center'
+	pt-10
+	text-text-100
+>
 	{$page.url}
 	{$page.status}
-	<hr class='mb-4 divide-solid !border-t-8' />
-	<a class='variant-filled-primary btn' href='/'>Return to Home</a>
+	<div p2> <hr ma op25 w-50 /> </div>
+	<a href='/'>Return to Home</a>
 </div>
