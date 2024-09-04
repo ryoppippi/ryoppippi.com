@@ -19,7 +19,6 @@
 			<span
 				block
 				inline='sm:~'
-				text-text-100
 			>
 				@ryoppippi
 			</span>

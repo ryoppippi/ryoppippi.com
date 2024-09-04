@@ -10,10 +10,7 @@
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}
 		{@const href = 'link' in item ? item.link : ufo.joinURL('/blog', item.slug)}
-		<p
-			opacity-70
-			text-text-200
-		>
+		<p opacity-70>
 			{formatDate(pubDate)}
 		</p>
 		<a
@@ -25,7 +22,6 @@
 			items-center
 			mr-5
 			target={external ? '_blank' : ''}
-			text-text-100
 		>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			{#if external}

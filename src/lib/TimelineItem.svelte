@@ -26,7 +26,7 @@
 		<div class={icon} />
 	</span>
 
-	<h3 class='mb-1 flex items-center text-lg font-semibold text-me-text-100'>
+	<h3 class='mb-1 flex items-center text-lg font-semibold'>
 		{title}
 		{#if titleSlot != null}
 			{@render titleSlot()}

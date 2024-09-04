@@ -87,7 +87,7 @@
 <style>
 :global {
 	body {
-		--at-apply: text-base bg-bg-base scroll-smooth;
+		--at-apply: text-base text-text-100 bg-bg-base scroll-smooth;
 	}
 }
 </style>
