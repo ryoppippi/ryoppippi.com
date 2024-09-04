@@ -14,7 +14,7 @@
 		<h1
 			font-bold
 			mb-6
-			text='4xl center gray-800'
+			text='4xl center'
 		>
 			<span
 				block
@@ -24,7 +24,7 @@
 			</span>
 			<span
 				font-medium
-				text='center text-200 xl'
+				text='center xl text-700 dark:text-200'
 			>
 				Engineer
 			</span>

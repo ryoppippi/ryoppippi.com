@@ -1,4 +1,3 @@
 <script lang='ts'>
+	import Markdown from 'svelte-exmarkdown';
 </script>
-
-<h1>hello</h1>

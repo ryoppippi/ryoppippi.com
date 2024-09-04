@@ -3,6 +3,8 @@
 	import { joinURL } from 'ufo';
 	import { page } from '$app/stores';
 
+	import * as DarkMode from '$lib/DarkMode';
+
 	const TITLE = 'ryoppippi' as const satisfies string;
 	const LINKS = [
 		{ href: '/works', name: 'works' },
@@ -74,6 +76,7 @@
 			>
 				CV <span class='i-line-md:download-outline' />
 			</a>
+			<DarkMode.ToggleButton />
 		</div>
 	</div>
 </header>

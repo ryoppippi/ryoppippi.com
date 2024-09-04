@@ -10,6 +10,7 @@
 	import { onNavigate } from '$app/navigation';
 
 	import Nav from '$lib/Nav.svelte';
+	import DarkMode from '$lib/DarkMode';
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
@@ -33,6 +34,8 @@
 	// eslint-disable-next-line node/prefer-global/process
 	const title = ufo.parseURL(process.env.DOMAIN).host;
 </script>
+
+<DarkMode />
 
 <MetaTags
 	additionalRobotsProps={{
@@ -87,7 +90,7 @@
 <style>
 :global {
 	body {
-		--at-apply: text-base text-text-100 bg-bg-base scroll-smooth;
+		--at-apply: text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
 	}
 }
 </style>
