@@ -6,14 +6,15 @@
 <article
 	container
 	grid
-	mt-8
+	mt8
+	mxa
 	place-content-center
 >
 	<Profile />
-	<div mt-8>
+	<div mt8>
 		<h1
 			font-bold
-			mb-6
+			mb6
 			text='4xl center'
 		>
 			<span
