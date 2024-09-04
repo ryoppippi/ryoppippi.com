@@ -56,4 +56,10 @@
 			transform: scale(1.3) rotateZ(-30deg);
 		}
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animation:hover {
+			animation: none;
+		}
+	}
 </style>
