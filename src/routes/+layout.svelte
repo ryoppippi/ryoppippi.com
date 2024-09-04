@@ -72,14 +72,15 @@
 
 <main
 	data-sveltekit-reload={$updated ? '' : 'off'}
-	my-3
+	max-w-xl
+	min-w-0
+	mxa
+	my3
 	un-dark
 >
 	<Nav />
 	{#key $page.url}
-		<article>
-			{@render children()}
-		</article>
+		{@render children()}
 	{/key}
 </main>
 

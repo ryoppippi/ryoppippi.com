@@ -5,10 +5,7 @@
 	const { data } = $props();
 </script>
 
-<div
-	max-w-xl
-	min-w-0
->
+<div mxa px-2>
 	{#each data.posts as item (item.title)}
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}

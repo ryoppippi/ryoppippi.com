@@ -7,7 +7,6 @@
 	container
 	grid
 	mt-8
-	mx-auto
 	place-content-center
 >
 	<Profile />
@@ -40,7 +39,7 @@
 	h-full
 	items-center
 	justify-center
-	mx-auto
+	mxa
 >
 	<Social />
 </div>
