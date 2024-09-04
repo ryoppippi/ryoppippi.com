@@ -5,8 +5,7 @@
 
 	const TITLE = 'ryoppippi' as const satisfies string;
 	const LINKS = [
-		// { href: '/me', name: 'me' },
-		// { link: '/works', name: 'works' },
+		{ href: '/works', name: 'works' },
 		{ href: '/blog', name: 'blog' },
 	] as const satisfies Readonly<{ href: string; name: string }[]>;
 </script>
