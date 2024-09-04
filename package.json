@@ -20,7 +20,7 @@
 		"prepare:typia": "ts-patch install"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.22.4",
+		"@antfu/ni": "^0.23.0",
 		"@iconify-json/akar-icons": "^1.2.0",
 		"@iconify-json/devicon-plain": "^1.2.0",
 		"@iconify-json/fa-solid": "^1.2.0",
