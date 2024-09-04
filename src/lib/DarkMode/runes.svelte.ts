@@ -24,7 +24,6 @@ export class CheckTransitions {
 			return;
 		}
 
-		// @ts-expect-error experimental API
 		this.#isViewTransitionAvailable = document.startViewTransition != null;
 		this.#mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 		this.#isReduced = this.#mediaQuery.matches;
@@ -58,10 +57,10 @@ export function toggleDark(event: MouseEvent) {
 		Math.max(y, innerHeight - y),
 	);
 		// @ts-expect-error: Transition API
-	// eslint-disable-next-line ts/no-unsafe-call, ts/no-unsafe-assignment
+
 	const transition = document.startViewTransition(() => toggleMode());
 
-	// eslint-disable-next-line ts/no-unsafe-call, ts/no-unsafe-member-access
+	// eslint-disable-next-line ts/no-floating-promises
 	transition.ready.then(() => {
 		const clipPath = [
 			`circle(0px at ${x}px ${y}px)`,
