@@ -19,7 +19,6 @@
 	min-w-0
 	mxa
 	py-6
-	text-base
 	text-text-100
 	text-xl
 >
