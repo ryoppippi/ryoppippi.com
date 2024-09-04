@@ -1,4 +1,4 @@
-# create-svelte
+# ryoppippi.com
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
@@ -21,6 +21,7 @@ To create a production version of your app:
 bun run build
 ```
 
-You can preview the production build with `npm run preview`.
+## LICENSE
+Code is under [MIT](./LICENSE).  
+Content is under [CC BY-SA 4.0](./LICENSE.content).
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
