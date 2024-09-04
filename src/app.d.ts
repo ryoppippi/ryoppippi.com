@@ -1,4 +1,5 @@
 /* eslint-disable */
+import 'unplugin-icons/types/svelte';
 
 declare namespace App {
 	// interface Locals {}

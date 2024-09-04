@@ -22,6 +22,6 @@ bun run build
 ```
 
 ## LICENSE
-Code is under [MIT](./LICENSE).  
-Content is under [CC BY-SA 4.0](./LICENSE.content).
 
+Code is under [MIT](./LICENSE).
+Content is under [CC BY-SA 4.0](./LICENSE.content).

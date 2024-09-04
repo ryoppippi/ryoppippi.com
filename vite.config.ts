@@ -3,14 +3,16 @@ import process from 'node:process';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
+import Icons from 'unplugin-icons/vite';
 import Macros from '@unplugin/macros/vite';
 import Replace from 'unplugin-replace/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+import { faviconsPlugin } from 'vite-plugin-favicons';
+import { isDevelopment } from 'std-env';
 
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
-import { faviconsPlugin } from 'vite-plugin-favicons';
 
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
@@ -43,6 +45,10 @@ export default defineConfig({
 			],
 		}),
 		UnpluginTypia({ log: 'verbose' }),
+		Icons({
+			compiler: 'svelte',
+			autoInstall: isDevelopment,
+		}),
 		Replace({
 			values: [
 				{

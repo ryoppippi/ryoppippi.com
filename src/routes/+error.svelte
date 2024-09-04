@@ -7,7 +7,6 @@
 	grid
 	place='content-center items-center'
 	pt-10
-	text-text-100
 >
 	{$page.url}
 	{$page.status}

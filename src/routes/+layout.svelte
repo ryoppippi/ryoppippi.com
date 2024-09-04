@@ -10,6 +10,7 @@
 	import { onNavigate } from '$app/navigation';
 
 	import Nav from '$lib/Nav.svelte';
+	import DarkMode from '$lib/DarkMode';
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 
@@ -33,6 +34,8 @@
 	// eslint-disable-next-line node/prefer-global/process
 	const title = ufo.parseURL(process.env.DOMAIN).host;
 </script>
+
+<DarkMode />
 
 <MetaTags
 	additionalRobotsProps={{
@@ -72,21 +75,22 @@
 
 <main
 	data-sveltekit-reload={$updated ? '' : 'off'}
-	my-3
+	max-w-xl
+	min-w-0
+	mxa
+	my3
 	un-dark
 >
 	<Nav />
 	{#key $page.url}
-		<article>
-			{@render children()}
-		</article>
+		{@render children()}
 	{/key}
 </main>
 
 <style>
 :global {
 	body {
-		--at-apply: bg-bg-base scroll-smooth;
+		--at-apply: text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
 	}
 }
 </style>

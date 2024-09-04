@@ -35,6 +35,12 @@ export default defineConfig({
 				text: {
 					100: '#FFFFFF',
 					200: '#e0e0e0',
+					300: '#b3b3b3',
+					400: '#808080',
+					500: '#4d4d4d',
+					600: '#262626',
+					700: '#1a1a1a',
+					800: '#0f0f0f',
 				},
 				bg: {
 					base: '#0F0F0F',

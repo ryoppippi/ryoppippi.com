@@ -18,7 +18,7 @@
 	mxa
 	w-xl
 >
-	<hgroup fcol gap-1 items-center mb-3 text-text-100>
+	<hgroup fcol gap-1 items-center mb-3>
 		<h1 text='6xl primary-100'>
 			{data.title}
 		</h1>
@@ -30,7 +30,7 @@
 		<hr ma op25 w-100 />
 	</div>
 
-	<div text-text-100>
+	<div>
 		<Markdown md={data.content} />
 	</div>
 </article>

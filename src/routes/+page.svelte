@@ -6,27 +6,26 @@
 <article
 	container
 	grid
-	mt-8
-	mx-auto
+	mt8
+	mxa
 	place-content-center
 >
 	<Profile />
-	<div mt-8>
+	<div mt8>
 		<h1
 			font-bold
-			mb-6
-			text='4xl center gray-800'
+			mb6
+			text='4xl center'
 		>
 			<span
 				block
 				inline='sm:~'
-				text-text-100
 			>
 				@ryoppippi
 			</span>
 			<span
 				font-medium
-				text='center text-200 xl'
+				text='center xl text-700 dark:text-200'
 			>
 				Engineer
 			</span>
@@ -40,7 +39,7 @@
 	h-full
 	items-center
 	justify-center
-	mx-auto
+	mxa
 >
 	<Social />
 </div>
