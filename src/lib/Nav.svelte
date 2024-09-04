@@ -38,11 +38,11 @@
 	>
 		{#each LINKS as { href, name } (href)}
 			<a
-				class:nav-underline={$page.url.pathname === href}
+				class:border-primary-100={$page.url.pathname === href}
 				block
+				border='b-2 transparent hover:primary-100'
 				font-bold
 				{href}
-				nav-underline='hover:~'
 				px-0
 				py-3
 				text-xl

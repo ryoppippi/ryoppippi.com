@@ -52,7 +52,6 @@ export default defineConfig({
 	],
 	shortcuts: {
 		'fcol': 'flex flex-col',
-		'nav-underline': 'border-b-2 border-transparent border-primary-100',
 		'blog-list-icon': 'shrink-0 size-5 ',
 	},
 });
