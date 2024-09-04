@@ -1,8 +1,10 @@
 import path from 'node:path';
+import process from 'node:process';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import Macros from '@unplugin/macros/vite';
+import Replace from 'unplugin-replace/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 
@@ -41,6 +43,14 @@ export default defineConfig({
 			],
 		}),
 		UnpluginTypia({ log: 'verbose' }),
+		Replace({
+			values: [
+				{
+					find: 'process.env.DOMAIN',
+					replacement: `'${(process.env.CF_PAGES_BRANCH === 'main' ? null : process.env.CF_PAGES_URL) ?? 'https://ryoppippi.com'}'`,
+				},
+			],
+		}),
 		enhancedImages(),
 		Macros(),
 		UnoCSS({

@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import process from 'node:process';
+	import { joinURL } from 'ufo';
 	import { page } from '$app/stores';
 
 	const TITLE = 'ryoppippi' as const satisfies string;
@@ -60,7 +62,7 @@
 		<a
 			flex='~'
 			font-bold
-			href='https://cv.ryoppippi.com'
+			href={joinURL(process.env.DOMAIN as string, '/cv')}
 			items-center
 			opacity='90 hover:100'
 			px-6

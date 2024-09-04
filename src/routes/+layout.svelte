@@ -4,6 +4,7 @@
 
 	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
+	import * as ufo from 'ufo';
 	import { page, updated } from '$app/stores';
 
 	import { onNavigate } from '$app/navigation';
@@ -29,7 +30,8 @@
 		});
 	});
 
-	const title = `ryoppippi.com`;
+	// eslint-disable-next-line node/prefer-global/process
+	const title = ufo.parseURL(process.env.DOMAIN).host;
 </script>
 
 <MetaTags
@@ -43,7 +45,8 @@
 		noimageindex: true,
 	}}
 	openGraph={{
-		url: 'https://ryoppippi.com',
+		// eslint-disable-next-line node/prefer-global/process
+		url: process.env.DOMAIN,
 		type: 'website',
 		description: 'Portfolio of @ryoppippi',
 		images: [

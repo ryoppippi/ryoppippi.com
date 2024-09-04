@@ -13,7 +13,10 @@
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
 		// { class: 'i-line-md:reddit-loop', url: '/reddit' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
-	] as const).map(({ url, ...rest }) => ({ url: ufo.joinURL('https://ryoppippi.com', url), ...rest }));
+	] as const)
+		// @ts-expect-error url is required
+		// eslint-disable-next-line node/prefer-global/process
+		.map(({ url, ...rest }) => ({ url: ufo.joinURL(process.env.DOMAIN, url), ...rest }));
 </script>
 
 <article
