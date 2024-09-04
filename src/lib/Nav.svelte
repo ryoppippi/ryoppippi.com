@@ -44,10 +44,12 @@
 			m='xa md:r0'
 		>
 			{#each LINKS as { href, name } (href)}
+				{@const isPath = $page.url.pathname === href}
 				<a
-					class:border-primary-100={$page.url.pathname === href}
+					class:border-primary-100={isPath}
+					class:border-transparent={!isPath}
 					block
-					border='b-2 transparent hover:primary-100'
+					border='b-2 hover:primary-100'
 					font-bold
 					{href}
 					px-0
