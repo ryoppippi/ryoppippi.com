@@ -16,61 +16,66 @@
 	fcol
 	grid='~ cols-1 md:cols-3'
 	items-center
-	max-w-8xl
+	max-w-xl
+	min-w-0
 	mxa
-	p-5
 	py-6
+	text-base
 	text-text-100
+	text-xl
 >
-	<div flex justify-end>
+	<div flex justify-start>
 		<a
 			font-bold
 			href='/'
-			mb='md:0'
-			mx='a md:0'
+			m='xa md:(x0 b0)'
 		>
 			{TITLE}
 		</a>
 	</div>
-	<nav
-		flex='~ wrap'
-		gap-3
-		mxa
-		text-base
-	>
-		{#each LINKS as { href, name } (href)}
-			<a
-				class:border-primary-100={$page.url.pathname === href}
-				block
-				border='b-2 transparent hover:primary-100'
-				font-bold
-				{href}
-				px-0
-				py-3
-				text-xl
-			>
-				{name}
-			</a>
-		{/each}
-	</nav>
-	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
-		flex
-		justify-start
-		mx='a md:0'
+		col-span-2
+		flex='~ md:row col'
+		justify-end
 	>
-		<a
-			flex='~'
-			font-bold
-			href={joinURL(process.env.DOMAIN as string, '/cv')}
-			items-center
-			opacity='90 hover:100'
-			px-6
-			py-2
-			target='_blank'
+		<nav
+			flex='~ wrap'
+			gap-3
+			m='xa md:r0'
 		>
-			CV <span class='i-line-md:download-outline' />
-		</a>
+			{#each LINKS as { href, name } (href)}
+				<a
+					class:border-primary-100={$page.url.pathname === href}
+					block
+					border='b-2 transparent hover:primary-100'
+					font-bold
+					{href}
+					px-0
+					py-3
+					text-lg
+				>
+					{name}
+				</a>
+			{/each}
+		</nav>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<div
+			flex
+			mx='a md:0'
+		>
+			<a
+				flex='~'
+				font-bold
+				href={joinURL(process.env.DOMAIN as string, '/cv')}
+				items-center
+				opacity='90 hover:100'
+				px-6
+				py-2
+				target='_blank'
+			>
+				CV <span class='i-line-md:download-outline' />
+			</a>
+		</div>
 	</div>
 </header>
 
