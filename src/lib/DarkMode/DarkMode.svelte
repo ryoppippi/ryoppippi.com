@@ -1,21 +1,17 @@
-<script lang='ts'>
-	import { ModeWatcher } from 'mode-watcher';
-	import type { ComponentProps } from 'svelte';
-	import { CheckTransitions } from './runes.svelte';
-
-	const ct = new CheckTransitions();
-
-	const { ...modeWatcherProps }: ComponentProps<ModeWatcher> = $props();
-</script>
-
-<!-- disable transition when reducing motion & transition api is available -->
-<ModeWatcher disableTransitions={ct.isAppearanceTransition} {...modeWatcherProps} />
+<svelte:head>
+	<script>
+		if ( localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		document.documentElement.classList.add('dark')
+		} else {
+		document.documentElement.classList.remove('dark')
+		}
+	</script>
+	<meta name='theme-color' content='#ffffff' media='(prefers-color-scheme: light)' />
+	<meta name='theme-color' content='#121212' media='(prefers-color-scheme: dark)' />
+</svelte:head>
 
 <style>
 :global{
-  body {
-    --at-apply: motion-safe:(transition transition-duration-1s)
-  }
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
