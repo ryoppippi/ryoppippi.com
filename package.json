@@ -64,7 +64,7 @@
 		"secretlint": "^8.2.4",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.7.0",
-		"svelte": "^5.0.0-next.243",
+		"svelte": "^5.0.0-next.244",
 		"svelte-check": "^3.8.6",
 		"svelte-exmarkdown": "^3.0.5",
 		"svelte-meta-tags": "^3.1.4",
