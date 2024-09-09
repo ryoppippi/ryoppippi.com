@@ -51,7 +51,7 @@
 
 <style>
 a {
-	--at-apply: hover:underline;
+	--at-apply: hover:no-underline;
 }
 
 @keyframes enter {
