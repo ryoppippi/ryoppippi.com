@@ -52,7 +52,7 @@
 		"@unplugin/macros": "npm:@jsr/unplugin__macros",
 		"buffer": "^6.0.3",
 		"date-fns": "^3.6.0",
-		"eslint": "^9.9.1",
+		"eslint": "^9.10.0",
 		"eslint-plugin-format": "^0.1.2",
 		"eslint-plugin-svelte": "^2.43.0",
 		"favicons": "^7.2.0",
