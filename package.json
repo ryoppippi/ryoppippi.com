@@ -74,7 +74,7 @@
 		"tslib": "^2.7.0",
 		"typescript": "~5.6.2",
 		"typescript-svelte-plugin": "^0.3.41",
-		"typia": "^6.9.0",
+		"typia": "^6.10.0",
 		"ufo": "^1.5.4",
 		"unocss": "^0.62.3",
 		"unplugin-icons": "^0.19.3",
