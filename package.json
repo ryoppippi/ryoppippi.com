@@ -42,7 +42,7 @@
 		"@std/collections": "npm:@jsr/std__collections",
 		"@sveltejs/adapter-auto": "^3.2.4",
 		"@sveltejs/adapter-static": "^3.0.4",
-		"@sveltejs/enhanced-img": "^0.3.4",
+		"@sveltejs/enhanced-img": "^0.3.7",
 		"@sveltejs/kit": "^2.5.27",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.7",
 		"@total-typescript/ts-reset": "^0.6.1",
