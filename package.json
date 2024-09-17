@@ -47,7 +47,7 @@
 		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.7",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@types/fs-extra": "^11.0.4",
-		"@types/node": "^22.5.4",
+		"@types/node": "^22.5.5",
 		"@unocss/extractor-svelte": "^0.62.3",
 		"@unocss/reset": "^0.62.3",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros",
