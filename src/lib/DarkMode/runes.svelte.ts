@@ -21,7 +21,7 @@ export class CheckTransitions {
 		this.#isReduced = this.#mediaQuery.matches;
 
 		on(this.#mediaQuery, 'change', (_event) => {
-			const event = _event as MediaQueryListEvent;
+			const event = _event;
 			this.#isReduced = event.matches;
 		});
 	}
