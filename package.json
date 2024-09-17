@@ -17,7 +17,8 @@
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"prepare": "nlx bunpare && nr prepare:typia",
-		"prepare:typia": "ts-patch install"
+		"prepare:typia": "ts-patch install",
+		"taze": "nlx taze -r"
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.23.0",
