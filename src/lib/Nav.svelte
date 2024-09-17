@@ -55,7 +55,7 @@
 				items-center
 				px-0
 				py-3
-				tatget={href.startsWith('http') ? '_blank' : undefined}
+				target={href.startsWith('http') ? '_blank' : undefined}
 			>
 				{name}
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
