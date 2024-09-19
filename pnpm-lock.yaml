@@ -93,7 +93,7 @@ importers:
         specifier: ^22.5.5
         version: 22.5.5
       '@unocss/extractor-svelte':
-        specifier: ^0.62.3
+        specifier: ^0.62.4
         version: 0.62.4
       '@unocss/reset':
         specifier: ^0.62.3
