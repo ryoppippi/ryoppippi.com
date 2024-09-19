@@ -48,7 +48,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@iconify-json/simple-icons':
-        specifier: ^1.2.2
+        specifier: ^1.2.3
         version: 1.2.3
       '@iconify-json/teenyicons':
         specifier: ^1.2.0
