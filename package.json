@@ -3,10 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"engines": {
-		"npm": "use bun please!",
-		"yarn": "use bun please!"
-	},
+	"packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -16,8 +13,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
-		"prepare": "nlx bunpare && nr prepare:typia",
-		"prepare:typia": "ts-patch install",
+		"prepare": "ts-patch install",
 		"taze": "nlx taze -r"
 	},
 	"devDependencies": {
