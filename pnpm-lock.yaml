@@ -180,7 +180,7 @@ importers:
         specifier: ^1.5.4
         version: 1.5.4
       unocss:
-        specifier: ^0.62.3
+        specifier: ^0.62.4
         version: 0.62.4(postcss@8.4.47)(rollup@4.21.3)(vite@5.4.6(@types/node@22.5.5))
       unplugin-icons:
         specifier: ^0.19.3
