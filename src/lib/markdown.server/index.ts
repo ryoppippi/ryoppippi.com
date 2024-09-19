@@ -5,26 +5,13 @@ import rt from 'reading-time';
 import matter from 'gray-matter';
 import markdownit from 'markdown-it';
 
+import type { Item, Metadata } from './types';
+
 const md = markdownit({
 	html: true,
 	linkify: true,
 	typographer: true,
 });
-
-type Item = {
-	slug: string;
-	title: string;
-	pubDate: string;
-	isPublished: boolean;
-	readingTime: ReturnType<typeof rt>;
-};
-
-type Metadata = {
-	title: string;
-	date: string;
-	isPublished: boolean;
-	lang: 'en' | 'ja';
-};
 
 export async function parseMarkdown(
 	slug: string,
