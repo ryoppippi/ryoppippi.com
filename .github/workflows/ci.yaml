@@ -14,9 +14,8 @@ jobs:
       - uses: pnpm/action-setup@v4.0.0
       - run: pnpm i --frozen-lockfile
       - run: pnpm secretlint **/*
-      - run: pnpm sync
-      - run: pnpm lint
       - run: pnpm check
+      - run: pnpm lint
 
   # build-and-deploy:
   #   needs:
