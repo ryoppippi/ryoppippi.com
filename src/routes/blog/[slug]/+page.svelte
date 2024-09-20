@@ -29,7 +29,7 @@
 		<hr ma op25 w-100 />
 	</div>
 
-	<div>
+	<article prose='~ dark:invert'>
 		{@html data.content}
-	</div>
+	</article>
 </article>
