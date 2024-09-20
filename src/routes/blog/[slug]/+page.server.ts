@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { parseMarkdown } from '$lib/markdown.server.js';
+import { parseMarkdown } from '$lib/markdown.server';
 
 export async function load({ params: { slug } }) {
 	try {

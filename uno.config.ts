@@ -4,6 +4,7 @@ import {
 	defineConfig,
 	presetAttributify,
 	presetIcons,
+	presetTypography,
 	presetUno,
 	transformerDirectives,
 	transformerVariantGroup,
@@ -14,6 +15,7 @@ export default defineConfig({
 		presetUno(),
 		presetAttributify(),
 		presetIcons({ autoInstall: isDevelopment }),
+		presetTypography(),
 	],
 	transformers: [
 		transformerDirectives(),
