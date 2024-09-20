@@ -1,5 +1,4 @@
 <script>
-	import Markdown from 'svelte-exmarkdown';
 	import { formatDate } from '$lib/util.js';
 
 	const { data } = $props();
@@ -31,6 +30,6 @@
 	</div>
 
 	<div>
-		<Markdown md={data.content} />
+		{@html data.content}
 	</div>
 </article>

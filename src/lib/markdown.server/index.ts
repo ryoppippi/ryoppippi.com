@@ -1,22 +1,17 @@
-import matter from 'gray-matter';
 import { parse } from 'date-fns';
 import typia from 'typia';
 import rt from 'reading-time';
 
-type Item = {
-	slug: string;
-	title: string;
-	pubDate: string;
-	isPublished: boolean;
-	readingTime: ReturnType<typeof rt>;
-};
+import matter from 'gray-matter';
+import markdownit from 'markdown-it';
 
-type Metadata = {
-	title: string;
-	date: string;
-	isPublished: boolean;
-	lang: 'en' | 'ja';
-};
+import type { Item, Metadata } from './types';
+
+const md = markdownit({
+	html: true,
+	linkify: true,
+	typographer: true,
+});
 
 export async function parseMarkdown(
 	slug: string,
@@ -28,7 +23,7 @@ export async function parseMarkdown(
 		throw new Error(`Post not found: ${slug}`);
 	}
 
-	const { data: metadata, content } = matter(mdRaw);
+	const { data: metadata, content: contentRaw } = matter(mdRaw);
 
 	typia.assertGuard<Metadata>(metadata);
 
@@ -36,10 +31,12 @@ export async function parseMarkdown(
 		...metadata,
 		slug,
 		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON(),
-		readingTime: rt(content),
+		readingTime: rt(contentRaw),
 	} as const satisfies Item;
 
 	typia.assertGuard<Item>(item);
+
+	const content = md.render(contentRaw);
 
 	return { ...item, content };
 }
