@@ -49,7 +49,7 @@
 		"@unocss/reset": "^0.62.4",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros",
 		"buffer": "^6.0.3",
-		"date-fns": "^3.6.0",
+		"date-fns": "^4.1.0",
 		"eslint": "^9.10.0",
 		"eslint-plugin-format": "^0.1.2",
 		"eslint-plugin-svelte": "^2.44.0",
