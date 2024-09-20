@@ -34,7 +34,7 @@
 		"@iconify-json/teenyicons": "^1.2.0",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia",
-		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.2",
+		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
 		"@std/collections": "npm:@jsr/std__collections",
 		"@sveltejs/adapter-auto": "^3.2.4",
