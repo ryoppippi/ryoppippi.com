@@ -37,7 +37,7 @@
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
 		"@std/collections": "npm:@jsr/std__collections",
-		"@sveltejs/adapter-auto": "^3.2.4",
+		"@sveltejs/adapter-auto": "^3.2.5",
 		"@sveltejs/adapter-static": "^3.0.4",
 		"@sveltejs/enhanced-img": "^0.3.7",
 		"@sveltejs/kit": "^2.5.27",
