@@ -144,7 +144,7 @@ importers:
         specifier: ^3.7.0
         version: 3.7.0
       svelte:
-        specifier: ^5.0.0-next.246
+        specifier: ^5.0.0-next.247
         version: 5.0.0-next.252
       svelte-check:
         specifier: ^3.8.6
