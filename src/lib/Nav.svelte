@@ -13,6 +13,18 @@
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
 
+{#snippet underline(isPath: boolean, transparentDefault = false)}
+	<!-- svelte-ignore element_invalid_self_closing_tag -->
+	<span
+		class:bg-primary-100={isPath}
+		class:bg-transparent={!isPath || transparentDefault}
+		class:view-transition--nav-underline={isPath}
+		absolute
+		h-0.5
+		w-full
+	/>
+{/snippet}
+
 <header
 	container
 	fcol
@@ -24,13 +36,15 @@
 	py-6
 	text-xl
 >
-	<div flex justify-start>
+	<div flex>
 		<a
 			font-bold
 			href='/'
 			m='xa md:(x0 b0)'
+			relative
 		>
-			{TITLE}
+			<div>{TITLE}</div>
+			<div>{@render underline($page.url.pathname === '/', true)}</div>
 		</a>
 	</div>
 	<nav
@@ -60,15 +74,7 @@
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
 					{#if icon != null} <span class={icon} /> {/if}
 				</div>
-
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<span
-					class={isPath ? 'bg-primary-100' : 'bg-transparent'}
-					class:view-transition-name-nav-underline={isPath}
-					absolute
-					h-0.5
-					w-full
-				/>
+				{@render underline(isPath, false)}
 			</a>
 		{/each}
 		<DarkMode.ToggleButton />
