@@ -46,20 +46,29 @@
 			{@const isPath = $page.url.pathname === href}
 			{@const icon = 'icon' in rest ? rest.icon : null}
 			<a
-				class:border-primary-100={isPath}
-				class:border-transparent={!isPath}
 				block
-				border='b-2 hover:primary-100'
-				flex='~'
 				{href}
-				items-center
 				px-0
-				py-3
+				relative
 				target={href.startsWith('http') ? '_blank' : undefined}
 			>
-				{name}
+				<div
+					flex='~'
+					items-center
+				>
+					{name}
+					<!-- svelte-ignore element_invalid_self_closing_tag -->
+					{#if icon != null} <span class={icon} /> {/if}
+				</div>
+
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				{#if icon != null} <span class={icon} /> {/if}
+				<span
+					class={isPath ? 'bg-primary-100' : 'bg-transparent'}
+					class:view-transition-name-nav-underline={isPath}
+					absolute
+					h-0.5
+					w-full
+				/>
 			</a>
 		{/each}
 		<DarkMode.ToggleButton />
