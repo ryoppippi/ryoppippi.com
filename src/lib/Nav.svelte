@@ -5,7 +5,6 @@
 
 	import * as DarkMode from '$lib/DarkMode';
 
-	const TITLE = 'ryoppippi' as const satisfies string;
 	const LINKS = [
 		{ name: 'works', href: '/works' },
 		{ name: 'blog', href: '/blog' },
@@ -43,7 +42,12 @@
 			m='xa md:(x0 b0)'
 			relative
 		>
-			<div>{TITLE}</div>
+			<div
+				class:hidden={$page.url.pathname === '/'}
+				view-transition--title
+			>
+				@ryoppippi
+			</div>
 			<div>{@render underline($page.url.pathname === '/', true)}</div>
 		</a>
 	</div>

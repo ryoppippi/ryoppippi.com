@@ -16,6 +16,7 @@
 			font-bold
 			mb6
 			text='4xl center'
+			view-transition--title
 		>
 			<span
 				block
