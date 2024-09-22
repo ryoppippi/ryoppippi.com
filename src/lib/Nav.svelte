@@ -82,17 +82,19 @@
 				{@render underline(isPath, false)}
 			</a>
 		{/each}
-		<DarkMode.ToggleButton />
-		<a
-			class='i-teenyicons:github-solid'
-			flex='~'
-			href='https://github.com/ryoppippi/ryoppippi.com'
-			items-center
-			mya
-			target='_blank'
-		>
-			souce code
-		</a>
+		<div flex gap-2 view-transition--nav-icons>
+			<DarkMode.ToggleButton />
+			<a
+				class='i-teenyicons:github-solid'
+				flex='~'
+				href='https://github.com/ryoppippi/ryoppippi.com'
+				items-center
+				mya
+				target='_blank'
+			>
+				souce code
+			</a>
+		</div>
 	</nav>
 </header>
 
