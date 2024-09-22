@@ -27,6 +27,7 @@
 				@ryoppippi
 			</span>
 			<span
+				animate-pulse
 				font-medium
 				text='center xl text-700 dark:text-200'
 			>
