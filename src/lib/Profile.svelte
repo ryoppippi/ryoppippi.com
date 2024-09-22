@@ -7,7 +7,7 @@
 <div>
 	<enhanced:img
 		style:--tag={name}
-		class='object-fit mx-auto aspect-square w-1/2 rounded-full md:(h-64 w-64)'
+		class='object-contain mx-auto aspect-square w-1/2 rounded-full md:(h-64 w-64)'
 		alt='profile'
 		src={img} />
 </div>
