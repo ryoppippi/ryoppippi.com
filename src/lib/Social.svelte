@@ -27,7 +27,7 @@
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { pathname } = ufo.parseURL(url)}
 		{@const path = pathname.replace('/', '')}
-		<div class='animation' cursor-pointer>
+		<div cursor-pointer op='hover:75'>
 			<a aria-label="link to ryoppippi's {path}" href={url} rel='noopener noreferrer' target='_blank'>
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
 				<div
@@ -39,30 +39,3 @@
 		</div>
 	{/each}
 </article>
-
-<style>
-	.animation:hover {
-		animation: rotate 4s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite both;
-	}
-
-	@keyframes rotate {
-		0% {
-			transform: scale(1) rotateZ(0);
-		}
-		25% {
-			transform: scale(1.3) rotateZ(30deg);
-		}
-		50% {
-			transform: scale(1) rotateZ(0);
-		}
-		75% {
-			transform: scale(1.3) rotateZ(-30deg);
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.animation:hover {
-			animation: none;
-		}
-	}
-</style>
