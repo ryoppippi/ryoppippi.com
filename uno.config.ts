@@ -25,6 +25,7 @@ export default defineConfig({
 		pipeline: {
 			exclude: [
 				/~icons/,
+				/svelte-meta-tags/,
 			],
 		},
 	},
