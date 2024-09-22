@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import { fade } from 'svelte/transition';
 	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
@@ -20,10 +19,11 @@
 </script>
 
 <article
+	animate='duration-3000 keyframes-fade-in'
 	gap-3
 	grid='~ cols-3 sm:cols-7'
 	place-items-center
-	in:fade|global={{ duration: 3000 }}>
+>
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { pathname } = ufo.parseURL(url)}
 		{@const path = pathname.replace('/', '')}
