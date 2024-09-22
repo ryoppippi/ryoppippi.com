@@ -27,6 +27,7 @@
 <header
 	container
 	fcol
+	gap-y-lg
 	grid='~ cols-1 md:cols-3'
 	items-center
 	max-w-xl
