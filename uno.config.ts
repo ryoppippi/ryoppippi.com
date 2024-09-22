@@ -21,6 +21,13 @@ export default defineConfig({
 		transformerDirectives(),
 		transformerVariantGroup(),
 	],
+	content: {
+		pipeline: {
+			exclude: [
+				/~icons/,
+			],
+		},
+	},
 	extendTheme: theme => deepMerge(
 		theme,
 		{
