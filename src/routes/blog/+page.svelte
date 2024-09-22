@@ -69,7 +69,7 @@ to {
 [data-animate] {
 	--stagger: 0;
 	--delay: 80ms;
-	--start: 0ms;
+	--start: 300ms;
 }
 
 [data-animate] {
