@@ -64,6 +64,7 @@
 			{@const isPath = $page.url.pathname === href}
 			{@const icon = 'icon' in rest ? rest.icon : null}
 			<a
+				style:view-transition-name='-nav-link-{name}'
 				block
 				{href}
 				px-0
