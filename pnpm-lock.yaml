@@ -186,8 +186,8 @@ importers:
         specifier: ^0.3.41
         version: 0.3.41(svelte@5.0.0-next.252)(typescript@5.6.2)
       typia:
-        specifier: ^6.10.0
-        version: 6.10.0(typescript@5.6.2)
+        specifier: ^6.10.1
+        version: 6.10.2(typescript@5.6.2)
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -3028,8 +3028,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typia@6.10.0:
-    resolution: {integrity: sha512-BYOga6Yk7p3/dV73Bfqr4XUBNgf1TBuF3ucEYYzTbC6VpKK8wqDPLUID+YNqLSy+Ud3NupytI/jPBSdKikYTMw==}
+  typia@6.10.2:
+    resolution: {integrity: sha512-osSOovyx9T4WrF7jPIVvmWj3YzNX7Fzen1e+NUz9/ori3xx+Z5KkNN7idSVN+fndPfQqmzVe5Jmua1oaUGvV6A==}
     hasBin: true
     peerDependencies:
       typescript: '>=4.8.0 <5.7.0'
@@ -3771,7 +3771,7 @@ snapshots:
       pkg-types: 1.2.0
       type-fest: 4.26.1
       typescript: 5.5.4
-      typia: 6.10.0(typescript@5.5.4)
+      typia: 6.10.2(typescript@5.5.4)
       unplugin: 1.14.1
       vite: 5.4.6(@types/node@22.5.5)
     transitivePeerDependencies:
@@ -6256,7 +6256,7 @@ snapshots:
 
   typescript@5.6.2: {}
 
-  typia@6.10.0(typescript@5.5.4):
+  typia@6.10.2(typescript@5.5.4):
     dependencies:
       '@samchon/openapi': 1.0.2
       commander: 10.0.1
@@ -6266,7 +6266,7 @@ snapshots:
       randexp: 0.5.3
       typescript: 5.5.4
 
-  typia@6.10.0(typescript@5.6.2):
+  typia@6.10.2(typescript@5.6.2):
     dependencies:
       '@samchon/openapi': 1.0.2
       commander: 10.0.1
