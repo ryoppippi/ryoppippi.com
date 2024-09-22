@@ -10,7 +10,9 @@
 	mxa
 	place-content-center
 >
-	<Profile />
+	<div animate='duration-1000 keyframes-flip-in-x'>
+		<Profile />
+	</div>
 	<div mt8>
 		<h1
 			font-bold
@@ -29,6 +31,7 @@
 				text='center xl text-700 dark:text-200'
 			>
 				Engineer
+
 			</span>
 		</h1>
 	</div>
