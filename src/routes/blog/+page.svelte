@@ -12,7 +12,7 @@
 		{@const href = 'link' in item ? item.link : ufo.joinURL('/blog', item.slug)}
 		<div
 			style:--stagger={count}
-			style:--depaly='150ms'
+			class='[--delay:80ms] sm:[--delay:150ms]'
 			data-animate
 			my-2
 		>
