@@ -5,7 +5,7 @@
 	const { data } = $props();
 </script>
 
-<div mxa px-2>
+<div mxa px-10>
 	{#each data.posts as item, count (item.title)}
 		{@const external = 'link' in item && item.link.startsWith('http')}
 		{@const pubDate = new Date(item.pubDate)}

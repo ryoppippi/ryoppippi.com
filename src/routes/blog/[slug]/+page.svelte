@@ -15,7 +15,6 @@
 	max-w-xl
 	min-w-0
 	mxa
-	w-xl
 >
 	<hgroup fcol gap-1 items-center mb-3>
 		<h1 text='6xl primary-100'>
@@ -29,7 +28,7 @@
 		<hr ma op25 w-100 />
 	</div>
 
-	<article prose='~ dark:invert'>
+	<article mx-10 prose='~ dark:invert'>
 		{@html data.content}
 	</article>
 </article>
