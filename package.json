@@ -20,7 +20,7 @@
 	"devDependencies": {
 		"@antfu/ni": "^0.23.0",
 		"@iconify-json/akar-icons": "^1.2.0",
-		"@iconify-json/devicon-plain": "^1.2.1",
+		"@iconify-json/devicon-plain": "^1.2.2",
 		"@iconify-json/fa-solid": "^1.2.0",
 		"@iconify-json/feather": "^1.2.0",
 		"@iconify-json/grommet-icons": "^1.2.0",
