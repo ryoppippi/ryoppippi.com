@@ -8,15 +8,9 @@ import type { Item, Metadata } from './types';
 import { md } from './markdown-it.js';
 
 export async function parseMarkdown(
+	mdRaw: string,
 	slug: string,
 ): Promise<Item & { content: string }> {
-	const posts = import.meta.glob(`$posts/*.md`, { eager: true, as: 'raw' });
-
-	const [_, mdRaw] = Object.entries(posts).find(([filepath]) => filepath.endsWith(`/${slug}.md`)) ?? [];
-	if (mdRaw == null) {
-		throw new Error(`Post not found: ${slug}`);
-	}
-
 	const { data: metadata, content: contentRaw } = matter(mdRaw);
 
 	typia.assertGuard<Metadata>(metadata);

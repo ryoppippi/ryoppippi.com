@@ -3,14 +3,14 @@ import sortOn from 'sort-on';
 import { parseMarkdown } from '$lib/markdown.server';
 
 async function getPosts() {
-	const originals = import.meta.glob('$posts/*.md', { eager: true, as: 'raw' });
+	const originals = import.meta.glob('$contents/blog/*.md', { eager: true, as: 'raw' });
 
-	const posts = await Promise.all(Object.entries(originals).map(async ([filepath]) => {
+	const posts = await Promise.all(Object.entries(originals).map(async ([filepath, mdRaw]) => {
 		const slug = filepath.split('/').at(-1)?.replace('.md', '');
 		if (slug == null) {
 			return undefined;
 		}
-		const post = await parseMarkdown(slug);
+		const post = await parseMarkdown(mdRaw, slug);
 		if (!post.isPublished) {
 			return undefined;
 		}
