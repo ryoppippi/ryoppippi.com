@@ -14,7 +14,8 @@ type ReturnType = Readonly<Record<keyof typeof _projects, (Required<Project> & G
 export const load: PageServerLoad = async ({ fetch }) => {
 	const cachePath = getCachePath('projects', _projects);
 	using cacheJson = new Json<ReturnType>(cachePath, { allowNoExist: true });
-	if (cacheJson.data != null) {
+	/* if null or empty */
+	if (cacheJson.data != null && Object.keys(cacheJson.data).length > 0) {
 		return {
 			projects: cacheJson.data,
 		};
@@ -24,16 +25,18 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	for (const [gerne, projects] of Object.entries(writableProjects) as Entries<typeof _projects>) {
 		for (const [index, project] of projects.entries()) {
 			let originalProject = structuredClone(project as Project);
-			if (!Object.hasOwn(project, 'link')) {
+			if (originalProject?.link != null) {
 				originalProject = {
 					...originalProject,
 					link: joinURL(GITHUB_URL, 'ryoppippi', project.name),
 				};
 			}
-			if (!Object.hasOwn(project, 'desc')
-				&& 'link' in project && project.link.startsWith(GITHUB_URL)) {
+			if (
+				originalProject.description == null
+				&& originalProject?.link?.startsWith(GITHUB_URL) === true
+			) {
 				try {
-					const unghURL = project.link.replace(GITHUB_URL, 'https://ungh.cc/repos');
+					const unghURL = originalProject.link.replace(GITHUB_URL, 'https://ungh.cc/repos');
 					const ghRepo = await fetch(unghURL);
 					if (!ghRepo.ok) {
 						throw new Error(`Failed to fetch ${unghURL}`);
@@ -55,7 +58,9 @@ export const load: PageServerLoad = async ({ fetch }) => {
 
 	const _writableProjects = writableProjects as ReturnType;
 
-	cacheJson.data = _writableProjects;
+	if (_writableProjects != null && JSON.stringify(_writableProjects) !== JSON.stringify(cacheJson.data)) {
+		cacheJson.data = _writableProjects;
+	}
 
 	return {
 		projects: _writableProjects,
