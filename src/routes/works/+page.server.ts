@@ -1,13 +1,25 @@
 import type { Entries } from 'type-fest';
+import fs from 'fs-extra';
 import { joinURL } from 'ufo';
 import typia from 'typia';
 import type { PageServerLoad } from './$types';
 import type { GHRepo, Project, Projects } from './projects';
 import _projects from './projects';
+import { Json, getCachePath } from '$lib/cache';
 
 const GITHUB_URL = `https://github.com`;
 
+type ReturnType = Readonly<Record<keyof typeof _projects, (Required<Project> & GHRepo['repo'])[]>>;
+
 export const load: PageServerLoad = async ({ fetch }) => {
+	const cachePath = getCachePath('projects', _projects);
+	using cacheJson = new Json<ReturnType>(cachePath, { allowNoExist: true });
+	if (cacheJson.data != null) {
+		return {
+			projects: cacheJson.data,
+		};
+	}
+
 	const writableProjects: Projects = _projects;
 	for (const [gerne, projects] of Object.entries(writableProjects) as Entries<typeof _projects>) {
 		for (const [index, project] of projects.entries()) {
@@ -40,7 +52,12 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			writableProjects[gerne][index] = originalProject;
 		};
 	}
+
+	const _writableProjects = writableProjects as ReturnType;
+
+	cacheJson.data = _writableProjects;
+
 	return {
-		projects: writableProjects as Readonly<Record<keyof typeof _projects, (Required<Project> & GHRepo['repo'])[]>>,
+		projects: _writableProjects,
 	};
 };
