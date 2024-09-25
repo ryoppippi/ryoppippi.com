@@ -23,6 +23,10 @@ export default defineConfig({
 	],
 	content: {
 		pipeline: {
+			include: [
+				/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+				'src/routes/works/projects.ts',
+			],
 			exclude: [
 				/~icons/,
 				/svelte-meta-tags/,
