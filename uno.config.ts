@@ -11,6 +11,14 @@ import {
 	transformerVariantGroup,
 } from 'unocss';
 
+// TODO: bug of unocss
+import ossProjects from './src/routes/projects/oss-projects.js';
+
+const projectSafelist: string[] = [];
+Object.values(ossProjects).forEach((projects) => {
+	projectSafelist.push(...projects.map(project => project.icon));
+});
+
 export default defineConfig({
 	presets: [
 		presetUno(),
@@ -84,4 +92,5 @@ export default defineConfig({
 		},
 		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
 	],
+	safelist: [...projectSafelist],
 });
