@@ -15,6 +15,7 @@
 	max-w-full
 	no-underline
 	op='70 dark:50 hover:80'
+	select-none
 	target='_blank'
 	transition
 >
@@ -34,9 +35,8 @@
 		<div text-lg truncate>
 			{name}
 		</div>
-		<p line-clamp-2 text-xs>
+		<p h-8 line-clamp-2 text-xs>
 			{description ?? ''}
 		</p>
 	</div>
-
 </a>

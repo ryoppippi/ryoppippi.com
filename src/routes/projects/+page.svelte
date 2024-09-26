@@ -70,7 +70,7 @@
 					op='35 dark:20'
 					py-8
 					select-none
-					text='size-4.5em transparent'
+					text='size-4.0em transparent'
 					text-stroke='hex-aaa [1.5px]'
 				>
 					{genre}
