@@ -6,6 +6,7 @@ import {
 	presetIcons,
 	presetTypography,
 	presetUno,
+	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
@@ -15,6 +16,15 @@ export default defineConfig({
 		presetUno(),
 		presetAttributify(),
 		presetIcons({ autoInstall: isDevelopment }),
+		presetWebFonts({
+			provider: 'bunny',
+			fonts: {
+				sans: 'Inter:400,600,800',
+				mono: 'DM Mono:400,600',
+				condensed: 'Roboto Condensed',
+				wisper: 'Bad Script',
+			},
+		}),
 		presetTypography(),
 	],
 	transformers: [
@@ -34,6 +44,7 @@ export default defineConfig({
 		},
 	},
 	extendTheme: theme => deepMerge(
+		// eslint-disable-next-line ts/no-unsafe-argument
 		theme,
 		{
 			colors: {
