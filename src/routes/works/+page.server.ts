@@ -1,6 +1,7 @@
 import type { Entries } from 'type-fest';
 import { joinURL } from 'ufo';
 import typia from 'typia';
+import { isEqual } from 'ohash';
 import type { PageServerLoad } from './$types';
 import type { GHRepo, Project, Projects } from './projects';
 import _projects from './projects';
@@ -59,7 +60,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 
 	const _writableProjects = writableProjects as ReturnType;
 
-	if (_writableProjects != null && JSON.stringify(_writableProjects) !== JSON.stringify(cacheJson.data)) {
+	if (!isEqual(cacheJson.data, _writableProjects)) {
 		cacheJson.data = _writableProjects;
 	}
 

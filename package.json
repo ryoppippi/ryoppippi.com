@@ -79,6 +79,7 @@
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
 		"mode-watcher": "^0.4.1",
+		"ohash": "^1.1.4",
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^8.2.4",
