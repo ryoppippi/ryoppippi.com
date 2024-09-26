@@ -11,7 +11,6 @@
 		{ class: 'i-line-md:linkedin', url: '/linkedin' },
 		{ class: 'i-line-md:twitter', url: '/twitter' },
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
-		// { class: 'i-line-md:reddit-loop', url: '/reddit' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
 	] as const)
 		.map(({ url, ...rest }) => ({ url: subdomain(url), ...rest }));
