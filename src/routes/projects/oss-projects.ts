@@ -30,11 +30,11 @@ export default {
 		},
 		{
 			name: 'vim-bun-lock',
-			icon: 'i-vscode-icons:file-type-bunfig',
+			icon: 'i-catppuccin:bun',
 		},
 		{
 			name: 'vim-ray-so',
-			icon: 'i-material-symbols:android-camera-outline',
+			icon: 'i-ph:camera-light',
 		},
 		{
 			name: 'vim-svelte-inspector',
@@ -60,17 +60,17 @@ export default {
 		},
 		{
 			name: 'svelte-html-event',
-			icon: 'i-simple-icons:svelte',
+			icon: 'i-ph:ticket-light',
 		},
 		{
 			name: 'svelte-preprocess-import-css',
-			icon: 'i-catppuccin:svelte-config?mask',
+			icon: 'i-ph:palette-light',
 		},
 	],
-	'Typescript Ecosystem': [
+	'TypeScript Ecosystem': [
 		{
 			name: 'unplugin-typia',
-			icon: 'i-pajamas:issue-type-enhancement',
+			icon: 'i-ph:magic-wand-light',
 		},
 		{
 			name: 'vite-plugin-favicons',
@@ -86,7 +86,7 @@ export default {
 		},
 		{
 			name: 'pkg-to-jsr',
-			icon: 'i-material-symbols:edit-document-outline-sharp',
+			icon: 'i-ph:selection-foreground-light',
 		},
 		{
 			name: 'mirror-jsr-to-npm',
@@ -128,11 +128,11 @@ export default {
 	'Fish Plugins': [
 		{
 			name: 'fish-na',
-			icon: 'i-codicon:package',
+			icon: 'i-ph:package',
 		},
 		{
 			name: 'fish-poetry',
-			icon: 'i-mdi:language-python?mask',
+			icon: 'i-teenyicons:python-outline',
 		},
 	],
 	'Zig Ecosystem': [
@@ -145,7 +145,7 @@ export default {
 	'Configs': [
 		{
 			name: 'dotfiles',
-			icon: 'i-icon-park-outline:config',
+			icon: 'i-catppuccin:folder-config?mask',
 		},
 	],
 } as const satisfies Record<Genre, Project[ ]>;
