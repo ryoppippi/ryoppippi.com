@@ -3,18 +3,18 @@ import { joinURL } from 'ufo';
 import type { tags } from 'typia';
 import typia from 'typia';
 import type { PageServerLoad } from './$types';
-import type { GHRepo, Project, Projects } from './projects';
-import _projects from './projects';
+import type { GHRepo, Project, Projects } from './oss-projects';
+import _ossProjects from './oss-projects';
 
 const GITHUB_URL = `https://github.com`;
 
-type ReturnType = Readonly<Record<keyof typeof _projects, (Required<Project> & GHRepo['repo'])[]>>;
+type ReturnType = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	const writableProjects: Projects = _projects;
+	const writableOSSProjects: Projects = _ossProjects;
 	const fetchPromises: Promise<void>[] = [];
 
-	for (const [gerne, projects] of Object.entries(writableProjects) as Entries<typeof _projects>) {
+	for (const [gerne, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
 		for (const [index, project] of projects.entries()) {
 			let originalProject = structuredClone(project as Project);
 			if (!typia.is<string>(originalProject?.link)) {
@@ -43,19 +43,19 @@ export const load: PageServerLoad = async ({ fetch }) => {
 					catch (e) {
 						console.error(e);
 					}
-					writableProjects[gerne][index] = originalProject;
+					writableOSSProjects[gerne][index] = originalProject;
 				})();
 				fetchPromises.push(fetchPromise);
 			}
 			else {
-				writableProjects[gerne][index] = originalProject;
+				writableOSSProjects[gerne][index] = originalProject;
 			}
 		}
 	}
 
 	await Promise.all(fetchPromises);
 
-	const _writableProjects = writableProjects as ReturnType;
+	const _writableProjects = writableOSSProjects as ReturnType;
 
 	return {
 		projects: _writableProjects,
