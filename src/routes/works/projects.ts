@@ -22,7 +22,7 @@ export type GHRepo = {
 };
 
 export default {
-	'vim/neovim': [
+	'Vim/Neovim': [
 		{
 			name: 'dotfiles',
 			icon: 'i-icon-park-outline:config',
@@ -32,40 +32,26 @@ export default {
 			icon: 'i-catppuccin:pnpm?mask',
 		},
 		{
-			name: 'nvim-reset',
-			icon: 'i-system-uicons:reset-alt',
-		},
-		{
 			name: 'vim-ray-so',
 			icon: 'i-material-symbols:android-camera-outline',
-		},
-		{
-			name: 'vim-bad-apple',
-			icon: 'i-hugeicons:apple-01',
 		},
 		{
 			name: 'vim-svelte-inspector',
 			icon: 'i-material-symbols-light:frame-inspect-rounded',
 		},
-	],
-	'typescript ecosystems': [
 		{
-			name: 'unplugin-typia',
-			icon: 'i-pajamas:issue-type-enhancement',
+			name: 'nvim-reset',
+			icon: 'i-system-uicons:reset-alt',
 		},
 		{
-			name: 'vite-plugin-favicons',
-			icon: 'i-tabler:favicon',
-		},
-		{
-			name: 'typiautil ',
-			icon: 'i-tabler:favicon', // TODO
+			name: 'vim-bad-apple',
+			icon: 'i-hugeicons:apple-01',
 		},
 	],
-	'svelte ecosystem': [
+	'Svelte Ecosystem': [
 		{
 			name: 'sveltweet',
-			icon: 'i-ph:twitter-logo-fill',
+			icon: 'i-ph:twitter-logo',
 		},
 		{
 			name: 'svelte-preprocess-budoux',
@@ -80,20 +66,18 @@ export default {
 			icon: 'i-catppuccin:svelte-config?mask',
 		},
 	],
-	'typescript build': [
+	'Typescript Ecosystem': [
 		{
-			name: 'limo',
-			icon: 'i-material-symbols:edit-document-outline',
+			name: 'unplugin-typia',
+			icon: 'i-pajamas:issue-type-enhancement',
 		},
 		{
-			name: 'str-fns',
-			icon: 'i-oui:app-devtools',
+			name: 'vite-plugin-favicons',
+			icon: 'i-tabler:favicon',
 		},
-	],
-	'cli': [
 		{
-			name: 'curxy',
-			icon: 'i-solar:cursor-square-broken',
+			name: 'typiautil ',
+			icon: 'i-ph:toolbox-light',
 		},
 		{
 			name: 'pkg-to-jsr',
@@ -104,19 +88,49 @@ export default {
 			icon: 'i-octicon:mirror',
 		},
 		{
-			name: 'nyancat.zig',
-			icon: 'i-solar:cat-broken',
-		},
-		{
-			name: 'na.fish',
-			icon: 'i-codicon:package',
+			name: 'bun-plugin-isolated-decl',
+			icon: 'i-ph:package',
 		},
 		{
 			name: 'bunpare',
 			icon: 'i-icon-park-outline:setting-config',
 		},
 	],
-	'misc': [
+	'TypeScript Libraries': [
+		{
+			name: 'limo',
+			icon: 'i-material-symbols:edit-document-outline',
+		},
+		{
+			name: 'str-fns',
+			icon: 'i-oui:app-devtools',
+		},
+	],
+	'CLI': [
+		{
+			name: 'curxy',
+			icon: 'i-solar:cursor-square-broken',
+		},
+		{
+			name: 'nyancat.zig',
+			icon: 'i-solar:cat-broken',
+		},
+		{
+			name: 'zigchat',
+			icon: 'i-ph:chat-light',
+		},
+	],
+	'Fish Plugins': [
+		{
+			name: 'fish-na',
+			icon: 'i-codicon:package',
+		},
+		{
+			name: 'fish-poetry',
+			icon: 'i-mdi:language-python?mask',
+		},
+	],
+	'Zig Ecosystem': [
 		{
 			name: 'zigcv',
 			link: 'https://github.com/zigcv/zigcv',
