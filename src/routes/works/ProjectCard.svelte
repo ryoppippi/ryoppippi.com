@@ -5,34 +5,33 @@
 	const { name, description, icon, link } = project;
 </script>
 
-<div prose='~ dark:invert'>
+<div>
 	<!-- eslint-disable-next-line svelte/require-each-key -->
 	<!-- card conmponrnt -->
 	<a
-		grid='~ cols-3'
+		bg='hover:[#88888811]'
+		grid='~ cols-5'
 		href={link}
 		no-underline
-		op='70 hover:100'
+		op='70 dark:50 hover:80'
 		target='_blank'
 		transition
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
 		<div
 			grid
-			op50
 			place-content-center
 		>
 			<div class={icon} op50 text-3xl />
 		</div>
 		<div
 			fcol
-			grid-col-span-2
-			op50
+			grid-col-span-4
 		>
-			<div text-lg>
+			<div text-lg truncate>
 				{name}
 			</div>
-			<p text-sm>
+			<p line-clamp-2 text-xs>
 				{description ?? ''}
 			</p>
 		</div>

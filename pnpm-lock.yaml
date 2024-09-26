@@ -50,6 +50,9 @@ importers:
       '@iconify-json/line-md':
         specifier: ^1.2.1
         version: 1.2.1
+      '@iconify-json/logos':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@iconify-json/material-symbols':
         specifier: ^1.2.1
         version: 1.2.1
@@ -92,6 +95,9 @@ importers:
       '@iconify-json/teenyicons':
         specifier: ^1.2.0
         version: 1.2.0
+      '@iconify-json/vscode-icons':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.23
         version: '@jsr/ryoppippi__eslint-config@0.0.23(@typescript-eslint/utils@8.7.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2))(@vue/compiler-sfc@3.5.8)(eslint-plugin-format@0.1.2(eslint@9.11.1(jiti@1.21.6)))(eslint-plugin-svelte@2.44.0(eslint@9.11.1(jiti@1.21.6))(svelte@5.0.0-next.259))(eslint@9.11.1(jiti@1.21.6))(svelte-eslint-parser@0.41.1(svelte@5.0.0-next.259))(svelte@5.0.0-next.259)(typescript@5.6.2)'
@@ -735,6 +741,9 @@ packages:
   '@iconify-json/line-md@1.2.1':
     resolution: {integrity: sha512-XMga2q5PiQ2LrU7K06hfqSYOA+7UFhRwhl52xvPCPAiLmtdfWBeX38nA46mcaLj7sdNo+DK+BJy9iTrzQ0ewNw==}
 
+  '@iconify-json/logos@1.2.0':
+    resolution: {integrity: sha512-VkU9QSqeZR2guWbecdqkcoZEAJfgJJTUm6QAsypuZQ7Cve6zy39wOXDjp2H31I8QyQy4O3Cz96+pNji6UQFg4w==}
+
   '@iconify-json/material-symbols-light@1.2.1':
     resolution: {integrity: sha512-V+YTtETuJHABPshWNP8i0zDUhscgTu8tQWl79BS4BrJbKnQJsGAZ2Zys4NNnRKalxcTj4yGmqW9YXPO3wGs0hA==}
 
@@ -776,6 +785,9 @@ packages:
 
   '@iconify-json/teenyicons@1.2.0':
     resolution: {integrity: sha512-3tKsH40ZOafvzXQ3KbmQpTRWqucn1B2wRt5LE+6glpDs1QqcRwp3jGEZzLVhhW7lZOZuG1iLRd+bVe04uWG9hA==}
+
+  '@iconify-json/vscode-icons@1.2.2':
+    resolution: {integrity: sha512-bTpT0HJDRqGkxQv8oiETNHLEnBZpnA1QaRD35CQyO7M7qgWVLx2xwn/lK6e4waojmlPC3ckMBx3WFIUUn0/Jdg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -3707,6 +3719,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/logos@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/material-symbols-light@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
@@ -3760,6 +3776,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/teenyicons@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/vscode-icons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 

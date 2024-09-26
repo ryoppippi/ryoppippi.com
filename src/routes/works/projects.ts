@@ -24,12 +24,12 @@ export type GHRepo = {
 export default {
 	'Vim/Neovim': [
 		{
-			name: 'dotfiles',
-			icon: 'i-icon-park-outline:config',
-		},
-		{
 			name: 'nvim-pnpm-catalog-lens',
 			icon: 'i-catppuccin:pnpm?mask',
+		},
+		{
+			name: 'vim-bun-lock',
+			icon: 'i-vscode-icons:file-type-bunfig',
 		},
 		{
 			name: 'vim-ray-so',
@@ -76,7 +76,11 @@ export default {
 			icon: 'i-tabler:favicon',
 		},
 		{
-			name: 'typiautil ',
+			name: 'slidev-transformer-budoux',
+			icon: 'i-tabler:language-hiragana',
+		},
+		{
+			name: 'typiautil',
 			icon: 'i-ph:toolbox-light',
 		},
 		{
@@ -135,6 +139,12 @@ export default {
 			name: 'zigcv',
 			link: 'https://github.com/zigcv/zigcv',
 			icon: 'i-file-icons:opencv',
+		},
+	],
+	'Configs': [
+		{
+			name: 'dotfiles',
+			icon: 'i-icon-park-outline:config',
 		},
 	],
 } as const satisfies Record<Genre, Project[ ]>;
