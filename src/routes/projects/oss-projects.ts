@@ -21,6 +21,7 @@ export type GHRepo = {
 	};
 };
 
+// @unocss-include
 export default {
 	'Vim/Neovim': [
 		{
