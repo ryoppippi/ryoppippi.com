@@ -6,7 +6,7 @@
 	import * as DarkMode from '$lib/DarkMode';
 
 	const LINKS = [
-		{ name: 'works', href: '/works' },
+		{ name: 'projects', href: '/projects' },
 		{ name: 'blog', href: '/blog' },
 		{ name: 'cv', href: joinURL(process.env.DOMAIN as string, '/cv'), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
@@ -25,13 +25,10 @@
 {/snippet}
 
 <header
-	container
 	fcol
 	gap-y-lg
 	grid='~ cols-1 md:cols-3'
 	items-center
-	max-w-xl
-	min-w-0
 	mxa
 	py-6
 	text-xl
@@ -40,7 +37,7 @@
 		<a
 			font-bold
 			href='/'
-			m='xa md:(x0 b0)'
+			m='x0 md:b0'
 			relative
 		>
 			<div

@@ -13,7 +13,7 @@
 		<div
 			style:--stagger={count}
 			class='[--delay:80ms] sm:[--delay:150ms]'
-			data-animate
+			data-sliding-animate
 			my-2
 		>
 			<p opacity-70>
@@ -52,36 +52,5 @@
 <style>
 a {
 	--at-apply: hover:no-underline;
-}
-
-@keyframes enter {
-0% {
-	opacity: 0;
-	transform: translateY(10px);
-}
-
-to {
-	opacity: 1;
-	transform: none;
-}
-}
-
-[data-animate] {
-	--stagger: 0;
-	--delay: 80ms;
-	--start: 300ms;
-}
-
-[data-animate] {
-	opacity: 0;
-	animation: enter 0.6s both;
-	animation-iteration-count: 1;
-	animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
-}
-
-@media (prefers-reduced-motion: reduce) {
-	[data-animate] {
-		animation: none;
-	}
 }
 </style>

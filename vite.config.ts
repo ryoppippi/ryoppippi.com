@@ -19,6 +19,9 @@ function relativePath(...args: string[]): string {
 }
 
 export default defineConfig({
+	esbuild: {
+		target: 'es2022',
+	},
 	plugins: [
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
@@ -35,6 +38,7 @@ export default defineConfig({
 				{ from: '/icon', to: '/ryoppippi.png' },
 				{ from: '/github', to: 'https://github.com/ryoppippi' },
 				{ from: '/gh', to: 'https://github.com/ryoppippi' },
+				{ from: '/gh-by-stars', to: 'https://github.com/ryoppippi?tab=repositories&sort=stargazers' },
 				{ from: '/pr', to: 'https://pr.ryoppippi.com' },
 				{ from: '/zenn', to: 'https://zenn.dev/ryoppippi' },
 				{ from: '/linkedin', to: 'https://www.linkedin.com/in/ryoppippi/' },

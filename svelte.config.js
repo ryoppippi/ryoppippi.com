@@ -34,7 +34,7 @@ const config = {
 			},
 		},
 		alias: {
-			$posts: './src/posts',
+			$contents: './src/contents',
 		},
 		paths: {
 			/**

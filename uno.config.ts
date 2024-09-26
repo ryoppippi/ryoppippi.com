@@ -6,6 +6,7 @@ import {
 	presetIcons,
 	presetTypography,
 	presetUno,
+	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
@@ -15,6 +16,15 @@ export default defineConfig({
 		presetUno(),
 		presetAttributify(),
 		presetIcons({ autoInstall: isDevelopment }),
+		presetWebFonts({
+			provider: 'bunny',
+			fonts: {
+				sans: 'Inter:400,600,800',
+				mono: 'DM Mono:400,600',
+				condensed: 'Roboto Condensed',
+				wisper: 'Bad Script',
+			},
+		}),
 		presetTypography(),
 	],
 	transformers: [
@@ -23,6 +33,10 @@ export default defineConfig({
 	],
 	content: {
 		pipeline: {
+			include: [
+				/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+				'src/routes/projects/projects.ts',
+			],
 			exclude: [
 				/~icons/,
 				/svelte-meta-tags/,
@@ -30,6 +44,7 @@ export default defineConfig({
 		},
 	},
 	extendTheme: theme => deepMerge(
+		// eslint-disable-next-line ts/no-unsafe-argument
 		theme,
 		{
 			colors: {
@@ -66,8 +81,11 @@ export default defineConfig({
 	),
 	rules: [
 	],
-	shortcuts: {
-		'fcol': 'flex flex-col',
-		'blog-list-icon': 'shrink-0 size-5 ',
-	},
+	shortcuts: [
+		{
+			'fcol': 'flex flex-col',
+			'blog-list-icon': 'shrink-0 size-5 ',
+		},
+		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
+	],
 });
