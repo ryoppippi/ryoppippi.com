@@ -6,7 +6,7 @@
 	import * as DarkMode from '$lib/DarkMode';
 
 	const LINKS = [
-		{ name: 'works', href: '/works' },
+		{ name: 'projects', href: '/projects' },
 		{ name: 'blog', href: '/blog' },
 		{ name: 'cv', href: joinURL(process.env.DOMAIN as string, '/cv'), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
