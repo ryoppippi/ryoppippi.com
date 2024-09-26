@@ -60,7 +60,10 @@
 
 	<div grid='~ gap-16'>
 		{#each Object.entries(projects) as [genre, projectsByGenrne], count (genre)}
-			<div style:--stagger={count}>
+			<div
+				style:--stagger={count}
+				data-sliding-animate
+			>
 				<h2
 					font='mono bold'
 					line-height-none
