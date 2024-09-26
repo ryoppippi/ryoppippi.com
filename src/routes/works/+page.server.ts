@@ -1,5 +1,4 @@
 import type { Entries } from 'type-fest';
-import fs from 'fs-extra';
 import { joinURL } from 'ufo';
 import typia from 'typia';
 import type { PageServerLoad } from './$types';
@@ -9,13 +8,15 @@ import { Json, getCachePath } from '$lib/cache';
 
 const GITHUB_URL = `https://github.com`;
 
+type EmptyObject = { [key: string]: never };
 type ReturnType = Readonly<Record<keyof typeof _projects, (Required<Project> & GHRepo['repo'])[]>>;
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const cachePath = getCachePath('projects', _projects);
 	using cacheJson = new Json<ReturnType>(cachePath, { allowNoExist: true });
+
 	/* if null or empty */
-	if (cacheJson.data != null && Object.keys(cacheJson.data).length > 0) {
+	if (!typia.is<EmptyObject | null | undefined>(cacheJson.data)) {
 		return {
 			projects: cacheJson.data,
 		};
@@ -25,7 +26,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	for (const [gerne, projects] of Object.entries(writableProjects) as Entries<typeof _projects>) {
 		for (const [index, project] of projects.entries()) {
 			let originalProject = structuredClone(project as Project);
-			if (originalProject?.link != null) {
+			if (originalProject?.link == null) {
 				originalProject = {
 					...originalProject,
 					link: joinURL(GITHUB_URL, 'ryoppippi', project.name),
