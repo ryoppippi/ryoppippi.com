@@ -1,5 +1,7 @@
 <script lang='ts'>
 	import ProjectCard from './ProjectCard.svelte';
+	import Title from '$lib/Title.svelte';
+	import { domain } from '$lib/util';
 
 	const { data } = $props();
 	const { projects } = data;
@@ -30,7 +32,7 @@
 				<a
 					btn-green
 					flex='~ col md:row items-center'
-					href='https://ryoppippi.com/pr'
+					href='{domain()}/pr'
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
@@ -39,7 +41,7 @@
 				<a
 					btn-blue
 					flex='~ col md:row items-center'
-					href='https://ryoppippi.com/gh'
+					href='{domain()}/gh'
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
@@ -48,7 +50,7 @@
 				<a
 					btn-pink
 					flex='~ col md:row items-center'
-					href='https://ryoppippi.com/gh-by-stars'
+					href='{domain()}/gh-by-stars'
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
