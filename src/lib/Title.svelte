@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import * as ufo from 'ufo';
 	import { domain } from './util';
 
 	const { title }: { title?: string } = $props();

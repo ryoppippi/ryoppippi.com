@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import * as ufo from 'ufo';
+	import { subdomain } from '$lib/util';
 
 	const { size = 4.5 } = $props();
 
@@ -13,9 +14,7 @@
 		// { class: 'i-line-md:reddit-loop', url: '/reddit' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
 	] as const)
-		// @ts-expect-error url is required
-		// eslint-disable-next-line node/prefer-global/process
-		.map(({ url, ...rest }) => ({ url: ufo.joinURL(process.env.DOMAIN, url), ...rest }));
+		.map(({ url, ...rest }) => ({ url: subdomain(url), ...rest }));
 </script>
 
 <article

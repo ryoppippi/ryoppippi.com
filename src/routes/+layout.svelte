@@ -4,7 +4,6 @@
 
 	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
-	import * as ufo from 'ufo';
 	import { page, updated } from '$app/stores';
 
 	import { onNavigate } from '$app/navigation';
@@ -14,7 +13,7 @@
 	import Title from '$lib/Title.svelte';
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
-	import { domain } from '$lib/util';
+	import { domain, subdomain } from '$lib/util';
 
 	const { children } = $props();
 
@@ -46,7 +45,7 @@
 		noimageindex: true,
 	}}
 	openGraph={{
-		url: domain(),
+		url: subdomain(),
 		type: 'website',
 		description: 'Portfolio of @ryoppippi',
 		images: [

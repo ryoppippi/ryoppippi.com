@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import ProjectCard from './ProjectCard.svelte';
 	import Title from '$lib/Title.svelte';
-	import { domain } from '$lib/util';
+	import { subdomain } from '$lib/util';
 
 	const { data } = $props();
 	const { projects } = data;
@@ -38,7 +38,7 @@
 				<a
 					btn-green
 					flex='~ col md:row items-center'
-					href='{domain()}/pr'
+					href={subdomain('/pr')}
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
@@ -47,7 +47,7 @@
 				<a
 					btn-blue
 					flex='~ col md:row items-center'
-					href='{domain()}/gh'
+					href={subdomain('/gh')}
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
@@ -56,7 +56,7 @@
 				<a
 					btn-pink
 					flex='~ col md:row items-center'
-					href='{domain()}/gh-by-stars'
+					href={subdomain('/gh-by-stars')}
 					target='_blank'
 				>
 					<!-- svelte-ignore element_invalid_self_closing_tag -->

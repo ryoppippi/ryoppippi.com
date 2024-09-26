@@ -10,6 +10,10 @@ export function formatDate(date: Date): string {
 
 export function domain(): string {
 	// eslint-disable-next-line node/prefer-global/process
-	const domain = ufo.parseURL(process.env.DOMAIN).host;
-	return domain as string;
+	return ufo.parseURL(process.env.DOMAIN).host as string;
+}
+
+export function subdomain(...paths: string[]): string {
+	// eslint-disable-next-line node/prefer-global/process
+	return ufo.joinURL(process.env.DOMAIN as string, ...paths);
 }
