@@ -1,9 +1,12 @@
 <script>
 	import * as ufo from 'ufo';
-	import { formatDate } from '$lib/util.js';
+	import Title from '$lib/Title.svelte';
+	import { formatDate } from '$lib/util';
 
 	const { data } = $props();
 </script>
+
+<Title title='blog' />
 
 <div mxa px-10>
 	{#each data.posts as item, count (item.title)}

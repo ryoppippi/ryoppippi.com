@@ -11,8 +11,10 @@
 
 	import Nav from '$lib/Nav.svelte';
 	import DarkMode from '$lib/DarkMode';
+	import Title from '$lib/Title.svelte';
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
+	import { domain } from '$lib/util';
 
 	const { children } = $props();
 
@@ -28,13 +30,11 @@
 			});
 		});
 	});
-
-	// eslint-disable-next-line node/prefer-global/process
-	const title = ufo.parseURL(process.env.DOMAIN).host;
 </script>
 
 <DarkMode />
 
+<Title />
 <MetaTags
 	additionalRobotsProps={{
 		noarchive: true,
@@ -46,8 +46,7 @@
 		noimageindex: true,
 	}}
 	openGraph={{
-		// eslint-disable-next-line node/prefer-global/process
-		url: process.env.DOMAIN,
+		url: domain(),
 		type: 'website',
 		description: 'Portfolio of @ryoppippi',
 		images: [
@@ -57,11 +56,10 @@
 			},
 		],
 	}}
-	{title}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
-		title,
+		title: domain(),
 		description: 'Portfolio of @ryoppippi',
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',

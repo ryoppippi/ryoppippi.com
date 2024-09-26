@@ -7,6 +7,8 @@
 	const { projects } = data;
 </script>
 
+<Title title='projects' />
+
 <div>
 	<div text-center>
 		<div font-mono>

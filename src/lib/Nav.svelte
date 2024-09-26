@@ -1,6 +1,7 @@
 <script lang='ts'>
 	import process from 'node:process';
 	import { joinURL } from 'ufo';
+	import { domain } from './util';
 	import { page } from '$app/stores';
 
 	import * as DarkMode from '$lib/DarkMode';
@@ -8,7 +9,7 @@
 	const LINKS = [
 		{ name: 'projects', href: '/projects' },
 		{ name: 'blog', href: '/blog' },
-		{ name: 'cv', href: joinURL(process.env.DOMAIN as string, '/cv'), icon: 'i-line-md:download-outline' },
+		{ name: 'cv', href: joinURL(domain(), '/cv'), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
 
