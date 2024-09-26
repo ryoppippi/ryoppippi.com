@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type { Project } from './projects';
+	import type { Project } from './oss-projects';
 
 	const { project }: { project: Project } = $props();
 	const { name, description, icon, link } = project;
@@ -20,8 +20,10 @@
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
+		style:--project-title={name}
 		grid
 		place-content-center
+		view-transition='-[--project-title]'
 	>
 		<div class={icon} op50 text-3xl />
 	</div>
