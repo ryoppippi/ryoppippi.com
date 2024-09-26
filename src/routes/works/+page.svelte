@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { joinURL } from 'ufo';
+	import ProjectCard from './ProjectCard.svelte';
 
 	const { data } = $props();
 	const { projects } = data;
@@ -7,16 +7,21 @@
 
 you can also check <a href='https://ryoppippi.com/pr' target='_blank'>my reset PRs</a>
 
-<div prose='~ dark:invert'>
-	{#each Object.entries(projects) as [slug, project] (slug)}
-		<h2>{slug}</h2>
-		<!-- eslint-disable-next-line svelte/require-each-key -->
-		{#each project as { name, description, icon, link }}
-			<a href={link} target='_blank'>
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<h3 flex gap-1 items-center><span class={icon} />{name}</h3>
-				<p>{description ?? ''} </p>
-			</a>
-		{/each}
-	{/each}
-</div>
+{#each Object.entries(projects) as [genre, projectsByGenrne], count (genre)}
+	<div
+		style:--stagger={count}
+		data-sliding-animate
+	>
+		<h2 text-4xl>{genre}</h2>
+		<div
+			class='[--delay:300ms] sm:[--delay:450ms]'
+			gap-8
+			grid
+			grid-cols='1 md:2'
+		>
+			{#each projectsByGenrne as project (project.link)}
+				<ProjectCard {project} />
+			{/each}
+		</div>
+	</div>
+{/each}
