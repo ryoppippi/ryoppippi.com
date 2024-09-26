@@ -25,7 +25,6 @@
 {/snippet}
 
 <header
-	container
 	fcol
 	gap-y-lg
 	grid='~ cols-1 md:cols-3'
@@ -38,7 +37,7 @@
 		<a
 			font-bold
 			href='/'
-			m='xa md:(x0 b0)'
+			m='x0 md:b0'
 			relative
 		>
 			<div

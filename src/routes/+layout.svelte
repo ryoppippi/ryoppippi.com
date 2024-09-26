@@ -76,6 +76,7 @@
 	max-w-4xl
 	mxa
 	my3
+	px-8
 	un-dark
 >
 	<Nav />
