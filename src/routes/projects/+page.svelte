@@ -9,6 +9,10 @@
 
 <Title title='projects' />
 
+{#snippet apo()}
+	<span>&rsquo;</span>
+{/snippet}
+
 <div>
 	<div text-center>
 		<div font-mono>
@@ -17,10 +21,10 @@
 				pb-4
 				text-5xl
 			>
-				Porjects
+				Projects
 			</h1>
 			<p italic mb5 op50 text-lg>
-				... that I've worked on
+				... that I (created | {@render apo()}m workin{@render apo()} on)
 			</p>
 		</div>
 
@@ -60,6 +64,7 @@
 				</a>
 			</div>
 		</div>
+
 	</div>
 
 	<div grid='~ gap-16'>
