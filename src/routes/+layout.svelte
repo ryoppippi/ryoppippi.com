@@ -73,7 +73,7 @@
 
 <main
 	data-sveltekit-reload={$updated ? '' : 'off'}
-	max-w-xl
+	max-w-4xl
 	min-w-0
 	mxa
 	my3

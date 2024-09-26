@@ -30,8 +30,6 @@
 	gap-y-lg
 	grid='~ cols-1 md:cols-3'
 	items-center
-	max-w-xl
-	min-w-0
 	mxa
 	py-6
 	text-xl
