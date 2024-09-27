@@ -3,7 +3,7 @@
 ## Developing
 
 ```bash
-pnpm  dev
+pnpm i
 
 # or start the server and open the app in a new browser tab
 pnpm dev -- --open
