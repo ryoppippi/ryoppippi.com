@@ -24,7 +24,7 @@
 	mt10
 	mxa
 	pb5
-	prose='~ dark:invert'
+	prose-base
 >
 	<div fxc gap-2>
 		{@render link('/pr', 'i-ph-git-pull-request-duotone', 'btn-green', 'My Recent PRs')}

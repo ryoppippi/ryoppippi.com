@@ -29,7 +29,7 @@
 		<hr ma op25 w-100 />
 	</div>
 
-	<article mx-10 prose='~ dark:invert'>
+	<article mx-10 prose-base>
 		{@html data.content}
 	</article>
 </article>
