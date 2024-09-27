@@ -6,6 +6,7 @@
 
 	const routes = [
 		'oss',
+		'web',
 		'art',
 		'academic',
 	] as const;
