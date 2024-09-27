@@ -36,7 +36,7 @@
 		<a
 			font-bold
 			href='/'
-			m='x0 md:b0'
+			m='xa md:(b0 x0)'
 			relative
 		>
 			<div
