@@ -17,7 +17,7 @@
 	min-w-0
 	mxa
 >
-	<hgroup fcol gap-1 items-center mb-3>
+	<hgroup fcol fyc gap-1 mb-3>
 		<h1 text='6xl primary-100'>
 			{data.title}
 		</h1>

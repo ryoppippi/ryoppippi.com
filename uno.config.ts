@@ -92,6 +92,9 @@ export default defineConfig({
 		{
 			'fcol': 'flex flex-col',
 			'fw': 'flex flex-wrap',
+			'fxc': 'flex justify-center',
+			'fyc': 'flex items-center',
+			'fcc': 'fxc fyc',
 			'blog-list-icon': 'shrink-0 size-5 ',
 		},
 		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],

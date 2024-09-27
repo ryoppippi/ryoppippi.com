@@ -8,11 +8,11 @@
 	pb5
 	prose='~ dark:invert'
 >
-	<div flex='~ gap-2 justify-center'>
+	<div fxc gap-2>
 		<a
 			btn-green
 			fcol-md-r
-			flex='items-center'
+			fyc
 			href={subdomain('/pr')}
 			target='_blank'
 		>
@@ -22,7 +22,7 @@
 		<a
 			btn-blue
 			fcol-md-r
-			flex='items-center'
+			fyc
 			href={subdomain('/gh')}
 			target='_blank'
 		>
@@ -32,7 +32,7 @@
 		<a
 			btn-pink
 			fcol-md-r
-			flex='items-center'
+			fyc
 			href={subdomain('/gh-by-stars')}
 			target='_blank'
 		>

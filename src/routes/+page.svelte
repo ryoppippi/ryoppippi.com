@@ -40,10 +40,8 @@
 
 <div
 	container
-	flex
+	fcc
 	h-full
-	items-center
-	justify-center
 	mxa
 >
 	<Social />

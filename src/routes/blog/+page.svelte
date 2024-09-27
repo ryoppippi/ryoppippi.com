@@ -25,10 +25,9 @@
 			<a
 				class='group'
 				border='b-2 transparent hover:primary-100'
-				flex
+				fyc
 				gap-3
 				{href}
-				items-center
 				mr-5
 				target={external ? '_blank' : ''}
 			>
