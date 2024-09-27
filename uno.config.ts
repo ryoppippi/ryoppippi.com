@@ -11,6 +11,8 @@ import {
 	transformerVariantGroup,
 } from 'unocss';
 
+import { presetFluid } from 'unocss-preset-fluid';
+
 // TODO: bug of unocss
 import ossProjects from './src/routes/projects/oss-projects.js';
 
@@ -34,6 +36,7 @@ export default defineConfig({
 			},
 		}),
 		presetTypography(),
+		presetFluid(),
 	],
 	transformers: [
 		transformerDirectives(),
