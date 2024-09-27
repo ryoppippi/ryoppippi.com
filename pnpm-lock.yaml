@@ -95,6 +95,9 @@ importers:
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.23
         version: '@jsr/ryoppippi__eslint-config@0.0.23(@typescript-eslint/utils@8.7.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2))(@vue/compiler-sfc@3.5.9)(eslint-plugin-format@0.1.2(eslint@9.11.1(jiti@1.21.6)))(eslint-plugin-svelte@2.44.0(eslint@9.11.1(jiti@1.21.6))(svelte@5.0.0-next.259))(eslint@9.11.1(jiti@1.21.6))(svelte-eslint-parser@0.41.1(svelte@5.0.0-next.259))(svelte@5.0.0-next.259)(typescript@5.6.2)'
+      '@ryoppippi/str-fns':
+        specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
+        version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.6
         version: '@jsr/ryoppippi__unplugin-typia@1.0.6(@types/node@22.7.2)(rollup@4.22.4)'
@@ -908,6 +911,9 @@ packages:
 
   '@jsr/ryoppippi__eslint-config@0.0.23':
     resolution: {integrity: sha512-2YGVhLJ1FEkbLzHyFoahaiIqOKZjW04Pi1j3mutgGOKIgOBvtjjQUkxsGB0BUyemgesfA5NS11X+QmemrIsQKQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__eslint-config/0.0.23.tgz}
+
+  '@jsr/ryoppippi__str-fns@0.1.2':
+    resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
 
   '@jsr/ryoppippi__unplugin-typia@1.0.6':
     resolution: {integrity: sha512-6Jgj8vZ7kui/LsjRUbZWsOR38o9XArrKCkv8sCVflgS11mh+4SiORilPTPKON8hB+rbHW7IJlmy8Sz2g1ppizQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.0.6.tgz}
@@ -3108,6 +3114,10 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
+  type-fest@4.23.0:
+    resolution: {integrity: sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==}
+    engines: {node: '>=16'}
+
   type-fest@4.26.1:
     resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
     engines: {node: '>=16'}
@@ -3920,6 +3930,10 @@ snapshots:
       - svelte-eslint-parser
       - typescript
       - vitest
+
+  '@jsr/ryoppippi__str-fns@0.1.2':
+    dependencies:
+      type-fest: 4.23.0
 
   '@jsr/ryoppippi__unplugin-typia@1.0.6(@types/node@22.7.2)(rollup@4.22.4)':
     dependencies:
@@ -6426,6 +6440,8 @@ snapshots:
   type-fest@0.8.1: {}
 
   type-fest@3.13.1: {}
+
+  type-fest@4.23.0: {}
 
   type-fest@4.26.1: {}
 
