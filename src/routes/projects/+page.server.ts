@@ -8,7 +8,7 @@ import _ossProjects from './oss-projects';
 
 const GITHUB_URL = `https://github.com`;
 
-type ReturnType = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
+export type ReturnType = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const writableOSSProjects: Projects = _ossProjects;
