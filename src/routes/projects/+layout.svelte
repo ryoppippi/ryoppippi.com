@@ -29,9 +29,9 @@
 		{#each routes as route (route)}
 			{@const isCurrent = $page.route.id?.endsWith(route)}
 			<a
-				class:op100={isCurrent}
+				class:op70={isCurrent}
 				href={isCurrent ? null : route}
-				op50
+				op20
 			>{capitalize(route)}</a>
 		{/each}
 	</div>
