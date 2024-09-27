@@ -13,8 +13,8 @@
 	"lockFileMaintenance": {
 		"enabled": true
 	},
-	"platformAutomerge": false,
-	"dependencyDashboard": true,
+	"platformAutomerge": true,
+	"dependencyDashboard": false,
 	"automerge": true,
 	"branchConcurrentLimit": 0,
 	"stabilityDays": 3
