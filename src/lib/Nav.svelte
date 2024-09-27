@@ -26,8 +26,8 @@
 <header
 	fcol
 	gap-y-lg
-	grid='~ cols-1 md:cols-3'
-	items-center
+	gcc
+	grid-cols='1 md:3'
 	mxa
 	py-6
 	text-xl

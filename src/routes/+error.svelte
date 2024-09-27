@@ -4,8 +4,7 @@
 
 <div
 	fcol
-	grid
-	place='content-center items-center'
+	gcc
 	pt-10
 >
 	{$page.url}

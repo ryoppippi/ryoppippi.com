@@ -19,8 +19,8 @@
 <article
 	animate='duration-3000 keyframes-fade-in'
 	gap-3
-	grid='~ cols-3 sm:cols-7'
-	place-items-center
+	gcc
+	grid-cols='3 sm:7'
 >
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { pathname } = ufo.parseURL(url)}

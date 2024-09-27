@@ -22,8 +22,7 @@
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		style:--project-title={name}
-		grid
-		place-content-center
+		gcc
 		view-transition='-[--project-title]'
 	>
 		<div class={icon} op50 text-3xl />

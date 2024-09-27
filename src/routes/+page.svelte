@@ -5,10 +5,9 @@
 
 <article
 	container
-	grid
+	gcc
 	mt8
 	mxa
-	place-content-center
 >
 	<div animate='duration-1000 keyframes-flip-in-x'>
 		<Profile />
