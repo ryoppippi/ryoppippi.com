@@ -3,28 +3,29 @@ import typia from 'typia';
 import rt from 'reading-time';
 
 import matter from 'gray-matter';
-
-import type { Item, Metadata } from './types';
 import { md } from './markdown-it.js';
 
-export async function parseMarkdown(
+export async function parseMarkdown<Metadata extends { [key: string]: unknown }>(
 	mdRaw: string,
-	slug: string,
-): Promise<Item & { content: string }> {
-	const { data: metadata, content: contentRaw } = matter(mdRaw);
+): Promise<Metadata & {
+	content: string;
+	readingTime: ReturnType<typeof rt>;
+	pubDate: string | undefined;
+}> {
+	const {
+		data,
+		content: contentRaw,
+	} = matter(mdRaw);
 
-	typia.assertGuard<Metadata>(metadata);
-
-	const item = {
-		...metadata,
-		slug,
-		pubDate: parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON(),
-		readingTime: rt(contentRaw),
-	} as const satisfies Item;
-
-	typia.assertGuard<Item>(item);
-
+	const metadata = data as Metadata;
+	const pubDate = typia.is<string>(metadata?.date) ? parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON() : undefined;
+	const readingTime = rt(contentRaw);
 	const content = md.render(contentRaw);
 
-	return { ...item, content };
+	return {
+		...metadata,
+		readingTime,
+		pubDate,
+		content,
+	};
 }
