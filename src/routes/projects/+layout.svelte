@@ -1,10 +1,8 @@
 <script lang='ts'>
 	import ProjectTitle from './ProjectTitle.svelte';
-	import OssProject from './OSSProject.svelte';
 	import Title from '$lib/Title.svelte';
 
-	const { data } = $props();
-	const { projects } = data;
+	const { children } = $props();
 </script>
 
 <Title title='projects' />
@@ -14,5 +12,12 @@
 		<ProjectTitle />
 	</div>
 
-	<OssProject {projects} />
+	<div
+		flex='~ col gap-1 sm:row sm:gap-3 wrap'
+		mb-0
+		text-3xl>
+		<a href='/projects'>OSS</a>
+	</div>
+
+	{@render children()}
 </div>

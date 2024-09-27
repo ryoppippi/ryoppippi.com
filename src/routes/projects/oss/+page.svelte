@@ -1,10 +1,13 @@
 <script lang='ts'>
-	import GithubNav from './GithubNav.svelte';
+	import GitHubNav from './GitHubNav.svelte';
 	import OssProjectCard from './OSSProjectCard.svelte';
-	import type { ReturnType } from './+page.server.ts';
+	import Title from '$lib/Title.svelte';
 
-	const { projects }: { projects: ReturnType } = $props();
+	const { data } = $props();
+	const { projects } = data;
 </script>
+
+<Title title='projects' />
 
 {#snippet genreTitle(genre: sting)}
   <h2
@@ -22,7 +25,7 @@
 {/snippet}
 
 <div text-center>
-	<GithubNav />
+	<GitHubNav />
 </div>
 
 <div grid='~ gap-16'>
