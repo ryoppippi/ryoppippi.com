@@ -22,7 +22,7 @@
 	</div>
 
 	<div
-		fcol-sm-r
+		fcol-sm-row
 		fw
 		gap='1 sm:3'
 		mb-0
