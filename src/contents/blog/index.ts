@@ -1,4 +1,6 @@
 import sortOn from 'sort-on';
+import typia from 'typia';
+import type { Item, Metadata } from '$contents/blog/types';
 
 import { parseMarkdown } from '$lib/markdown.server';
 
@@ -8,14 +10,21 @@ async function getPosts() {
 	const posts = await Promise.all(Object.entries(originals).map(async ([filepath, mdRaw]) => {
 		const slug = filepath.split('/').at(-1)?.replace('.md', '');
 		if (slug == null) {
-			return undefined;
+			return;
 		}
-		const post = await parseMarkdown(mdRaw, slug);
-		if (!post.isPublished) {
-			return undefined;
-		}
+		try {
+			const metadata = await parseMarkdown<Metadata>(mdRaw);
 
-		return post;
+			if (metadata.isPublished) {
+				return typia.assert<Item>({
+					...metadata,
+					slug,
+				});
+			}
+		}
+		catch (e) {
+			console.error(e);
+		}
 	})).then(ps => ps.filter(p => p != null));
 
 	const sortedPost = sortOn(posts, ['-pubDate']);
