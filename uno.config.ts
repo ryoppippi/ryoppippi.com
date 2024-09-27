@@ -14,7 +14,7 @@ import {
 import { presetFluid } from 'unocss-preset-fluid';
 
 // TODO: bug of unocss
-import ossProjects from './src/routes/projects/oss/projects.js';
+import ossProjects from './src/contents/projects/oss/list.js';
 
 const projectSafelist: string[] = [];
 Object.values(ossProjects).forEach((projects) => {

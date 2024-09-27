@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type { Project } from './projects';
+	import type { Project } from '$contents/projects/oss';
 
 	const { project }: { project: Project } = $props();
 	const { name, description, icon, link } = project;
