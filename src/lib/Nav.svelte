@@ -50,8 +50,8 @@
 	</div>
 	<nav
 		col-span-2
-		flex='~ wrap'
 		font-bold
+		fw
 		gap-4
 		justify-end
 		m='xa md:r0'

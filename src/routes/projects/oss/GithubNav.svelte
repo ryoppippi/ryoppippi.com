@@ -11,7 +11,8 @@
 	<div flex='~ gap-2 justify-center'>
 		<a
 			btn-green
-			flex='~ col md:row items-center'
+			fcol-md-r
+			flex='items-center'
 			href={subdomain('/pr')}
 			target='_blank'
 		>
@@ -20,7 +21,8 @@
 		</a>
 		<a
 			btn-blue
-			flex='~ col md:row items-center'
+			fcol-md-r
+			flex='items-center'
 			href={subdomain('/gh')}
 			target='_blank'
 		>
@@ -29,7 +31,8 @@
 		</a>
 		<a
 			btn-pink
-			flex='~ col md:row items-center'
+			fcol-md-r
+			flex='items-center'
 			href={subdomain('/gh-by-stars')}
 			target='_blank'
 		>

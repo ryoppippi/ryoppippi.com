@@ -20,7 +20,8 @@
 	</div>
 
 	<div
-		flex='~ col sm:row wrap'
+		fcol-sm-r
+		fw
 		gap='1 sm:3'
 		mb-0
 		text-3xl
