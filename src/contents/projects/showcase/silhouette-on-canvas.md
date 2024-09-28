@@ -20,7 +20,7 @@ featured: true
 <!-- This curious artwork, -->
 <!-- Born and vanishing, -->
 <!-- In an endless cycle of creation. -->
-Interactive art instllation with projection mapping.
+Interactive art installation with projection mapping.
 Displayed at Science Summer School for Kids at ICU, July 2017.
 
 [YouTube](https://youtu.be/MngEJwk5KPU)
