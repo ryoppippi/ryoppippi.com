@@ -7,7 +7,7 @@
 
 <div
 	grid='~ gap-4'
-	grid-cols='1 lg:2 xl:3'
+	grid-cols='1 lg:2'
 >
 	{#each projects as project, count (project.slug)}
 		<div
