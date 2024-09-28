@@ -13,7 +13,7 @@ export async function getProjects(fetch?: typeof globalThis.fetch): Promise<Proj
 	const writableOSSProjects: Projects = structuredClone(_ossProjects);
 	const fetchPromises: Promise<void>[] = [];
 
-	for (const [gerne, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
+	for (const [genre, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
 		for (const [index, project] of projects.entries()) {
 			let originalProject = structuredClone(project as Project);
 			if (!typia.is<string>(originalProject?.link)) {
@@ -42,12 +42,12 @@ export async function getProjects(fetch?: typeof globalThis.fetch): Promise<Proj
 					catch (e) {
 						console.error(e);
 					}
-					writableOSSProjects[gerne][index] = originalProject;
+					writableOSSProjects[genre][index] = originalProject;
 				})();
 				fetchPromises.push(fetchPromise);
 			}
 			else {
-				writableOSSProjects[gerne][index] = originalProject;
+				writableOSSProjects[genre][index] = originalProject;
 			}
 		}
 	}
