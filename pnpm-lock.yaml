@@ -125,9 +125,6 @@ importers:
       '@total-typescript/ts-reset':
         specifier: ^0.6.1
         version: 0.6.1
-      '@types/diacritics':
-        specifier: ^1.3.3
-        version: 1.3.3
       '@types/dom-view-transitions':
         specifier: ^1.0.5
         version: 1.0.5
@@ -155,9 +152,6 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
-      diacritics:
-        specifier: ^1.3.0
-        version: 1.3.0
       eslint:
         specifier: ^9.11.1
         version: 9.11.1(jiti@1.21.6)
@@ -173,6 +167,9 @@ importers:
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -1141,9 +1138,6 @@ packages:
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
-  '@types/diacritics@1.3.3':
-    resolution: {integrity: sha512-wt0tBItmBsOUVZ8+MCrkBMoVfH/EUZeTXwYSekVVYilZlGDYssREUR+sX72mHvl2IrbdCKgpYARXKh3awD2how==}
-
   '@types/dom-view-transitions@1.0.5':
     resolution: {integrity: sha512-N2sILR7fxSMnaFaAPwGj4DtHCXjIyQTHt+xJyf9jATpzUsTkMNM0DWtqZB6W7f501B/Y0tq3uqat/VlbjuTpMA==}
 
@@ -1688,9 +1682,6 @@ packages:
   devalue@5.1.1:
     resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
 
-  diacritics@1.3.0:
-    resolution: {integrity: sha512-wlwEkqcsaxvPJML+rDh/2iS824jbREk6DUMUKkEaSlxdYHeS43cClJtsWglvw2RfeXGm6ohKDqsXteJ5sP5enA==}
-
   diff-match-patch@1.0.5:
     resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
 
@@ -2080,6 +2071,9 @@ packages:
 
   get-tsconfig@4.8.1:
     resolution: {integrity: sha512-k9PN+cFBmaLWtVz29SkUoqU5O0slLuHJXt/2P+tMVFT+phsSGXGkp9t3rQIqdz0e+06EHNGs3oM6ZX1s2zHxRg==}
+
+  github-slugger@2.0.0:
+    resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -4240,8 +4234,6 @@ snapshots:
 
   '@types/cookie@0.6.0': {}
 
-  '@types/diacritics@1.3.3': {}
-
   '@types/dom-view-transitions@1.0.5': {}
 
   '@types/eslint@9.6.1':
@@ -4857,8 +4849,6 @@ snapshots:
 
   devalue@5.1.1: {}
 
-  diacritics@1.3.0: {}
-
   diff-match-patch@1.0.5: {}
 
   doctrine@3.0.0:
@@ -5388,6 +5378,8 @@ snapshots:
   get-tsconfig@4.8.1:
     dependencies:
       resolve-pkg-maps: 1.0.0
+
+  github-slugger@2.0.0: {}
 
   glob-parent@5.1.2:
     dependencies:

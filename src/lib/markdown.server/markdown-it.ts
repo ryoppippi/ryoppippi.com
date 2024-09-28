@@ -1,7 +1,6 @@
 import markdownit from 'markdown-it';
 import anchor from 'markdown-it-anchor';
-
-import { slugify } from './slugify';
+import { slugger } from '$lib/util';
 
 const md = markdownit({
 	html: true,
@@ -9,8 +8,12 @@ const md = markdownit({
 	typographer: true,
 });
 
+function slug(s: string) {
+	return slugger.slug(s);
+}
+
 md.use(anchor, {
-	slugify,
+	slug,
 	permalink: anchor.permalink.linkInsideHeader({
 		symbol: '#',
 		renderAttrs: () => ({ 'aria-hidden': 'true' }),
