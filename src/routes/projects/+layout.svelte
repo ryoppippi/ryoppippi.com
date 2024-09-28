@@ -31,9 +31,11 @@
 		{#each routes as route (route)}
 			{@const isCurrent = $page.route.id?.endsWith(route)}
 			<a
+				style:--nav-title='project-nav-{route}'
 				class:op70={isCurrent}
 				href={isCurrent ? null : route}
 				op20
+				view-transition='-[--nav-title]'
 			>{capitalize(route)}</a>
 		{/each}
 	</div>
