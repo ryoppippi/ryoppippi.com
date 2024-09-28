@@ -3,6 +3,7 @@ title: 影のキャンバス- Silhouette on Canvas
 link: https://youtu.be/MngEJwk5KPU
 image: './silhouette-on-canvas.jpg'
 date: '2017-7-17'
+featured: true
 ---
 
 <!-- 2017年7月制作/ICU子ども科学教室にて展示 (Science Summer School for Kids at ICU, July 2017) -->

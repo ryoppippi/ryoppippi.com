@@ -9,6 +9,7 @@ type Metadata = {
 	link: string;
 	image: string;
 	pubDate: string;
+	featured?: boolean;
 };
 
 type Project = Omit<Metadata, 'image'> & {
@@ -41,5 +42,12 @@ export async function getProjects(): Promise<Project[]> {
 			throw e;
 		}
 	})).then(ps => ps.filter(p => p != null));
-	return sortOn(projects, ['-pubDate']);
+	const sortedProject = sortOn(projects, ['-pubDate']);
+
+	/** populate the featured projects and sort them */
+	const featuredProjects = sortedProject.filter(p => p.featured);
+	// eslint-disable-next-line ts/strict-boolean-expressions
+	const otherProjects = sortedProject.filter(p => !p.featured);
+
+	return [...featuredProjects, ...otherProjects];
 }
