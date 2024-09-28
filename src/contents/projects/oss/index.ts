@@ -7,10 +7,10 @@ import type { GHRepo, Project, Projects } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
 
-export type ReturnType = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
+export type ProjectsByGenre = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
 
-export async function getProjects(fetch?: typeof globalThis.fetch): Promise<ReturnType> {
-	const writableOSSProjects: Projects = _ossProjects;
+export async function getProjects(fetch?: typeof globalThis.fetch): Promise<ProjectsByGenre> {
+	const writableOSSProjects: Projects = structuredClone(_ossProjects);
 	const fetchPromises: Promise<void>[] = [];
 
 	for (const [gerne, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
@@ -54,5 +54,5 @@ export async function getProjects(fetch?: typeof globalThis.fetch): Promise<Retu
 
 	await Promise.all(fetchPromises);
 
-	return writableOSSProjects as ReturnType;
+	return writableOSSProjects as ProjectsByGenre;
 }
