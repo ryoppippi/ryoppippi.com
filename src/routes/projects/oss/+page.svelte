@@ -2,27 +2,13 @@
 	import GitHubNav from './GitHubNav.svelte';
 	import OssProjectCard from './OSSProjectCard.svelte';
 	import HeadTitle from '$lib/HeadTitle.svelte';
+	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
 	const { projects } = data;
 </script>
 
 <HeadTitle title='projects' />
-
-{#snippet genreTitle(genre: sting)}
-  <h2
-    f-text-32-64
-    font='mono bold'
-    line-height-none
-    op='35 dark:20'
-    py-8
-    select-none
-    text-stroke='hex-aaa [1.5px]'
-    text-transparent
-  >
-    {genre}
-  </h2>
-{/snippet}
 
 <div text-center>
 	<GitHubNav />
@@ -34,7 +20,7 @@
 			style:--stagger={count}
 			data-sliding-animate
 		>
-			{@render genreTitle(genre)}
+			<LargeTitle title={genre} />
 			<div
 				class='[--delay:300ms] sm:[--delay:450ms]'
 				grid='~ gap-8'
