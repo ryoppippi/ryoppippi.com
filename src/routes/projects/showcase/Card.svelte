@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import type { Snippet } from 'svelte';
 	import type { load } from './+page.ts';
 	import { formatDate } from '$lib/util';
 
@@ -13,7 +14,7 @@
 	}: Props = $props();
 </script>
 
-{#snippet projectLink(children)}
+{#snippet projectLink(children: Snippet)}
 	<a href={project.link} no-underline>
 		{@render children()}
 	</a>

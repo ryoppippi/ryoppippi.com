@@ -1,3 +1,5 @@
+import type { Genre, Project } from './types';
+
 // @unocss-include
 export default {
 	'Vim/Neovim': [
