@@ -25,8 +25,9 @@
 
 <header
 	fcol
+	fyc
 	gap-y-lg
-	gc
+	grid
 	grid-cols='1 md:3'
 	mxa
 	py-6
