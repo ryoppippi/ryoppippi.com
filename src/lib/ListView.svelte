@@ -10,9 +10,9 @@
 <script lang='ts'>
 	import type { Snippet } from 'svelte';
 
-	type Props<_Item extends Item = Item> = {
+	type Props = {
 		items: Item[];
-		itemView: Snippet<[_Item]>;
+		itemView: Snippet<[Item]>;
 	};
 
 	const { items, itemView }: Props = $props();
@@ -27,7 +27,7 @@
 			my-2
 		>
 			<p opacity-70>
-				{item.date}}
+				{item.date}
 			</p>
 			<a
 				class='group'
