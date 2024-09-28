@@ -3,3 +3,9 @@ declare namespace svelteHTML {
 
   type HTMLAttributes = AttributifyAttributes;
 }
+
+declare module 'svelte/elements' {
+	export type SvelteHTMLElements = {
+		'enhanced:img': EnhancedImgAttributes & AttributifyAttributes;
+	};
+}
