@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type { Project } from './oss-projects';
+	import type { Project } from '$contents/projects/oss/types';
 
 	const { project }: { project: Project } = $props();
 	const { name, description, icon, link } = project;
@@ -11,19 +11,19 @@
 	bg='hover:[#88888811]'
 	font-sans
 	grid='~ cols-5'
+	hover='scale-101 shadow-xl z-10'
 	href={link}
 	max-w-full
 	no-underline
-	op='70 dark:50 hover:80'
+	op-card
 	select-none
 	target='_blank'
-	transition
+	transition-base
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		style:--project-title={name}
-		grid
-		place-content-center
+		gcc
 		view-transition='-[--project-title]'
 	>
 		<div class={icon} op50 text-3xl />

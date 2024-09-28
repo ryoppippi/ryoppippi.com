@@ -1,12 +1,12 @@
 <script>
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate } from '$lib/util';
 
 	const { data } = $props();
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
-<Title title='{data.title} | blog' />
+<HeadTitle title='{data.title} | blog' />
 <svelte:head>
 	<meta content='article' property='og:type' />
 	<meta content={data.title} property='og:title' />
@@ -17,7 +17,7 @@
 	min-w-0
 	mxa
 >
-	<hgroup fcol gap-1 items-center mb-3>
+	<hgroup fcol fyc gap-1 mb-3>
 		<h1 text='6xl primary-100'>
 			{data.title}
 		</h1>
@@ -29,7 +29,7 @@
 		<hr ma op25 w-100 />
 	</div>
 
-	<article mx-10 prose='~ dark:invert'>
+	<article mx-10 prose-base>
 		{@html data.content}
 	</article>
 </article>

@@ -25,9 +25,10 @@
 
 <header
 	fcol
+	fyc
 	gap-y-lg
-	grid='~ cols-1 md:cols-3'
-	items-center
+	grid
+	grid-cols='1 md:3'
 	mxa
 	py-6
 	text-xl
@@ -50,8 +51,8 @@
 	</div>
 	<nav
 		col-span-2
-		flex='~ wrap'
 		font-bold
+		fw
 		gap-4
 		justify-end
 		m='xa md:r0'
@@ -68,10 +69,7 @@
 				relative
 				target={href.startsWith('http') ? '_blank' : undefined}
 			>
-				<div
-					flex='~'
-					items-center
-				>
+				<div fyc>
 					{name}
 					<!-- svelte-ignore element_invalid_self_closing_tag -->
 					{#if icon != null} <span class={icon} /> {/if}
@@ -83,9 +81,8 @@
 			<DarkMode.ToggleButton />
 			<a
 				class='i-teenyicons:github-solid'
-				flex='~'
+				fyc
 				href='https://github.com/ryoppippi/ryoppippi.com'
-				items-center
 				mya
 				target='_blank'
 			>

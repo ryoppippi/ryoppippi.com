@@ -5,10 +5,9 @@
 
 <article
 	container
-	grid
+	gcc
 	mt8
 	mxa
-	place-content-center
 >
 	<div animate='duration-1000 keyframes-flip-in-x'>
 		<Profile />
@@ -40,10 +39,8 @@
 
 <div
 	container
-	flex
+	fcc
 	h-full
-	items-center
-	justify-center
 	mxa
 >
 	<Social />
