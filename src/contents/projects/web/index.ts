@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import typia from 'typia';
 import { parseMarkdown } from '$lib/markdown.server';
+import { slugger } from '$lib/util';
 
 type Metadata = {
 	title: string;
@@ -29,7 +30,7 @@ export async function getProjects(): Promise<Project[]> {
 			const project = {
 				...metadata,
 				image: metadata.image.startsWith('http') ? metadata.image : fileURLToPath(new URL(metadata.image, import.meta.url)),
-				slug,
+				slug: slugger.slug(slug),
 				content,
 			} as const satisfies Project;
 			return project;

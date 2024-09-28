@@ -9,7 +9,7 @@
 	grid='~ gap-4'
 	grid-cols='1 lg:2'
 >
-	{#each projects as project (project.link)}
+	{#each projects as project (project.slug)}
 		<Card {project} />
 	{/each}
 </div>
