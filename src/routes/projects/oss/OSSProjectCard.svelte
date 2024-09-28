@@ -11,6 +11,7 @@
 	bg='hover:[#88888811]'
 	font-sans
 	grid='~ cols-5'
+	hover='scale-101 shadow-xl z-10'
 	href={link}
 	max-w-full
 	no-underline
