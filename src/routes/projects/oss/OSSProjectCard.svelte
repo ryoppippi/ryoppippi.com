@@ -17,7 +17,7 @@
 	op-card
 	select-none
 	target='_blank'
-	transition
+	transition-base
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
