@@ -7,7 +7,7 @@
 	const routes = [
 		'oss',
 		'showcase',
-		'academic',
+		'publications',
 	] as const;
 
 	const { children } = $props();
