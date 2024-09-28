@@ -100,6 +100,7 @@ export default defineConfig({
 			'blog-list-icon': 'shrink-0 size-5 ',
 			'border-base': 'border-[#8884]',
 			'prose-base': 'prose dark:prose-invert',
+			'op-card': 'op70 dark:op50 hover:op80 group-hover:op80',
 		},
 		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
 		[/^fcol-(\w+)-row$/, ([_, size]) => `fcol ${size}:flex-row`],

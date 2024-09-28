@@ -14,7 +14,7 @@
 	href={link}
 	max-w-full
 	no-underline
-	op='70 dark:50 hover:80'
+	op-card
 	select-none
 	target='_blank'
 	transition
