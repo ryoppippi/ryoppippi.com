@@ -137,7 +137,7 @@ export default defineConfig({
 
 			yield {
 				[symbols.parent]: `@media (prefers-reduced-motion: reduce)`,
-				'motion-reduce:animate-none': `{ animation: 'none' }`,
+				animation: 'none',
 			};
 		}],
 	],
