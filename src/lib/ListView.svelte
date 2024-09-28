@@ -13,17 +13,18 @@
 	type Props = {
 		items: Item[];
 		itemView: Snippet<[Item]>;
+		animation?: boolean;
 	};
 
-	const { items, itemView }: Props = $props();
+	const { items, itemView, animation }: Props = $props();
 </script>
 <div mxa px-10>
 	{#each items as item, count (item.title)}
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
-			class='[--delay:80ms] sm:[--delay:150ms]'
-			data-sliding-animate
+			class:animate-delay-base={animation}
+			data-sliding-animate={animation ? '' : undefined}
 			my-2
 		>
 			{#if item.date}
