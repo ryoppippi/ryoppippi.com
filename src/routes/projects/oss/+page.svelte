@@ -1,13 +1,13 @@
 <script lang='ts'>
 	import GitHubNav from './GitHubNav.svelte';
 	import OssProjectCard from './OSSProjectCard.svelte';
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 
 	const { data } = $props();
 	const { projects } = data;
 </script>
 
-<Title title='projects' />
+<HeadTitle title='projects' />
 
 {#snippet genreTitle(genre: sting)}
   <h2

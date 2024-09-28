@@ -1,12 +1,12 @@
 <script>
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate } from '$lib/util';
 
 	const { data } = $props();
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
-<Title title='{data.title} | blog' />
+<HeadTitle title='{data.title} | blog' />
 <svelte:head>
 	<meta content='article' property='og:type' />
 	<meta content={data.title} property='og:title' />

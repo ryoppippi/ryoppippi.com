@@ -1,20 +1,19 @@
 <script lang='ts'>
 	import { capitalize } from '@ryoppippi/str-fns';
 	import ProjectTitle from './ProjectTitle.svelte';
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { page } from '$app/stores';
 
 	const routes = [
 		'oss',
 		'web',
-		'art',
 		'academic',
 	] as const;
 
 	const { children } = $props();
 </script>
 
-<Title title='projects' />
+<HeadTitle title='projects' />
 
 <div>
 	<div text-center>

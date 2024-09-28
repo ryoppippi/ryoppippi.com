@@ -10,7 +10,7 @@
 
 	import Nav from '$lib/Nav.svelte';
 	import DarkMode from '$lib/DarkMode';
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 	import { domain, subdomain } from '$lib/util';
@@ -33,7 +33,7 @@
 
 <DarkMode />
 
-<Title />
+<HeadTitle />
 <MetaTags
 	additionalRobotsProps={{
 		noarchive: true,

@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import * as ufo from 'ufo';
-	import Title from '$lib/Title.svelte';
+	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate } from '$lib/util';
 	import ListView, { type Item } from '$lib/ListView.svelte';
 
@@ -19,7 +19,7 @@
 	}) satisfies Item[];
 </script>
 
-<Title title='blog' />
+<HeadTitle title='blog' />
 
 {#snippet itemView(item: Item)}
 	{#if item.external}
