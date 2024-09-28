@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'node:url';
+import sortOn from 'sort-on';
 import typia from 'typia';
 import { parseMarkdown } from '$lib/markdown.server';
 import { slugger } from '$lib/util';
@@ -40,5 +41,5 @@ export async function getProjects(): Promise<Project[]> {
 			throw e;
 		}
 	})).then(ps => ps.filter(p => p != null));
-	return projects;
+	return sortOn(projects, ['-pubDate']);
 }
