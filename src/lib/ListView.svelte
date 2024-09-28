@@ -2,7 +2,7 @@
 	export type Item = {
 		title: string;
 		link: string;
-		date: string;
+		date?: string;
 		external?: boolean;
 	};
 </script>
@@ -26,9 +26,11 @@
 			data-sliding-animate
 			my-2
 		>
-			<p opacity-70>
-				{item.date}
-			</p>
+			{#if item.date}
+				<p opacity-70>
+					{item.date}
+				</p>
+			{/if}
 			<a
 				class='group'
 				border='b-2 transparent hover:primary-100'
