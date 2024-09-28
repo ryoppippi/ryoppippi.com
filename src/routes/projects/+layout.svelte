@@ -25,7 +25,7 @@
 		fcol-sm-row
 		fw
 		gap='1 sm:3'
-		mb-0
+		mb-8
 		text-3xl
 	>
 		{#each routes as route (route)}
