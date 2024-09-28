@@ -86,8 +86,6 @@ export default defineConfig({
 			},
 		},
 	),
-	rules: [
-	],
 	shortcuts: [
 		{
 			'fcol': 'flex flex-col',
@@ -102,11 +100,46 @@ export default defineConfig({
 			'prose-base': 'prose dark:prose-invert',
 			'op-card': 'op70 dark:op50 hover:op80 group-hover:op80',
 			'transition-base': 'transition-all transition-duration-500',
-			'animate-delay-base': '[--delay:80ms] sm:[--delay:150ms]',
+			'sliding-animation-delay-base': '[--delay:80ms] sm:[--delay:150ms]',
 		},
 		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
 		[/^fcol-(\w+)-row$/, ([_, size]) => `fcol ${size}:flex-row`],
 		[/^gcc-(\w+)$/, ([_, flowDirection]) => `gcc grid-flow-${flowDirection}`],
+	],
+	rules: [
+		[/^sliding-animation$/, function* ([,], { symbols }) {
+			yield `
+@keyframes enter {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+`;
+
+			yield {
+				'--stagger': 0,
+				'--delay': `80ms`,
+				'--start': `0ms`,
+			};
+
+			yield {
+				'opacity': 0,
+				'animation': `enter 0.6s both`,
+				'animation-iteration-count': 1,
+				'animation-delay': `calc(var(--stagger) * var(--delay) + var(--start))`,
+			};
+
+			yield {
+				[symbols.parent]: `@media (prefers-reduced-motion: reduce)`,
+				'motion-reduce:animate-none': `{ animation: 'none' }`,
+			};
+		}],
 	],
 	safelist: [...projectSafelist],
 });

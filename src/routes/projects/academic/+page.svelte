@@ -51,8 +51,8 @@
 	<div
 		style:--stagger={count}
 		animate-delay-base
-		data-sliding-animate
 		no-underline
+		sliding-animation='~ delay-base'
 	>
 		<LargeTitle title={year} />
 		<ListView animation={false} {itemView} {items} />

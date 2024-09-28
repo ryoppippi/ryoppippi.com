@@ -12,7 +12,7 @@
 	{#each projects as project, count (project.slug)}
 		<div
 			style:--stagger={count}
-			data-sliding-animate
+			sliding-animation='~ delay-base'
 		>
 			<Card {project} />
 		</div>

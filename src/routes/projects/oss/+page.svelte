@@ -18,7 +18,7 @@
 	{#each Object.entries(projects) as [genre, projectsByGenrne], count (genre)}
 		<div
 			style:--stagger={count}
-			data-sliding-animate
+			sliding-animation='~ delay-base'
 		>
 			<LargeTitle title={genre} />
 			<div

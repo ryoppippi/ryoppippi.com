@@ -90,31 +90,5 @@
 	@view-transition {
 		navigation: auto;
 	}
-
-	@keyframes enter {
-		0% {
-			opacity: 0;
-			transform: translateY(10px);
-		}
-
-		to {
-			opacity: 1;
-			transform: none;
-		}
-	}
-
-	[data-sliding-animate] {
-		--stagger: 0;
-		--delay: 80ms;
-		--start: 300ms;
-	}
-
-	[data-sliding-animate] {
-		opacity: 0;
-		animation: enter 0.6s both;
-		animation-iteration-count: 1;
-		animation-delay: calc(var(--stagger) * var(--delay) + var(--start));
-		--at-apply: motion-reduce:animate-none;
-	}
 }
 </style>
