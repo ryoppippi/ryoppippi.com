@@ -12,6 +12,7 @@ import {
 	transformerVariantGroup,
 } from 'unocss';
 
+import transformerAlias from 'unocss-transformer-alias';
 import { presetFluid } from 'unocss-preset-fluid';
 
 // TODO: bug of unocss
@@ -82,6 +83,8 @@ export default defineConfig({
 		presetFluid(),
 	],
 	transformers: [
+		// @ts-expect-error unocss bug
+		transformerAlias(),
 		transformerDirectives(),
 		transformerVariantGroup(),
 	],
