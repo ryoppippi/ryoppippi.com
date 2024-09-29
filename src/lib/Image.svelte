@@ -30,13 +30,15 @@
 	<img
 		{...rest}
 		{alt}
+		loading='lazy'
 		{src}
 	/>
 {:else}
 	{#await importImage(src) then src}
 		<enhanced:img
-			{...rest}
 			{alt}
+			{...rest}
+			loading='lazy'
 			{src}
 		/>
 	{/await}
