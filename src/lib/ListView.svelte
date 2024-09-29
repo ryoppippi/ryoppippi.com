@@ -3,6 +3,7 @@
 		title: string;
 		link: string;
 		date?: string;
+		lang?: string;
 		external?: boolean;
 	};
 </script>
@@ -15,18 +16,26 @@
 		items: Item[];
 		itemView: Snippet<[Item]>;
 		animation?: boolean;
+		isEnglishOnly?: boolean;
 	};
 
-	const { items, itemView, animation }: Props = $props();
+	const {
+		items,
+		itemView,
+		animation,
+		isEnglishOnly = $bindable(false),
+	}: Props = $props();
 </script>
 <div mxa px-10>
 	{#each items as item, count (slugify(item.title))}
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
+			class:hidden={isEnglishOnly && item.lang !== 'en'}
 			class:sliding-animation={animation}
 			my-2
 			sliding-animation-delay-base
+			transition-all
 		>
 			{#if item.date}
 				<p opacity-70>

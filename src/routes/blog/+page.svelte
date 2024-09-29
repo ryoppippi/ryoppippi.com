@@ -4,6 +4,10 @@
 
 	const { data } = $props();
 
+	let isOnlyEnglish = $state(false);
+	let isOnlyEnglishChangedCount = $state(0);
+
+	const items = $derived(data.posts.filter(i => !isOnlyEnglish || i.lang === 'en'));
 </script>
 
 <HeadTitle title='blog' />
@@ -28,7 +32,29 @@
 	<p truncate>{item.title}</p>
 {/snippet}
 
+<div mxa px-10>
+	<button
+		fyc
+		gap-1
+		mb2
+		onclick={() => {
+			isOnlyEnglish = !isOnlyEnglish;
+			isOnlyEnglishChangedCount += 1;
+		}}
+		op30
+		text-sm
+		type='button'>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<div
+			class:i-carbon-checkbox={!isOnlyEnglish}
+			class:i-carbon-checkbox-checked={isOnlyEnglish}
+		/>
+		English Only
+	</button>
+</div>
+
 <ListView
+	animation={isOnlyEnglishChangedCount < 1}
 	{itemView}
 	{items}
 />
