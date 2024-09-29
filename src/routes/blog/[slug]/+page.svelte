@@ -26,6 +26,7 @@
 >
 	<hgroup fcol fyc gap-1 mb-3 text-center>
 		<LargeTitle
+			selectDisabled={false}
 			title={data.title}
 			viewTransitionName='blog-{data.slug}'
 		/>
