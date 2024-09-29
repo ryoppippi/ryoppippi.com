@@ -1,6 +1,6 @@
-import { fileURLToPath } from 'node:url';
 import sortOn from 'sort-on';
 import typia from 'typia';
+import { joinURL } from 'ufo';
 import { parseMarkdown } from '$lib/markdown.server';
 import { slugger } from '$lib/util';
 
@@ -12,7 +12,7 @@ type Metadata = {
 	featured?: boolean;
 };
 
-type Project = Omit<Metadata, 'image'> & {
+export type Project = Omit<Metadata, 'image'> & {
 	slug: string;
 	image: string;
 	content: string;
@@ -31,7 +31,7 @@ export async function getProjects(): Promise<Project[]> {
 			typia.assertGuard<Metadata>(metadata);
 			const project = {
 				...metadata,
-				image: metadata.image.startsWith('http') ? metadata.image : fileURLToPath(new URL(metadata.image, import.meta.url)),
+				image: metadata.image.startsWith('http') ? metadata.image : joinURL('/contents/projects/showcase', metadata.image),
 				slug: slugger.slug(slug),
 				content,
 			} as const satisfies Project;

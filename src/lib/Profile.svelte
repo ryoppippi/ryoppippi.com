@@ -1,13 +1,11 @@
 <script lang='ts'>
-	const name = `ryoppippi`;
-
-	import img from '$lib/assets/ryoppippi.png?enhanced';
+	import Image from './Image.svelte';
 </script>
 
 <div>
-	<enhanced:img
-		style:--tag={name}
+	<Image
 		class='object-contain mx-auto aspect-square w-1/2 rounded-full md:(h-64 w-64)'
 		alt='profile'
-		src={img} />
+		src='/src/lib/assets/ryoppippi.png'
+	/>
 </div>
