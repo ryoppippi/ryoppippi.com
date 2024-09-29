@@ -16,14 +16,12 @@
 		items: Item[];
 		itemView: Snippet<[Item]>;
 		animation?: boolean;
-		isEnglishOnly?: boolean;
 	};
 
 	const {
 		items,
 		itemView,
 		animation,
-		isEnglishOnly = $bindable(false),
 	}: Props = $props();
 </script>
 <div mxa px-10>
@@ -32,7 +30,6 @@
 		<div
 			style:--stagger={count}
 			style:--start='500ms'
-			class:hidden={isEnglishOnly && item.lang !== 'en'}
 			class:sliding-animation={animation}
 			my-2
 			sliding-animation-delay-base
