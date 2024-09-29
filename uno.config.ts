@@ -1,6 +1,7 @@
 import { isDevelopment } from 'std-env';
 import { deepMerge } from '@std/collections/deep-merge';
 import {
+	type PresetUnoTheme,
 	defineConfig,
 	presetAttributify,
 	presetIcons,
@@ -21,6 +22,38 @@ Object.values(ossProjects).forEach((projects) => {
 	projectSafelist.push(...projects.map(project => project.icon));
 });
 
+const theme = {
+	colors: {
+		primary: {
+			100: '#FF6B6B',
+			200: '#dd4d51',
+			300: '#8f001a',
+		},
+		accent: {
+			100: '#FFE66D',
+			200: '#958500',
+		},
+		text: {
+			100: '#FFFFFF',
+			200: '#e0e0e0',
+			300: '#b3b3b3',
+			400: '#808080',
+			500: '#4d4d4d',
+			600: '#262626',
+			700: '#1a1a1a',
+			800: '#0f0f0f',
+		},
+		bg: {
+			base: '#0F0F0F',
+			100: '#1E1E1E',
+			200: '#2d2d2d',
+			300: '#454545',
+		},
+	},
+	breakpoints: {
+		tiny: '375px',
+	},
+} as const satisfies PresetUnoTheme;
 export default defineConfig({
 	presets: [
 		presetUno(),
@@ -50,41 +83,10 @@ export default defineConfig({
 			],
 		},
 	},
-	extendTheme: theme => deepMerge(
+	extendTheme: _theme => deepMerge(
 		// eslint-disable-next-line ts/no-unsafe-argument
+		_theme,
 		theme,
-		{
-			colors: {
-				primary: {
-					100: '#FF6B6B',
-					200: '#dd4d51',
-					300: '#8f001a',
-				},
-				accent: {
-					100: '#FFE66D',
-					200: '#958500',
-				},
-				text: {
-					100: '#FFFFFF',
-					200: '#e0e0e0',
-					300: '#b3b3b3',
-					400: '#808080',
-					500: '#4d4d4d',
-					600: '#262626',
-					700: '#1a1a1a',
-					800: '#0f0f0f',
-				},
-				bg: {
-					base: '#0F0F0F',
-					100: '#1E1E1E',
-					200: '#2d2d2d',
-					300: '#454545',
-				},
-			},
-			breakpoints: {
-				tiny: '375px',
-			},
-		},
 	),
 	shortcuts: [
 		{
