@@ -9,6 +9,7 @@
 
 <script lang='ts'>
 	import type { Snippet } from 'svelte';
+	import { slugify } from '$lib/util';
 
 	type Props = {
 		items: Item[];
@@ -19,7 +20,7 @@
 	const { items, itemView, animation }: Props = $props();
 </script>
 <div mxa px-10>
-	{#each items as item, count (item.title)}
+	{#each items as item, count (slugify(item.title))}
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
