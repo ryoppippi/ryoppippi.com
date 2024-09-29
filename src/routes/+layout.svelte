@@ -1,6 +1,9 @@
 <script>
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
+	import 'markdown-it-github-alerts/styles/github-colors-light.css';
+	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
+	import 'markdown-it-github-alerts/styles/github-base.css';
 	import '@shikijs/twoslash/style-rich.css';
 
 	import faviconLinks from 'virtual:favicons';

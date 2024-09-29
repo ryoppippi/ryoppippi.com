@@ -78,6 +78,7 @@
 		"gray-matter": "^4.0.3",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
+		"markdown-it-github-alerts": "^0.3.0",
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^8.2.4",
