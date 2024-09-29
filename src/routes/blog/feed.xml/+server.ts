@@ -6,7 +6,7 @@ import { posts as blogPosts } from '$contents/blog';
 export const prerender = true;
 
 export const GET = (async () => {
-	const favicon = subdomain('favicon.jpg');
+	const favicon = subdomain('ryoppippi.jpg');
 
 	const feed = new Feed({
 		title: `blog | ryoppippi.com`,
