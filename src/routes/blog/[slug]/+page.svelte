@@ -12,7 +12,7 @@
 	<meta content={data.title} property='og:title' />
 </svelte:head>
 
-<article
+<div
 	max-w-xl
 	min-w-0
 	mxa
@@ -37,7 +37,7 @@
 	<article mx-10 prose-base>
 		{@html data.content}
 	</article>
-</article>
+</div>
 
 <style>
 :global {
