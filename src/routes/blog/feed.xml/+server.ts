@@ -1,6 +1,4 @@
 import { Feed } from 'feed';
-import { joinURL } from 'ufo';
-import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { domain, subdomain } from '$lib/util';
 import { posts as blogPosts } from '$contents/blog';
