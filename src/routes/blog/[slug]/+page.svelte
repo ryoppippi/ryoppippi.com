@@ -34,7 +34,7 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article mx-10 prose-base>
+	<article mx-10 class='*prose-base'>
 		{@html data.content}
 	</article>
 </div>
@@ -68,6 +68,13 @@
 	h6:hover .header-anchor,
 	h6:focus .header-anchor {
 		opacity: 0.5;
+	}
+
+	.prose figure figcaption {
+	  color: theme('colors.text.400');
+	  font-size: 0.875em;
+	  line-height: 1.4285714;
+	  margin-top: 0.8571429em;
 	}
 
 	html.dark .shiki,
