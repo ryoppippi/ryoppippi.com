@@ -63,7 +63,7 @@
 		"@types/dom-view-transitions": "^1.0.5",
 		"@types/fs-extra": "^11.0.4",
 		"@types/markdown-it": "^14.1.2",
-		"@types/node": "^22.7.2",
+		"@types/node": "^22.7.3",
 		"@unocss/extractor-svelte": "^0.62.4",
 		"@unocss/reset": "^0.62.4",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.13.3",
