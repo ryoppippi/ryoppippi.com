@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import CheckButton from './CheckButton.svelte';
 	import HeadTitle from '$lib/HeadTitle.svelte';
 	import ListView, { type Item } from '$lib/ListView.svelte';
 
@@ -7,7 +8,14 @@
 	let isOnlyEnglishCount = $state(0);
 	const isOnlyEnglish = $derived(isOnlyEnglishCount % 2 === 1);
 
-	const items = $derived(data.posts.filter(i => !isOnlyEnglish || i.lang === 'en'));
+	let isOnlyRyoppippiCount = $state(0);
+	const isOnlyRyoppippi = $derived(isOnlyRyoppippiCount % 2 === 1);
+
+	const items = $derived(data
+		.posts
+		.filter(i => !isOnlyEnglish || i.lang === 'en')
+		.filter(i => !isOnlyRyoppippi || !i.link.startsWith('http')),
+	);
 </script>
 
 <HeadTitle title='blog' />
@@ -36,21 +44,16 @@
 {/snippet}
 
 <div mxa px-10>
-	<button
-		fyc
-		gap-1
-		mb2
+	<CheckButton
+		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
 		onclick={() => isOnlyEnglishCount++}
-		op30
-		text-sm
-		type='button'>
-		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<div
-			class:i-carbon-checkbox={!isOnlyEnglish}
-			class:i-carbon-checkbox-checked={isOnlyEnglish}
-		/>
-		English Only
-	</button>
+		text='English Only'
+	/>
+	<CheckButton
+		iconClass={!isOnlyRyoppippi ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
+		onclick={() => isOnlyRyoppippiCount++}
+		text='ryoppippi.com exclusive'
+	/>
 </div>
 
 <ListView
