@@ -4,8 +4,8 @@
 
 	const { data } = $props();
 
-	let isOnlyEnglish = $state(false);
-	let isOnlyEnglishChangedCount = $state(0);
+	let isOnlyEnglishCount = $state(0);
+	const isOnlyEnglish = $derived(isOnlyEnglishCount % 2 === 1);
 
 	const items = $derived(data.posts.filter(i => !isOnlyEnglish || i.lang === 'en'));
 </script>
@@ -40,10 +40,7 @@
 		fyc
 		gap-1
 		mb2
-		onclick={() => {
-			isOnlyEnglish = !isOnlyEnglish;
-			isOnlyEnglishChangedCount += 1;
-		}}
+		onclick={() => isOnlyEnglishCount++}
 		op30
 		text-sm
 		type='button'>
@@ -57,7 +54,7 @@
 </div>
 
 <ListView
-	animation={isOnlyEnglishChangedCount < 1}
+	animation={isOnlyEnglishCount < 1}
 	{itemView}
 	{items}
 />
