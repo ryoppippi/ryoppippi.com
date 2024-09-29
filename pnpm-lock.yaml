@@ -18,8 +18,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       '@iconify-json/catppuccin':
-        specifier: ^1.2.3
-        version: 1.2.3
+        specifier: ^1.2.4
+        version: 1.2.4
       '@iconify-json/devicon-plain':
         specifier: ^1.2.2
         version: 1.2.2
@@ -705,8 +705,8 @@ packages:
   '@iconify-json/carbon@1.2.1':
     resolution: {integrity: sha512-dIMY6OOY9LnwR3kOqAtfz4phGFG+KNfESEwSL6muCprBelSlSPpRXtdqvEEO/qWhkf5AJ9hWrOV3Egi5Z2IuKA==}
 
-  '@iconify-json/catppuccin@1.2.3':
-    resolution: {integrity: sha512-VfpYog398nzQyxaIm7fDCXS8id3Jgfzzq+f0QIfGmXmHGITP0u1I6aUDPhvkSa5UYH3fgy8FakmjxSI9eID8aA==}
+  '@iconify-json/catppuccin@1.2.4':
+    resolution: {integrity: sha512-yirVaJjjNwcqD5U7RFodXdkI3aBfp8MGFrRY/OA3UyisIwhydniWaeyn8MUpOnR865qRinEyKwUh57b5yQQfoA==}
 
   '@iconify-json/devicon-plain@1.2.2':
     resolution: {integrity: sha512-VQqWz9unG1ET/Zqugi2zmYS7puZF1IYPiLK43oWbwyrO8Ju4uymCpdUDKGThFEiQ4cN88ErjCWguXhZSNETSyg==}
@@ -3698,7 +3698,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/catppuccin@1.2.3':
+  '@iconify-json/catppuccin@1.2.4':
     dependencies:
       '@iconify/types': 2.0.0
 
