@@ -17,8 +17,13 @@
 	min-w-0
 	mxa
 >
-	<hgroup fcol fyc gap-1 mb-3>
-		<h1 text='6xl primary-100'>
+	<hgroup fcol fyc gap-1 mb-3 text-center>
+		<h1
+			f-text-32-64
+			line-height-none
+			pb-4
+			text-primary-100
+		>
 			{data.title}
 		</h1>
 		<p>Date: {formatDate(new Date(data.pubDate))}</p>
@@ -26,7 +31,7 @@
 	</hgroup>
 
 	<div p2>
-		<hr ma op25 w-100 />
+		<hr ma max-w-100 op25 w-full />
 	</div>
 
 	<article mx-10 prose-base>
