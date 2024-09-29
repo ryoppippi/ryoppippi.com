@@ -34,7 +34,7 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article mx-10 class='*prose-base'>
+	<article class='*prose-base' mx-10>
 		{@html data.content}
 	</article>
 </div>
@@ -71,10 +71,10 @@
 	}
 
 	.prose figure figcaption {
-	  color: theme('colors.text.400');
-	  font-size: 0.875em;
-	  line-height: 1.4285714;
-	  margin-top: 0.8571429em;
+		color: theme('colors.text.400');
+		font-size: 0.875em;
+		line-height: 1.4285714;
+		margin-top: 0.8571429em;
 	}
 
 	html.dark .shiki,
