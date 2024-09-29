@@ -1,9 +1,8 @@
 <script lang='ts'>
 	import type { Snippet } from 'svelte';
-	import type { load } from './+page.ts';
 	import { formatDate } from '$lib/util';
-
-	type Project = ReturnType<typeof load>['projects'][0];
+	import Image from '$lib/Image.svelte';
+	import type { Project } from '$contents/projects/showcase';
 
 	type Props = {
 		project: Project;
@@ -32,25 +31,14 @@
 >
 	{#snippet _a()}
 	{#if project.image != null}
-			{#if typeof project.image === 'string'}
-				<img
-					alt={project.title}
-					aspect-video
-					border='b base'
-					object-cover
-					src={project.image}
-					w-full
-				/>
-			{:else}
-				<enhanced:img
-					alt={project.title}
-					aspect-video
-					border='b base'
-					object-cover
-					src={project.image.default}
-					w-full
-				/>
-			{/if}
+			<Image
+				alt={project.title}
+				aspect-video='~'
+				border='b base'
+				object-cover='~'
+				src={project.image}
+				w-full='~'
+			/>
 	{/if}
 		{/snippet}
 	{@render projectLink(_a)}
