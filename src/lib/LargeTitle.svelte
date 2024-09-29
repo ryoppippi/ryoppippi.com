@@ -1,8 +1,13 @@
 <script lang='ts'>
-	const { title }: { title: string } = $props();
+	type Props = {
+		title: string;
+		viewTransitionName?: string;
+	};
+	const { title, viewTransitionName }: Props = $props();
 </script>
 
-<h2
+<h1
+	style:view-transition-name={viewTransitionName}
 	f-text-32-64
 	font='mono bold'
 	line-height-none
@@ -13,4 +18,4 @@
 	text-transparent
 >
 	{title}
-</h2>
+</h1>
