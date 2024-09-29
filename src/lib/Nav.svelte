@@ -80,6 +80,15 @@
 		<div flex gap-2 view-transition--nav-icons>
 			<DarkMode.ToggleButton />
 			<a
+				class='i-line-md:rss'
+				fyc
+				href='/blog/feed.xml'
+				mya
+				target='_blank'
+			>
+				souce code
+			</a>
+			<a
 				class='i-teenyicons:github-solid'
 				fyc
 				href='https://github.com/ryoppippi/ryoppippi.com'
