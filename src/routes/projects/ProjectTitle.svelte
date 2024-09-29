@@ -2,8 +2,7 @@
 	const apo = `&rsquo;`;
 	const statement = [
 		'... that',
-		'I created',
-		'and',
+		'I',
 		`(${apo}m working | ${apo}ve worked)`,
 		'on',
 	].map(text => `<span text-nowrap>${text}</span>`).join(' ');
