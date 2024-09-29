@@ -2,7 +2,7 @@ import sortOn from 'sort-on';
 import typia from 'typia';
 import { joinURL } from 'ufo';
 import { parseMarkdown } from '$lib/markdown.server';
-import { slugger } from '$lib/util';
+import { slugify } from '$lib/util';
 
 type Metadata = {
 	title: string;
@@ -32,7 +32,7 @@ export async function getProjects(): Promise<Project[]> {
 			const project = {
 				...metadata,
 				image: metadata.image.startsWith('http') ? metadata.image : joinURL('/contents/projects/showcase', metadata.image),
-				slug: slugger.slug(slug),
+				slug: slugify(slug),
 				content,
 			} as const satisfies Project;
 			return project;

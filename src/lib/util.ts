@@ -19,4 +19,7 @@ export function subdomain(...paths: string[]): string {
 	return ufo.joinURL(process.env.DOMAIN as string, ...paths);
 }
 
-export const slugger = new GithubSlugger();
+const slugger = new GithubSlugger();
+export function slugify(s: string) {
+	return slugger.slug(s);
+}
