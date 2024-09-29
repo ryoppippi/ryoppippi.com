@@ -10,6 +10,7 @@ type Item = {
 	title: string;
 	link: string;
 	pubDate: string;
+	lang: 'en' | 'ja';
 };
 
 export async function getPosts() {
@@ -18,15 +19,16 @@ export async function getPosts() {
 			rss.map(async (url) => {
 				const feed = await parser.parseURL(url);
 				return feed.items
-					.map(({ title, link, pubDate }) => {
-						const item = { title, link, pubDate };
-						typia.assertGuard<Item>(item);
-						return item;
-					})
-					.map(item => ({ ...item, pubDate: new Date(item.pubDate).toJSON() }));
+					.map(({ pubDate, ...rest }) => ({
+						...rest,
+						lang: 'ja',
+						pubDate: new Date(pubDate as string).toJSON(),
+					}));
 			}),
 		)
 	).flat();
+
+	typia.assertGuard<Item[]>(feeds);
 
 	const sortedFeeds = sortOn(feeds, ['-pubDate']);
 
