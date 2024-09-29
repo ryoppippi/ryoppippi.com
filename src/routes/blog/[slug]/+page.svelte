@@ -1,8 +1,15 @@
 <script>
 	import HeadTitle from '$lib/HeadTitle.svelte';
-	import { formatDate } from '$lib/util';
+	import { domain, formatDate } from '$lib/util';
+	import { page } from '$app/stores';
 
 	const { data } = $props();
+
+	const shareText = encodeURIComponent(`Reading @ryoppippi\'s ${domain()}${$page.url}\n\nI think...`);
+	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
+	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText}`;
+
+	$inspect(tweetUrl);
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
@@ -35,12 +42,26 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article class='*prose-base' mx-10>
+	<article class='*prose-base' mx-10 pb-8>
 		{@html data.content}
 	</article>
+	<div op50 pb-8 prose>
+		<span op50>comment on</span>
+		<a href={bskyUrl} target='_blank'>bluesky</a>
+		<span op25> / </span>
+		<a href={tweetUrl} target='_blank'>twitter</a>
+	</div>
+
+	<div op50 pb-8>
+		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank'>CC BY-NC-SA 4.0</a> 2022-PRESENT © ryoppippi
+	</div>
 </div>
 
 <style>
+a {
+	--at-apply: no-underline hover:underline
+}
+
 :global {
 	a.header-anchor {
 		float: left;
