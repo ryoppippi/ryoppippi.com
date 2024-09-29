@@ -24,9 +24,9 @@
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
-			class:animate-delay-base={animation}
+			class:sliding-animation={animation}
 			my-2
-			sliding-animation='~ delay-base'
+			sliding-animation-delay-base
 		>
 			{#if item.date}
 				<p opacity-70>
