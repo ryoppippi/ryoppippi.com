@@ -4,6 +4,7 @@ import typia from 'typia';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.js';
 import type { GHRepo, Project, Projects } from './types.js';
+import { slugify } from '$lib/util.js';
 
 const GITHUB_URL = `https://github.com`;
 
@@ -16,6 +17,10 @@ export async function getProjects(fetch?: typeof globalThis.fetch): Promise<Proj
 	for (const [genre, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
 		for (const [index, project] of projects.entries()) {
 			let originalProject = structuredClone(project as Project);
+			originalProject = {
+				...originalProject,
+				slug: slugify(originalProject.name),
+			};
 			if (!typia.is<string>(originalProject?.link)) {
 				originalProject = {
 					...originalProject,

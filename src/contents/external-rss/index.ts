@@ -3,11 +3,13 @@ import sortOn from 'sort-on';
 import typia from 'typia';
 
 import rss from './rss.json';
+import { slugify } from '$lib/util';
 
 const parser = new Parser();
 
 type Item = {
 	title: string;
+	slug: string;
 	link: string;
 	pubDate: string;
 	lang: 'en' | 'ja';
@@ -21,6 +23,7 @@ export async function getPosts() {
 				return feed.items
 					.map(({ pubDate, ...rest }) => ({
 						...rest,
+						slug: slugify(rest.title ?? ''),
 						lang: 'ja',
 						pubDate: new Date(pubDate as string).toJSON(),
 					}));

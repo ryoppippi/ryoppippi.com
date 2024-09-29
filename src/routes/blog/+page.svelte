@@ -29,7 +29,10 @@
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
 		<span blog-list-icon i-simple-icons-markdown />
 	{/if}
-	<p truncate>{item.title}</p>
+	<p
+		style:view-transition-name='blog-{item.slug}'
+		truncate
+	>{item.title}</p>
 {/snippet}
 
 <div mxa px-10>

@@ -2,7 +2,7 @@
 	import type { Project } from '$contents/projects/oss/types';
 
 	const { project }: { project: Project } = $props();
-	const { name, description, icon, link } = project;
+	const { name, description, icon, link, slug } = project;
 </script>
 
 <!-- eslint-disable-next-line svelte/require-each-key -->
@@ -22,9 +22,8 @@
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
-		style:--project-title={name}
+		style:view-transition-name={slug}
 		gcc
-		view-transition='-[--project-title]'
 	>
 		<div class={icon} op50 text-3xl />
 	</div>

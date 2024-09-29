@@ -3,6 +3,7 @@
 		title: string;
 		link: string;
 		date?: string;
+		slug: string;
 		lang?: string;
 		external?: boolean;
 	};
@@ -10,7 +11,6 @@
 
 <script lang='ts'>
 	import type { Snippet } from 'svelte';
-	import { slugify } from '$lib/util';
 
 	type Props = {
 		items: Item[];
@@ -27,10 +27,11 @@
 	}: Props = $props();
 </script>
 <div mxa px-10>
-	{#each items as item, count (slugify(item.title))}
+	{#each items as item, count (item.slug)}
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
+			style:--start='500ms'
 			class:hidden={isEnglishOnly && item.lang !== 'en'}
 			class:sliding-animation={animation}
 			my-2

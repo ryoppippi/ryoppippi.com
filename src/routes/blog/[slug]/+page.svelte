@@ -19,6 +19,7 @@
 >
 	<hgroup fcol fyc gap-1 mb-3 text-center>
 		<h1
+			style:view-transition-name='blog-{data.slug}'
 			f-text-32-64
 			line-height-none
 			pb-4

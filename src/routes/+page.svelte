@@ -14,10 +14,10 @@
 	</div>
 	<div mt8>
 		<h1
+			style:view-transition-name='title-ryoppippi'
 			font-bold
 			mb6
 			text='4xl center'
-			view-transition--title
 		>
 			<span
 				block

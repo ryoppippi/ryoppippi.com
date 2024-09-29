@@ -20,14 +20,13 @@
 {/snippet}
 
 <div
-	style:--showcase-title={project.title}
+	style:view-transition-name={project.title}
 	class='group'
 	border='~ base rounded-lg'
 	hover='scale-101 shadow-xl z-10'
 	select-none
 	target={project.link.startsWith('http') ? '_blank' : '_self'}
 	transition-base
-	view-transition='-[--showcase-title]'
 >
 	{#snippet _a()}
 	{#if project.image != null}

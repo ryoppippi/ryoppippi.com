@@ -40,14 +40,15 @@
 <HeadTitle title='publications' />
 
 {#snippet itemView(_item: ListItem)}
-	{@const item = _item as Item}
+	{@const item = _item as unknown as Item}
 	<div>
 		<h3 text-xl>{item.title}</h3>
 		<p op50>{item.publisher}</p>
 	</div>
 {/snippet}
 
-{#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, items], count (year)}
+{#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, _items], count (year)}
+	{@const items = _items.map(item => ({ ...item, slug: JSON.stringify(item) }))}
 	<div
 		style:--stagger={count}
 		animate-delay-base
@@ -55,6 +56,10 @@
 		sliding-animation='~ delay-base'
 	>
 		<LargeTitle title={year} />
-		<ListView animation={false} {itemView} {items} />
+		<ListView
+			animation={false}
+			{itemView}
+			{items}
+		/>
 	</div>
 {/each}

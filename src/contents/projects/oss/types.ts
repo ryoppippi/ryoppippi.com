@@ -2,6 +2,7 @@ export type Genre = string;
 export type Project = {
 	name: string;
 	link?: string;
+	slug?: string;
 	description?: string | null;
 	icon: string;
 };
