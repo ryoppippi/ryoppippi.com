@@ -12,6 +12,7 @@
 			class={color}
 			fcol-md-row
 			fyc
+			gap-1
 			href={subdomain(_subdomain)}
 			target='_blank'
 		>
