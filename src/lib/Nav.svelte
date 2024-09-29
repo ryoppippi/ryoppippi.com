@@ -59,7 +59,7 @@
 		text-lg
 	>
 		{#each LINKS as { href, name, ...rest } (href)}
-			{@const isPath = $page.url.pathname === href}
+			{@const isPath = $page.url.pathname.startsWith(href)}
 			{@const icon = 'icon' in rest ? rest.icon : null}
 			<a
 				style:view-transition-name='-nav-link-{name}'
