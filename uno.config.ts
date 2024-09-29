@@ -54,6 +54,7 @@ const theme = {
 		tiny: '375px',
 	},
 } as const satisfies PresetUnoTheme;
+
 export default defineConfig({
 	presets: [
 		presetUno(),
@@ -68,7 +69,16 @@ export default defineConfig({
 				wisper: 'Bad Script',
 			},
 		}),
-		presetTypography(),
+		presetTypography({
+			cssExtend: {
+				'code': {
+					color: theme.colors.text[700],
+				},
+				'html.dark code': {
+					color: theme.colors.text[400],
+				},
+			},
+		}),
 		presetFluid(),
 	],
 	transformers: [
