@@ -51,6 +51,8 @@
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.0.6",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3",
 		"@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
+		"@shikijs/markdown-it": "^1.21.0",
+		"@shikijs/twoslash": "^1.21.0",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.7",
 		"@sveltejs/adapter-auto": "^3.2.5",
 		"@sveltejs/adapter-static": "^3.0.5",

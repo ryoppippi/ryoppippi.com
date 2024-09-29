@@ -1,6 +1,7 @@
 <script>
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
+	import '@shikijs/twoslash/style-rich.css';
 
 	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
