@@ -24,8 +24,8 @@
 		<div
 			style:--stagger={count}
 			class:animate-delay-base={animation}
-			data-sliding-animate={animation ? '' : undefined}
 			my-2
+			sliding-animation='~ delay-base'
 		>
 			{#if item.date}
 				<p opacity-70>

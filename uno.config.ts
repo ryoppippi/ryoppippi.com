@@ -123,16 +123,10 @@ export default defineConfig({
 `;
 
 			yield {
-				'--stagger': 0,
-				'--delay': `80ms`,
-				'--start': `0ms`,
-			};
-
-			yield {
 				'opacity': 0,
 				'animation': `enter 0.6s both`,
 				'animation-iteration-count': 1,
-				'animation-delay': `calc(var(--stagger) * var(--delay) + var(--start))`,
+				'animation-delay': `calc(var(--stagger, 0) * var(--delay, 80ms) + var(--start, 0ms))`,
 			};
 
 			yield {

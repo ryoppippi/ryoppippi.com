@@ -22,7 +22,6 @@
 		>
 			<LargeTitle title={genre} />
 			<div
-				class='[--delay:300ms] sm:[--delay:450ms]'
 				grid='~ gap-8'
 				grid-cols='1 md:2'
 			>
