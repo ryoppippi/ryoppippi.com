@@ -1,4 +1,6 @@
+import path from 'node:path';
 import sortOn from 'sort-on';
+import fs from 'fs-extra';
 import typia from 'typia';
 import type { Item, Metadata } from '$contents/blog/types';
 
@@ -30,6 +32,25 @@ async function getPosts() {
 	const sortedPost = sortOn(posts, ['-pubDate']);
 
 	return sortedPost;
+}
+
+export async function getPost(slug: string) {
+	try {
+		const mdRaw = await fs.readFile(path.resolve(`src/contents/blog/${slug}.md`), 'utf-8');
+		const { content, ...metadata } = await parseMarkdown(mdRaw);
+		typia.assertGuard<Metadata>(metadata);
+
+		const item = typia.assert<Item>({
+			...metadata,
+			slug,
+		});
+
+		return { ...item, content };
+	}
+	catch (e) {
+		console.error(`Post not found: ${slug}`);
+		throw e;
+	}
 }
 
 export const posts = await getPosts();
