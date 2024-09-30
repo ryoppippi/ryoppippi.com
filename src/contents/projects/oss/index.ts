@@ -11,53 +11,59 @@ const GITHUB_URL = `https://github.com`;
 export type ProjectsByGenre = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
 
 export async function getProjects(fetch?: typeof globalThis.fetch): Promise<ProjectsByGenre> {
-	const writableOSSProjects: Projects = structuredClone(_ossProjects);
-	const fetchPromises: Promise<void>[] = [];
+	const updatedProjects = await Promise.all(
+		(Object.entries(_ossProjects) as Entries<typeof _ossProjects>)
+			.map(async ([genre, projects]) => {
+				const updatedGenreProjects = await Promise.all(
+					projects.map(async (project) => {
+						return Promise.resolve(project as Project)
+							/* add slug */
+							.then(originalProject => ({
+								...originalProject,
+								slug: slugify(originalProject.name),
+							}))
+							/* add link */
+							.then(originalProject =>
+								!typia.is<string>(originalProject?.link)
+									? {
+											...originalProject,
+											link: joinURL(GITHUB_URL, 'ryoppippi', originalProject.name),
+										}
+									: originalProject,
+							)
+							/* fetch repo info from ungh.cc */
+							.then(async (originalProject) => {
+								if (!typia.is<string>(originalProject?.description)) {
+									try {
+										const unghURL = originalProject.link?.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
+										typia.assertGuard<string & tags.Format<'url'>>(unghURL);
 
-	for (const [genre, projects] of Object.entries(writableOSSProjects) as Entries<typeof _ossProjects>) {
-		for (const [index, project] of projects.entries()) {
-			let originalProject = structuredClone(project as Project);
-			originalProject = {
-				...originalProject,
-				slug: slugify(originalProject.name),
-			};
-			if (!typia.is<string>(originalProject?.link)) {
-				originalProject = {
-					...originalProject,
-					link: joinURL(GITHUB_URL, 'ryoppippi', project.name),
-				};
-			}
-			if (!typia.is<string>(originalProject?.description)) {
-				const fetchPromise = (async () => {
-					try {
-						const unghURL = originalProject.link?.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
-						typia.assertGuard<string & tags.Format<'url'>>(unghURL);
+										const ghRepoRes = await (fetch ?? globalThis.fetch)(unghURL);
+										if (!ghRepoRes.ok) {
+											throw new Error(`Failed to fetch ${unghURL}`);
+										}
 
-						const ghRepoRes = await (fetch ?? globalThis.fetch)(unghURL);
-						if (!ghRepoRes.ok) {
-							throw new Error(`Failed to fetch ${unghURL}`);
-						}
-						const ghRepo = await ghRepoRes.json();
-						typia.assertGuard<GHRepo>(ghRepo);
-						originalProject = {
-							...originalProject,
-							...ghRepo.repo,
-						};
-					}
-					catch (e) {
-						console.error(e);
-					}
-					writableOSSProjects[genre][index] = originalProject;
-				})();
-				fetchPromises.push(fetchPromise);
-			}
-			else {
-				writableOSSProjects[genre][index] = originalProject;
-			}
-		}
-	}
+										const ghRepo = await ghRepoRes.json();
+										typia.assertGuard<GHRepo>(ghRepo);
 
-	await Promise.all(fetchPromises);
+										return {
+											...originalProject,
+											...ghRepo.repo,
+										};
+									}
+									catch (e) {
+										console.error(e);
+									}
+								}
+								return originalProject;
+							});
+					}),
+				);
 
-	return writableOSSProjects as ProjectsByGenre;
+				/* return by tuple */
+				return [genre, updatedGenreProjects] as const;
+			}),
+	);
+
+	return Object.fromEntries(updatedProjects) as ProjectsByGenre;
 }
