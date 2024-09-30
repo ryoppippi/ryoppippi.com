@@ -29,16 +29,16 @@
 
 {#if src.startsWith('http')}
 	<img
-		{...rest}
 		{alt}
 		loading='lazy'
 		{src}
+		{...rest}
 	/>
 {:else}
 	<enhanced:img
 		{alt}
-		{...rest}
 		loading='lazy'
 		src={importImage(src)}
+		{...rest}
 	/>
 {/if}
