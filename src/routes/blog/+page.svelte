@@ -21,26 +21,30 @@
 <HeadTitle title='blog' />
 
 {#snippet itemView(item: Item)}
-	{#if item.external}
-		{#if item.link.includes('zenn')}
-			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			<span
-				blog-list-icon
-				i-simple-icons-zenn
-				text='group-hover:[#3EA8FF]'
-			/>
+	<div fyc gap-1 op-card>
+		{#if item.external}
+			{#if item.link.includes('zenn')}
+				<!-- svelte-ignore element_invalid_self_closing_tag -->
+				<div
+					blog-list-icon
+					i-simple-icons-zenn
+					text='group-hover:[#3EA8FF]'
+				/>
+			{:else}
+				<!-- svelte-ignore element_invalid_self_closing_tag -->
+				<div blog-list-icon i-quill-link-out />
+			{/if}
 		{:else}
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			<span blog-list-icon i-quill-link-out />
+			<span blog-list-icon i-simple-icons-markdown />
 		{/if}
-	{:else}
-		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<span blog-list-icon i-simple-icons-markdown />
-	{/if}
-	<p
-		style:view-transition-name='blog-{item.slug}'
-		truncate
-	>{item.title}</p>
+		<p
+			style:view-transition-name='blog-{item.slug}'
+			truncate
+		>
+			{item.title}
+		</p>
+	</div>
 {/snippet}
 
 <div mxa px-10>
