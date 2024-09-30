@@ -30,8 +30,10 @@
 	grid
 	grid-cols='1 md:3'
 	mxa
+	op='card hover:100'
 	py-6
 	text-xl
+	transition-base
 >
 	<div flex>
 		<a
