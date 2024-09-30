@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import type { Snippet } from 'svelte';
 	import { formatDate } from '$lib/util';
 	import Image from '$lib/Image.svelte';
 	import type { Project } from '$contents/projects/showcase';
