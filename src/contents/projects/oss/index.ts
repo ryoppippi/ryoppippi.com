@@ -3,7 +3,7 @@ import type { tags } from 'typia';
 import typia from 'typia';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.js';
-import type { GHRepo, Project, Projects } from './types.js';
+import type { GHRepo, Project } from './types.js';
 import { slugify } from '$lib/util.js';
 
 const GITHUB_URL = `https://github.com`;
