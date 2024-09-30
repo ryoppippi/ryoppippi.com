@@ -47,7 +47,7 @@
 			<span op50 pl-2 text-sm truncate>{item.date}</span>
 		</p>
 
-		</div>
+	</div>
 {/snippet}
 
 <HeadTitle title='blog' />

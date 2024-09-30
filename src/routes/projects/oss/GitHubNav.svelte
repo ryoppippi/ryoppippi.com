@@ -8,17 +8,17 @@
 	color: `btn-${string}`,
 	name: string
 )}
-		<a
-			class={color}
-			fcol-md-row
-			fyc
-			gap-1
-			href={subdomain(_subdomain)}
-			target='_blank'
-		>
-			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			<span class={icon} /> {name}
-		</a>
+	<a
+		class={color}
+		fcol-md-row
+		fyc
+		gap-1
+		href={subdomain(_subdomain)}
+		target='_blank'
+	>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<span class={icon} /> {name}
+	</a>
 {/snippet}
 
 <div
