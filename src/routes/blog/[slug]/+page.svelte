@@ -103,7 +103,7 @@ a {
 		text-decoration: var(--shiki-dark-text-decoration) !important;
 	}
 
-	.slide-enter-content > * {
+	html:not(.no-sliding) .slide-enter-content > * {
 		--at-apply: sliding-animation
 	}
 

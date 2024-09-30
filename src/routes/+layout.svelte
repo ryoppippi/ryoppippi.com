@@ -33,6 +33,16 @@
 			});
 		});
 	});
+
+	$effect(() => {
+		const url = $page.url;
+		if (url.hash.length > 1) {
+			document.documentElement.classList.add('no-sliding');
+		}
+		else {
+			document.documentElement.classList.remove('no-sliding');
+		}
+	});
 </script>
 
 <DarkMode />
