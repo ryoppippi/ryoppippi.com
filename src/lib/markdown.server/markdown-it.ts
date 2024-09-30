@@ -10,6 +10,8 @@ import GitHubAlerts from 'markdown-it-github-alerts';
 // @ts-expect-error no types
 import figures from 'markdown-it-image-figures';
 
+import LinkAttributes from 'markdown-it-link-attributes';
+
 import { slugify } from '$lib/util';
 
 const md = markdownit({
@@ -24,6 +26,14 @@ md.use(anchor, {
 		symbol: '#',
 		renderAttrs: () => ({ 'aria-hidden': 'true' }),
 	}),
+});
+
+md.use(LinkAttributes, {
+	matcher: (link: string) => /^https?:\/\//.test(link),
+	attrs: {
+		target: '_blank',
+		rel: 'noopener',
+	},
 });
 
 md.use(await MarkdownItShiki({
