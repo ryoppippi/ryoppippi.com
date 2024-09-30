@@ -6,6 +6,10 @@ import MarkdownItShiki from '@shikijs/markdown-it';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 
 import GitHubAlerts from 'markdown-it-github-alerts';
+
+// @ts-expect-error no types
+import figures from 'markdown-it-image-figures';
+
 import { slugify } from '$lib/util';
 
 const md = markdownit({
@@ -37,5 +41,12 @@ md.use(await MarkdownItShiki({
 
 // eslint-disable-next-line ts/no-unsafe-argument
 md.use(GitHubAlerts);
+
+// eslint-disable-next-line ts/no-unsafe-argument
+md.use(figures, {
+	figcaption: true,
+	lazy: true,
+	async: true,
+});
 
 export { md };
