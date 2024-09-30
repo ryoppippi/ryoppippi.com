@@ -55,7 +55,7 @@ export default defineConfig({
 				{ from: '/youtube', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
 			],
 		}),
-		UnpluginTypia({ log: 'verbose' }),
+		UnpluginTypia({ log: 'verbose', cache: true }),
 		Icons({
 			compiler: 'svelte',
 			autoInstall: isDevelopment,
