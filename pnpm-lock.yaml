@@ -221,9 +221,6 @@ importers:
       svelte-meta-tags:
         specifier: ^3.1.4
         version: 3.1.4(svelte@5.0.0-next.259)(typescript@5.6.2)
-      svelte-preprocess-import-assets:
-        specifier: ^1.1.0
-        version: 1.1.0(svelte@5.0.0-next.259)
       svelte-vertical-timeline:
         specifier: ^1.0.2
         version: 1.0.2(svelte@5.0.0-next.259)
@@ -2053,9 +2050,6 @@ packages:
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
-  estree-walker@3.0.3:
-    resolution: {integrity: sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==}
-
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
@@ -3133,11 +3127,6 @@ packages:
     resolution: {integrity: sha512-T6mqZrySltPCDwfKXWQ6zehipVLk4GWfH1zCMGgRtLlOIFPuw58ZxVYxVvotMJgJaurKi1i14viB2GIRKXeJTQ==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
-
-  svelte-preprocess-import-assets@1.1.0:
-    resolution: {integrity: sha512-pWjoceFcGAG6vUg50JZXfhr5V4amxI2aYbcsn6CJrytcA528NNgaHnvMR1EwJYBIpZEf302I8Pyw0YeEta1zbg==}
-    peerDependencies:
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.1
 
   svelte-vertical-timeline@1.0.2:
     resolution: {integrity: sha512-PAB+qBrSrNp5/saLXwIJ9r9dljdbiDB8ymc7c6ieIdbbP+71j7N+qUdZP1In+KXUbyXMpsG2I13KCgLalf6kOA==}
@@ -5555,10 +5544,6 @@ snapshots:
 
   estree-walker@2.0.2: {}
 
-  estree-walker@3.0.3:
-    dependencies:
-      '@types/estree': 1.0.6
-
   esutils@2.0.3: {}
 
   extend-shallow@2.0.1:
@@ -6665,13 +6650,6 @@ snapshots:
   svelte-parse-markup@0.1.5(svelte@5.0.0-next.259):
     dependencies:
       svelte: 5.0.0-next.259
-
-  svelte-preprocess-import-assets@1.1.0(svelte@5.0.0-next.259):
-    dependencies:
-      estree-walker: 3.0.3
-      magic-string: 0.30.11
-      svelte: 5.0.0-next.259
-      svelte-parse-markup: 0.1.5(svelte@5.0.0-next.259)
 
   svelte-vertical-timeline@1.0.2(svelte@5.0.0-next.259):
     dependencies:
