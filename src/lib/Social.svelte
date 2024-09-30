@@ -25,7 +25,7 @@
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { pathname } = ufo.parseURL(url)}
 		{@const path = pathname.replace('/', '')}
-		<div cursor-pointer op='hover:75'>
+		<div cursor-pointer op='50 hover:75' transition-base>
 			<a aria-label="link to ryoppippi's {path}" href={url} rel='noopener noreferrer' target='_blank'>
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
 				<div
