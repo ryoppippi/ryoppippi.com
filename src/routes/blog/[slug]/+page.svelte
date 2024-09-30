@@ -1,12 +1,12 @@
 <script lang='ts'>
 	import HeadTitle from '$lib/HeadTitle.svelte';
-	import { domain, formatDate } from '$lib/util';
+	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
 	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
 
-	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${domain()}${$page.url}\n\nI think...`);
+	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain($page.url.pathname)}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 
