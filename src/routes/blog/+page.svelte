@@ -18,8 +18,6 @@
 	);
 </script>
 
-<HeadTitle title='blog' />
-
 {#snippet itemView(_item: Item)}
 	{@const item = _item as typeof data.posts[0]}
 	<div fyc gap-1 my-2>
@@ -51,7 +49,9 @@
 	</div>
 {/snippet}
 
-<div mxa px-10>
+<HeadTitle title='blog' />
+
+<div mxa pt-10 px-10>
 	<CheckButton
 		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
 		onclick={() => isOnlyEnglishCount++}
