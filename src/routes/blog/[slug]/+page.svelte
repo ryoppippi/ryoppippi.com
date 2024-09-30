@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
 	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { domain, formatDate } from '$lib/util';
 	import { page } from '$app/stores';
@@ -6,9 +6,9 @@
 
 	const { data } = $props();
 
-	const shareText = encodeURIComponent(`Reading @ryoppippi\'s ${domain()}${$page.url}\n\nI think...`);
-	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
-	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText}`;
+	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${domain()}${$page.url}\n\nI think...`);
+	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
+	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 
 	$inspect(tweetUrl);
 /* eslint svelte/no-at-html-tags: 0 */
