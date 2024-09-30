@@ -7,6 +7,7 @@ import Icons from 'unplugin-icons/vite';
 import Macros from '@unplugin/macros/vite';
 import Replace from 'unplugin-replace/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
+import { denyImports } from 'vite-env-only';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { isDevelopment } from 'std-env';
@@ -23,6 +24,12 @@ export default defineConfig({
 		target: 'es2022',
 	},
 	plugins: [
+		denyImports({
+			client: {
+				specifiers: ['fs-extra', /^node:/, 'typia'],
+				files: ['**/.server/*', '**/*.server.*'],
+			},
+		}),
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
 			imgSrc: relativePath('./src/lib/assets/ryoppippi.png'),
