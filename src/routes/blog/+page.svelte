@@ -20,33 +20,34 @@
 
 {#snippet itemView(_item: Item)}
 	{@const item = _item as typeof data.posts[0]}
-	<div fyc gap-1 my-2>
-		{#if item.external}
-			{#if item.link.includes('zenn')}
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div
-					blog-list-icon
-					i-simple-icons-zenn
-					text='group-hover:[#3EA8FF]'
-				/>
+	<div flex gap-2 items-start my-2>
+		<span mt-0.5>
+			{#if item.external}
+				{#if item.link.includes('zenn')}
+					<!-- svelte-ignore element_invalid_self_closing_tag -->
+					<div
+						blog-list-icon
+						i-simple-icons-zenn
+						text='group-hover:[#3EA8FF]'
+					/>
+				{:else}
+					<!-- svelte-ignore element_invalid_self_closing_tag -->
+					<div blog-list-icon i-quill-link-out />
+				{/if}
 			{:else}
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div blog-list-icon i-quill-link-out />
+				<div blog-list-icon i-simple-icons-markdown />
 			{/if}
-		{:else}
-			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			<span blog-list-icon i-simple-icons-markdown />
-		{/if}
+		</span>
 		<p
 			style:view-transition-name='blog-{item.slug}'
-			fcol-lg-row
 			gap-x-2
-			truncate
 		>
-			<span>{item.title}</span>
-			<span op50 text-sm>{item.date}</span>
+			{item.title}
+			<span op50 pl-2 text-sm truncate>{item.date}</span>
 		</p>
-	</div>
+
+		</div>
 {/snippet}
 
 <HeadTitle title='blog' />
