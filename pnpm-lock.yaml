@@ -126,7 +126,7 @@ importers:
         specifier: ^0.3.8
         version: 0.3.8(rollup@4.22.5)(svelte@5.0.0-next.259)(vite@5.4.8(@types/node@22.7.4))
       '@sveltejs/kit':
-        specifier: ^2.6.0
+        specifier: ^2.6.1
         version: 2.6.1(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.259)(vite@5.4.8(@types/node@22.7.4)))(svelte@5.0.0-next.259)(vite@5.4.8(@types/node@22.7.4))
       '@sveltejs/vite-plugin-svelte':
         specifier: 4.0.0-next.7
