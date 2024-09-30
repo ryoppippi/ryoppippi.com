@@ -4,6 +4,7 @@ import typia from 'typia';
 
 import rss from './rss.json';
 import { slugify } from '$lib/util';
+import type { Lang } from '$contents/types';
 
 const parser = new Parser();
 
@@ -12,7 +13,7 @@ type Item = {
 	slug: string;
 	link: string;
 	pubDate: string;
-	lang: 'en' | 'ja';
+	lang: Lang;
 };
 
 export async function getPosts() {

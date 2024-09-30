@@ -1,10 +1,11 @@
 import type rt from 'reading-time';
+import type { Lang } from '$contents/types';
 
 export type Metadata = {
 	title: string;
 	date: string;
 	isPublished: boolean;
-	lang: 'en' | 'ja';
+	lang: Lang;
 };
 
 export type Item = {
