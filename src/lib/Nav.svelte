@@ -41,8 +41,8 @@
 			relative
 		>
 			<div
+				style:view-transition-name='title-ryoppippi'
 				class:hidden={$page.url.pathname === '/'}
-				view-transition--title
 			>
 				@ryoppippi
 			</div>
