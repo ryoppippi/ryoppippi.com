@@ -20,8 +20,9 @@
 
 <HeadTitle title='blog' />
 
-{#snippet itemView(item: Item)}
-	<div fyc gap-1>
+{#snippet itemView(_item: Item)}
+	{@const item = _item as typeof data.posts[0]}
+	<div fyc gap-1 my-2>
 		{#if item.external}
 			{#if item.link.includes('zenn')}
 				<!-- svelte-ignore element_invalid_self_closing_tag -->
@@ -40,9 +41,12 @@
 		{/if}
 		<p
 			style:view-transition-name='blog-{item.slug}'
+			fcol-lg-row
+			gap-x-2
 			truncate
 		>
-			{item.title}
+			<span>{item.title}</span>
+			<span op50 text-sm>{item.date}</span>
 		</p>
 	</div>
 {/snippet}

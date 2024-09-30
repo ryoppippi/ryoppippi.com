@@ -2,7 +2,6 @@
 	export type Item = {
 		title: string;
 		link: string;
-		date?: string;
 		slug: string;
 		lang?: string;
 		external?: boolean;
@@ -34,11 +33,6 @@
 			my-2
 			sliding-animation-delay-base
 		>
-			{#if item.date}
-				<p opacity-70>
-					{item.date}
-				</p>
-			{/if}
 			<a
 				class='group'
 				fyc
