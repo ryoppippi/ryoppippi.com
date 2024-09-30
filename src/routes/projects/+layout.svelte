@@ -1,11 +1,11 @@
 <script lang='ts'>
-	import { capitalize } from '@ryoppippi/str-fns';
+	import { capitalize, lowercase } from '@ryoppippi/str-fns';
 	import ProjectTitle from './ProjectTitle.svelte';
 	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { page } from '$app/stores';
 
 	const routes = [
-		'oss',
+		'OSS',
 		'showcase',
 		'publications',
 	] as const;
@@ -26,12 +26,13 @@
 		text-3xl
 	>
 		{#each routes as route (route)}
-			{@const isCurrent = $page.route.id?.endsWith(route)}
+			{@const lowercaseRoute = lowercase(route)}
+			{@const isCurrent = $page.route.id?.endsWith(lowercaseRoute)}
 			<a
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'
 				class:op70={isCurrent}
-				href={isCurrent ? null : route}
+				href={isCurrent ? null : lowercaseRoute}
 				op20
 			>{capitalize(route)}</a>
 		{/each}
