@@ -13,12 +13,6 @@
 	}: Props = $props();
 </script>
 
-{#snippet projectLink(children: Snippet)}
-	<a href={project.link} no-underline>
-		{@render children()}
-	</a>
-{/snippet}
-
 <div
 	style:view-transition-name={project.title}
 	class='group'
@@ -28,8 +22,8 @@
 	target={project.link.startsWith('http') ? '_blank' : '_self'}
 	transition-base
 >
-	{#snippet _a()}
-	{#if project.image != null}
+	<a href={project.link} no-underline>
+		{#if project.image != null}
 			<Image
 				alt={project.title}
 				aspect-video='~'
@@ -38,23 +32,22 @@
 				src={project.image}
 				w-full='~'
 			/>
-	{/if}
-		{/snippet}
-	{@render projectLink(_a)}
+		{/if}
+	</a>
 
 	<div
-		m0
-		mt--8
 		op-card
 		p4
 		pb3
-		prose='base sm'
 		transition-base
 	>
-		{#snippet title()} {project.title}{/snippet}
-		<h3 hover-underline>{@render projectLink(title)}</h3>
+		<a href={project.link}>
+			<h3 hover-underline text-2xl>
+				{project.title}
+			</h3>
+		</a>
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html project.content}
+		<div prose='base sm'>{@html project.content}</div>
 		{#if project.pubDate}
 			<div op50 pt2 text-sm>
 				{formatDate(new Date(project.pubDate))}
