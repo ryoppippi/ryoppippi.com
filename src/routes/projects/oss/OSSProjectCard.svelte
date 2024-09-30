@@ -8,10 +8,9 @@
 <!-- eslint-disable-next-line svelte/require-each-key -->
 <!-- card conmponrnt -->
 <a
-	bg='hover:[#88888811]'
 	font-sans
 	grid='~ cols-5'
-	hover='scale-101 shadow-xl z-10'
+	hover='scale-101 shadow-xl z-10 bg-[#88888811]'
 	href={link}
 	max-w-full
 	no-underline
