@@ -36,7 +36,7 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article class='*prose-base' mx-10 pb-8>
+	<article class='*prose-base' mxa pb-8>
 		{@html data.content}
 	</article>
 	<div op50 pb-8 prose>
