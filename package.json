@@ -94,7 +94,7 @@
 		"tslib": "^2.7.0",
 		"type-fest": "^4.26.1",
 		"typescript": "~5.6.2",
-		"typescript-svelte-plugin": "^0.3.41",
+		"typescript-svelte-plugin": "^0.3.42",
 		"typia": "^6.11.0",
 		"ufo": "^1.5.4",
 		"unocss": "^0.62.4",
