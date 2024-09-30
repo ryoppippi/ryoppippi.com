@@ -3,8 +3,10 @@
 
 	const { title }: { title?: string } = $props();
 
+	const displayTitle = (title != null ? `${title} |` : '') + domain();
 </script>
 
 <svelte:head>
-	<title>{title != null ? `${title} |` : ''}  {domain()}</title>
+	<title> {displayTitle} </title>
+	<meta content={displayTitle} property='og:title' />
 </svelte:head>

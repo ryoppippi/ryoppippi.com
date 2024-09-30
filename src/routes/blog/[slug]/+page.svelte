@@ -17,7 +17,6 @@
 <HeadTitle title='{data.title} | blog' />
 <svelte:head>
 	<meta content='article' property='og:type' />
-	<meta content={data.title} property='og:title' />
 </svelte:head>
 
 <div
