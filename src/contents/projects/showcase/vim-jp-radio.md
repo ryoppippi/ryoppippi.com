@@ -6,6 +6,6 @@ date: '2024-7-08'
 featured: true
 ---
 
-Landing page for vim-jp radio  
+Landing page for vim-jp radio
 
 [GitHub](https://github.com/vim-jp-radio/LP)
