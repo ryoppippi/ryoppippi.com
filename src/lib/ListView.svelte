@@ -29,7 +29,7 @@
 		{@const external = item.link.startsWith('http')}
 		<div
 			style:--stagger={count}
-			style:--start='500ms'
+			style:--start='300ms'
 			class:sliding-animation={animation}
 			my-2
 			sliding-animation-delay-base
