@@ -16,9 +16,7 @@
 <HeadTitle title='projects' />
 
 <div>
-	<div text-center>
-		<ProjectTitle />
-	</div>
+	<ProjectTitle />
 
 	<div
 		fcol-sm-row

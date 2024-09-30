@@ -9,7 +9,7 @@
 
 </script>
 
-<div font-mono>
+<div font-mono text-center>
 	<h1
 		font-bold
 		pb-4
