@@ -21,7 +21,7 @@
 <HeadTitle title='blog' />
 
 {#snippet itemView(item: Item)}
-	<div fyc gap-1 op-card>
+	<div fyc gap-1>
 		{#if item.external}
 			{#if item.link.includes('zenn')}
 				<!-- svelte-ignore element_invalid_self_closing_tag -->

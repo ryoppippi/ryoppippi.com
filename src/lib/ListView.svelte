@@ -33,7 +33,6 @@
 			class:sliding-animation={animation}
 			my-2
 			sliding-animation-delay-base
-			transition-all
 		>
 			{#if item.date}
 				<p opacity-70>
@@ -42,12 +41,13 @@
 			{/if}
 			<a
 				class='group'
-				border='b-2 transparent hover:primary-100'
 				fyc
 				gap-3
 				href={item.link}
 				mr-5
+				op-card
 				target={external ? '_blank' : ''}
+				transition-base
 			>
 				{@render itemView(item)}
 			</a>
