@@ -8,7 +8,7 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import GitHubAlerts from 'markdown-it-github-alerts';
 
 // @ts-expect-error no types
-import figures from 'markdown-it-image-figures';
+import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
 
@@ -53,7 +53,7 @@ md.use(await MarkdownItShiki({
 md.use(GitHubAlerts);
 
 // eslint-disable-next-line ts/no-unsafe-argument
-md.use(figures, {
+md.use(Figures, {
 	figcaption: true,
 	lazy: true,
 	async: true,
