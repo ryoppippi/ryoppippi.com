@@ -89,7 +89,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@iconify-json/tabler':
-        specifier: ^1.2.3
+        specifier: ^1.2.4
         version: 1.2.4
       '@iconify-json/teenyicons':
         specifier: ^1.2.0
