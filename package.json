@@ -89,7 +89,7 @@
 		"secretlint": "^8.2.4",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.7.0",
-		"svelte": "5.0.0-next.259",
+		"svelte": "5.0.0-next.260",
 		"svelte-check": "^4.0.4",
 		"svelte-meta-tags": "^3.1.4",
 		"svelte-vertical-timeline": "^1.0.2",
