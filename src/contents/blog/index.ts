@@ -5,6 +5,7 @@ import typia from 'typia';
 import type { Item, Metadata } from '$contents/blog/types';
 
 import { parseMarkdown } from '$lib/markdown.server';
+import { dev } from '$app/environment';
 
 async function getPosts() {
 	const originals = import.meta.glob('$contents/blog/*.md', { eager: true, as: 'raw' });
@@ -17,7 +18,7 @@ async function getPosts() {
 		try {
 			const metadata = await parseMarkdown<Metadata>(mdRaw);
 
-			if (metadata.isPublished) {
+			if (dev || metadata.isPublished) {
 				return typia.assert<Item>({
 					...metadata,
 					slug,

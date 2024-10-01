@@ -23,6 +23,10 @@
 	min-w-0
 	mxa
 >
+	{#if !data.isPublished}
+		<p bg-red text='4xl center'>This article is not published yet.</p>
+	{/if}
+
 	<hgroup fcol fyc gap-1 mb-3 text-center>
 		<LargeTitle
 			selectDisabled={false}

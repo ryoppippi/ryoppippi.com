@@ -43,6 +43,7 @@
 			style:view-transition-name='blog-{item.slug}'
 			gap-x-2
 		>
+			{#if 'isPublished' in item && !item?.isPublished}<span bg-red>(draft)</span>{/if}
 			{item.title}
 			<span op50 pl-2 text-sm truncate>{item.date}</span>
 		</p>
