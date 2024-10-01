@@ -114,5 +114,10 @@
 		"esbuild",
 		"sharp",
 		"svelte-preprocess"
-	]
+	],
+	"pnpm": {
+		"patchedDependencies": {
+			"@luckrya/markdown-it-link-to-card": "patches/@luckrya__markdown-it-link-to-card.patch"
+		}
+	}
 }

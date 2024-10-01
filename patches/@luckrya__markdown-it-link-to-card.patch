@@ -1,0 +1,19 @@
+diff --git a/package.json b/package.json
+index d2590333e1207583fc9fb2957769394ac826cf63..d834a4ee46efa4d2b7dfeae24f44c7c849a43e2a 100644
+--- a/package.json
++++ b/package.json
+@@ -8,7 +8,8 @@
+   "exports": {
+     ".": {
+       "require": "./dist/markdown.cjs.min.js",
+-      "import": "./dist/markdown.esm.min.js"
++      "import": "./dist/markdown.esm.min.js",
++      "types": "./types/index.d.ts"
+     }
+   },
+   "files": [
+@@ -67,3 +68,4 @@
+     "build": "npm run clean && npm run type:dts && rollup -c"
+   }
+ }
++
