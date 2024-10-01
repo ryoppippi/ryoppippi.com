@@ -18,6 +18,7 @@
 
 	import ryoppippi from '$lib/assets/ryoppippi.png';
 	import { domain, subdomain } from '$lib/util';
+	import { dev } from '$app/environment';
 
 	const { children } = $props();
 
@@ -36,7 +37,7 @@
 
 	$effect(() => {
 		const url = $page.url;
-		if (url.hash.length > 1) {
+		if (dev || url.hash.length > 1) {
 			document.documentElement.classList.add('no-sliding');
 		}
 		else {
