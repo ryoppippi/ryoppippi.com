@@ -225,7 +225,7 @@ importers:
         specifier: 5.0.0-next.259
         version: 5.0.0-next.259
       svelte-check:
-        specifier: ^4.0.3
+        specifier: ^4.0.4
         version: 4.0.4(picomatch@4.0.2)(svelte@5.0.0-next.259)(typescript@5.6.2)
       svelte-meta-tags:
         specifier: ^3.1.4
