@@ -7,7 +7,7 @@ import { md } from './markdown-it.js';
 
 export async function parseMarkdown<Metadata extends { [key: string]: unknown }>(
 	mdRaw: string,
-): Promise<Metadata & {
+): Promise<Omit<Metadata, 'date'> & {
 	content: string;
 	readingTime: ReturnType<typeof rt>;
 	pubDate: string | undefined;
@@ -17,15 +17,19 @@ export async function parseMarkdown<Metadata extends { [key: string]: unknown }>
 		content: contentRaw,
 	} = matter(mdRaw);
 
-	const metadata = data as Metadata;
-	const pubDate = typia.is<string>(metadata?.date) ? parse(metadata.date, 'yyyy-MM-dd', new Date()).toJSON() : undefined;
+	const { date, ...metadataRest } = data as Metadata;
+	const pubDate = typia.is<Date>(date)
+		? date.toJSON()
+		: typia.is<string>(date)
+			? parse(date, 'yyyy-MM-dd', new Date()).toJSON()
+			: undefined;
 	const readingTime = rt(contentRaw);
 	const content = md.render(contentRaw);
 
 	return {
-		...metadata,
-		readingTime,
+		...metadataRest,
 		pubDate,
+		readingTime,
 		content,
 	};
 }
