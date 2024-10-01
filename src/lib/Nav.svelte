@@ -55,8 +55,8 @@
 		col-span-2
 		font-bold
 		fw
+		fxe
 		gap-4
-		justify-end
 		m='xa md:r0'
 		text-lg
 	>

@@ -98,6 +98,9 @@ importers:
       '@ryoppippi/str-fns':
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
+      '@ryoppippi/unocss-preset':
+        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.0
+        version: '@jsr/ryoppippi__unocss-preset@1.0.0'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.6
         version: '@jsr/ryoppippi__unplugin-typia@1.0.6(@types/node@22.7.4)(rollup@4.22.5)'
@@ -984,6 +987,9 @@ packages:
 
   '@jsr/ryoppippi__str-fns@0.1.2':
     resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
+
+  '@jsr/ryoppippi__unocss-preset@1.0.0':
+    resolution: {integrity: sha512-E4Tbjq5N3FmbFtn0Y6/IxlzVL/B1NuvpRwBz/Lb9M1q0Apbj1dnrA1yX6kmqkjvFlcrDmXcC4wiJgrNo3e5xOA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.0.tgz}
 
   '@jsr/ryoppippi__unplugin-typia@1.0.6':
     resolution: {integrity: sha512-6Jgj8vZ7kui/LsjRUbZWsOR38o9XArrKCkv8sCVflgS11mh+4SiORilPTPKON8hB+rbHW7IJlmy8Sz2g1ppizQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.0.6.tgz}
@@ -4289,6 +4295,10 @@ snapshots:
   '@jsr/ryoppippi__str-fns@0.1.2':
     dependencies:
       type-fest: 4.23.0
+
+  '@jsr/ryoppippi__unocss-preset@1.0.0':
+    dependencies:
+      '@unocss/core': 0.62.4
 
   '@jsr/ryoppippi__unplugin-typia@1.0.6(@types/node@22.7.4)(rollup@4.22.5)':
     dependencies:
