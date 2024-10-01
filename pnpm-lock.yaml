@@ -99,8 +99,8 @@ importers:
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unocss-preset':
-        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.1
-        version: '@jsr/ryoppippi__unocss-preset@1.0.1'
+        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.2
+        version: '@jsr/ryoppippi__unocss-preset@1.0.2'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.6
         version: '@jsr/ryoppippi__unplugin-typia@1.0.6(@types/node@22.7.4)(rollup@4.23.0)'
@@ -988,8 +988,8 @@ packages:
   '@jsr/ryoppippi__str-fns@0.1.2':
     resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
 
-  '@jsr/ryoppippi__unocss-preset@1.0.1':
-    resolution: {integrity: sha512-g1PJgZbs4ow9Z4HVxyk22CwA0vBk2kOMT4xzZclnOuws0wXciNcq1o0Md5ovplIF5HXfw9+gwIqF2eq1P1UpHA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.1.tgz}
+  '@jsr/ryoppippi__unocss-preset@1.0.2':
+    resolution: {integrity: sha512-Eme+7kIQFbBhwXjD6qhvWAnc7MnUczf71K106XXKslQEc0f3xIxmm44jfkHHgCzyU/I6Qg6DFb9/8nKx+ZlNuQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.2.tgz}
 
   '@jsr/ryoppippi__unplugin-typia@1.0.6':
     resolution: {integrity: sha512-6Jgj8vZ7kui/LsjRUbZWsOR38o9XArrKCkv8sCVflgS11mh+4SiORilPTPKON8hB+rbHW7IJlmy8Sz2g1ppizQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.0.6.tgz}
@@ -2256,8 +2256,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@15.9.0:
-    resolution: {integrity: sha512-SmSKyLLKFbSr6rptvP8izbyxJL4ILwqO9Jg23UA0sDlGlu58V59D1//I3vlc0KJphVdUR7vMjHIplYnzBxorQA==}
+  globals@15.10.0:
+    resolution: {integrity: sha512-tqFIbz83w4Y5TCbtgjZjApohbuh7K9BxGYFm7ifwDR240tvdb7P9x+/9VvUKlmkPoiknoJtanI8UOrqxS3a7lQ==}
     engines: {node: '>=18'}
 
   globalyzer@0.1.0:
@@ -3685,7 +3685,7 @@ snapshots:
       eslint-plugin-vue: 9.28.0(eslint@9.11.1(jiti@1.21.6))
       eslint-plugin-yml: 1.14.0(eslint@9.11.1(jiti@1.21.6))
       eslint-processor-vue-blocks: 0.1.2(@vue/compiler-sfc@3.5.10)(eslint@9.11.1(jiti@1.21.6))
-      globals: 15.9.0
+      globals: 15.10.0
       jsonc-eslint-parser: 2.4.0
       local-pkg: 0.5.0
       parse-gitignore: 2.0.0
@@ -4296,7 +4296,7 @@ snapshots:
     dependencies:
       type-fest: 4.23.0
 
-  '@jsr/ryoppippi__unocss-preset@1.0.1':
+  '@jsr/ryoppippi__unocss-preset@1.0.2':
     dependencies:
       '@unocss/core': 0.62.4
 
@@ -5536,7 +5536,7 @@ snapshots:
       eslint: 9.11.1(jiti@1.21.6)
       eslint-plugin-es-x: 7.8.0(eslint@9.11.1(jiti@1.21.6))
       get-tsconfig: 4.8.1
-      globals: 15.9.0
+      globals: 15.10.0
       ignore: 5.3.2
       minimatch: 9.0.5
       semver: 7.6.3
@@ -5607,7 +5607,7 @@ snapshots:
       core-js-compat: 3.38.1
       eslint: 9.11.1(jiti@1.21.6)
       esquery: 1.6.0
-      globals: 15.9.0
+      globals: 15.10.0
       indent-string: 4.0.0
       is-builtin-module: 3.2.1
       jsesc: 3.0.2
@@ -5877,7 +5877,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@15.9.0: {}
+  globals@15.10.0: {}
 
   globalyzer@0.1.0: {}
 
