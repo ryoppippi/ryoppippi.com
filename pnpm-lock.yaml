@@ -92,6 +92,9 @@ importers:
       '@iconify-json/vscode-icons':
         specifier: ^1.2.2
         version: 1.2.2
+      '@luckrya/markdown-it-link-to-card':
+        specifier: ^0.3.3
+        version: 0.3.3
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.23
         version: '@jsr/ryoppippi__eslint-config@0.0.23(@typescript-eslint/utils@8.8.0(eslint@9.11.1(jiti@1.21.6))(typescript@5.6.2))(@vue/compiler-sfc@3.5.10)(eslint-plugin-format@0.1.2(eslint@9.11.1(jiti@1.21.6)))(eslint-plugin-svelte@2.44.1(eslint@9.11.1(jiti@1.21.6))(svelte@5.0.0-next.259))(eslint@9.11.1(jiti@1.21.6))(svelte-eslint-parser@0.41.1(svelte@5.0.0-next.259))(svelte@5.0.0-next.259)(typescript@5.6.2)'
@@ -996,6 +999,12 @@ packages:
 
   '@jsr/unplugin__macros@0.13.3':
     resolution: {integrity: sha512-0rbhTbeREqmoGVWrtSQN//7KWA9ZqMmkkBmqdA1LZmeLe+StlWG4b3aLS5yI5OSw7waE+LVTHsi5H53jN4gW8Q==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.13.3.tgz}
+
+  '@luckrya/markdown-it-link-to-card@0.3.3':
+    resolution: {integrity: sha512-rvNeV7x1j1TN++au10wMyzbT3GiumMVt61DiJ++jTJeAZsdBIL4ORN/o5uqF01IAlHUWVXKGUpHRaZXqxatKdg==}
+
+  '@luckrya/utility@0.1.1':
+    resolution: {integrity: sha512-TWkgqawyVdaDnPBeOGJTJfI32isrG/t4e4R0Vf2LBMvU2stSDCnJUblKJhcgL9O5EQRb5TBwWj2Pyzc209tQyA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3601,6 +3610,10 @@ packages:
     resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
     engines: {node: '>=4.0'}
 
+  xmlhttprequest@1.8.0:
+    resolution: {integrity: sha512-58Im/U0mlVBLM38NdZjHyhuMtCqa61469k2YP/AaPbvCoV9aQGUpbJBj1QRm2ytRiVQBD/fsw7L2bJGDVQswBA==}
+    engines: {node: '>=0.4.0'}
+
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
@@ -4355,6 +4368,13 @@ snapshots:
       - supports-color
       - terser
       - webpack-sources
+
+  '@luckrya/markdown-it-link-to-card@0.3.3':
+    dependencies:
+      '@luckrya/utility': 0.1.1
+      xmlhttprequest: 1.8.0
+
+  '@luckrya/utility@0.1.1': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -7293,6 +7313,8 @@ snapshots:
       xmlbuilder: 11.0.1
 
   xmlbuilder@11.0.1: {}
+
+  xmlhttprequest@1.8.0: {}
 
   y18n@5.0.8: {}
 

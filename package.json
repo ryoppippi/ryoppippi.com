@@ -46,6 +46,7 @@
 		"@iconify-json/tabler": "^1.2.3",
 		"@iconify-json/teenyicons": "^1.2.0",
 		"@iconify-json/vscode-icons": "^1.2.2",
+		"@luckrya/markdown-it-link-to-card": "^0.3.3",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@ryoppippi/str-fns": "npm:@jsr/ryoppippi__str-fns@^0.1.2",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.0.6",
