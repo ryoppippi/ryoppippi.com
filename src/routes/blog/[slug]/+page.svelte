@@ -2,6 +2,7 @@
 	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
+	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
 
@@ -27,13 +28,12 @@
 	{/if}
 
 	<hgroup fcol fyc gap-1 mb-3 text-center>
-		<h2
-			style:view-transition-name='blog-{data.slug}'
-			f-text-32-64
-			line-height-none
-		>
-			{data.title}
-		</h2>
+		<LargeTitle
+			opacity={false}
+			selectDisabled={false}
+			title={data.title}
+			viewTransitionName='blog-{data.slug}'
+		/>
 		<p text-text-400>{formatDate(new Date(data.pubDate))} ・ {data.readingTime.text}</p>
 	</hgroup>
 
