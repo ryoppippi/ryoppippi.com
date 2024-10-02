@@ -4,14 +4,22 @@ import { parseJSON } from 'date-fns';
 import { formatDate } from '$lib/util';
 
 import { posts as rssPosts } from '$contents/external-rss';
-import { posts as blogPosts } from '$contents/blog';
+import { blogPosts } from '$contents/blog';
 
 export function load() {
-	const allPosts = [...rssPosts, ...blogPosts].map(item => ({ ...item, pubDate: parseJSON(item.pubDate) }));
+	const allPosts = sortOn([
+		...rssPosts,
+		...blogPosts,
+	].map(item => ({
+		...item,
+		pubDate: parseJSON(item.pubDate),
+	})), ['-pubDate']);
 
-	const posts = sortOn(allPosts, ['-pubDate']).map((item) => {
+	const posts = allPosts.map((item) => {
 		const pubDate = formatDate(new Date(item.pubDate));
-		const link = 'link' in item ? item.link : ufo.joinURL('/blog', item.slug);
+		const link = 'link' in item
+			? item.link
+			: ufo.joinURL('/blog', item.slug);
 		const external = 'link' in item && item.link.startsWith('http');
 		return {
 			...item,
@@ -20,5 +28,5 @@ export function load() {
 			external,
 		};
 	});
-	return { posts };
+	return { posts, allPosts };
 }
