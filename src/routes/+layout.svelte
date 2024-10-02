@@ -44,6 +44,7 @@
 			document.documentElement.classList.remove('no-sliding');
 		}
 	});
+
 </script>
 
 <DarkMode />
@@ -80,7 +81,10 @@
 	}} />
 <svelte:head>
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-	{@html faviconLinks}
+	{@html faviconLinks
+		.split('\n')
+		.filter(s => !s.includes('theme-color'))
+		.join('\n')}
 </svelte:head>
 
 <main
