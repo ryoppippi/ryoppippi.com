@@ -8,8 +8,8 @@
 
 	const { src, alt, ...rest }: Props = $props();
 
-	function importImage(src: string): EnhancedImg {
-		const pictures = import.meta.glob(`/src/**/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp}`, {
+	function importImage(src: string): EnhancedImg | undefined {
+		const pictures = import.meta.glob(`/src/**/*.{gif,heif,jpeg,jpg,png,tiff,webp}`, {
 			import: 'default',
 			query: {
 				enhanced: true,
@@ -23,22 +23,31 @@
 				return picutureSrc as EnhancedImg;
 			}
 		}
-		throw new Error(`Image not found: ${src}`);
+		return undefined;
 	}
 </script>
 
-{#if src.startsWith('http')}
+{#snippet img(src: string)}
 	<img
 		{alt}
 		loading='lazy'
 		{src}
 		{...rest}
 	/>
+{/snippet}
+
+{#if src.startsWith('http')}
+	{@render img(src)}
 {:else}
-	<enhanced:img
-		{alt}
-		loading='lazy'
-		src={importImage(src)}
-		{...rest}
-	/>
+	{@const enhancedSrc = importImage(src)}
+	{#if enhancedSrc != null}
+		<enhanced:img
+			{alt}
+			loading='lazy'
+			src={enhancedSrc}
+			{...rest}
+		/>
+	{:else}
+		{@render img(src)}
+	{/if}
 {/if}

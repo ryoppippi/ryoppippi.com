@@ -93,6 +93,7 @@
 		"svelte": "5.0.0-next.260",
 		"svelte-check": "^4.0.4",
 		"svelte-meta-tags": "^3.1.4",
+		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.2",
 		"ts-patch": "^3.2.1",
 		"tslib": "^2.7.0",
