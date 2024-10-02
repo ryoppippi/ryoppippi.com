@@ -74,10 +74,10 @@ export default defineConfig({
 		presetTypography({
 			cssExtend: {
 				'code': {
-					color: theme.colors.text[700],
+					color: theme.colors.text[800],
 				},
 				'html.dark code': {
-					color: theme.colors.text[400],
+					color: theme.colors.text[100],
 				},
 			},
 		}),
