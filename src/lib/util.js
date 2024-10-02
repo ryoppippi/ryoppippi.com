@@ -11,7 +11,11 @@ export function formatDate(date) {
 
 export function domain() {
 	// eslint-disable-next-line node/prefer-global/process
-	return /** @as{string} */ (ufo.parseURL(process.env.DOMAIN).host);
+	const { host } = (ufo.parseURL(process.env.DOMAIN));
+	if (host == null) {
+		throw new Error('Missing domain');
+	}
+	return host;
 }
 
 /**
