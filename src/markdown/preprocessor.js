@@ -1,5 +1,4 @@
 import { parse as dateParse } from 'date-fns';
-import { parse } from 'svelte/compiler';
 import rt from 'reading-time';
 import MagicString from 'magic-string';
 import matter from 'gray-matter';
@@ -47,17 +46,24 @@ function svelteMarkdown(md) {
 
 			const processed = md.render(htmlWithoutMeta);
 
+			const s = new MagicString(processed);
+
+			/** replace <code ~ </code> -> {@html "<code ~ </code>"} */
+			s.replaceAll(/<code[\s\S]*?<\/code>/g, (match) => {
+				return `{@html ${JSON.stringify(match)}}`;
+			});
+
 			const meta = processMeta(htmlWithoutMeta, data);
 
-			const code = `
-<script context="module">
+			s.prepend(`
+<script module>
   export const metadata = ${JSON.stringify(meta)};
 </script>
 
-{@html ${JSON.stringify(processed)}}
-`;
-
-			return { code };
+`);
+			return {
+				code: s.toString(),
+			};
 		},
 	};
 }
