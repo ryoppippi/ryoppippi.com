@@ -45,9 +45,9 @@
 		{@html data.content}
 	</article>
 	<div op50 pb-8 prose>
-		<span op50>comment on</span>
+		<span op70>comment on</span>
 		<a href={bskyUrl} target='_blank'>bluesky</a>
-		<span op25> / </span>
+		<span op35> / </span>
 		<a href={tweetUrl} target='_blank'>twitter</a>
 	</div>
 
