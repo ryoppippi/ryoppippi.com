@@ -1,7 +1,6 @@
 import sortOn from 'sort-on';
-import typia from 'typia';
 import { joinURL } from 'ufo';
-import { parseMarkdown } from '$lib/markdown.server';
+import type { MarkdownImport } from '../../../markdown';
 import { slugify } from '$lib/util';
 
 type Metadata = {
@@ -15,25 +14,24 @@ type Metadata = {
 export type Project = Omit<Metadata, 'image'> & {
 	slug: string;
 	image: string;
-	content: string;
+	Content: MarkdownImport<unknown>['default'];
 };
 
 /** list of web projects */
 export async function getProjects(): Promise<Project[]> {
-	const originals = import.meta.glob('./*.md', { eager: true, as: 'raw' });
-	const projects = await Promise.all(Object.entries(originals).map(async ([filepath, mdRaw]) => {
+	const originals = import.meta.glob('./*.md', { eager: true });
+	const projects = await Promise.all(Object.entries(originals).map(async ([filepath, md]) => {
 		const slug = filepath.split('/').at(-1)?.replace('.md', '');
 		if (slug == null) {
 			return;
 		}
 		try {
-			const { content, ...metadata } = await parseMarkdown(mdRaw);
-			typia.assertGuard<Metadata>(metadata);
+			const { metadata, default: Content } = md as MarkdownImport<Metadata>;
 			const project = {
 				...metadata,
 				image: metadata.image.startsWith('http') ? metadata.image : joinURL('/contents/projects/showcase', metadata.image),
 				slug: slugify(slug),
-				content,
+				Content,
 			} as const satisfies Project;
 			return project;
 		}

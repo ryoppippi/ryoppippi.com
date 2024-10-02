@@ -12,7 +12,7 @@ import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
 
-import { slugify } from '$lib/util';
+import { slugify } from '../lib/util.js';
 
 const md = markdownit({
 	html: true,
@@ -29,7 +29,8 @@ md.use(anchor, {
 });
 
 md.use(LinkAttributes, {
-	matcher: (link: string) => /^https?:\/\//.test(link),
+	/** @param {string} link */
+	matcher: link => /^https?:\/\//.test(link),
 	attrs: {
 		target: '_blank',
 		rel: 'noopener',
@@ -49,10 +50,8 @@ md.use(await MarkdownItShiki({
 	],
 }));
 
-// eslint-disable-next-line ts/no-unsafe-argument
 md.use(GitHubAlerts);
 
-// eslint-disable-next-line ts/no-unsafe-argument
 md.use(Figures, {
 	figcaption: true,
 	lazy: true,

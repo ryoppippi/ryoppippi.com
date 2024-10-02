@@ -191,6 +191,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      magic-string:
+        specifier: ^0.30.11
+        version: 0.30.11
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0

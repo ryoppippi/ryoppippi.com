@@ -10,6 +10,8 @@
 	const {
 		project,
 	}: Props = $props();
+
+	const { Content } = project;
 </script>
 
 <div
@@ -45,8 +47,7 @@
 				{project.title}
 			</h3>
 		</a>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		<div prose='base sm'>{@html project.content}</div>
+		<div prose='base sm'><Content /></div>
 		{#if project.pubDate}
 			<div op50 pt2 text-sm>
 				{formatDate(new Date(project.pubDate))}

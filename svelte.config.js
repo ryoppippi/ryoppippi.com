@@ -3,12 +3,16 @@ import process from 'node:process';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { isDevelopment } from 'std-env';
+import svelteMarkdown from './src/markdown/preprocessor.js';
+import { md } from './src/markdown/markdown-it.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	extensions: ['.svelte', '.md'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [
+		svelteMarkdown(md),
 		vitePreprocess(),
 	],
 

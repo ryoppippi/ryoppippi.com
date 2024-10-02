@@ -1,7 +1,7 @@
 import { Feed } from 'feed';
 import type { RequestHandler } from './$types';
 import { domain, subdomain } from '$lib/util';
-import { posts as blogPosts } from '$contents/blog';
+import { blogPosts } from '$contents/blog';
 
 export const prerender = true;
 
