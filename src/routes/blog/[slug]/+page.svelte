@@ -5,6 +5,7 @@
 	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
+	const { metadata, Markdown } = data;
 
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain($page.url.pathname)}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
@@ -14,7 +15,7 @@
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
-<HeadTitle title='{data.title} | blog' />
+<HeadTitle title='{metadata.title} | blog' />
 <svelte:head>
 	<meta content='article' property='og:type' />
 </svelte:head>
@@ -23,7 +24,7 @@
 	min-w-0
 	mxa
 >
-	{#if !data.isPublished}
+	{#if !metadata.isPublished}
 		<p bg-red text='4xl center'>This article is not published yet.</p>
 	{/if}
 
@@ -31,10 +32,10 @@
 		<LargeTitle
 			opacity={false}
 			selectDisabled={false}
-			title={data.title}
-			viewTransitionName='blog-{data.slug}'
+			title={metadata.title}
+			viewTransitionName='blog-{metadata.title}'
 		/>
-		<p text-text-400>{formatDate(new Date(data.pubDate))} ・ {data.readingTime.text}</p>
+		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text}</p>
 	</hgroup>
 
 	<div p2>
@@ -42,7 +43,7 @@
 	</div>
 
 	<article class='*prose-base slide-enter-content' mxa pb-8 text-text='700 dark:200'>
-		{@html data.content}
+		<Markdown />
 	</article>
 	<div op50 pb-8 prose>
 		<span op70>comment on</span>
