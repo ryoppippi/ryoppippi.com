@@ -9,7 +9,7 @@
 	const { src, alt, ...rest }: Props = $props();
 
 	function importImage(src: string): EnhancedImg {
-		const pictures = import.meta.glob(`/src/**/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp}`, {
+		const pictures = import.meta.glob(`/src/**/*.{gif,heif,jpeg,jpg,png,tiff,webp}`, {
 			import: 'default',
 			query: {
 				enhanced: true,
