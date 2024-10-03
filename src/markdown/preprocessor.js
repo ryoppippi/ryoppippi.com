@@ -5,6 +5,7 @@ import MagicString from 'magic-string';
 import matter from 'gray-matter';
 
 /**
+ * @param {string} filename
  * @param {string} content
  * @param {Record<string, any>} data
  */
