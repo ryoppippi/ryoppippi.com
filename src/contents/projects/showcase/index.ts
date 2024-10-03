@@ -29,7 +29,6 @@ export async function getProjects(): Promise<Project[]> {
 			const { metadata, default: Content } = md as MarkdownImport<Metadata>;
 			const project = {
 				...metadata,
-				image: metadata.image.startsWith('http') ? metadata.image : joinURL('/contents/projects/showcase', metadata.image),
 				slug: slugify(slug),
 				Content,
 			} as const satisfies Project;

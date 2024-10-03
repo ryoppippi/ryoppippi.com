@@ -1,3 +1,4 @@
+import { dirname, join } from 'node:path';
 import { parse as dateParse } from 'date-fns';
 import rt from 'reading-time';
 import MagicString from 'magic-string';
@@ -7,7 +8,7 @@ import matter from 'gray-matter';
  * @param {string} content
  * @param {Record<string, any>} data
  */
-function processMeta(content, data) {
+function processMeta(filename, content, data) {
 	const { date, ...metadataRest } = data;
 	const pubDate = date instanceof Date
 		? date.toJSON()
@@ -15,6 +16,15 @@ function processMeta(content, data) {
 			? dateParse(date, 'yyyy-MM-dd', new Date()).toJSON()
 			: undefined;
 	const readingTime = rt(content);
+
+	/** if value is string and start with './' or '../', it's a path */
+	for (const key in metadataRest) {
+		if (typeof metadataRest[key] === 'string') {
+			if (metadataRest[key].startsWith('./') || metadataRest[key].startsWith('../')) {
+				metadataRest[key] = join(dirname(filename), metadataRest[key]);
+			}
+		}
+	}
 
 	return {
 		...metadataRest,
@@ -48,7 +58,7 @@ function svelteMarkdown(md) {
 
 			const s = new MagicString(processed);
 
-			const meta = processMeta(htmlWithoutMeta, data);
+			const meta = processMeta(filename, htmlWithoutMeta, data);
 
 			s.prepend(`
 <script module>
