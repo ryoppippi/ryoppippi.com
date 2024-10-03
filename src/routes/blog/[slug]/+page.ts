@@ -10,6 +10,7 @@ export const load: PageLoad = async ({ params: { slug } }) => {
 		return {
 			metadata: md.metadata,
 			Markdown: md.default,
+			slug,
 		};
 	}
 	catch (e) {

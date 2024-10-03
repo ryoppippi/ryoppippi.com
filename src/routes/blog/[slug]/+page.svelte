@@ -5,7 +5,7 @@
 	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
-	const { metadata, Markdown } = data;
+	const { metadata, Markdown, slug } = data;
 
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain($page.url.pathname)}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
@@ -33,7 +33,7 @@
 			opacity={false}
 			selectDisabled={false}
 			title={metadata.title}
-			viewTransitionName='blog-{metadata.title}'
+			viewTransitionName='blog-{slug}'
 		/>
 		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text}</p>
 	</hgroup>
