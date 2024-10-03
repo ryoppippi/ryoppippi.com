@@ -13,6 +13,7 @@ import Figures from 'markdown-it-image-figures';
 import LinkAttributes from 'markdown-it-link-attributes';
 
 import { slugify } from '../lib/util.js';
+import { transformerEscape } from './shiki-transformer.js';
 
 const md = markdownit({
 	html: true,
@@ -44,9 +45,10 @@ md.use(await MarkdownItShiki({
 	},
 	transformers: [
 		transformerTwoslash({
-			explicitTrigger: false,
+			explicitTrigger: true,
 			renderer: rendererRich(),
 		}),
+		transformerEscape(),
 	],
 }));
 

@@ -218,6 +218,9 @@ importers:
       secretlint:
         specifier: ^8.2.4
         version: 8.2.4
+      shiki:
+        specifier: ^1.21.0
+        version: 1.21.0
       sort-on:
         specifier: ^6.1.0
         version: 6.1.0

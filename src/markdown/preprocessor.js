@@ -48,11 +48,6 @@ function svelteMarkdown(md) {
 
 			const s = new MagicString(processed);
 
-			/** replace <code ~ </code> -> {@html "<code ~ </code>"} */
-			s.replaceAll(/<code[\s\S]*?<\/code>/g, (match) => {
-				return `{@html ${JSON.stringify(match)}}`;
-			});
-
 			const meta = processMeta(htmlWithoutMeta, data);
 
 			s.prepend(`

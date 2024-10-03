@@ -88,6 +88,7 @@
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^8.2.4",
+		"shiki": "^1.21.0",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.7.0",
 		"svelte": "5.0.0-next.260",
