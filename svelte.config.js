@@ -19,6 +19,8 @@ import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
 
+import Budoux from 'markdown-it-budoux';
+
 import { slugify } from './src/lib/util.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
@@ -67,6 +69,8 @@ md.use(Figures, {
 	lazy: true,
 	async: true,
 });
+
+md.use(Budoux({ language: 'ja' }));
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

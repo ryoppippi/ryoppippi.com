@@ -82,6 +82,7 @@
 		"magic-string": "^0.30.11",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
+		"markdown-it-budoux": "^1.0.5",
 		"markdown-it-github-alerts": "^0.3.0",
 		"markdown-it-image-figures": "^2.1.1",
 		"markdown-it-link-attributes": "^4.0.1",
