@@ -2,11 +2,13 @@ import type { Entries } from 'type-fest';
 import type { tags } from 'typia';
 import typia from 'typia';
 import { joinURL } from 'ufo';
-import _ossProjects from './list.js';
-import type { GHRepo, Project } from './types.js';
+import _ossProjects from './list.json';
+import type { GHRepo, Genre, Project } from './types.js';
 import { slugify } from '$lib/util.js';
 
 const GITHUB_URL = `https://github.com`;
+
+_ossProjects satisfies Record<Genre, Project[]>;
 
 export type ProjectsByGenre = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
 

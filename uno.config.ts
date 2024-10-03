@@ -17,7 +17,7 @@ import { presetFluid } from 'unocss-preset-fluid';
 import { presetRyoppippi } from '@ryoppippi/unocss-preset';
 
 // TODO: bug of unocss
-import ossProjects from './src/contents/projects/oss/list.js';
+import ossProjects from './src/contents/projects/oss/list.json';
 
 const projectSafelist: string[] = [];
 Object.values(ossProjects).forEach((projects) => {
