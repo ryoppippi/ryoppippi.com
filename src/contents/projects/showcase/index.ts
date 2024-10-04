@@ -1,5 +1,4 @@
 import sortOn from 'sort-on';
-import { joinURL } from 'ufo';
 import type { MarkdownImport } from '../../../markdown';
 import { slugify } from '$lib/util';
 

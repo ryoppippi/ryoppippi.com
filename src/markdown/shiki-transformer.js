@@ -5,7 +5,7 @@ const entites = [
 ];
 
 /**
- * @returns {import('shiki').ShikiTransformer}
+ * @returns {import('shiki').ShikiTransformer} Escape brackets
  */
 export function transformerEscape() {
 	return {
