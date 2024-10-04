@@ -26,7 +26,7 @@ export default defineConfig({
 	plugins: [
 		denyImports({
 			client: {
-				specifiers: ['fs-extra', /^node:/, 'typia'],
+				specifiers: ['fs-extra', /^node:/],
 				files: ['**/.server/*', '**/*.server.*'],
 			},
 		}),
