@@ -11,6 +11,9 @@ importers:
       '@antfu/ni':
         specifier: ^0.23.0
         version: 0.23.0
+      '@core/iterutil':
+        specifier: npm:@jsr/core__iterutil@^0.8.0
+        version: '@jsr/core__iterutil@0.8.0'
       '@core/pipe':
         specifier: npm:@jsr/core__pipe@0.3.0-pre.1
         version: '@jsr/core__pipe@0.3.0-pre.1'
@@ -999,6 +1002,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@jsr/core__iterutil@0.8.0':
+    resolution: {integrity: sha512-6dUINUfIV9LMkiJ8vr23yGFO/IytIcnQNM1eStMyCXcyk+7/Xi9e8354ByeRsgpkkKpl98pwr7rl5rfqCUprVA==, tarball: https://npm.jsr.io/~/11/@jsr/core__iterutil/0.8.0.tgz}
 
   '@jsr/core__pipe@0.3.0-pre.1':
     resolution: {integrity: sha512-7GSdk6HFoPliIztF3jmYSvTU9P6TwGmYNAgjcDpz3JKxuHb0HlshP8pZwwkFOsI5pARZ7Uc0Ft/kradMCNDidQ==, tarball: https://npm.jsr.io/~/11/@jsr/core__pipe/0.3.0-pre.1.tgz}
@@ -4464,6 +4470,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@jsr/core__iterutil@0.8.0': {}
 
   '@jsr/core__pipe@0.3.0-pre.1': {}
 
