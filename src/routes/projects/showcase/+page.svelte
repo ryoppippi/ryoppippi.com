@@ -12,7 +12,8 @@
 	grid='~ gap-4'
 	grid-cols='1 lg:2'
 >
-	{#each projects as project, count (project.slug)}
+	<!-- eslint-disable-next-line svelte/require-each-key -->
+	{#each projects as project, count}
 		<div
 			style:--stagger={count}
 			sliding-animation='~ delay-base'

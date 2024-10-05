@@ -1,6 +1,5 @@
 import sortOn from 'sort-on';
 import type { MarkdownImport } from '../../../markdown';
-import { slugify } from '$lib/util';
 
 type Metadata = {
 	title: string;
@@ -11,7 +10,6 @@ type Metadata = {
 };
 
 export type Project = Omit<Metadata, 'image'> & {
-	slug: string;
 	image: string;
 	Content: MarkdownImport<unknown>['default'];
 };
@@ -28,7 +26,6 @@ export async function getProjects(): Promise<Project[]> {
 			const { metadata, default: Content } = md as MarkdownImport<Metadata>;
 			const project = {
 				...metadata,
-				slug: slugify(slug),
 				Content,
 			} as const satisfies Project;
 			return project;
