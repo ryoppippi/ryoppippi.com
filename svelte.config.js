@@ -21,7 +21,7 @@ import LinkAttributes from 'markdown-it-link-attributes';
 
 import Budoux from 'markdown-it-budoux';
 
-import { slugify } from './src/lib/util.js';
+import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
 

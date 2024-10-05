@@ -3,7 +3,7 @@ import sortOn from 'sort-on';
 import typia from 'typia';
 
 import rss from './rss.json';
-import { slugify } from '$lib/util';
+import { slugify } from '$lib/slugify.server';
 import type { Lang } from '$contents/types';
 
 const parser = new Parser();

@@ -1,6 +1,5 @@
 import * as ufo from 'ufo';
 import { format } from 'date-fns';
-import GithubSlugger from 'github-slugger';
 
 /**
  * @param {Date} date
@@ -28,13 +27,4 @@ export function subdomain(...paths) {
 		/** @as{string} */(process.env.DOMAIN),
 		...paths,
 	);
-}
-
-const slugger = new GithubSlugger();
-
-/**
- * @param {string} s
- */
-export function slugify(s) {
-	return slugger.slug(s);
 }

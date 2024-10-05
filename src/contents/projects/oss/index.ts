@@ -4,7 +4,7 @@ import typia from 'typia';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
 import type { GHRepo, Genre, Project } from './types.js';
-import { slugify } from '$lib/util.js';
+import { slugify } from '$lib/slugify.server';
 
 const GITHUB_URL = `https://github.com`;
 
