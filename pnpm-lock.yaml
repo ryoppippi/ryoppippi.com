@@ -284,9 +284,6 @@ importers:
       unplugin-icons:
         specifier: ^0.19.3
         version: 0.19.3(@vue/compiler-sfc@3.5.10)
-      unplugin-replace:
-        specifier: ^0.3.3
-        version: 0.3.3(rollup@4.23.0)
       vite:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@22.7.4)
@@ -3610,10 +3607,6 @@ packages:
         optional: true
       vue-template-es2015-compiler:
         optional: true
-
-  unplugin-replace@0.3.3:
-    resolution: {integrity: sha512-EHv9QpShJSez8jinjXAlpBeQwj5gQt4ZLkEjqOlYfMladTTDAlrIgGmcOYzXMK7SGjQCaXD2srsWVkHV3DDSjw==}
-    engines: {node: '>=18.0.0'}
 
   unplugin@1.14.1:
     resolution: {integrity: sha512-lBlHbfSFPToDYp9pjXlUEFVxYLaue9f9T1HC+4OHlmj+HnMDdz9oZY+erXfoCe/5V/7gKUSY2jpXPb9S7f0f/w==}
@@ -7507,15 +7500,6 @@ snapshots:
       '@vue/compiler-sfc': 3.5.10
     transitivePeerDependencies:
       - supports-color
-      - webpack-sources
-
-  unplugin-replace@0.3.3(rollup@4.23.0):
-    dependencies:
-      '@rollup/pluginutils': 5.1.2(rollup@4.23.0)
-      magic-string: 0.30.11
-      unplugin: 1.14.1
-    transitivePeerDependencies:
-      - rollup
       - webpack-sources
 
   unplugin@1.14.1:
