@@ -1,3 +1,5 @@
+import { pipe } from '@core/pipe';
+import { flatten, map } from '@core/iterutil/pipe/async';
 import Parser from 'rss-parser';
 import sortOn from 'sort-on';
 import typia from 'typia';
@@ -17,20 +19,22 @@ type Item = {
 };
 
 export async function getPosts() {
-	const feeds = (
-		await Promise.all(
-			rss.map(async (url) => {
-				const feed = await parser.parseURL(url);
-				return feed.items
-					.map(({ pubDate, ...rest }) => ({
-						...rest,
-						slug: slugify(rest.title ?? ''),
-						lang: 'ja',
-						pubDate: new Date(pubDate as string).toJSON(),
-					}));
+	const feedsIter = pipe(
+		rss,
+		map(async feed => parser.parseURL(feed)),
+		map(async feed => feed.items),
+		flatten,
+		map(
+			({ pubDate, ...rest }) => ({
+				...rest,
+				slug: slugify(rest.title ?? ''),
+				lang: 'ja',
+				pubDate: new Date(pubDate ?? '').toJSON(),
 			}),
-		)
-	).flat();
+		),
+	);
+
+	const feeds = await Array.fromAsync(feedsIter);
 
 	typia.assertGuard<Item[]>(feeds);
 
