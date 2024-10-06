@@ -1,5 +1,6 @@
 import * as ufo from 'ufo';
 import { format } from 'date-fns';
+import { assets } from '$app/paths';
 
 /**
  * @param {Date} date
@@ -9,22 +10,12 @@ export function formatDate(date) {
 }
 
 export function domain() {
-	// eslint-disable-next-line node/prefer-global/process
-	const { host } = (ufo.parseURL(process.env.DOMAIN));
-	if (host == null) {
-		throw new Error('Missing domain');
-	}
-	return host;
+	return assets;
 }
 
 /**
  * @param {string[]} paths
  */
 export function subdomain(...paths) {
-	return ufo.joinURL(
-		// @ts-expect-error undefined
-		// eslint-disable-next-line node/prefer-global/process
-		/** @as{string} */(process.env.DOMAIN),
-		...paths,
-	);
+	return ufo.joinURL(domain(), ...paths);
 }

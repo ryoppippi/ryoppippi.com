@@ -60,14 +60,6 @@ export default defineConfig({
 			compiler: 'svelte',
 			autoInstall: isDevelopment,
 		}),
-		Replace({
-			values: [
-				{
-					find: 'process.env.DOMAIN',
-					replacement: `'${(process.env.CF_PAGES_BRANCH === 'main' ? null : process.env.CF_PAGES_URL) ?? 'https://ryoppippi.com'}'`,
-				},
-			],
-		}),
 		enhancedImages(),
 		Macros(),
 		UnoCSS({
