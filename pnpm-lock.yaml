@@ -162,7 +162,7 @@ importers:
         specifier: ^0.63.3
         version: 0.63.3
       '@unocss/reset':
-        specifier: ^0.63.2
+        specifier: ^0.63.3
         version: 0.63.3
       '@unplugin/macros':
         specifier: npm:@jsr/unplugin__macros@^0.13.3
