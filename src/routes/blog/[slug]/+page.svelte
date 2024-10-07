@@ -1,4 +1,9 @@
 <script lang='ts'>
+	import '@shikijs/twoslash/style-rich.css';
+	import 'markdown-it-github-alerts/styles/github-colors-light.css';
+	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
+	import 'markdown-it-github-alerts/styles/github-base.css';
+
 	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
