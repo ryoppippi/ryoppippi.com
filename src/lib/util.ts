@@ -5,7 +5,7 @@ import { assets } from '$app/paths';
 /**
  * @param {Date} date
  */
-export function formatDate(date) {
+export function formatDate(date: Date) {
 	return format(date, 'dd MMM y');
 }
 
@@ -13,9 +13,6 @@ export function domain() {
 	return assets;
 }
 
-/**
- * @param {string[]} paths
- */
-export function subdomain(...paths) {
+export function subdomain(...paths: string[]) {
 	return ufo.joinURL(domain(), ...paths);
 }
