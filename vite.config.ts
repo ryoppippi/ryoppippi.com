@@ -13,6 +13,8 @@ import { isDevelopment } from 'std-env';
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
 
+import { Route } from './routes.js';
+
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
 }
@@ -38,20 +40,7 @@ export default defineConfig({
 		}),
 		cloudflareRedirect({
 			mode: 'generate',
-			entries: [
-				{ from: '/cv', to: 'https://cv.ryoppippi.com' },
-				{ from: '/icon', to: '/ryoppippi.png' },
-				{ from: '/github', to: 'https://github.com/ryoppippi' },
-				{ from: '/gh', to: 'https://github.com/ryoppippi' },
-				{ from: '/gh-by-stars', to: 'https://github.com/ryoppippi?tab=repositories&sort=stargazers' },
-				{ from: '/pr', to: 'https://pr.ryoppippi.com' },
-				{ from: '/zenn', to: 'https://zenn.dev/ryoppippi' },
-				{ from: '/linkedin', to: 'https://www.linkedin.com/in/ryoppippi/' },
-				{ from: '/twitter', to: 'https://x.com/ryoppippi' },
-				{ from: '/bsky', to: 'https://bsky.app/profile/ryoppippi.com' },
-				{ from: '/reddit', to: '/https://www.reddit.com/user/ryoppippi' },
-				{ from: '/youtube', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
-			],
+			entries: Route,
 		}),
 		UnpluginTypia({ log: 'verbose', cache: true }),
 		Icons({

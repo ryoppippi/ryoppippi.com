@@ -25,6 +25,8 @@ import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
+import { Route } from './routes.js';
+
 const md = markdownit({
 	html: true,
 	linkify: true,
@@ -107,6 +109,15 @@ const config = {
 		},
 		alias: {
 			$contents: './src/contents',
+		},
+		prerender: {
+			handleHttpError: ({ path, message }) => {
+				if (Route.find(({ from }) => from === path)) {
+					return;
+				}
+
+				throw new Error(message);
+			},
 		},
 		paths: {
 			/**
