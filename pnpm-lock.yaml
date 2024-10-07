@@ -15,8 +15,8 @@ importers:
         specifier: npm:@jsr/core__iterutil@^0.8.0
         version: '@jsr/core__iterutil@0.8.0'
       '@core/pipe':
-        specifier: npm:@jsr/core__pipe@0.3.0
-        version: '@jsr/core__pipe@0.3.0'
+        specifier: npm:@jsr/core__pipe@0.3.1
+        version: '@jsr/core__pipe@0.3.1'
       '@iconify-json/akar-icons':
         specifier: ^1.2.0
         version: 1.2.0
@@ -1011,8 +1011,8 @@ packages:
   '@jsr/core__iterutil@0.8.0':
     resolution: {integrity: sha512-6dUINUfIV9LMkiJ8vr23yGFO/IytIcnQNM1eStMyCXcyk+7/Xi9e8354ByeRsgpkkKpl98pwr7rl5rfqCUprVA==, tarball: https://npm.jsr.io/~/11/@jsr/core__iterutil/0.8.0.tgz}
 
-  '@jsr/core__pipe@0.3.0':
-    resolution: {integrity: sha512-EWZxx2qEAGgW74CyqOsyvEHa4KEML5lrxMdN7D6QXWXV5VGLbhzXnJ4k3jN92Rz6DmsqdZ5hKQnpkRd8RrV7bg==, tarball: https://npm.jsr.io/~/11/@jsr/core__pipe/0.3.0.tgz}
+  '@jsr/core__pipe@0.3.1':
+    resolution: {integrity: sha512-1yFxGg6y+lx5PFeJIX3UvahH2To6LQBI0cOvdtp7khD/sumIdn/xzETbCTO37DLYD/oCEkZKVhviR2maRexzuw==, tarball: https://npm.jsr.io/~/11/@jsr/core__pipe/0.3.1.tgz}
 
   '@jsr/ryoppippi__eslint-config@0.0.23':
     resolution: {integrity: sha512-2YGVhLJ1FEkbLzHyFoahaiIqOKZjW04Pi1j3mutgGOKIgOBvtjjQUkxsGB0BUyemgesfA5NS11X+QmemrIsQKQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__eslint-config/0.0.23.tgz}
@@ -4576,7 +4576,7 @@ snapshots:
 
   '@jsr/core__iterutil@0.8.0': {}
 
-  '@jsr/core__pipe@0.3.0': {}
+  '@jsr/core__pipe@0.3.1': {}
 
   '@jsr/ryoppippi__eslint-config@0.0.23(@typescript-eslint/utils@8.8.0(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.2))(@vue/compiler-sfc@3.5.11)(eslint-plugin-format@0.1.2(eslint@9.12.0(jiti@1.21.6)))(eslint-plugin-svelte@2.44.1(eslint@9.12.0(jiti@1.21.6))(svelte@5.0.0-next.262))(eslint@9.12.0(jiti@1.21.6))(svelte-eslint-parser@0.41.1(svelte@5.0.0-next.262))(svelte@5.0.0-next.262)(typescript@5.6.2)(vitest@2.1.2(@types/node@22.7.4)(jsdom@23.2.0))':
     dependencies:
