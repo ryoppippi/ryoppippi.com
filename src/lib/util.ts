@@ -27,7 +27,9 @@ export function formatDate(date: Date) {
 }
 
 export function domain() {
-	return assets;
+	// extract hostname from asset
+	// eslint-disable-next-line ts/strict-boolean-expressions
+	return assets || new URL(import.meta.url).hostname;
 }
 
 export function subdomain(...paths: string[]) {
