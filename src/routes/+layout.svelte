@@ -16,7 +16,7 @@
 	import DarkMode from '$lib/DarkMode';
 	import HeadTitle from '$lib/HeadTitle.svelte';
 
-	import ryoppippi from '$lib/assets/ryoppippi.png';
+	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import { domain, subdomain } from '$lib/util';
 	import { dev } from '$app/environment';
 

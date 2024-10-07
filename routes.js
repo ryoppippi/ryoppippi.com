@@ -1,7 +1,7 @@
 /** @satisfies {import('@ryoppippi/vite-plugin-cloudflare-redirect').Options['entries']} */
 export const Route = /** @as{const} */([
 	{ from: '/cv', to: 'https://cv.ryoppippi.com' },
-	{ from: '/icon', to: '/ryoppippi.png' },
+	{ from: '/icon', to: '/ryoppippi.jpg' },
 	{ from: '/github', to: 'https://github.com/ryoppippi' },
 	{ from: '/gh', to: 'https://github.com/ryoppippi' },
 	{ from: '/gh-by-stars', to: 'https://github.com/ryoppippi?tab=repositories&sort=stargazers' },
