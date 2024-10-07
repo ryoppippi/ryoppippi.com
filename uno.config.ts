@@ -82,6 +82,7 @@ export default defineConfig({
 			},
 		}),
 		presetFluid(),
+		// @ts-expect-error unocss type error
 		presetRyoppippi(),
 	],
 	transformers: [
