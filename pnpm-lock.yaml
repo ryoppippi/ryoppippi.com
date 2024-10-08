@@ -162,8 +162,8 @@ importers:
         specifier: 0.63.2
         version: 0.63.2
       '@unocss/reset':
-        specifier: 0.63.2
-        version: 0.63.2
+        specifier: 0.63.3
+        version: 0.63.3
       '@unplugin/macros':
         specifier: npm:@jsr/unplugin__macros@^0.13.3
         version: '@jsr/unplugin__macros@0.13.3(@types/node@22.7.4)(rollup@4.24.0)'
@@ -1456,6 +1456,9 @@ packages:
 
   '@unocss/reset@0.63.2':
     resolution: {integrity: sha512-qKA1pp+FLV8vnnNPDh60yq63HsehkJtX8gbZwk4X5mYm8FvZJsgTtSnSkoLEqO9855JIhXvLxjGs4a7LBiEhLA==}
+
+  '@unocss/reset@0.63.3':
+    resolution: {integrity: sha512-AByvjMrKYOMcqVQc659b3oF85B/np+wvsTRYGLHYf/ZLrBCkdKNWGHMDS3O6RuJUzYqKOzR4HiM0VJLw3BJU8Q==}
 
   '@unocss/rule-utils@0.63.2':
     resolution: {integrity: sha512-PeW1wVGG/tJSW9GpxbjyGNQvV2UDDMu/FU5ohkYz9CeGcHOGHw8gdlnH+9IT1hbQ6koVKNavhvKEQkXH1++FBg==}
@@ -5224,6 +5227,8 @@ snapshots:
       '@unocss/rule-utils': 0.63.2
 
   '@unocss/reset@0.63.2': {}
+
+  '@unocss/reset@0.63.3': {}
 
   '@unocss/rule-utils@0.63.2':
     dependencies:
