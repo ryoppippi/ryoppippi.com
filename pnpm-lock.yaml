@@ -114,7 +114,7 @@ importers:
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
         version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.7.4)'
       '@secretlint/secretlint-rule-preset-recommend':
-        specifier: ^8.2.4
+        specifier: ^8.3.0
         version: 8.4.0
       '@shikijs/markdown-it':
         specifier: ^1.21.0
