@@ -36,18 +36,14 @@ function processMeta(filename, content, data) {
 
 /**
  * @param md {import('markdown-it').default}
+ * @returns {import('svelte/types/compiler/preprocess').PreprocessorGroup} preprocessor
  */
 function svelteMarkdown(md) {
 	return {
 		name: 'svelte-markdown',
-		/**
-		 * @param {object} options
-		 * @param {string} options.content
-		 * @param {string} options.filename
-		 */
 		markup: ({ content, filename }) => {
-			if (!filename.endsWith('.md')) {
-				return;
+			if (filename == null || !filename.endsWith('.md')) {
+				return { code: content };
 			}
 
 			const {
@@ -61,12 +57,17 @@ function svelteMarkdown(md) {
 
 			const meta = processMeta(filename, htmlWithoutMeta, data);
 
-			s.prepend(`
+			const metaExport = `export const metadata = ${JSON.stringify(meta)};`;
+			if (s.toString().includes('<script module>')) {
+				s.replace('<script module>', `<script module>\n${metaExport}`);
+			}
+			else {
+				s.prepend(`
 <script module>
   export const metadata = ${JSON.stringify(meta)};
 </script>
-
 `);
+			}
 			return {
 				code: s.toString(),
 			};
