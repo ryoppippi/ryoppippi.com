@@ -13,3 +13,4 @@ vite.config.ts.timestamp-*
 /static/_redirects
 /src/lib/assets/favicons.html
 /.vite-inspect
+/.eslintrc-components.json

@@ -1,7 +1,5 @@
 <script lang='ts'>
-	import HeadTitle from '$lib/HeadTitle.svelte';
-	import LargeTitle from '$lib/LargeTitle.svelte';
-	import ListView, { type Item as ListItem } from '$lib/ListView.svelte';
+	import { type Item as ListItem } from '$components/ListView.svelte';
 
 	type Year = `${number}`;
 	interface Item {

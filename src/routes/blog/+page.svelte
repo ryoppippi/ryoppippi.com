@@ -1,7 +1,5 @@
 <script lang='ts'>
-	import CheckButton from './CheckButton.svelte';
-	import HeadTitle from '$lib/HeadTitle.svelte';
-	import ListView, { type Item } from '$lib/ListView.svelte';
+	import type { Item } from '$components/ListView.svelte';
 
 	const { data } = $props();
 

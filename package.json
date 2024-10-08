@@ -110,6 +110,7 @@
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
 		"unplugin-icons": "^0.19.3",
+		"unplugin-svelte-components": "^0.3.1",
 		"vite": "^5.4.8",
 		"vite-env-only": "^3.0.3",
 		"vite-plugin-favicons": "^0.1.4"

@@ -1,9 +1,4 @@
 <script lang='ts'>
-	import GitHubNav from './GitHubNav.svelte';
-	import OssProjectCard from './OSSProjectCard.svelte';
-	import HeadTitle from '$lib/HeadTitle.svelte';
-	import LargeTitle from '$lib/LargeTitle.svelte';
-
 	const { data } = $props();
 	const { projects } = data;
 </script>

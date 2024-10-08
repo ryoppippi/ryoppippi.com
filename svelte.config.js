@@ -109,6 +109,7 @@ const config = {
 		},
 		alias: {
 			$contents: './src/contents',
+			$components: './src/components',
 		},
 		prerender: {
 			handleHttpError: ({ path, message }) => {

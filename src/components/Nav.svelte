@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { subdomain } from './util';
+	import { subdomain } from '$lib/util';
 	import { page } from '$app/stores';
 
 	import * as DarkMode from '$lib/DarkMode';

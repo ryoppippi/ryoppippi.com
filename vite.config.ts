@@ -5,6 +5,7 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import Icons from 'unplugin-icons/vite';
 import Macros from '@unplugin/macros/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
+import Components from 'unplugin-svelte-components/vite';
 import { denyImports } from 'vite-env-only';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { faviconsPlugin } from 'vite-plugin-favicons';
@@ -53,6 +54,10 @@ export default defineConfig({
 			extractors: [
 				extractorSvelte(),
 			],
+		}),
+		Components({
+			dirs: ['src/components'],
+			dts: './src/components.d.ts',
 		}),
 		sveltekit(),
 	],

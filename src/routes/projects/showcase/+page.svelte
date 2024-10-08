@@ -1,7 +1,4 @@
 <script lang='ts'>
-	import Card from './Card.svelte';
-	import HeadTitle from '$lib/HeadTitle.svelte';
-
 	const { data } = $props();
 	const { projects } = data;
 </script>
@@ -18,7 +15,7 @@
 			style:--stagger={count}
 			sliding-animation='~ delay-base'
 		>
-			<Card {project} />
+			<ShowcaseCard {project} />
 		</div>
 	{/each}
 

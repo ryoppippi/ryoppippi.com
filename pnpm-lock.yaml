@@ -284,6 +284,9 @@ importers:
       unplugin-icons:
         specifier: ^0.19.3
         version: 0.19.3(@vue/compiler-sfc@3.5.11)
+      unplugin-svelte-components:
+        specifier: ^0.3.1
+        version: 0.3.1(rollup@4.24.0)
       vite:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@22.7.4)
@@ -2688,6 +2691,10 @@ packages:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
+  local-pkg@0.4.3:
+    resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
+    engines: {node: '>=14'}
+
   local-pkg@0.5.0:
     resolution: {integrity: sha512-ok6z3qlYyCDS4ZEU27HaU6x/xZa9Whf8jD4ptH5UZTQYZVYeb9bnZ3ojVhiJNLiXK1Hfc0GNbLXcmZ5plLDDBg==}
     engines: {node: '>=14'}
@@ -3683,6 +3690,10 @@ packages:
         optional: true
       vue-template-es2015-compiler:
         optional: true
+
+  unplugin-svelte-components@0.3.1:
+    resolution: {integrity: sha512-njVdk06fyeftsKTIrGcbNiAFoOBaCv+Ik064eSVHMO7VzaaPjaluJVKPmtKjg07pxGVy3bXNwRM84DnQZN5z4A==}
+    engines: {node: '>=14'}
 
   unplugin@1.14.1:
     resolution: {integrity: sha512-lBlHbfSFPToDYp9pjXlUEFVxYLaue9f9T1HC+4OHlmj+HnMDdz9oZY+erXfoCe/5V/7gKUSY2jpXPb9S7f0f/w==}
@@ -6611,6 +6622,8 @@ snapshots:
 
   load-tsconfig@0.2.5: {}
 
+  local-pkg@0.4.3: {}
+
   local-pkg@0.5.0:
     dependencies:
       mlly: 1.7.2
@@ -7684,6 +7697,20 @@ snapshots:
       '@vue/compiler-sfc': 3.5.11
     transitivePeerDependencies:
       - supports-color
+      - webpack-sources
+
+  unplugin-svelte-components@0.3.1(rollup@4.24.0):
+    dependencies:
+      '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
+      chokidar: 3.6.0
+      fast-glob: 3.3.2
+      local-pkg: 0.4.3
+      magic-string: 0.30.11
+      minimatch: 9.0.5
+      resolve: 1.22.8
+      unplugin: 1.14.1
+    transitivePeerDependencies:
+      - rollup
       - webpack-sources
 
   unplugin@1.14.1:

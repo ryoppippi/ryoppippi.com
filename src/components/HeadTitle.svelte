@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { domain } from './util';
+	import { domain } from '$lib/util';
 
 	const { title }: { title?: string } = $props();
 

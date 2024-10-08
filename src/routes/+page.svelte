@@ -1,8 +1,3 @@
-<script>
-	import Profile from '$lib/Profile.svelte';
-	import Social from '$lib/Social.svelte';
-</script>
-
 <article
 	container
 	gcc

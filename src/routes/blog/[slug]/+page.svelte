@@ -4,10 +4,8 @@
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
 	import 'markdown-it-github-alerts/styles/github-base.css';
 
-	import HeadTitle from '$lib/HeadTitle.svelte';
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
-	import LargeTitle from '$lib/LargeTitle.svelte';
 
 	const { data } = $props();
 	const { metadata, Markdown, slug } = data;
