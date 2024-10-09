@@ -1,4 +1,4 @@
-// @ts-check
+import path from 'node:path';
 import { defineConfig } from 'astro/config';
 
 import svelte from '@astrojs/svelte';
@@ -7,6 +7,8 @@ import mdx from '@astrojs/mdx';
 
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/astro';
+
+import { faviconsPlugin } from 'vite-plugin-favicons';
 
 import metaTags from 'astro-meta-tags';
 
@@ -21,4 +23,16 @@ export default defineConfig({
 		}),
 		metaTags(),
 	],
+	vite: {
+		plugins: [
+			faviconsPlugin({
+				cache: true,
+				imgSrc: './src/assets/ryoppippi.jpg',
+				/* ===== metadataの設定 ===== */
+				path: `/favicons`,
+				lang: 'ja-JP',
+				orientation: 'portrait',
+			}),
+		],
+	},
 });

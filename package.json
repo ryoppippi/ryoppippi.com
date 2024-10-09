@@ -37,9 +37,11 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
 		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.3",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.7",
+		"@types/node": "^22.7.5",
 		"@unocss/extractor-svelte": "^0.63.4",
 		"@unocss/preset-attributify": "^0.63.4",
 		"@unocss/reset": "^0.63.4",
+		"astro-seo": "^0.8.4",
 		"eslint": "^9.12.0",
 		"eslint-plugin-astro": "^1.2.4",
 		"eslint-plugin-format": "^0.1.2",
@@ -48,6 +50,7 @@
 		"sveltweet": "^0.2.8",
 		"unocss": "^0.63.4",
 		"unocss-preset-fluid": "^1.0.2",
-		"unocss-transformer-alias": "^0.0.8"
+		"unocss-transformer-alias": "^0.0.8",
+		"vite-plugin-favicons": "^0.1.5"
 	}
 }

@@ -1,18 +1,44 @@
 ---
+import { SEO } from 'astro-seo';
+import faviconLinks from 'virtual:favicons';
+import ryoppippi from '@/assets/ryoppippi.jpg';
+
 type Props = {
 	title: string;
 };
 
 const { title } = Astro.props;
+
+const description = 'Portfolio of @ryoppippi';
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO
+			title={title}
+			{description}
+			twitter={{
+				card: 'summary',
+				site: '@ryoppippi',
+				creator: '@ryoppippi',
+				title: 'ryoppippi.com',
+				description,
+				image: ryoppippi.src,
+				imageAlt: 'ryoppippi',
+			}}
+			openGraph={{
+				basic: {
+					title,
+					type: 'website',
+					image: ryoppippi.src,
+					url: 'https://ryoppippi.com',
+				},
+			}}
+		/>
+		<Fragment set:html={faviconLinks} />
 	</head>
 	<body>
 		<main
