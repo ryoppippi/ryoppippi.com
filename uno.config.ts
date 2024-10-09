@@ -17,12 +17,12 @@ import { presetFluid } from 'unocss-preset-fluid';
 import { presetRyoppippi } from '@ryoppippi/unocss-preset';
 
 // TODO: bug of unocss
-import ossProjects from './sveltekit/src/contents/projects/oss/list.json';
-
-const projectSafelist: string[] = [];
-Object.values(ossProjects).forEach((projects) => {
-	projectSafelist.push(...projects.map(project => project.icon));
-});
+// import ossProjects from './sveltekit/src/contents/projects/oss/list.json';
+//
+// const projectSafelist: string[] = [];
+// Object.values(ossProjects).forEach((projects) => {
+// 	projectSafelist.push(...projects.map(project => project.icon));
+// });
 
 const theme = {
 	colors: {
@@ -116,5 +116,4 @@ export default defineConfig({
 	],
 	rules: [
 	],
-	safelist: [...projectSafelist],
 });
