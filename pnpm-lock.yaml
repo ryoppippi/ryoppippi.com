@@ -20,6 +20,9 @@ importers:
       astro:
         specifier: ^4.15.12
         version: 4.15.12(rollup@4.24.0)(typescript@5.6.3)
+      astro-meta-tags:
+        specifier: ^0.3.1
+        version: 0.3.1(astro@4.15.12(rollup@4.24.0)(typescript@5.6.3))
       svelte:
         specifier: 5.0.0-next.263
         version: 5.0.0-next.263
@@ -1320,6 +1323,11 @@ packages:
   astro-eslint-parser@1.0.3:
     resolution: {integrity: sha512-AGsGgcg7Jg9UpyCDgvl/EkdYpe1oMkFdmC2Zl+KWneoieLCtQIFjmcY8yt41gcNx4mby0w8BBJQcBmPuf8UAoQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  astro-meta-tags@0.3.1:
+    resolution: {integrity: sha512-6g/SfAVTV7BsGlfWU+s/Kvo6atyn9DpfI7Dq3fE/ck3ppfg30aoeT2Uxu7UH4yla3QXAUWaJIher7fGjewf0ew==}
+    peerDependencies:
+      astro: ^4.0.0 || ^5.0.0-beta.0
 
   astro@4.15.12:
     resolution: {integrity: sha512-PojmALAzwafLUD//hqKD4/+1Fj03Aa2VQY/rztCg6DUMgHLpo3TFV3ob1++kay91z/MdNWR+IGITcXhxAXhiTg==}
@@ -4963,6 +4971,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  astro-meta-tags@0.3.1(astro@4.15.12(rollup@4.24.0)(typescript@5.6.3)):
+    dependencies:
+      astro: 4.15.12(rollup@4.24.0)(typescript@5.6.3)
 
   astro@4.15.12(rollup@4.24.0)(typescript@5.6.3):
     dependencies:
