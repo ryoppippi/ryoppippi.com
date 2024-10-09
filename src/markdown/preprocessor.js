@@ -59,7 +59,7 @@ function svelteMarkdown(md) {
 
 			const metaExport = `export const metadata = ${JSON.stringify(meta)};`;
 			if (s.toString().includes('<script module>')) {
-				if (!s.toString().includes('export const metadata')) {
+				if (!s.toString().includes('const metadata')) {
 					s.replace('<script module>', `<script module>\n${metaExport}`);
 				}
 			}
