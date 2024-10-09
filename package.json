@@ -28,6 +28,8 @@
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.3.1",
 		"@iconify-json/catppuccin": "^1.2.4",
+		"@iconify-json/hugeicons": "^1.2.0",
+		"@iconify-json/material-symbols": "^1.2.2",
 		"@iconify-json/material-symbols-light": "^1.2.2",
 		"@iconify-json/ph": "^1.2.0",
 		"@iconify-json/solar": "^1.2.0",
@@ -43,6 +45,7 @@
 		"eslint-plugin-format": "^0.1.2",
 		"eslint-plugin-svelte": "^2.44.1",
 		"std-env": "^3.7.0",
+		"sveltweet": "^0.2.8",
 		"unocss": "^0.63.4",
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8"

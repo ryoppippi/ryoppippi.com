@@ -1,0 +1,14 @@
+---
+import { SvelteTweet } from 'sveltweet';
+import { getTweet } from 'sveltweet/api';
+
+type Props = {
+  id: string;
+};
+
+const { id } = Astro.props;
+
+const tweet = await getTweet(id);
+---
+
+<SvelteTweet {tweet} client:visible />
