@@ -33,6 +33,7 @@ export default defineConfig({
 		}),
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
+			cache: true,
 			imgSrc: relativePath('./static/ryoppippi.jpg'),
 			/* ===== metadataの設定 ===== */
 			path: `/favicons`,

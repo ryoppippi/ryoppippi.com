@@ -113,7 +113,7 @@
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "^5.4.8",
 		"vite-env-only": "^3.0.3",
-		"vite-plugin-favicons": "^0.1.4"
+		"vite-plugin-favicons": "^0.1.5"
 	},
 	"trustedDependencies": [
 		"@sveltejs/kit",
