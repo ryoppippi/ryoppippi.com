@@ -82,7 +82,6 @@ export default defineConfig({
 			},
 		}),
 		presetFluid(),
-		// @ts-expect-error unocss type error
 		presetRyoppippi(),
 	],
 	transformers: [
@@ -100,7 +99,7 @@ export default defineConfig({
 		},
 	},
 	extendTheme: _theme => deepMerge(
-
+		// eslint-disable-next-line ts/no-unsafe-argument
 		_theme,
 		theme,
 	),

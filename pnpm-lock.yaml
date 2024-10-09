@@ -33,6 +33,9 @@ importers:
       '@antfu/ni':
         specifier: ^0.23.0
         version: 0.23.0
+      '@astrojs/ts-plugin':
+        specifier: ^1.10.2
+        version: 1.10.2
       '@core/iterutil':
         specifier: npm:@jsr/core__iterutil@^0.8.0
         version: '@jsr/core__iterutil@0.8.0'
@@ -55,6 +58,9 @@ importers:
         specifier: npm:@jsr/std__collections@^1.0.7
         version: '@jsr/std__collections@1.0.7'
       '@unocss/extractor-svelte':
+        specifier: ^0.63.4
+        version: 0.63.4
+      '@unocss/preset-attributify':
         specifier: ^0.63.4
         version: 0.63.4
       '@unocss/reset':
@@ -195,6 +201,9 @@ packages:
   '@astrojs/telemetry@3.1.0':
     resolution: {integrity: sha512-/ca/+D8MIKEC8/A9cSaPUqQNZm+Es/ZinRv0ZAzvu2ios7POQSsVD+VOj7/hypWNsNM3T7RpfgNq7H2TU1KEHA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
+
+  '@astrojs/ts-plugin@1.10.2':
+    resolution: {integrity: sha512-Q7EvUh9dU9Ufi6Jfe5JRcisBuremlLZ7jJImUY2/eMe6OVwCXSmETDir/tVwT0K+lnfNiUwju9qHZYX2/5ch0Q==}
 
   '@astrojs/yaml2ts@0.2.1':
     resolution: {integrity: sha512-CBaNwDQJz20E5WxzQh4thLVfhB3JEEGz72wRA+oJp6fQR37QLAqXZJU0mHC+yqMOQ6oj0GfRPJrz6hjf+zm6zA==}
@@ -3774,6 +3783,16 @@ snapshots:
       which-pm-runs: 1.1.0
     transitivePeerDependencies:
       - supports-color
+
+  '@astrojs/ts-plugin@1.10.2':
+    dependencies:
+      '@astrojs/compiler': 2.10.3
+      '@astrojs/yaml2ts': 0.2.1
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@volar/language-core': 2.4.6
+      '@volar/typescript': 2.4.6
+      semver: 7.6.3
+      vscode-languageserver-textdocument: 1.0.12
 
   '@astrojs/yaml2ts@0.2.1':
     dependencies:
