@@ -25,10 +25,20 @@
 		"@antfu/ni": "^0.23.0",
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.3.1",
+		"@iconify-json/catppuccin": "^1.2.4",
+		"@iconify-json/material-symbols-light": "^1.2.2",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
+		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.3",
+		"@std/collections": "npm:@jsr/std__collections@^1.0.7",
+		"@unocss/extractor-svelte": "^0.63.4",
+		"@unocss/reset": "^0.63.4",
 		"eslint": "^9.12.0",
 		"eslint-plugin-astro": "^1.2.4",
 		"eslint-plugin-format": "^0.1.2",
-		"eslint-plugin-svelte": "^2.44.1"
+		"eslint-plugin-svelte": "^2.44.1",
+		"std-env": "^3.7.0",
+		"unocss": "^0.63.4",
+		"unocss-preset-fluid": "^1.0.2",
+		"unocss-transformer-alias": "^0.0.8"
 	}
 }
