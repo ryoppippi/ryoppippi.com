@@ -18,6 +18,7 @@
 		"@astrojs/mdx": "^3.1.7",
 		"@astrojs/svelte": "^5.7.2",
 		"astro": "^4.15.12",
+		"astro-meta-tags": "^0.3.1",
 		"svelte": "5.0.0-next.263",
 		"typescript": "^5.6.3"
 	},
