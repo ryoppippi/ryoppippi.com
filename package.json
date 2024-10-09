@@ -24,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.23.0",
+		"@astrojs/ts-plugin": "^1.10.2",
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.3.1",
 		"@iconify-json/catppuccin": "^1.2.4",
@@ -32,6 +33,7 @@
 		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.3",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.7",
 		"@unocss/extractor-svelte": "^0.63.4",
+		"@unocss/preset-attributify": "^0.63.4",
 		"@unocss/reset": "^0.63.4",
 		"eslint": "^9.12.0",
 		"eslint-plugin-astro": "^1.2.4",
