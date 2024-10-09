@@ -11,6 +11,9 @@ import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { isDevelopment } from 'std-env';
 
+// @ts-expect-error no type
+import autoImport from 'sveltekit-autoimport';
+
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
 
@@ -59,6 +62,11 @@ export default defineConfig({
 		Components({
 			dirs: ['src/components'],
 			dts: './src/components.d.ts',
+		}),
+		// eslint-disable-next-line ts/no-unsafe-call
+		autoImport({
+			include: ['**/*.(svelte|md)'],
+			components: ['./src/components'],
 		}),
 		sveltekit(),
 	],
