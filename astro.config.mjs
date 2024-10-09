@@ -7,5 +7,5 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [svelte(), mdx()]
+	integrations: [svelte(), mdx()],
 });

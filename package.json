@@ -1,32 +1,34 @@
 {
-  "name": "astro",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "lint": "eslint --cache .",
-    "format": "nr lint --fix",
-    "preinstall": "nlx only-allow pnpm"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^3.1.7",
-    "@astrojs/svelte": "^5.7.2",
-    "astro": "^4.15.12",
-    "svelte": "5.0.0-next.263",
-    "typescript": "^5.6.3"
-  },
-  "devDependencies": {
-    "@antfu/ni": "^0.23.0",
-    "@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
-    "@core/pipe": "npm:@jsr/core__pipe@0.3.1",
-    "@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
-    "eslint": "^9.12.0",
-    "eslint-plugin-svelte": "^2.44.1"
-  },
-  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+	"name": "astro",
+	"type": "module",
+	"version": "0.0.1",
+	"packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"lint": "eslint --cache .",
+		"format": "nr lint --fix",
+		"preinstall": "nlx only-allow pnpm"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/mdx": "^3.1.7",
+		"@astrojs/svelte": "^5.7.2",
+		"astro": "^4.15.12",
+		"svelte": "5.0.0-next.263",
+		"typescript": "^5.6.3"
+	},
+	"devDependencies": {
+		"@antfu/ni": "^0.23.0",
+		"@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
+		"@core/pipe": "npm:@jsr/core__pipe@0.3.1",
+		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.23",
+		"eslint": "^9.12.0",
+		"eslint-plugin-astro": "^1.2.4",
+		"eslint-plugin-format": "^0.1.2",
+		"eslint-plugin-svelte": "^2.44.1"
+	}
 }
