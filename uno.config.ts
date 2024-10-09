@@ -17,7 +17,7 @@ import { presetFluid } from 'unocss-preset-fluid';
 import { presetRyoppippi } from '@ryoppippi/unocss-preset';
 
 // TODO: bug of unocss
-import ossProjects from './src/contents/projects/oss/list.json';
+import ossProjects from './sveltekit/src/contents/projects/oss/list.json';
 
 const projectSafelist: string[] = [];
 Object.values(ossProjects).forEach((projects) => {
@@ -100,7 +100,7 @@ export default defineConfig({
 		},
 	},
 	extendTheme: _theme => deepMerge(
-		// eslint-disable-next-line ts/no-unsafe-argument
+
 		_theme,
 		theme,
 	),
