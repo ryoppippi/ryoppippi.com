@@ -33,6 +33,7 @@ const theme = {
 		},
 		text: {
 			100: '#FFFFFF',
+			150: '#fafafa',
 			200: '#e0e0e0',
 			300: '#b3b3b3',
 			400: '#808080',
