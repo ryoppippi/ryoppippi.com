@@ -19,6 +19,7 @@ import GitHubAlerts from 'markdown-it-github-alerts';
 import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
+import LinkPreview from 'markdown-it-link-preview';
 
 import Budoux from 'markdown-it-budoux';
 
@@ -50,6 +51,8 @@ md.use(LinkAttributes, {
 		rel: 'noopener',
 	},
 });
+
+md.use(LinkPreview);
 
 md.use(await MarkdownItShiki({
 	themes: {

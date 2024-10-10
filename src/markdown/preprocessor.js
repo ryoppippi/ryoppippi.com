@@ -3,6 +3,8 @@ import { parse as dateParse } from 'date-fns';
 import rt from 'reading-time';
 import MagicString from 'magic-string';
 import matter from 'gray-matter';
+import { pipe } from '@core/pipe';
+import { map } from '@core/iterutil/pipe';
 
 /**
  * @param {string} filename
@@ -35,6 +37,25 @@ function processMeta(filename, content, data) {
 }
 
 /**
+ * @param {string} proceed
+ */
+function addtionalProcessMd(proceed) {
+	return Array.from(
+		pipe(
+			proceed.split('\n'),
+			map((line) => {
+				if (line.includes(`link-preview-widget`)) {
+					/* remove <p>, </p> */
+					line = line.replace(/<p>/g, '').replace(/<\/p>/g, '');
+					return line;
+				}
+				return line;
+			}),
+		),
+	).join('\n');
+}
+
+/**
  * @param md {import('markdown-it').default}
  * @returns {import('svelte/types/compiler/preprocess').PreprocessorGroup} preprocessor
  */
@@ -51,7 +72,7 @@ function svelteMarkdown(md) {
 				content: htmlWithoutMeta,
 			} = matter(content);
 
-			const processed = md.render(htmlWithoutMeta);
+			const processed = addtionalProcessMd(md.render(htmlWithoutMeta));
 
 			const s = new MagicString(processed);
 
