@@ -105,7 +105,7 @@ export default defineConfig({
 			'prose-base': 'prose dark:prose-invert',
 			'op-card': 'op70 dark:op50 hover:op80 group-hover:op80',
 			'transition-base': 'transition-all transition-duration-500',
-			'sliding-animation-delay-base': '[--delay:80ms] sm:[--delay:150ms]',
+			'sliding-animation-delay-base': '[--delay:80ms]',
 		},
 		[/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
 	],
