@@ -103,6 +103,10 @@ a {
 		margin-top: 0.8571429em;
 	}
 
+	.prose {
+		--un-prose-borders: #7d7d7d4d !important;
+	}
+
 	html.dark .shiki,
 	html.dark .shiki span {
 		color: var(--shiki-dark) !important;
