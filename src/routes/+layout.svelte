@@ -4,6 +4,7 @@
 
 	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
+	import { fromStore } from 'svelte/store';
 	import { page, updated } from '$app/stores';
 
 	import { onNavigate } from '$app/navigation';
@@ -39,11 +40,12 @@
 		}
 	});
 
+	const pageRune = fromStore(page);
+	const title = $derived(pageRune.current.data.title ?? 'home');
 </script>
 
 <DarkMode />
 
-<HeadTitle />
 <MetaTags
 	additionalRobotsProps={{
 		noarchive: true,
@@ -65,10 +67,11 @@
 			},
 		],
 	}}
+	title={title}
+	titleTemplate={title !== 'home' ? `%s | ${domain()}` : domain()}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
-		title: domain(),
 		description: 'Portfolio of @ryoppippi',
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',

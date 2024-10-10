@@ -3,8 +3,6 @@
 	const { projects } = data;
 </script>
 
-<HeadTitle title='projects' />
-
 <div text-center>
 	<GitHubNav />
 </div>

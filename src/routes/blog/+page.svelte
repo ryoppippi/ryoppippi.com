@@ -49,8 +49,6 @@
 	</div>
 {/snippet}
 
-<HeadTitle title='blog' />
-
 <div mxa pt-10 px-10>
 	<CheckButton
 		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}

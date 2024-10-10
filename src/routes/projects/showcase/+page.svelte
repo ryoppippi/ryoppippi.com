@@ -1,9 +1,8 @@
 <script lang='ts'>
 	const { data } = $props();
 	const { projects } = data;
-</script>
 
-<HeadTitle title='Showcase' />
+</script>
 
 <div
 	grid='~ gap-4'

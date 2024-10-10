@@ -11,8 +11,6 @@
 	const { children } = $props();
 </script>
 
-<HeadTitle title='projects' />
-
 <div>
 	<ProjectTitle />
 

@@ -3,7 +3,6 @@
 declare global {
     const CheckButton: typeof import("./components/CheckButton.svelte")["default"]
     const GitHubNav: typeof import("./components/GitHubNav.svelte")["default"]
-    const HeadTitle: typeof import("./components/HeadTitle.svelte")["default"]
     const Image: typeof import("./components/Image.svelte")["default"]
     const LargeTitle: typeof import("./components/LargeTitle.svelte")["default"]
     const ListView: typeof import("./components/ListView.svelte")["default"]

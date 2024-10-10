@@ -3,7 +3,9 @@ import 'unplugin-icons/types/svelte';
 
 declare namespace App {
 	// interface Locals {}
-	// interface PageData {}
+	interface PageData {
+		title: string;
+	}
 	// interface Error {}
 	// interface Platform {}
 }

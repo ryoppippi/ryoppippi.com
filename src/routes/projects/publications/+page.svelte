@@ -35,8 +35,6 @@
 	} as const satisfies Record<Year, Item[]>;
 </script>
 
-<HeadTitle title='publications' />
-
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Item}
 	<div>

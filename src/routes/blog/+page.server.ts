@@ -28,5 +28,9 @@ export function load() {
 			external,
 		};
 	});
-	return { posts, allPosts };
+	return {
+		posts,
+		allPosts,
+		title: 'blog',
+	};
 }

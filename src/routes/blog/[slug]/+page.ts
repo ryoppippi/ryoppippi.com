@@ -11,6 +11,7 @@ export const load: PageLoad = async ({ params: { slug } }) => {
 			metadata: md.metadata,
 			Markdown: md.default,
 			slug,
+			title: `${md.metadata.title} | blog`,
 		};
 	}
 	catch (e) {

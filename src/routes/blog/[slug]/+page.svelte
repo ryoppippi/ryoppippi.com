@@ -16,10 +16,10 @@
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 
 	$inspect(tweetUrl);
+
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
-<HeadTitle title='{metadata.title} | blog' />
 <svelte:head>
 	<meta content='article' property='og:type' />
 </svelte:head>

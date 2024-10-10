@@ -5,5 +5,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	const projects = await getProjects(fetch);
 	return {
 		projects,
+		title: 'oss',
 	};
 };
