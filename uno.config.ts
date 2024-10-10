@@ -26,7 +26,7 @@ Object.values(ossProjects).forEach((projects) => {
 
 const theme = {
 	colors: {
-		primary: {
+		accent: {
 			100: '#FF6B6B',
 			200: '#dd4d51',
 			300: '#8f001a',

@@ -14,7 +14,7 @@
 {#snippet underline(isPath: boolean, transparentDefault = false)}
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<span
-		class:bg-primary-100={isPath}
+		class:bg-accent-100={isPath}
 		class:bg-transparent={!isPath || transparentDefault}
 		class:view-transition--nav-underline={isPath}
 		absolute
