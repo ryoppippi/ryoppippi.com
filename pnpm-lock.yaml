@@ -48,6 +48,9 @@ importers:
       '@iconify-json/hugeicons':
         specifier: ^1.2.0
         version: 1.2.0
+      '@iconify-json/line-md':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/material-symbols':
         specifier: ^1.2.2
         version: 1.2.2
@@ -57,6 +60,9 @@ importers:
       '@iconify-json/ph':
         specifier: ^1.2.0
         version: 1.2.0
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.6
+        version: 1.2.6
       '@iconify-json/solar':
         specifier: ^1.2.0
         version: 1.2.0
@@ -105,6 +111,9 @@ importers:
       sveltweet:
         specifier: ^0.2.8
         version: 0.2.8(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.0.0-next.263)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.263)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.263)
+      ufo:
+        specifier: ^1.5.4
+        version: 1.5.4
       unocss:
         specifier: ^0.63.4
         version: 0.63.4(postcss@8.4.47)(rollup@4.24.0)(vite@5.4.8(@types/node@22.7.5))
@@ -721,6 +730,9 @@ packages:
   '@iconify-json/hugeicons@1.2.0':
     resolution: {integrity: sha512-jlvqjvzAECReUzdJ/m5ziW2fOooK/n0Sy8Fryu56KqeFJMgCDgZKvLHZVpt0D0PkyAkEj+pbqtwG0RFcPX/bnw==}
 
+  '@iconify-json/line-md@1.2.1':
+    resolution: {integrity: sha512-XMga2q5PiQ2LrU7K06hfqSYOA+7UFhRwhl52xvPCPAiLmtdfWBeX38nA46mcaLj7sdNo+DK+BJy9iTrzQ0ewNw==}
+
   '@iconify-json/material-symbols-light@1.2.2':
     resolution: {integrity: sha512-Wey9XCGiZPK9zenZATmA0yz6jUK40c3WwgCOhxbtEbPji/IidgtAd3Oa57AfUcViC3M3AP5sHIb2FV2o5p1NEA==}
 
@@ -729,6 +741,9 @@ packages:
 
   '@iconify-json/ph@1.2.0':
     resolution: {integrity: sha512-013eLpgTmX1lACOuDnkuhC7gRHyYj9w/j8SyDmlyUYvsKQrwdRsv1otcXtwH3DevuDAzSkreeeRsCeez+gTyVA==}
+
+  '@iconify-json/simple-icons@1.2.6':
+    resolution: {integrity: sha512-E4asFcJ3JY/mtk6zeYCSQBBrmG4AncGo8vQ9ZO2oY8h/qA3TlGYSIoYzwRjmDKuFu30QwWJQMS43kka0JcPZUg==}
 
   '@iconify-json/solar@1.2.0':
     resolution: {integrity: sha512-xMspRoN2S2Op8mgjZHgiMJq2Xqo5oVlBp/1NICTeMByfePpkEKF67Fwh5KdBRF+SBey/cNLhjkTuHmKeSIEkog==}
@@ -4331,6 +4346,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/line-md@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/material-symbols-light@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
@@ -4340,6 +4359,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/ph@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/simple-icons@1.2.6':
     dependencies:
       '@iconify/types': 2.0.0
 
