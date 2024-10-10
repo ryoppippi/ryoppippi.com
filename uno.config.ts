@@ -52,9 +52,6 @@ const theme = {
 			300: '#454545',
 		},
 	},
-	breakpoints: {
-		tiny: '375px',
-	},
 } as const satisfies PresetUnoTheme;
 
 export default defineConfig({
