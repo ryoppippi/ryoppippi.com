@@ -67,6 +67,12 @@ export default defineConfig({
 		autoImport({
 			include: ['**/*.(svelte|md)'],
 			components: ['./src/components'],
+			module: {
+				sveltweet: [
+					'SvelteTweet',
+					'SvelteTweetNotFound',
+				],
+			},
 		}),
 		sveltekit(),
 	],

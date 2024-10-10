@@ -100,6 +100,7 @@
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.2",
 		"sveltekit-autoimport": "^1.8.1",
+		"sveltweet": "https://pkg.pr.new/sveltweet@ecf724d",
 		"ts-patch": "^3.2.1",
 		"tslib": "^2.7.0",
 		"type-fest": "^4.26.1",

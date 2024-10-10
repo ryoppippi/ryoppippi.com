@@ -4,6 +4,7 @@ import adapter from '@sveltejs/adapter-static';
 import { isDevelopment } from 'std-env';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { importAssets } from 'svelte-preprocess-import-assets';
+import SveltweetPreprocessor from 'sveltweet/preprocessor';
 
 import markdownit from 'markdown-it';
 
@@ -81,6 +82,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [
 		svelteMarkdown(md),
+		SveltweetPreprocessor(),
 		importAssets(),
 		vitePreprocess(),
 	],

@@ -8,3 +8,7 @@ lang: 'en'
 # First post
 
 Hello World
+
+<div>
+  <SvelteTweet tweet={__TWEET_1844335472719561111}/>
+</div>
