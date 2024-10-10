@@ -28,7 +28,7 @@ export function formatDate(date: Date) {
 
 export function domain() {
 	// extract hostname from asset
-	return (assets ?? '') !== '' ? new URL(import.meta.url).hostname : '';
+	return (assets ?? '') !== '' ? new URL(assets).hostname : 'ryoppippi.com';
 }
 
 export function subdomain(...paths: string[]) {
