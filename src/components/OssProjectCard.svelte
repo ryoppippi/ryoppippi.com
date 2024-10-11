@@ -5,7 +5,6 @@
 	const { name, description, icon, link, slug } = project;
 </script>
 
-<!-- eslint-disable-next-line svelte/require-each-key -->
 <!-- card conmponrnt -->
 <a
 	font-sans
