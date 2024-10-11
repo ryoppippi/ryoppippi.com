@@ -113,8 +113,9 @@ const config = {
 			},
 		},
 		alias: {
-			$contents: './src/contents',
-			$components: './src/components',
+			'$contents': './src/contents',
+			'$components': './src/components',
+			'content-collections': './src/contents/.content-collections/generated',
 		},
 		prerender: {
 			handleHttpError: ({ path, message }) => {

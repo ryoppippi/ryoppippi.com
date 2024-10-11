@@ -19,6 +19,8 @@
 	},
 	"devDependencies": {
 		"@antfu/ni": "^0.23.0",
+		"@content-collections/core": "^0.7.2",
+		"@content-collections/vite": "^0.2.3",
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.8.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.3.1",
 		"@iconify-json/akar-icons": "^1.2.1",

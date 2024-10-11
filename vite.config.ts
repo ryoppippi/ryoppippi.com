@@ -9,6 +9,7 @@ import Components from 'unplugin-svelte-components/vite';
 import { denyImports } from 'vite-env-only';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { faviconsPlugin } from 'vite-plugin-favicons';
+import contentCollections from '@content-collections/vite';
 import { isDevelopment } from 'std-env';
 
 // @ts-expect-error no type
@@ -75,5 +76,8 @@ export default defineConfig({
 			},
 		}),
 		sveltekit(),
+		contentCollections({
+			configPath: relativePath('./src/contents/config.ts'),
+		}),
 	],
 });
