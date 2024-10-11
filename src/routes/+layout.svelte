@@ -1,11 +1,12 @@
 <script>
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
+	import NProgress from 'nprogress';
 
 	import faviconLinks from 'virtual:favicons';
 	import { MetaTags } from 'svelte-meta-tags';
 	import { fromStore } from 'svelte/store';
-	import { page, updated } from '$app/stores';
+	import { navigating, page, updated } from '$app/stores';
 
 	import { onNavigate } from '$app/navigation';
 
@@ -42,6 +43,22 @@
 
 	const pageRune = fromStore(page);
 	const title = $derived(pageRune.current.data.title ?? 'home');
+
+	$effect(() => {
+		NProgress.configure({
+			showSpinner: false,
+		});
+	});
+
+	$effect(() => {
+		if ($navigating) {
+			NProgress.start();
+		}
+		else {
+			NProgress.done();
+		}
+	});
+
 </script>
 
 <DarkMode />
@@ -105,6 +122,41 @@
 	}
 	@view-transition {
 		navigation: auto;
+	}
+
+	#nprogress {
+		pointer-events: none;
+	}
+
+	#nprogress {
+		--np-bg-color: theme('colors.accent.100');
+	}
+
+	#nprogress .bar {
+		background: var(--np-bg-color);
+
+		position: fixed;
+		z-index: 1031;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		height: 2px;
+	}
+
+	/* Fancy blur effect */
+	#nprogress .peg {
+		display: block;
+		position: absolute;
+		right: 0px;
+		width: 100px;
+		height: 100%;
+		box-shadow: 0 0 10px var(--np-bg-color), 0 0 5px var(--np-bg-color);
+		opacity: 1.0;
+
+		-webkit-transform: rotate(3deg) translate(0px, -4px);
+		-ms-transform: rotate(3deg) translate(0px, -4px);
+		transform: rotate(3deg) translate(0px, -4px);
 	}
 }
 </style>
