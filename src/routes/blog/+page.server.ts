@@ -19,7 +19,9 @@ export function load() {
 		const pubDate = formatDate(new Date(item.pubDate));
 		const link = 'link' in item
 			? item.link
-			: ufo.joinURL('/blog', item.slug);
+			: 'filename' in item && typeof item.filename === 'string'
+				? ufo.joinURL('/blog', item.filename)
+				: ufo.joinURL('/blog', item.slug);
 		const external = 'link' in item && item.link.startsWith('http');
 		return {
 			...item,

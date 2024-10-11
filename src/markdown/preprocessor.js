@@ -8,11 +8,11 @@ import { map } from '@core/iterutil/pipe';
 import { slugify } from '../lib/slugify.server.js';
 
 /**
- * @param {string} filename
+ * @param {string} filepath
  * @param {string} content
  * @param {Record<string, any>} data
  */
-function processMeta(filename, content, data) {
+function processMeta(filepath, content, data) {
 	const { date, ...metadataRest } = data;
 	const pubDate = date instanceof Date
 		? date.toJSON()
@@ -25,12 +25,12 @@ function processMeta(filename, content, data) {
 	for (const key in metadataRest) {
 		if (typeof metadataRest[key] === 'string') {
 			if (metadataRest[key].startsWith('./') || metadataRest[key].startsWith('../')) {
-				metadataRest[key] = join(dirname(filename), metadataRest[key]);
+				metadataRest[key] = join(dirname(filepath), metadataRest[key]);
 			}
 		}
 	}
-	const slug = filename.split('/').at(-1)?.replace('.md', '');
-	if (slug == null) {
+	const filename = filepath.split('/').at(-1)?.replace('.md', '');
+	if (filename == null) {
 		throw new Error(`slug is not found in ${filename}`);
 	}
 
@@ -38,7 +38,9 @@ function processMeta(filename, content, data) {
 		...metadataRest,
 		pubDate,
 		readingTime,
-		slug: slugify(slug),
+		filename,
+		filepath,
+		slug: slugify(filename),
 	};
 }
 
