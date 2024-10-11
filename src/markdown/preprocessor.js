@@ -5,6 +5,7 @@ import MagicString from 'magic-string';
 import matter from 'gray-matter';
 import { pipe } from '@core/pipe';
 import { map } from '@core/iterutil/pipe';
+import { slugify } from '../lib/slugify.server.js';
 
 /**
  * @param {string} filename
@@ -28,11 +29,16 @@ function processMeta(filename, content, data) {
 			}
 		}
 	}
+	const slug = filename.split('/').at(-1)?.replace('.md', '');
+	if (slug == null) {
+		throw new Error(`slug is not found in ${filename}`);
+	}
 
 	return {
 		...metadataRest,
 		pubDate,
 		readingTime,
+		slug: slugify(slug),
 	};
 }
 

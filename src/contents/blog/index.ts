@@ -16,18 +16,11 @@ export const blogPosts = sortOn(
 				filepath,
 			})),
 
-			map(({ filepath, ...metadata }) => {
-				const slug = filepath.split('/').at(-1)?.replace('.md', '');
-				return {
-					...metadata,
-					slug,
-				};
-			}),
 			/** filter out files without slug */
 			filter(({ slug }) => slug != null),
 
 			/** correct type */
-			map(({ slug, ...v }) => ({ ...v, slug: slug as string })),
+			map(({ slug, ...v }) => ({ ...v, slug })),
 
 			/** filter isPublished */
 			filter(({ isPublished }) => dev || isPublished),
