@@ -1,18 +1,18 @@
 <script>
-	import { useDarkMode } from './runes.svelte';
+	import { UseDarkMode } from './runes.svelte';
 	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
-	const { isDark, toggleDark } = useDarkMode();
+	const dark = new UseDarkMode();
 </script>
 
 <button
 	aria-label='Toggle Dark Mode'
-	onclick={toggleDark}
+	onclick={dark.toggleDark}
 	type='button'
 >
 
-	{#if isDark}
+	{#if dark.isDark}
 		<SunnyToMoon />
 	{:else}
 		<MoonToSunny />
