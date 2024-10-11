@@ -1,6 +1,7 @@
 import { withoutTransition } from './without-transition';
 import { CheckTransitions } from './transition.svelte';
-import { browser } from '$app/environment';
+
+const browser = typeof window !== 'undefined';
 
 export class UseDarkMode {
 	_isDark = $state(true);
@@ -74,4 +75,5 @@ export class UseDarkMode {
 		transition.ready.then(() => withoutTransition(transitionAction));
 	};
 }
+
 

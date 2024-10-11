@@ -1,14 +1,13 @@
 <script lang='ts'>
-	import { subdomain } from '$lib/util';
-	import { page } from '$app/stores';
-
-	import * as DarkMode from '$lib/DarkMode';
+	import * as DarkMode from '@/lib/DarkMode';
 
 	const LINKS = [
 		{ name: 'projects', href: '/projects' },
 		{ name: 'blog', href: '/blog' },
-		{ name: 'cv', href: subdomain('/cv'), icon: 'i-line-md:download-outline' },
+		{ name: 'cv', href: '/cv', icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
+
+	const { url }: { url: URL } = $props();
 </script>
 
 {#snippet underline(isPath: boolean, transparentDefault = false)}
@@ -44,11 +43,11 @@
 		>
 			<div
 				style:view-transition-name='title-ryoppippi'
-				class:hidden={$page.url.pathname === '/'}
+				class:hidden={url.pathname === '/'}
 			>
 				@ryoppippi
 			</div>
-			<div>{@render underline($page.url.pathname === '/', true)}</div>
+			<div>{@render underline(url.pathname === '/', true)}</div>
 		</a>
 	</div>
 	<nav
@@ -61,7 +60,7 @@
 		text-lg
 	>
 		{#each LINKS as { href, name, ...rest } (href)}
-			{@const isPath = $page.url.pathname.startsWith(href)}
+			{@const isPath = url.pathname.startsWith(href)}
 			{@const icon = 'icon' in rest ? rest.icon : null}
 			<a
 				style:view-transition-name='-nav-link-{name}'

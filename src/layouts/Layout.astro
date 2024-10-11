@@ -3,6 +3,8 @@ import { SEO } from 'astro-seo';
 import faviconLinks from 'virtual:favicons';
 import ryoppippi from '@/assets/ryoppippi.jpg';
 
+import Nav from '@/components/Nav.svelte';
+
 type Props = {
 	title: string;
 };
@@ -39,6 +41,16 @@ const description = 'Portfolio of @ryoppippi';
 			}}
 		/>
 		<Fragment set:html={faviconLinks} />
+		<script is:inline>
+		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+			document.documentElement.classList.add('dark');
+		}
+		else {
+			document.documentElement.classList.remove('dark');
+		}
+		</script>
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
 	</head>
 	<body>
 		<main
@@ -48,7 +60,17 @@ const description = 'Portfolio of @ryoppippi';
 			px-8
 			un-dark
 		>
+			<Nav url={Astro.url} client:load />
 			<slot />
 		</main>
 	</body>
 </html>
+
+<style is:global>
+body {
+	--at-apply: font-sans text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
+}
+@view-transition {
+	navigation: auto;
+}
+</style>

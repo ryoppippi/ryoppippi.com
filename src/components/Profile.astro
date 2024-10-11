@@ -1,0 +1,13 @@
+---
+import { Picture } from 'astro:assets';
+import ryoppippi from '../assets/ryoppippi.jpg';
+---
+
+<div>
+	<Picture
+		formats={['webp', 'avif']}
+		class="object-contain mx-auto aspect-square w-1/2 rounded-full md:(h-64 w-64) view-transition-name---profile"
+		alt="profile"
+		src={ryoppippi}
+	/>
+</div>

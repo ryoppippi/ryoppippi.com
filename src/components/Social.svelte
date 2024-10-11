@@ -1,10 +1,9 @@
 <script lang='ts'>
 	import * as ufo from 'ufo';
-	import { subdomain } from '$lib/util';
 
 	const { size = 4.5 } = $props();
 
-	const ICONS = ([
+	const ICONS = [
 		{ class: 'i-line-md:github-loop', url: '/github' },
 		{ class: 'i-ph-git-pull-request-duotone', url: '/pr' },
 		{ class: 'i-simple-icons:zenn', url: '/zenn' },
@@ -12,8 +11,7 @@
 		{ class: 'i-line-md:twitter', url: '/twitter' },
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
-	] as const)
-		.map(({ url, ...rest }) => ({ url: subdomain(url), ...rest }));
+	] as const;
 </script>
 
 <article

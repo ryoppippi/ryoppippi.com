@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { defineConfig } from 'astro/config';
 
 import svelte from '@astrojs/svelte';
@@ -7,10 +6,12 @@ import mdx from '@astrojs/mdx';
 
 import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/astro';
+import Icons from 'unplugin-icons/vite';
 
 import { faviconsPlugin } from 'vite-plugin-favicons';
 
 import metaTags from 'astro-meta-tags';
+import { isDevelopment } from 'std-env';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,10 @@ export default defineConfig({
 	],
 	vite: {
 		plugins: [
+			Icons({
+				compiler: 'svelte',
+				autoInstall: isDevelopment,
+			}),
 			faviconsPlugin({
 				cache: true,
 				imgSrc: './src/assets/ryoppippi.jpg',

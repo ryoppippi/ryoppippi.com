@@ -1,5 +1,4 @@
 import { on } from 'svelte/events';
-import { browser } from '$app/environment';
 
 /**
  * check if the browser supports appearance transition
@@ -11,7 +10,7 @@ export class CheckTransitions {
 
 	#isAppearanceTransition = $derived(this.#isViewTransitionAvailable && !this.#isReduced);
 	constructor() {
-		if (!browser) {
+		if (typeof document === 'undefined') {
 			return;
 		}
 
