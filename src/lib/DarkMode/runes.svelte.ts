@@ -74,3 +74,4 @@ export class UseDarkMode {
 		transition.ready.then(() => withoutTransition(transitionAction));
 	};
 }
+
