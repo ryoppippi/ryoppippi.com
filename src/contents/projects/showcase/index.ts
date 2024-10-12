@@ -2,13 +2,14 @@ import sortOn from 'sort-on';
 import typia from 'typia';
 import { pipe } from '@core/pipe';
 import { filter, flatten, map, reduce } from '@core/iterutil/pipe';
+import * as ufo from 'ufo';
 import type { MarkdownImport } from '../../../markdown';
 
 type Metadata = {
 	title: string;
 	link: string;
 	image: string;
-	pubDate: string;
+	date: string;
 	featured?: boolean;
 };
 
@@ -43,6 +44,7 @@ export function getProjects(): Project[] {
 		map(({ metadata, default: Content }) => ({
 			...metadata,
 			featured: metadata?.featured ?? false,
+			image: ufo.joinURL(`/src/contents/projects/showcase`, metadata.image),
 			Content,
 		} as const satisfies Project)),
 
@@ -53,7 +55,7 @@ export function getProjects(): Project[] {
 		}, [[], []] as [Project[], Project[]]),
 
 		/** sort projects by pubDate */
-		map(projectGroups => sortOn(projectGroups, ['-pubDate'])),
+		map(projectGroups => sortOn(projectGroups, ['date'])),
 
 		/** flatten the two iterables */
 		flatten,
