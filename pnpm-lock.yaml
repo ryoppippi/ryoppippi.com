@@ -267,8 +267,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(@sveltejs/kit@2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))
       sveltweet:
-        specifier: https://pkg.pr.new/sveltweet@ecf724d
-        version: https://pkg.pr.new/sveltweet@ecf724d(@sveltejs/kit@2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)
+        specifier: https://pkg.pr.new/sveltweet@12d91f5
+        version: https://pkg.pr.new/sveltweet@12d91f5(@sveltejs/kit@2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)
       ts-patch:
         specifier: ^3.2.1
         version: 3.2.1
@@ -3577,8 +3577,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': '>=1.0.0'
 
-  sveltweet@https://pkg.pr.new/sveltweet@ecf724d:
-    resolution: {tarball: https://pkg.pr.new/sveltweet@ecf724d}
+  sveltweet@https://pkg.pr.new/sveltweet@12d91f5:
+    resolution: {tarball: https://pkg.pr.new/sveltweet@12d91f5}
     version: 0.2.9
     peerDependencies:
       '@sveltejs/kit': ^2.6.1
@@ -7780,7 +7780,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.26.7
 
-  sveltweet@https://pkg.pr.new/sveltweet@ecf724d(@sveltejs/kit@2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262):
+  sveltweet@https://pkg.pr.new/sveltweet@12d91f5(@sveltejs/kit@2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262):
     dependencies:
       '@sveltejs/kit': 2.6.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.5))
       svelte: 5.0.0-next.262
