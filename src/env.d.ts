@@ -7,3 +7,9 @@ namespace astroHTML.JSX {
 		[key: string]: any;
 	}
 }
+
+declare namespace svelteHTML {
+	import type { AttributifyAttributes } from '@unocss/preset-attributify';
+
+  type HTMLAttributes = AttributifyAttributes;
+}
