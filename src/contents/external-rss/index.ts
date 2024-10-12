@@ -14,7 +14,7 @@ type Item = {
 	title: string;
 	slug: string;
 	link: string;
-	pubDate: string;
+	date: string;
 	lang: Lang;
 };
 
@@ -29,7 +29,7 @@ export async function getPosts() {
 				...rest,
 				slug: slugify(rest.title ?? ''),
 				lang: 'ja',
-				pubDate: new Date(pubDate ?? '').toJSON(),
+				date: new Date(pubDate ?? '').toJSON(),
 			}),
 		),
 	);

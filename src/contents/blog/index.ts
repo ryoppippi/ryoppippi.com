@@ -2,8 +2,20 @@ import { pipe } from '@core/pipe';
 import { filter, map } from '@core/iterutil/pipe';
 import typia from 'typia';
 import sortOn from 'sort-on';
+import type rt from 'reading-time';
 import { dev } from '$app/environment';
-import type { Item, Metadata } from '$contents/blog/types';
+import type { Lang } from '$contents/types';
+
+export type Metadata = {
+	title: string;
+	date: string;
+	isPublished: boolean;
+	lang: Lang;
+};
+
+export type Item = {
+	slug: string;
+} & Metadata;
 
 export const blogPosts = sortOn(
 	Array.from(
@@ -13,7 +25,7 @@ export const blogPosts = sortOn(
 			map(([filepath, md]) => ({
 				// eslint-disable-next-line ts/no-unsafe-member-access
 				...typia.assert<Metadata>((md as any).metadata),
-				filepath,
+				slug: filepath.split('/').at(-1)?.replace('.md', ''),
 			})),
 
 			/** filter out files without slug */
@@ -26,5 +38,5 @@ export const blogPosts = sortOn(
 			filter(({ isPublished }) => dev || isPublished),
 		),
 	),
-	['-pubDate'],
+	['-date'],
 ) satisfies Item[];

@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { MarkdownImport } from '../../../markdown';
 import type { PageLoad } from './$types';
-import type { Metadata } from '$contents/blog/types';
+import type { Metadata } from '$contents/blog';
 
 export const load: PageLoad = async ({ params: { slug } }) => {
 	try {

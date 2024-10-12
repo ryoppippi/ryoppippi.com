@@ -4,7 +4,16 @@ import adapter from '@sveltejs/adapter-static';
 import { isDevelopment } from 'std-env';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { importAssets } from 'svelte-preprocess-import-assets';
-import SveltweetPreprocessor from 'sveltweet/preprocessor';
+// import SveltweetPreprocessor from 'sveltweet/preprocessor';
+
+import { escapeSvelte, mdsvex } from 'mdsvex';
+import {
+	bundledLanguages,
+	bundledThemes,
+	createHighlighter,
+} from 'shiki';
+
+import readingTime from 'remark-reading-time';
 
 import markdownit from 'markdown-it';
 
@@ -19,11 +28,13 @@ import GitHubAlerts from 'markdown-it-github-alerts';
 import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
+// @ts-expect-error no types
 import LinkPreview from 'markdown-it-link-preview';
 
 import Budoux from 'markdown-it-budoux';
 
 import { slugify } from './src/lib/slugify.server.js';
+// @ts-ignore
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
@@ -54,6 +65,7 @@ md.use(LinkAttributes, {
 
 md.use(LinkPreview);
 
+// @ts-ignore
 md.use(await MarkdownItShiki({
 	themes: {
 		dark: 'vitesse-dark',
@@ -78,14 +90,38 @@ md.use(Figures, {
 
 md.use(Budoux({ language: 'ja' }));
 
+/** @type {import('mdsvex').MdsvexOptions} */
+const mdsvexOptions = {
+	extensions: ['.md'],
+	remarkPlugins: [
+		readingTime,
+	],
+	highlight: {
+		highlighter: async (code, lang = 'text') => {
+			const highlighter = await createHighlighter({
+				themes: Object.keys(bundledThemes),
+				langs: Object.keys(bundledLanguages),
+			});
+			const html = escapeSvelte(highlighter.codeToHtml(code, {
+				// @ts-ignore
+				lang,
+				themes: {
+					dark: 'vitesse-dark',
+					light: 'vitesse-light',
+				},
+			}));
+			return `{@html \`${html}\` }`;
+		},
+	},
+};
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [
-		svelteMarkdown(md),
-		SveltweetPreprocessor(),
+		mdsvex(mdsvexOptions),
 		importAssets(),
 		vitePreprocess(),
 	],
@@ -109,6 +145,7 @@ const config = {
 		}),
 		typescript: {
 			config(config) {
+				// @ts-ignore
 				config.include.push(path.join(import.meta.dirname, 'uno.config.ts'));
 			},
 		},
@@ -118,6 +155,7 @@ const config = {
 		},
 		prerender: {
 			handleHttpError: ({ path, message }) => {
+				// @ts-ignore
 				if (Route.find(({ from }) => from === path)) {
 					return;
 				}
@@ -130,6 +168,7 @@ const config = {
 			  @see https://developers.cloudflare.com/pages/configuration/build-configuration#environment-variables
 			  @see https://kit.svelte.jp/docs/configuration#paths
 			 */
+			// @ts-ignore
 			assets: isDevelopment
 				? ''
 				: process.env.CF_PAGES_BRANCH === 'main'

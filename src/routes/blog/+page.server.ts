@@ -12,11 +12,12 @@ export function load() {
 		...blogPosts,
 	].map(item => ({
 		...item,
-		pubDate: parseJSON(item.pubDate),
-	})), ['-pubDate']);
+	})), ['-date']);
+
+	console.log({ allPosts });
 
 	const posts = allPosts.map((item) => {
-		const pubDate = formatDate(new Date(item.pubDate));
+		const date = formatDate(new Date(item.date));
 		const link = 'link' in item
 			? item.link
 			: 'filename' in item && typeof item.filename === 'string'
@@ -25,7 +26,7 @@ export function load() {
 		const external = 'link' in item && item.link.startsWith('http');
 		return {
 			...item,
-			date: pubDate,
+			date,
 			link,
 			external,
 		};

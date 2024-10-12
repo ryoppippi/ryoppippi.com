@@ -39,7 +39,7 @@
 			title={metadata.title}
 			viewTransitionName='blog-{slug}'
 		/>
-		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text}</p>
+		<p text-text-400>{formatDate(new Date(metadata.date))} ・ {metadata.readingTime.text}</p>
 	</hgroup>
 
 	<div p2>
