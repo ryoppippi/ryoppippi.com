@@ -13,6 +13,9 @@ import { faviconsPlugin } from 'vite-plugin-favicons';
 import metaTags from 'astro-meta-tags';
 import { isDevelopment } from 'std-env';
 
+import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+import { Route } from './routes.js';
+
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
@@ -26,6 +29,10 @@ export default defineConfig({
 	],
 	vite: {
 		plugins: [
+			cloudflareRedirect({
+				mode: 'generate',
+				entries: Route,
+			}),
 			Icons({
 				compiler: 'svelte',
 				autoInstall: isDevelopment,

@@ -78,9 +78,15 @@ importers:
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.23
         version: '@jsr/ryoppippi__eslint-config@0.0.23(@typescript-eslint/utils@8.8.1(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(@vue/compiler-sfc@3.5.11)(astro-eslint-parser@1.0.3(typescript@5.6.3))(eslint-plugin-astro@1.2.4(eslint@9.12.0(jiti@1.21.6))(typescript@5.6.3))(eslint-plugin-format@0.1.2(eslint@9.12.0(jiti@1.21.6)))(eslint-plugin-svelte@2.44.1(eslint@9.12.0(jiti@1.21.6))(svelte@5.0.0-next.263))(eslint@9.12.0(jiti@1.21.6))(svelte-eslint-parser@0.41.1(svelte@5.0.0-next.263))(svelte@5.0.0-next.263)(typescript@5.6.3)'
+      '@ryoppippi/str-fns':
+        specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
+        version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unocss-preset':
         specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.3
         version: '@jsr/ryoppippi__unocss-preset@1.0.3'
+      '@ryoppippi/vite-plugin-cloudflare-redirect':
+        specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
+        version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.7.5)'
       '@std/collections':
         specifier: npm:@jsr/std__collections@^1.0.7
         version: '@jsr/std__collections@1.0.7'
@@ -907,8 +913,14 @@ packages:
   '@jsr/ryoppippi__eslint-config@0.0.23':
     resolution: {integrity: sha512-2YGVhLJ1FEkbLzHyFoahaiIqOKZjW04Pi1j3mutgGOKIgOBvtjjQUkxsGB0BUyemgesfA5NS11X+QmemrIsQKQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__eslint-config/0.0.23.tgz}
 
+  '@jsr/ryoppippi__str-fns@0.1.2':
+    resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
+
   '@jsr/ryoppippi__unocss-preset@1.0.3':
     resolution: {integrity: sha512-okE5xLROkamESpwUQ0lcBirC4cb5ysPqDATVFNEQIZSPqm1vJ8gBy6T/VjIR7hNR269/6wuMQhhkLkR07R1H1Q==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.3.tgz}
+
+  '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3':
+    resolution: {integrity: sha512-CZJCq4VGpVHuinDd4NaO/pbxpifERtaCnZyMGqGQsLQeeDWtWVmaNSKUdmFUJuK/1w4hvHbV+Ofa8Kqz2fjglw==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__vite-plugin-cloudflare-redirect/1.0.3.tgz}
 
   '@jsr/std__collections@1.0.7':
     resolution: {integrity: sha512-2FQzEPIZUZMEzCz/1wRJ6+IKxvmJvTlMoIwxKAH8qgXrncTEZNBM4pgFY+oLfNXIgrKsm9aMgmogNW62tm49FA==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.7.tgz}
@@ -1576,6 +1588,9 @@ packages:
   cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
+
+  cloudflare-redirect-parser@0.1.0:
+    resolution: {integrity: sha512-M4pDIvjLX4wuC9SX1CaQ3ClLIgNOa37gaeL4c31cCJpJ2b+GlaXybnB14iUTtuGbhmS+Eu6JGLoWbiJ2PW8g+A==}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -3377,6 +3392,10 @@ packages:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
 
+  type-fest@4.23.0:
+    resolution: {integrity: sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==}
+    engines: {node: '>=16'}
+
   type-fest@4.26.1:
     resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
     engines: {node: '>=16'}
@@ -4569,9 +4588,28 @@ snapshots:
       - typescript
       - vitest
 
+  '@jsr/ryoppippi__str-fns@0.1.2':
+    dependencies:
+      type-fest: 4.23.0
+
   '@jsr/ryoppippi__unocss-preset@1.0.3':
     dependencies:
       '@unocss/core': 0.63.4
+
+  '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.7.5)':
+    dependencies:
+      cloudflare-redirect-parser: 0.1.0
+      defu: 6.1.4
+      vite: 5.4.8(@types/node@22.7.5)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - terser
 
   '@jsr/std__collections@1.0.7': {}
 
@@ -5477,6 +5515,8 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+
+  cloudflare-redirect-parser@0.1.0: {}
 
   clsx@2.1.1: {}
 
@@ -7781,6 +7821,8 @@ snapshots:
   type-fest@0.6.0: {}
 
   type-fest@0.8.1: {}
+
+  type-fest@4.23.0: {}
 
   type-fest@4.26.1: {}
 
