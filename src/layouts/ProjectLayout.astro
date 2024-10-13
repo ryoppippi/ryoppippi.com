@@ -1,0 +1,24 @@
+---
+import ProjectTitle from '@/components/ProjectTitle.svelte';
+import ProjectMenu from '@/components/ProjectMenu.svelte';
+
+import Layout from '@/layouts/Layout.astro';
+
+const routes = [
+  'OSS',
+  'showcase',
+  'publications',
+] as const;
+
+type Props = Parameters<typeof Layout>[0];
+
+const { ...props } = Astro.props;
+---
+
+<Layout {...props}>
+  <div>
+    <ProjectTitle />
+    <ProjectMenu {routes} url={Astro.url} />
+    <slot />
+  </div>
+</Layout>
