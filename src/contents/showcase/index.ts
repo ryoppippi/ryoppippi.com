@@ -2,7 +2,7 @@ import sortOn from 'sort-on';
 import typia from 'typia';
 import { pipe } from '@core/pipe';
 import { filter, flatten, map, reduce } from '@core/iterutil/pipe';
-import type { MarkdownImport } from '../../../markdown';
+import type { MarkdownImport } from '../../../../.sveltekit/sveltekit/src/markdown';
 
 type Metadata = {
 	title: string;
