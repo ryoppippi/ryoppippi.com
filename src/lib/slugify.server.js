@@ -1,10 +1,28 @@
-import GithubSlugger from 'github-slugger';
+// string.js slugify drops non ascii chars so we have to
+// use a custom implementation here
+import { remove } from 'diacritics';
 
-const slugger = new GithubSlugger();
+// eslint-disable-next-line no-control-regex
+const rControl = /[\u0000-\u001F]/g;
+const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
 
 /**
- * @param {string} s
+ * @param {string} str
  */
-export function slugify(s) {
-	return slugger.slug(s);
+export function slugify(str) {
+	return (
+		remove(str)
+		// Remove control characters
+			.replace(rControl, '')
+		// Replace special characters
+			.replace(rSpecial, '-')
+		// Remove continuos separators
+			.replace(/-{2,}/g, '-')
+		// Remove prefixing and trailing separtors
+			.replace(/^-+|-+$/g, '')
+		// ensure it doesn't start with a number (#121)
+			.replace(/^(\d)/, '_$1')
+		// lowercase
+			.toLowerCase()
+	);
 }

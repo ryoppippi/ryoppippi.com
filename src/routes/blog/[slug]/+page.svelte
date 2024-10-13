@@ -37,7 +37,7 @@
 			opacity={false}
 			selectDisabled={false}
 			title={metadata.title}
-			viewTransitionName='blog-{slug}'
+			viewTransitionName='blog-{metadata.slug}'
 		/>
 		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text}</p>
 	</hgroup>
