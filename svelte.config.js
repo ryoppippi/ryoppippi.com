@@ -157,7 +157,6 @@ const mdsvexOptions = {
 						explicitTrigger: true,
 						renderer: rendererRich(),
 					}),
-					transformerEscape(),
 				],
 			}));
 			return `{@html \`${html}\` }`;
