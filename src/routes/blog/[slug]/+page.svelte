@@ -1,9 +1,7 @@
 <script lang='ts'>
 	import '@shikijs/twoslash/style-rich.css';
-	import 'markdown-it-github-alerts/styles/github-colors-light.css';
-	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
-	import 'markdown-it-github-alerts/styles/github-base.css';
 	import './link-card.css';
+	import './alert.css';
 
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
@@ -39,7 +37,8 @@
 			title={metadata.title}
 			viewTransitionName='blog-{slug}'
 		/>
-		<p text-text-400>{formatDate(new Date(metadata.date))} ・ {metadata.readingTime.text}</p>
+		<p text-text-400>{formatDate(new Date(metadata.date))} ・ </p>
+		<!-- <p text-text-400>{formatDate(new Date(metadata.date))} ・ {metadata.readingTime.text}</p> -->
 	</hgroup>
 
 	<div p2>
