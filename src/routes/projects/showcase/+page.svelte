@@ -1,7 +1,6 @@
 <script lang='ts'>
 	const { data } = $props();
 	const { projects } = data;
-
 </script>
 
 <div
