@@ -14,6 +14,14 @@
 		.filter(i => !isOnlyEnglish || i.lang === 'en')
 		.filter(i => !isOnlyRyoppippi || !i.link.startsWith('http')),
 	);
+
+	export const snapshot = {
+		capture: () => ({ isOnlyEnglishCount, isOnlyRyoppippiCount }),
+		restore: (value) => {
+			isOnlyEnglishCount = value.isOnlyEnglishCount;
+			isOnlyRyoppippiCount = value.isOnlyRyoppippiCount;
+		},
+	};
 </script>
 
 {#snippet itemView(_item: Item)}
