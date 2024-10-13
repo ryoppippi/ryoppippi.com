@@ -77,7 +77,8 @@ export default defineConfig({
 		}),
 		sveltekit(),
 		contentCollections({
-			configPath: relativePath('./src/contents/config.ts'),
+			configPath: relativePath('./src/contents/config.server.ts'),
+
 		}),
 	],
 });

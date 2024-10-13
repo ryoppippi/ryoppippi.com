@@ -8,6 +8,7 @@ const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
 
 /**
  * @param {string} str
+ * @returns {string} slugified string
  */
 export function slugify(str) {
 	return (
