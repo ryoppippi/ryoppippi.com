@@ -53,32 +53,35 @@
 	</div>
 	<nav
 		col-span-2
+		flex='wrap  '
 		font-bold
-		fw
-		fxe
+		fxc
 		gap-4
 		m='xa md:r0'
+		md-fxe
 		text-lg
 	>
-		{#each LINKS as { href, name, ...rest } (href)}
-			{@const isPath = $page.url.pathname.startsWith(href)}
-			{@const icon = 'icon' in rest ? rest.icon : null}
-			<a
-				style:view-transition-name='-nav-link-{name}'
-				block
-				{href}
-				px-0
-				relative
-				target={href.startsWith('http') ? '_blank' : undefined}
-			>
-				<div fyc>
-					{name}
-					<!-- svelte-ignore element_invalid_self_closing_tag -->
-					{#if icon != null} <span class={icon} /> {/if}
-				</div>
-				{@render underline(isPath, false)}
-			</a>
-		{/each}
+		<div flex gap-4>
+			{#each LINKS as { href, name, ...rest } (href)}
+				{@const isPath = $page.url.pathname.startsWith(href)}
+				{@const icon = 'icon' in rest ? rest.icon : null}
+				<a
+					style:view-transition-name='-nav-link-{name}'
+					block
+					{href}
+					px-0
+					relative
+					target={href.startsWith('http') ? '_blank' : undefined}
+				>
+					<div fyc>
+						{name}
+						<!-- svelte-ignore element_invalid_self_closing_tag -->
+						{#if icon != null} <span class={icon} /> {/if}
+					</div>
+					{@render underline(isPath, false)}
+				</a>
+			{/each}
+		</div>
 		<div flex gap-2 view-transition--nav-icons>
 			<DarkMode.ToggleButton />
 			<a
