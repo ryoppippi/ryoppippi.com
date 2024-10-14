@@ -18,7 +18,7 @@
 			<span op80 pl-2 text-sm truncate>{item.date}</span>
 		</p>
 		{#if item.videoLink}
-			<p op50>
+			<p op50 text-sm>
 				<a href={item.videoLink}>Watch the video</a>
 			</p>
 		{/if}
