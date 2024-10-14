@@ -6,6 +6,7 @@
 	import './slide-enter.css';
 	import './link-card.css';
 	import './magic-link.css';
+	import './prose.css';
 
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
@@ -96,31 +97,6 @@ a {
 	h6:hover .header-anchor,
 	h6:focus .header-anchor {
 		opacity: 0.5;
-	}
-
-	.prose figure figcaption {
-		color: theme('colors.text.400');
-		font-size: 0.875em;
-		line-height: 1.4285714;
-		margin-top: 0.8571429em;
-	}
-
-	.prose {
-		--un-prose-borders: #7d7d7d4d !important;
-	}
-
-	html.dark .shiki,
-	html.dark .shiki span {
-		color: var(--shiki-dark) !important;
-		background-color: var(--shiki-dark-bg) !important;
-		/* Optional, if you also want font styles */
-		font-style: var(--shiki-dark-font-style) !important;
-		font-weight: var(--shiki-dark-font-weight) !important;
-		text-decoration: var(--shiki-dark-text-decoration) !important;
-	}
-
-	html:not(.dark) .shiki {
-		background-color: theme('colors.text.150') !important;
 	}
 }
 </style>
