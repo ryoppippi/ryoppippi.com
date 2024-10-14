@@ -23,6 +23,8 @@ import LinkPreview from 'markdown-it-link-preview';
 
 import Budoux from 'markdown-it-budoux';
 
+import MarkdownItMagicLink from 'markdown-it-magic-link';
+
 import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
@@ -77,6 +79,8 @@ md.use(Figures, {
 });
 
 md.use(Budoux({ language: 'ja' }));
+
+md.use(MarkdownItMagicLink);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

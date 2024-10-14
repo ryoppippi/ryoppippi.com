@@ -4,6 +4,7 @@
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
 	import 'markdown-it-github-alerts/styles/github-base.css';
 	import './link-card.css';
+	import './magic-link.css';
 
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
