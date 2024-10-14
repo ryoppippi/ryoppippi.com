@@ -3,6 +3,7 @@
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
 	import 'markdown-it-github-alerts/styles/github-base.css';
+	import './slide-enter.css';
 	import './link-card.css';
 	import './magic-link.css';
 
@@ -121,30 +122,5 @@ a {
 	html:not(.dark) .shiki {
 		background-color: theme('colors.text.150') !important;
 	}
-
-	html:not(.no-sliding) .slide-enter-content > * {
-		--at-apply: sliding-animation
-	}
-
-	.slide-enter-content > *:nth-child(1) { --stagger: 1; }
-	.slide-enter-content > *:nth-child(2) { --stagger: 2; }
-	.slide-enter-content > *:nth-child(3) { --stagger: 3; }
-	.slide-enter-content > *:nth-child(4) { --stagger: 4; }
-	.slide-enter-content > *:nth-child(5) { --stagger: 5; }
-	.slide-enter-content > *:nth-child(6) { --stagger: 6; }
-	.slide-enter-content > *:nth-child(7) { --stagger: 7; }
-	.slide-enter-content > *:nth-child(8) { --stagger: 8; }
-	.slide-enter-content > *:nth-child(9) { --stagger: 9; }
-	.slide-enter-content > *:nth-child(10) { --stagger: 10; }
-	.slide-enter-content > *:nth-child(11) { --stagger: 11; }
-	.slide-enter-content > *:nth-child(12) { --stagger: 12; }
-	.slide-enter-content > *:nth-child(13) { --stagger: 13; }
-	.slide-enter-content > *:nth-child(14) { --stagger: 14; }
-	.slide-enter-content > *:nth-child(15) { --stagger: 15; }
-	.slide-enter-content > *:nth-child(16) { --stagger: 16; }
-	.slide-enter-content > *:nth-child(17) { --stagger: 17; }
-	.slide-enter-content > *:nth-child(18) { --stagger: 18; }
-	.slide-enter-content > *:nth-child(19) { --stagger: 19; }
-	.slide-enter-content > *:nth-child(20) { --stagger: 20; }
 }
 </style>
