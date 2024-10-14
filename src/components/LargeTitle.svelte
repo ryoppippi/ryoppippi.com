@@ -20,7 +20,7 @@
 	f-text-32-64
 	font='mono bold'
 	line-height-none
-	py-8
+	my-8
 	text-stroke='hex-aaa [1.5px]'
 	text-transparent
 >

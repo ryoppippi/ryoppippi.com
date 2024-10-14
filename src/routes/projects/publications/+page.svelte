@@ -37,7 +37,7 @@
 
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Item}
-	<div>
+	<div mt-5>
 		<h3 text-xl>{item.title}</h3>
 		<p op50>{item.publisher}</p>
 	</div>
