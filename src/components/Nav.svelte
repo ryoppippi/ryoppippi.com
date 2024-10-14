@@ -6,6 +6,7 @@
 
 	const LINKS = [
 		{ name: 'projects', href: '/projects' },
+		{ name: 'talks', href: '/talks' },
 		{ name: 'blog', href: '/blog' },
 		{ name: 'cv', href: subdomain('/cv'), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
