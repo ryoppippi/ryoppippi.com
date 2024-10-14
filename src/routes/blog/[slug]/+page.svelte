@@ -7,6 +7,7 @@
 	import './link-card.css';
 	import './magic-link.css';
 	import './prose.css';
+	import './anchor.css';
 
 	import { formatDate, subdomain } from '$lib/util';
 	import { page } from '$app/stores';
@@ -67,36 +68,5 @@
 <style>
 a {
 	--at-apply: no-underline hover:underline
-}
-
-:global {
-	a.header-anchor {
-		float: left;
-		margin-top: 0.125em;
-		margin-left: -1.2em;
-		padding-right: 0.5em;
-		font-size: 0.85em;
-		opacity: 0;
-		text-decoration: none;
-		border: 0 !important;
-	}
-	a.header-anchor:hover,
-	a.header-anchor:focus {
-		text-decoration: none;
-	}
-	h1:hover .header-anchor,
-	h1:focus .header-anchor,
-	h2:hover .header-anchor,
-	h2:focus .header-anchor,
-	h3:hover .header-anchor,
-	h3:focus .header-anchor,
-	h4:hover .header-anchor,
-	h4:focus .header-anchor,
-	h5:hover .header-anchor,
-	h5:focus .header-anchor,
-	h6:hover .header-anchor,
-	h6:focus .header-anchor {
-		opacity: 0.5;
-	}
 }
 </style>
