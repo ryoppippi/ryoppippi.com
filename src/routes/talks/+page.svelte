@@ -6,27 +6,43 @@
 
 	type Talk = typeof talks[string][0];
 
-	$inspect({ talks });
+	let isOnlyEnglish = $state(false);
+
+	export const snapshot = {
+		capture: () => ({ isOnlyEnglish }),
+		restore: (value) => {
+			isOnlyEnglish = value.isOnlyEnglish;
+		},
+	};
 </script>
 
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Talk}
-	<div mt-5>
-		<h3 text-xl><a href={item.urls.at(0)}>{item.title}</a></h3>
-		<p op50>
-			<a href={item.eventLink}>{item.event}</a>
-			<span op80 pl-2 text-sm truncate>{item.date}</span>
-		</p>
-		{#if item.videoLink}
-			<p op50 text-sm>
-				<a href={item.videoLink}>Watch the video</a>
+	{#if !(isOnlyEnglish && item.lang !== 'en')}
+		<div mt-5>
+			<h3 text-xl><a href={item.urls.at(0)}>{item.title}</a></h3>
+			<p op50>
+				<a href={item.eventLink}>{item.event}</a>
+				<span op80 pl-2 text-sm truncate>{item.date}</span>
 			</p>
-		{/if}
-	</div>
+			{#if item.videoLink}
+				<p op50 text-sm>
+					<a href={item.videoLink}>Watch the video</a>
+				</p>
+			{/if}
+		</div>
+	{/if}
 {/snippet}
 
+<div mxa pt-10>
+	<CheckButton
+		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
+		onclick={() => isOnlyEnglish = !isOnlyEnglish}
+		text='English Only'
+	/>
+</div>
+
 {#each Object.entries(talks).sort(([a], [b]) => Number(b) - Number(a)) as [year, items], count (year)}
-	<LargeTitle title={year} />
 
 	<div
 		style:--stagger={count}
@@ -34,8 +50,8 @@
 		no-underline
 		sliding-animation='~ delay-base'
 	>
+		<LargeTitle title={year} />
 		<ListView
-			animation={false}
 			{itemView}
 			items={items as unknown as ListItem[]}
 		/>

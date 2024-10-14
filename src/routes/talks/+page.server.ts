@@ -5,10 +5,12 @@ import { parseJSON } from 'date-fns';
 import type { PageServerLoad } from './$types';
 import { formatDate } from '$lib/util';
 import { slugify } from '$lib/slugify.server';
+import type { Lang } from '$lib/../contents/types';
 
 export type Talk = {
 	title: string;
 	date: string;
+	lang?: Lang;
 	event: string;
 	eventLink?: string & tags.Format<'url'>;
 	videoLink?: string & tags.Format<'url'>;
