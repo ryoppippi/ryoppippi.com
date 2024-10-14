@@ -1,7 +1,7 @@
 <script context='module' lang='ts'>
 	export type Item = {
 		title: string;
-		link: string;
+		link?: string;
 		slug: string;
 		lang?: string;
 		external?: boolean;
@@ -25,7 +25,7 @@
 </script>
 <div mxa px-10>
 	{#each items as item, count (item.slug)}
-		{@const external = item.link.startsWith('http')}
+		{@const external = typeof item.link === 'string' && item?.link.startsWith('http')}
 		<div
 			style:--stagger={count}
 			style:--start='300ms'
@@ -33,18 +33,24 @@
 			my-2
 			sliding-animation-delay-base
 		>
-			<a
-				class='group'
-				fyc
-				gap-3
-				href={item.link}
-				mr-5
-				op-card
-				target={external ? '_blank' : ''}
-				transition-base
-			>
-				{@render itemView(item)}
-			</a>
+			{#if item.link != null}
+				<a
+					class='group'
+					fyc
+					gap-3
+					href={item.link}
+					mr-5
+					op-card
+					target={external ? '_blank' : ''}
+					transition-base
+				>
+					{@render itemView(item)}
+				</a>
+			{:else}
+				<div class='group' fyc gap-3 mr-5 op-card transition-base>
+					{@render itemView(item)}
+				</div>
+			{/if}
 		</div>
 	{/each}
 </div>

@@ -11,12 +11,17 @@
 
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Talk}
-	<div>
-		<h3 text-xl>{item.title}</h3>
+	<div mt-5>
+		<h3 text-xl><a href={item.urls.at(0)}>{item.title}</a></h3>
 		<p op50>
-			{item.event}
+			<a href={item.eventLink}>{item.event}</a>
 			<span op80 pl-2 text-sm truncate>{item.date}</span>
 		</p>
+		{#if item.videoLink}
+			<p op50>
+				<a href={item.videoLink}>Watch the video</a>
+			</p>
+		{/if}
 	</div>
 {/snippet}
 
@@ -36,3 +41,9 @@
 		/>
 	</div>
 {/each}
+
+<style>
+a {
+	--at-apply: hover:underline;
+}
+</style>

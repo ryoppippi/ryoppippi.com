@@ -30,12 +30,19 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		...talk,
 		date: formatDate(parseJSON(talk.date)),
 		slug: slugify(talk.title + talk.date + talk.event),
-		link: talk.urls[0],
+		link: null,
 	}));
+
+	/* filter the talks dosn't happen yet */
+	const today = new Date();
+	const talksHappened = talkWithParsedDate.filter((talk) => {
+		const talkDate = new Date(talk.date);
+		return talkDate < today;
+	});
 
 	/* split by year */
 	const talksByYear: Record<string, Talk[]> = {};
-	talkWithParsedDate.forEach((talk) => {
+	talksHappened.forEach((talk) => {
 		const year = new Date(talk.date).getFullYear().toString();
 		if (talksByYear[year] == null) {
 			talksByYear[year] = [];
