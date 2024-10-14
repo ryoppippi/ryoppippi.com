@@ -9,7 +9,7 @@
 	import { page } from '$app/stores';
 
 	const { data } = $props();
-	const { metadata, Markdown, slug } = data;
+	const { metadata, Markdown } = data;
 
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain($page.url.pathname)}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
