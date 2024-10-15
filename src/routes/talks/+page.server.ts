@@ -7,15 +7,16 @@ import { formatDate } from '$lib/util';
 import { slugify } from '$lib/slugify.server';
 import type { Lang } from '$lib/../contents/types';
 
+type URLString = string & tags.Format<'url'>;
 export type Talk = {
 	title: string;
 	date: string;
 	lang?: Lang;
 	event: string;
-	eventLink?: string & tags.Format<'url'>;
-	videoLink?: string & tags.Format<'url'>;
+	eventLink?: URLString;
+	videoLink?: URLString;
+	links: URLString[];
 	content: string;
-	urls: string[];
 };
 
 export const load: PageServerLoad = async ({ fetch }) => {

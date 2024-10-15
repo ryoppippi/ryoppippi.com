@@ -20,7 +20,7 @@
 	{@const item = _item as unknown as Talk}
 	{#if !(isOnlyEnglish && item.lang !== 'en')}
 		<div mt-5>
-			<h3 text-xl><a href={item.urls.at(0)}>{item.title}</a></h3>
+			<h3 text-xl><a href={item.links.at(0)}>{item.title}</a></h3>
 			<p op50>
 				<a href={item.eventLink}>{item.event}</a>
 				<span op80 pl-2 text-sm truncate>{item.date}</span>
