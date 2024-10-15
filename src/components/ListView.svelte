@@ -33,19 +33,24 @@
 			my-2
 			sliding-animation-delay-base
 		>
-			<svelte:element
-				this={item.link != null ? 'a' : 'div'}
-				class='group'
-				fyc
-				gap-3
-				href={item.link}
-				mr-5
-				op-card
-				target={external ? '_blank' : ''}
-				transition-base
-			>
-				{@render itemView(item)}
-			</svelte:element>
+			{#if item.link != null}
+				<a
+					class='group'
+					fyc
+					gap-3
+					href={item.link}
+					mr-5
+					op-card
+					target={external ? '_blank' : ''}
+					transition-base
+				>
+					{@render itemView(item)}
+				</a>
+			{:else}
+				<div class='group' fyc gap-3 mr-5 op-card transition-base>
+					{@render itemView(item)}
+				</div>
+			{/if}
 		</div>
 	{/each}
 </div>
