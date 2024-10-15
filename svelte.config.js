@@ -25,6 +25,8 @@ import Budoux from 'markdown-it-budoux';
 
 import MarkdownItMagicLink from 'markdown-it-magic-link';
 
+import MDC from 'markdown-it-mdc';
+
 import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
@@ -86,6 +88,8 @@ md.use(MarkdownItMagicLink, {
 		'Svelte Japan': { link: 'https://svelte.jp', imageUrl: 'https://cdn.jsdelivr.net/gh/sveltejs/branding/svelte-logo-square.png' },
 	},
 });
+
+md.use(MDC);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

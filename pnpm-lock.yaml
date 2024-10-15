@@ -230,6 +230,9 @@ importers:
       markdown-it-magic-link:
         specifier: ^0.1.4
         version: 0.1.4
+      markdown-it-mdc:
+        specifier: ^0.2.5
+        version: 0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2875,6 +2878,12 @@ packages:
 
   markdown-it-magic-link@0.1.4:
     resolution: {integrity: sha512-Y0CgJVtqdGGeWJ+8bN+eBEr2q2ugmf5AMJWSbxBpmGcqARbKBB62biB7LwkoxtbddlmVkACYBFyjlMP/SzYlzg==}
+
+  markdown-it-mdc@0.2.5:
+    resolution: {integrity: sha512-7nj5/efQlZX+OAVw5nAYEH6kXtiNmRoMf5i7WDCeFRLXl5POFQCb+9s6qIsaBHnDLVWpZC3UTIPoVStbR9+24A==}
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: ^14.0.0
 
   markdown-it@14.1.0:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
@@ -7010,6 +7019,12 @@ snapshots:
 
   markdown-it-magic-link@0.1.4:
     dependencies:
+      markdown-it: 14.1.0
+
+  markdown-it-mdc@0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
+    dependencies:
+      '@types/markdown-it': 14.1.2
+      js-yaml: 4.1.0
       markdown-it: 14.1.0
 
   markdown-it@14.1.0:
