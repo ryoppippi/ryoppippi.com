@@ -36,7 +36,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		link: null,
 	}));
 
-	/* filter the talks dosn't happen yet */
+	/* filter the talks don't happen yet */
 	const today = new Date();
 	const talksHappened = talkWithParsedDate.filter((talk) => {
 		const talkDate = new Date(talk.date);

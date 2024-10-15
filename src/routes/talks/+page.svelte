@@ -43,7 +43,6 @@
 </div>
 
 {#each Object.entries(talks).sort(([a], [b]) => Number(b) - Number(a)) as [year, items], count (year)}
-
 	<div
 		style:--stagger={count}
 		animate-delay-base
