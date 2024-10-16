@@ -72,8 +72,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@iconify-json/ph':
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/quill':
         specifier: ^1.2.0
         version: 1.2.0
@@ -879,8 +879,8 @@ packages:
   '@iconify-json/oui@1.2.2':
     resolution: {integrity: sha512-3x7wO8wnAfwLEc336Lxc2glEHgWamN0aXt4EU5SXS5YRAF3nUotu6cAbwprR6gz6u9xNS2G8zE3JzDtWKI1f4w==}
 
-  '@iconify-json/ph@1.2.0':
-    resolution: {integrity: sha512-013eLpgTmX1lACOuDnkuhC7gRHyYj9w/j8SyDmlyUYvsKQrwdRsv1otcXtwH3DevuDAzSkreeeRsCeez+gTyVA==}
+  '@iconify-json/ph@1.2.1':
+    resolution: {integrity: sha512-x0DNfwWrS18dbsBYOq3XGiZnGz4CgRyC+YSl/TZvMQiKhIUl1woWqUbMYqqfMNUBzjyk7ulvaRovpRsIlqIf8g==}
 
   '@iconify-json/quill@1.2.0':
     resolution: {integrity: sha512-ux7HNIIZPT8zT0fNfJObnbtN48bSrOv1mkwcdHvHG49t1u2wb8bMNg0imZIJbjHLYuUeOwVxiFYq7Q4YztSp9A==}
@@ -4644,7 +4644,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/ph@1.2.0':
+  '@iconify-json/ph@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 
