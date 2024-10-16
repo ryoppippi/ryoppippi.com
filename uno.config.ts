@@ -63,6 +63,7 @@ export default defineConfig({
 				mono: 'DM Mono:400,600',
 				condensed: 'Roboto Condensed',
 				wisper: 'Bad Script',
+				code: ['JetBrains Mono', 'Fira Code', 'monospace'],
 			},
 		}),
 		presetTypography({

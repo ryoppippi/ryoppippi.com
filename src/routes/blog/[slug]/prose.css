@@ -22,3 +22,7 @@ html.dark .shiki span {
 html:not(.dark) .shiki {
 	background-color: theme('colors.text.150') !important;
 }
+
+.prose pre code {
+	--at-apply: font-code;
+}
