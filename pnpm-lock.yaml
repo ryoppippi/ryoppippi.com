@@ -81,7 +81,7 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       '@iconify-json/simple-icons':
-        specifier: ^1.2.7
+        specifier: ^1.2.8
         version: 1.2.8
       '@iconify-json/solar':
         specifier: ^1.2.1
