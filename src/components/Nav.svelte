@@ -83,7 +83,7 @@
 				</a>
 			{/each}
 		</div>
-		<div flex gap-2 view-transition--nav-icons>
+		<div flex gap='4 md:2' view-transition--nav-icons>
 			<DarkMode.ToggleButton />
 			<a
 				class='i-line-md:rss'
