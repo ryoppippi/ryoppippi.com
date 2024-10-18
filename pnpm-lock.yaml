@@ -114,8 +114,8 @@ importers:
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
         version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.7.5)'
       '@secretlint/secretlint-rule-preset-recommend':
-        specifier: ^8.4.0
-        version: 8.4.0
+        specifier: ^8.5.0
+        version: 8.5.0
       '@shikijs/markdown-it':
         specifier: ^1.22.0
         version: 1.22.0
@@ -1203,8 +1203,8 @@ packages:
   '@secretlint/resolver@8.4.0':
     resolution: {integrity: sha512-UjnrdsLP5LxGFWTr09uiawcc22OZCygPFtH+BcgVOpMY0jA0LohY/HDEEKqJYUQEOcBD60ikfVUqNnD6xJjqhg==}
 
-  '@secretlint/secretlint-rule-preset-recommend@8.4.0':
-    resolution: {integrity: sha512-dY3QFn+cIr1sZXqeK36U+sbNPnE4VDxPn8QE9re4NjsemSRwDncP5noBybGf8I55mrEEd09H8hYwjGkkfFmc0Q==}
+  '@secretlint/secretlint-rule-preset-recommend@8.5.0':
+    resolution: {integrity: sha512-jfvCI2nbQ/k53Ffzm/dEGxV6dW8dzMRAhImZWLc3LBkIjRv3ZcMljvbjqDsrM614QF1BGMWT7D+JCBFmzcfEFA==}
     engines: {node: ^14.13.1 || >=16.0.0}
 
   '@secretlint/source-creator@8.4.0':
@@ -5029,7 +5029,7 @@ snapshots:
 
   '@secretlint/resolver@8.4.0': {}
 
-  '@secretlint/secretlint-rule-preset-recommend@8.4.0': {}
+  '@secretlint/secretlint-rule-preset-recommend@8.5.0': {}
 
   '@secretlint/source-creator@8.4.0':
     dependencies:
