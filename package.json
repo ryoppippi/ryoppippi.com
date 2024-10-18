@@ -56,7 +56,7 @@
 		"@secretlint/secretlint-rule-preset-recommend": "^8.4.0",
 		"@shikijs/markdown-it": "^1.22.0",
 		"@shikijs/twoslash": "^1.22.0",
-		"@std/collections": "npm:@jsr/std__collections@^1.0.7",
+		"@std/collections": "npm:@jsr/std__collections@^1.0.8",
 		"@sveltejs/adapter-auto": "^3.2.5",
 		"@sveltejs/adapter-static": "^3.0.5",
 		"@sveltejs/enhanced-img": "^0.3.8",
