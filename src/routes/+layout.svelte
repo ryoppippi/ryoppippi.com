@@ -120,8 +120,9 @@
 	body {
 		--at-apply: font-sans text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
 	}
-	@view-transition {
-		navigation: auto;
+
+	:root {
+		view-transition-name: none;
 	}
 
 	#nprogress {
