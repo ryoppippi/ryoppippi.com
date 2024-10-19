@@ -35,6 +35,7 @@
 	py-6
 	text-xl
 	transition-base
+	view-transition--nav
 >
 	<div flex>
 		<a
