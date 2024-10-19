@@ -108,7 +108,7 @@
 		"sveltekit-autoimport": "^1.8.1",
 		"sveltweet": "https://pkg.pr.new/sveltweet@ecf724d",
 		"ts-patch": "^3.2.1",
-		"tslib": "^2.7.0",
+		"tslib": "^2.8.0",
 		"type-fest": "^4.26.1",
 		"typescript": "~5.6.3",
 		"typescript-svelte-plugin": "^0.3.42",
