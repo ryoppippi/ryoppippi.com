@@ -12,6 +12,7 @@
 <div font-mono text-center>
 	<h1
 		font-bold
+		op70
 		pb-4
 		text-5xl
 	>
