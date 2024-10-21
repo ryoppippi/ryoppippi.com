@@ -53,7 +53,7 @@
 		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.3",
 		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.0.6",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3",
-		"@secretlint/secretlint-rule-preset-recommend": "^8.5.0",
+		"@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
 		"@shikijs/markdown-it": "^1.22.0",
 		"@shikijs/twoslash": "^1.22.0",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.8",
