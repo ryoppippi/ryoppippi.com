@@ -1,20 +1,20 @@
 <script>
-	import 'uno.css';
-	import '@unocss/reset/tailwind.css';
-	import NProgress from 'nprogress';
-
-	import faviconLinks from 'virtual:favicons';
-	import { MetaTags } from 'svelte-meta-tags';
-	import { fromStore } from 'svelte/store';
+	import { dev } from '$app/environment';
+	import { onNavigate } from '$app/navigation';
 	import { navigating, page, updated } from '$app/stores';
 
-	import { onNavigate } from '$app/navigation';
-
-	import DarkMode from '$lib/DarkMode';
-
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
+	import DarkMode from '$lib/DarkMode';
 	import { domain, subdomain } from '$lib/util';
-	import { dev } from '$app/environment';
+	import NProgress from 'nprogress';
+
+	import { fromStore } from 'svelte/store';
+
+	import { MetaTags } from 'svelte-meta-tags';
+
+	import faviconLinks from 'virtual:favicons';
+	import 'uno.css';
+	import '@unocss/reset/tailwind.css';
 
 	const { children } = $props();
 

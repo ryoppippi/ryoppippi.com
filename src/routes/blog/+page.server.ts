@@ -1,10 +1,10 @@
-import * as ufo from 'ufo';
-import sortOn from 'sort-on';
-import { parseJSON } from 'date-fns';
-import { formatDate } from '$lib/util';
-
-import { posts as rssPosts } from '$contents/external-rss';
 import { blogPosts } from '$contents/blog';
+import { posts as rssPosts } from '$contents/external-rss';
+import { formatDate } from '$lib/util';
+import { parseJSON } from 'date-fns';
+
+import sortOn from 'sort-on';
+import * as ufo from 'ufo';
 
 export function load() {
 	const allPosts = sortOn([

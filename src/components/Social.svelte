@@ -1,6 +1,6 @@
 <script lang='ts'>
-	import * as ufo from 'ufo';
 	import { subdomain } from '$lib/util';
+	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
 

@@ -1,9 +1,9 @@
 import type { Entries } from 'type-fest';
 import type { tags } from 'typia';
+import type { Genre, GHRepo, Project } from './types.js';
 import typia from 'typia';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
-import type { GHRepo, Genre, Project } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
 

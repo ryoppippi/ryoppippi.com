@@ -1,7 +1,7 @@
 <script>
-	import { UseDarkMode } from './runes.svelte';
 	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
+	import { UseDarkMode } from './runes.svelte';
 
 	const dark = new UseDarkMode();
 </script>

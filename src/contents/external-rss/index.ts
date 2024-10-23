@@ -1,12 +1,14 @@
-import { pipe } from '@core/pipe';
+/* eslint-disable antfu/no-top-level-await */
+
+import type { Lang } from '$contents/types';
+import { slugify } from '$lib/slugify.server';
 import { flatten, map } from '@core/iterutil/pipe/async';
+import { pipe } from '@core/pipe';
 import Parser from 'rss-parser';
+
 import sortOn from 'sort-on';
 import typia from 'typia';
-
 import rss from './rss.json';
-import { slugify } from '$lib/slugify.server';
-import type { Lang } from '$contents/types';
 
 const parser = new Parser();
 

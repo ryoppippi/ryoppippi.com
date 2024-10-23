@@ -1,37 +1,37 @@
 import path from 'node:path';
 import process from 'node:process';
+import MarkdownItShiki from '@shikijs/markdown-it';
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import adapter from '@sveltejs/adapter-static';
-import { isDevelopment } from 'std-env';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { importAssets } from 'svelte-preprocess-import-assets';
-import SveltweetPreprocessor from 'sveltweet/preprocessor';
-
 import markdownit from 'markdown-it';
 
 import anchor from 'markdown-it-anchor';
 
-import MarkdownItShiki from '@shikijs/markdown-it';
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
+import Budoux from 'markdown-it-budoux';
 
 import GitHubAlerts from 'markdown-it-github-alerts';
+import { isDevelopment } from 'std-env';
+
+import { importAssets } from 'svelte-preprocess-import-assets';
+
+import SveltweetPreprocessor from 'sveltweet/preprocessor';
 
 // @ts-expect-error no types
 import Figures from 'markdown-it-image-figures';
-
 import LinkAttributes from 'markdown-it-link-attributes';
-import LinkPreview from 'markdown-it-link-preview';
 
-import Budoux from 'markdown-it-budoux';
+import LinkPreview from 'markdown-it-link-preview';
 
 import MarkdownItMagicLink from 'markdown-it-magic-link';
 
 import MDC from 'markdown-it-mdc';
 
+import { Route } from './routes.js';
 import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
-import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
-import { Route } from './routes.js';
+import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
 const md = markdownit({
 	html: true,

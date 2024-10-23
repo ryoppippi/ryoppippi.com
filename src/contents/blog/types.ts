@@ -1,5 +1,5 @@
-import type rt from 'reading-time';
 import type { Lang } from '$contents/types';
+import type rt from 'reading-time';
 
 export type Metadata = {
 	slug: string;

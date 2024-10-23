@@ -1,20 +1,20 @@
-import { isDevelopment } from 'std-env';
+import { presetRyoppippi } from '@ryoppippi/unocss-preset';
 import { deepMerge } from '@std/collections/deep-merge';
+import { isDevelopment } from 'std-env';
+
 import {
-	type PresetUnoTheme,
 	defineConfig,
 	presetAttributify,
 	presetIcons,
 	presetTypography,
 	presetUno,
+	type PresetUnoTheme,
 	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
-
-import transformerAlias from 'unocss-transformer-alias';
 import { presetFluid } from 'unocss-preset-fluid';
-import { presetRyoppippi } from '@ryoppippi/unocss-preset';
+import transformerAlias from 'unocss-transformer-alias';
 
 // TODO: bug of unocss
 import ossProjects from './src/contents/projects/oss/list.json';

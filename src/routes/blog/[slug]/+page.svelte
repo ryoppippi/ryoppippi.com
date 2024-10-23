@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import { page } from '$app/stores';
+	import { formatDate, subdomain } from '$lib/util';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -6,11 +8,9 @@
 	import './slide-enter.css';
 	import './link-card.css';
 	import './magic-link.css';
+
 	import './prose.css';
 	import './anchor.css';
-
-	import { formatDate, subdomain } from '$lib/util';
-	import { page } from '$app/stores';
 
 	const { data } = $props();
 	const { metadata, Markdown } = data;

@@ -1,20 +1,20 @@
 import path from 'node:path';
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
-import { enhancedImages } from '@sveltejs/enhanced-img';
-import Icons from 'unplugin-icons/vite';
-import Macros from '@unplugin/macros/vite';
 import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
-import Components from 'unplugin-svelte-components/vite';
-import { denyImports } from 'vite-env-only';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
-import { faviconsPlugin } from 'vite-plugin-favicons';
+import { enhancedImages } from '@sveltejs/enhanced-img';
+import { sveltekit } from '@sveltejs/kit/vite';
+import extractorSvelte from '@unocss/extractor-svelte';
+import Macros from '@unplugin/macros/vite';
 import { isDevelopment } from 'std-env';
+import Icons from 'unplugin-icons/vite';
+import Components from 'unplugin-svelte-components/vite';
+import { defineConfig } from 'vite';
+import { denyImports } from 'vite-env-only';
+
+import { faviconsPlugin } from 'vite-plugin-favicons';
 
 // @ts-expect-error no type
 import autoImport from 'sveltekit-autoimport';
-
-import extractorSvelte from '@unocss/extractor-svelte';
 import UnoCSS from 'unocss/vite';
 
 import { Route } from './routes.js';

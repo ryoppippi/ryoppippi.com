@@ -1,5 +1,5 @@
-import * as ufo from 'ufo';
 import { assets } from '$app/paths';
+import * as ufo from 'ufo';
 
 type PartsObject = Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>;
 

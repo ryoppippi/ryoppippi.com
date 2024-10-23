@@ -1,8 +1,8 @@
 <script lang='ts'>
-	import { subdomain } from '$lib/util';
 	import { page } from '$app/stores';
-
 	import * as DarkMode from '$lib/DarkMode';
+
+	import { subdomain } from '$lib/util';
 
 	const LINKS = [
 		{ name: 'projects', href: '/projects' },

@@ -1,11 +1,11 @@
-import { error } from '@sveltejs/kit';
-import type { tags } from 'typia';
-import typia from 'typia';
-import { parseJSON } from 'date-fns';
-import type { PageServerLoad } from './$types';
-import { formatDate } from '$lib/util';
-import { slugify } from '$lib/slugify.server';
 import type { Lang } from '$lib/../contents/types';
+import type { tags } from 'typia';
+import type { PageServerLoad } from './$types';
+import { slugify } from '$lib/slugify.server';
+import { formatDate } from '$lib/util';
+import { error } from '@sveltejs/kit';
+import { parseJSON } from 'date-fns';
+import typia from 'typia';
 
 type URLString = string & tags.Format<'url'>;
 export type Talk = {

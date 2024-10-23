@@ -1,6 +1,6 @@
 <script lang='ts'>
-	import { capitalize, lowercase } from '@ryoppippi/str-fns';
 	import { page } from '$app/stores';
+	import { capitalize, lowercase } from '@ryoppippi/str-fns';
 
 	const routes = [
 		'OSS',
