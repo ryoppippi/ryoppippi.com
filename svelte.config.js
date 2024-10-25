@@ -60,8 +60,8 @@ md.use(LinkPreview);
 
 md.use(await MarkdownItShiki({
 	themes: {
-		dark: 'vitesse-dark',
-		light: 'vitesse-light',
+		dark: 'kanagawa-dragon',
+		light: 'kanagawa-lotus',
 	},
 	transformers: [
 		transformerTwoslash({
