@@ -71,7 +71,7 @@
 		"@types/node": "^22.7.8",
 		"@types/nprogress": "^0.2.3",
 		"@unocss/extractor-svelte": "^0.63.6",
-		"@unocss/reset": "^0.63.4",
+		"@unocss/reset": "^0.63.6",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.13.3",
 		"buffer": "^6.0.3",
 		"date-fns": "^4.1.0",
