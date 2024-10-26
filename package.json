@@ -102,7 +102,7 @@
 		"std-env": "^3.7.0",
 		"svelte": "^5.1.2",
 		"svelte-check": "^4.0.5",
-		"svelte-meta-tags": "^4.0.0",
+		"svelte-meta-tags": "^4.0.1",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.2",
 		"sveltekit-autoimport": "^1.8.1",
