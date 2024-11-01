@@ -171,8 +171,8 @@ importers:
         specifier: ^0.63.6
         version: 0.63.6
       '@unplugin/macros':
-        specifier: npm:@jsr/unplugin__macros@^0.13.3
-        version: '@jsr/unplugin__macros@0.13.3(@types/node@22.8.6)(rollup@4.24.2)'
+        specifier: npm:@jsr/unplugin__macros@^0.13.5
+        version: '@jsr/unplugin__macros@0.13.5(@types/node@22.8.6)(rollup@4.24.2)'
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1065,8 +1065,8 @@ packages:
   '@jsr/std__collections@1.0.9':
     resolution: {integrity: sha512-cTxYdBY5oMVyU26MLLHsX1jXu9GUmiQKNnKrcEMo9/qei4lypvnds6I7cp5i7N1ex5DRetQaNa/YjMyJQEabzg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.9.tgz}
 
-  '@jsr/unplugin__macros@0.13.3':
-    resolution: {integrity: sha512-0rbhTbeREqmoGVWrtSQN//7KWA9ZqMmkkBmqdA1LZmeLe+StlWG4b3aLS5yI5OSw7waE+LVTHsi5H53jN4gW8Q==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.13.3.tgz}
+  '@jsr/unplugin__macros@0.13.5':
+    resolution: {integrity: sha512-9316tFBVnyW0LapXJ0giDmfp+ZtRLta37kffZOI/2rK46whWakD2zdE18qMtkvGe+2RcQ55uwUvCPmtHNx6iSg==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.13.5.tgz}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3856,6 +3856,15 @@ packages:
       webpack-sources:
         optional: true
 
+  unplugin@1.15.0:
+    resolution: {integrity: sha512-jTPIs63W+DUEDW207ztbaoO7cQ4p5aVaB823LSlxpsFEU3Mykwxf3ZGC/wzxFJeZlASZYgVrWeo7LgOrqJZ8RA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      webpack-sources: ^3
+    peerDependenciesMeta:
+      webpack-sources:
+        optional: true
+
   update-browserslist-db@1.1.1:
     resolution: {integrity: sha512-R8UzCaa9Az+38REPiJ1tXlImTJXlVfgHZsglwBD/k6nj76ctsH1E3q4doGrukiLQd3sGQYu56r5+lo5r94l29A==}
     hasBin: true
@@ -3889,8 +3898,8 @@ packages:
     resolution: {integrity: sha512-C9C7b2p/8/TCN2g26tE9haoer2i8K4x0v2RXUiHsIjiz221vQuKItCQ+VyiVCsUMPXfJC/tlZsmCZVBz5jh7uA==}
     engines: {node: '>=18.0.0'}
 
-  vite-node@2.1.3:
-    resolution: {integrity: sha512-I1JadzO+xYX887S39Do+paRePCKoiDrWRRjp9kkG5he0t7RXNvPAJPCQSJqbGN4uCrFFeS3Kj3sLqY8NMYBEdA==}
+  vite-node@2.1.4:
+    resolution: {integrity: sha512-kqa9v+oi4HwkG6g8ufRnb5AeplcRw8jUF6/7/Qz1qRQOXHImG8YnLbB+LLszENwFnoBl9xIf9nVdCFzNd7GQEg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -4835,15 +4844,15 @@ snapshots:
 
   '@jsr/std__collections@1.0.9': {}
 
-  '@jsr/unplugin__macros@0.13.3(@types/node@22.8.6)(rollup@4.24.2)':
+  '@jsr/unplugin__macros@0.13.5(@types/node@22.8.6)(rollup@4.24.2)':
     dependencies:
       '@babel/types': 7.26.0
       '@rollup/pluginutils': 5.1.3(rollup@4.24.2)
       ast-kit: 1.3.0
       magic-string-ast: 0.6.2
-      unplugin: 1.14.1
+      unplugin: 1.15.0
       vite: 5.4.10(@types/node@22.8.6)
-      vite-node: 2.1.3(@types/node@22.8.6)
+      vite-node: 2.1.4(@types/node@22.8.6)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -8191,6 +8200,11 @@ snapshots:
       acorn: 8.14.0
       webpack-virtual-modules: 0.6.2
 
+  unplugin@1.15.0:
+    dependencies:
+      acorn: 8.14.0
+      webpack-virtual-modules: 0.6.2
+
   update-browserslist-db@1.1.1(browserslist@4.24.2):
     dependencies:
       browserslist: 4.24.2
@@ -8244,7 +8258,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-node@2.1.3(@types/node@22.8.6):
+  vite-node@2.1.4(@types/node@22.8.6):
     dependencies:
       cac: 6.7.14
       debug: 4.3.7
