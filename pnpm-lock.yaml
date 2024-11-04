@@ -108,7 +108,7 @@ importers:
         specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.4
         version: '@jsr/ryoppippi__unocss-preset@1.0.4'
       '@ryoppippi/unplugin-typia':
-        specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.6
+        specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.7
         version: '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.8.7)(rollup@4.24.3)'
       '@ryoppippi/vite-plugin-cloudflare-redirect':
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
