@@ -57,7 +57,7 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@iconify-json/material-symbols':
-        specifier: ^1.2.5
+        specifier: ^1.2.6
         version: 1.2.6
       '@iconify-json/material-symbols-light':
         specifier: ^1.2.5
