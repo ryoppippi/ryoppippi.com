@@ -159,7 +159,7 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       '@types/node':
-        specifier: ^22.8.6
+        specifier: ^22.8.7
         version: 22.8.7
       '@types/nprogress':
         specifier: ^0.2.3
