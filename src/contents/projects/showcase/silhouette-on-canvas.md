@@ -16,7 +16,7 @@ featured: true
 <!-- As you draw near,  a kaleidoscope of vibrant "shadows" unfolds.   -->
 <!-- Projector-born, these analog shades cast their dark, potent forms.   -->
 <!-- At times, the shadows pause, Weaving a singular "painting" on canvas—   -->
-<!-- A tapestry of digital, analog, and colorful shade.   -->
+<!-- A tapestry of digital, analog, and colourful shade.   -->
 <!-- This curious artwork, -->
 <!-- Born and vanishing, -->
 <!-- In an endless cycle of creation. -->
