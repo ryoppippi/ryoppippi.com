@@ -12,6 +12,4 @@ extend-ignore-re = [
 Edn = "Edn"
 
 [files]
-extend-exclude = [ 
-  "node_modules/**"
-]
+extend-exclude = [ "node_modules/**" ]

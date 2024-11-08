@@ -20,13 +20,13 @@ jobs:
   spell-check:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Actions Repository
-      uses: actions/checkout@v4
+      - name: Checkout Actions Repository
+        uses: actions/checkout@v4
 
-    - uses: crate-ci/typos@master
-      with:
-        files: ./src/contents/**/*.md
-        config: ./typos.toml
+      - uses: crate-ci/typos@master
+        with:
+          files: ./src/contents/**/*.md
+          config: ./typos.toml
 
   secretlint:
     runs-on: ubuntu-latest
