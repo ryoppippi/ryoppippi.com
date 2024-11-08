@@ -3,6 +3,8 @@ locale = 'en-gb'
 extend-ignore-re = [
   "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
   "(?Rm)^.*#\\s*spellchecker:disable-line$",
+  "(?s)<!--\\s*spellchecker:off.*?\\n\\s*spellchecker:on\\s*-->",
+  "(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$",
   "(?s)```.*?``` ", # ignore code blocks
   "(?s)```[a-zA-Z0-9]*\n.*?```", # ignore code blocks
   "(?s)`.*?` ", # ignore inline code
