@@ -165,8 +165,8 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3
       '@unocss/extractor-svelte':
-        specifier: ^0.63.6
-        version: 0.63.6
+        specifier: ^0.64.0
+        version: 0.64.0
       '@unocss/reset':
         specifier: ^0.63.6
         version: 0.63.6
@@ -1476,8 +1476,8 @@ packages:
   '@unocss/extractor-arbitrary-variants@0.63.6':
     resolution: {integrity: sha512-HJX0oAa9uzwKYoU8CoJdP1gxjuqFmOLxyZmITjStAmZNZpIxlz2wz4VrHmqml2dkvx/mifGGGc/GxZpQ36D12Q==}
 
-  '@unocss/extractor-svelte@0.63.6':
-    resolution: {integrity: sha512-Bu+5GeTnVafc03tHgcv3CmhKFZjExiOo9/m8j0o6zOrQ+pzAImTRfWKAAQDLuFYb/RUJaDxJevuYtg9gnAp0pg==}
+  '@unocss/extractor-svelte@0.64.0':
+    resolution: {integrity: sha512-vg2qjZtEYzsKMB1w0lzxA2UDUikjdCSRLD8TR95l9+8kPnD/aWjRCyjzB4ALTxmVKPI1dqB3ctjQq/0Msk38Iw==}
 
   '@unocss/inspector@0.63.6':
     resolution: {integrity: sha512-DQDJnhtzdHIQXD2vCdj5ytFnHfQCWJGPmrHJHXxzkTYn8nIovV1roVl1ITLxkDIIYK9bdYneg2imQN5JCZhHmQ==}
@@ -5359,7 +5359,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.63.6
 
-  '@unocss/extractor-svelte@0.63.6': {}
+  '@unocss/extractor-svelte@0.64.0': {}
 
   '@unocss/inspector@0.63.6(typescript@5.6.3)':
     dependencies:
