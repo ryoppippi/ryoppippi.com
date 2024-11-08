@@ -5,7 +5,11 @@ extend-ignore-re = [
   "(?Rm)^.*#\\s*spellchecker:disable-line$",
   "(?s)```.*?``` ", # ignore code blocks
   "(?s)```[a-zA-Z0-9]*\n.*?```", # ignore code blocks
+  "(?s)`.*?` ", # ignore inline code
 ]
+
+[default.extend-words]
+Edn = "Edn"
 
 [files]
 extend-exclude = [ 
