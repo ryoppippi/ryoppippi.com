@@ -306,8 +306,8 @@ importers:
         specifier: ^0.0.8
         version: 0.0.8
       unplugin-icons:
-        specifier: ^0.20.0
-        version: 0.20.0(@vue/compiler-sfc@3.5.12)(svelte@5.1.9)
+        specifier: ^0.20.1
+        version: 0.20.1(@vue/compiler-sfc@3.5.12)(svelte@5.1.9)
       unplugin-svelte-components:
         specifier: ^0.3.1
         version: 0.3.1(rollup@4.24.3)
@@ -3830,8 +3830,8 @@ packages:
       vite:
         optional: true
 
-  unplugin-icons@0.20.0:
-    resolution: {integrity: sha512-817iCV6AMADLHHcs9R15XII5Jaz++thnaQRzXbd0IZDcxi43iekoKENpuxqZN3k3+aOqJfqxcZ6I8POJ35UCEA==}
+  unplugin-icons@0.20.1:
+    resolution: {integrity: sha512-0z5sYGx07Q69ZrJB4kjmx7a5LYLNSWwyq95Ox9OuSG2y/sbhJaHUapRPOJcKmKhOAyToDVRdy9P7gxJ05lYipw==}
     peerDependencies:
       '@svgr/core': '>=7.0.0'
       '@svgx/core': ^1.0.1
@@ -8173,7 +8173,7 @@ snapshots:
       - supports-color
       - typescript
 
-  unplugin-icons@0.20.0(@vue/compiler-sfc@3.5.12)(svelte@5.1.9):
+  unplugin-icons@0.20.1(@vue/compiler-sfc@3.5.12)(svelte@5.1.9):
     dependencies:
       '@antfu/install-pkg': 0.4.1
       '@antfu/utils': 0.7.10
