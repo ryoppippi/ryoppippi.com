@@ -101,7 +101,7 @@
 		"sort-on": "^6.1.0",
 		"std-env": "^3.7.0",
 		"svelte": "^5.1.12",
-		"svelte-check": "^4.0.5",
+		"svelte-check": "^4.0.6",
 		"svelte-meta-tags": "^4.0.4",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-vertical-timeline": "^1.0.2",
