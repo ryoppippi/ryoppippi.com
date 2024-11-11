@@ -99,7 +99,7 @@
 		"secretlint": "^9.0.0",
 		"shiki": "^1.22.2",
 		"sort-on": "^6.1.0",
-		"std-env": "^3.7.0",
+		"std-env": "^3.8.0",
 		"svelte": "^5.1.12",
 		"svelte-check": "^4.0.6",
 		"svelte-meta-tags": "^4.0.4",
