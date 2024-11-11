@@ -288,7 +288,7 @@ importers:
         specifier: ~5.6.3
         version: 5.6.3
       typescript-svelte-plugin:
-        specifier: ^0.3.42
+        specifier: ^0.3.43
         version: 0.3.43(svelte@5.1.13)(typescript@5.6.3)
       typia:
         specifier: ^6.11.3
