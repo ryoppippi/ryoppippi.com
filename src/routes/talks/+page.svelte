@@ -16,37 +16,32 @@
 	};
 </script>
 
+{#snippet link(_link: string | null | undefined, _text: string)}
+	<a
+		class:hover:no-underline={_link == null}
+		class:hover:underline={_link != null}
+		href={_link}
+		target='_blank'
+	>
+		{_text}
+	</a>
+{/snippet}
+
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Talk}
-	{@const link = item.links.at(0)}
+	{@const _link = item.links.at(0)}
 	{#if !(isOnlyEnglish && item.lang !== 'en')}
 		<div mt-5>
 			<h3 text-xl>
-				<a
-					class:hover:no-underline!={link == null}
-					href={link}
-					target='_blank'
-				>
-					{item.title}
-				</a>
+				{@render link(_link, item.title)}
 			</h3>
 			<p op50>
-				<a
-					href={item.eventLink}
-					target='_blank'
-				>
-					{item.event}
-				</a>
+				{@render link(item.eventLink, item.event)}
 				<span op80 pl-2 text-sm truncate>{item.date}</span>
 			</p>
 			{#if item.videoLink}
 				<p op50 text-sm>
-					<a
-						href={item.videoLink}
-						target='_blank'
-					>
-						Watch the video
-					</a>
+					{@render link(item.videoLink, 'Watch the video')}
 				</p>
 			{/if}
 		</div>
@@ -75,9 +70,3 @@
 		/>
 	</div>
 {/each}
-
-<style>
-a {
-	--at-apply: hover:underline;
-}
-</style>
