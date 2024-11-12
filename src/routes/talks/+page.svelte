@@ -25,17 +25,28 @@
 				<a
 					class:hover:no-underline!={link == null}
 					href={link}
+					target='_blank'
 				>
 					{item.title}
 				</a>
 			</h3>
 			<p op50>
-				<a href={item.eventLink}>{item.event}</a>
+				<a
+					href={item.eventLink}
+					target='_blank'
+				>
+					{item.event}
+				</a>
 				<span op80 pl-2 text-sm truncate>{item.date}</span>
 			</p>
 			{#if item.videoLink}
 				<p op50 text-sm>
-					<a href={item.videoLink}>Watch the video</a>
+					<a
+						href={item.videoLink}
+						target='_blank'
+					>
+						Watch the video
+					</a>
 				</p>
 			{/if}
 		</div>
