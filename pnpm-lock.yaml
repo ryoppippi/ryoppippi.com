@@ -24,7 +24,7 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@iconify-json/catppuccin':
-        specifier: ^1.2.5
+        specifier: ^1.2.6
         version: 1.2.6
       '@iconify-json/devicon-plain':
         specifier: ^1.2.4
