@@ -36,11 +36,18 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		link: null,
 	}));
 
-	/* filter the talks don't happen yet */
+	/* hide future talks */
 	const today = new Date();
-	const talksHappened = talkWithParsedDate.filter((talk) => {
-		const talkDate = new Date(talk.date);
-		return talkDate < today;
+	const talksHappened = talkWithParsedDate.map((talk) => {
+		if (new Date(talk.date) < today) {
+			return talk;
+		}
+
+		return {
+			...talk,
+			links: [],
+			content: '',
+		};
 	});
 
 	/* split by year */
