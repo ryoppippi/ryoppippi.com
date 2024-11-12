@@ -18,9 +18,17 @@
 
 {#snippet itemView(_item: ListItem)}
 	{@const item = _item as unknown as Talk}
+	{@const link = item.links.at(0)}
 	{#if !(isOnlyEnglish && item.lang !== 'en')}
 		<div mt-5>
-			<h3 text-xl><a href={item.links.at(0)}>{item.title}</a></h3>
+			<h3 text-xl>
+				<a
+					class:hover:no-underline!={link == null}
+					href={link}
+				>
+					{item.title}
+				</a>
+			</h3>
 			<p op50>
 				<a href={item.eventLink}>{item.event}</a>
 				<span op80 pl-2 text-sm truncate>{item.date}</span>
