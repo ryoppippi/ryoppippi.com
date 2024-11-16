@@ -100,7 +100,7 @@
 		"shiki": "^1.22.2",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.8.0",
-		"svelte": "^5.1.15",
+		"svelte": "^5.1.16",
 		"svelte-check": "^4.0.7",
 		"svelte-meta-tags": "^4.0.4",
 		"svelte-preprocess-import-assets": "^1.1.0",
