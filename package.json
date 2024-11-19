@@ -104,7 +104,7 @@
 		"svelte-check": "^4.0.7",
 		"svelte-meta-tags": "^4.0.4",
 		"svelte-preprocess-import-assets": "^1.1.0",
-		"svelte-vertical-timeline": "^1.0.2",
+		"svelte-vertical-timeline": "^2.0.0",
 		"sveltekit-autoimport": "^1.8.1",
 		"sveltweet": "https://pkg.pr.new/sveltweet@ecf724d",
 		"ts-patch": "^3.2.1",

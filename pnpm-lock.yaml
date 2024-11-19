@@ -267,8 +267,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.2.2)
       svelte-vertical-timeline:
-        specifier: ^1.0.2
-        version: 1.0.2(svelte@5.2.2)
+        specifier: ^2.0.0
+        version: 2.0.0(svelte@5.2.2)
       sveltekit-autoimport:
         specifier: ^1.8.1
         version: 1.8.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.2)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.2)(vite@5.4.11(@types/node@22.9.0)))
@@ -3606,10 +3606,10 @@ packages:
     peerDependencies:
       svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.1
 
-  svelte-vertical-timeline@1.0.2:
-    resolution: {integrity: sha512-PAB+qBrSrNp5/saLXwIJ9r9dljdbiDB8ymc7c6ieIdbbP+71j7N+qUdZP1In+KXUbyXMpsG2I13KCgLalf6kOA==}
+  svelte-vertical-timeline@2.0.0:
+    resolution: {integrity: sha512-I2Lb+J23mhG8Vf4dLi/qXEo3hVBG2+xilCXpGazMPze8Dhdwad0W+EqxRDvXmlkEdF5HdI+nizO5bNVRe+IgYA==}
     peerDependencies:
-      svelte: ^4.2.16
+      svelte: ^5.0.0
 
   svelte2tsx@0.7.23:
     resolution: {integrity: sha512-LUVKEHlblBYvzOXdpMHhyMle7iSZ/qr71gGhf1AIrsk1j0FjwTLXp9QuSmPop4C4IlL5BSGFS95Kr78Rb9Eyuw==}
@@ -7942,7 +7942,7 @@ snapshots:
       svelte: 5.2.2
       svelte-parse-markup: 0.1.5(svelte@5.2.2)
 
-  svelte-vertical-timeline@1.0.2(svelte@5.2.2):
+  svelte-vertical-timeline@2.0.0(svelte@5.2.2):
     dependencies:
       svelte: 5.2.2
 
