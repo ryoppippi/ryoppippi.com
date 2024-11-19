@@ -282,8 +282,8 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1
       type-fest:
-        specifier: ^4.26.1
-        version: 4.26.1
+        specifier: ^4.27.0
+        version: 4.27.0
       typescript:
         specifier: ~5.6.3
         version: 5.6.3
@@ -3780,8 +3780,8 @@ packages:
     resolution: {integrity: sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==}
     engines: {node: '>=16'}
 
-  type-fest@4.26.1:
-    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+  type-fest@4.27.0:
+    resolution: {integrity: sha512-3IMSWgP7C5KSQqmo1wjhKrwsvXAtF33jO3QY+Uy++ia7hqvgSK6iXbbg5PbDBc1P2ZbNEDgejOrN4YooXvhwCw==}
     engines: {node: '>=16'}
 
   typescript-svelte-plugin@0.3.43:
@@ -4849,7 +4849,7 @@ snapshots:
       magic-string: 0.30.12
       pathe: 1.1.2
       pkg-types: 1.2.1
-      type-fest: 4.26.1
+      type-fest: 4.27.0
       typescript: 5.5.4
       typia: 6.12.0(typescript@5.5.4)
       unplugin: 1.15.0
@@ -5949,7 +5949,7 @@ snapshots:
 
   dot-prop@9.0.0:
     dependencies:
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
   drange@1.1.1: {}
 
@@ -7590,7 +7590,7 @@ snapshots:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 7.1.1
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
   readable-stream@3.6.2:
     dependencies:
@@ -8120,7 +8120,7 @@ snapshots:
 
   type-fest@4.23.0: {}
 
-  type-fest@4.26.1: {}
+  type-fest@4.27.0: {}
 
   typescript-svelte-plugin@0.3.43(svelte@5.2.2)(typescript@5.6.3):
     dependencies:
