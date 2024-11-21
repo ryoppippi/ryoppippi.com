@@ -83,7 +83,7 @@
 		"feed": "^4.2.2",
 		"fs-extra": "^11.2.0",
 		"gray-matter": "^4.0.3",
-		"magic-string": "^0.30.12",
+		"magic-string": "^0.30.13",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
 		"markdown-it-budoux": "^1.0.5",
