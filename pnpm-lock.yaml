@@ -204,8 +204,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       magic-string:
-        specifier: ^0.30.12
-        version: 0.30.12
+        specifier: ^0.30.13
+        version: 0.30.13
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
@@ -2807,8 +2807,8 @@ packages:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
 
-  magic-string@0.30.12:
-    resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
+  magic-string@0.30.13:
+    resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
 
   markdown-it-anchor@9.2.0:
     resolution: {integrity: sha512-sa2ErMQ6kKOA4l31gLGYliFQrMKkqSO0ZJgGhDHKijPf0pNFM9vghjAh3gn26pS4JDRs7Iwa9S36gxm3vgZTzg==}
@@ -4846,7 +4846,7 @@ snapshots:
       defu: 6.1.4
       diff-match-patch: 1.0.5
       find-cache-dir: 5.0.0
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       pathe: 1.1.2
       pkg-types: 1.2.1
       type-fest: 4.27.0
@@ -5124,7 +5124,7 @@ snapshots:
 
   '@sveltejs/enhanced-img@0.4.1(rollup@4.25.0)(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0))':
     dependencies:
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       svelte: 5.2.7
       svelte-parse-markup: 0.1.5(svelte@5.2.7)
       vite: 5.4.11(@types/node@22.9.0)
@@ -5142,7 +5142,7 @@ snapshots:
       esm-env: 1.1.4
       import-meta-resolve: 4.1.0
       kleur: 4.1.5
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       mrmime: 2.0.0
       sade: 1.8.1
       set-cookie-parser: 2.7.1
@@ -5166,7 +5166,7 @@ snapshots:
       debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       svelte: 5.2.7
       vite: 5.4.11(@types/node@22.9.0)
       vitefu: 1.0.3(vite@5.4.11(@types/node@22.9.0))
@@ -5375,7 +5375,7 @@ snapshots:
       chokidar: 3.6.0
       colorette: 2.0.20
       consola: 3.2.3
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       pathe: 1.1.2
       perfect-debounce: 1.0.0
       tinyglobby: 0.2.10
@@ -5473,7 +5473,7 @@ snapshots:
   '@unocss/rule-utils@0.63.6':
     dependencies:
       '@unocss/core': 0.63.6
-      magic-string: 0.30.12
+      magic-string: 0.30.13
 
   '@unocss/transformer-attributify-jsx@0.63.6':
     dependencies:
@@ -5501,7 +5501,7 @@ snapshots:
       '@unocss/core': 0.63.6
       '@unocss/inspector': 0.63.6(typescript@5.6.3)
       chokidar: 3.6.0
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       tinyglobby: 0.2.10
       vite: 5.4.11(@types/node@22.9.0)
     transitivePeerDependencies:
@@ -5537,7 +5537,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.12
       '@vue/shared': 3.5.12
       estree-walker: 2.0.2
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       postcss: 8.4.48
       source-map-js: 1.2.1
 
@@ -6910,13 +6910,13 @@ snapshots:
 
   magic-string-ast@0.6.2:
     dependencies:
-      magic-string: 0.30.12
+      magic-string: 0.30.13
 
   magic-string@0.26.7:
     dependencies:
       sourcemap-codec: 1.4.8
 
-  magic-string@0.30.12:
+  magic-string@0.30.13:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -7938,7 +7938,7 @@ snapshots:
   svelte-preprocess-import-assets@1.1.0(svelte@5.2.7):
     dependencies:
       estree-walker: 3.0.3
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       svelte: 5.2.7
       svelte-parse-markup: 0.1.5(svelte@5.2.7)
 
@@ -7966,7 +7966,7 @@ snapshots:
       esrap: 1.2.2
       is-reference: 3.0.3
       locate-character: 3.0.0
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       zimmerframe: 1.1.2
 
   sveltekit-autoimport@1.8.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.0))):
@@ -8256,7 +8256,7 @@ snapshots:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       local-pkg: 0.4.3
-      magic-string: 0.30.12
+      magic-string: 0.30.13
       minimatch: 9.0.5
       resolve: 1.22.8
       unplugin: 1.15.0
