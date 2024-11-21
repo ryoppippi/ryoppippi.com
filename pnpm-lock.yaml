@@ -246,7 +246,7 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
       shiki:
-        specifier: ^1.23.0
+        specifier: ^1.23.1
         version: 1.23.1
       sort-on:
         specifier: ^6.1.0
