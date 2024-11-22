@@ -18,7 +18,7 @@
 		"taze": "nlx taze -r"
 	},
 	"devDependencies": {
-		"@antfu/ni": "^0.23.0",
+		"@antfu/ni": "^0.23.1",
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.9.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.4.0",
 		"@iconify-json/akar-icons": "^1.2.1",
