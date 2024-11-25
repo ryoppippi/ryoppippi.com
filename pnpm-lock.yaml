@@ -60,7 +60,7 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8
       '@iconify-json/material-symbols-light':
-        specifier: ^1.2.7
+        specifier: ^1.2.8
         version: 1.2.8
       '@iconify-json/mdi':
         specifier: ^1.2.1
