@@ -291,7 +291,7 @@ importers:
         specifier: ^0.3.43
         version: 0.3.43(svelte@5.2.7)(typescript@5.7.2)
       typia:
-        specifier: ^6.12.0
+        specifier: ^6.12.1
         version: 6.12.1(@samchon/openapi@1.2.4)(typescript@5.7.2)
       ufo:
         specifier: ^1.5.4
