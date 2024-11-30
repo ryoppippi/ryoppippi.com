@@ -255,7 +255,7 @@ importers:
         specifier: ^3.8.0
         version: 3.8.0
       svelte:
-        specifier: ^5.2.8
+        specifier: ^5.2.9
         version: 5.2.10
       svelte-check:
         specifier: ^4.1.0
