@@ -120,8 +120,8 @@ importers:
         specifier: ^1.24.0
         version: 1.24.0
       '@shikijs/twoslash':
-        specifier: ^1.23.1
-        version: 1.23.1(typescript@5.7.2)
+        specifier: ^1.24.0
+        version: 1.24.0(typescript@5.7.2)
       '@std/collections':
         specifier: npm:@jsr/std__collections@^1.0.9
         version: '@jsr/std__collections@1.0.9'
@@ -1401,8 +1401,8 @@ packages:
   '@shikijs/markdown-it@1.24.0':
     resolution: {integrity: sha512-YjYg8jJoTO0cUXUNlFHTZWWFt4wSDOcRd2nM2aB1rnX5RqRlcqwfS2x1vQjlPqmUisv+/GHClvz7uKHeK7ZDBw==}
 
-  '@shikijs/twoslash@1.23.1':
-    resolution: {integrity: sha512-Qj/+CGAF6TdcRjPDQn1bxyKD8ejnV7VJLqCHzob1uCbwQlJTI5z0gUVAgpqS55z4vdV1Mrx2IpCTl9glhC0l3A==}
+  '@shikijs/twoslash@1.24.0':
+    resolution: {integrity: sha512-ELyIoD54dFDlb4eGt5sy54WhFeJ39N1hR9W7ADwHWn3XH7cOPjj320EPCh2t76fIoLb0auD46tVLQVVMn93qsA==}
 
   '@shikijs/types@1.23.1':
     resolution: {integrity: sha512-98A5hGyEhzzAgQh2dAeHKrWW4HfCMeoFER2z16p5eJ+vmPeF6lZ/elEne6/UCU551F/WqkopqRsr1l2Yu6+A0g==}
@@ -5386,10 +5386,10 @@ snapshots:
       markdown-it: 14.1.0
       shiki: 1.24.0
 
-  '@shikijs/twoslash@1.23.1(typescript@5.7.2)':
+  '@shikijs/twoslash@1.24.0(typescript@5.7.2)':
     dependencies:
-      '@shikijs/core': 1.23.1
-      '@shikijs/types': 1.23.1
+      '@shikijs/core': 1.24.0
+      '@shikijs/types': 1.24.0
       twoslash: 0.2.12(typescript@5.7.2)
     transitivePeerDependencies:
       - supports-color
