@@ -45,7 +45,7 @@
 		"@iconify-json/simple-icons": "^1.2.13",
 		"@iconify-json/solar": "^1.2.1",
 		"@iconify-json/system-uicons": "^1.2.1",
-		"@iconify-json/tabler": "^1.2.8",
+		"@iconify-json/tabler": "^1.2.9",
 		"@iconify-json/teenyicons": "^1.2.1",
 		"@iconify-json/vscode-icons": "^1.2.3",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.24",
