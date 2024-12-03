@@ -212,6 +212,9 @@ importers:
       markdown-it-anchor:
         specifier: ^9.2.0
         version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+      markdown-it-block-embed:
+        specifier: ^0.0.3
+        version: 0.0.3
       markdown-it-budoux:
         specifier: ^1.0.5
         version: 1.0.5
@@ -2966,6 +2969,9 @@ packages:
     peerDependencies:
       '@types/markdown-it': '*'
       markdown-it: '*'
+
+  markdown-it-block-embed@0.0.3:
+    resolution: {integrity: sha512-coWuC/uZY6Z1Gp3wthhJo5yjkG3/gHErNF/emaiEvD98fKzEHNP6GCYGfJfk5o0n31xiaYjbDgef+XtabKOZzA==}
 
   markdown-it-budoux@1.0.5:
     resolution: {integrity: sha512-vzxlIhxW0QPI8xkRPTy5NxaYqOsKQTHupVEu/Pyu+pG+Y7HBRdTsytIbke4+LtrGMBcyGcNhFVC8bt57LsDBsA==}
@@ -7214,6 +7220,8 @@ snapshots:
     dependencies:
       '@types/markdown-it': 14.1.2
       markdown-it: 14.1.0
+
+  markdown-it-block-embed@0.0.3: {}
 
   markdown-it-budoux@1.0.5:
     dependencies:
