@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { formatDate, subdomain } from '$lib/util';
 	import '@shikijs/twoslash/style-rich.css';
@@ -7,8 +8,8 @@
 	import 'markdown-it-github-alerts/styles/github-base.css';
 	import './slide-enter.css';
 	import './link-card.css';
-	import './magic-link.css';
 
+	import './magic-link.css';
 	import './prose.css';
 	import './anchor.css';
 
@@ -50,7 +51,7 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article class='*prose-base slide-enter-content' mxa pb-8 text-text='700 dark:200'>
+	<article class='*prose-base' class:slide-enter-content={!dev} mxa pb-8 text-text='700 dark:200'>
 		<Markdown />
 	</article>
 	<div op50 pb-8 prose>
