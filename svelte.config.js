@@ -8,8 +8,6 @@ import markdownit from 'markdown-it';
 
 import anchor from 'markdown-it-anchor';
 
-import BlockEmbed from 'markdown-it-block-embed';
-
 import Budoux from 'markdown-it-budoux';
 import MarkdownItCollapsible from 'markdown-it-collapsible';
 
@@ -85,8 +83,6 @@ md.use(Figures, {
 });
 
 md.use(MarkdownItCollapsible);
-
-md.use(BlockEmbed);
 
 md.use(Budoux({ language: 'ja' }));
 

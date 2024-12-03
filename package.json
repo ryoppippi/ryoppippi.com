@@ -86,7 +86,6 @@
 		"magic-string": "^0.30.14",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
-		"markdown-it-block-embed": "^0.0.3",
 		"markdown-it-budoux": "^1.0.5",
 		"markdown-it-collapsible": "^2.0.2",
 		"markdown-it-github-alerts": "^0.3.0",
