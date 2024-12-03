@@ -218,6 +218,9 @@ importers:
       markdown-it-budoux:
         specifier: ^1.0.5
         version: 1.0.5
+      markdown-it-collapsible:
+        specifier: ^2.0.2
+        version: 2.0.2(markdown-it@14.1.0)
       markdown-it-github-alerts:
         specifier: ^0.3.0
         version: 0.3.0(markdown-it@14.1.0)
@@ -2975,6 +2978,11 @@ packages:
 
   markdown-it-budoux@1.0.5:
     resolution: {integrity: sha512-vzxlIhxW0QPI8xkRPTy5NxaYqOsKQTHupVEu/Pyu+pG+Y7HBRdTsytIbke4+LtrGMBcyGcNhFVC8bt57LsDBsA==}
+
+  markdown-it-collapsible@2.0.2:
+    resolution: {integrity: sha512-rDOBBCVogON8pRsitSamyR/eIgfPqcjyraLGLJ+5AY/2xfN5iHtqX4+Bo9zABdVSltbVPn2PI+3PRBWlRCWS7w==}
+    peerDependencies:
+      markdown-it: '>=5'
 
   markdown-it-github-alerts@0.3.0:
     resolution: {integrity: sha512-qyIuDyfdrVGHhY+E/44yMyNA3ZnayaT/KKT2VgkIz1nmrgiuPkdgPUh4YBZwgJ9VKEGJvGd82Ndrc4oGftrJWg==}
@@ -7233,6 +7241,10 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
+
+  markdown-it-collapsible@2.0.2(markdown-it@14.1.0):
+    dependencies:
+      markdown-it: 14.1.0
 
   markdown-it-github-alerts@0.3.0(markdown-it@14.1.0):
     dependencies:

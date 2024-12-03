@@ -88,6 +88,7 @@
 		"markdown-it-anchor": "^9.2.0",
 		"markdown-it-block-embed": "^0.0.3",
 		"markdown-it-budoux": "^1.0.5",
+		"markdown-it-collapsible": "^2.0.2",
 		"markdown-it-github-alerts": "^0.3.0",
 		"markdown-it-image-figures": "^2.1.1",
 		"markdown-it-link-attributes": "^4.0.1",

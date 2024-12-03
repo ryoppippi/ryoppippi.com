@@ -11,13 +11,15 @@ import anchor from 'markdown-it-anchor';
 import BlockEmbed from 'markdown-it-block-embed';
 
 import Budoux from 'markdown-it-budoux';
+import MarkdownItCollapsible from 'markdown-it-collapsible';
+
 import GitHubAlerts from 'markdown-it-github-alerts';
 
 import { isDevelopment } from 'std-env';
 
 import { importAssets } from 'svelte-preprocess-import-assets';
-
 import SveltweetPreprocessor from 'sveltweet/preprocessor';
+
 // @ts-expect-error no types
 import Figures from 'markdown-it-image-figures';
 
@@ -81,6 +83,8 @@ md.use(Figures, {
 	lazy: true,
 	async: true,
 });
+
+md.use(MarkdownItCollapsible);
 
 md.use(BlockEmbed);
 
