@@ -165,7 +165,7 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3
       '@unocss/extractor-svelte':
-        specifier: ^0.65.0
+        specifier: ^0.65.1
         version: 0.65.1
       '@unocss/reset':
         specifier: ^0.65.0
