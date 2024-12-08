@@ -2,6 +2,7 @@
 // We suggest you to commit this file into source control
 declare global {
     const CheckButton: typeof import("./components/CheckButton.svelte")["default"]
+    const Divider: typeof import("./components/Divider.svelte")["default"]
     const GitHubNav: typeof import("./components/GitHubNav.svelte")["default"]
     const Image: typeof import("./components/Image.svelte")["default"]
     const LargeTitle: typeof import("./components/LargeTitle.svelte")["default"]
