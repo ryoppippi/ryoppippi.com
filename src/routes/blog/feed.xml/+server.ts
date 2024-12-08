@@ -26,9 +26,14 @@ export const GET = (async () => {
 		if (!post.isPublished) {
 			continue;
 		}
+		const slug = post.filepath.split('/').at(-1)?.replace(/\.md$/, '');
+
+		if (slug == null) {
+			continue;
+		}
 
 		feed.addItem({
-			link: subdomain('blog', post.slug),
+			link: subdomain('blog', slug),
 			date: new Date(post.pubDate),
 			title: post.title,
 			description: `${post.title} | ${post.readingTime.text}`,
