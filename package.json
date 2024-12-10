@@ -116,7 +116,7 @@
 		"typescript-svelte-plugin": "^0.3.44",
 		"typia": "^6.12.2",
 		"ufo": "^1.5.4",
-		"unocss": "^0.63.6",
+		"unocss": "^0.65.1",
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
 		"unplugin-icons": "^0.21.0",
