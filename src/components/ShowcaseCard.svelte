@@ -23,7 +23,7 @@
 	target={project.link.startsWith('http') ? '_blank' : '_self'}
 	transition-base
 >
-	<a href={project.link} no-underline>
+	<a href={project.link} no-underline target={project.link.startsWith('http') ? '_blank' : '_self'}>
 		{#if project.image != null}
 			<Image
 				alt={project.title}
