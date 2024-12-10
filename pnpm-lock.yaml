@@ -105,8 +105,8 @@ importers:
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unocss-preset':
-        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.4
-        version: '@jsr/ryoppippi__unocss-preset@1.0.4'
+        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.5
+        version: '@jsr/ryoppippi__unocss-preset@1.0.5'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.7
         version: '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.1)(rollup@4.27.4)'
@@ -1208,8 +1208,8 @@ packages:
   '@jsr/ryoppippi__str-fns@0.1.2':
     resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
 
-  '@jsr/ryoppippi__unocss-preset@1.0.4':
-    resolution: {integrity: sha512-+NxOkaHHpCVwvrvn2zG9oRTzB4dgv8aPgJjVyd1pMowNl1IxidMhpc2qV5MnASIZaol2eeWmj9wq7r5LtIltJg==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.4.tgz}
+  '@jsr/ryoppippi__unocss-preset@1.0.5':
+    resolution: {integrity: sha512-wqHOdKwcFY2RkcBQMt5YPEyxLryY4qMSU2rduwfrom1mz7dGZo6iDDji60D4TTMvqtgjONm0TPNjMGnGhwG2kg==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.5.tgz}
 
   '@jsr/ryoppippi__unplugin-typia@1.0.7':
     resolution: {integrity: sha512-pjJcs1JhCjd3j3jxBJtOqK1Hrh6w1NWKfNh/mXPZHwAnsU0Ov41K3wHGOAjoaiIm7JJew854kcQ+EHWPg9HL/w==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.0.7.tgz}
@@ -1622,9 +1622,6 @@ packages:
 
   '@unocss/core@0.61.9':
     resolution: {integrity: sha512-2W1YZQIWXcueGdbXU/ZCqn/8yQhWk8e8kAHFkVlbc9rictkd2UmPB9nIZ8Ii1tMwt6F0TT6vfHbLJEGCV08o2g==}
-
-  '@unocss/core@0.63.6':
-    resolution: {integrity: sha512-Q4QPgJ271Up89+vIqqOKgtdCKkFpHqvHN8W1LUlKPqtYnOvVYaOIVNAZowaIdEhPuc83yLc6Tg2+7riK18QKEw==}
 
   '@unocss/core@0.65.1':
     resolution: {integrity: sha512-Ke0WNZjfSCE6pniJb8PjiwhO6/McxVb1EQYrkkz8aJuR83xu+AEcTog9D4N9EUkRfHS5tZYXQtTj4Uh90T6CEg==}
@@ -5123,9 +5120,9 @@ snapshots:
     dependencies:
       type-fest: 4.23.0
 
-  '@jsr/ryoppippi__unocss-preset@1.0.4':
+  '@jsr/ryoppippi__unocss-preset@1.0.5':
     dependencies:
-      '@unocss/core': 0.63.6
+      '@unocss/core': 0.65.1
 
   '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.1)(rollup@4.27.4)':
     dependencies:
@@ -5681,8 +5678,6 @@ snapshots:
       - supports-color
 
   '@unocss/core@0.61.9': {}
-
-  '@unocss/core@0.63.6': {}
 
   '@unocss/core@0.65.1': {}
 
