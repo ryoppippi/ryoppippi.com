@@ -108,8 +108,8 @@ importers:
         specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.5
         version: '@jsr/ryoppippi__unocss-preset@1.0.5'
       '@ryoppippi/unplugin-typia':
-        specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.7
-        version: '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.1)(rollup@4.27.4)'
+        specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.1.0
+        version: '@jsr/ryoppippi__unplugin-typia@1.1.0(@samchon/openapi@2.0.1)(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)'
       '@ryoppippi/vite-plugin-cloudflare-redirect':
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
         version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.10.1)'
@@ -298,7 +298,7 @@ importers:
         version: 0.3.44(svelte@5.10.0)(typescript@5.7.2)
       typia:
         specifier: ^7.1.0
-        version: 7.1.0(typescript@5.7.2)
+        version: 7.1.0(@samchon/openapi@2.0.1)(typescript@5.7.2)
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -1211,8 +1211,8 @@ packages:
   '@jsr/ryoppippi__unocss-preset@1.0.5':
     resolution: {integrity: sha512-wqHOdKwcFY2RkcBQMt5YPEyxLryY4qMSU2rduwfrom1mz7dGZo6iDDji60D4TTMvqtgjONm0TPNjMGnGhwG2kg==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.5.tgz}
 
-  '@jsr/ryoppippi__unplugin-typia@1.0.7':
-    resolution: {integrity: sha512-pjJcs1JhCjd3j3jxBJtOqK1Hrh6w1NWKfNh/mXPZHwAnsU0Ov41K3wHGOAjoaiIm7JJew854kcQ+EHWPg9HL/w==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.0.7.tgz}
+  '@jsr/ryoppippi__unplugin-typia@1.1.0':
+    resolution: {integrity: sha512-/Azs26dk4J/Lq9nkNCRIC0A0CbOnRnt2RWSKEcGSbhk2Vh3zKut2uyqiwjy7EJccSAnbwZ3fmrYltMiaiyV14A==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.1.0.tgz}
 
   '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3':
     resolution: {integrity: sha512-CZJCq4VGpVHuinDd4NaO/pbxpifERtaCnZyMGqGQsLQeeDWtWVmaNSKUdmFUJuK/1w4hvHbV+Ofa8Kqz2fjglw==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__vite-plugin-cloudflare-redirect/1.0.3.tgz}
@@ -1344,6 +1344,9 @@ packages:
     resolution: {integrity: sha512-3j4jx1TppORdTAoBJRd+/wJRGCPC0ETWkXOecJ6PPZLj6SptXkrXcNqdj0oclbKML6FkQltdz7bBA3rUSirZug==}
     cpu: [x64]
     os: [win32]
+
+  '@samchon/openapi@2.0.1':
+    resolution: {integrity: sha512-Vw/iaxqrWVIXlGuwsLPb7hCZUmhBm/ez0aCP3e/8hPWuA9+0sEWAODrvyyrR8elMzK6uXrRRK9a6KibTQ/jHPw==}
 
   '@secretlint/config-creator@9.0.0':
     resolution: {integrity: sha512-w92my2FP4gSOT+782+D46yk5SzVZ835ZMb6lxcNc4inVY/iNy8YKpKBAkwPnH/PkXqqwB5mVGCBZx+4TIN/ksQ==}
@@ -3953,8 +3956,8 @@ packages:
   typescript-svelte-plugin@0.3.44:
     resolution: {integrity: sha512-EO/wj/ir9rwz+xJ3VI47K+vwvNC+iAZBgQiyv3MmhJcUSt11YxvbotL78jxXdytui/DpUPSEOhuDnLw+LTNaeA==}
 
-  typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+  typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3962,13 +3965,6 @@ packages:
     resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
-
-  typia@6.12.2:
-    resolution: {integrity: sha512-SAH/yd3bbB20kbzzkinBcwT1KZTa/tKJykPMqMkjMZWCAGWJ6nde+zfL31ntmCGVz2r/UvTHN1b75kCwlhkyxA==}
-    hasBin: true
-    peerDependencies:
-      '@samchon/openapi': '>=1.2.4 <2.0.0'
-      typescript: '>=4.8.0 <5.7.0'
 
   typia@7.1.0:
     resolution: {integrity: sha512-pG3H1KNIo3/Cd0VssdE+badLYnLnAQ7QtdYldqzqzXIDWG+Ve5fl0H4vQ/j+d1+rOAuurxfZ5bsCcw83SiYDVw==}
@@ -4142,6 +4138,46 @@ packages:
 
   vite@6.0.1:
     resolution: {integrity: sha512-Ldn6gorLGr4mCdFnmeAOLweJxZ34HjKnDm4HGo6P66IEqTxQb36VEdFJQENKxWjupNfoIjvRUnswjn1hpYEpjQ==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      jiti: '>=1.21.0'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
+  vite@6.0.3:
+    resolution: {integrity: sha512-Cmuo5P0ENTN6HxLSo6IHsjCLn/81Vgrp81oaiFFMRa8gGDj5xEjIcEpf2ZymZtZR8oU0P2JX5WuUp/rlXcHkAw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -5124,7 +5160,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.65.1
 
-  '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.1)(rollup@4.27.4)':
+  '@jsr/ryoppippi__unplugin-typia@1.1.0(@samchon/openapi@2.0.1)(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)':
     dependencies:
       '@rollup/pluginutils': 5.1.3(rollup@4.27.4)
       consola: 3.2.3
@@ -5135,13 +5171,14 @@ snapshots:
       pathe: 1.1.2
       pkg-types: 1.2.1
       type-fest: 4.30.0
-      typescript: 5.5.4
-      typia: 6.12.2(typescript@5.5.4)
+      typescript: 5.6.3
+      typia: 7.1.0(@samchon/openapi@2.0.1)(typescript@5.6.3)
       unplugin: 1.16.0
-      vite: 5.4.11(@types/node@22.10.1)
+      vite: 6.0.3(@types/node@22.10.1)(jiti@1.21.6)(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - '@samchon/openapi'
       - '@types/node'
+      - jiti
       - less
       - lightningcss
       - rollup
@@ -5150,6 +5187,8 @@ snapshots:
       - stylus
       - sugarss
       - terser
+      - tsx
+      - yaml
 
   '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.10.1)':
     dependencies:
@@ -5274,6 +5313,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     optional: true
+
+  '@samchon/openapi@2.0.1': {}
 
   '@secretlint/config-creator@9.0.0':
     dependencies:
@@ -8454,21 +8495,23 @@ snapshots:
       - svelte
       - typescript
 
-  typescript@5.5.4: {}
+  typescript@5.6.3: {}
 
   typescript@5.7.2: {}
 
-  typia@6.12.2(typescript@5.5.4):
+  typia@7.1.0(@samchon/openapi@2.0.1)(typescript@5.6.3):
     dependencies:
+      '@samchon/openapi': 2.0.1
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
       package-manager-detector: 0.2.5
       randexp: 0.5.3
-      typescript: 5.5.4
+      typescript: 5.6.3
 
-  typia@7.1.0(typescript@5.7.2):
+  typia@7.1.0(@samchon/openapi@2.0.1)(typescript@5.7.2):
     dependencies:
+      '@samchon/openapi': 2.0.1
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
@@ -8680,6 +8723,18 @@ snapshots:
       fsevents: 2.3.3
 
   vite@6.0.1(@types/node@22.10.1)(jiti@1.21.6)(tsx@4.19.2)(yaml@2.6.1):
+    dependencies:
+      esbuild: 0.24.0
+      postcss: 8.4.49
+      rollup: 4.27.4
+    optionalDependencies:
+      '@types/node': 22.10.1
+      fsevents: 2.3.3
+      jiti: 1.21.6
+      tsx: 4.19.2
+      yaml: 2.6.1
+
+  vite@6.0.3(@types/node@22.10.1)(jiti@1.21.6)(tsx@4.19.2)(yaml@2.6.1):
     dependencies:
       esbuild: 0.24.0
       postcss: 8.4.49
