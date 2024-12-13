@@ -57,7 +57,7 @@
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.13.6",
 		"@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
 		"@shikijs/markdown-it": "^1.24.1",
-		"@shikijs/twoslash": "^1.24.1",
+		"@shikijs/twoslash": "^1.24.2",
 		"@sveltejs/adapter-auto": "^3.3.1",
 		"@sveltejs/adapter-static": "^3.0.6",
 		"@sveltejs/enhanced-img": "^0.4.3",
