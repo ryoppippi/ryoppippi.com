@@ -30,8 +30,8 @@ importers:
         specifier: ^1.2.7
         version: 1.2.7
       '@iconify-json/fa-solid':
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/feather':
         specifier: ^1.2.0
         version: 1.2.0
@@ -998,8 +998,8 @@ packages:
   '@iconify-json/devicon-plain@1.2.7':
     resolution: {integrity: sha512-O2b7dEpzVHLCbAMeVxQd+RSwRX5dnZxDyHSBM/tHU7VVBgC1VC84uO4lKUl8ZDEIdBXQfu9qxNcjWuLic/EA5A==}
 
-  '@iconify-json/fa-solid@1.2.0':
-    resolution: {integrity: sha512-8WV0gViiLN7WK150B9Ub+2nzqOmdmhMAKZAO9JqRDGhO07GEH4T/FYlKXK2zlF51C6HAx8fXV8pDapDX3TBavg==}
+  '@iconify-json/fa-solid@1.2.1':
+    resolution: {integrity: sha512-eEcnCb6yjRJ0bZrQQZOvO9P5PYCGujz2V8PpiIxBSlm6xqoVLNtOfUyPr6xZD4zWeW7H3cmWi2ZXSzqxQ5e4lw==}
 
   '@iconify-json/feather@1.2.0':
     resolution: {integrity: sha512-hIJ8fewd662egMuMn81riaDiOXhrnLeCaxz2WMvrzu0oQlUT6OwGFC3wnPK868PBjxC6Ii2pINVAAzlmtejM9A==}
@@ -4886,7 +4886,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/fa-solid@1.2.0':
+  '@iconify-json/fa-solid@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 
