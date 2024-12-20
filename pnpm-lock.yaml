@@ -42,8 +42,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@iconify-json/hugeicons':
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/icon-park-outline':
         specifier: ^1.2.1
         version: 1.2.1
@@ -1010,8 +1010,8 @@ packages:
   '@iconify-json/grommet-icons@1.2.0':
     resolution: {integrity: sha512-YnhfMsJeXsfsSkMQP206MpVPY/O0jXbyhC9+P70W6SkVvpODqw72GK7TV1pnKUuPvNRZzRik2x+9KWQxgmMhGQ==}
 
-  '@iconify-json/hugeicons@1.2.1':
-    resolution: {integrity: sha512-IedWO3xgMuRdRaolyl8kLOMA01xQ2QhldCKWrqtIxEpalndU7hoh1dUR00ackhWLFDwpKdGQGzuF5/Szaw40CQ==}
+  '@iconify-json/hugeicons@1.2.2':
+    resolution: {integrity: sha512-6twKTOjUecuX2Cl3OP83YBe5ACDGrJvQePwoI/hMZ6TEpYuB+23BjwekMmO+cSiP13YmKALCkcF4NZp2MAnIrw==}
 
   '@iconify-json/icon-park-outline@1.2.1':
     resolution: {integrity: sha512-cNvUJL9mk3xOfyffErQuxvyRCWk0hCx1M8AEyGmNXjqIfgPC25OChCstt0KFB3IULS+hw9es+uA7pvVPmQh+AA==}
@@ -4902,7 +4902,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/hugeicons@1.2.1':
+  '@iconify-json/hugeicons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
