@@ -297,8 +297,8 @@ importers:
         specifier: ^0.3.44
         version: 0.3.44(svelte@5.10.0)(typescript@5.7.2)
       typia:
-        specifier: ^7.1.0
-        version: 7.1.0(typescript@5.7.2)
+        specifier: ^7.5.0
+        version: 7.5.0(typescript@5.7.2)
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -3970,11 +3970,11 @@ packages:
       '@samchon/openapi': '>=1.2.4 <2.0.0'
       typescript: '>=4.8.0 <5.7.0'
 
-  typia@7.1.0:
-    resolution: {integrity: sha512-pG3H1KNIo3/Cd0VssdE+badLYnLnAQ7QtdYldqzqzXIDWG+Ve5fl0H4vQ/j+d1+rOAuurxfZ5bsCcw83SiYDVw==}
+  typia@7.5.0:
+    resolution: {integrity: sha512-m/MYDwQrJLwkZH7uOYaXNuSZYRCX36x5/ojMSCBPfdREdptG2FPNVNmuFwf8AOlgF9HwizTYB2gAWJ1CxvxjHw==}
     hasBin: true
     peerDependencies:
-      '@samchon/openapi': '>=2.0.1 <3.0.0'
+      '@samchon/openapi': '>=2.3.0 <3.0.0'
       typescript: '>=4.8.0 <5.8.0'
 
   uc.micro@2.1.0:
@@ -8467,7 +8467,7 @@ snapshots:
       randexp: 0.5.3
       typescript: 5.5.4
 
-  typia@7.1.0(typescript@5.7.2):
+  typia@7.5.0(typescript@5.7.2):
     dependencies:
       commander: 10.0.1
       comment-json: 4.2.5
