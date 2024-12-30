@@ -161,9 +161,6 @@ importers:
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1
-      '@types/nprogress':
-        specifier: ^0.2.3
-        version: 0.2.3
       '@unocss/extractor-svelte':
         specifier: ^0.65.1
         version: 0.65.1
@@ -236,9 +233,6 @@ importers:
       markdown-it-mdc:
         specifier: ^0.2.5
         version: 0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
-      nprogress:
-        specifier: ^0.2.0
-        version: 0.2.0
       reading-time:
         specifier: ^1.5.0
         version: 1.5.0
@@ -1544,9 +1538,6 @@ packages:
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
-
-  '@types/nprogress@0.2.3':
-    resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -3249,9 +3240,6 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  nprogress@0.2.0:
-    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -5603,8 +5591,6 @@ snapshots:
 
   '@types/normalize-package-data@2.4.4': {}
 
-  '@types/nprogress@0.2.3': {}
-
   '@types/unist@3.0.3': {}
 
   '@typescript-eslint/eslint-plugin@8.15.0(@typescript-eslint/parser@8.15.0(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2))(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2)':
@@ -7751,8 +7737,6 @@ snapshots:
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
-
-  nprogress@0.2.0: {}
 
   nth-check@2.1.1:
     dependencies:
