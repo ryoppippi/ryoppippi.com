@@ -18,8 +18,8 @@ importers:
         specifier: npm:@jsr/core__pipe@0.4.0
         version: '@jsr/core__pipe@0.4.0'
       '@iconify-json/akar-icons':
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/carbon':
         specifier: ^1.2.4
         version: 1.2.4
@@ -980,8 +980,8 @@ packages:
     resolution: {integrity: sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==}
     engines: {node: '>=18.18'}
 
-  '@iconify-json/akar-icons@1.2.1':
-    resolution: {integrity: sha512-b2qj2P2LxVUSl7vP+/1FDeF5+DL6IpKw5yon+Qszb8rWejKr/uQn6dV9yGE+pGaKkFaxGhPNF75EsCNLmrbm0Q==}
+  '@iconify-json/akar-icons@1.2.2':
+    resolution: {integrity: sha512-PoUMM4FKQ6NumbSUjoM4lsulJ0GPpj979nLjZS8MGwk99MuZc80LV6AP51lfLcF4jvZFmC5G1gDIymQOi66Sqg==}
 
   '@iconify-json/carbon@1.2.4':
     resolution: {integrity: sha512-DhW2jjMVGwV0DLHc0cmDYohdtGxMra8UuwgjHrryPy+rQX4gXhJwCBBVP2h2UG/92AoRCTn7zUJve4WvY5MLYg==}
@@ -4888,7 +4888,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.1': {}
 
-  '@iconify-json/akar-icons@1.2.1':
+  '@iconify-json/akar-icons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
