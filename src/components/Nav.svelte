@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import * as DarkMode from '$lib/DarkMode';
 
 	import { subdomain } from '$lib/util';
@@ -46,11 +46,11 @@
 		>
 			<div
 				style:view-transition-name='title-ryoppippi'
-				class:hidden={$page.url.pathname === '/'}
+				class:hidden={page.url.pathname === '/'}
 			>
 				@ryoppippi
 			</div>
-			<div>{@render underline($page.url.pathname === '/', true)}</div>
+			<div>{@render underline(page.url.pathname === '/', true)}</div>
 		</a>
 	</div>
 	<nav
@@ -65,7 +65,7 @@
 	>
 		<div flex gap-4>
 			{#each LINKS as { href, name, ...rest } (href)}
-				{@const isPath = $page.url.pathname.startsWith(href)}
+				{@const isPath = page.url.pathname.startsWith(href)}
 				{@const icon = 'icon' in rest ? rest.icon : null}
 				<a
 					style:view-transition-name='-nav-link-{name}'

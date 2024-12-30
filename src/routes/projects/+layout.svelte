@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { capitalize, lowercase } from '@ryoppippi/str-fns';
 
 	const routes = [
@@ -23,7 +23,7 @@
 	>
 		{#each routes as route (route)}
 			{@const lowercaseRoute = lowercase(route)}
-			{@const isCurrent = $page.route.id?.endsWith(lowercaseRoute)}
+			{@const isCurrent = page.route.id?.endsWith(lowercaseRoute)}
 			<a
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'

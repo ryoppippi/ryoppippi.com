@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { dev } from '$app/environment';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { formatDate, subdomain } from '$lib/util';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
@@ -16,7 +16,7 @@
 	const { data } = $props();
 	const { metadata, Markdown } = data;
 
-	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain($page.url.pathname)}\n\nI think...`);
+	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain(page.url.pathname)}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 

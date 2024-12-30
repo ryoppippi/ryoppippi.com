@@ -1,14 +1,12 @@
 <script>
 	import { dev } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
-	import { navigating, page, updated } from '$app/stores';
+	import { navigating, page, updated } from '$app/state';
 
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import DarkMode from '$lib/DarkMode';
 	import { domain, subdomain } from '$lib/util';
 	import NProgress from 'nprogress';
-
-	import { fromStore } from 'svelte/store';
 
 	import { MetaTags } from 'svelte-meta-tags';
 
@@ -32,7 +30,7 @@
 	});
 
 	$effect(() => {
-		const url = $page.url;
+		const url = page.url;
 		if (dev || url.hash.length > 1) {
 			document.documentElement.classList.add('no-sliding');
 		}
@@ -41,8 +39,7 @@
 		}
 	});
 
-	const pageRune = fromStore(page);
-	const title = $derived(pageRune.current.data.title ?? 'home');
+	const title = $derived(page.data.title ?? 'home');
 
 	$effect(() => {
 		NProgress.configure({
@@ -51,7 +48,7 @@
 	});
 
 	$effect(() => {
-		if ($navigating) {
+		if (navigating) {
 			NProgress.start();
 		}
 		else {
@@ -102,7 +99,7 @@
 </svelte:head>
 
 <main
-	data-sveltekit-reload={$updated ? '' : 'off'}
+	data-sveltekit-reload={updated ? '' : 'off'}
 	max-w-4xl
 	mxa
 	my3
@@ -110,7 +107,7 @@
 	un-dark
 >
 	<Nav />
-	{#key $page.url}
+	{#key page.url}
 		{@render children()}
 	{/key}
 </main>
