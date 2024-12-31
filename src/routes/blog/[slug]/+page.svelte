@@ -20,8 +20,6 @@
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 
-	$inspect(tweetUrl);
-
 /* eslint svelte/no-at-html-tags: 0 */
 </script>
 
