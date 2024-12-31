@@ -18,8 +18,7 @@
 
 {#snippet link(_link: string | null | undefined, _text: string)}
 	<a
-		class:hover:no-underline={_link == null}
-		class:hover:underline={_link != null}
+		class={_link == null ? 'no-underline' : 'underline'}
 		href={_link}
 		target='_blank'
 	>

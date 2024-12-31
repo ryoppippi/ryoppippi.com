@@ -15,9 +15,11 @@
 {#snippet underline(isPath: boolean, transparentDefault = false)}
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<span
-		class:bg-accent-100={isPath}
-		class:bg-transparent={!isPath || transparentDefault}
-		class:view-transition--nav-underline={isPath}
+		class={{
+			'bg-accent-100': isPath,
+			'bg-transparent': !isPath || transparentDefault,
+			'view-transition--nav-underline': isPath,
+		}}
 		absolute
 		h-0.5
 		w-full
@@ -46,7 +48,7 @@
 		>
 			<div
 				style:view-transition-name='title-ryoppippi'
-				class:hidden={page.url.pathname === '/'}
+				class={{ hidden: page.url.pathname === '/' }}
 			>
 				@ryoppippi
 			</div>

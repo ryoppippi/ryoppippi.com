@@ -15,8 +15,7 @@
 
 <h1
 	style:view-transition-name={viewTransitionName}
-	class={opacity ? 'op-35 dark:op-20' : ''}
-	class:select-none={selectDisabled}
+	class={{ 'op-35 dark:op-20': opacity, 'select-none': selectDisabled }}
 	f-text-32-64
 	font='mono bold'
 	line-height-none

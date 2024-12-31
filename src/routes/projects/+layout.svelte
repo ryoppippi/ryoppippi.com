@@ -27,7 +27,7 @@
 			<a
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'
-				class:op70={isCurrent}
+				class={{ op70: isCurrent }}
 				href={isCurrent ? null : lowercaseRoute}
 				op20
 			>{capitalize(route)}</a>

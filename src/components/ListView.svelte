@@ -29,7 +29,7 @@
 		<div
 			style:--stagger={count}
 			style:--start='300ms'
-			class:sliding-animation={animation}
+			class={{ 'sliding-animation': animation }}
 			my-2
 			sliding-animation-delay-base
 		>
