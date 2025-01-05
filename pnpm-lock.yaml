@@ -87,8 +87,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@iconify-json/system-uicons':
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/tabler':
         specifier: ^1.2.10
         version: 1.2.10
@@ -1049,8 +1049,8 @@ packages:
   '@iconify-json/solar@1.2.2':
     resolution: {integrity: sha512-lcTb6DWL4HZObiY1W3fHfuxxuQHUc6CFHFeywKEx7Ry0k+dU6POZCMC7oVLr0F8vuf+KgaQ3oOoGO/yFzOwrNg==}
 
-  '@iconify-json/system-uicons@1.2.1':
-    resolution: {integrity: sha512-P3CEr7GewtwcAWX/RZeRZw4Gkq+WS+w5iTh+0jDR30A2bEEhm98R1N0Pas3VUJSU/b/3EfsA6cAX18wrjcqwkw==}
+  '@iconify-json/system-uicons@1.2.2':
+    resolution: {integrity: sha512-E5mwm7F3ahs58YacvifJlj7tPN/QYTMWtLe38bwS9LVylyfT7hAsHdBiBUcsgM5Isdr+6x1TTSz1iAq+/bkUcw==}
 
   '@iconify-json/tabler@1.2.10':
     resolution: {integrity: sha512-P58U/e0rZNYptzMjnExcFOtSt712xJnqwJI7KoF4iaUJ7EeFQNJawjUXT8X1rvbLMUk/O/fgrzAfhD163XuckA==}
@@ -4998,7 +4998,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/system-uicons@1.2.1':
+  '@iconify-json/system-uicons@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 
