@@ -58,7 +58,7 @@
 		"@shikijs/twoslash": "^1.25.1",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.9",
 		"@sveltejs/adapter-auto": "^3.3.1",
-		"@sveltejs/adapter-static": "^3.0.6",
+		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/enhanced-img": "^0.4.3",
 		"@sveltejs/kit": "^2.15.1",
 		"@sveltejs/vite-plugin-svelte": "4.0.2",
