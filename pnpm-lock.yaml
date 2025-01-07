@@ -210,8 +210,8 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       markdown-it-budoux:
-        specifier: ^1.0.5
-        version: 1.0.5
+        specifier: ^1.0.6
+        version: 1.0.6
       markdown-it-collapsible:
         specifier: ^2.0.2
         version: 2.0.2(markdown-it@14.1.0)
@@ -3006,8 +3006,8 @@ packages:
       '@types/markdown-it': '*'
       markdown-it: '*'
 
-  markdown-it-budoux@1.0.5:
-    resolution: {integrity: sha512-vzxlIhxW0QPI8xkRPTy5NxaYqOsKQTHupVEu/Pyu+pG+Y7HBRdTsytIbke4+LtrGMBcyGcNhFVC8bt57LsDBsA==}
+  markdown-it-budoux@1.0.6:
+    resolution: {integrity: sha512-onL2XuIqxWdYtBz5vnn3SUQhDeqrIit+9OtR7bCF3Vng6BlV49K/djlDX+rwQTAznij4VsT6GeI8WNKUNscooA==}
 
   markdown-it-collapsible@2.0.2:
     resolution: {integrity: sha512-rDOBBCVogON8pRsitSamyR/eIgfPqcjyraLGLJ+5AY/2xfN5iHtqX4+Bo9zABdVSltbVPn2PI+3PRBWlRCWS7w==}
@@ -7349,7 +7349,7 @@ snapshots:
       '@types/markdown-it': 14.1.2
       markdown-it: 14.1.0
 
-  markdown-it-budoux@1.0.5:
+  markdown-it-budoux@1.0.6:
     dependencies:
       budoux: 0.6.3
       defu: 6.1.4
