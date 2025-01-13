@@ -51,8 +51,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       '@iconify-json/line-md':
-        specifier: ^1.2.4
-        version: 1.2.4
+        specifier: ^1.2.5
+        version: 1.2.5
       '@iconify-json/logos':
         specifier: ^1.2.4
         version: 1.2.4
@@ -1023,8 +1023,8 @@ packages:
   '@iconify-json/icon-park-solid@1.2.2':
     resolution: {integrity: sha512-CVIe1+WMb3axWWrZ4Yt9/ZAbF8UEYnQ77Zt+DooLuA5VxVcea9eVzFnmuNZ8UVgQ7lt2y8ZHU2VGI6BylLeYCA==}
 
-  '@iconify-json/line-md@1.2.4':
-    resolution: {integrity: sha512-zapvr+PM17evfekZwarZaNp4szd/2ELuFhNKqLw3hGqY4by8DWIE4c97yue9ooUJN54CQXPfVGFnxNEXeeZctQ==}
+  '@iconify-json/line-md@1.2.5':
+    resolution: {integrity: sha512-6zFKhs6g++kFJLLi+ye5nPoHgjYh44yVLjua0tmbxH1HdImMQZ6rkRsPnBgxADY4bQWiapXBzfoiz7+UBXgtWg==}
 
   '@iconify-json/logos@1.2.4':
     resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
@@ -4961,7 +4961,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/line-md@1.2.4':
+  '@iconify-json/line-md@1.2.5':
     dependencies:
       '@iconify/types': 2.0.0
 
