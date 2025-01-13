@@ -109,7 +109,7 @@
 		"sveltweet": "https://pkg.pr.new/sveltweet@ecf724d",
 		"ts-patch": "^3.3.0",
 		"tslib": "^2.8.1",
-		"type-fest": "^4.31.0",
+		"type-fest": "^4.32.0",
 		"typescript": "~5.7.3",
 		"typescript-svelte-plugin": "^0.3.45",
 		"typia": "^6.12.2",
