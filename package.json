@@ -117,7 +117,7 @@
 		"unocss": "^0.65.1",
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
-		"unplugin-icons": "^0.22.0",
+		"unplugin-icons": "^22.0.0",
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "^5.4.11",
 		"vite-env-only": "^3.0.3",
