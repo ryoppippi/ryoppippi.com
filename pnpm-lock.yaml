@@ -120,7 +120,7 @@ importers:
         specifier: ^1.26.2
         version: 1.27.2
       '@shikijs/twoslash':
-        specifier: ^1.26.2
+        specifier: ^1.27.0
         version: 1.27.2(typescript@5.7.3)
       '@std/collections':
         specifier: npm:@jsr/std__collections@^1.0.9
