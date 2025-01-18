@@ -117,7 +117,7 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
       '@shikijs/markdown-it':
-        specifier: ^1.26.2
+        specifier: ^1.27.2
         version: 1.27.2
       '@shikijs/twoslash':
         specifier: ^1.27.0
