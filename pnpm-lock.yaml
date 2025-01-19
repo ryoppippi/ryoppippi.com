@@ -109,7 +109,7 @@ importers:
         version: '@jsr/ryoppippi__unocss-preset@1.0.5'
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.0.7
-        version: '@jsr/ryoppippi__unplugin-typia@1.0.7(@samchon/openapi@1.2.4)(@types/node@22.10.7)(rollup@4.27.4)'
+        version: '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.7)(rollup@4.27.4)'
       '@ryoppippi/vite-plugin-cloudflare-redirect':
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3
         version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3(@types/node@22.10.7)'
@@ -291,8 +291,8 @@ importers:
         specifier: ^0.3.45
         version: 0.3.45(svelte@5.18.0)(typescript@5.7.3)
       typia:
-        specifier: ^6.12.2
-        version: 6.12.2(@samchon/openapi@1.2.4)(typescript@5.7.3)
+        specifier: ^7.6.0
+        version: 7.6.0(typescript@5.7.3)
       ufo:
         specifier: ^1.5.4
         version: 1.5.4
@@ -1363,9 +1363,6 @@ packages:
     resolution: {integrity: sha512-3j4jx1TppORdTAoBJRd+/wJRGCPC0ETWkXOecJ6PPZLj6SptXkrXcNqdj0oclbKML6FkQltdz7bBA3rUSirZug==}
     cpu: [x64]
     os: [win32]
-
-  '@samchon/openapi@1.2.4':
-    resolution: {integrity: sha512-fEFAI2tXJHdsc4CYghNDuLmz2lDlwnGIQLW7+x5IEznYK3Hm6MBwU1RmD9v9QoCYgUyYJ7R8bZDn9GKoQnb8FA==}
 
   '@secretlint/config-creator@9.0.0':
     resolution: {integrity: sha512-w92my2FP4gSOT+782+D46yk5SzVZ835ZMb6lxcNc4inVY/iNy8YKpKBAkwPnH/PkXqqwB5mVGCBZx+4TIN/ksQ==}
@@ -4034,6 +4031,13 @@ packages:
       '@samchon/openapi': '>=1.2.4 <2.0.0'
       typescript: '>=4.8.0 <5.7.0'
 
+  typia@7.6.0:
+    resolution: {integrity: sha512-iuxkRcZltbxEA87CvW6vIvNaQerEcLZbRmJugMraZFAMTwVf3AKvQEh4pSq2n1VMfomINnWFhy0nxEWvpEzHbQ==}
+    hasBin: true
+    peerDependencies:
+      '@samchon/openapi': '>=2.4.0 <3.0.0'
+      typescript: '>=4.8.0 <5.8.0'
+
   uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
@@ -4497,7 +4501,7 @@ snapshots:
 
   '@antfu/install-pkg@0.4.1':
     dependencies:
-      package-manager-detector: 0.2.5
+      package-manager-detector: 0.2.8
       tinyexec: 0.3.1
 
   '@antfu/install-pkg@0.5.0':
@@ -5216,7 +5220,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.65.1
 
-  '@jsr/ryoppippi__unplugin-typia@1.0.7(@samchon/openapi@1.2.4)(@types/node@22.10.7)(rollup@4.27.4)':
+  '@jsr/ryoppippi__unplugin-typia@1.0.7(@types/node@22.10.7)(rollup@4.27.4)':
     dependencies:
       '@rollup/pluginutils': 5.1.3(rollup@4.27.4)
       consola: 3.2.3
@@ -5228,7 +5232,7 @@ snapshots:
       pkg-types: 1.2.1
       type-fest: 4.32.0
       typescript: 5.5.4
-      typia: 6.12.2(@samchon/openapi@1.2.4)(typescript@5.5.4)
+      typia: 6.12.2(typescript@5.5.4)
       unplugin: 1.16.0
       vite: 5.4.11(@types/node@22.10.7)
     transitivePeerDependencies:
@@ -5374,8 +5378,6 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     optional: true
-
-  '@samchon/openapi@1.2.4': {}
 
   '@secretlint/config-creator@9.0.0':
     dependencies:
@@ -8634,9 +8636,8 @@ snapshots:
 
   typescript@5.7.3: {}
 
-  typia@6.12.2(@samchon/openapi@1.2.4)(typescript@5.5.4):
+  typia@6.12.2(typescript@5.5.4):
     dependencies:
-      '@samchon/openapi': 1.2.4
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
@@ -8644,13 +8645,12 @@ snapshots:
       randexp: 0.5.3
       typescript: 5.5.4
 
-  typia@6.12.2(@samchon/openapi@1.2.4)(typescript@5.7.3):
+  typia@7.6.0(typescript@5.7.3):
     dependencies:
-      '@samchon/openapi': 1.2.4
       commander: 10.0.1
       comment-json: 4.2.5
       inquirer: 8.2.6
-      package-manager-detector: 0.2.5
+      package-manager-detector: 0.2.8
       randexp: 0.5.3
       typescript: 5.7.3
 
