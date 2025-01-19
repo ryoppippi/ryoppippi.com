@@ -6,16 +6,16 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import extractorSvelte from '@unocss/extractor-svelte';
 import Macros from '@unplugin/macros/vite';
 import { isDevelopment } from 'std-env';
-import Icons from 'unplugin-icons/vite';
-import Components from 'unplugin-svelte-components/vite';
-import { defineConfig } from 'vite';
-import { denyImports } from 'vite-env-only';
-
-import { faviconsPlugin } from 'vite-plugin-favicons';
-
 // @ts-expect-error no type
 import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
+import Icons from 'unplugin-icons/vite';
+import Components from 'unplugin-svelte-components/vite';
+
+import { defineConfig } from 'vite';
+
+import { denyImports } from 'vite-env-only';
+import { faviconsPlugin } from 'vite-plugin-favicons';
 
 import { Route } from './routes.js';
 
