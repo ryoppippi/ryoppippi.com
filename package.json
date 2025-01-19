@@ -112,7 +112,7 @@
 		"type-fest": "^4.32.0",
 		"typescript": "~5.7.3",
 		"typescript-svelte-plugin": "^0.3.45",
-		"typia": "^6.12.2",
+		"typia": "^7.6.0",
 		"ufo": "^1.5.4",
 		"unocss": "^0.65.1",
 		"unocss-preset-fluid": "^1.0.2",
