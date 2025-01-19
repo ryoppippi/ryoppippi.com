@@ -51,7 +51,7 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.25",
 		"@ryoppippi/str-fns": "npm:@jsr/ryoppippi__str-fns@^0.1.2",
 		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.5",
-		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.0.7",
+		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.2.0",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.0.3",
 		"@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
 		"@shikijs/markdown-it": "^1.27.2",
