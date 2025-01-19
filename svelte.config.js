@@ -13,21 +13,21 @@ import MarkdownItCollapsible from 'markdown-it-collapsible';
 
 import GitHubAlerts from 'markdown-it-github-alerts';
 
-import { isDevelopment } from 'std-env';
-
-import { importAssets } from 'svelte-preprocess-import-assets';
-import SveltweetPreprocessor from 'sveltweet/preprocessor';
-
 // @ts-expect-error no types
 import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
-
 import LinkPreview from 'markdown-it-link-preview';
 
 import MarkdownItMagicLink from 'markdown-it-magic-link';
 
 import MDC from 'markdown-it-mdc';
+
+import { isDevelopment } from 'std-env';
+
+import { importAssets } from 'svelte-preprocess-import-assets';
+
+import SveltweetPreprocessor from 'sveltweet/preprocessor';
 
 import { Route } from './routes.js';
 import { slugify } from './src/lib/slugify.server.js';
