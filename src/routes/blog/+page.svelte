@@ -3,11 +3,9 @@
 
 	const { data } = $props();
 
-	let isOnlyEnglishCount = $state(0);
-	const isOnlyEnglish = $derived(isOnlyEnglishCount % 2 === 1);
+	let isOnlyEnglish = $state(false);
 
-	let isOnlyRyoppippiCount = $state(0);
-	const isOnlyRyoppippi = $derived(isOnlyRyoppippiCount % 2 === 1);
+	let isOnlyRyoppippi = $state(false);
 
 	const items = $derived(data
 		.posts
@@ -16,10 +14,10 @@
 	);
 
 	export const snapshot = {
-		capture: () => ({ isOnlyEnglishCount, isOnlyRyoppippiCount }),
+		capture: () => ({ isOnlyEnglish, isOnlyRyoppippi }),
 		restore: (value) => {
-			isOnlyEnglishCount = value.isOnlyEnglishCount;
-			isOnlyRyoppippiCount = value.isOnlyRyoppippiCount;
+			isOnlyEnglish = value.isOnlyEnglish;
+			isOnlyRyoppippi = value.isOnlyRyoppippi;
 		},
 	};
 </script>
@@ -60,18 +58,17 @@
 <div mxa pt-10 px-10>
 	<CheckButton
 		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
-		onclick={() => isOnlyEnglishCount++}
+		onclick={() => isOnlyEnglish = !isOnlyEnglish}
 		text='English Only'
 	/>
 	<CheckButton
 		iconClass={!isOnlyRyoppippi ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
-		onclick={() => isOnlyRyoppippiCount++}
+		onclick={() => isOnlyRyoppippi = !isOnlyRyoppippi}
 		text='ryoppippi.com exclusive'
 	/>
 </div>
 
 <ListView
-	animation={isOnlyEnglishCount < 1}
 	{itemView}
 	{items}
 />

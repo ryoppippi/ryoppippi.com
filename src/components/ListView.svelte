@@ -14,13 +14,11 @@
 	type Props = {
 		items: Item[];
 		itemView: Snippet<[Item]>;
-		animation?: boolean;
 	};
 
 	const {
 		items,
 		itemView,
-		animation,
 	}: Props = $props();
 </script>
 <div mxa px-10>
@@ -29,8 +27,8 @@
 		<div
 			style:--stagger={count}
 			style:--start='300ms'
-			class={{ 'sliding-animation': animation }}
 			my-2
+			sliding-animation
 			sliding-animation-delay-base
 		>
 			{#if item.link != null}
