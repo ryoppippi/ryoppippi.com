@@ -47,7 +47,7 @@ function processMeta(filepath, content, data) {
 /**
  * @param {string} proceed
  */
-function addtionalProcessMd(proceed) {
+function additionalProcessMd(proceed) {
 	return Array.from(
 		pipe(
 			proceed.split('\n'),
@@ -80,7 +80,7 @@ function svelteMarkdown(md) {
 				content: htmlWithoutMeta,
 			} = matter(content);
 
-			const processed = addtionalProcessMd(md.render(htmlWithoutMeta));
+			const processed = additionalProcessMd(md.render(htmlWithoutMeta));
 
 			const s = new MagicString(processed);
 
