@@ -3,7 +3,7 @@ import type { MarkdownImport } from '../../../markdown';
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
-export const load: PageLoad = async ({ params: { slug } }) => {
+export const load = (async ({ params: { slug } }) => {
 	try {
 		const md = await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
 
@@ -18,4 +18,4 @@ export const load: PageLoad = async ({ params: { slug } }) => {
 		console.error(e);
 		return error(404, 'Post not found');
 	}
-};
+}) satisfies PageLoad;
