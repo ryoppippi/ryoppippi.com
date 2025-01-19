@@ -52,12 +52,12 @@
 
 <div mxa pt-10 px-10>
 	<CheckButton
-		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
+		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
 		text='English Only'
 	/>
 	<CheckButton
-		iconClass={!isOnlyRyoppippi ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
+		checked={isOnlyRyoppippi}
 		onclick={() => isOnlyRyoppippi = !isOnlyRyoppippi}
 		text='ryoppippi.com exclusive'
 	/>

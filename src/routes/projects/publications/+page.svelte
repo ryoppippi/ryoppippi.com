@@ -53,7 +53,6 @@
 	>
 		<LargeTitle title={year} />
 		<ListView
-			animation={false}
 			{itemView}
 			{items}
 		/>

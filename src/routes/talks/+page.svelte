@@ -49,7 +49,7 @@
 
 <div mxa pt-10>
 	<CheckButton
-		iconClass={!isOnlyEnglish ? 'i-carbon-checkbox' : 'i-carbon-checkbox-checked'}
+		iconClass={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
 		text='English Only'
 	/>

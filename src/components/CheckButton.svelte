@@ -3,12 +3,12 @@
 
 	type Props = {
 		text: string;
-		iconClass: string;
+		checked?: boolean;
 	} & HTMLButtonAttributes;
 
 	const {
 		text,
-		iconClass = $bindable(''),
+		checked = $bindable(false),
 		...rest
 	}: Props = $props();
 </script>
@@ -22,6 +22,11 @@
 	type='button'
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
-	<div class={iconClass} />
+	<div
+		class={{
+			'i-carbon-checkbox': !checked,
+			'i-carbon-checkbox-checked': checked,
+		}}
+	/>
 	{text}
 </button>
