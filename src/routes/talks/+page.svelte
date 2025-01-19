@@ -49,18 +49,16 @@
 
 <div mxa pt-10>
 	<CheckButton
-		iconClass={isOnlyEnglish}
+		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
 		text='English Only'
 	/>
 </div>
 
-{#each Object.entries(talks).sort(([a], [b]) => Number(b) - Number(a)) as [year, items], count (year)}
+{#each Object.entries(talks).sort(([a], [b]) => Number(b) - Number(a)) as [year, items] (year)}
 	<div
-		style:--stagger={count}
 		animate-delay-base
 		no-underline
-		sliding-animation='~ delay-base'
 	>
 		<LargeTitle title={year} />
 		<ListView

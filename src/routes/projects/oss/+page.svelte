@@ -8,11 +8,8 @@
 </div>
 
 <div grid='~ gap-16'>
-	{#each Object.entries(projects) as [genre, projectsByGenrne], count (genre)}
-		<div
-			style:--stagger={count}
-			sliding-animation='~ delay-base'
-		>
+	{#each Object.entries(projects) as [genre, projectsByGenrne] (genre)}
+		<div>
 			<LargeTitle title={genre} />
 			<div
 				grid='~ gap-8'

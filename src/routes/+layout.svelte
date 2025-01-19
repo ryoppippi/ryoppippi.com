@@ -1,5 +1,4 @@
 <script>
-	import { dev } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
 	import { page, updated } from '$app/state';
 
@@ -26,16 +25,6 @@
 				await navigation.complete;
 			});
 		});
-	});
-
-	$effect(() => {
-		const url = page.url;
-		if (dev || url.hash.length > 1) {
-			document.documentElement.classList.add('no-sliding');
-		}
-		else {
-			document.documentElement.classList.remove('no-sliding');
-		}
 	});
 
 	const title = $derived(page.data.title ?? 'home');

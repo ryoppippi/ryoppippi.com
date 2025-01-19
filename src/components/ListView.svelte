@@ -22,15 +22,9 @@
 	}: Props = $props();
 </script>
 <div mxa px-10>
-	{#each items as item, count (item.slug)}
+	{#each items as item (item.slug)}
 		{@const external = typeof item.link === 'string' && item?.link.startsWith('http')}
-		<div
-			style:--stagger={count}
-			style:--start='300ms'
-			my-2
-			sliding-animation
-			sliding-animation-delay-base
-		>
+		<div my-2>
 			{#if item.link != null}
 				<a
 					class='group'

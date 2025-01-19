@@ -9,10 +9,7 @@
 	grid-cols='1 lg:2'
 >
 	{#each projects as project, count (count)}
-		<div
-			style:--stagger={count}
-			sliding-animation='~ delay-base'
-		>
+		<div>
 			<ShowcaseCard {project} />
 		</div>
 	{/each}

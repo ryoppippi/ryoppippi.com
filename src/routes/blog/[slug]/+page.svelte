@@ -6,7 +6,6 @@
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
 	import 'markdown-it-github-alerts/styles/github-base.css';
-	import './slide-enter.css';
 	import './link-card.css';
 
 	import './magic-link.css';

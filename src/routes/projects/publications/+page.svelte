@@ -43,13 +43,11 @@
 	</div>
 {/snippet}
 
-{#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, _items], count (year)}
+{#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, _items] (year)}
 	{@const items = _items.map(item => ({ ...item, slug: JSON.stringify(item) }))}
 	<div
-		style:--stagger={count}
 		animate-delay-base
 		no-underline
-		sliding-animation='~ delay-base'
 	>
 		<LargeTitle title={year} />
 		<ListView
