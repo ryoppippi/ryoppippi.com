@@ -195,8 +195,8 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2
       fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
+        specifier: ^11.3.0
+        version: 11.3.0
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -2599,8 +2599,8 @@ packages:
     resolution: {integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==}
     engines: {node: '>= 6'}
 
-  fs-extra@11.2.0:
-    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
+  fs-extra@11.3.0:
+    resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
     engines: {node: '>=14.14'}
 
   fsevents@2.3.3:
@@ -6948,7 +6948,7 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  fs-extra@11.2.0:
+  fs-extra@11.3.0:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
@@ -8849,7 +8849,7 @@ snapshots:
     dependencies:
       consola: 3.2.3
       favicons: 7.2.0
-      fs-extra: 11.2.0
+      fs-extra: 11.3.0
       pathe: 1.1.2
       std-env: 3.8.0
       typescript: 5.7.3
