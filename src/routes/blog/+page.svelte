@@ -26,22 +26,17 @@
 	{@const item = _item as typeof data.posts[0]}
 	<div flex gap-2 items-start my-2>
 		<span mt-0.5>
-			{#if item.external}
-				{#if item.link.includes('zenn')}
-					<!-- svelte-ignore element_invalid_self_closing_tag -->
-					<div
-						blog-list-icon
-						i-simple-icons-zenn
-						text='group-hover:[#3EA8FF]'
-					/>
-				{:else}
-					<!-- svelte-ignore element_invalid_self_closing_tag -->
-					<div blog-list-icon i-quill-link-out />
-				{/if}
-			{:else}
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div blog-list-icon i-simple-icons-markdown />
-			{/if}
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
+			<div
+				class={[
+					'blog-list-icon',
+					{
+						'i-simple-icons-markdown': !item.external,
+						'i-simple-icons-zenn group-hover:text-#3EA8FF': item.link.includes('zenn'),
+						'i-quill-link-out': item.external, // default for external links
+					},
+				]}
+			/>
 		</span>
 		<p
 			style:view-transition-name='blog-{item.slug}'
