@@ -1,6 +1,6 @@
 <script>
 	import { onNavigate } from '$app/navigation';
-	import { page, updated } from '$app/state';
+	import { page } from '$app/state';
 
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import DarkMode from '$lib/DarkMode';
@@ -73,7 +73,6 @@
 </svelte:head>
 
 <main
-	data-sveltekit-reload={updated ? '' : 'off'}
 	max-w-4xl
 	mxa
 	my3
