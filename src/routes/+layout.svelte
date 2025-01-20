@@ -55,7 +55,7 @@
 			},
 		],
 	}}
-	title={title}
+	{title}
 	titleTemplate={title !== 'home' ? `%s | ${domain()}` : domain()}
 	twitter={{
 		cardType: 'summary',
