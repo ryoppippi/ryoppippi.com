@@ -41,6 +41,7 @@
 >
 	<div flex>
 		<a
+			aria-label='Home'
 			font-bold
 			href='/'
 			m='xa md:(b0 x0)'
