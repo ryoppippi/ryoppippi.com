@@ -28,7 +28,7 @@
 	});
 
 	const title = $derived(page.data.title ?? 'home');
-
+	const description = `Portfolio of @ryoppippi`;
 </script>
 
 <DarkMode />
@@ -43,10 +43,11 @@
 		notranslate: true,
 		noimageindex: true,
 	}}
+	{description}
 	openGraph={{
 		url: subdomain(),
 		type: 'website',
-		description: 'Portfolio of @ryoppippi',
+		description,
 		images: [
 			{
 				url: ryoppippi,
@@ -59,7 +60,7 @@
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
-		description: 'Portfolio of @ryoppippi',
+		description,
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
