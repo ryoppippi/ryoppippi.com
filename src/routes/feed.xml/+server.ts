@@ -18,7 +18,7 @@ export const GET = (async () => {
 		favicon,
 		copyright: 'CC BY-NC-SA 4.0 2022-PRESENT © ryoppippi',
 		feedLinks: {
-			rss: subdomain('blog', 'feed.xml'),
+			rss: subdomain('feed.xml'),
 		},
 	});
 

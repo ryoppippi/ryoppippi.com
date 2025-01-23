@@ -92,7 +92,7 @@
 			<a
 				class='i-line-md:rss'
 				fyc
-				href='/blog/feed.xml'
+				href='/feed.xml'
 				mya
 				target='_blank'
 			>

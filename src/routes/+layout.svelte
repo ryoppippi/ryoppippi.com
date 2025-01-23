@@ -39,7 +39,7 @@
 			rel: 'alternate',
 			title: description,
 			type: 'application/rss+xml',
-			href: '/blog/feed.xml',
+			href: '/feed.xml',
 		},
 	]}
 	additionalRobotsProps={{
