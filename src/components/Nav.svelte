@@ -96,7 +96,7 @@
 				mya
 				target='_blank'
 			>
-				souce code
+				source code
 			</a>
 			<a
 				class='i-teenyicons:github-solid'
@@ -105,7 +105,7 @@
 				mya
 				target='_blank'
 			>
-				souce code
+				source code
 			</a>
 		</div>
 	</nav>
