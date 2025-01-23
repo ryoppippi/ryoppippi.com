@@ -73,11 +73,12 @@
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
 <svelte:head>
-	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-	{@html faviconLinks
-		.split('\n')
-		.filter(s => !s.includes('theme-color'))
-		.join('\n')}
+	{#each faviconLinks.split('\n') as link (link)}
+		{#if !link.includes('theme-color')}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+			{@html link}
+		{/if}
+	{/each}
 </svelte:head>
 
 <main
