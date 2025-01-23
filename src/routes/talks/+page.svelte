@@ -47,7 +47,19 @@
 	{/if}
 {/snippet}
 
-<div mxa pt-10>
+<div flex='~ col gap-1' mxa pt-10>
+	<a
+		fyc
+		gap-1
+		href='https://talks.ryoppippi.com/feed.xml'
+		mya
+		op30
+		target='_blank'
+	>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
+		<span class='i-line-md:rss' />
+		Feed
+	</a>
 	<CheckButton
 		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
