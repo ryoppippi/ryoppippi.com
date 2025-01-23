@@ -34,6 +34,14 @@
 <DarkMode />
 
 <MetaTags
+	additionalLinkTags={[
+		{
+			rel: 'alternate',
+			title: description,
+			type: 'application/rss+xml',
+			href: '/blog/feed.xml',
+		},
+	]}
 	additionalRobotsProps={{
 		noarchive: true,
 		nosnippet: true,
