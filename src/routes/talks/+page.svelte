@@ -47,7 +47,7 @@
 	{/if}
 {/snippet}
 
-<div flex='~ col gap-1' mxa pt-10>
+<div fcol gap-1 mxa pt-10>
 	<a
 		fyc
 		gap-1

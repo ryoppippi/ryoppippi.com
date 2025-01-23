@@ -50,7 +50,7 @@
 	</div>
 {/snippet}
 
-<div flex='~ col gap-1' mxa pt-10 px-10>
+<div fcol gap-1 mxa pt-10 px-10>
 	<CheckButton
 		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
