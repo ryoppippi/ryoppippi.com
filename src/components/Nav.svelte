@@ -1,8 +1,9 @@
 <script lang='ts'>
 	import { page } from '$app/state';
-	import * as DarkMode from '$lib/DarkMode';
-
 	import { subdomain } from '$lib/util';
+	import * as DarkMode from 'svelte-fancy-darkmode';
+	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
+	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
 	const LINKS = [
 		{ name: 'projects', href: '/projects' },
@@ -88,7 +89,15 @@
 			{/each}
 		</div>
 		<div flex gap='4 md:2' view-transition--nav-icons>
-			<DarkMode.ToggleButton />
+			<DarkMode.ToggleButton>
+				{#snippet darkIcon()}
+					<MoonToSunny />
+				{/snippet}
+
+				{#snippet lightIcon()}
+					<SunnyToMoon />
+				{/snippet}
+			</DarkMode.ToggleButton>
 			<a
 				class='i-line-md:rss'
 				fyc
@@ -112,7 +121,7 @@
 </header>
 
 <style>
-	a{
-		--at-apply: no-underline;
-	}
+a{
+	--at-apply: no-underline;
+}
 </style>
