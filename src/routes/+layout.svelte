@@ -3,8 +3,8 @@
 	import { page } from '$app/state';
 
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
-	import DarkMode from '$lib/DarkMode';
 	import { domain, subdomain } from '$lib/util';
+	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 
 	import { MetaTags } from 'svelte-meta-tags';
 
@@ -31,7 +31,7 @@
 	const description = `Portfolio of @ryoppippi`;
 </script>
 
-<DarkMode />
+<DarkModeHeader darkThemeColor='#121212' lightThemeColor='#ffffff' />
 
 <MetaTags
 	additionalLinkTags={[
