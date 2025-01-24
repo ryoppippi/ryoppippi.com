@@ -31,7 +31,7 @@
 	const description = `Portfolio of @ryoppippi`;
 </script>
 
-<DarkModeHeader darkThemeColor='#121212' lightThemeColor='#ffffff' />
+<DarkModeHeader themeColors={{ dark: '#121212', light: '#ffffff' }} />
 
 <MetaTags
 	additionalLinkTags={[
