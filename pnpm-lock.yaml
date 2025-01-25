@@ -165,8 +165,8 @@ importers:
         specifier: ^65.4.3
         version: 65.4.3
       '@unocss/reset':
-        specifier: ^65.4.2
-        version: 65.4.2
+        specifier: ^65.4.3
+        version: 65.4.3
       '@unplugin/macros':
         specifier: npm:@jsr/unplugin__macros@^0.14.0
         version: '@jsr/unplugin__macros@0.14.0(@types/node@22.10.7)(jiti@1.21.7)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)'
@@ -1730,8 +1730,8 @@ packages:
   '@unocss/reset@0.65.1':
     resolution: {integrity: sha512-qyxF7rKGX+Cu3FpV8KCRQbtCvFcBpmzvx5A2wal77tIhrFR5VSH7NzCVmgs2+V9FXvU3aWVNZ79i1KMnLZ5Mjg==}
 
-  '@unocss/reset@65.4.2':
-    resolution: {integrity: sha512-Sas0lTGEgzdWKafSiT+dyhhrUOkOpPbhJYbPMgjW6Ol/tB5JXhdlCNm90Xue1wt453P8O3J4v+dQcyrdRSq0Ig==}
+  '@unocss/reset@65.4.3':
+    resolution: {integrity: sha512-f9QnMtY1yPS1HEIkeKmSwUYcp4QS6zdo9ZcIFE9PDSLOcns3v+M1lTQg8mLChxJHVl73Cf6PofWVh5tmnxV53Q==}
 
   '@unocss/rule-utils@0.65.1':
     resolution: {integrity: sha512-XGXdXsRmIuMDQk/3Fd3g5JMhsyDGWsTfs6aN4vFQ1rfdSgY4UwbslqUNbIH9xxoTfmzUOJ2lhNrFw78RygCNSA==}
@@ -5953,7 +5953,7 @@ snapshots:
 
   '@unocss/reset@0.65.1': {}
 
-  '@unocss/reset@65.4.2': {}
+  '@unocss/reset@65.4.3': {}
 
   '@unocss/rule-utils@0.65.1':
     dependencies:
