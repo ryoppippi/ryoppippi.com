@@ -90,11 +90,11 @@
 		</div>
 		<div flex gap='4 md:2' view-transition--nav-icons>
 			<DarkMode.ToggleButton>
-				{#snippet darkIcon()}
+				{#snippet dark()}
 					<SunnyToMoon />
 				{/snippet}
 
-				{#snippet lightIcon()}
+				{#snippet light()}
 					<MoonToSunny />
 				{/snippet}
 			</DarkMode.ToggleButton>
