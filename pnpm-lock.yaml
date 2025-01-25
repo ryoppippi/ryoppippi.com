@@ -123,8 +123,8 @@ importers:
         specifier: ^1.27.2
         version: 1.27.2(typescript@5.7.3)
       '@std/collections':
-        specifier: npm:@jsr/std__collections@^1.0.9
-        version: '@jsr/std__collections@1.0.9'
+        specifier: npm:@jsr/std__collections@^1.0.10
+        version: '@jsr/std__collections@1.0.10'
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.19.2)(vite@5.4.14(@types/node@22.10.7)))(svelte@5.19.2)(vite@5.4.14(@types/node@22.10.7)))
@@ -1230,8 +1230,8 @@ packages:
   '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.0.3':
     resolution: {integrity: sha512-CZJCq4VGpVHuinDd4NaO/pbxpifERtaCnZyMGqGQsLQeeDWtWVmaNSKUdmFUJuK/1w4hvHbV+Ofa8Kqz2fjglw==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__vite-plugin-cloudflare-redirect/1.0.3.tgz}
 
-  '@jsr/std__collections@1.0.9':
-    resolution: {integrity: sha512-cTxYdBY5oMVyU26MLLHsX1jXu9GUmiQKNnKrcEMo9/qei4lypvnds6I7cp5i7N1ex5DRetQaNa/YjMyJQEabzg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.9.tgz}
+  '@jsr/std__collections@1.0.10':
+    resolution: {integrity: sha512-/FlggygpgekjQKToZZ9a1YjJXe2iVoAaVcvToRVMZ6Bs/oGLQ8efHY4ApZZfLwBk+SsKU7mFizyAYYxvGOuAHg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.10.tgz}
 
   '@jsr/unplugin__macros@0.14.0':
     resolution: {integrity: sha512-MSjP5MWBTzubEU5r7RznlNtWOST4O129tqdVaiEM1/127kC0KUmwottFNZowys9HlPrUW/2p1/XuVP6iJr7fOA==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.14.0.tgz}
@@ -5283,7 +5283,7 @@ snapshots:
       - sugarss
       - terser
 
-  '@jsr/std__collections@1.0.9': {}
+  '@jsr/std__collections@1.0.10': {}
 
   '@jsr/unplugin__macros@0.14.0(@types/node@22.10.7)(jiti@1.21.7)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)':
     dependencies:
