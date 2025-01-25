@@ -41,6 +41,10 @@
 		{
 			"name": "svelte-preprocess-import-css",
 			"icon": "i-ph:palette-light"
+		},
+		{
+			"name": "svelte-fancy-darkmode",
+			"icon": "i-ph:moon-stars-light"
 		}
 	],
 	"TypeScript Ecosystem": [
