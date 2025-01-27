@@ -120,8 +120,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       '@shikijs/twoslash':
-        specifier: ^1.29.1
-        version: 1.29.1(typescript@5.7.3)
+        specifier: ^2.1.0
+        version: 2.1.0(typescript@5.7.3)
       '@std/collections':
         specifier: npm:@jsr/std__collections@^1.0.10
         version: '@jsr/std__collections@1.0.10'
@@ -1446,8 +1446,8 @@ packages:
   '@shikijs/themes@2.1.0':
     resolution: {integrity: sha512-oS2mU6+bz+8TKutsjBxBA7Z3vrQk21RCmADLpnu8cy3tZD6Rw0FKqDyXNtwX52BuIDKHxZNmRlTdG3vtcYv3NQ==}
 
-  '@shikijs/twoslash@1.29.1':
-    resolution: {integrity: sha512-SN2aam87NjkpjS0O2Zq9SeXSDX1CztLBAROXrJpEe5Qe19dkMUUXY8uhw32Qu/FKjqsK8ycEP2S6FZrd9A2pzw==}
+  '@shikijs/twoslash@2.1.0':
+    resolution: {integrity: sha512-tgZEk78/g1ceC/mS3xA50aIc2rArl+oiphZEdAXaoioLVNebDChhV93NzcXu4NAq4pCogfBbD5HV8qO38+fQyQ==}
 
   '@shikijs/types@1.29.1':
     resolution: {integrity: sha512-aBqAuhYRp5vSir3Pc9+QPu9WESBOjUo03ao0IHLC4TyTioSsp/SkbAZSrIH4ghYYC1T1KTEpRSBa83bas4RnPA==}
@@ -5542,10 +5542,10 @@ snapshots:
     dependencies:
       '@shikijs/types': 2.1.0
 
-  '@shikijs/twoslash@1.29.1(typescript@5.7.3)':
+  '@shikijs/twoslash@2.1.0(typescript@5.7.3)':
     dependencies:
-      '@shikijs/core': 1.29.1
-      '@shikijs/types': 1.29.1
+      '@shikijs/core': 2.1.0
+      '@shikijs/types': 2.1.0
       twoslash: 0.2.12(typescript@5.7.3)
     transitivePeerDependencies:
       - supports-color
