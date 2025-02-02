@@ -12,7 +12,7 @@
 	const publications = {
 		2019: [
 			{
-				title: `Artificial Neural Networks for Realized Volatility Prediction in Cryptocurrency Time Series`,
+				title: `Artificial Neural Networks for Realized Volatility Prediction in Cryptocurrency Time Series`, // spellchecker:disable-line
 				link: `https://link.springer.com/chapter/10.1007/978-3-030-22796-8_18`,
 				authors: `<span text-bold>Ryotaro Miura</span>, Lukáš Pichl, Taisei Kaizoji`,
 				publisher: `ISNN 2019: Advances in Neural Networks 2019`,

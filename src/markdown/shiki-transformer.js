@@ -1,5 +1,5 @@
 /** @type {[RegExp, string][]} */
-const entites = [
+const entities = [
 	[/\{/g, '&#123;'],
 	[/\}/g, '&#125;'],
 ];
@@ -11,7 +11,7 @@ export function transformerEscape() {
 	return {
 		name: '@shikijs/transformers:escape-brackets',
 		postprocess(code) {
-			return entites
+			return entities
 				.reduce((
 					acc,
 					[pattern, replacement],

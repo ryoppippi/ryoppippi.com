@@ -7,6 +7,10 @@ extend-ignore-re = [
 
 [default.extend-words]
 Edn = "Edn"
+items-center = "items-center"
+justify-center = "justify-center"
 
 [files]
-extend-exclude = [ "node_modules/**" ]
+extend-exclude = [
+  "node_modules/**",
+]
