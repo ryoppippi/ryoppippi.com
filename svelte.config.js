@@ -10,9 +10,6 @@ import { importAssets } from 'svelte-preprocess-import-assets';
 import SveltweetPreprocessor from 'sveltweet/preprocessor';
 
 import { Route } from './routes.js';
-import svelteMarkdown from './src/markdown/preprocessor.js';
-
-import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,7 +17,6 @@ const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [
-		svelteMarkdown(md),
 		SveltweetPreprocessor(),
 		importAssets(),
 		vitePreprocess(),

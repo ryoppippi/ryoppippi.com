@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "types": ["vite/client"],
+    "plugins": [
+      { "transform": "typia/lib/transform" }
+    ],
+    "outDir": "dist",
+  },
+  "include": ["./src/lib/*.ts"],
+}

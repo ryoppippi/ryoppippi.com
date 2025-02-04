@@ -1,4 +1,4 @@
-import type { Lang } from '$contents/types';
+import type { Lang } from '@ryoppippi.com/types';
 import type rt from 'reading-time';
 
 export type Metadata = {

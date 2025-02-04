@@ -1,14 +1,17 @@
 import type { Item, Metadata } from './types.js';
-import { dev } from '$app/environment';
 import { filter, map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
+import { DEV as dev } from 'esm-env';
 import sortOn from 'sort-on';
 import typia from 'typia';
 
 export const blogPosts = sortOn(
 	Array.from(
 		pipe(
-			Object.entries(import.meta.glob('$contents/blog/*.md', { eager: true })),
+			[
+				...Object.entries(import.meta.glob('./*.md', { eager: true })),
+				...Object.entries(import.meta.glob('./*.svelte', { eager: true })),
+			],
 
 			map(([filepath, md]) => ({
 				// eslint-disable-next-line ts/no-unsafe-member-access
