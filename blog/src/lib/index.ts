@@ -31,3 +31,5 @@ export const blogPosts = sortOn(
 	),
 	['-pubDate'],
 ) satisfies Item[];
+
+export type * from './types.js';
