@@ -14,7 +14,6 @@ import Components from 'unplugin-svelte-components/vite';
 
 import { defineConfig } from 'vite';
 
-import { denyImports } from 'vite-env-only';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 
 import { Route } from './routes.js';
@@ -28,12 +27,6 @@ export default defineConfig({
 		target: 'es2022',
 	},
 	plugins: [
-		denyImports({
-			client: {
-				specifiers: ['fs-extra', /^node:/],
-				files: ['**/.server/*', '**/*.server.*'],
-			},
-		}),
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
 			cache: true,
