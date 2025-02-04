@@ -116,9 +116,6 @@ importers:
       '@secretlint/secretlint-rule-preset-recommend':
         specifier: ^9.0.0
         version: 9.0.0
-      '@shikijs/markdown-it':
-        specifier: ^2.1.0
-        version: 2.1.0
       '@shikijs/twoslash':
         specifier: ^2.1.0
         version: 2.1.0(typescript@5.7.3)
@@ -152,12 +149,6 @@ importers:
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
-      '@types/markdown-it':
-        specifier: ^14.1.2
-        version: 14.1.2
-      '@types/markdown-it-link-attributes':
-        specifier: ^3.0.5
-        version: 3.0.5
       '@types/node':
         specifier: ^22.12.0
         version: 22.12.0
@@ -197,54 +188,12 @@ importers:
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
-      magic-string:
-        specifier: ^0.30.17
-        version: 0.30.17
-      markdown-it:
-        specifier: ^14.1.0
-        version: 14.1.0
-      markdown-it-anchor:
-        specifier: ^9.2.0
-        version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
-      markdown-it-budoux:
-        specifier: ^1.0.6
-        version: 1.0.6
-      markdown-it-collapsible:
-        specifier: ^2.0.2
-        version: 2.0.2(markdown-it@14.1.0)
-      markdown-it-github-alerts:
-        specifier: ^0.3.0
-        version: 0.3.0(markdown-it@14.1.0)
-      markdown-it-image-figures:
-        specifier: ^2.1.1
-        version: 2.1.1(markdown-it@14.1.0)
-      markdown-it-link-attributes:
-        specifier: ^4.0.1
-        version: 4.0.1
-      markdown-it-link-preview:
-        specifier: ^1.1.4
-        version: 1.1.4
-      markdown-it-magic-link:
-        specifier: ^0.1.4
-        version: 0.1.4
-      markdown-it-mdc:
-        specifier: ^0.2.5
-        version: 0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
-      reading-time:
-        specifier: ^1.5.0
-        version: 1.5.0
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
       secretlint:
         specifier: ^9.0.0
         version: 9.0.0
-      shiki:
-        specifier: ^2.1.0
-        version: 2.1.0
       sort-on:
         specifier: ^6.1.0
         version: 6.1.0
@@ -329,6 +278,12 @@ importers:
       '@core/pipe':
         specifier: npm:@jsr/core__pipe@^0.4.0
         version: '@jsr/core__pipe@0.4.0'
+      '@ryoppippi.com/markdown':
+        specifier: workspace:*
+        version: link:../packages/markdown
+      '@ryoppippi.com/types':
+        specifier: workspace:*
+        version: link:../packages/types
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.2.0
         version: '@jsr/ryoppippi__unplugin-typia@1.2.0(@samchon/openapi@2.4.0)(@types/node@22.12.0)(jiti@1.21.7)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)'
@@ -347,6 +302,9 @@ importers:
       publint:
         specifier: ^0.3.2
         version: 0.3.2
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
       sort-on:
         specifier: ^6.1.0
         version: 6.1.0
@@ -368,6 +326,95 @@ importers:
       vite:
         specifier: ^6.0.0
         version: 6.0.7(@types/node@22.12.0)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)
+
+  packages/libs:
+    dependencies:
+      diacritics:
+        specifier: ^1.3.0
+        version: 1.3.0
+    devDependencies:
+      typescript:
+        specifier: ^5.0.0
+        version: 5.7.3
+
+  packages/markdown:
+    dependencies:
+      '@core/pipe':
+        specifier: npm:@jsr/core__pipe@0.4.0
+        version: '@jsr/core__pipe@0.4.0'
+      '@ryoppippi.com/libs':
+        specifier: workspace:*
+        version: link:../libs
+      '@shikijs/markdown-it':
+        specifier: ^2.1.0
+        version: 2.1.0
+      '@types/markdown-it':
+        specifier: ^14.1.2
+        version: 14.1.2
+      '@types/markdown-it-link-attributes':
+        specifier: ^3.0.5
+        version: 3.0.5
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
+      magic-string:
+        specifier: ^0.30.17
+        version: 0.30.17
+      markdown-it:
+        specifier: ^14.1.0
+        version: 14.1.0
+      markdown-it-anchor:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+      markdown-it-budoux:
+        specifier: ^1.0.6
+        version: 1.0.6
+      markdown-it-collapsible:
+        specifier: ^2.0.2
+        version: 2.0.2(markdown-it@14.1.0)
+      markdown-it-github-alerts:
+        specifier: ^0.3.0
+        version: 0.3.0(markdown-it@14.1.0)
+      markdown-it-image-figures:
+        specifier: ^2.1.1
+        version: 2.1.1(markdown-it@14.1.0)
+      markdown-it-link-attributes:
+        specifier: ^4.0.1
+        version: 4.0.1
+      markdown-it-link-preview:
+        specifier: ^1.1.4
+        version: 1.1.4
+      markdown-it-magic-link:
+        specifier: ^0.1.4
+        version: 0.1.4
+      markdown-it-mdc:
+        specifier: ^0.2.5
+        version: 0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
+      shiki:
+        specifier: ^2.1.0
+        version: 2.1.0
+    devDependencies:
+      svelte:
+        specifier: ^5.19.7
+        version: 5.19.7
+      type-fest:
+        specifier: ^4.33.0
+        version: 4.33.0
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
+
+  packages/types:
+    devDependencies:
+      typescript:
+        specifier: ^5.0.0
+        version: 5.7.3
 
 packages:
 
@@ -3874,6 +3921,10 @@ packages:
 
   svelte@5.19.6:
     resolution: {integrity: sha512-6ydekB3qyqUal+UhfMjmVOjRGtxysR8vuiMhi2nwuBtPJWnctVlsGspjVFB05qmR+TXI1emuqtZt81c0XiFleA==}
+    engines: {node: '>=18'}
+
+  svelte@5.19.7:
+    resolution: {integrity: sha512-I0UUp2MpB5gF8aqHJVklOcRcoLgQNnBolSwLMMqDepE9gVwmGeYBmJp1/obzae72QpxdPIymA4AunIm2x70LBg==}
     engines: {node: '>=18'}
 
   sveltekit-autoimport@1.8.1:
@@ -8469,6 +8520,23 @@ snapshots:
       typescript: 5.7.3
 
   svelte@5.19.6:
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@types/estree': 1.0.6
+      acorn: 8.14.0
+      acorn-typescript: 1.4.13(acorn@8.14.0)
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      clsx: 2.1.1
+      esm-env: 1.2.2
+      esrap: 1.4.3
+      is-reference: 3.0.3
+      locate-character: 3.0.0
+      magic-string: 0.30.17
+      zimmerframe: 1.1.2
+
+  svelte@5.19.7:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0

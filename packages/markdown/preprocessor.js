@@ -1,11 +1,11 @@
 import { dirname, join } from 'node:path';
 import { map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
+import { slugify } from '@ryoppippi.com/libs/slugify.server.js';
 import { parse as dateParse } from 'date-fns';
 import matter from 'gray-matter';
 import MagicString from 'magic-string';
 import rt from 'reading-time';
-import { slugify } from '../lib/slugify.server.js';
 
 /**
  * @param {string} filepath
