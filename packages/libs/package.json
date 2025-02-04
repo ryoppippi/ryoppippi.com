@@ -1,0 +1,11 @@
+{
+  "name": "@ryoppippi.com/libs",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "diacritics": "^1.3.0"
+  }
+}
