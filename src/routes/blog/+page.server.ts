@@ -1,6 +1,6 @@
-import { blogPosts } from '$contents/blog';
 import { posts as rssPosts } from '$contents/external-rss';
 import { formatDate } from '$lib/util';
+import { blogPosts } from '@ryoppippi.com/blog';
 import { parseJSON } from 'date-fns';
 
 import sortOn from 'sort-on';

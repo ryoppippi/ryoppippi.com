@@ -9,7 +9,7 @@ export const blogPosts = sortOn(
 	Array.from(
 		pipe(
 			[
-				...Object.entries(import.meta.glob('./*.md', { eager: true })),
+				// ...Object.entries(import.meta.glob('./*.md', { eager: true })),
 				...Object.entries(import.meta.glob('./*.svelte', { eager: true })),
 			],
 

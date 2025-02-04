@@ -1,9 +1,9 @@
 /* eslint-disable antfu/no-top-level-await */
 
 import type { Lang } from '$contents/types';
-import { slugify } from '$lib/slugify.server';
 import { flatten, map } from '@core/iterutil/pipe/async';
 import { pipe } from '@core/pipe';
+import { slugify } from '@ryoppippi.com/libs/slugify.server.js';
 import Parser from 'rss-parser';
 
 import sortOn from 'sort-on';

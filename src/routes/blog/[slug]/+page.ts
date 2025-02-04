@@ -1,11 +1,11 @@
-import type { Metadata } from '$contents/blog/types';
-import type { MarkdownImport } from '../../../markdown';
+import type { Metadata } from '@ryoppippi.com/blog';
+import type { MarkdownImport } from '@ryoppippi.com/markdown';
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
 export const load = (async ({ params: { slug } }) => {
 	try {
-		const md = await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
+		const md = await import(`@ryoppippi.com/blog/dist/${slug}.svelte`) as unknown as MarkdownImport<Metadata>;
 
 		return {
 			metadata: md.metadata,

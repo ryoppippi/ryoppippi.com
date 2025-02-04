@@ -1,8 +1,8 @@
 import type { Lang } from '$lib/../contents/types';
 import type { tags } from 'typia';
 import type { PageServerLoad } from './$types';
-import { slugify } from '$lib/slugify.server';
 import { formatDate } from '$lib/util';
+import { slugify } from '@ryoppippi.com/libs/slugify.server.js';
 import { error } from '@sveltejs/kit';
 import { parseJSON } from 'date-fns';
 import typia from 'typia';

@@ -98,6 +98,15 @@ importers:
       '@iconify-json/vscode-icons':
         specifier: ^1.2.10
         version: 1.2.10
+      '@ryoppippi.com/blog':
+        specifier: workspace:*
+        version: link:blog
+      '@ryoppippi.com/libs':
+        specifier: workspace:*
+        version: link:packages/libs
+      '@ryoppippi.com/markdown':
+        specifier: workspace:*
+        version: link:packages/markdown
       '@ryoppippi/eslint-config':
         specifier: npm:@jsr/ryoppippi__eslint-config@^0.0.25
         version: '@jsr/ryoppippi__eslint-config@0.0.25(@typescript-eslint/utils@8.20.0(eslint@9.19.0(jiti@1.21.7))(typescript@5.7.3))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.19.0(jiti@1.21.7)))(eslint-plugin-svelte@2.46.1(eslint@9.19.0(jiti@1.21.7))(svelte@5.19.6))(eslint@9.19.0(jiti@1.21.7))(svelte-eslint-parser@0.43.0(svelte@5.19.6))(typescript@5.7.3)'
@@ -188,6 +197,9 @@ importers:
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
+      markdown-it-github-alerts:
+        specifier: ^0.3.0
+        version: 0.3.0(markdown-it@14.1.0)
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
@@ -278,6 +290,9 @@ importers:
       '@core/pipe':
         specifier: npm:@jsr/core__pipe@^0.4.0
         version: '@jsr/core__pipe@0.4.0'
+      '@ryoppippi.com/blog':
+        specifier: workspace:*
+        version: 'link:'
       '@ryoppippi.com/markdown':
         specifier: workspace:*
         version: link:../packages/markdown

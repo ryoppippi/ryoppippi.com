@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
-import { blogPosts } from '$contents/blog';
 import { domain, subdomain } from '$lib/util';
+import { blogPosts } from '@ryoppippi.com/blog';
 import { Feed } from 'feed';
 
 export const prerender = true;
