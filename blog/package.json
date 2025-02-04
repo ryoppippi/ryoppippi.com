@@ -1,7 +1,17 @@
 {
 	"name": "@ryoppippi.com/blog",
-	"private": true,
+	"type": "module",
 	"version": "0.0.0",
+	"private": true,
+	"sideEffects": [
+		"**/*.css"
+	],
+	"types": "./dist/index.d.ts",
+	"files": [
+		"!dist/**/*.spec.*",
+		"!dist/**/*.test.*",
+		"dist"
+	],
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack && npm run build:tsc",
@@ -12,17 +22,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
-	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
-	],
-	"sideEffects": [
-		"**/*.css"
-	],
 	"svelte": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"type": "module",
 	"peerDependencies": {
 		"svelte": "^5.0.0"
 	},

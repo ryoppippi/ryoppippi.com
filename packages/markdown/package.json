@@ -1,37 +1,37 @@
 {
-		"name": "@ryoppippi.com/markdown",
-		"type": "module",
-		"exports": {
-				".": {
-						"import": "./index.js",
-						"types": "./index.d.ts"
-				}
-		},
-		"dependencies": {
-				"@core/pipe": "npm:@jsr/core__pipe@0.4.0",
-				"@ryoppippi.com/libs": "workspace:*",
-				"@shikijs/markdown-it": "^2.1.0",
-				"@types/markdown-it": "^14.1.2",
-				"@types/markdown-it-link-attributes": "^3.0.5",
-				"date-fns": "^4.1.0",
-				"gray-matter": "^4.0.3",
-				"magic-string": "^0.30.17",
-				"markdown-it": "^14.1.0",
-				"markdown-it-anchor": "^9.2.0",
-				"markdown-it-budoux": "^1.0.6",
-				"markdown-it-collapsible": "^2.0.2",
-				"markdown-it-github-alerts": "^0.3.0",
-				"markdown-it-image-figures": "^2.1.1",
-				"markdown-it-link-attributes": "^4.0.1",
-				"markdown-it-link-preview": "^1.1.4",
-				"markdown-it-magic-link": "^0.1.4",
-				"markdown-it-mdc": "^0.2.5",
-				"reading-time": "^1.5.0",
-				"shiki": "^2.1.0"
-		},
-		"devDependencies": {
-				"svelte": "^5.19.7",
-				"type-fest": "^4.33.0",
-				"typescript": "^5.7.3"
+	"name": "@ryoppippi.com/markdown",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.js"
 		}
+	},
+	"dependencies": {
+		"@core/pipe": "npm:@jsr/core__pipe@0.4.0",
+		"@ryoppippi.com/libs": "workspace:*",
+		"@shikijs/markdown-it": "^2.1.0",
+		"@types/markdown-it": "^14.1.2",
+		"@types/markdown-it-link-attributes": "^3.0.5",
+		"date-fns": "^4.1.0",
+		"gray-matter": "^4.0.3",
+		"magic-string": "^0.30.17",
+		"markdown-it": "^14.1.0",
+		"markdown-it-anchor": "^9.2.0",
+		"markdown-it-budoux": "^1.0.6",
+		"markdown-it-collapsible": "^2.0.2",
+		"markdown-it-github-alerts": "^0.3.0",
+		"markdown-it-image-figures": "^2.1.1",
+		"markdown-it-link-attributes": "^4.0.1",
+		"markdown-it-link-preview": "^1.1.4",
+		"markdown-it-magic-link": "^0.1.4",
+		"markdown-it-mdc": "^0.2.5",
+		"reading-time": "^1.5.0",
+		"shiki": "^2.1.0"
+	},
+	"devDependencies": {
+		"svelte": "^5.19.7",
+		"type-fest": "^4.33.0",
+		"typescript": "^5.7.3"
+	}
 }
