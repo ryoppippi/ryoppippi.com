@@ -60,8 +60,8 @@ importers:
         specifier: ^1.2.14
         version: 1.2.14
       '@iconify-json/material-symbols-light':
-        specifier: ^1.2.13
-        version: 1.2.13
+        specifier: ^1.2.14
+        version: 1.2.14
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -990,8 +990,8 @@ packages:
   '@iconify-json/logos@1.2.4':
     resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
 
-  '@iconify-json/material-symbols-light@1.2.13':
-    resolution: {integrity: sha512-UBrmleqXOXU96E1R2SCzx8F0D3gcYAqPjcof49R5mKTqUNRWzciYPHbzvUhkFL6rwjDVQb/D5KErpoTjWN7V3g==}
+  '@iconify-json/material-symbols-light@1.2.14':
+    resolution: {integrity: sha512-twTlrbxhhb7YsMfbgo5u9iTbOh2pGjapTu+Rxbz/rIjrCTnns5plmF/lFahr9SrfxZ+XUNikRTE9F0bKIODPOA==}
 
   '@iconify-json/material-symbols@1.2.14':
     resolution: {integrity: sha512-S0AAFFQPVr8Dkrprspz/otNjxdD3rJRXDGZjbO8a8zn8ZR5mO8jAF81lVoTfUWxPH6SCtH2lK1JQGXHGPxld7g==}
@@ -4861,7 +4861,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/material-symbols-light@1.2.13':
+  '@iconify-json/material-symbols-light@1.2.14':
     dependencies:
       '@iconify/types': 2.0.0
 
