@@ -323,6 +323,15 @@ importers:
 
   blog:
     devDependencies:
+      '@core/iterutil':
+        specifier: npm:@jsr/core__iterutil@^0.9.0
+        version: '@jsr/core__iterutil@0.9.0'
+      '@core/pipe':
+        specifier: npm:@jsr/core__pipe@^0.4.0
+        version: '@jsr/core__pipe@0.4.0'
+      '@ryoppippi/unplugin-typia':
+        specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.2.0
+        version: '@jsr/ryoppippi__unplugin-typia@1.2.0(@samchon/openapi@2.4.0)(@types/node@22.12.0)(jiti@1.21.7)(rollup@4.27.4)(tsx@4.19.2)(yaml@2.6.1)'
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.7(@types/node@22.12.0)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.19.6)(vite@6.0.7(@types/node@22.12.0)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))
@@ -338,6 +347,9 @@ importers:
       publint:
         specifier: ^0.3.2
         version: 0.3.2
+      sort-on:
+        specifier: ^6.1.0
+        version: 6.1.0
       svelte:
         specifier: ^5.0.0
         version: 5.19.6
@@ -347,6 +359,12 @@ importers:
       typescript:
         specifier: ^5.0.0
         version: 5.7.3
+      typescript-svelte-plugin:
+        specifier: ^0.3.45
+        version: 0.3.45(svelte@5.19.6)(typescript@5.7.3)
+      typia:
+        specifier: ^7.6.0
+        version: 7.6.0(@samchon/openapi@2.4.0)(typescript@5.7.3)
       vite:
         specifier: ^6.0.0
         version: 6.0.7(@types/node@22.12.0)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)

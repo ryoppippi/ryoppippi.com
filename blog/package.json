@@ -5,7 +5,7 @@
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
+		"prepare": "svelte-kit sync && ts-patch install || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
@@ -31,14 +31,20 @@
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
+		"@core/iterutil": "npm:@jsr/core__iterutil@^0.9.0",
+		"@core/pipe": "npm:@jsr/core__pipe@^0.4.0",
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@ryoppippi/unplugin-typia": "npm:@jsr/ryoppippi__unplugin-typia@^1.2.0",
 		"publint": "^0.3.2",
+		"sort-on": "^6.1.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
+		"typescript-svelte-plugin": "^0.3.45",
+		"typia": "^7.6.0",
 		"vite": "^6.0.0"
 	}
 }
