@@ -99,7 +99,7 @@
 		"shiki": "^2.2.0",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.8.0",
-		"svelte": "^5.19.6",
+		"svelte": "^5.19.7",
 		"svelte-check": "^4.1.4",
 		"svelte-fancy-darkmode": "^1.1.0",
 		"svelte-meta-tags": "^4.1.0",
