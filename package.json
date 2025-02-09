@@ -106,7 +106,6 @@
 		"svelte-meta-tags": "^4.1.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-sitemap": "^2.7.0",
-		"svelte-vertical-timeline": "^2.0.0",
 		"sveltekit-autoimport": "^1.8.1",
 		"sveltekit-embed": "^0.0.18",
 		"sveltweet": "^0.4.0",

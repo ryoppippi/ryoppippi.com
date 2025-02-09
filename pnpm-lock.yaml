@@ -269,9 +269,6 @@ importers:
       svelte-sitemap:
         specifier: ^2.7.0
         version: 2.7.0
-      svelte-vertical-timeline:
-        specifier: ^2.0.0
-        version: 2.0.0(svelte@5.19.8)
       sveltekit-autoimport:
         specifier: ^1.8.1
         version: 1.8.1(@sveltejs/kit@2.17.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.19.8)(vite@5.4.14(@types/node@22.13.1)))(svelte@5.19.8)(vite@5.4.14(@types/node@22.13.1)))
@@ -3907,11 +3904,6 @@ packages:
     resolution: {integrity: sha512-/0rHrKQuA4MQ7CyHj6d9lD5jSO3woq86LR+ATUS/lx9hxwiQee6awjJ2nzy639Giu6m/Bhzereu9738CkWprfw==}
     engines: {node: '>= 14.17.0'}
     hasBin: true
-
-  svelte-vertical-timeline@2.0.0:
-    resolution: {integrity: sha512-I2Lb+J23mhG8Vf4dLi/qXEo3hVBG2+xilCXpGazMPze8Dhdwad0W+EqxRDvXmlkEdF5HdI+nizO5bNVRe+IgYA==}
-    peerDependencies:
-      svelte: ^5.0.0
 
   svelte2tsx@0.7.28:
     resolution: {integrity: sha512-TJjA+kU8AnkyoprZPgQACMfTX8N0MA5NsIL//h9IuHOxmmaCLluqhcZU+fCkWipi5c/pooHLFOMpqjhq4v7JLQ==}
@@ -8581,10 +8573,6 @@ snapshots:
       fast-glob: 3.3.3
       minimist: 1.2.8
       xmlbuilder2: 3.1.1
-
-  svelte-vertical-timeline@2.0.0(svelte@5.19.8):
-    dependencies:
-      svelte: 5.19.8
 
   svelte2tsx@0.7.28(svelte@5.19.8)(typescript@5.7.3):
     dependencies:
