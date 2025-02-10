@@ -168,8 +168,8 @@ importers:
         specifier: ^65.4.3
         version: 65.4.3
       '@unplugin/macros':
-        specifier: npm:@jsr/unplugin__macros@^0.14.2
-        version: '@jsr/unplugin__macros@0.14.2(@types/node@22.13.1)(jiti@1.21.7)(rollup@4.34.6)(tsx@4.19.2)(yaml@2.6.1)'
+        specifier: npm:@jsr/unplugin__macros@^0.15.1
+        version: '@jsr/unplugin__macros@0.15.1(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)'
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1184,8 +1184,8 @@ packages:
   '@jsr/std__collections@1.0.10':
     resolution: {integrity: sha512-/FlggygpgekjQKToZZ9a1YjJXe2iVoAaVcvToRVMZ6Bs/oGLQ8efHY4ApZZfLwBk+SsKU7mFizyAYYxvGOuAHg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.10.tgz}
 
-  '@jsr/unplugin__macros@0.14.2':
-    resolution: {integrity: sha512-60WLMikxY71Yx/4RSRtrXXTZ1U+BUsv07WbaTfSk3cp+VGMDW4Jh7kSqDuyICxVA8jDJ3D6J/7353aE/nfCfAQ==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.14.2.tgz}
+  '@jsr/unplugin__macros@0.15.1':
+    resolution: {integrity: sha512-/SW0zyXfuAxkWnBNVUEPHzcDGGJxspAhSaNv8H3CL6WoF2iQ/PTUAtJ0zYrZw2EWKf9olrZbXAxXl+AqBjKlxg==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.15.1.tgz}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4192,6 +4192,10 @@ packages:
     resolution: {integrity: sha512-njVdk06fyeftsKTIrGcbNiAFoOBaCv+Ik064eSVHMO7VzaaPjaluJVKPmtKjg07pxGVy3bXNwRM84DnQZN5z4A==}
     engines: {node: '>=14'}
 
+  unplugin-utils@0.2.3:
+    resolution: {integrity: sha512-unB2e2ogZwEoMw/X0Gq1vj2jaRKLmTh9wcSEJggESPllcrZI68uO7B8ykixbXqsSwG8r9T7qaHZudXIC/3qvhw==}
+    engines: {node: '>=18.12.0'}
+
   unplugin@1.16.0:
     resolution: {integrity: sha512-5liCNPuJW8dqh3+DM6uNM2EI3MLLpCKp/KY+9pB5M2S2SR2qvvDHhKgBOaTWEbZTAws3CXfB0rKTIolWKL05VQ==}
     engines: {node: '>=14.0.0'}
@@ -5292,13 +5296,13 @@ snapshots:
 
   '@jsr/std__collections@1.0.10': {}
 
-  '@jsr/unplugin__macros@0.14.2(@types/node@22.13.1)(jiti@1.21.7)(rollup@4.34.6)(tsx@4.19.2)(yaml@2.6.1)':
+  '@jsr/unplugin__macros@0.15.1(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)':
     dependencies:
       '@babel/types': 7.26.7
-      '@rollup/pluginutils': 5.1.4(rollup@4.34.6)
       ast-kit: 1.4.0
       magic-string-ast: 0.7.0
       unplugin: 2.1.2
+      unplugin-utils: 0.2.3
       vite: 6.1.0(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)
       vite-node: 3.0.5(@types/node@22.13.1)
     transitivePeerDependencies:
@@ -5306,7 +5310,6 @@ snapshots:
       - jiti
       - less
       - lightningcss
-      - rollup
       - sass
       - sass-embedded
       - stylus
@@ -8895,6 +8898,11 @@ snapshots:
       unplugin: 1.16.0
     transitivePeerDependencies:
       - rollup
+
+  unplugin-utils@0.2.3:
+    dependencies:
+      pathe: 2.0.2
+      picomatch: 4.0.2
 
   unplugin@1.16.0:
     dependencies:
