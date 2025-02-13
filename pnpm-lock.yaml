@@ -273,8 +273,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(@sveltejs/kit@2.17.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.19.9)(vite@5.4.14(@types/node@22.13.1)))(svelte@5.19.9)(vite@5.4.14(@types/node@22.13.1)))
       sveltekit-embed:
-        specifier: ^0.0.18
-        version: 0.0.18(svelte@5.19.9)
+        specifier: ^0.0.20
+        version: 0.0.20(svelte@5.19.9)
       sveltweet:
         specifier: ^0.4.0
         version: 0.4.0(@sveltejs/kit@2.17.1(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.19.9)(vite@5.4.14(@types/node@22.13.1)))(svelte@5.19.9)(vite@5.4.14(@types/node@22.13.1)))(svelte@5.19.9)
@@ -3924,8 +3924,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': '>=1.0.0'
 
-  sveltekit-embed@0.0.18:
-    resolution: {integrity: sha512-/uj5pjQPH22G99x+adgD2EydXjkkdQNg84aByPmxeZ7HE3cjk5IXUYF8CJqV5IQWBGVKSNta4k8KOqjtlig8/g==}
+  sveltekit-embed@0.0.20:
+    resolution: {integrity: sha512-b/QqAyI9AJxmsOIXMGgCaKFk5CtMJrR56WyTCxnLLC7FwVEbHkZoHf2IgqmXMJflYvmYKVhmF4x/xP/6+RESGQ==}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0
 
@@ -8616,7 +8616,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.26.7
 
-  sveltekit-embed@0.0.18(svelte@5.19.9):
+  sveltekit-embed@0.0.20(svelte@5.19.9):
     dependencies:
       svelte: 5.19.9
 
