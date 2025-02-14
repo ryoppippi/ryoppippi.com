@@ -168,8 +168,8 @@ importers:
         specifier: ^65.4.3
         version: 65.4.3
       '@unplugin/macros':
-        specifier: npm:@jsr/unplugin__macros@^0.15.1
-        version: '@jsr/unplugin__macros@0.15.1(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)'
+        specifier: npm:@jsr/unplugin__macros@^0.16.0
+        version: '@jsr/unplugin__macros@0.16.0(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)'
       buffer:
         specifier: ^6.0.3
         version: 6.0.3
@@ -412,8 +412,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  '@babel/types@7.26.7':
-    resolution: {integrity: sha512-t8kDRGrKXyp6+tjUh7hw2RLyclsW4TRoRvRHtSyAX9Bb5ldlFh+90YAYY6awRXrlB4G5G2izNeGySpATlFzmOg==}
+  '@babel/types@7.26.8':
+    resolution: {integrity: sha512-eUuWapzEGWFEpHFxgEaBG8e3n6S8L3MSu0oda755rOfabWPnh0Our1AozNFVUxGFIhbKgd1ksprsoDGMinTOTA==}
     engines: {node: '>=6.9.0'}
 
   '@clack/core@0.4.1':
@@ -1188,8 +1188,8 @@ packages:
   '@jsr/std__collections@1.0.10':
     resolution: {integrity: sha512-/FlggygpgekjQKToZZ9a1YjJXe2iVoAaVcvToRVMZ6Bs/oGLQ8efHY4ApZZfLwBk+SsKU7mFizyAYYxvGOuAHg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.10.tgz}
 
-  '@jsr/unplugin__macros@0.15.1':
-    resolution: {integrity: sha512-/SW0zyXfuAxkWnBNVUEPHzcDGGJxspAhSaNv8H3CL6WoF2iQ/PTUAtJ0zYrZw2EWKf9olrZbXAxXl+AqBjKlxg==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.15.1.tgz}
+  '@jsr/unplugin__macros@0.16.0':
+    resolution: {integrity: sha512-5nEFTcIk+xMdhBxrxwsQfaOApkRcTeIRxW3ZnfDxkBcW+jz1Cm7WXdTdwmKsb/HU4zZ1ohVjwBYO4XpCsqblbA==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.16.0.tgz}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4650,9 +4650,9 @@ snapshots:
 
   '@babel/parser@7.26.7':
     dependencies:
-      '@babel/types': 7.26.7
+      '@babel/types': 7.26.8
 
-  '@babel/types@7.26.7':
+  '@babel/types@7.26.8':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
@@ -5304,9 +5304,9 @@ snapshots:
 
   '@jsr/std__collections@1.0.10': {}
 
-  '@jsr/unplugin__macros@0.15.1(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)':
+  '@jsr/unplugin__macros@0.16.0(@types/node@22.13.1)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)':
     dependencies:
-      '@babel/types': 7.26.7
+      '@babel/types': 7.26.8
       ast-kit: 1.4.0
       magic-string-ast: 0.7.0
       unplugin: 2.1.2
