@@ -27,7 +27,7 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8
       '@iconify-json/devicon-plain':
-        specifier: ^1.2.13
+        specifier: ^1.2.14
         version: 1.2.14
       '@iconify-json/fa-solid':
         specifier: ^1.2.1
