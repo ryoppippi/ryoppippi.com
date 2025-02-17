@@ -159,7 +159,7 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       '@types/node':
-        specifier: ^22.13.2
+        specifier: ^22.13.4
         version: 22.13.4
       '@unocss/extractor-svelte':
         specifier: ^65.4.3
