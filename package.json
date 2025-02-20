@@ -56,7 +56,7 @@
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.1.0",
 		"@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
 		"@shikijs/markdown-it": "^2.4.1",
-		"@shikijs/twoslash": "^2.4.1",
+		"@shikijs/twoslash": "^2.4.2",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.10",
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/adapter-static": "^3.0.8",
