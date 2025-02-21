@@ -129,5 +129,10 @@
 		"esbuild",
 		"sharp",
 		"svelte-preprocess"
-	]
+	],
+	"pnpm": {
+		"executionEnv": {
+			"nodeVersion": "22.14.0"
+		}
+	}
 }
