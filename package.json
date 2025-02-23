@@ -5,6 +5,7 @@
 	"private": true,
 	"packageManager": "pnpm@10.4.1",
 	"scripts": {
+		"new": "./scripts/new-post.js",
 		"dev": "vite dev",
 		"build": "vite build",
 		"postbuild": "nlx svelte-sitemap --domain https://ryoppippi.com",
@@ -74,7 +75,9 @@
 		"@unocss/reset": "^66.0.0",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.16.0",
 		"buffer": "^6.0.3",
+		"consola": "^3.4.0",
 		"date-fns": "^4.1.0",
+		"dax-sh": "^0.42.0",
 		"diacritics": "^1.3.0",
 		"eslint": "^9.20.1",
 		"eslint-plugin-format": "^1.0.1",
