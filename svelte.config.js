@@ -128,6 +128,7 @@ const config = {
 		typescript: {
 			config(config) {
 				config.include.push(path.join(import.meta.dirname, 'uno.config.ts'));
+				config.include.push(path.join(import.meta.dirname, 'scripts/**/*.ts'));
 			},
 		},
 		alias: {
