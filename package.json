@@ -71,7 +71,7 @@
 		"@types/markdown-it-link-attributes": "^3.0.5",
 		"@types/node": "^22.13.4",
 		"@unocss/extractor-svelte": "^66.0.0",
-		"@unocss/reset": "^65.5.0",
+		"@unocss/reset": "^66.0.0",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.16.0",
 		"buffer": "^6.0.3",
 		"date-fns": "^4.1.0",
