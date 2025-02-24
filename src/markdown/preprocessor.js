@@ -12,7 +12,7 @@ import { slugify } from '../lib/slugify.server.js';
  * @param {string} content
  * @param {Record<string, any>} data
  */
-function processMeta(filepath, content, data) {
+export function processMeta(filepath, content, data) {
 	const { date, ...metadataRest } = data;
 	const pubDate = date instanceof Date
 		? date.toJSON()

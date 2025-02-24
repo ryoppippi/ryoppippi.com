@@ -1,4 +1,4 @@
-import { blogPosts } from '$contents/blog';
+import { blogPosts } from '$contents/blog' with { type: 'macro'};
 import { posts as rssPosts } from '$contents/external-rss';
 import { formatDate } from '$lib/util';
 import { parseJSON } from 'date-fns';

@@ -26,7 +26,8 @@ export const GET = (async () => {
 		if (!post.isPublished) {
 			continue;
 		}
-		const slug = post.filepath.split('/').at(-1)?.replace(/\.md$/, '');
+
+		const { slug } = post;
 
 		if (slug == null) {
 			continue;
