@@ -48,7 +48,6 @@
 		"@unocss/extractor-svelte": "^66.0.0",
 		"@unocss/reset": "^66.0.0",
 		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.16.0",
-		"buffer": "^6.0.3",
 		"consola": "^3.4.0",
 		"date-fns": "^4.1.0",
 		"dax-sh": "^0.42.0",
