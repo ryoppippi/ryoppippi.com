@@ -1,6 +1,5 @@
 import { presetRyoppippi } from '@ryoppippi/unocss-preset';
 import { deepMerge } from '@std/collections/deep-merge';
-import { isDevelopment } from 'std-env';
 
 import {
 	defineConfig,
@@ -55,7 +54,7 @@ export default defineConfig({
 	presets: [
 		presetUno(),
 		presetAttributify(),
-		presetIcons({ autoInstall: isDevelopment }),
+		presetIcons(),
 		presetWebFonts({
 			provider: 'bunny',
 			fonts: {

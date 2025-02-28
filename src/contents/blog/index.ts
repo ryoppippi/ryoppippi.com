@@ -17,7 +17,7 @@ export const blogPosts = await (async () => {
 	for (const filepath of blogs) {
 		const text = await $`cat ${filepath}`.text();
 		const { data } = matter(text);
-		// eslint-disable-next-line ts/no-unsafe-assignment, ts/no-unsafe-call
+
 		const metadata = processMeta(filepath, '', data);
 		frontMatters.push(metadata as unknown as Item);
 	}
