@@ -5,7 +5,6 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import extractorSvelte from '@unocss/extractor-svelte';
 import Macros from '@unplugin/macros/vite';
-import { isDevelopment } from 'std-env';
 // @ts-expect-error no type
 import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
@@ -41,10 +40,7 @@ export default defineConfig({
 			entries: Route,
 		}),
 		UnpluginTypia({ log: 'verbose', cache: true }),
-		Icons({
-			compiler: 'svelte',
-			autoInstall: isDevelopment,
-		}),
+		Icons({ compiler: 'svelte' }),
 		enhancedImages(),
 		Macros(),
 		UnoCSS({
