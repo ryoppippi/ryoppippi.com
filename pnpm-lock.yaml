@@ -183,8 +183,8 @@ importers:
         specifier: ^4.1.4
         version: 4.1.4(picomatch@4.0.2)(svelte@5.20.5)(typescript@5.7.3)
       svelte-fancy-darkmode:
-        specifier: ^1.1.0
-        version: 1.1.0(svelte@5.20.5)
+        specifier: ^1.1.1
+        version: 1.1.1(svelte@5.20.5)
       svelte-meta-tags:
         specifier: ^4.1.1
         version: 4.1.1(svelte@5.20.5)(typescript@5.7.3)
@@ -3765,10 +3765,10 @@ packages:
       svelte:
         optional: true
 
-  svelte-fancy-darkmode@1.1.0:
-    resolution: {integrity: sha512-6ZM3A++JEv62FOmYh1kmlEIpmIxUUy8iQpjUrx49bwTSSpgz4U1hsDUbWoF+PVl8qHZVhV9p5cWkKtIU/LeNRg==}
+  svelte-fancy-darkmode@1.1.1:
+    resolution: {integrity: sha512-AFM3n4FnnyC4Z3aMLSd5HTPEVV8vh4wTwnKBj6bAHXdaNjgY6lWBtbua/Vfk/jxh7tDg8L8aqjyvW17s5grjbw==}
     peerDependencies:
-      svelte: ^5.19.2
+      svelte: ^5.20.4
 
   svelte-meta-tags@4.1.1:
     resolution: {integrity: sha512-7FaGUy4PuTvUpHZ43K9qtetc/MTIVMduFH5PMs7NMtwNVlICDk903CQEpJDJgYXlRNgo7a/EHg6dAFqA5usF9A==}
@@ -8359,7 +8359,7 @@ snapshots:
     optionalDependencies:
       svelte: 5.20.5
 
-  svelte-fancy-darkmode@1.1.0(svelte@5.20.5):
+  svelte-fancy-darkmode@1.1.1(svelte@5.20.5):
     dependencies:
       esm-env: 1.2.2
       svelte: 5.20.5
