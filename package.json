@@ -23,7 +23,7 @@
 		"@antfu/ni": "^23.3.1",
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.9.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.4.0",
-		"@iconify/json": "^2.2.312",
+		"@iconify/json": "^2.2.313",
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.25",
 		"@ryoppippi/str-fns": "npm:@jsr/ryoppippi__str-fns@^0.1.2",
 		"@ryoppippi/unocss-preset": "npm:@jsr/ryoppippi__unocss-preset@^1.0.5",
