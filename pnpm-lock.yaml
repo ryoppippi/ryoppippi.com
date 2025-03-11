@@ -27,8 +27,8 @@ importers:
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unocss-preset':
-        specifier: npm:@jsr/ryoppippi__unocss-preset@^1.0.5
-        version: '@jsr/ryoppippi__unocss-preset@1.0.5'
+        specifier: ^2.0.0
+        version: 2.0.0(unocss@0.65.1(postcss@8.5.1)(rollup@4.34.6)(vite@5.4.14(@types/node@22.13.9))(vue@3.5.13(typescript@5.8.2)))
       '@ryoppippi/unplugin-typia':
         specifier: npm:@jsr/ryoppippi__unplugin-typia@^1.2.0
         version: '@jsr/ryoppippi__unplugin-typia@1.2.0(@samchon/openapi@2.4.0)(@types/node@22.13.9)(jiti@1.21.7)(rollup@4.34.6)(tsx@4.19.2)(yaml@2.6.1)'
@@ -1182,9 +1182,6 @@ packages:
   '@jsr/ryoppippi__str-fns@0.1.2':
     resolution: {integrity: sha512-KNFaC8uCkIG7CHsI7uPySBZUAEZJXZUkcfrPcyicYLSO/p+u79v+rYSy6a596GXsxeMIAfyBbJM6/+h144ptSA==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__str-fns/0.1.2.tgz}
 
-  '@jsr/ryoppippi__unocss-preset@1.0.5':
-    resolution: {integrity: sha512-wqHOdKwcFY2RkcBQMt5YPEyxLryY4qMSU2rduwfrom1mz7dGZo6iDDji60D4TTMvqtgjONm0TPNjMGnGhwG2kg==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unocss-preset/1.0.5.tgz}
-
   '@jsr/ryoppippi__unplugin-typia@1.2.0':
     resolution: {integrity: sha512-WslO8hg5nbTRn1LD+fYpHub1CnwOg1y3+ezjrRH6gdAXdamr9n4Vr3COe5ejE8EjM6Ai+5WgTlOT0NJMu7w3MQ==, tarball: https://npm.jsr.io/~/11/@jsr/ryoppippi__unplugin-typia/1.2.0.tgz}
 
@@ -1438,6 +1435,11 @@ packages:
     resolution: {integrity: sha512-0PVwmgzZ8+TZ9oGBmdZoQVXflbvuwzN/HRclujpl4N/q3i+y0lqLw8n1bXA8ru3sApDjlmONaNAuYr38y1Kr9w==}
     cpu: [x64]
     os: [win32]
+
+  '@ryoppippi/unocss-preset@2.0.0':
+    resolution: {integrity: sha512-2g1+fuKdgAnQ+ayJBMNhD2aU2ZOpAikIyoc3tsaOFyp2qEp205xeAl1iW+Xh19auB0CFkeYaaJDTb6lrdt1zng==}
+    peerDependencies:
+      unocss: '>=0.56.0 < 101'
 
   '@samchon/openapi@2.4.0':
     resolution: {integrity: sha512-PydX+pugPCagfaIfPW57z0M2V58fAer6aQqNZWsa6MgM9gm5ZWPx85z1Yt9VvqTpIXMNnzlvA9tg8C5ngqP/SA==}
@@ -5254,10 +5256,6 @@ snapshots:
     dependencies:
       type-fest: 4.23.0
 
-  '@jsr/ryoppippi__unocss-preset@1.0.5':
-    dependencies:
-      '@unocss/core': 0.65.1
-
   '@jsr/ryoppippi__unplugin-typia@1.2.0(@samchon/openapi@2.4.0)(@types/node@22.13.9)(jiti@1.21.7)(rollup@4.34.6)(tsx@4.19.2)(yaml@2.6.1)':
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.34.6)
@@ -5495,6 +5493,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.34.6':
     optional: true
+
+  '@ryoppippi/unocss-preset@2.0.0(unocss@0.65.1(postcss@8.5.1)(rollup@4.34.6)(vite@5.4.14(@types/node@22.13.9))(vue@3.5.13(typescript@5.8.2)))':
+    dependencies:
+      unocss: 0.65.1(postcss@8.5.1)(rollup@4.34.6)(vite@5.4.14(@types/node@22.13.9))(vue@3.5.13(typescript@5.8.2))
 
   '@samchon/openapi@2.4.0': {}
 
