@@ -52,7 +52,7 @@
 		"date-fns": "^4.1.0",
 		"dax-sh": "^0.42.0",
 		"diacritics": "^1.3.0",
-		"eslint": "^9.21.0",
+		"eslint": "^9.22.0",
 		"eslint-plugin-format": "^1.0.1",
 		"eslint-plugin-svelte": "^3.0.3",
 		"favicons": "^7.2.0",
