@@ -27,7 +27,7 @@ importers:
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
       '@ryoppippi/unocss-preset':
-        specifier: ^2.0.0
+        specifier: ^2.0.1
         version: 2.0.1(unocss@66.0.0(postcss@8.5.3)(vite@5.4.14(@types/node@22.13.10))(vue@3.5.13(typescript@5.8.2)))
       '@ryoppippi/unplugin-typia':
         specifier: ^2.0.3
