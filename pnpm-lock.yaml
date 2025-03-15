@@ -222,7 +222,7 @@ importers:
         specifier: ^0.3.46
         version: 0.3.46(svelte@5.23.0)(typescript@5.8.2)
       typia:
-        specifier: ^8.0.0
+        specifier: ^8.0.1
         version: 8.0.1(@samchon/openapi@3.0.0)(typescript@5.8.2)
       ufo:
         specifier: ^1.5.4
