@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@antfu/ni':
-        specifier: ^24.1.0
+        specifier: ^24.2.0
         version: 24.2.0
       '@core/iterutil':
         specifier: npm:@jsr/core__iterutil@^0.9.0
