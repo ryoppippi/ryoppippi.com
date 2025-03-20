@@ -93,8 +93,8 @@ importers:
         specifier: npm:@jsr/unplugin__macros@^0.16.2
         version: '@jsr/unplugin__macros@0.16.2(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.7.0)'
       consola:
-        specifier: ^3.4.0
-        version: 3.4.0
+        specifier: ^3.4.1
+        version: 3.4.2
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -1833,8 +1833,8 @@ packages:
   confbox@0.2.1:
     resolution: {integrity: sha512-hkT3yDPFbs95mNCy1+7qNKC6Pro+/ibzYxtM2iqEigpf0sVw+bg4Zh9/snjsBcf990vfIsg5+1U7VyiyBb3etg==}
 
-  consola@3.4.0:
-    resolution: {integrity: sha512-EiPU8G6dQG0GFHNR8ljnZFki/8a+cQwEQ+7wpxdChl02Q8HXlwEZWD5lqAF8vC2sEC3Tehr8hy7vErz88LHyUA==}
+  consola@3.4.2:
+    resolution: {integrity: sha512-5IKcdX0nnYavi6G7TtOhwkYzyjfJlatbjMjuLSfE2kYT5pMDOilZ4OvMhi637CcDICTmz3wARPoyhqyX1Y+XvA==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
   cookie@0.6.0:
@@ -4915,7 +4915,7 @@ snapshots:
   '@ryoppippi/unplugin-typia@2.0.3(rollup@4.35.0)(svelte@5.23.1)(typescript@5.8.2)(typia@8.0.3(@samchon/openapi@3.1.0)(typescript@5.8.2))(vite@5.4.14(@types/node@22.13.10))':
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.35.0)
-      consola: 3.4.0
+      consola: 3.4.2
       defu: 6.1.4
       diff-match-patch: 1.0.5
       find-cache-dir: 5.0.0
@@ -5331,7 +5331,7 @@ snapshots:
       cac: 6.7.14
       chokidar: 3.6.0
       colorette: 2.0.20
-      consola: 3.4.0
+      consola: 3.4.2
       magic-string: 0.30.17
       pathe: 2.0.3
       perfect-debounce: 1.0.0
@@ -5814,7 +5814,7 @@ snapshots:
 
   confbox@0.2.1: {}
 
-  consola@3.4.0: {}
+  consola@3.4.2: {}
 
   cookie@0.6.0: {}
 
@@ -8355,7 +8355,7 @@ snapshots:
 
   vite-plugin-favicons@0.1.5(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)):
     dependencies:
-      consola: 3.4.0
+      consola: 3.4.2
       favicons: 7.2.0
       fs-extra: 11.3.0
       pathe: 1.1.2
