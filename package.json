@@ -99,7 +99,7 @@
 		"unplugin-icons": "^22.1.0",
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "^5.4.14",
-		"vite-plugin-favicons": "^0.1.5"
+		"vite-plugin-favicons": "^0.1.6"
 	},
 	"trustedDependencies": [
 		"@sveltejs/kit",

@@ -246,8 +246,8 @@ importers:
         specifier: ^5.4.14
         version: 5.4.14(@types/node@22.13.10)
       vite-plugin-favicons:
-        specifier: ^0.1.5
-        version: 0.1.5(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10))
+        specifier: ^0.1.6
+        version: 0.1.6(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10))
 
 packages:
 
@@ -3927,11 +3927,11 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite-plugin-favicons@0.1.5:
-    resolution: {integrity: sha512-ti+q1K+kDlzvJ/NmvmCZUd6bU+cHxB8RF2fOcHIIZrQapHDEx8mUj71GQUDoqlM4GSgSpaRgNu8ysu3ECxitcA==}
+  vite-plugin-favicons@0.1.6:
+    resolution: {integrity: sha512-FYLe7r0g3r/BTNdZjrZgweFMimQKSReiEWEsHrigZ/xi+/cLKaOpDdjOM1O2lbQ2Dl+GflxFfTkIYJx6feQz1g==}
     peerDependencies:
-      typescript: ^5.6.2
-      vite: ^5.4.8
+      typescript: ^5.8.2
+      vite: ^6.2.2
 
   vite@5.4.14:
     resolution: {integrity: sha512-EK5cY7Q1D8JNhSaPKVK4pwBFvaTmZxEnoKXLG/U9gmdDcihQGNzFlgIvaxezFR4glP1LsuiedwMBqCXH3wZccA==}
@@ -8353,12 +8353,12 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-favicons@0.1.5(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)):
+  vite-plugin-favicons@0.1.6(typescript@5.8.2)(vite@5.4.14(@types/node@22.13.10)):
     dependencies:
       consola: 3.4.2
       favicons: 7.2.0
       fs-extra: 11.3.0
-      pathe: 1.1.2
+      pathe: 2.0.3
       std-env: 3.8.1
       typescript: 5.8.2
       vite: 5.4.14(@types/node@22.13.10)
