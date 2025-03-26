@@ -4,7 +4,7 @@
 
 <div>
 	<Image
-		class='object-contain mx-auto aspect-square w-1/2 rounded-full md:size-64 view-transition-name---profile'
+		class='mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64'
 		alt='profile'
 		fetchpriority='high'
 		loading='eager'
