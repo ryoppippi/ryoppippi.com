@@ -27,7 +27,7 @@
 		"@ryoppippi/eslint-config": "npm:@jsr/ryoppippi__eslint-config@^0.0.25",
 		"@ryoppippi/str-fns": "npm:@jsr/ryoppippi__str-fns@^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
-		"@ryoppippi/unplugin-typia": "^2.1.0",
+		"@ryoppippi/unplugin-typia": "^2.1.3",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.1.0",
 		"@secretlint/secretlint-rule-preset-recommend": "^9.2.0",
 		"@shikijs/markdown-it": "^3.2.1",
