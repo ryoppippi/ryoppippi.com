@@ -113,7 +113,8 @@
 		},
 		"onlyBuiltDependencies": [
 			"esbuild",
-			"sharp"
+			"sharp",
+			"typia"
 		]
 	}
 }
