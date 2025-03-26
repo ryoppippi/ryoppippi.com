@@ -1,13 +1,14 @@
+import type { PresetUnoTheme } from 'unocss';
 import { presetRyoppippi } from '@ryoppippi/unocss-preset';
-import { deepMerge } from '@std/collections/deep-merge';
 
+import { deepMerge } from '@std/collections/deep-merge';
 import {
 	defineConfig,
 	presetAttributify,
 	presetIcons,
 	presetTypography,
 	presetUno,
-	type PresetUnoTheme,
+
 	presetWebFonts,
 	transformerDirectives,
 	transformerVariantGroup,

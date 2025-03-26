@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { type Item as ListItem } from '$components/ListView.svelte';
+	import type { Item as ListItem } from '$components/ListView.svelte';
 
 	type Year = `${number}`;
 	interface Item {
