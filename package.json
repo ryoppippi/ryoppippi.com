@@ -107,15 +107,5 @@
 		"esbuild",
 		"sharp",
 		"svelte-preprocess"
-	],
-	"pnpm": {
-		"executionEnv": {
-			"nodeVersion": "22.14.0"
-		},
-		"onlyBuiltDependencies": [
-			"esbuild",
-			"sharp",
-			"typia"
-		]
-	}
+	]
 }
