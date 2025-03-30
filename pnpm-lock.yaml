@@ -18,8 +18,8 @@ importers:
         specifier: npm:@jsr/core__pipe@0.4.0
         version: '@jsr/core__pipe@0.4.0'
       '@iconify/json':
-        specifier: ^2.2.320
-        version: 2.2.320
+        specifier: ^2.2.321
+        version: 2.2.321
       '@ryoppippi/eslint-config':
         specifier: ^0.1.5
         version: 0.1.5(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.3.3(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.0(svelte@5.25.3))(typescript@5.8.2)
@@ -782,8 +782,8 @@ packages:
     resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify/json@2.2.320':
-    resolution: {integrity: sha512-vyqsYnejXrvY8To10DCdAdXMyh87TQNeaD8IrxnSoT/RDnZTGuUCuFs1wdMHUwDw7xMfVBUWR1+IbpTbdej4hg==}
+  '@iconify/json@2.2.321':
+    resolution: {integrity: sha512-0D1OjRK77jD7dhrb4IhGiBTqLufi6I6HaYso6qkSkvm0WqbWgzGnoNEpw+g/jzSJAiLfuBwOGz6b7Q/ZJqsYrw==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -4603,7 +4603,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.2': {}
 
-  '@iconify/json@2.2.320':
+  '@iconify/json@2.2.321':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
