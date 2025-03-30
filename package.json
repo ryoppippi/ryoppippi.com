@@ -24,7 +24,7 @@
 		"@core/iterutil": "npm:@jsr/core__iterutil@^0.9.0",
 		"@core/pipe": "npm:@jsr/core__pipe@0.4.0",
 		"@iconify/json": "^2.2.320",
-		"@ryoppippi/eslint-config": "^0.1.1",
+		"@ryoppippi/eslint-config": "^0.1.5",
 		"@ryoppippi/str-fns": "npm:@jsr/ryoppippi__str-fns@^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
 		"@ryoppippi/unplugin-typia": "^2.1.3",
