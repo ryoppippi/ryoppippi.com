@@ -21,8 +21,8 @@ importers:
         specifier: ^2.2.321
         version: 2.2.321
       '@ryoppippi/eslint-config':
-        specifier: ^0.1.5
-        version: 0.1.5(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.1(svelte@5.25.3))(typescript@5.8.2)
+        specifier: ^0.2.1
+        version: 0.2.3(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.1(svelte@5.25.3))(typescript@5.8.2)
       '@ryoppippi/str-fns':
         specifier: npm:@jsr/ryoppippi__str-fns@^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
@@ -1091,14 +1091,20 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@ryoppippi/eslint-config@0.1.5':
-    resolution: {integrity: sha512-aIs5KabsIwuMV80+O9WtzXBAiw+592w2+KDCvyDS4g7XtYN9xs1i/jH1aJ6SOi5V7/eDuKinHOPTmj8mJnaVtg==}
+  '@ryoppippi/eslint-config@0.2.3':
+    resolution: {integrity: sha512-9LhsQNrnSMQKUeINN1Eev8Crjg6Doign7IGP4sDSel8GgPBJsWHiZy2lQxogeqeNREWEBXXltM5jAUM7alrx5Q==}
     peerDependencies:
       '@next/eslint-plugin-next': ^15.2.4
-      eslint: '>= 9.0.0'
+      '@tanstack/eslint-plugin-query': '>= 5.68.0'
+      '@tanstack/eslint-plugin-router': '>= 1.114.12'
+      eslint: '>= 9.23.0'
       eslint-plugin-tailwindcss: ^3.18.0
     peerDependenciesMeta:
       '@next/eslint-plugin-next':
+        optional: true
+      '@tanstack/eslint-plugin-query':
+        optional: true
+      '@tanstack/eslint-plugin-router':
         optional: true
       eslint-plugin-tailwindcss:
         optional: true
@@ -2225,6 +2231,11 @@ packages:
     engines: {node: ^18 || >=20}
     peerDependencies:
       eslint: '>=8.44.0'
+
+  eslint-plugin-ryoppippi@0.2.6:
+    resolution: {integrity: sha512-zJ31KEUyNu1jpSzneEwIsI2yVz5f+E7Gs1YtFzDFCJdMEKVA8csCC0mcyfqagLsRGRWUuPhFJcGRKv3Z/TdHcg==}
+    peerDependencies:
+      eslint: '*'
 
   eslint-plugin-svelte@3.4.0:
     resolution: {integrity: sha512-L0eX0W6M0YhIUhWRlOAaornY1lIz6xRSVKVJuiRovMM5wHUBQZmefwJRR0y+sqR0CHtJpFmxYiQbw3UaO8h5KA==}
@@ -4906,13 +4917,14 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.38.0':
     optional: true
 
-  '@ryoppippi/eslint-config@0.1.5(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.1(svelte@5.25.3))(typescript@5.8.2)':
+  '@ryoppippi/eslint-config@0.2.3(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.1(svelte@5.25.3))(typescript@5.8.2)':
     dependencies:
       '@antfu/eslint-config': 4.11.0(@typescript-eslint/utils@8.28.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@66.1.0-beta.7(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3))(eslint@9.23.0(jiti@2.4.2))(svelte-eslint-parser@1.1.1(svelte@5.25.3))(typescript@5.8.2)
       '@antfu/ni': 24.3.0
       defu: 6.1.4
       eslint: 9.23.0(jiti@2.4.2)
       eslint-flat-config-utils: 2.0.1
+      eslint-plugin-ryoppippi: 0.2.6(eslint@9.23.0(jiti@2.4.2))
       pkg-types: 2.1.0
     transitivePeerDependencies:
       - '@eslint-react/eslint-plugin'
@@ -6268,6 +6280,11 @@ snapshots:
       refa: 0.12.1
       regexp-ast-analysis: 0.7.1
       scslre: 0.3.0
+
+  eslint-plugin-ryoppippi@0.2.6(eslint@9.23.0(jiti@2.4.2)):
+    dependencies:
+      '@types/estree': 1.0.7
+      eslint: 9.23.0(jiti@2.4.2)
 
   eslint-plugin-svelte@3.4.0(eslint@9.23.0(jiti@2.4.2))(svelte@5.25.3):
     dependencies:
