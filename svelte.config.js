@@ -111,7 +111,6 @@ const config = {
 	vitePlugin: {
 		inspector: isDevelopment,
 		dynamicCompileOptions({ filename }) {
-			/* sveltekit-tweet が rune に対応していないので、user script のみ rune を強制する https://github.com/sveltejs/svelte/issues/9632#issuecomment-1825498213 */
 			if (!filename.includes('node_modules')) {
 				return { runes: true };
 			}
