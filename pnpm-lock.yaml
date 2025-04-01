@@ -60,7 +60,7 @@ importers:
         specifier: ^2.20.2
         version: 2.20.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.3)(vite@6.2.4(@types/node@22.13.14)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.25.3)(vite@6.2.4(@types/node@22.13.14)(jiti@2.4.2)(yaml@2.7.1))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.0.0
+        specifier: ^5.0.3
         version: 5.0.3(svelte@5.25.3)(vite@6.2.4(@types/node@22.13.14)(jiti@2.4.2)(yaml@2.7.1))
       '@total-typescript/ts-reset':
         specifier: ^0.6.1
