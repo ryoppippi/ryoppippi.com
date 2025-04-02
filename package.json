@@ -101,11 +101,5 @@
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "^6.2.4",
 		"vite-plugin-favicons": "^0.1.6"
-	},
-	"trustedDependencies": [
-		"@sveltejs/kit",
-		"esbuild",
-		"sharp",
-		"svelte-preprocess"
-	]
+	}
 }
