@@ -36,7 +36,7 @@ importers:
         specifier: npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.1.0
         version: '@jsr/ryoppippi__vite-plugin-cloudflare-redirect@1.1.0(@types/node@22.13.14)(jiti@2.4.2)(yaml@2.7.1)'
       '@secretlint/secretlint-rule-preset-recommend':
-        specifier: ^9.2.1
+        specifier: ^9.3.0
         version: 9.3.0
       '@shikijs/markdown-it':
         specifier: ^3.2.1
