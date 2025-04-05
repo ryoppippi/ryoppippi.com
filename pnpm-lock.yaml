@@ -168,7 +168,7 @@ importers:
         specifier: ^3.13.0
         version: 3.13.0
       secretlint:
-        specifier: ^9.2.1
+        specifier: ^9.3.0
         version: 9.3.0
       shiki:
         specifier: ^3.2.1
