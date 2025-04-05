@@ -144,8 +144,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2(markdown-it@14.1.0)
       markdown-it-github-alerts:
-        specifier: ^0.3.2
-        version: 0.3.2(markdown-it@14.1.0)
+        specifier: ^1.0.0
+        version: 1.0.0(markdown-it@14.1.0)
       markdown-it-image-figures:
         specifier: ^2.1.1
         version: 2.1.1(markdown-it@14.1.0)
@@ -2717,8 +2717,8 @@ packages:
     peerDependencies:
       markdown-it: '>=5'
 
-  markdown-it-github-alerts@0.3.2:
-    resolution: {integrity: sha512-WKHmbrNDQ3jdixBJPeTXquMy0KjTr1qhwPDjPozTsO9i+UyfhHmV9gQXE/enpIwrzf7qKk+w4s69CX3jM2t1tA==}
+  markdown-it-github-alerts@1.0.0:
+    resolution: {integrity: sha512-RU3cbB/ewujrDpYNdyabvp4CscZ5J/3D71NWbJW+JSA0nplfutIXDMCwtGWlMLwzgBDAYkFMvYGkigq8nWOVdA==}
     peerDependencies:
       markdown-it: '>= 13.0.0'
 
@@ -6728,7 +6728,7 @@ snapshots:
     dependencies:
       markdown-it: 14.1.0
 
-  markdown-it-github-alerts@0.3.2(markdown-it@14.1.0):
+  markdown-it-github-alerts@1.0.0(markdown-it@14.1.0):
     dependencies:
       markdown-it: 14.1.0
 
