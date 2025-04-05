@@ -73,7 +73,7 @@
 		"markdown-it-mdc": "^0.2.5",
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
-		"secretlint": "^9.2.1",
+		"secretlint": "^9.3.0",
 		"shiki": "^3.2.1",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.8.1",
