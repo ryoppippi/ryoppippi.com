@@ -177,8 +177,8 @@ importers:
         specifier: ^6.1.0
         version: 6.1.0
       std-env:
-        specifier: ^3.8.1
-        version: 3.8.1
+        specifier: ^3.9.0
+        version: 3.9.0
       svelte:
         specifier: ^5.25.6
         version: 5.25.6
@@ -3420,8 +3420,8 @@ packages:
   stable-hash@0.0.5:
     resolution: {integrity: sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==}
 
-  std-env@3.8.1:
-    resolution: {integrity: sha512-vj5lIj3Mwf9D79hBkltk5qmkFI+biIKWS2IBxEyEU3AX1tUf7AoL8nSazCOiiqQsGKIq01SClsKEzweu34uwvA==}
+  std-env@3.9.0:
+    resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -7651,7 +7651,7 @@ snapshots:
 
   stable-hash@0.0.5: {}
 
-  std-env@3.8.1: {}
+  std-env@3.9.0: {}
 
   string-width@4.2.3:
     dependencies:
@@ -8146,7 +8146,7 @@ snapshots:
       favicons: 7.2.0
       fs-extra: 11.3.0
       pathe: 2.0.3
-      std-env: 3.8.1
+      std-env: 3.9.0
       typescript: 5.8.2
       vite: 6.2.5(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)
 
