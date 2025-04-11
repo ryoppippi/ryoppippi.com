@@ -228,7 +228,7 @@ importers:
         specifier: ^8.2.0
         version: 8.2.0(@samchon/openapi@3.2.2)(typescript@5.8.3)
       ufo:
-        specifier: ^1.6.0
+        specifier: ^1.6.1
         version: 1.6.1
       unocss:
         specifier: ^66.0.0
