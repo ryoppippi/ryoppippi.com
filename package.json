@@ -93,7 +93,7 @@
 		"typescript": "~5.8.3",
 		"typescript-svelte-plugin": "^0.3.46",
 		"typia": "^8.2.0",
-		"ufo": "^1.6.0",
+		"ufo": "^1.6.1",
 		"unocss": "^66.0.0",
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
