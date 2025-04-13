@@ -93,8 +93,8 @@ importers:
         specifier: ^66.0.0
         version: 66.0.0
       '@unplugin/macros':
-        specifier: npm:@jsr/unplugin__macros@^0.16.2
-        version: '@jsr/unplugin__macros@0.16.2(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)'
+        specifier: npm:@jsr/unplugin__macros@^0.16.3
+        version: '@jsr/unplugin__macros@0.16.3(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)'
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -791,8 +791,8 @@ packages:
   '@jsr/std__collections@1.0.10':
     resolution: {integrity: sha512-/FlggygpgekjQKToZZ9a1YjJXe2iVoAaVcvToRVMZ6Bs/oGLQ8efHY4ApZZfLwBk+SsKU7mFizyAYYxvGOuAHg==, tarball: https://npm.jsr.io/~/11/@jsr/std__collections/1.0.10.tgz}
 
-  '@jsr/unplugin__macros@0.16.2':
-    resolution: {integrity: sha512-kVI1Ncoe2PtFzhjCWSE87bCluNMTYq+fJXITs3m8K+ryLY/6y+DBfw8x3vsFywMsFZkDRHYdFWPTnhJMOrTSTQ==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.16.2.tgz}
+  '@jsr/unplugin__macros@0.16.3':
+    resolution: {integrity: sha512-J/S8Hb6HoQaYaMtBPvUplWK9SYVN/OrHKLxRxm9RGp3mJGWX4Ovx/1+4qz/aOmvRyZFAcRZybWh64MJEKBgahA==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.16.3.tgz}
 
   '@napi-rs/wasm-runtime@0.2.7':
     resolution: {integrity: sha512-5yximcFK5FNompXfJFoWanu5l8v1hNGqNHh9du1xETp9HWk/B/PzvchX55WYOPaIeNglG8++68AAiauBAtbnzw==}
@@ -2692,8 +2692,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  magic-string-ast@0.8.0:
-    resolution: {integrity: sha512-e9eH6YOYl2OuDd3fNt2ciFhj/l2vxJmGeWLLcY+0NcW6k0Xitq7XIxN2++QVVhswXeJLy95SjF8oVKRyJC95GQ==}
+  magic-string-ast@0.9.1:
+    resolution: {integrity: sha512-18dv2ZlSSgJ/jDWlZGKfnDJx56ilNlYq9F7NnwuWTErsmYmqJ2TWE4l1o2zlUHBYUGBy3tIhPCC1gxq8M5HkMA==}
     engines: {node: '>=20.18.0'}
 
   magic-string@0.26.7:
@@ -3787,6 +3787,10 @@ packages:
     resolution: {integrity: sha512-Qp+iiD+qCRnUek+nDoYvtWX7tfnYyXsrOnJ452FRTgOyKmTM7TUJ3l+PLPJOOWPTUyKISKp4isC5JJPSXUjGgw==}
     engines: {node: '>=18.12.0'}
 
+  unplugin@2.3.2:
+    resolution: {integrity: sha512-3n7YA46rROb3zSj8fFxtxC/PqoyvYQ0llwz9wtUPUutr9ig09C8gGo5CWCwHrUzlqC1LLR43kxp5vEIyH1ac1w==}
+    engines: {node: '>=18.12.0'}
+
   unrs-resolver@1.3.3:
     resolution: {integrity: sha512-PFLAGQzYlyjniXdbmQ3dnGMZJXX5yrl2YS4DLRfR3BhgUsE1zpRIrccp9XMOGRfIHpdFvCn/nr5N1KMVda4x3A==}
 
@@ -3818,8 +3822,8 @@ packages:
     resolution: {integrity: sha512-OOvVnaBTqJJ2J7X1cM1qpH4pj9jsfTxia1VSuWeyXtf+OnP8d0YI1LHpv8y2NT47wg+n7XiTgh3BvcSffuBWrw==}
     engines: {node: '>=18.0.0'}
 
-  vite-node@3.0.9:
-    resolution: {integrity: sha512-w3Gdx7jDcuT9cNn9jExXgOyKmf5UOTb6WMHz8LGAm54eS1Elf5OuBhCxl6zJxGhEeIkgsE1WbHuoL0mj/UXqXg==}
+  vite-node@3.1.1:
+    resolution: {integrity: sha512-V+IxPAE2FvXpTCHXyNem0M+gWm6J7eRyWPR6vYoG/Gl+IscNOjXzztUhimQgTxaAoUoj40Qqimaa0NLIOOAH4w==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
@@ -4528,15 +4532,14 @@ snapshots:
 
   '@jsr/std__collections@1.0.10': {}
 
-  '@jsr/unplugin__macros@0.16.2(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)':
+  '@jsr/unplugin__macros@0.16.3(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)':
     dependencies:
       '@babel/types': 7.27.0
       ast-kit: 1.4.2
-      magic-string-ast: 0.8.0
-      unplugin: 2.2.2
-      unplugin-utils: 0.2.4
+      magic-string-ast: 0.9.1
+      unplugin: 2.3.2
       vite: 6.2.5(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)
-      vite-node: 3.0.9(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)
+      vite-node: 3.1.1(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -6695,7 +6698,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  magic-string-ast@0.8.0:
+  magic-string-ast@0.9.1:
     dependencies:
       magic-string: 0.30.17
 
@@ -8061,6 +8064,12 @@ snapshots:
       acorn: 8.14.1
       webpack-virtual-modules: 0.6.2
 
+  unplugin@2.3.2:
+    dependencies:
+      acorn: 8.14.1
+      picomatch: 4.0.2
+      webpack-virtual-modules: 0.6.2
+
   unrs-resolver@1.3.3:
     optionalDependencies:
       '@unrs/resolver-binding-darwin-arm64': 1.3.3
@@ -8119,7 +8128,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-node@3.0.9(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1):
+  vite-node@3.1.1(@types/node@22.14.0)(jiti@2.4.2)(yaml@2.7.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
