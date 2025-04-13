@@ -48,7 +48,7 @@
 		"@unocss/eslint-plugin": "66.1.0-beta.10",
 		"@unocss/extractor-svelte": "^66.0.0",
 		"@unocss/reset": "^66.0.0",
-		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.16.2",
+		"@unplugin/macros": "npm:@jsr/unplugin__macros@^0.16.3",
 		"consola": "^3.4.2",
 		"date-fns": "^4.1.0",
 		"dax-sh": "^0.42.0",
