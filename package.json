@@ -30,7 +30,7 @@
 		"@ryoppippi/unplugin-typia": "^2.2.0",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "npm:@jsr/ryoppippi__vite-plugin-cloudflare-redirect@^1.1.0",
 		"@secretlint/secretlint-rule-preset-recommend": "^9.3.0",
-		"@shikijs/markdown-it": "^3.2.1",
+		"@shikijs/markdown-it": "^3.2.2",
 		"@shikijs/twoslash": "^3.2.1",
 		"@std/collections": "npm:@jsr/std__collections@^1.0.10",
 		"@sveltejs/adapter-auto": "^6.0.0",
