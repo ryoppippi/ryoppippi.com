@@ -246,7 +246,7 @@ importers:
         specifier: ^0.3.1
         version: 0.3.1(rollup@4.40.0)
       vite:
-        specifier: ^6.3.0
+        specifier: ^6.3.1
         version: 6.3.2(@types/node@22.14.1)(jiti@2.4.2)(yaml@2.7.1)
       vite-plugin-favicons:
         specifier: ^0.1.6
