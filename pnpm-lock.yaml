@@ -18,7 +18,7 @@ importers:
         specifier: npm:@jsr/core__pipe@0.4.0
         version: '@jsr/core__pipe@0.4.0'
       '@iconify/json':
-        specifier: ^2.2.328
+        specifier: ^2.2.329
         version: 2.2.329
       '@ryoppippi/eslint-config':
         specifier: ^0.3.7
