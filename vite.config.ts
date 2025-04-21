@@ -1,5 +1,4 @@
 import path from 'node:path';
-import UnpluginTypia from '@ryoppippi/unplugin-typia/vite';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -39,7 +38,6 @@ export default defineConfig({
 			mode: 'generate',
 			entries: Route,
 		}),
-		UnpluginTypia({ log: 'verbose', cache: true }),
 		Icons({ compiler: 'svelte' }),
 		enhancedImages(),
 		Macros(),
