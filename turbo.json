@@ -1,0 +1,22 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "remoteCache": {
+    "signature": true
+  },
+  "tasks": {
+    "build:turbo": {
+      "dependsOn": [
+        "build:vite"
+      ],
+      "inputs": [
+        "src/**/*",
+        "static/**/*",
+        "package.json"
+      ],
+      "outputs": [
+        "./.svelte-kit/**",
+        "./build/**"
+      ]
+    }
+  }
+}
