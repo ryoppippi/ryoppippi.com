@@ -2,3 +2,4 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - typia
+  - unrs-resolver
