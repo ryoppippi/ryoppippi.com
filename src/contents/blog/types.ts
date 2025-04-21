@@ -7,7 +7,7 @@ export type Metadata = {
 	pubDate: string;
 	readingTime: ReturnType<typeof rt>;
 	isPublished: boolean;
-	lang: Lang;
+	lang: typeof Lang.infer;
 };
 
 export type Item = {

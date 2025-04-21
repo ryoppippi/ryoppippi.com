@@ -1,23 +1,30 @@
-export type Genre = string;
-export type Project = {
-	name: string;
-	link?: string;
-	slug?: string;
-	description?: string | null;
-	icon: string;
-};
+import { scope } from 'arktype';
 
-export type Projects = Record<Genre, Project[]>;
-
-export type GHRepo = {
-	repo: {
-		name: string;
-		description: string | null;
-		stars: number;
-		watchers: number;
-		forks: number;
-		createdAt: string;
-		pushedAt: string;
-		updatedAt: string;
-	};
-};
+export const { Genre, URL, Repo, GHRes, Project, OssProjects, ParsedProject, ProjectsByGenre } = scope({
+	Genre: 'string#genre',
+	URL: 'string#url',
+	Project: {
+		'name': 'string',
+		'link?': 'URL',
+		'slug?': 'string',
+		'description?': 'string | null',
+		'icon': 'string',
+	},
+	Projects: 'Record<Genre, Project[]>',
+	Repo: {
+		name: 'string',
+		description: 'string | null',
+		stars: 'number',
+		watchers: 'number',
+		forks: 'number',
+		createdAt: 'string',
+		pushedAt: 'string',
+		updatedAt: 'string',
+	},
+	GHRes: {
+		repo: 'Repo',
+	},
+	OssProjects: 'Record<Genre, Project[]>',
+	ParsedProject: 'Required<Project> & Repo',
+	ProjectsByGenre: 'Record<Genre, ParsedProject[]>',
+}).export();

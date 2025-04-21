@@ -1,24 +1,27 @@
 /* eslint-disable antfu/no-top-level-await */
 
-import type { Lang } from '$contents/types';
+import { Lang } from '$contents/types';
 import { slugify } from '$lib/slugify.server';
 import { flatten, map } from '@core/iterutil/pipe/async';
 import { pipe } from '@core/pipe';
+import { scope } from 'arktype';
 import Parser from 'rss-parser';
 
 import sortOn from 'sort-on';
-import typia from 'typia';
 import rss from './rss.json';
 
 const parser = new Parser();
 
-type Item = {
-	title: string;
-	slug: string;
-	link: string;
-	pubDate: string;
-	lang: Lang;
-};
+const { Item } = scope({
+	Lang,
+	Item: {
+		title: 'string',
+		slug: 'string',
+		link: 'string',
+		pubDate: 'string',
+		lang: 'Lang',
+	},
+}).export();
 
 export async function getPosts() {
 	const feedsIter = pipe(
@@ -36,9 +39,9 @@ export async function getPosts() {
 		),
 	);
 
-	const feeds = await Array.fromAsync(feedsIter);
+	const _feeds = await Array.fromAsync(feedsIter);
 
-	typia.assertGuard<Item[]>(feeds);
+	const feeds = Item.array().assert(_feeds);
 
 	const sortedFeeds = sortOn(feeds, ['-pubDate']);
 
