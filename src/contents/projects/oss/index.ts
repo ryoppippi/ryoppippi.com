@@ -1,69 +1,82 @@
 import type { Entries } from 'type-fest';
-import type { tags } from 'typia';
-import type { Genre, GHRepo, Project } from './types.js';
-import typia from 'typia';
+import type { Project } from './types.js';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
+import { GHRes, OssProjects, ParsedProject, ProjectsByGenre } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
 
-_ossProjects satisfies Record<Genre, Project[]>;
+/**
+ * Processes a single project: adds a link if missing, fetches repo info if description is missing.
+ */
+async function processProject(
+	project: typeof Project.infer,
+	fetchFn: typeof globalThis.fetch,
+) {
+	// Ensure project has a link
+	if (project.link != null) {
+		project.link = joinURL(GITHUB_URL, 'ryoppippi', project.name);
+	}
 
-export type ProjectsByGenre = Readonly<Record<keyof typeof _ossProjects, (Required<Project> & GHRepo['repo'])[]>>;
+	// Fetch repo info if description is missing or null
+	if (project.description === undefined || project.description === null) {
+		try {
+			const unghURL = project.link?.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
+			// Basic URL check
+			if (!unghURL.startsWith('https://')) {
+				throw new Error(`Invalid URL format for ungh.cc fetch: ${unghURL}`);
+			}
 
-export async function getProjects(fetch?: typeof globalThis.fetch): Promise<ProjectsByGenre> {
-	const updatedProjects = await Promise.all(
-		(Object.entries(_ossProjects) as Entries<typeof _ossProjects>)
-			.map(async ([genre, projects]) => {
-				const updatedGenreProjects = await Promise.all(
-					projects.map(async (project) => {
-						return Promise.resolve(project as Project)
-							/* add slug */
-							.then(originalProject => ({
-								...originalProject,
-							}))
-							/* add link */
-							.then(originalProject =>
-								!typia.is<string>(originalProject?.link)
-									? {
-											...originalProject,
-											link: joinURL(GITHUB_URL, 'ryoppippi', originalProject.name),
-										}
-									: originalProject,
-							)
-							/* fetch repo info from ungh.cc */
-							.then(async (originalProject) => {
-								if (!typia.is<string>(originalProject?.description)) {
-									try {
-										const unghURL = originalProject.link?.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
-										typia.assertGuard<string & tags.Format<'url'>>(unghURL);
+			const ghRepoRes = await fetchFn(unghURL);
+			if (!ghRepoRes.ok) {
+				throw new Error(`Failed to fetch ${unghURL}: ${ghRepoRes.statusText}`);
+			}
 
-										const ghRepoRes = await (fetch ?? globalThis.fetch)(unghURL);
-										if (!ghRepoRes.ok) {
-											throw new Error(`Failed to fetch ${unghURL}`);
-										}
+			const ghRepoData = await ghRepoRes.json();
 
-										const ghRepo = await ghRepoRes.json();
-										typia.assertGuard<GHRepo>(ghRepo);
+			// Validate fetched data using ArkType
+			const validatedGhRepo = GHRes.assert(ghRepoData);
+			// Merge fetched repo info
+			project = {
+				...project,
+				...validatedGhRepo.repo,
+			};
+		}
+		catch (e) {
+			console.error(`Error fetching or processing repo info for project ${project.name}:`, e);
+			// Continue with the original project data if fetch/processing fails
+		}
+	}
 
-										return {
-											...originalProject,
-											...ghRepo.repo,
-										};
-									}
-									catch (e) {
-										console.error(e);
-									}
-								}
-								return originalProject;
-							});
-					}),
+	// The final object needs to satisfy `Required<Project.infer> & GHRepo['repo']['infer']`.
+	// We assume 'name' and 'icon' are present from the input (as per Project schema).
+	// 'link' is added if missing.
+	// 'description', 'stars', etc., are added from GHRepo if fetched successfully.
+	// 'slug' remains optional as it wasn't added before.
+	// We cast here, assuming the process populates the necessary fields.
+	// Add runtime checks or a final validation step if stricter guarantees are needed.
+	return ParsedProject.assert(project);
+}
+
+/**
+ * Fetches and processes project information, enriching it with GitHub repository data.
+ */
+export async function getProjects(fetchFn: typeof globalThis.fetch = globalThis.fetch): Promise<typeof ProjectsByGenre.inferOut> {
+	const validatedOssProjects = OssProjects.assert(_ossProjects);
+
+	// Process genres concurrently
+	const processedEntries = await Promise.all(
+		(Object.entries(validatedOssProjects) as Entries<typeof validatedOssProjects>).map(
+			async ([genre, projects]) => {
+				// Process projects within a genre concurrently
+				const processedGenreProjects = await Promise.all(
+					projects.map(async project => processProject(project, fetchFn)),
 				);
-
-				/* return by tuple */
-				return [genre, updatedGenreProjects] as const;
-			}),
+				return [genre, processedGenreProjects] as const;
+			},
+		),
 	);
 
-	return Object.fromEntries(updatedProjects) as ProjectsByGenre;
+	// Construct the final result object
+	return ProjectsByGenre.assert(Object.fromEntries(processedEntries));
 }

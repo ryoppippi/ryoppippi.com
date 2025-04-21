@@ -1,7 +1,7 @@
 import { scope } from 'arktype';
 
-export const { Genre, GHRepo, Project } = scope({
-	Genre: 'string',
+export const { Genre, Repo, GHRes, Project, OssProjects, ParsedProject, ProjectsByGenre } = scope({
+	Genre: 'string#genre',
 	Project: {
 		'name': 'string',
 		'link?': 'string',
@@ -10,16 +10,20 @@ export const { Genre, GHRepo, Project } = scope({
 		'icon': 'string',
 	},
 	Projects: 'Record<Genre, Project[]>',
-	GHRepo: {
-		repo: {
-			name: 'string',
-			description: 'string | null',
-			stars: 'number',
-			watchers: 'number',
-			forks: 'number',
-			createdAt: 'string',
-			pushedAt: 'string',
-			updatedAt: 'string',
-		},
+	Repo: {
+		name: 'string',
+		description: 'string | null',
+		stars: 'number',
+		watchers: 'number',
+		forks: 'number',
+		createdAt: 'string',
+		pushedAt: 'string',
+		updatedAt: 'string',
 	},
+	GHRes: {
+		repo: 'Repo',
+	},
+	OssProjects: 'Record<Genre, Project[]>',
+	ParsedProject: 'Required<Project> & Repo',
+	ProjectsByGenre: 'Record<Genre, ParsedProject[]>',
 }).export();
