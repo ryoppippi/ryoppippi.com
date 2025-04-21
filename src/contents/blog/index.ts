@@ -1,4 +1,4 @@
-import type { Item } from '$contents/blog/types';
+import type { Item } from './types';
 import { dev } from '$app/environment';
 import { $ } from 'dax-sh';
 import matter from 'gray-matter';
