@@ -1,23 +1,24 @@
-import type { Lang } from '$lib/../contents/types';
-import type { tags } from 'typia';
 import type { PageServerLoad } from './$types';
+import { Lang } from '$lib/../contents/types';
 import { slugify } from '$lib/slugify.server';
 import { formatDate } from '$lib/util';
 import { error } from '@sveltejs/kit';
+import { scope, type } from 'arktype';
 import { parseJSON } from 'date-fns';
-import typia from 'typia';
 
-type URLString = string & tags.Format<'url'>;
-export type Talk = {
-	title: string;
-	date: string;
-	lang?: Lang;
-	event: string;
-	eventLink?: URLString;
-	videoLink?: URLString;
-	links: URLString[];
-	content: string;
-};
+const { Talk } = scope({
+	URLString: 'string.url#url',
+	Talk: {
+		'title': 'string',
+		'date': 'string',
+		'lang?': Lang,
+		'event': 'string',
+		'eventLink?': 'URLString',
+		'videoLink?': 'URLString',
+		'links': 'URLString[]',
+		'content': 'string',
+	},
+}).export();
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	const res = await fetch('https://talks.ryoppippi.com/talks.json');
@@ -25,9 +26,9 @@ export const load: PageServerLoad = async ({ fetch }) => {
 		return error(res.status, 'Failed to fetch talks');
 	}
 
-	const talks = await res.json();
+	const _talks = await res.json();
 
-	typia.assertGuard<Talk[]>(talks);
+	const talks = Talk.array().assert(_talks);
 
 	const talkWithParsedDate = talks.map(talk => ({
 		...talk,
@@ -51,7 +52,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	});
 
 	/* split by year */
-	const talksByYear: Record<string, Talk[]> = {};
+	const talksByYear: Record<string, typeof talksHappened> = {};
 	talksHappened.forEach((talk) => {
 		const year = new Date(talk.date).getFullYear().toString();
 		if (talksByYear[year] == null) {
