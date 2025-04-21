@@ -7,11 +7,12 @@ import { scope } from 'arktype';
 import { parseJSON } from 'date-fns';
 
 const { Talk } = scope({
+	Lang,
 	URLString: 'string.url#url',
 	Talk: {
 		'title': 'string',
 		'date': 'string',
-		'lang?': Lang,
+		'lang?': 'Lang',
 		'event': 'string',
 		'eventLink?': 'URLString',
 		'videoLink?': 'URLString',
