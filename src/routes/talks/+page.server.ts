@@ -3,7 +3,7 @@ import { Lang } from '$lib/../contents/types';
 import { slugify } from '$lib/slugify.server';
 import { formatDate } from '$lib/util';
 import { error } from '@sveltejs/kit';
-import { scope, type } from 'arktype';
+import { scope } from 'arktype';
 import { parseJSON } from 'date-fns';
 
 const { Talk } = scope({

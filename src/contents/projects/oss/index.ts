@@ -2,9 +2,10 @@ import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
-import { GHRes, OssProjects, ParsedProject, ProjectsByGenre } from './types.js';
+import { GHRes, OssProjects, ParsedProject, ProjectsByGenre, URL } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
+const GITHUB_USERNAME = `ryoppippi`;
 
 /**
  * Processes a single project: adds a link if missing, fetches repo info if description is missing.
@@ -15,13 +16,15 @@ async function processProject(
 ) {
 	// Ensure project has a link
 	if (project.link == null) {
-		project.link = joinURL(GITHUB_URL, 'ryoppippi', project.name);
+		project.link = URL.assert(joinURL(GITHUB_URL, GITHUB_USERNAME, project.name));
 	}
+
+	const link = URL.assert(project.link);
 
 	// Fetch repo info if description is missing or null
 	if (project.description === undefined || project.description === null) {
 		try {
-			const unghURL = project.link?.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
+			const unghURL = link.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
 			// Basic URL check
 			if (!unghURL.startsWith('https://')) {
 				throw new Error(`Invalid URL format for ungh.cc fetch: ${unghURL}`);
@@ -40,7 +43,9 @@ async function processProject(
 			project = {
 				...project,
 				...validatedGhRepo.repo,
-			};
+				link,
+				slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
+			} as const satisfies typeof ParsedProject.infer;
 		}
 		catch (e) {
 			console.error(`Error fetching or processing repo info for project ${project.name}:`, e);
