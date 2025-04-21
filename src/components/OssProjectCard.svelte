@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import type { Project } from '$contents/projects/oss/types';
 
-	const { project }: { project: Project } = $props();
+	const { project }: { project: typeof Project.infer } = $props();
 	const { name, description, icon, link, slug } = project;
 </script>
 

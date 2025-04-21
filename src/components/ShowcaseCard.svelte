@@ -4,7 +4,7 @@
 	import { formatDate } from '$lib/util';
 
 	type Props = {
-		project: Project;
+		project: typeof Project.infer;
 	};
 
 	const {
