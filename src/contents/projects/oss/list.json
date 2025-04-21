@@ -1,4 +1,22 @@
 {
+	"CLI": [
+		{
+			"name": "sitemcp",
+			"icon": "i-solar-cloud-download-line-duotone"
+		},
+		{
+			"name": "curxy",
+			"icon": "i-solar:cursor-square-broken"
+		},
+		{
+			"name": "nyancat.zig",
+			"icon": "i-solar:cat-broken"
+		},
+		{
+			"name": "zigchat",
+			"icon": "i-ph:chat-light"
+		}
+	],
 	"Vim/Neovim": [
 		{
 			"name": "nvim-pnpm-catalog-lens",
@@ -89,20 +107,6 @@
 		{
 			"name": "str-fns",
 			"icon": "i-oui:app-devtools"
-		}
-	],
-	"CLI": [
-		{
-			"name": "curxy",
-			"icon": "i-solar:cursor-square-broken"
-		},
-		{
-			"name": "nyancat.zig",
-			"icon": "i-solar:cat-broken"
-		},
-		{
-			"name": "zigchat",
-			"icon": "i-ph:chat-light"
 		}
 	],
 	"Fish Plugins": [
