@@ -1,2 +1,3 @@
-export const LANGS = ['en', 'ja'] as const;
-export type Lang = typeof LANGS[number];
+import { type } from 'arktype';
+
+export const Lang = type(`'en' | 'ja'`);
