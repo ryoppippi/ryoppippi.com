@@ -14,7 +14,7 @@ async function processProject(
 	fetchFn: typeof globalThis.fetch,
 ) {
 	// Ensure project has a link
-	if (project.link != null) {
+	if (project.link == null) {
 		project.link = joinURL(GITHUB_URL, 'ryoppippi', project.name);
 	}
 
@@ -48,13 +48,6 @@ async function processProject(
 		}
 	}
 
-	// The final object needs to satisfy `Required<Project.infer> & GHRepo['repo']['infer']`.
-	// We assume 'name' and 'icon' are present from the input (as per Project schema).
-	// 'link' is added if missing.
-	// 'description', 'stars', etc., are added from GHRepo if fetched successfully.
-	// 'slug' remains optional as it wasn't added before.
-	// We cast here, assuming the process populates the necessary fields.
-	// Add runtime checks or a final validation step if stricter guarantees are needed.
 	return ParsedProject.assert(project);
 }
 
