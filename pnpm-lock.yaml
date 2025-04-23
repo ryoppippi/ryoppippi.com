@@ -207,7 +207,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(@sveltejs/kit@2.20.7(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.1)(vite@6.3.2(@types/node@22.14.1)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.1)(vite@6.3.2(@types/node@22.14.1)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.1)
       tinyglobby:
-        specifier: ^0.2.12
+        specifier: ^0.2.13
         version: 0.2.13
       tslib:
         specifier: ^2.8.1
