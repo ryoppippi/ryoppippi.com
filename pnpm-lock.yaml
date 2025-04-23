@@ -209,9 +209,6 @@ importers:
       tinyglobby:
         specifier: ^0.2.13
         version: 0.2.13
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
       type-fest:
         specifier: ^4.40.0
         version: 4.40.0
