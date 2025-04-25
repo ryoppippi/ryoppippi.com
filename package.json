@@ -22,7 +22,7 @@
 		"@antfu/ni": "^24.3.0",
 		"@core/iterutil": "jsr:^0.9.0",
 		"@core/pipe": "jsr:^0.4.0",
-		"@iconify/json": "^2.2.329",
+		"@iconify/json": "^2.2.330",
 		"@ryoppippi/eslint-config": "^0.3.7",
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
