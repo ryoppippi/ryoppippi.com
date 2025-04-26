@@ -76,7 +76,7 @@
 		"shiki": "^3.3.0",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.9.0",
-		"svelte": "^5.28.1",
+		"svelte": "^5.28.2",
 		"svelte-check": "^4.1.6",
 		"svelte-fancy-darkmode": "^1.1.2",
 		"svelte-meta-tags": "^4.2.0",
