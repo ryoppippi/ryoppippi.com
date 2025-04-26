@@ -144,15 +144,7 @@ const config = {
 			},
 		},
 		paths: {
-			/**
-			  @see https://developers.cloudflare.com/pages/configuration/build-configuration#environment-variables
-			  @see https://kit.svelte.jp/docs/configuration#paths
-			 */
-			assets: (isDevelopment
-				? ''
-				: process.env.CF_PAGES_BRANCH !== 'main'
-					? process.env.CF_PAGES_URL
-					: undefined) ?? 'https://ryoppippi.com',
+			assets: process.env.CF_PAGES_URL ?? '',
 		},
 	},
 };
