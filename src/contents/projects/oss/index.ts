@@ -13,7 +13,6 @@ const GITHUB_USERNAME = `ryoppippi`;
  */
 async function processProject(
 	project: typeof Project.infer,
-	fetchFn: typeof globalThis.fetch,
 ) {
 	// Ensure project has a link
 	if (project.link == null) {
@@ -52,7 +51,7 @@ async function processProject(
 /**
  * Fetches and processes project information, enriching it with GitHub repository data.
  */
-export async function getProjects(fetchFn: typeof globalThis.fetch = globalThis.fetch): Promise<typeof ProjectsByGenre.inferOut> {
+export async function getProjects(): Promise<typeof ProjectsByGenre.inferOut> {
 	const validatedOssProjects = OssProjects.assert(_ossProjects);
 
 	// Process genres concurrently
@@ -61,7 +60,7 @@ export async function getProjects(fetchFn: typeof globalThis.fetch = globalThis.
 			async ([genre, projects]) => {
 				// Process projects within a genre concurrently
 				const processedGenreProjects = await Promise.all(
-					projects.map(async project => processProject(project, fetchFn)),
+					projects.map(async project => processProject(project)),
 				);
 				return [genre, processedGenreProjects] as const;
 			},
