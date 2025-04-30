@@ -1,8 +1,9 @@
 import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
+import { useOctokit } from '$lib/server/octokit.js';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
-import { GHRes, OssProjects, ParsedProject, ProjectsByGenre, URL } from './types.js';
+import { OssProjects, ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
 const GITHUB_USERNAME = `ryoppippi`;
@@ -22,27 +23,19 @@ async function processProject(
 	const link = URL.assert(project.link);
 
 	// Fetch repo info if description is missing or null
-	if (project.description === undefined || project.description === null) {
+	if (project.description == null) {
 		try {
-			const unghURL = link.replace(GITHUB_URL, 'https://ungh.cc/repos').trim() ?? '';
-			// Basic URL check
-			if (!unghURL.startsWith('https://')) {
-				throw new Error(`Invalid URL format for ungh.cc fetch: ${unghURL}`);
-			}
-
-			const ghRepoRes = await fetchFn(unghURL);
-			if (!ghRepoRes.ok) {
-				throw new Error(`Failed to fetch ${unghURL}: ${ghRepoRes.statusText}`);
-			}
-
-			const ghRepoData = await ghRepoRes.json();
+			const { data: ghRepoData } = await useOctokit().rest.repos.get({
+				owner: GITHUB_USERNAME,
+				repo: project.name,
+			});
 
 			// Validate fetched data using ArkType
-			const validatedGhRepo = GHRes.assert(ghRepoData);
+			const validatedGhRepo = Repo.assert(ghRepoData);
 			// Merge fetched repo info
 			project = {
 				...project,
-				...validatedGhRepo.repo,
+				...validatedGhRepo,
 				link,
 				slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
 			} as const satisfies typeof ParsedProject.infer;
