@@ -7,7 +7,6 @@ import Macros from '@unplugin/macros/vite';
 // @ts-expect-error no type
 import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
-import { attributifyToClass } from 'unplugin-attributify-to-class/vite';
 import Icons from 'unplugin-icons/vite';
 import Components from 'unplugin-svelte-components/vite';
 
@@ -42,9 +41,6 @@ export default defineConfig({
 		Icons({ compiler: 'svelte' }),
 		enhancedImages(),
 		Macros(),
-		attributifyToClass({
-			include: [/\.svelte$/],
-		}),
 		UnoCSS({
 			extractors: [
 				extractorSvelte(),

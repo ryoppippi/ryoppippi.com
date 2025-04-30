@@ -233,9 +233,6 @@ importers:
       unocss-transformer-alias:
         specifier: ^0.0.8
         version: 0.0.8
-      unplugin-attributify-to-class:
-        specifier: ^0.2.5
-        version: 0.2.5(rollup@4.40.1)
       unplugin-icons:
         specifier: ^22.1.0
         version: 22.1.0(@vue/compiler-sfc@3.5.13)(svelte@5.28.2)
@@ -796,9 +793,6 @@ packages:
 
   '@jsr/unplugin__macros@0.16.3':
     resolution: {integrity: sha512-J/S8Hb6HoQaYaMtBPvUplWK9SYVN/OrHKLxRxm9RGp3mJGWX4Ovx/1+4qz/aOmvRyZFAcRZybWh64MJEKBgahA==, tarball: https://npm.jsr.io/~/11/@jsr/unplugin__macros/0.16.3.tgz}
-
-  '@meoc/utils@0.2.10':
-    resolution: {integrity: sha512-LN/CQDOVmmN/kq31630r+dFYZSPezmhbRq0Ib0RbKv+qpSpaOasXwAcwO/rkpPkhuoty5kfpHmTdjrEUU8bJYQ==}
 
   '@napi-rs/wasm-runtime@0.2.9':
     resolution: {integrity: sha512-OKRBiajrrxB9ATokgEQoG87Z25c67pCpYcCwmXYX8PBftC9pBfN18gnm/fh1wurSLEKIAt+QRFLFCQISrb66Jg==}
@@ -1885,9 +1879,6 @@ packages:
 
   dax-sh@0.43.0:
     resolution: {integrity: sha512-rH9zPtgeunTAQnJrh0Q/wZ+uEV5adPffGjJ13Yl/aV4Z3wAQCZqcNspQqa2i3WH+f1yMIBw6a132qpJwLImCDQ==}
-
-  dayjs@1.11.13:
-    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -3700,9 +3691,6 @@ packages:
       vite:
         optional: true
 
-  unplugin-attributify-to-class@0.2.5:
-    resolution: {integrity: sha512-0lTUi01mI19PmTTX4420QO6gJFic1wK4LqNnHeBNDrthQEKI0xw/lYg0bGnWYgPmyqXz88hAdLG+ibaypibXqg==}
-
   unplugin-icons@22.1.0:
     resolution: {integrity: sha512-ect2ZNtk1Zgwb0NVHd0C1IDW/MV+Jk/xaq4t8o6rYdVS3+L660ZdD5kTSQZvsgdwCvquRw+/wYn75hsweRjoIA==}
     peerDependencies:
@@ -3730,9 +3718,6 @@ packages:
     resolution: {integrity: sha512-njVdk06fyeftsKTIrGcbNiAFoOBaCv+Ik064eSVHMO7VzaaPjaluJVKPmtKjg07pxGVy3bXNwRM84DnQZN5z4A==}
     engines: {node: '>=14'}
 
-  unplugin-transform-class@0.5.3:
-    resolution: {integrity: sha512-4xBvfoeBDqlqi9aD0Hv3TTs8JpRs2h9l8LBMXIRXFNTf8biRk6hAQir+zEM/GpBKoMzvt7JqqbMIYzMazQZysQ==}
-
   unplugin-utils@0.2.4:
     resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
@@ -3740,9 +3725,6 @@ packages:
   unplugin@1.16.1:
     resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
     engines: {node: '>=14.0.0'}
-
-  unplugin@1.7.1:
-    resolution: {integrity: sha512-JqzORDAPxxs8ErLV4x+LL7bk5pk3YlcWqpSNsIkAZj972KzFZLClc/ekppahKkOczGkwIG6ElFgdOgOlK4tXZw==}
 
   unplugin@2.3.2:
     resolution: {integrity: sha512-3n7YA46rROb3zSj8fFxtxC/PqoyvYQ0llwz9wtUPUutr9ig09C8gGo5CWCwHrUzlqC1LLR43kxp5vEIyH1ac1w==}
@@ -3880,10 +3862,6 @@ packages:
   webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
-
-  webpack-sources@3.2.3:
-    resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
-    engines: {node: '>=10.13.0'}
 
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
@@ -4511,10 +4489,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-
-  '@meoc/utils@0.2.10':
-    dependencies:
-      dayjs: 1.11.13
 
   '@napi-rs/wasm-runtime@0.2.9':
     dependencies:
@@ -5755,8 +5729,6 @@ snapshots:
     dependencies:
       '@deno/shim-deno': 0.19.2
       undici-types: 5.28.4
-
-  dayjs@1.11.13: {}
 
   debug@3.2.7:
     dependencies:
@@ -7957,14 +7929,6 @@ snapshots:
       - supports-color
       - vue
 
-  unplugin-attributify-to-class@0.2.5(rollup@4.40.1):
-    dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.40.1)
-      unplugin: 1.16.1
-      unplugin-transform-class: 0.5.3(rollup@4.40.1)
-    transitivePeerDependencies:
-      - rollup
-
   unplugin-icons@22.1.0(@vue/compiler-sfc@3.5.13)(svelte@5.28.2):
     dependencies:
       '@antfu/install-pkg': 1.0.0
@@ -7991,14 +7955,6 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-transform-class@0.5.3(rollup@4.40.1):
-    dependencies:
-      '@meoc/utils': 0.2.10
-      '@rollup/pluginutils': 5.1.4(rollup@4.40.1)
-      unplugin: 1.7.1
-    transitivePeerDependencies:
-      - rollup
-
   unplugin-utils@0.2.4:
     dependencies:
       pathe: 2.0.3
@@ -8007,13 +7963,6 @@ snapshots:
   unplugin@1.16.1:
     dependencies:
       acorn: 8.14.1
-      webpack-virtual-modules: 0.6.2
-
-  unplugin@1.7.1:
-    dependencies:
-      acorn: 8.14.1
-      chokidar: 3.6.0
-      webpack-sources: 3.2.3
       webpack-virtual-modules: 0.6.2
 
   unplugin@2.3.2:
@@ -8177,8 +8126,6 @@ snapshots:
   webidl-conversions@6.1.0: {}
 
   webidl-conversions@7.0.0: {}
-
-  webpack-sources@3.2.3: {}
 
   webpack-virtual-modules@0.6.2: {}
 
