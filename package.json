@@ -78,7 +78,7 @@
 		"sort-on": "^6.1.0",
 		"std-env": "^3.9.0",
 		"svelte": "^5.28.2",
-		"svelte-check": "^4.1.6",
+		"svelte-check": "^4.1.7",
 		"svelte-fancy-darkmode": "^1.1.2",
 		"svelte-meta-tags": "^4.2.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
