@@ -87,7 +87,7 @@ importers:
         specifier: ^66.1.0
         version: 66.1.0
       '@unocss/reset':
-        specifier: ^66.0.0
+        specifier: ^66.1.0
         version: 66.1.0
       '@unplugin/macros':
         specifier: jsr:^0.16.3
