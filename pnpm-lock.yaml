@@ -174,7 +174,7 @@ importers:
         specifier: ^9.3.2
         version: 9.3.2
       shiki:
-        specifier: ^3.3.0
+        specifier: ^3.4.0
         version: 3.4.0
       sort-on:
         specifier: ^6.1.0
