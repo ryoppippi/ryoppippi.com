@@ -207,8 +207,8 @@ importers:
         specifier: ^0.0.20
         version: 0.0.20(svelte@5.28.2)
       sveltweet:
-        specifier: ^0.4.0
-        version: 0.4.0(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)
+        specifier: ^0.4.1
+        version: 0.4.1(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)
       tinyglobby:
         specifier: ^0.2.13
         version: 0.2.13
@@ -3765,11 +3765,11 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0
 
-  sveltweet@0.4.0:
-    resolution: {integrity: sha512-RW1ZBEpeTAU47ZaJzF5g8cY8JE+v/TLElIhInBegP13UepYwwLUFOOTHJOHc5lrDXpv+YL0eTxr1OFp9lLJmhA==}
+  sveltweet@0.4.1:
+    resolution: {integrity: sha512-q0SrJZ/gWhjxxWSg7APo0j/jmtf1F/InDxZS/B6ToQN3ktM6aj9h4zOZOFpgr0fOKCR7oI8HbnyDa91NLADL/w==}
     peerDependencies:
-      '@sveltejs/kit': ^2.15.2
-      svelte: ^5.17.3
+      '@sveltejs/kit': ^2.20.8
+      svelte: ^5.28.2
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
@@ -8335,7 +8335,7 @@ snapshots:
     dependencies:
       svelte: 5.28.2
 
-  sveltweet@0.4.0(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2):
+  sveltweet@0.4.1(@sveltejs/kit@2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2):
     dependencies:
       '@sveltejs/kit': 2.20.8(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1)))(svelte@5.28.2)(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(yaml@2.7.1))
       svelte: 5.28.2
