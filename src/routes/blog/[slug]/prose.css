@@ -29,5 +29,5 @@ html:not(.dark) .shiki {
 }
 
 .prose pre code {
-	--at-apply: font-code;
+	--uno: font-code;
 }

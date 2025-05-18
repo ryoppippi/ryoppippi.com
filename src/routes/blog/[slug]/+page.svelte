@@ -65,6 +65,6 @@
 
 <style>
 a {
-	--at-apply: no-underline hover:underline
+	--uno: no-underline hover:underline
 }
 </style>

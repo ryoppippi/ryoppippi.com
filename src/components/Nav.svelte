@@ -122,6 +122,6 @@
 
 <style>
 a{
-	--at-apply: no-underline;
+	--uno: no-underline;
 }
 </style>

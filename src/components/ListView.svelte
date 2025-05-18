@@ -49,6 +49,6 @@
 
 <style>
 a {
-	--at-apply: hover:no-underline;
+	--uno: hover:no-underline;
 }
 </style>
