@@ -1,4 +1,5 @@
 import type { Item } from './types';
+import { join } from 'node:path';
 import { dev } from '$app/environment';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
