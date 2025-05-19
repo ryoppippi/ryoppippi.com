@@ -2,35 +2,37 @@
 
 import { join } from 'node:path';
 import process from 'node:process';
-import { consola } from 'consola';
+import * as p from '@clack/prompts';
 import * as d from 'date-fns';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
 import openEditor from 'open-editor';
 
-const title = await consola.prompt(
-	'Enter the title of the post',
-	{
-		type: 'text',
-		required: true,
-	},
-);
-if (!title) {
-	consola.error('Title is required');
+p.intro('Create a new blog post');
+
+const title = await p.text({
+	message: 'Enter the title of the post',
+});
+if (p.isCancel(title)) {
+	p.log.error('Title is required');
 	process.exit(1);
 }
 
 const date = d.format(new Date(), 'yyyy-MM-dd');
-const lang = await consola.prompt(
-	'Enter the language of the post',
-	{
-		type: 'select',
-		options: ['ja', 'en'],
-		initial: 'en',
-	},
-);
+const lang = await p.select({
+	message: 'Select the language of the post',
+	options: [
+		{ value: 'ja' },
+		{ value: 'en' },
+	],
+	initialValue: 'en',
+});
+if (p.isCancel(lang)) {
+	p.log.error('Language is required');
+	process.exit(1);
+}
 
-consola.start('Creating project...');
+p.log.message('Creating post...');
 
 const blogDir = join(import.meta.dirname, '..', 'src', 'contents', 'blog');
 const md = join(
@@ -47,15 +49,14 @@ const frontMatter = matter.stringify('', {
 await fs.ensureFile(md);
 await fs.writeFile(md, frontMatter);
 
-consola.success(`Post created at ${md}`);
+p.log.success(`Post created at ${md}`);
 
-const isOpen = await consola.prompt(
-	'Do you want to open the editor?',
-	{
-		type: 'confirm',
-		initial: true,
-	},
-);
-if (isOpen) {
+const isOpen = await p.confirm({
+	message: 'Do you want to open the editor?',
+	initialValue: true,
+});
+if (isOpen === true) {
 	openEditor([{ file: md }]);
 }
+
+p.outro('Done!');
