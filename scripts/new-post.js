@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
+import { join } from 'node:path';
 import process from 'node:process';
 import { consola } from 'consola';
 import * as d from 'date-fns';
-import { $ } from 'dax-sh';
+import fs from 'fs-extra';
 import matter from 'gray-matter';
+import openEditor from 'open-editor';
 
 const title = await consola.prompt(
 	'Enter the title of the post',
@@ -24,14 +26,17 @@ const lang = await consola.prompt(
 	{
 		type: 'select',
 		options: ['ja', 'en'],
-		initial: 'ja',
+		initial: 'en',
 	},
 );
 
 consola.start('Creating project...');
 
-const blogDir = $.path(import.meta.dirname).join(`../src/contents/blog/`);
-const location = $.path(blogDir).join(`${date}-${title.toLowerCase().replace(/ /g, '-')}.md`);
+const blogDir = join(import.meta.dirname, '..', 'src', 'contents', 'blog');
+const md = join(
+	blogDir,
+	`${date}-${title.toLowerCase().replace(/ /g, '-')}.md`,
+);
 const frontMatter = matter.stringify('', {
 	title,
 	date,
@@ -39,6 +44,18 @@ const frontMatter = matter.stringify('', {
 	lang,
 });
 
-await $`touch ${location}`;
-await $`echo ${frontMatter} > ${location}`;
-consola.success(`Post created at ${location}`);
+await fs.ensureFile(md);
+await fs.writeFile(md, frontMatter);
+
+consola.success(`Post created at ${md}`);
+
+const isOpen = await consola.prompt(
+	'Do you want to open the editor?',
+	{
+		type: 'confirm',
+		initial: true,
+	},
+);
+if (isOpen) {
+	openEditor([{ file: md }]);
+}
