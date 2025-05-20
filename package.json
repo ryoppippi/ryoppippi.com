@@ -88,7 +88,7 @@
 		"tinyglobby": "^0.2.13",
 		"type-fest": "^4.41.0",
 		"typescript": "^5.8.3",
-		"typescript-svelte-plugin": "^0.3.46",
+		"typescript-svelte-plugin": "^0.3.47",
 		"ufo": "^1.6.1",
 		"unocss": "^66.1.1",
 		"unocss-preset-fluid": "^1.0.2",
