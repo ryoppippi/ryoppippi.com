@@ -72,7 +72,7 @@
 		"open-editor": "^5.1.0",
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
-		"secretlint": "^9.3.2",
+		"secretlint": "^9.3.3",
 		"shiki": "^3.4.2",
 		"sort-on": "^6.1.0",
 		"std-env": "^3.9.0",
