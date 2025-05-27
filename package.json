@@ -8,7 +8,7 @@
 		"new": "./scripts/new-post.js",
 		"dev": "vite dev",
 		"build": "vite build",
-		"postbuild": "nlx svelte-sitemap --domain https://ryoppippi.com",
+		"postbuild": "svelte-sitemap --domain https://ryoppippi.com",
 		"preview": "vite preview",
 		"sync": "svelte-kit sync",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
