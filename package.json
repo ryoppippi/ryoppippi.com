@@ -95,7 +95,7 @@
 		"unocss-transformer-alias": "^0.0.8",
 		"unplugin-icons": "^22.1.0",
 		"unplugin-svelte-components": "^0.3.1",
-		"vite": "^6.3.5",
+		"vite": "npm:rolldown-vite@latest",
 		"vite-plugin-favicons": "^0.1.6"
 	}
 }
