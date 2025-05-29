@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types';
-import { blogPosts } from '$contents/blog';
+import { blogPosts } from '$contents/blog' with { type: 'macro' };
 import { domain, subdomain } from '$lib/util';
 import { Feed } from 'feed';
 
