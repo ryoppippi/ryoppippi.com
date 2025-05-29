@@ -3,14 +3,14 @@ import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import extractorSvelte from '@unocss/extractor-svelte';
-import Macros from '@unplugin/macros/vite';
 // @ts-expect-error no type
 import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import Components from 'unplugin-svelte-components/vite';
-
 import { defineConfig } from 'vite';
+
+import compileTime from 'vite-plugin-compile-time';
 
 import { faviconsPlugin } from 'vite-plugin-favicons';
 
@@ -40,7 +40,7 @@ export default defineConfig({
 		}),
 		Icons({ compiler: 'svelte' }),
 		enhancedImages(),
-		Macros(),
+		compileTime(),
 		UnoCSS({
 			extractors: [
 				extractorSvelte(),

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import 'unplugin-icons/types/svelte';
+import 'vite-plugin-compile-time/client';
 
 declare namespace App {
 	// interface Locals {}
