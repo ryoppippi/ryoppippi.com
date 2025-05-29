@@ -1,5 +1,5 @@
 overrides:
-  vite: "npm:rolldown-vite@latest"
+  vite: 'npm:rolldown-vite@latest'
 onlyBuiltDependencies:
   - esbuild
   - sharp
