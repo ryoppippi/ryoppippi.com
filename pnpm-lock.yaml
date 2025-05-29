@@ -204,8 +204,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))
       sveltekit-embed:
-        specifier: ^0.0.20
-        version: 0.0.20(svelte@5.33.8)
+        specifier: ^0.0.22
+        version: 0.0.22(svelte@5.33.8)
       sveltweet:
         specifier: ^0.4.3
         version: 0.4.3(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))(svelte@5.33.8)
@@ -3977,8 +3977,9 @@ packages:
     peerDependencies:
       '@sveltejs/kit': '>=1.0.0'
 
-  sveltekit-embed@0.0.20:
-    resolution: {integrity: sha512-b/QqAyI9AJxmsOIXMGgCaKFk5CtMJrR56WyTCxnLLC7FwVEbHkZoHf2IgqmXMJflYvmYKVhmF4x/xP/6+RESGQ==}
+  sveltekit-embed@0.0.22:
+    resolution: {integrity: sha512-+zNJF5dMd+Tolnmcc5ZHZIr90v5bj/SLMl2d410WZSuXC5RubWy45U5MtHahBFIXbxtnN/RBdxNj2kKE/jkCug==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0
 
@@ -8545,7 +8546,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.26.7
 
-  sveltekit-embed@0.0.20(svelte@5.33.8):
+  sveltekit-embed@0.0.22(svelte@5.33.8):
     dependencies:
       svelte: 5.33.8
 
