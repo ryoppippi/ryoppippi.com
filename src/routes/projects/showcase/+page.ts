@@ -1,4 +1,4 @@
-import { getProjects } from '$contents/projects/showcase';
+import { getProjects } from '$contents/projects/showcase/index.compile';
 
 export function load() {
 	return {

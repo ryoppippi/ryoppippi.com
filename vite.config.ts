@@ -40,7 +40,6 @@ export default defineConfig({
 		}),
 		Icons({ compiler: 'svelte' }),
 		enhancedImages(),
-		compileTime(),
 		UnoCSS({
 			extractors: [
 				extractorSvelte(),
@@ -65,5 +64,6 @@ export default defineConfig({
 			},
 		}),
 		sveltekit(),
+		compileTime(),
 	],
 });

@@ -1,7 +1,7 @@
 import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
-import { useOctokit } from '$lib/server/octokit.js';
 import { joinURL } from 'ufo';
+import { useOctokit } from '../../../lib/server/octokit.js';
 import _ossProjects from './list.json';
 import { OssProjects, ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
 

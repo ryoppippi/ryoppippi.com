@@ -1,5 +1,5 @@
-import { blogPosts } from '$contents/blog' with { type: 'macro'};
-import { posts as rssPosts } from '$contents/external-rss';
+import { blogPosts } from '$contents/blog/index.compile';
+import { posts as rssPosts } from '$contents/external-rss/index.compile';
 import { formatDate } from '$lib/util';
 import { parseJSON } from 'date-fns';
 
