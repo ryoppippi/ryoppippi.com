@@ -210,8 +210,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))(rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1))(svelte@5.33.8))(svelte@5.33.8)
       tinyglobby:
-        specifier: ^0.2.13
-        version: 0.2.13
+        specifier: ^0.2.14
+        version: 0.2.14
       type-fest:
         specifier: ^4.41.0
         version: 4.41.0
@@ -4022,8 +4022,8 @@ packages:
   tinyexec@1.0.1:
     resolution: {integrity: sha512-5uC6DDlmeqiOwCPmK9jMSdOuZTh8bU39Ys6yidB+UTt5hfZUPGAypSgFRiEp+jbi9qH40BLDvy85jIU88wKSqw==}
 
-  tinyglobby@0.2.13:
-    resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==}
+  tinyglobby@0.2.14:
+    resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==}
     engines: {node: '>=12.0.0'}
 
   tldts-core@6.1.86:
@@ -5824,7 +5824,7 @@ snapshots:
       magic-string: 0.30.17
       pathe: 2.0.3
       perfect-debounce: 1.0.0
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
       unplugin-utils: 0.2.4
 
   '@unocss/config@66.1.2':
@@ -5873,7 +5873,7 @@ snapshots:
       '@unocss/rule-utils': 66.1.2
       css-tree: 3.1.0
       postcss: 8.5.3
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
 
   '@unocss/preset-attributify@66.1.2':
     dependencies:
@@ -5964,7 +5964,7 @@ snapshots:
       chokidar: 3.6.0
       magic-string: 0.30.17
       pathe: 2.0.3
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
       unplugin-utils: 0.2.4
       vite: rolldown-vite@6.3.14(@types/node@22.15.21)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.7.1)
     transitivePeerDependencies:
@@ -6662,7 +6662,7 @@ snapshots:
       jsonc-eslint-parser: 2.4.0
       pathe: 2.0.3
       pnpm-workspace-yaml: 0.3.1
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
       yaml-eslint-parser: 1.3.0
 
   eslint-plugin-regexp@2.7.0(eslint@9.27.0(jiti@2.4.2)):
@@ -8146,7 +8146,7 @@ snapshots:
       picomatch: 4.0.2
       postcss: 8.5.3
       rolldown: 1.0.0-beta.9-commit.ce72026(@oxc-project/runtime@0.71.0)
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
     optionalDependencies:
       '@types/node': 22.15.21
       esbuild: 0.25.4
@@ -8162,7 +8162,7 @@ snapshots:
       picomatch: 4.0.2
       postcss: 8.5.3
       rolldown: 1.0.0-beta.10-commit.ac4e5db
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
     optionalDependencies:
       '@types/node': 22.15.21
       esbuild: 0.25.4
@@ -8588,7 +8588,7 @@ snapshots:
 
   tinyexec@1.0.1: {}
 
-  tinyglobby@0.2.13:
+  tinyglobby@0.2.14:
     dependencies:
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
