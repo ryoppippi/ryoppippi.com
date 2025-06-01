@@ -2,7 +2,7 @@ import type { MarkdownImport } from '../../../markdown';
 import { filter, flatten, map, reduce } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import { scope, type } from 'arktype';
-import sortOn from 'sort-on';
+import { sort } from 'fast-sort';
 
 export const { Project, Metadata } = scope({
 	Metadata: {
@@ -54,7 +54,7 @@ export function getProjects(): (typeof Project.inferOut)[] {
 		}, [[], []] as [typeof Project.inferOut[], typeof Project.inferOut[]]),
 
 		/** sort projects by pubDate */
-		map(projectGroups => sortOn(projectGroups, ['-pubDate'])),
+		map(projectGroups => sort(projectGroups).desc(({ pubDate }) => pubDate)),
 
 		/** flatten the two iterables */
 		flatten,

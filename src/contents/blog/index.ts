@@ -1,8 +1,8 @@
 import type { Item } from './types';
 import { dev } from '$app/environment';
+import { sort } from 'fast-sort';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
-import sortOn from 'sort-on';
 import { glob } from 'tinyglobby';
 import { processMeta } from '../../markdown/preprocessor';
 
@@ -22,8 +22,5 @@ export const blogPosts = await (async () => {
 		frontMatters.push(metadata as unknown as Item);
 	}
 
-	return sortOn(
-		frontMatters.filter(({ isPublished }) => dev || isPublished),
-		['-pubDate'],
-	);
+	return sort(frontMatters.filter(({ isPublished }) => dev || isPublished)).desc(({ pubDate }) => pubDate);
 })();
