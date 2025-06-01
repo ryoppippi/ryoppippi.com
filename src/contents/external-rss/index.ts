@@ -5,9 +5,9 @@ import { slugify } from '$lib/slugify.server';
 import { flatten, map } from '@core/iterutil/pipe/async';
 import { pipe } from '@core/pipe';
 import { scope } from 'arktype';
-import Parser from 'rss-parser';
+import { sort } from 'fast-sort';
 
-import sortOn from 'sort-on';
+import Parser from 'rss-parser';
 import rss from './rss.json';
 
 const parser = new Parser();
@@ -43,7 +43,7 @@ export async function getPosts() {
 
 	const feeds = Item.array().assert(_feeds);
 
-	const sortedFeeds = sortOn(feeds, ['-pubDate']);
+	const sortedFeeds = sort(feeds).desc(({ pubDate }) => pubDate);
 
 	return sortedFeeds;
 }

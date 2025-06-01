@@ -3,17 +3,17 @@ import { posts as rssPosts } from '$contents/external-rss';
 import { formatDate } from '$lib/util';
 import { parseJSON } from 'date-fns';
 
-import sortOn from 'sort-on';
+import { sort } from 'fast-sort';
 import * as ufo from 'ufo';
 
 export function load() {
-	const allPosts = sortOn([
+	const allPosts = sort([
 		...rssPosts,
 		...blogPosts,
 	].map(item => ({
 		...item,
 		pubDate: parseJSON(item.pubDate),
-	})), ['-pubDate']);
+	}))).desc(item => item.pubDate);
 
 	const posts = allPosts.map((item) => {
 		const pubDate = formatDate(new Date(item.pubDate));
