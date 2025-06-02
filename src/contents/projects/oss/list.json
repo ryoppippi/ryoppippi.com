@@ -15,6 +15,10 @@
 		{
 			"name": "zigchat",
 			"icon": "i-ph:chat-light"
+		},
+		{
+			"name": "ccusage",
+			"icon": "i-ph:chart-line-light"
 		}
 	],
 	"Vim/Neovim": [
