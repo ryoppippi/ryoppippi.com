@@ -16,7 +16,8 @@
 		"lint": "eslint --cache .",
 		"format": "nr lint --fix",
 		"preinstall": "nlx only-allow pnpm",
-		"taze": "nlx taze -r"
+		"taze": "nlx taze -r",
+		"prepare": "mv -n .env.example .env"
 	},
 	"devDependencies": {
 		"@antfu/ni": "^25.0.0",
@@ -49,6 +50,7 @@
 		"@unocss/reset": "^66.1.3",
 		"@unplugin/macros": "jsr:^0.16.3",
 		"arktype": "^2.1.20",
+		"dataloader": "^2.2.3",
 		"date-fns": "^4.1.0",
 		"diacritics": "^1.3.0",
 		"eslint": "^9.28.0",
