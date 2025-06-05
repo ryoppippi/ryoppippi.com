@@ -5,4 +5,4 @@ onlyBuiltDependencies:
   - sharp
   - unrs-resolver
 shellEmulator: true
-useNodeVersion: 22.14.0
+useNodeVersion: 22.15.1
