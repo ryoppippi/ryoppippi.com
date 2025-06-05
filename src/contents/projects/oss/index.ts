@@ -1,6 +1,6 @@
 import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
-import { useRepoLoader } from '$lib/server/octokit.js';
+import { useOctokit } from '$lib/server/octokit.js';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
 import { OssProjects, ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
@@ -24,23 +24,20 @@ async function processProject(
 	// Fetch repo info if description is missing or null
 	if (project.description == null) {
 		try {
-			const repoLoader = useRepoLoader();
-			const ghRepoData = await repoLoader.load({
+			const { data: ghRepoData } = await useOctokit().rest.repos.get({
 				owner: GITHUB_USERNAME,
 				repo: project.name,
 			});
 
-			if (ghRepoData != null) {
-				// Validate fetched data using ArkType
-				const validatedGhRepo = Repo.assert(ghRepoData);
-				// Merge fetched repo info
-				project = {
-					...project,
-					...validatedGhRepo,
-					link,
-					slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
-				} as const satisfies typeof ParsedProject.infer;
-			}
+			// Validate fetched data using ArkType
+			const validatedGhRepo = Repo.assert(ghRepoData);
+			// Merge fetched repo info
+			project = {
+				...project,
+				...validatedGhRepo,
+				link,
+				slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
+			} as const satisfies typeof ParsedProject.infer;
 		}
 		catch (e) {
 			console.error(`Error fetching or processing repo info for project ${project.name}:`, e);
