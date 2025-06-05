@@ -21,9 +21,6 @@ function relativePath(...args: string[]): string {
 }
 
 export default defineConfig({
-	esbuild: {
-		target: 'es2022',
-	},
 	plugins: [
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
