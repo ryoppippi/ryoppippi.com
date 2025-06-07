@@ -45,7 +45,7 @@ importers:
         specifier: ^3.5.0
         version: 3.5.0
       '@shikijs/twoslash':
-        specifier: ^3.4.2
+        specifier: ^3.5.0
         version: 3.5.0(typescript@5.8.3)
       '@std/collections':
         specifier: jsr:^1.0.10
