@@ -42,7 +42,7 @@ importers:
         specifier: ^9.3.4
         version: 9.3.4
       '@shikijs/markdown-it':
-        specifier: ^3.4.2
+        specifier: ^3.5.0
         version: 3.5.0
       '@shikijs/twoslash':
         specifier: ^3.4.2
