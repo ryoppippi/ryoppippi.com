@@ -192,7 +192,7 @@ importers:
         specifier: ^1.1.4
         version: 1.1.4(svelte@5.33.14)
       svelte-meta-tags:
-        specifier: ^4.3.0
+        specifier: ^4.4.0
         version: 4.4.0(svelte@5.33.14)
       svelte-preprocess-import-assets:
         specifier: ^1.1.0
