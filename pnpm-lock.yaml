@@ -174,7 +174,7 @@ importers:
         specifier: ^3.13.0
         version: 3.13.0
       secretlint:
-        specifier: ^9.3.3
+        specifier: ^9.3.4
         version: 9.3.4
       shiki:
         specifier: ^3.4.2
