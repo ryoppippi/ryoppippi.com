@@ -16,14 +16,6 @@ import {
 import { presetFluid } from 'unocss-preset-fluid';
 import transformerAlias from 'unocss-transformer-alias';
 
-// TODO: bug of unocss
-import ossProjects from './src/contents/projects/oss/list.json';
-
-const projectSafelist: string[] = [];
-Object.values(ossProjects).forEach((projects) => {
-	projectSafelist.push(...projects.map(project => project.icon));
-});
-
 const theme = {
 	colors: {
 		accent: {
@@ -110,5 +102,4 @@ export default defineConfig({
 	],
 	rules: [
 	],
-	safelist: [...projectSafelist],
 });

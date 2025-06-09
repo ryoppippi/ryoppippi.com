@@ -2,8 +2,8 @@ import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
 import { useOctokit } from '$lib/server/octokit.js';
 import { joinURL } from 'ufo';
-import _ossProjects from './list.json';
-import { OssProjects, ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
+import ossProjects from './list.js';
+import { ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
 const GITHUB_USERNAME = `ryoppippi`;
@@ -52,11 +52,9 @@ async function processProject(
  * Fetches and processes project information, enriching it with GitHub repository data.
  */
 export async function getProjects(): Promise<typeof ProjectsByGenre.inferOut> {
-	const validatedOssProjects = OssProjects.assert(_ossProjects);
-
 	// Process genres concurrently
 	const processedEntries = await Promise.all(
-		(Object.entries(validatedOssProjects) as Entries<typeof validatedOssProjects>).map(
+		(Object.entries(ossProjects) as Entries<typeof ossProjects>).map(
 			async ([genre, projects]) => {
 				// Process projects within a genre concurrently
 				const processedGenreProjects = await Promise.all(
