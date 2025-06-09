@@ -79,7 +79,7 @@
 		"svelte": "^5.33.14",
 		"svelte-check": "^4.2.1",
 		"svelte-fancy-darkmode": "^1.1.4",
-		"svelte-meta-tags": "^4.3.0",
+		"svelte-meta-tags": "^4.4.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-sitemap": "^2.7.0",
 		"sveltekit-autoimport": "^1.8.1",
