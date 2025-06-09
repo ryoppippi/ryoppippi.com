@@ -39,6 +39,7 @@ export default defineConfig({
 		enhancedImages(),
 		Macros(),
 		UnoCSS({
+			mode: 'per-module',
 			extractors: [
 				extractorSvelte(),
 			],
