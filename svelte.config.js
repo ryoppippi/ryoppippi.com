@@ -1,22 +1,25 @@
-import path from 'node:path';
+import { basename, join } from 'node:path';
 import process from 'node:process';
+import { flatMap, map } from '@core/iterutil/pipe';
+import { pipe } from '@core/pipe';
 import MarkdownItShiki from '@shikijs/markdown-it';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
 import markdownit from 'markdown-it';
 
 import anchor from 'markdown-it-anchor';
-
 import Budoux from 'markdown-it-budoux';
+
 import MarkdownItCollapsible from 'markdown-it-collapsible';
 
 import GitHubAlerts from 'markdown-it-github-alerts';
 
 // @ts-expect-error no types
 import Figures from 'markdown-it-image-figures';
-
 import LinkAttributes from 'markdown-it-link-attributes';
+
 import LinkPreview from 'markdown-it-link-preview';
 
 import MarkdownItMagicLink from 'markdown-it-magic-link';
@@ -28,11 +31,11 @@ import { isDevelopment } from 'std-env';
 import { importAssets } from 'svelte-preprocess-import-assets';
 
 import SveltweetPreprocessor from 'sveltweet/preprocessor';
-
+import { glob } from 'tinyglobby';
 import { Route } from './routes.js';
+
 import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
-
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
 const md = markdownit({
@@ -126,8 +129,8 @@ const config = {
 		}),
 		typescript: {
 			config(config) {
-				config.include.push(path.join(import.meta.dirname, 'uno.config.ts'));
-				config.include.push(path.join(import.meta.dirname, 'scripts/**/*.ts'));
+				config.include.push(join(import.meta.dirname, 'uno.config.ts'));
+				config.include.push(join(import.meta.dirname, 'scripts/**/*.ts'));
 			},
 		},
 		alias: {
@@ -142,6 +145,21 @@ const config = {
 
 				throw new Error(message);
 			},
+			entries: await (async () => {
+				const iter = pipe(
+					await glob('*.md', {
+						cwd: join(import.meta.dirname, 'src/contents/blog'),
+						absolute: true,
+					}),
+					map(file => basename(file, '.md')),
+					flatMap(slug => [
+						`/blog/${slug}`,
+						`/blog/${slug}.md`,
+					]),
+				);
+
+				return Array.from(iter);
+			})(),
 		},
 		paths: {
 			/**
