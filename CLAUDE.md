@@ -20,11 +20,17 @@ This is a personal portfolio and blog site built with SvelteKit, TypeScript, and
 - `pnpm preview` - Preview production build
 - `pnpm check` - Run svelte-check and TypeScript type checking
 - `pnpm lint` - Run ESLint
-- `pnpm format` - Fix linting issues
+- `pnpm format` - Fix linting issues (runs `nr lint --fix`)
 
 ### Content Management
 
 - `pnpm new` - Interactive script to create a new blog post with frontmatter
+
+### Additional Commands
+
+- `pnpm check:watch` - Watch mode for svelte-check and TypeScript type checking
+- `pnpm sync` - Run svelte-kit sync
+- `pnpm taze` - Update dependencies interactively
 
 ## Architecture
 
