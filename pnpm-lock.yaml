@@ -60,7 +60,7 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0(@sveltejs/vite-plugin-svelte@5.1.0(rolldown-vite@6.3.19(@types/node@22.15.31)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.34.1))(rolldown-vite@6.3.19(@types/node@22.15.31)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.34.1)
       '@sveltejs/kit':
-        specifier: ^2.21.3
+        specifier: ^2.21.4
         version: 2.21.4(@sveltejs/vite-plugin-svelte@5.1.0(rolldown-vite@6.3.19(@types/node@22.15.31)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.34.1))(rolldown-vite@6.3.19(@types/node@22.15.31)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.34.1)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.1.0
