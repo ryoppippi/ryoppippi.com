@@ -46,7 +46,7 @@
 		"@types/node": "^24.0.1",
 		"@unocss/eslint-plugin": "66.2.0",
 		"@unocss/extractor-svelte": "^66.2.0",
-		"@unocss/reset": "^66.1.4",
+		"@unocss/reset": "^66.2.0",
 		"@unplugin/macros": "jsr:^0.16.3",
 		"arktype": "^2.1.20",
 		"date-fns": "^4.1.0",
