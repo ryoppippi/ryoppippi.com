@@ -4,7 +4,7 @@
   "scripts": {
     "zenn": "bun x zenn-cli@latest",
     "new": "bun run zenn new:article",
-    "preview": "bun run zenn preview --open -p 4000"
+    "dev": "bun run zenn preview --open -p 4000"
   },
   "packageManager": "bun@latest"
 }
