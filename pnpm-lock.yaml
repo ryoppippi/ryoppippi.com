@@ -198,7 +198,7 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.34.3)
       svelte-sitemap:
-        specifier: ^2.7.0
+        specifier: ^2.7.1
         version: 2.7.1
       sveltekit-autoimport:
         specifier: ^1.8.1
