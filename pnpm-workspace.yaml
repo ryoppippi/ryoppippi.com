@@ -1,8 +1,12 @@
 overrides:
-  vite: 'npm:rolldown-vite@latest'
+  vite: npm:rolldown-vite@latest
+
 onlyBuiltDependencies:
   - esbuild
   - sharp
   - unrs-resolver
+  - workerd
+
 shellEmulator: true
+
 useNodeVersion: 22.15.1

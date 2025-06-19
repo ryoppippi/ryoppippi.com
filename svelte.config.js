@@ -4,7 +4,7 @@ import { flatMap, map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import MarkdownItShiki from '@shikijs/markdown-it';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 import markdownit from 'markdown-it';
@@ -124,9 +124,7 @@ const config = {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
-		adapter: adapter({
-			precompress: true,
-		}),
+		adapter: adapter(),
 		typescript: {
 			config(config) {
 				config.include.push(join(import.meta.dirname, 'uno.config.ts'));
