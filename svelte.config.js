@@ -1,5 +1,4 @@
 import { basename, join } from 'node:path';
-import process from 'node:process';
 import { flatMap, map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import MarkdownItShiki from '@shikijs/markdown-it';
