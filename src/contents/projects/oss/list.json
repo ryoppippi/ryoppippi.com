@@ -1,6 +1,10 @@
 {
 	"CLI": [
 		{
+			"name": "ccusage",
+			"icon": "i-ph:chart-line-light"
+		},
+		{
 			"name": "sitemcp",
 			"icon": "i-solar-cloud-download-line-duotone"
 		},
@@ -15,10 +19,6 @@
 		{
 			"name": "zigchat",
 			"icon": "i-ph:chat-light"
-		},
-		{
-			"name": "ccusage",
-			"icon": "i-ph:chart-line-light"
 		}
 	],
 	"Vim/Neovim": [
