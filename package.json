@@ -76,7 +76,7 @@
 		"secretlint": "^10.1.0",
 		"shiki": "^3.6.0",
 		"std-env": "^3.9.0",
-		"svelte": "^5.34.3",
+		"svelte": "^5.34.6",
 		"svelte-check": "^4.2.1",
 		"svelte-fancy-darkmode": "^1.1.4",
 		"svelte-meta-tags": "^4.4.0",
