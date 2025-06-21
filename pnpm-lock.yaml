@@ -93,8 +93,8 @@ importers:
         specifier: ^66.2.3
         version: 66.2.3
       '@unocss/reset':
-        specifier: ^66.2.1
-        version: 66.2.1
+        specifier: ^66.2.3
+        version: 66.2.3
       '@unplugin/macros':
         specifier: jsr:^0.16.3
         version: '@jsr/unplugin__macros@0.16.3(@types/node@24.0.3)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0)'
@@ -1593,6 +1593,9 @@ packages:
 
   '@unocss/reset@66.2.1':
     resolution: {integrity: sha512-gaEUsrRJ7UyWgbP89eFyilw6oHdgPMuLmTfz6Gu1eIKF1rxP6u2n4k/WsO5e+6ECUvEq0pYJluuWUNR8CkpW9Q==}
+
+  '@unocss/reset@66.2.3':
+    resolution: {integrity: sha512-szULFXX4IvNMQ+HKbu9p0KVME2pVhZBh9zQ1CSqA/TV9s2DRVMbNO5nVYjjBDkTnvr6N4IgWEGFVK+XVVITJRQ==}
 
   '@unocss/rule-utils@66.2.1':
     resolution: {integrity: sha512-uzi8onV53XXXjxI9ynUdk+9DngUYsy7uR4YFbTFUMF758SnNLil/MhJ9AeJGCUnl/3skZR6CZi8ne3IBJVnZAw==}
@@ -5746,6 +5749,8 @@ snapshots:
       '@unocss/preset-wind3': 66.2.1
 
   '@unocss/reset@66.2.1': {}
+
+  '@unocss/reset@66.2.3': {}
 
   '@unocss/rule-utils@66.2.1':
     dependencies:
