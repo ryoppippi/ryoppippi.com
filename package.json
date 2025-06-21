@@ -23,7 +23,7 @@
 		"@clack/prompts": "^0.11.0",
 		"@core/iterutil": "jsr:^0.9.0",
 		"@core/pipe": "jsr:^0.4.0",
-		"@iconify/json": "^2.2.349",
+		"@iconify/json": "^2.2.350",
 		"@ryoppippi/eslint-config": "^0.3.7",
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
