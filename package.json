@@ -97,6 +97,6 @@
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "npm:rolldown-vite@latest",
 		"vite-plugin-favicons": "^0.1.7",
-		"wrangler": "^4.20.3"
+		"wrangler": "^4.20.5"
 	}
 }
