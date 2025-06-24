@@ -74,7 +74,7 @@
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^10.1.0",
-		"shiki": "^3.6.0",
+		"shiki": "^3.7.0",
 		"std-env": "^3.9.0",
 		"svelte": "^5.34.7",
 		"svelte-check": "^4.2.2",
