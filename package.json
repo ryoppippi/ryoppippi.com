@@ -28,7 +28,7 @@
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "jsr:^1.1.0",
-		"@secretlint/secretlint-rule-preset-recommend": "^10.1.0",
+		"@secretlint/secretlint-rule-preset-recommend": "^10.1.1",
 		"@shikijs/markdown-it": "^3.7.0",
 		"@shikijs/twoslash": "^3.7.0",
 		"@std/collections": "jsr:^1.0.10",
