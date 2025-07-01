@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import type { Project } from '$contents/projects/showcase';
-	import Image from '$lib/Image.svelte';
 	import { formatDate } from '$lib/util';
+	import Image from './Image.svelte';
 
 	type Props = {
 		project: typeof Project.infer;
