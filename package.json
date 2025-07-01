@@ -5,19 +5,19 @@
 	"private": true,
 	"packageManager": "pnpm@10.12.4",
 	"scripts": {
-		"new": "./scripts/new-post.js",
-		"dev": "vite dev",
 		"build": "vite build",
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./.svelte-kit/cloudflare",
-		"preview": "vite preview",
-		"sync": "svelte-kit sync",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint --cache .",
+		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "nlx only-allow pnpm",
-		"taze": "nlx taze -r",
-		"prepare": "simple-git-hooks"
+		"lint": "eslint --cache .",
+		"new": "./scripts/new-post.js",
+		"prepare": "simple-git-hooks",
+		"preview": "vite preview",
+		"sync": "svelte-kit sync",
+		"taze": "nlx taze -r"
 	},
 	"devDependencies": {
 		"@antfu/ni": "^25.0.0",
@@ -77,6 +77,7 @@
 		"secretlint": "^10.1.1",
 		"shiki": "^3.7.0",
 		"simple-git-hooks": "^2.13.0",
+		"sort-package-json": "^3.3.1",
 		"std-env": "^3.9.0",
 		"svelte": "^5.34.8",
 		"svelte-check": "^4.2.2",
@@ -107,6 +108,9 @@
 	"lint-staged": {
 		"*": [
 			"eslint --cache --fix"
+		],
+		"package.json": [
+			"sort-package-json"
 		]
 	}
 }
