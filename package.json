@@ -32,7 +32,6 @@
 		"@shikijs/markdown-it": "^3.7.0",
 		"@shikijs/twoslash": "^3.7.0",
 		"@std/collections": "jsr:^1.0.10",
-		"@sveltejs/adapter-auto": "^6.0.1",
 		"@sveltejs/adapter-cloudflare": "^7.0.4",
 		"@sveltejs/enhanced-img": "^0.6.1",
 		"@sveltejs/kit": "^2.22.2",
