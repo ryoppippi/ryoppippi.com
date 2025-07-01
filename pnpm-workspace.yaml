@@ -9,4 +9,4 @@ onlyBuiltDependencies:
 
 shellEmulator: true
 
-useNodeVersion: 22.15.1
+useNodeVersion: 22.17.0
