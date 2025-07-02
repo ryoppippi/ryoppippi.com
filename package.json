@@ -103,7 +103,7 @@
 		"wrangler": "^4.22.0"
 	},
 	"simple-git-hooks": {
-		"pre-commit": "bun lint-staged"
+		"pre-commit": "pnpm lint-staged"
 	},
 	"lint-staged": {
 		"*": [
