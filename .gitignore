@@ -16,3 +16,4 @@ vite.config.ts.timestamp-*
 /.eslintrc-components.json
 
 /_redirects
+/.cloudflare

@@ -6,7 +6,7 @@
 	"packageManager": "pnpm@10.12.4",
 	"scripts": {
 		"build": "vite build",
-		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./.svelte-kit/cloudflare",
+		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./.cloudflare",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"dev": "vite dev",
