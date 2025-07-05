@@ -159,8 +159,8 @@ importers:
         specifier: ^0.1.4
         version: 0.1.4
       markdown-it-mdc:
-        specifier: ^0.2.5
-        version: 0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+        specifier: ^0.2.6
+        version: 0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       octokit:
         specifier: ^5.0.3
         version: 5.0.3
@@ -3121,8 +3121,8 @@ packages:
   markdown-it-magic-link@0.1.4:
     resolution: {integrity: sha512-Y0CgJVtqdGGeWJ+8bN+eBEr2q2ugmf5AMJWSbxBpmGcqARbKBB62biB7LwkoxtbddlmVkACYBFyjlMP/SzYlzg==}
 
-  markdown-it-mdc@0.2.5:
-    resolution: {integrity: sha512-7nj5/efQlZX+OAVw5nAYEH6kXtiNmRoMf5i7WDCeFRLXl5POFQCb+9s6qIsaBHnDLVWpZC3UTIPoVStbR9+24A==}
+  markdown-it-mdc@0.2.6:
+    resolution: {integrity: sha512-HxbEZoEmftdm/krWzwI3JcCWoeXTkAufme1gQt8MTN6nY7y2w/I0LI8U9TEERNPjBNtMOLaNaQsM1H+5K15UJQ==}
     peerDependencies:
       '@types/markdown-it': '*'
       markdown-it: ^14.0.0
@@ -7593,11 +7593,11 @@ snapshots:
     dependencies:
       markdown-it: 14.1.0
 
-  markdown-it-mdc@0.2.5(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
+  markdown-it-mdc@0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
     dependencies:
       '@types/markdown-it': 14.1.2
-      js-yaml: 4.1.0
       markdown-it: 14.1.0
+      yaml: 2.8.0
 
   markdown-it@14.1.0:
     dependencies:
