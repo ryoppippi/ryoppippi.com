@@ -42,6 +42,12 @@
 			href: '/feed.xml',
 		},
 	]}
+	additionalMetaTags={[
+		{
+			name: 'Hatena::Bookmark',
+			content: 'nocomment',
+		},
+	]}
 	additionalRobotsProps={{
 		noarchive: true,
 		nosnippet: true,
