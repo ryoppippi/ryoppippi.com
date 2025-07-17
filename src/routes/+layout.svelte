@@ -61,6 +61,7 @@
 	openGraph={{
 		url: subdomain(),
 		type: 'website',
+		title,
 		description,
 		images: [
 			{
@@ -74,6 +75,7 @@
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
+		title,
 		description,
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
