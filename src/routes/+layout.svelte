@@ -5,8 +5,9 @@
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import { domain, subdomain } from '$lib/util';
 	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
-
 	import { MetaTags } from 'svelte-meta-tags';
+
+	import * as ufo from 'ufo';
 
 	import faviconLinks from 'virtual:favicons';
 	import 'uno.css';
@@ -59,7 +60,7 @@
 	}}
 	{description}
 	openGraph={{
-		url: subdomain(),
+		url: ufo.joinURL(subdomain(), page.url.pathname),
 		type: 'website',
 		title,
 		description,
