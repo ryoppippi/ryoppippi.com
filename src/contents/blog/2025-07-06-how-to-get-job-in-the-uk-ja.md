@@ -56,7 +56,7 @@ UKに来てからの約**2年間**は、基本的に日本の会社とリモー�
 
 ## 履歴書の改善（2024年10月）
 
-10月に入り、CVの書き方に **[ ATS（Applicant Tracking System）friendly ](https://www.indeed.com/career-advice/resumes-cover-letters/what-is-an-ats)** という概念があることを知りました(妻と妻の大学の就職講座を受けていて知りました)。これに合わせて **typst** で履歴書を書き直しました。
+10月に入り、CVの書き方に **[ ATS（Applicant Tracking System）friendly ](https://www.indeed.com/career-advice/career-development/what-are-applicant-tracking-systems)** という概念があることを知りました(妻と妻の大学の就職講座を受けていて知りました)。これに合わせて **typst** で履歴書を書き直しました。
 
 また、職歴をより詳細に記述し、**1ページに収まる**よう工夫しました。これらの改善により、ようやく面接に呼ばれる機会が増えてきました。
 
