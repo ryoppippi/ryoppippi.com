@@ -225,8 +225,8 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       typescript-svelte-plugin:
-        specifier: ^0.3.48
-        version: 0.3.48(svelte@5.35.6)(typescript@5.8.3)
+        specifier: ^0.3.49
+        version: 0.3.49(svelte@5.35.6)(typescript@5.8.3)
       ufo:
         specifier: ^1.6.1
         version: 1.6.1
@@ -4233,8 +4233,8 @@ packages:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
 
-  typescript-svelte-plugin@0.3.48:
-    resolution: {integrity: sha512-IAeY4mFD0CBKQXQRAYd7TmL0QGvbVdiGftIQ6ys+oPDH0D9xYp/Afp8GndQ76/nXDeHe5lgvbLBCP1u8YOKpvg==}
+  typescript-svelte-plugin@0.3.49:
+    resolution: {integrity: sha512-KwQEtfjVR8Nomv1yVAvCaVTCGhklLlk3TDHNAUW/pibesqmbtHMZcSi7SyR/gpYH8wWgNDljAZHTflo47XWgQg==}
 
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
@@ -9041,7 +9041,7 @@ snapshots:
 
   type-fest@4.41.0: {}
 
-  typescript-svelte-plugin@0.3.48(svelte@5.35.6)(typescript@5.8.3):
+  typescript-svelte-plugin@0.3.49(svelte@5.35.6)(typescript@5.8.3):
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
       svelte2tsx: 0.7.39(svelte@5.35.6)(typescript@5.8.3)
