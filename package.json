@@ -100,7 +100,7 @@
 		"unplugin-svelte-components": "^0.3.1",
 		"vite": "npm:rolldown-vite@latest",
 		"vite-plugin-favicons": "^0.1.7",
-		"wrangler": "^4.24.4"
+		"wrangler": "^4.25.0"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm lint-staged"
