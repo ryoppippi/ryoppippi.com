@@ -1,7 +1,6 @@
 <script lang='ts'>
 	import type { Project } from '$contents/projects/showcase';
 	import { formatDate } from '$lib/util';
-	import Image from './Image.svelte';
 
 	type Props = {
 		project: typeof Project.infer;
@@ -25,7 +24,7 @@
 >
 	<a href={project.link} no-underline target={project.link.startsWith('http') ? '_blank' : '_self'}>
 		{#if project.image != null}
-			<Image
+			<img
 				alt={project.title}
 				aspect-video='~'
 				border='b base'
