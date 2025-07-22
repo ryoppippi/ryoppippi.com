@@ -1,6 +1,6 @@
 import { scope } from 'arktype';
 
-export const { Genre, URL, Repo, Project, OssProjects, ParsedProject, ProjectsByGenre } = scope({
+export const { Genre, URL, Repo, UnghRepo, Project, OssProjects, ParsedProject, ProjectsByGenre } = scope({
 	Genre: 'string#genre',
 	URL: 'string#url',
 	Project: {
@@ -14,6 +14,9 @@ export const { Genre, URL, Repo, Project, OssProjects, ParsedProject, ProjectsBy
 	Repo: {
 		name: 'string',
 		description: 'string | null',
+	},
+	UnghRepo: {
+		repo: 'Repo',
 	},
 	OssProjects: 'Record<Genre, Project[]>',
 	ParsedProject: 'Required<Project> & Repo',

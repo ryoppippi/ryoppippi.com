@@ -1,11 +1,11 @@
 import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
-import { useOctokit } from '$lib/server/octokit.js';
 import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
-import { OssProjects, ParsedProject, ProjectsByGenre, Repo, URL } from './types.js';
+import { OssProjects, ParsedProject, ProjectsByGenre, UnghRepo, URL } from './types.js';
 
 const GITHUB_URL = `https://github.com`;
+const UNGH_URL = `https://ungh.cc`;
 const GITHUB_USERNAME = `ryoppippi`;
 
 /**
@@ -24,17 +24,20 @@ async function processProject(
 	// Fetch repo info if description is missing or null
 	if (project.description == null) {
 		try {
-			const { data: ghRepoData } = await useOctokit().rest.repos.get({
-				owner: GITHUB_USERNAME,
-				repo: project.name,
-			});
+			const url = joinURL(UNGH_URL, 'repos', GITHUB_USERNAME, project.name);
+			const res = await fetch(url);
+			if (!res.ok) {
+				throw new Error(`Failed to fetch repo info for ${project.name}: ${res.statusText}`);
+			}
+
+			const unghRepoData = await res.json();
 
 			// Validate fetched data using ArkType
-			const validatedGhRepo = Repo.assert(ghRepoData);
+			const validatedGhRepo = UnghRepo.assert(unghRepoData);
 			// Merge fetched repo info
 			project = {
 				...project,
-				...validatedGhRepo,
+				...validatedGhRepo.repo,
 				link,
 				slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
 			} as const satisfies typeof ParsedProject.infer;
