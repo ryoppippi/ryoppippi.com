@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { subdomain } from '$lib/util';
 	import * as DarkMode from 'svelte-fancy-darkmode';
@@ -6,9 +7,9 @@
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
 	const LINKS = [
-		{ name: 'projects', href: '/projects' },
-		{ name: 'talks', href: '/talks' },
-		{ name: 'blog', href: '/blog' },
+		{ name: 'projects', href: resolve('/projects') },
+		{ name: 'talks', href: resolve('/talks') },
+		{ name: 'blog', href: resolve('/blog') },
 		{ name: 'cv', href: subdomain('/cv-pdf'), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
@@ -44,7 +45,7 @@
 		<a
 			aria-label='Home'
 			font-bold
-			href='/'
+			href={resolve('/')}
 			m='xa md:(b0 x0)'
 			relative
 		>
@@ -101,7 +102,7 @@
 			<a
 				class='i-line-md:rss'
 				fyc
-				href='/feed.xml'
+				href={resolve('/feed.xml')}
 				mya
 				target='_blank'
 			>
