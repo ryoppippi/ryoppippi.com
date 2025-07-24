@@ -1,5 +1,6 @@
 <script lang='ts'>
-	import { subdomain } from '$lib/util';
+	import type { Asset } from '$app/types';
+	import { asset } from '$app/paths';
 </script>
 
 {#snippet link(
@@ -13,7 +14,7 @@
 		fcol-md-row
 		fyc
 		gap-1
-		href={subdomain(_subdomain)}
+		href={asset(_subdomain as Asset)}
 		target='_blank'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->

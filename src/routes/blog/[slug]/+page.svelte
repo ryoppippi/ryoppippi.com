@@ -1,13 +1,15 @@
 <script lang='ts'>
+	import type { Asset } from '$app/types';
 	import { dev } from '$app/environment';
+	import { asset } from '$app/paths';
 	import { page } from '$app/state';
-	import { formatDate, subdomain } from '$lib/util';
+	import { formatDate } from '$lib/util';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
+
 	import 'markdown-it-github-alerts/styles/github-base.css';
 	import './link-card.css';
-
 	import './magic-link.css';
 	import './prose.css';
 	import './anchor.css';
@@ -15,7 +17,8 @@
 	const { data } = $props();
 	const { metadata, Markdown } = data;
 
-	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${subdomain(page.url.pathname)}\n\nI think...`);
+	const url = asset(page.url.pathname as Asset);
+	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${url}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
 

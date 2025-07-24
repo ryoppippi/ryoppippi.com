@@ -1,14 +1,13 @@
-<script>
+<script lang='ts'>
+	import type { Asset } from '$app/types';
 	import { onNavigate } from '$app/navigation';
+
+	import { asset } from '$app/paths';
 	import { page } from '$app/state';
-
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
-	import { domain, subdomain } from '$lib/util';
 	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
+
 	import { MetaTags } from 'svelte-meta-tags';
-
-	import * as ufo from 'ufo';
-
 	import faviconLinks from 'virtual:favicons';
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
@@ -60,7 +59,7 @@
 	}}
 	{description}
 	openGraph={{
-		url: ufo.joinURL(subdomain(), page.url.pathname),
+		url: asset(page.url.pathname as Asset),
 		type: 'website',
 		title,
 		description,
@@ -72,7 +71,7 @@
 		],
 	}}
 	{title}
-	titleTemplate={title !== 'home' ? `%s | ${domain()}` : domain()}
+	titleTemplate={title !== 'home' ? `%s | ${page.url.origin}` : page.url.origin}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
