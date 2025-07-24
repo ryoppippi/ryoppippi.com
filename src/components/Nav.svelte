@@ -1,7 +1,7 @@
 <script lang='ts'>
-	import { resolve } from '$app/paths';
+	import type { Asset } from '$app/types';
+	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { subdomain } from '$lib/util';
 	import * as DarkMode from 'svelte-fancy-darkmode';
 	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
@@ -10,7 +10,7 @@
 		{ name: 'projects', href: resolve('/projects') },
 		{ name: 'talks', href: resolve('/talks') },
 		{ name: 'blog', href: resolve('/blog') },
-		{ name: 'cv', href: subdomain('/cv-pdf'), icon: 'i-line-md:download-outline' },
+		{ name: 'cv', href: asset('/cv-pdf' as Asset), icon: 'i-line-md:download-outline' },
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
 
