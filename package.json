@@ -33,7 +33,7 @@
 		"@shikijs/markdown-it": "^3.8.1",
 		"@shikijs/twoslash": "^3.8.1",
 		"@std/collections": "jsr:^1.0.10",
-		"@sveltejs/adapter-cloudflare": "^7.1.0",
+		"@sveltejs/adapter-cloudflare": "^7.1.1",
 		"@sveltejs/enhanced-img": "^0.7.0",
 		"@sveltejs/kit": "^2.26.0",
 		"@sveltejs/vite-plugin-svelte": "^6.1.0",
