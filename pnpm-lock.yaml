@@ -249,7 +249,7 @@ importers:
         specifier: ^0.1.7
         version: 0.1.7(rolldown-vite@7.0.11(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))(typescript@5.8.3)
       wrangler:
-        specifier: ^4.25.1
+        specifier: ^4.26.0
         version: 4.26.0
 
 packages:
