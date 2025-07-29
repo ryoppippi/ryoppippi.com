@@ -186,7 +186,7 @@ importers:
         specifier: ^3.9.0
         version: 3.9.0
       svelte:
-        specifier: ^5.36.16
+        specifier: ^5.36.17
         version: 5.36.17
       svelte-check:
         specifier: ^4.3.0
