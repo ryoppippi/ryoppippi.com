@@ -34,7 +34,6 @@ export default defineConfig({
 		cloudflareRedirect({
 			mode: 'generate',
 			entries: Route,
-			redirectsFilePath: relativePath('./_redirects'),
 		}),
 		Icons({ compiler: 'svelte' }),
 		enhancedImages(),

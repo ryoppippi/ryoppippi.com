@@ -3,7 +3,7 @@ import { flatMap, map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import MarkdownItShiki from '@shikijs/markdown-it';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
-import adapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 import markdownit from 'markdown-it';
