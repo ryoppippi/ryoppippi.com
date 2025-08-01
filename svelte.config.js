@@ -29,7 +29,6 @@ import { isDevelopment } from 'std-env';
 
 import { importAssets } from 'svelte-preprocess-import-assets';
 
-import SveltweetPreprocessor from 'sveltweet/preprocessor';
 import { glob } from 'tinyglobby';
 import { Route } from './routes.js';
 
@@ -105,7 +104,6 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [
 		svelteMarkdown(md),
-		SveltweetPreprocessor(),
 		importAssets(),
 		vitePreprocess(),
 	],
