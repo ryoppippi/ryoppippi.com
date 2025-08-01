@@ -7,4 +7,8 @@ export default ryoppippi({
 	typescript: {
 		tsconfigPath: './tsconfig.json',
 	},
+}, {
+	rules: {
+		'antfu/no-top-level-await': 'off',
+	},
 });
