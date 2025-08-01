@@ -1,13 +1,12 @@
 import type { Asset } from '$app/types';
 import type { RequestHandler } from './$types';
 import { asset, resolve } from '$app/paths';
-import { page } from '$app/state';
 import { blogPosts } from '$contents/blog' with { type: 'macro' };
 import { Feed } from 'feed';
 
 export const prerender = true;
 
-const domain = page.url.origin;
+const domain = 'https://ryoppippi.com';
 
 export const GET = (async () => {
 	const favicon = asset('/ryoppippi.jpg');
