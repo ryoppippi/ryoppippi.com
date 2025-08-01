@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { getTweet } from '$lib/tweet.remote.js';
-	import { Tweet as Sveltweet } from 'sveltweet';
+	import * as st from 'sveltweet';
 
 	type Props = Parameters<typeof getTweet>[0];
 
@@ -8,6 +8,11 @@
 	const tweet = getTweet({ id });
 </script>
 
-{#if tweet.ready}
-	<Sveltweet tweet={tweet.current} />
+<!-- TODO: async using svelte:bundary -->
+{#if tweet.error}
+	<st.TweetNotFound />
+{:else if tweet.loading || !tweet.ready}
+	<st.TweetSkeleton />
+{:else}
+	<st.Tweet tweet={tweet.current} />
 {/if}
