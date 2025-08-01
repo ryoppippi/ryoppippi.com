@@ -52,10 +52,6 @@ export default defineConfig({
 			include: ['**/*.(svelte|md)'],
 			components: ['./src/components'],
 			module: {
-				'sveltweet': [
-					'Tweet',
-					'TweetNotFound',
-				],
 				'sveltekit-embed': [
 					'YouTube',
 				],
