@@ -6,7 +6,6 @@ import matter from 'gray-matter';
 import { glob } from 'tinyglobby';
 import { processMeta } from '../../markdown/preprocessor';
 
-// eslint-disable-next-line antfu/no-top-level-await
 export const blogPosts = await (async () => {
 	const blogDir = import.meta.dirname;
 

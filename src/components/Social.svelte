@@ -1,6 +1,5 @@
 <script lang='ts'>
-	import type { Asset } from '$app/types';
-	import { asset } from '$app/paths';
+	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
@@ -14,7 +13,10 @@
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
 	] as const)
-		.map(({ url, ...rest }) => ({ url: asset(url as Asset), ...rest }));
+		.map(({ url, ...rest }) => ({
+			url: ufo.joinURL(PUBLIC_ORIGIN, url),
+			...rest,
+		}));
 </script>
 
 <article

@@ -1,27 +1,26 @@
-import type { Asset } from '$app/types';
 import type { RequestHandler } from './$types';
 import { asset, resolve } from '$app/paths';
 import { blogPosts } from '$contents/blog' with { type: 'macro' };
+import { PUBLIC_ORIGIN } from '$env/static/public';
 import { Feed } from 'feed';
+import * as ufo from 'ufo';
 
 export const prerender = true;
 
-const domain = 'https://ryoppippi.com';
-
 export const GET = (async () => {
-	const favicon = asset('/ryoppippi.jpg');
+	const favicon = ufo.joinURL(PUBLIC_ORIGIN, asset('/ryoppippi.jpg'));
 
 	const feed = new Feed({
 		title: `blog | ryoppippi.com`,
 		description: `blog | ryoppippi.com`,
-		id: domain,
-		link: domain,
+		id: PUBLIC_ORIGIN,
+		link: PUBLIC_ORIGIN,
 		language: 'en',
 		image: favicon,
 		favicon,
 		copyright: 'CC BY-NC-SA 4.0 2022-PRESENT © ryoppippi',
 		feedLinks: {
-			rss: asset(resolve('/feed.xml') as Asset),
+			rss: ufo.joinURL(PUBLIC_ORIGIN, resolve('/feed.xml')),
 		},
 	});
 
@@ -37,7 +36,7 @@ export const GET = (async () => {
 		}
 
 		feed.addItem({
-			link: asset(resolve('/blog/[slug]', { slug }) as Asset),
+			link: ufo.joinURL(PUBLIC_ORIGIN, resolve('/blog/[slug]', { slug })),
 			date: new Date(post.pubDate),
 			title: post.title,
 			description: `${post.title} | ${post.readingTime.text}`,

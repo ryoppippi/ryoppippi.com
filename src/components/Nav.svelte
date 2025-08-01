@@ -1,8 +1,9 @@
 <script lang='ts'>
-	import type { Asset } from '$app/types';
-	import { asset, resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import * as DarkMode from 'svelte-fancy-darkmode';
+	import * as ufo from 'ufo';
 	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
@@ -10,7 +11,11 @@
 		{ name: 'projects', href: resolve('/projects') },
 		{ name: 'talks', href: resolve('/talks') },
 		{ name: 'blog', href: resolve('/blog') },
-		{ name: 'cv', href: asset('/cv-pdf' as Asset), icon: 'i-line-md:download-outline' },
+		{
+			name: 'cv',
+			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv-pdf'),
+			icon: 'i-line-md:download-outline',
+		},
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
 

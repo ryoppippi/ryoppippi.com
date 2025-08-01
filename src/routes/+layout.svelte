@@ -1,13 +1,13 @@
 <script lang='ts'>
-	import type { Asset } from '$app/types';
 	import { onNavigate } from '$app/navigation';
 
-	import { asset } from '$app/paths';
 	import { page } from '$app/state';
+	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
-	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 
+	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 	import { MetaTags } from 'svelte-meta-tags';
+	import * as ufo from 'ufo';
 	import faviconLinks from 'virtual:favicons';
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
@@ -59,7 +59,7 @@
 	}}
 	{description}
 	openGraph={{
-		url: asset(page.url.pathname as Asset),
+		url: ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname),
 		type: 'website',
 		title,
 		description,

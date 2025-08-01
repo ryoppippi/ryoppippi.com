@@ -1,5 +1,3 @@
-/* eslint-disable antfu/no-top-level-await */
-
 import { Lang } from '$contents/types';
 import { slugify } from '$lib/slugify.server';
 import { flatten, map } from '@core/iterutil/pipe/async';

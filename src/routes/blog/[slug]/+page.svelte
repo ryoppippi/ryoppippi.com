@@ -1,9 +1,9 @@
 <script lang='ts'>
-	import type { Asset } from '$app/types';
 	import { dev } from '$app/environment';
-	import { asset } from '$app/paths';
 	import { page } from '$app/state';
+	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { formatDate } from '$lib/util';
+	import * as ufo from 'ufo';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -17,7 +17,7 @@
 	const { data } = $props();
 	const { metadata, Markdown } = data;
 
-	const url = asset(page.url.pathname as Asset);
+	const url = ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname);
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${url}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
