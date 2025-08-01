@@ -1,3 +1,8 @@
+<script>
+	import Profile from '$components/Profile.svelte';
+	import Social from '$components/Social.svelte';
+</script>
+
 <article
 	container
 	gcc

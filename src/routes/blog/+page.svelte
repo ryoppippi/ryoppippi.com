@@ -1,5 +1,6 @@
 <script lang='ts'>
-	import type { Item } from '$components/ListView.svelte';
+	import CheckButton from '$components/CheckButton.svelte';
+	import ListView, { type Item } from '$components/ListView.svelte';
 
 	const { data } = $props();
 
