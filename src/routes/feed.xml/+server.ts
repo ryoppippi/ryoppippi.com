@@ -1,24 +1,27 @@
+import type { Asset } from '$app/types';
 import type { RequestHandler } from './$types';
+import { asset, resolve } from '$app/paths';
 import { blogPosts } from '$contents/blog' with { type: 'macro' };
-import { domain, subdomain } from '$lib/util';
 import { Feed } from 'feed';
 
 export const prerender = true;
 
+const domain = 'https://ryoppippi.com';
+
 export const GET = (async () => {
-	const favicon = subdomain('ryoppippi.jpg');
+	const favicon = asset('/ryoppippi.jpg');
 
 	const feed = new Feed({
 		title: `blog | ryoppippi.com`,
 		description: `blog | ryoppippi.com`,
-		id: domain(),
-		link: domain(),
+		id: domain,
+		link: domain,
 		language: 'en',
 		image: favicon,
 		favicon,
 		copyright: 'CC BY-NC-SA 4.0 2022-PRESENT © ryoppippi',
 		feedLinks: {
-			rss: subdomain('feed.xml'),
+			rss: asset(resolve('/feed.xml') as Asset),
 		},
 	});
 
@@ -34,7 +37,7 @@ export const GET = (async () => {
 		}
 
 		feed.addItem({
-			link: subdomain('blog', slug),
+			link: asset(resolve('/blog/[slug]', { slug }) as Asset),
 			date: new Date(post.pubDate),
 			title: post.title,
 			description: `${post.title} | ${post.readingTime.text}`,

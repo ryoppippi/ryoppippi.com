@@ -97,6 +97,8 @@ md.use(MarkdownItMagicLink, {
 
 md.use(MDC);
 
+const origin = isDevelopment ? '' : 'https://ryoppippi.com';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
@@ -142,6 +144,7 @@ const config = {
 			$components: './src/components',
 		},
 		prerender: {
+			origin,
 			handleHttpError: ({ path, message }) => {
 				if (Route.find(({ from }) => from === path)) {
 					return;
@@ -166,7 +169,7 @@ const config = {
 			})(),
 		},
 		paths: {
-			assets: (isDevelopment ? '' : 'https://ryoppippi.com'),
+			assets: origin,
 		},
 	},
 };

@@ -1,5 +1,6 @@
 <script lang='ts'>
-	import { subdomain } from '$lib/util';
+	import type { Asset } from '$app/types';
+	import { asset } from '$app/paths';
 	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
@@ -13,7 +14,7 @@
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
 	] as const)
-		.map(({ url, ...rest }) => ({ url: subdomain(url), ...rest }));
+		.map(({ url, ...rest }) => ({ url: asset(url as Asset), ...rest }));
 </script>
 
 <article
