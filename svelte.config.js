@@ -29,7 +29,6 @@ import { isDevelopment } from 'std-env';
 
 import { importAssets } from 'svelte-preprocess-import-assets';
 
-import SveltweetPreprocessor from 'sveltweet/preprocessor';
 import { glob } from 'tinyglobby';
 import { Route } from './routes.js';
 
@@ -105,7 +104,6 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [
 		svelteMarkdown(md),
-		SveltweetPreprocessor(),
 		importAssets(),
 		vitePreprocess(),
 	],
@@ -119,11 +117,20 @@ const config = {
 		},
 	},
 
+	compilerOptions: {
+		experimental: {
+			async: true,
+		},
+	},
+
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
+		experimental: {
+			remoteFunctions: true,
+		},
 		typescript: {
 			config(config) {
 				config.include.push(join(import.meta.dirname, 'uno.config.ts'));
