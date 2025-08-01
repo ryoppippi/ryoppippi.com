@@ -13,6 +13,7 @@ declare global {
     const ProjectTitle: typeof import("./components/ProjectTitle.svelte")["default"]
     const ShowcaseCard: typeof import("./components/ShowcaseCard.svelte")["default"]
     const Social: typeof import("./components/Social.svelte")["default"]
+    const Tweet: typeof import("./components/Tweet.svelte")["default"]
 }
 
 export {}
