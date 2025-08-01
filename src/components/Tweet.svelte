@@ -1,6 +1,6 @@
 <script lang='ts'>
+	import { getTweet } from '$lib/tweet.remote.js';
 	import { Tweet as Sveltweet } from 'sveltweet';
-	import { getTweet } from './tweet.remote.js';
 
 	type Props = Parameters<typeof getTweet>[0];
 
