@@ -1,5 +1,4 @@
 <script lang='ts'>
-	import { onNavigate } from '$app/navigation';
 
 	import { page } from '$app/state';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
@@ -14,18 +13,19 @@
 
 	const { children } = $props();
 
-	onNavigate((navigation) => {
-		if (!document?.startViewTransition) {
-			return;
-		}
-
-		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
-			});
-		});
-	});
+	// TODO: disable view transitions for now because it doesn't work with remote function
+	// onNavigate((navigation) => {
+	// 	if (!document?.startViewTransition) {
+	// 		return;
+	// 	}
+	//
+	// 	return new Promise((resolve) => {
+	// 		document.startViewTransition(async () => {
+	// 			resolve();
+	// 			await navigation.complete;
+	// 		});
+	// 	});
+	// });
 
 	const title = $derived(page.data.title ?? 'home');
 	const description = `Portfolio of @ryoppippi`;
