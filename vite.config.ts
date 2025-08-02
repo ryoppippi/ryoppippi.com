@@ -8,7 +8,6 @@ import Macros from '@unplugin/macros/vite';
 import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
-import Components from 'unplugin-svelte-components/vite';
 
 import { defineConfig } from 'vite';
 
@@ -42,10 +41,6 @@ export default defineConfig({
 			extractors: [
 				extractorSvelte(),
 			],
-		}),
-		Components({
-			dirs: ['src/components'],
-			dts: './src/components.d.ts',
 		}),
 		// eslint-disable-next-line ts/no-unsafe-call
 		autoImport({

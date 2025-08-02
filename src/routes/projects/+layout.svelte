@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { page } from '$app/state';
+	import ProjectTitle from '$components/ProjectTitle.svelte';
 	import { capitalize, lowercase } from '@ryoppippi/str-fns';
 
 	const routes = [

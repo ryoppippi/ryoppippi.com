@@ -96,7 +96,6 @@
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
 		"unplugin-icons": "^22.2.0",
-		"unplugin-svelte-components": "^0.3.1",
 		"vite": "npm:rolldown-vite@latest",
 		"vite-plugin-favicons": "^0.1.7",
 		"wrangler": "^4.26.1"

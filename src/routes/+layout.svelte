@@ -2,9 +2,10 @@
 	import { onNavigate } from '$app/navigation';
 
 	import { page } from '$app/state';
+	import Nav from '$components/Nav.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
-	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 
+	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 	import { MetaTags } from 'svelte-meta-tags';
 	import * as ufo from 'ufo';
