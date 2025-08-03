@@ -89,7 +89,7 @@
 		"sveltweet": "^0.4.3",
 		"tinyglobby": "^0.2.14",
 		"type-fest": "^4.41.0",
-		"typescript": "^5.8.3",
+		"typescript": "^5.9.2",
 		"typescript-svelte-plugin": "^0.3.49",
 		"ufo": "^1.6.1",
 		"unocss": "^66.3.3",
