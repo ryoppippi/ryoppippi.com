@@ -13,7 +13,7 @@
 		{ name: 'blog', href: resolve('/blog') },
 		{
 			name: 'cv',
-			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv-pdf'),
+			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
 			icon: 'i-line-md:download-outline',
 		},
 	] as const satisfies { href: string; name: string; icon?: string }[];
