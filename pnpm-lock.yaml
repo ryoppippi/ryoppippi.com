@@ -174,7 +174,7 @@ importers:
         specifier: ^10.2.1
         version: 10.2.1
       shiki:
-        specifier: ^3.9.0
+        specifier: ^3.9.1
         version: 3.9.1
       simple-git-hooks:
         specifier: ^2.13.0
