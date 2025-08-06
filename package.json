@@ -79,7 +79,7 @@
 		"sort-package-json": "^3.4.0",
 		"std-env": "^3.9.0",
 		"svelte": "^5.37.3",
-		"svelte-check": "^4.3.0",
+		"svelte-check": "^4.3.1",
 		"svelte-fancy-darkmode": "^1.1.4",
 		"svelte-meta-tags": "^4.4.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
