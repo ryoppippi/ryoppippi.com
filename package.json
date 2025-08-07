@@ -31,7 +31,7 @@
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "jsr:^1.1.0",
 		"@secretlint/secretlint-rule-preset-recommend": "^10.2.1",
 		"@shikijs/markdown-it": "^3.9.1",
-		"@shikijs/twoslash": "^3.9.1",
+		"@shikijs/twoslash": "^3.9.2",
 		"@std/collections": "jsr:^1.0.10",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/enhanced-img": "^0.7.0",
