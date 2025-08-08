@@ -161,6 +161,9 @@ importers:
       markdown-it-mdc:
         specifier: ^0.2.6
         version: 0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
+      node:
+        specifier: runtime:^24.5.0
+        version: runtime:24.5.0
       open-editor:
         specifier: ^5.1.0
         version: 5.1.0
@@ -3348,6 +3351,96 @@ packages:
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+
+  node@runtime:24.5.0:
+    resolution:
+      type: variations
+      variants:
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-8oJdIJu3HyTy6IYIJjHptoFj9QRijuAdAaW9JQ6q/sY=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-aix-ppc64.tar.gz
+          targets:
+            - cpu: ppc64
+              os: aix
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-KkFyR0Vl7LjwyHoVIFkOANayinhZTCINOO75kXY9wnY=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-darwin-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-I5bD3RSMj84VWT2if4OSSM3qFarZcQeOp8Bsc7qXD2Q=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-darwin-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: darwin
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-xkPBGNkHyNtCpnehJ4nrXVWtbeS44sEbqwjb0jhS2i4=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-linux-arm64.tar.gz
+          targets:
+            - cpu: arm64
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-f0Xiiu2uWkB3wE+hk0JoyeNiDc+xBWJFF8JBDKHesA0=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-linux-ppc64le.tar.gz
+          targets:
+            - cpu: ppc64le
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-HRUSRPVQL/fnInHmA4ideJ3sAh8MsoFI2Q9KjOierzA=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-linux-s390x.tar.gz
+          targets:
+            - cpu: s390x
+              os: linux
+        - resolution:
+            archive: tarball
+            bin: bin/node
+            integrity: sha256-Np8qNmjd5+MkaXBA+v3PRC/RmLjBAjFxRUF7PIOpeUo=
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-linux-x64.tar.gz
+          targets:
+            - cpu: x64
+              os: linux
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-/ZeELDY5+8M++fyMDGrcXUXlZmKkNUxyE8WKVaBDLo4=
+            prefix: node-v24.5.0-win-arm64
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-win-arm64.zip
+          targets:
+            - cpu: arm64
+              os: win32
+        - resolution:
+            archive: zip
+            bin: node.exe
+            integrity: sha256-xqVxQQjKqBvHHjhZwY9Emo9FbidZRsDUKeLXEgsD0g4=
+            prefix: node-v24.5.0-win-x64
+            type: binary
+            url: https://nodejs.org/download/release/v24.5.0/node-v24.5.0-win-x64.zip
+          targets:
+            - cpu: x64
+              os: win32
+    version: 24.5.0
+    hasBin: true
 
   normalize-package-data@6.0.2:
     resolution: {integrity: sha512-V6gygoYb/5EmNI+MEGrWkC+e6+Rr7mTmfHrxDbLzxQogBkgzo76rkok0Am6thgSF7Mv2nLOajAJj5vDJZEFn7g==}
@@ -7993,6 +8086,8 @@ snapshots:
   node-fetch-native@1.6.6: {}
 
   node-releases@2.0.19: {}
+
+  node@runtime:24.5.0: {}
 
   normalize-package-data@6.0.2:
     dependencies:
