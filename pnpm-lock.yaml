@@ -87,7 +87,7 @@ importers:
         specifier: 66.4.1
         version: 66.4.1(eslint@9.32.0(jiti@2.4.2))(typescript@5.9.2)
       '@unocss/extractor-svelte':
-        specifier: ^66.4.0
+        specifier: ^66.4.1
         version: 66.4.1
       '@unocss/reset':
         specifier: ^66.4.1
