@@ -1,6 +1,5 @@
 import type { Entries } from 'type-fest';
 import type { Project } from './types.js';
-import { joinURL } from 'ufo';
 import _ossProjects from './list.json';
 import { OssProjects, ParsedProject, ProjectsByGenre, UnghRepo, URL } from './types.js';
 
@@ -16,7 +15,7 @@ async function processProject(
 ) {
 	// Ensure project has a link
 	if (project.link == null) {
-		project.link = URL.assert(joinURL(GITHUB_URL, GITHUB_USERNAME, project.name));
+		project.link = URL.assert(`${GITHUB_URL}/${GITHUB_USERNAME}/${project.name}`);
 	}
 
 	const link = URL.assert(project.link);
@@ -24,7 +23,7 @@ async function processProject(
 	// Fetch repo info if description is missing or null
 	if (project.description == null) {
 		try {
-			const url = joinURL(UNGH_URL, 'repos', GITHUB_USERNAME, project.name);
+			const url = `${UNGH_URL}/repos/${GITHUB_USERNAME}/${project.name}`;
 			const res = await fetch(url);
 			if (!res.ok) {
 				throw new Error(`Failed to fetch repo info for ${project.name}: ${res.statusText}`);
