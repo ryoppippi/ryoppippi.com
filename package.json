@@ -74,7 +74,7 @@
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^10.2.2",
-		"shiki": "^3.9.1",
+		"shiki": "^3.9.2",
 		"simple-git-hooks": "^2.13.1",
 		"sort-package-json": "^3.4.0",
 		"std-env": "^3.9.0",
