@@ -29,7 +29,7 @@
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "jsr:^1.1.0",
-		"@secretlint/secretlint-rule-preset-recommend": "^10.2.1",
+		"@secretlint/secretlint-rule-preset-recommend": "^10.2.2",
 		"@shikijs/markdown-it": "^3.9.2",
 		"@shikijs/twoslash": "^3.9.2",
 		"@std/collections": "jsr:^1.0.10",
