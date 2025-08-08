@@ -30,6 +30,7 @@
 
 	const title = $derived(page.data.title ?? 'home');
 	const description = `Portfolio of @ryoppippi`;
+	const ogImage = ufo.joinURL(PUBLIC_ORIGIN, ryoppippi);
 </script>
 
 <DarkModeHeader themeColors={{ dark: '#121212', light: '#ffffff' }} />
@@ -66,7 +67,7 @@
 		description,
 		images: [
 			{
-				url: ryoppippi,
+				url: ogImage,
 				alt: 'ryoppippi\'s icon',
 			},
 		],
@@ -78,7 +79,7 @@
 		site: '@ryoppippi',
 		title,
 		description,
-		image: ryoppippi,
+		image: ogImage,
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
 <svelte:head>
