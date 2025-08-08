@@ -1,6 +1,5 @@
 <script lang='ts'>
 	import { PUBLIC_ORIGIN } from '$env/static/public';
-	import * as ufo from 'ufo';
 
 	const { size = 4.5 } = $props();
 
@@ -14,7 +13,7 @@
 		{ class: 'i-ri:youtube-line', url: '/youtube' },
 	] as const)
 		.map(({ url, ...rest }) => ({
-			url: ufo.joinURL(PUBLIC_ORIGIN, url),
+			url: new URL(url, PUBLIC_ORIGIN).toString(),
 			...rest,
 		}));
 </script>
@@ -26,7 +25,7 @@
 	grid-cols='3 sm:7'
 >
 	{#each ICONS as { class: _class, url } (url)}
-		{@const { pathname } = ufo.parseURL(url)}
+		{@const { pathname } = new URL(url)}
 		{@const path = pathname.replace('/', '')}
 		<div
 			cursor-pointer

@@ -8,7 +8,6 @@
 	import ryoppippi from '$lib/assets/ryoppippi.jpg';
 	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 	import { MetaTags } from 'svelte-meta-tags';
-	import * as ufo from 'ufo';
 	import faviconLinks from 'virtual:favicons';
 	import 'uno.css';
 	import '@unocss/reset/tailwind.css';
@@ -30,7 +29,7 @@
 
 	const title = $derived(page.data.title ?? 'home');
 	const description = `Portfolio of @ryoppippi`;
-	const ogImage = ufo.joinURL(PUBLIC_ORIGIN, ryoppippi);
+	const ogImage = new URL(ryoppippi, PUBLIC_ORIGIN).toString();
 </script>
 
 <DarkModeHeader themeColors={{ dark: '#121212', light: '#ffffff' }} />
@@ -61,7 +60,7 @@
 	}}
 	{description}
 	openGraph={{
-		url: ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname),
+		url: new URL(page.url.pathname, PUBLIC_ORIGIN).toString(),
 		type: 'website',
 		title,
 		description,
