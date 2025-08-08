@@ -44,7 +44,7 @@
 		"@types/markdown-it": "^14.1.2",
 		"@types/markdown-it-link-attributes": "^3.0.5",
 		"@types/node": "^24.1.0",
-		"@unocss/eslint-plugin": "66.4.0",
+		"@unocss/eslint-plugin": "66.4.1",
 		"@unocss/extractor-svelte": "^66.4.0",
 		"@unocss/reset": "^66.4.1",
 		"@unplugin/macros": "jsr:^0.16.3",
