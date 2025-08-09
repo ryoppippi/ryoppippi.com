@@ -225,7 +225,7 @@ importers:
         specifier: ^0.3.49
         version: 0.3.49(svelte@5.37.3)(typescript@5.9.2)
       unocss:
-        specifier: ^66.4.0
+        specifier: ^66.4.1
         version: 66.4.1(postcss@8.5.6)(rolldown-vite@7.1.0(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))
       unocss-preset-fluid:
         specifier: ^1.0.2
@@ -5943,7 +5943,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.16':
     dependencies:
-      '@babel/parser': 7.27.5
+      '@babel/parser': 7.28.0
       '@vue/shared': 3.5.16
       entities: 4.5.0
       estree-walker: 2.0.2
@@ -5956,7 +5956,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.16':
     dependencies:
-      '@babel/parser': 7.27.5
+      '@babel/parser': 7.28.0
       '@vue/compiler-core': 3.5.16
       '@vue/compiler-dom': 3.5.16
       '@vue/compiler-ssr': 3.5.16
