@@ -9,6 +9,7 @@
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"deploy": "wrangler deploy",
 		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "nlx only-allow pnpm",
