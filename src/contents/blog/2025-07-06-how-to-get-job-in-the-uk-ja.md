@@ -5,6 +5,8 @@ isPublished: true
 lang: ja
 ---
 
+> [English](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en)
+
 こんにちは、ryoppippi です。はじめましての方ははじめまして。
 
 2025年6月から [Stackone](https://www.stackone.com/) というUKのAIスタートアップでAI Engineerとして働いています。
