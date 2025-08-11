@@ -45,7 +45,7 @@ As a result, I spent lazy days at home muttering "I want to go back to Japan" ev
 
 ## The Trigger to Start (September 2024)
 
-Around this time, the [yasunori project](https://github.com/times-yasunori/) was launched in {@vim-jp}. It was a groundbreaking initiative centered around {@yasunori0418}, the heart of vim-jp discussions, to job hunt together, write books, produce output, and encourage each other. While I wasn't actively involved initially, this activity inspired me to finally escape my lazy lifestyle and decide to start job hunting in the UK.
+Around this time, the [yasunori project](https://github.com/times-yasunori/) was launched in {@vim-jp}. It was a groundbreaking initiative centred around {@yasunori0418}, the heart of vim-jp discussions, to job hunt together, write books, produce output, and encourage each other. While I wasn't actively involved initially, this activity inspired me to finally escape my lazy lifestyle and decide to start job hunting in the UK.
 
 > https://blog.tomoya.dev/posts/you-dont-know-yasunori-1/
 
@@ -61,13 +61,13 @@ I also described my work experience in more detail and made efforts to **fit it 
 ## The Turning Point (November-December 2024)
 
 In November, I temporarily returned to Japan and spoke at **vimconf** and **neovimconf**. Knowing that recordings would be published in advance, I prepared in English with job hunting in mind, aiming for short but rich content. I probably spent an excessive amount of time preparing.
-The presentation videos were very well received, and this led to interview invitations. It was an event that made me realize the importance of **technical output** once again.
+The presentation videos were very well received, and this led to interview invitations. It was an event that made me realise the importance of **technical output** once again.
 
 > My vimconf presentation report is here: https://ryoppippi.com/blog/2024-12-09
 
 ## The Language Barrier (January 2025)
 
-At the end of the year, I went to the **final interview** at a company that was excited about my vimconf presentation. The day after returning to the UK, I traveled to a **WeWork in London**. I felt it went well, but I was rejected due to **"communication difficulties"**. I was quite shocked because communication had been very positive up to the final interview.
+At the end of the year, I went to the **final interview** at a company that was excited about my vimconf presentation. The day after returning to the UK, I travelled to a **WeWork in London**. I felt it went well, but I was rejected due to **"communication difficulties"**. I was quite shocked because communication had been very positive up to the final interview.
 
 This experience made me painfully aware that technical skills alone are insufficient, and that **English communication ability** is the ultimate deciding factor.
 
@@ -134,7 +134,7 @@ The current UK job market is in an extremely tough situation. Getting your first
 
 ## The Importance of the Resume
 
-CVs have clear formats and optimization techniques. Creating an **ATS-friendly format** and properly showcasing **OSS activities and technical achievements** is key to passing document screening.
+CVs have clear formats and optimisation techniques. Creating an **ATS-friendly format** and properly showcasing **OSS activities and technical achievements** is key to passing document screening.
 
 ## Reconsidering Application Methods
 
