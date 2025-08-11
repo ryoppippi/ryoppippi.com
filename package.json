@@ -33,7 +33,7 @@
 		"@shikijs/markdown-it": "^3.9.2",
 		"@shikijs/twoslash": "^3.9.2",
 		"@std/collections": "jsr:^1.0.10",
-		"@sveltejs/adapter-static": "^3.0.8",
+		"@sveltejs/adapter-static": "^3.0.9",
 		"@sveltejs/enhanced-img": "^0.7.1",
 		"@sveltejs/kit": "^2.27.3",
 		"@sveltejs/vite-plugin-svelte": "^6.1.0",
