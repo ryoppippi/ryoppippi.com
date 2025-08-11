@@ -57,7 +57,7 @@ importers:
         specifier: ^0.7.1
         version: 0.7.1(@sveltejs/vite-plugin-svelte@6.1.0(rolldown-vite@7.1.0(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.37.3))(rolldown-vite@7.1.0(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.37.3)
       '@sveltejs/kit':
-        specifier: ^2.27.1
+        specifier: ^2.27.3
         version: 2.27.3(@sveltejs/vite-plugin-svelte@6.1.0(rolldown-vite@7.1.0(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.37.3))(rolldown-vite@7.1.0(@types/node@24.1.0)(esbuild@0.25.4)(jiti@2.4.2)(yaml@2.8.0))(svelte@5.37.3)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.1.0
