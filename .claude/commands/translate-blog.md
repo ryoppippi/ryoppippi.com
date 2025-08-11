@@ -1,2 +1,1 @@
-translate the given blog post.
-if written in Japanese, translate to English, and vice versa.
+translate the given blog post by calling markdown-translator subagent
