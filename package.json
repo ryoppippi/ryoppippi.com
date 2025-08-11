@@ -16,8 +16,7 @@
 		"new": "./scripts/new-post.js",
 		"prepare": "simple-git-hooks",
 		"preview": "vite preview",
-		"sync": "svelte-kit sync",
-		"taze": "nlx taze -r"
+		"sync": "svelte-kit sync"
 	},
 	"devDependencies": {
 		"@antfu/ni": "^25.0.0",
