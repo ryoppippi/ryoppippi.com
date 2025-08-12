@@ -28,7 +28,7 @@ export const GET = (async () => {
 			continue;
 		}
 
-		const { slug } = post;
+		const { filename: slug } = post;
 
 		if (slug == null) {
 			continue;

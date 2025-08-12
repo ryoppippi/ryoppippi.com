@@ -8,6 +8,7 @@ export type Metadata = {
 	readingTime: ReturnType<typeof rt>;
 	isPublished: boolean;
 	lang: typeof Lang.infer;
+	filename: string;
 };
 
 export type Item = {
