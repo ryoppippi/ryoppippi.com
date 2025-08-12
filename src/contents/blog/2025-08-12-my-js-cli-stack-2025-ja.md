@@ -171,7 +171,7 @@ const command = define({
 		});
 
 		await Promise.all([
-			Deno.serve(
+			Bun.serve(
 				{ port: ctx.values.port, hostname: ctx.values.hostname },
 				app.fetch,
 			),
