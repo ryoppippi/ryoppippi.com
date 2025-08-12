@@ -10,6 +10,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"deploy": "wrangler deploy",
+		"deploy:non-production": "wrangler versions upload",
 		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "nlx only-allow pnpm",
