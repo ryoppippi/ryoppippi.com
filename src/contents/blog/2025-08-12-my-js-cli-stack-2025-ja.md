@@ -207,6 +207,16 @@ const command = define({
 
 より対話的なinterfaceが必要な場合は [`@clack/prompts`](https://github.com/bombshell-dev/clack)を使うこともあります。
 
+## テスト
+
+CLIツールのテストには [Vitest](https://vitest.dev/) を使っています。VitestはCLIツール開発において以下のような利点があります：
+
+- **高いパフォーマンス**: native ES modulesサポートにより極めて高速に動作する
+- **安全な環境変数のモック**: 環境設定に依存するCLIツールにとって重要な、安全で分離された環境変数のモックが可能
+- **In-source testing**: `if (import.meta.vitest)` を使ってソースコードと直接並べてテストを書ける機能により、テストのためだけに関数をexportする必要がない
+
+特にin-source testingは、CLIツールにとって価値があります。パブリックAPIを汚すことなく内部関数をテストでき、実装の詳細をプライベートに保ちながら包括的なテストカバレッジを確保できます。
+
 # 配布について
 
 ## npm

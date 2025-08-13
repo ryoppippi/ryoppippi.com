@@ -38,7 +38,7 @@ I use [bun](https://bun.sh/) for the following reasons:
 - **Excellent compatibility**: Very high compatibility with Node.js - I haven't encountered any compatibility issues so far
 - **Useful extensions**: [bun shell](https://bun.com/docs/runtime/shell) is particularly handy for writing simple scripts or executing shell scripts within `package.json`
 
-While [pnpm](https://pnpm.io/) had the edge for monorepo usage, bun is catching up with the recent implementation of [pnpm style isolated install](https://bun.com/docs/install/isolated). Once this stabilizes, bun will become more suitable for monorepos as well.
+While [pnpm](https://pnpm.io/) had the edge for monorepo usage, bun is catching up with the recent implementation of [pnpm style isolated install](https://bun.com/docs/install/isolated). Once this stabilises, bun will become more suitable for monorepos as well.
 
 ## Bundler
 
@@ -83,7 +83,7 @@ This strategy significantly reduces distribution size:
 
 <Tweet id="1911562801530777634" />
 
-To keep bundle sizes small, I prioritize the following when selecting libraries:
+To keep bundle sizes small, I prioritise the following when selecting libraries:
 
 - Small size with minimal dependencies
 - Effective tree shaking compatibility
@@ -115,7 +115,7 @@ Currently, I mainly use {@kazupon}'s gunshi:
 - **Comprehensive features**: Includes negatable, enum, alias, type checking, and more
 - **Small bundle size**: Lightweight compared to other frameworks
 - **Active development**: Innovative features like plugin systems are being added
-- **Future potential**: Shell completion, i18n, and help customization are in development
+- **Future potential**: Shell completion, i18n, and help customisation are in development
 
 I originally used `cleye`, but migrated to `gunshi` as it maintains a similar interface while being lighter and more feature-rich.
 
@@ -206,6 +206,16 @@ I use [consola](https://github.com/unjs/consola) for log output. It's attractive
 While not the smallest in terms of bundle size, I chose it for its balance of features.
 
 For more interactive interfaces, I sometimes use [`@clack/prompts`](https://github.com/bombshell-dev/clack).
+
+## Testing
+
+I use [Vitest](https://vitest.dev/) for testing CLI tools. Vitest offers several advantages for CLI tool development:
+
+- **High performance**: Extremely fast execution thanks to its native ES modules support
+- **Safe environment variable mocking**: Provides safe and isolated environment variable mocking, crucial for CLI tools that depend on environment configurations
+- **In-source testing**: Allows writing tests directly alongside source code using `if (import.meta.vitest)`, eliminating the need to export functions purely for testing purposes
+
+In-source testing is particularly valuable for CLI tools because it allows testing internal functions without cluttering the public API. You can keep implementation details private while ensuring comprehensive test coverage.
 
 # Distribution
 
