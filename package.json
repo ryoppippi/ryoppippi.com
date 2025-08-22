@@ -98,7 +98,7 @@
 		"unplugin-icons": "^22.2.0",
 		"vite": "npm:rolldown-vite@latest",
 		"vite-plugin-favicons": "^0.1.7",
-		"wrangler": "^4.27.0"
+		"wrangler": "^4.31.0"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "pnpm lint-staged"
