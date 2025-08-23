@@ -87,7 +87,7 @@
 		"svelte-sitemap": "^2.7.1",
 		"sveltekit-autoimport": "^1.8.1",
 		"sveltekit-embed": "^0.0.22",
-		"sveltweet": "^0.4.3",
+		"sveltweet": "^0.5.0",
 		"tinyglobby": "^0.2.14",
 		"type-fest": "^4.41.0",
 		"typescript": "^5.9.2",
