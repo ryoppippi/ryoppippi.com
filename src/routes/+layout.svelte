@@ -1,11 +1,11 @@
 <script lang='ts'>
 	import { onNavigate } from '$app/navigation';
 
+	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import Nav from '$components/Nav.svelte';
-	import { PUBLIC_ORIGIN } from '$env/static/public';
 
-	import ryoppippi from '$lib/assets/ryoppippi.jpg';
+	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { Header as DarkModeHeader } from 'svelte-fancy-darkmode';
 	import { MetaTags } from 'svelte-meta-tags';
 	import * as ufo from 'ufo';
@@ -29,8 +29,8 @@
 	});
 
 	const title = $derived(page.data.title ?? 'home');
+	const ryoppippi = ufo.joinURL(PUBLIC_ORIGIN, asset('/ryoppippi.jpg'));
 	const description = `Portfolio of @ryoppippi`;
-	const ogImage = ufo.joinURL(PUBLIC_ORIGIN, ryoppippi);
 </script>
 
 <DarkModeHeader themeColors={{ dark: '#121212', light: '#ffffff' }} />
@@ -67,7 +67,7 @@
 		description,
 		images: [
 			{
-				url: ogImage,
+				url: ryoppippi,
 				alt: 'ryoppippi\'s icon',
 			},
 		],
@@ -79,7 +79,7 @@
 		site: '@ryoppippi',
 		title,
 		description,
-		image: ogImage,
+		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
 	}} />
 <svelte:head>
