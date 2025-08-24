@@ -97,7 +97,7 @@
 		"unocss-preset-fluid": "^1.0.2",
 		"unocss-transformer-alias": "^0.0.8",
 		"unplugin-icons": "^22.2.0",
-		"vite": "npm:rolldown-vite@latest",
+		"vite": "^7.1.3",
 		"vite-plugin-favicons": "^0.1.7",
 		"wrangler": "^4.31.0"
 	},

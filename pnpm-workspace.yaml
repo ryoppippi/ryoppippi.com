@@ -1,6 +1,3 @@
-overrides:
-  vite: npm:rolldown-vite@latest
-
 onlyBuiltDependencies:
   - esbuild
   - sharp
