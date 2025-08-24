@@ -4,6 +4,7 @@
 	import LargeTitle from '$components/LargeTitle.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { formatDate } from '$lib/util';
+	import * as ufo from 'ufo';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -16,7 +17,7 @@
 	const { data } = $props();
 	const { metadata, Markdown } = data;
 
-	const url = new URL(page.url.pathname, PUBLIC_ORIGIN).toString();
+	const url = ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname);
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${url}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;

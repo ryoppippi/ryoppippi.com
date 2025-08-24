@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { PUBLIC_ORIGIN } from '$env/static/public';
+	import * as ufo from 'ufo';
 </script>
 
 {#snippet link(
@@ -13,7 +14,7 @@
 		fcol-md-row
 		fyc
 		gap-1
-		href={new URL(_subdomain, PUBLIC_ORIGIN).toString()}
+		href={ufo.joinURL(PUBLIC_ORIGIN, _subdomain)}
 		target='_blank'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
