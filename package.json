@@ -111,5 +111,12 @@
 		"package.json": [
 			"sort-package-json"
 		]
+	},
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": "^24.5.0",
+			"onFail": "download"
+		}
 	}
 }

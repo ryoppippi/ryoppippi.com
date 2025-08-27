@@ -6,5 +6,3 @@ onlyBuiltDependencies:
   - workerd
 
 shellEmulator: true
-
-useNodeVersion: 24.5.0
