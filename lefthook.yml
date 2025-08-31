@@ -8,3 +8,4 @@ pre-commit:
     sort-package-json:
       glob: package.json
       run: pnpm sort-package-json {staged_files}
+      stage_fixed: true
