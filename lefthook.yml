@@ -2,8 +2,9 @@ pre-commit:
   parallel: true
   commands:
     eslint:
-      glob: "*"
+      glob: '*'
       run: pnpm eslint --cache --fix {staged_files}
+      stage_fixed: true
     sort-package-json:
-      glob: "package.json"
+      glob: package.json
       run: pnpm sort-package-json {staged_files}
