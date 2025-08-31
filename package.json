@@ -1,8 +1,9 @@
 {
 	"name": "ryoppippi.com",
+	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"type": "module",
+	"packageManager": "pnpm@10.15.0",
 	"scripts": {
 		"build": "vite build",
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
@@ -98,7 +99,6 @@
 		"vite-plugin-favicons": "^0.1.7",
 		"wrangler": "^4.32.0"
 	},
-	"packageManager": "pnpm@10.15.0",
 	"devEngines": {
 		"runtime": {
 			"name": "node",
