@@ -1,9 +1,8 @@
 {
 	"name": "ryoppippi.com",
-	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@10.15.0",
+	"type": "module",
 	"scripts": {
 		"build": "vite build",
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
@@ -16,7 +15,6 @@
 		"preinstall": "nlx only-allow pnpm",
 		"lint": "eslint --cache .",
 		"new": "./scripts/new-post.js",
-		"prepare": "simple-git-hooks",
 		"preview": "vite preview",
 		"sync": "svelte-kit sync"
 	},
@@ -59,7 +57,7 @@
 		"feed": "^5.1.0",
 		"fs-extra": "^11.3.1",
 		"gray-matter": "^4.0.3",
-		"lint-staged": "^16.1.5",
+		"lefthook": "^1.12.3",
 		"magic-string": "^0.30.18",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
@@ -76,7 +74,6 @@
 		"rss-parser": "^3.13.0",
 		"secretlint": "^11.0.2",
 		"shiki": "^3.11.0",
-		"simple-git-hooks": "^2.13.1",
 		"sort-package-json": "^3.4.0",
 		"std-env": "^3.9.0",
 		"svelte": "^5.38.2",
@@ -101,17 +98,7 @@
 		"vite-plugin-favicons": "^0.1.7",
 		"wrangler": "^4.32.0"
 	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm lint-staged"
-	},
-	"lint-staged": {
-		"*": [
-			"eslint --cache --fix"
-		],
-		"package.json": [
-			"sort-package-json"
-		]
-	},
+	"packageManager": "pnpm@10.15.0",
 	"devEngines": {
 		"runtime": {
 			"name": "node",

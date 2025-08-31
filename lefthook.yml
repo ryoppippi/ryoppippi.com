@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      glob: "*.{js,ts,jsx,tsx,vue,svelte}"
+      run: pnpm eslint --cache --fix {staged_files}
+    sort-package-json:
+      glob: "package.json"
+      run: pnpm sort-package-json {staged_files}

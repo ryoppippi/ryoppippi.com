@@ -1,7 +1,7 @@
 onlyBuiltDependencies:
   - esbuild
+  - lefthook
   - sharp
-  - simple-git-hooks
   - unrs-resolver
   - workerd
 
