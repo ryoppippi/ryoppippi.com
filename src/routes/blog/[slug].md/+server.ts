@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ params: { slug } }) => {
 		// Import the raw markdown content
 		const rawMd = await import(`../../../contents/blog/${slug}.md?raw`) as { default: string };
 
-		return new Response(rawMd.default, {
+		return new Response(new TextEncoder().encode(rawMd.default), {
 			headers: {
 				'Content-Type': 'text/plain; charset=utf-8'
 			}
