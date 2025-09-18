@@ -6,3 +6,4 @@ onlyBuiltDependencies:
   - workerd
 
 shellEmulator: true
+minimumReleaseAge: 1440
