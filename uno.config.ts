@@ -7,9 +7,8 @@ import {
 	presetAttributify,
 	presetIcons,
 	presetTypography,
-	presetUno,
-
 	presetWebFonts,
+	presetWind3,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
@@ -52,7 +51,7 @@ const theme = {
 
 export default defineConfig({
 	presets: [
-		presetUno(),
+		presetWind3(),
 		presetAttributify(),
 		presetIcons(),
 		presetWebFonts({
