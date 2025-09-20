@@ -11,12 +11,17 @@ jobs:
     permissions: read-all
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - uses: cachix/install-nix-action@v26
+      - uses: cachix/cachix-action@v14
+        with:
+          name: devenv
+      - name: Install devenv.sh
+        run: nix profile install nixpkgs#devenv
       - run: mv .env.example .env
-      - run: pnpm i --frozen-lockfile
-      - run: pnpm secretlint **/*
-      - run: pnpm check
-      - run: pnpm lint
+      - run: devenv shell pnpm i --frozen-lockfile
+      - run: devenv shell pnpm secretlint **/*
+      - run: devenv shell pnpm check
+      - run: devenv shell pnpm lint
 
   spell-check:
     runs-on: ubuntu-latest
