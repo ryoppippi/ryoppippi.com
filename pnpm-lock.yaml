@@ -233,9 +233,6 @@ importers:
       unocss-preset-fluid:
         specifier: ^1.0.2
         version: 1.0.2(typescript@5.9.2)
-      unocss-transformer-alias:
-        specifier: ^0.0.8
-        version: 0.0.8
       unplugin-icons:
         specifier: ^22.2.0
         version: 22.2.0(@vue/compiler-sfc@3.5.16)(svelte@5.38.7)
@@ -1518,9 +1515,6 @@ packages:
   '@unocss/config@66.5.1':
     resolution: {integrity: sha512-eL9P+WDX42B6ZkNGGSkMgOyR99xeuJ2Gkj0uarhag5kaRwvwHLn/CJptZ7/oZLLIn0uTH8TQ6MG8ErhK0ymewA==}
     engines: {node: '>=14'}
-
-  '@unocss/core@0.61.9':
-    resolution: {integrity: sha512-2W1YZQIWXcueGdbXU/ZCqn/8yQhWk8e8kAHFkVlbc9rictkd2UmPB9nIZ8Ii1tMwt6F0TT6vfHbLJEGCV08o2g==}
 
   '@unocss/core@66.5.0':
     resolution: {integrity: sha512-4JStg50nrwd4aJulbPYglqHyuVUHMEX2EltpdxrrxknvSjy4LriKCVUCEmIljsbTFDXm8xcPnPGs6VN/ZmlKlA==}
@@ -4084,9 +4078,6 @@ packages:
   unocss-preset-fluid@1.0.2:
     resolution: {integrity: sha512-ggHinMtgGHxGQqEsyZBan/nrypJ36gzR5wKxil6Xg4Qu42oJC+GW+SXqD0psybg7q1U9r4euE/f4Yz+fbY+idQ==}
 
-  unocss-transformer-alias@0.0.8:
-    resolution: {integrity: sha512-rJDAUQAxi+qhuo3NJd5G/nOAFL/TyHaS4ALKtF5/PEf2WpN3PqpHFCaQfQdlZxkkuikp+mO3o/TBQJ6azIH9xg==}
-
   unocss@66.5.1:
     resolution: {integrity: sha512-e+9nqOy9v6NwPz0DxFdApGPefW22pCfU0Z1ALuodEoSHen03WlfTuEhkDkcKEpdo78tbIi/BbAYK9qT8p1d9sg==}
     engines: {node: '>=14'}
@@ -5753,8 +5744,6 @@ snapshots:
     dependencies:
       '@unocss/core': 66.5.1
       unconfig: 7.3.3
-
-  '@unocss/core@0.61.9': {}
 
   '@unocss/core@66.5.0': {}
 
@@ -8650,10 +8639,6 @@ snapshots:
       vue: 3.5.16(typescript@5.9.2)
     transitivePeerDependencies:
       - typescript
-
-  unocss-transformer-alias@0.0.8:
-    dependencies:
-      '@unocss/core': 0.61.9
 
   unocss@66.5.1(postcss@8.5.6)(vite@7.1.4(@types/node@24.3.1)(jiti@2.5.1)(lightningcss@1.30.1)(yaml@2.8.1)):
     dependencies:

@@ -14,7 +14,6 @@ import {
 	transformerVariantGroup,
 } from 'unocss';
 import { presetFluid } from 'unocss-preset-fluid';
-import transformerAlias from 'unocss-transformer-alias';
 
 // TODO: bug of unocss
 import ossProjects from './src/contents/projects/oss/list.json';
@@ -80,8 +79,6 @@ export default defineConfig({
 		presetRyoppippi(),
 	],
 	transformers: [
-		// @ts-expect-error unocss bug
-		transformerAlias(),
 		transformerDirectives(),
 		transformerVariantGroup(),
 	],
