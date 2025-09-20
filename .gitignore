@@ -17,3 +17,13 @@ vite.config.ts.timestamp-*
 
 /_redirects
 /.cloudflare
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
