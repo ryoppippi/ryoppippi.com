@@ -1,3 +1,4 @@
+import type { Config } from '@sveltejs/kit';
 import { basename, join } from 'node:path';
 import { flatMap, map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
@@ -19,6 +20,7 @@ import GitHubAlerts from 'markdown-it-github-alerts';
 import Figures from 'markdown-it-image-figures';
 import LinkAttributes from 'markdown-it-link-attributes';
 
+// @ts-expect-error no types
 import LinkPreview from 'markdown-it-link-preview';
 
 import MarkdownItMagicLink from 'markdown-it-magic-link';
@@ -29,7 +31,7 @@ import { isDevelopment } from 'std-env';
 
 import { importAssets } from 'svelte-preprocess-import-assets';
 
-import { glob } from 'tinyglobby';
+import { globSync } from 'tinyglobby';
 import { Route } from './routes.js';
 
 import { slugify } from './src/lib/slugify.server.js';
@@ -51,14 +53,14 @@ md.use(anchor, {
 });
 
 md.use(LinkAttributes, {
-	/** @param {string} link */
-	matcher: link => /^https?:\/\//.test(link),
+	matcher: (link: string) => /^https?:\/\//.test(link),
 	attrs: {
 		target: '_blank',
 		rel: 'noopener',
 	},
 });
 
+// eslint-disable-next-line ts/no-unsafe-argument
 md.use(LinkPreview);
 
 md.use(await MarkdownItShiki({
@@ -77,6 +79,7 @@ md.use(await MarkdownItShiki({
 
 md.use(GitHubAlerts);
 
+// eslint-disable-next-line ts/no-unsafe-argument
 md.use(Figures, {
 	figcaption: true,
 	lazy: true,
@@ -95,10 +98,10 @@ md.use(MarkdownItMagicLink, {
 	},
 });
 
+// eslint-disable-next-line ts/no-unsafe-argument
 md.use(MDC);
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
 	extensions: ['.svelte', '.md'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
@@ -126,9 +129,11 @@ const config = {
 			remoteFunctions: true,
 		},
 		typescript: {
-			config(config) {
-				config.include.push(join(import.meta.dirname, 'uno.config.ts'));
-				config.include.push(join(import.meta.dirname, 'scripts/**/*.ts'));
+			config(config: Record<string, unknown>) {
+				const configs = ['uno.config.ts', 'svelte.config.ts', 'scripts/**/*.ts'];
+				for (const c of configs) {
+					(config.include as string[])?.push(join(import.meta.dirname, c));
+				}
 			},
 		},
 		alias: {
@@ -137,29 +142,23 @@ const config = {
 		},
 		prerender: {
 			handleHttpError: ({ path, message }) => {
-				if (Route.find(({ from }) => from === path)) {
+				if (Route.find(({ from }) => from === path) != null) {
 					return;
 				}
 
 				throw new Error(message);
 			},
-			entries: await (async () => {
-				const iter = pipe(
-					await glob('*.md', {
-						cwd: join(import.meta.dirname, 'src/contents/blog'),
-						absolute: true,
-					}),
-					map(file => basename(file, '.md')),
-					flatMap(slug => [
-						`/blog/${slug}`,
-						`/blog/${slug}.md`,
-					]),
-				);
-
-				return Array.from(iter);
-			})(),
+			entries: Array.from(pipe(
+				globSync('*.md', {
+					cwd: join(import.meta.dirname, 'src/contents/blog'),
+					absolute: true,
+				}),
+				map(file => basename(file, '.md')),
+				flatMap(slug => [
+					`/blog/${slug}`,
+					`/blog/${slug}.md`,
+				] as const),
+			)),
 		},
 	},
-};
-
-export default config;
+} satisfies Config;
