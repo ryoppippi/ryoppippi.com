@@ -1,18 +1,23 @@
 <script lang='ts'>
-	import { getTweet } from '$lib/tweet.remote.js';
+	import type { Tweet } from 'sveltweet/api';
 	import * as st from 'sveltweet';
 
-	type Props = Parameters<typeof getTweet>[0];
+	type Props = {
+		id: string;
+	};
 
 	const { id }: Props = $props();
-	const tweet = getTweet({ id });
+	const tweet = fetch(`https://react-tweet.vercel.app/api/tweet/${id}`).then(async res => (await res.json()) as { data: Tweet | null }).then(res => res.data);
 </script>
 
-<!-- TODO: async using svelte:bundary -->
-{#if tweet.error}
-	<st.TweetNotFound />
-{:else if tweet.loading || !tweet.ready}
+{#await tweet}
 	<st.TweetSkeleton />
-{:else}
-	<st.Tweet tweet={tweet.current} />
-{/if}
+{:then data}
+	{#if data}
+		<st.Tweet tweet={data} />
+	{:else}
+		<st.TweetNotFound />
+	{/if}
+{:catch _error}
+	<st.TweetNotFound />
+{/await}
