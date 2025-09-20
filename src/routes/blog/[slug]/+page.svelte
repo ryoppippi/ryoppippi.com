@@ -51,7 +51,7 @@
 		<hr ma max-w-100 op25 w-full />
 	</div>
 
-	<article class={['*prose-base', !dev && 'slide-enter-content']} mxa pb-8 text-text='700 dark:200'>
+	<article class={['prose dark:prose-invert', !dev && 'slide-enter-content']} mxa pb-8 text-text='700 dark:200'>
 		<Markdown />
 	</article>
 	<div op50 pb-8 prose>

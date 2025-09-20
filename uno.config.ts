@@ -99,7 +99,6 @@ export default defineConfig({
 		{
 			'blog-list-icon': 'shrink-0 size-5 ',
 			'border-base': 'border-[#8884]',
-			'prose-base': 'prose dark:prose-invert',
 			'op-card': 'op70 dark:op50 hover:op80 group-hover:op80',
 			'transition-base': 'transition-all transition-duration-500',
 		},
