@@ -5,6 +5,7 @@ export const Route = /** @as{const} */([
 	{ from: '/github', to: 'https://github.com/ryoppippi' },
 	{ from: '/gh', to: 'https://github.com/ryoppippi' },
 	{ from: '/gh-by-stars', to: 'https://github.com/ryoppippi?tab=repositories&sort=stargazers' },
+	{ from: '/sponsor', to: 'https://github.com/sponsors/ryoppippi' },
 	{ from: '/pr', to: 'https://pr.ryoppippi.com' },
 	{ from: '/zenn', to: 'https://zenn.dev/ryoppippi' },
 	{ from: '/linkedin', to: 'https://www.linkedin.com/in/ryoppippi/' },
