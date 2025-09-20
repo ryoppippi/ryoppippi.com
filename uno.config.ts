@@ -7,14 +7,12 @@ import {
 	presetAttributify,
 	presetIcons,
 	presetTypography,
-	presetUno,
-
 	presetWebFonts,
+	presetWind3,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
 import { presetFluid } from 'unocss-preset-fluid';
-import transformerAlias from 'unocss-transformer-alias';
 
 // TODO: bug of unocss
 import ossProjects from './src/contents/projects/oss/list.json';
@@ -53,7 +51,7 @@ const theme = {
 
 export default defineConfig({
 	presets: [
-		presetUno(),
+		presetWind3(),
 		presetAttributify(),
 		presetIcons(),
 		presetWebFonts({
@@ -80,8 +78,6 @@ export default defineConfig({
 		presetRyoppippi(),
 	],
 	transformers: [
-		// @ts-expect-error unocss bug
-		transformerAlias(),
 		transformerDirectives(),
 		transformerVariantGroup(),
 	],
@@ -102,7 +98,6 @@ export default defineConfig({
 		{
 			'blog-list-icon': 'shrink-0 size-5 ',
 			'border-base': 'border-[#8884]',
-			'prose-base': 'prose dark:prose-invert',
 			'op-card': 'op70 dark:op50 hover:op80 group-hover:op80',
 			'transition-base': 'transition-all transition-duration-500',
 		},
