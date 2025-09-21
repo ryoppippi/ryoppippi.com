@@ -1,6 +1,7 @@
 <script lang='ts'>
+	import type { Item as ListItem } from '$components/ListView.svelte';
 	import LargeTitle from '$components/LargeTitle.svelte';
-	import ListView, { type Item as ListItem } from '$components/ListView.svelte';
+	import ListView from '$components/ListView.svelte';
 	import publications from '$contents/publication.json';
 
 	interface Item {

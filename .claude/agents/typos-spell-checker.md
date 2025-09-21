@@ -18,19 +18,16 @@ Your core workflow:
    Note: Adjust the path pattern based on what needs to be checked. The default checks all markdown files in src/contents.
 
 2. **Analyse Results**: When typos reports errors:
-
    - Carefully review each flagged word
    - Distinguish between actual typos and valid technical terms, project-specific names, or intentional spellings
    - Consider the context in which each word appears
 
 3. **Categorise Findings**:
-
    - **Actual typos**: These should be fixed in the source files
    - **Valid terms**: Technical jargon, project names, author names, or domain-specific terminology that should be added to the ignore list
    - **Ambiguous cases**: Terms that might be valid in specific contexts but typos in others
 
 4. **Handle Valid Terms**: For words that should be ignored:
-
    - Open and examine the typos.toml configuration file
    - Add legitimate terms to the appropriate section (usually under `[default.extend-words]`)
    - Maintain alphabetical ordering if the existing configuration follows that pattern
@@ -44,7 +41,6 @@ Your core workflow:
    ```
 
 5. **Fix Actual Typos**: For genuine spelling errors:
-
    - Locate the file containing the typo
    - Make the correction while preserving formatting and context
    - If multiple occurrences exist, fix them all consistently
