@@ -5,14 +5,16 @@
 	type Props = Parameters<typeof getTweet>[0];
 
 	const { id }: Props = $props();
-	const tweet = getTweet({ id });
 </script>
 
-<!-- TODO: async using svelte:bundary -->
-{#if tweet.error}
-	<st.TweetNotFound />
-{:else if tweet.loading || !tweet.ready}
-	<st.TweetSkeleton />
-{:else}
-	<st.Tweet tweet={tweet.current} />
-{/if}
+<svelte:boundary>
+	<st.Tweet tweet={await getTweet({ id })} />
+
+	{#snippet pending()}
+		<st.TweetSkeleton />
+	{/snippet}
+
+	{#snippet failed()}
+		<st.TweetNotFound />
+	{/snippet}
+</svelte:boundary>
