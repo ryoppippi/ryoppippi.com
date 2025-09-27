@@ -8,9 +8,9 @@
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
 	const LINKS = [
-		{ name: 'projects', href: resolve('/projects') },
-		{ name: 'talks', href: resolve('/talks') },
-		{ name: 'blog', href: resolve('/blog') },
+		{ name: 'projects', href: ('/projects') },
+		{ name: 'talks', href: ('/talks') },
+		{ name: 'blog', href: ('/blog') },
 		{
 			name: 'cv',
 			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
@@ -107,7 +107,7 @@
 			<a
 				class='i-line-md:rss'
 				fyc
-				href={resolve('/feed.xml')}
+				href='/feed.xml'
 				mya
 				target='_blank'
 			>
