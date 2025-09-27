@@ -7,14 +7,4 @@
 	const { id }: Props = $props();
 </script>
 
-<svelte:boundary>
-	<st.Tweet tweet={await getTweet({ id })} />
-
-	{#snippet pending()}
-		<st.TweetSkeleton />
-	{/snippet}
-
-	{#snippet failed()}
-		<st.TweetNotFound />
-	{/snippet}
-</svelte:boundary>
+<st.Tweet tweet={await getTweet({ id })} />
