@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@10.17.0",
+	"packageManager": "pnpm@10.17.1",
 	"scripts": {
 		"build": "vite build",
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
@@ -45,7 +45,7 @@
 		"@types/markdown-it": "^14.1.2",
 		"@types/markdown-it-link-attributes": "^3.0.5",
 		"@types/node": "^24.5.2",
-		"@unocss/eslint-plugin": "66.5.1",
+		"@unocss/eslint-plugin": "66.5.2",
 		"@unocss/extractor-svelte": "^66.5.2",
 		"@unocss/reset": "^66.5.2",
 		"@unplugin/macros": "jsr:^0.16.3",
