@@ -25,7 +25,7 @@ importers:
         version: 2.2.388
       '@ryoppippi/eslint-config':
         specifier: ^0.4.0
-        version: 0.4.0(@unocss/eslint-plugin@66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)
+        version: 0.4.0(@unocss/eslint-plugin@66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)
       '@ryoppippi/str-fns':
         specifier: jsr:^0.1.2
         version: '@jsr/ryoppippi__str-fns@0.1.2'
@@ -81,8 +81,8 @@ importers:
         specifier: ^24.5.2
         version: 24.5.2
       '@unocss/eslint-plugin':
-        specifier: 66.5.1
-        version: 66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
+        specifier: 66.5.2
+        version: 66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
       '@unocss/extractor-svelte':
         specifier: ^66.5.2
         version: 66.5.2
@@ -160,7 +160,7 @@ importers:
         version: 0.2.6(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
       node:
         specifier: runtime:^24.5.0
-        version: runtime:24.8.0
+        version: runtime:24.9.0
       open-editor:
         specifier: ^5.1.0
         version: 5.1.0
@@ -1482,22 +1482,15 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  '@unocss/config@66.5.1':
-    resolution: {integrity: sha512-eL9P+WDX42B6ZkNGGSkMgOyR99xeuJ2Gkj0uarhag5kaRwvwHLn/CJptZ7/oZLLIn0uTH8TQ6MG8ErhK0ymewA==}
-    engines: {node: '>=14'}
-
   '@unocss/config@66.5.2':
     resolution: {integrity: sha512-rREBBt2a6aZJ21TCeKG3/wjHfTNPbIwdrJtIVrN7hLcljW2vnWuyYabZ1yASK8+lnNsMoBoU5mbakgrPF0MItA==}
     engines: {node: '>=14'}
 
-  '@unocss/core@66.5.1':
-    resolution: {integrity: sha512-BUgN87sUIffco1d+1IuV4a1gKTI1YAFa7CTjxglLUAnopXPPJ+Q77G10zoBoFLzutiIOYLsesa3hzbQvDhosnA==}
-
   '@unocss/core@66.5.2':
     resolution: {integrity: sha512-POSEpwj2FJtrDgzSq6nVhAJbnGIYPqtEMTpzQXfeFqPDMidAXjaH/xZUeTdHDbI9Jg700smrRXJtFJrJFXkmiQ==}
 
-  '@unocss/eslint-plugin@66.5.1':
-    resolution: {integrity: sha512-wb9+Ntfo62v77lhBa9ZlgKzxjBvWDFJwogevzT9rl0jJuqwZgLABwEDZOANWEso21z3FKHugN86Ei/STqojeQQ==}
+  '@unocss/eslint-plugin@66.5.2':
+    resolution: {integrity: sha512-e44HkFSWCecAnTU813/+aN7UNpxJHkwM4rUYDBvYi2ZVIPb5UdfH9y+i0M1Vc40qtACDbwKbDecN0DND5EnusA==}
     engines: {node: '>=14'}
 
   '@unocss/extractor-arbitrary-variants@66.5.2':
@@ -1547,10 +1540,6 @@ packages:
 
   '@unocss/reset@66.5.2':
     resolution: {integrity: sha512-DirXdqrkSp3fThRGOz0s0ehsYBpLb72Vh4QlPfMFuwHHFC9P9IDTLMUj5kD51A9fdy07Wrmhs7T5CQ//DlfOdQ==}
-
-  '@unocss/rule-utils@66.5.1':
-    resolution: {integrity: sha512-GuBKHrDv3bdq5N1HfOr1tD864vI1EIiovBVJSfg7x9ERA4jJSnyMpGk/hbLuDIXF25EnVdZ1lFhEpJgur9+9sw==}
-    engines: {node: '>=14'}
 
   '@unocss/rule-utils@66.5.2':
     resolution: {integrity: sha512-2eR5TBTO+cmPY9ahFjyEu8qP/NFPI02dVpI0rgGKdyDMv/PnO9+yS/9rKgrmXsN3nPYHjOrLutRXkF/xxm/t3w==}
@@ -2001,10 +1990,6 @@ packages:
   detect-indent@7.0.1:
     resolution: {integrity: sha512-Mc7QhQ8s+cLrnUfU/Ji94vG/r8M26m8f++vyres4ZoojaRDpZ1eSIh/EpzLNwlWuvzSZ3UbDFspjFvTDXe6e/g==}
     engines: {node: '>=12.20'}
-
-  detect-libc@2.1.0:
-    resolution: {integrity: sha512-vEtk+OcP7VBRtQZ1EJ3bdgzSfBjgnEalLTp5zjJrS+2Z1w2KZly4SBdac/WDU3hhsNAZ9E8SC96ME4Ey8MZ7cg==}
-    engines: {node: '>=8'}
 
   detect-libc@2.1.1:
     resolution: {integrity: sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==}
@@ -3209,94 +3194,94 @@ packages:
   node-releases@2.0.21:
     resolution: {integrity: sha512-5b0pgg78U3hwXkCM8Z9b2FJdPZlr9Psr9V2gQPESdGHqbntyFJKFW4r5TeWGFzafGY3hzs1JC62VEQMbl1JFkw==}
 
-  node@runtime:24.8.0:
+  node@runtime:24.9.0:
     resolution:
       type: variations
       variants:
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-ViWzv/qbOYEdyD4U9AraL4/mk96TrZt189ZSZ50MqCM=
+            integrity: sha256-+dYIygSje5v5TXfSnUsUNZ/LAtSdbQ0J+r+zs8hsmFk=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-aix-ppc64.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-aix-ppc64.tar.gz
           targets:
             - cpu: ppc64
               os: aix
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-2BGRoYZnYOuRjKqXbAIwNrwfx0BeoxsUiQUhFSIEV2c=
+            integrity: sha256-lhAkKWwqjmDa7QeE+LYeD6tcUdGXUCqS7/BSxytTIJs=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-darwin-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-darwin-arm64.tar.gz
           targets:
             - cpu: arm64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-b9hJa1m6qPhqJOPrAzCLdjCRcW/8a24QlNGl5Wlt1t0=
+            integrity: sha256-bJrBLTFgU42W1FbcWaj+wUeeP4sgv8DWG8gJ657BFBc=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-darwin-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-darwin-x64.tar.gz
           targets:
             - cpu: x64
               os: darwin
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-XrFrFK9aX0lO1UdwgiFE6EfHRP5ZD43wk61JJ8891/0=
+            integrity: sha256-2rIyqQFpc3pIFJFJ3WcH5/3LrvuqlLSHEEejjpPblH8=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-linux-arm64.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-linux-arm64.tar.gz
           targets:
             - cpu: arm64
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-IKCFbnsVKl6DtP1v49UJqlS3XWFwzYkGbDQdVvbF3nY=
+            integrity: sha256-VX1OP3efWvT8KZRGR+av12kBxb57wMK9h4WhmaG8AnE=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-linux-ppc64le.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-linux-ppc64le.tar.gz
           targets:
             - cpu: ppc64le
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-cI1O36/KIhj6mODouMINwUgzTy+IL86hI3xlNuhYbQY=
+            integrity: sha256-m6qy62uNnv0uNTOsebVy5pdRD2WC/bVyumNsTXsB0rE=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-linux-s390x.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-linux-s390x.tar.gz
           targets:
             - cpu: s390x
               os: linux
         - resolution:
             archive: tarball
             bin: bin/node
-            integrity: sha256-2vaEBLR4tMNhZmZYDQJQCiQUjA9Dnk0BNNZc5w6Q5lU=
+            integrity: sha256-1X1sKKNXhfWPM4maCqC/yD96jvREi2zz99CWHvx7kYk=
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-linux-x64.tar.gz
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-linux-x64.tar.gz
           targets:
             - cpu: x64
               os: linux
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-2mO6FGxFXrdLf1xuj0U1XQGxTZu6tAVL3yUPxOn10Ag=
-            prefix: node-v24.8.0-win-arm64
+            integrity: sha256-6tBkSMYnQ9K4cldEUMazzxMo2H8W6AV9fOqaeXFwsWA=
+            prefix: node-v24.9.0-win-arm64
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-win-arm64.zip
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-win-arm64.zip
           targets:
             - cpu: arm64
               os: win32
         - resolution:
             archive: zip
             bin: node.exe
-            integrity: sha256-lw7MEhoW9UYXS2qHAhXKTMDeM/imFrQsFsjALmawfQU=
-            prefix: node-v24.8.0-win-x64
+            integrity: sha256-aHNRTD5qASkXzG+VzkimKJJTNw0CXxtp2ykNcP7r+m4=
+            prefix: node-v24.9.0-win-x64
             type: binary
-            url: https://nodejs.org/download/release/v24.8.0/node-v24.8.0-win-x64.zip
+            url: https://nodejs.org/download/release/v24.9.0/node-v24.9.0-win-x64.zip
           targets:
             - cpu: x64
               os: win32
-    version: 24.8.0
+    version: 24.9.0
     hasBin: true
 
   normalize-package-data@6.0.2:
@@ -4433,7 +4418,7 @@ packages:
 
 snapshots:
 
-  '@antfu/eslint-config@4.19.0(@unocss/eslint-plugin@66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)':
+  '@antfu/eslint-config@4.19.0(@unocss/eslint-plugin@66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)':
     dependencies:
       '@antfu/install-pkg': 1.1.0
       '@clack/prompts': 0.11.0
@@ -4473,7 +4458,7 @@ snapshots:
       vue-eslint-parser: 10.2.0(eslint@9.36.0(jiti@2.5.1))
       yaml-eslint-parser: 1.3.0
     optionalDependencies:
-      '@unocss/eslint-plugin': 66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
+      '@unocss/eslint-plugin': 66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
       eslint-plugin-format: 1.0.2(eslint@9.36.0(jiti@2.5.1))
       eslint-plugin-svelte: 3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6)
       svelte-eslint-parser: 1.3.0(svelte@5.39.6)
@@ -4548,14 +4533,14 @@ snapshots:
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/parser': 7.27.7
+      '@babel/parser': 7.28.4
       '@babel/types': 7.28.4
 
   '@babel/traverse@7.27.7':
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/generator': 7.28.3
-      '@babel/parser': 7.27.7
+      '@babel/parser': 7.28.4
       '@babel/template': 7.27.2
       '@babel/types': 7.28.4
       debug: 4.4.3
@@ -5185,9 +5170,9 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.48.0':
     optional: true
 
-  '@ryoppippi/eslint-config@0.4.0(@unocss/eslint-plugin@66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)':
+  '@ryoppippi/eslint-config@0.4.0(@unocss/eslint-plugin@66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)':
     dependencies:
-      '@antfu/eslint-config': 4.19.0(@unocss/eslint-plugin@66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)
+      '@antfu/eslint-config': 4.19.0(@unocss/eslint-plugin@66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2))(@vue/compiler-sfc@3.5.16)(eslint-plugin-format@1.0.2(eslint@9.36.0(jiti@2.5.1)))(eslint-plugin-svelte@3.12.4(eslint@9.36.0(jiti@2.5.1))(svelte@5.39.6))(eslint@9.36.0(jiti@2.5.1))(svelte-eslint-parser@1.3.0(svelte@5.39.6))(typescript@5.9.2)
       eslint: 9.36.0(jiti@2.5.1)
       eslint-flat-config-utils: 2.1.4
       eslint-plugin-ryoppippi: 0.2.6(eslint@9.36.0(jiti@2.5.1))
@@ -5626,26 +5611,19 @@ snapshots:
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.0
 
-  '@unocss/config@66.5.1':
-    dependencies:
-      '@unocss/core': 66.5.1
-      unconfig: 7.3.3
-
   '@unocss/config@66.5.2':
     dependencies:
       '@unocss/core': 66.5.2
       unconfig: 7.3.3
 
-  '@unocss/core@66.5.1': {}
-
   '@unocss/core@66.5.2': {}
 
-  '@unocss/eslint-plugin@66.5.1(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)':
+  '@unocss/eslint-plugin@66.5.2(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)':
     dependencies:
       '@typescript-eslint/utils': 8.44.0(eslint@9.36.0(jiti@2.5.1))(typescript@5.9.2)
-      '@unocss/config': 66.5.1
-      '@unocss/core': 66.5.1
-      '@unocss/rule-utils': 66.5.1
+      '@unocss/config': 66.5.2
+      '@unocss/core': 66.5.2
+      '@unocss/rule-utils': 66.5.2
       magic-string: 0.30.19
       synckit: 0.11.11
     transitivePeerDependencies:
@@ -5732,11 +5710,6 @@ snapshots:
       '@unocss/preset-wind3': 66.5.2
 
   '@unocss/reset@66.5.2': {}
-
-  '@unocss/rule-utils@66.5.1':
-    dependencies:
-      '@unocss/core': 66.5.1
-      magic-string: 0.30.19
 
   '@unocss/rule-utils@66.5.2':
     dependencies:
@@ -6172,10 +6145,7 @@ snapshots:
 
   detect-indent@7.0.1: {}
 
-  detect-libc@2.1.0: {}
-
-  detect-libc@2.1.1:
-    optional: true
+  detect-libc@2.1.1: {}
 
   detect-newline@4.0.1: {}
 
@@ -7678,7 +7648,7 @@ snapshots:
 
   node-releases@2.0.21: {}
 
-  node@runtime:24.8.0: {}
+  node@runtime:24.9.0: {}
 
   normalize-package-data@6.0.2:
     dependencies:
@@ -8043,7 +8013,7 @@ snapshots:
   sharp@0.33.5:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.1.0
+      detect-libc: 2.1.1
       semver: 7.7.2
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.33.5
@@ -8069,7 +8039,7 @@ snapshots:
   sharp@0.34.2:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.1.0
+      detect-libc: 2.1.1
       semver: 7.7.2
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.34.2
