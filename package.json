@@ -29,7 +29,7 @@
 		"@ryoppippi/eslint-config": "^0.4.0",
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
-		"@ryoppippi/vite-plugin-cloudflare-redirect": "jsr:^1.1.0",
+		"@ryoppippi/vite-plugin-cloudflare-redirect": "^1.1.0",
 		"@secretlint/secretlint-rule-preset-recommend": "^11.2.4",
 		"@shikijs/markdown-it": "^3.13.0",
 		"@shikijs/twoslash": "^3.13.0",
