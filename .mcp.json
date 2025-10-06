@@ -12,8 +12,15 @@
 			"type": "stdio",
 			"command": "pnpm",
 			"args": [
-				"dlx",
-				"chrome-devtools-mcp@latest"
+				"chrome-devtools-mcp"
+			],
+			"env": {}
+		},
+		"svelte": {
+			"type": "stdio",
+			"command": "pnpm",
+			"args": [
+				"svelte-mcp"
 			],
 			"env": {}
 		}

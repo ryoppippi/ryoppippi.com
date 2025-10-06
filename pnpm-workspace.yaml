@@ -1,4 +1,7 @@
+minimumReleaseAge: 1440
+
 onlyBuiltDependencies:
+  - core-js
   - esbuild
   - sharp
   - simple-git-hooks
@@ -6,4 +9,3 @@ onlyBuiltDependencies:
   - workerd
 
 shellEmulator: true
-minimumReleaseAge: 1440
