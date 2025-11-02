@@ -6,7 +6,7 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-import markdownit from 'markdown-it';
+import { createMarkdownExit } from 'markdown-exit';
 
 import anchor from 'markdown-it-anchor';
 import Budoux from 'markdown-it-budoux';
@@ -36,7 +36,7 @@ import { slugify } from './src/lib/slugify.server.js';
 import svelteMarkdown from './src/markdown/preprocessor.js';
 import { transformerEscape } from './src/markdown/shiki-transformer.js';
 
-const md = markdownit({
+const md = createMarkdownExit({
 	html: true,
 	linkify: true,
 	typographer: true,

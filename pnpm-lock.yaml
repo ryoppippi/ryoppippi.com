@@ -134,9 +134,9 @@ importers:
       magic-string:
         specifier: ^0.30.21
         version: 0.30.21
-      markdown-it:
-        specifier: ^14.1.0
-        version: 14.1.0
+      markdown-exit:
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       markdown-it-anchor:
         specifier: ^9.2.0
         version: 9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0)
@@ -2258,6 +2258,10 @@ packages:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
 
+  entities@7.0.0:
+    resolution: {integrity: sha512-FDWG5cmEYf2Z00IkYRhbFrwIwvdFKH07uV8dvNy0omp/Qb1xcyCWp2UDtcwJF4QZZvk0sLudP6/hAu42TaqVhQ==}
+    engines: {node: '>=0.12'}
+
   env-editor@1.3.0:
     resolution: {integrity: sha512-EqiD/j01PooUbeWk+etUo2TWoocjoxMfGNYpS9e47glIJ5r8WepycIki+LCbonFbPdwlqY5ETeSTAJVMih4z4w==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -3077,6 +3081,9 @@ packages:
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
+
+  markdown-exit@1.0.0-beta.4:
+    resolution: {integrity: sha512-El8Z51NwToq72k/C290HVWdQtvFVakGBVy8Fvhs5YtM/YMLqIGOp3qwE8zLoj3zOzMMtM2FelFV5Go+JEaLA1g==}
 
   markdown-it-anchor@9.2.0:
     resolution: {integrity: sha512-sa2ErMQ6kKOA4l31gLGYliFQrMKkqSO0ZJgGhDHKijPf0pNFM9vghjAh3gn26pS4JDRs7Iwa9S36gxm3vgZTzg==}
@@ -6469,6 +6476,8 @@ snapshots:
 
   entities@6.0.1: {}
 
+  entities@7.0.0: {}
+
   env-editor@1.3.0: {}
 
   environment@1.1.0: {}
@@ -7442,6 +7451,14 @@ snapshots:
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  markdown-exit@1.0.0-beta.4:
+    dependencies:
+      entities: 7.0.0
+      linkify-it: 5.0.0
+      mdurl: 2.0.0
+      punycode.js: 2.3.1
+      uc.micro: 2.1.0
 
   markdown-it-anchor@9.2.0(@types/markdown-it@14.1.2)(markdown-it@14.1.0):
     dependencies:
