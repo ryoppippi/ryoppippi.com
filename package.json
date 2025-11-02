@@ -63,6 +63,7 @@
 		"gray-matter": "^4.0.3",
 		"lint-staged": "^16.2.6",
 		"magic-string": "^0.30.21",
+		"markdown-exit": "1.0.0-beta.4",
 		"markdown-it": "^14.1.0",
 		"markdown-it-anchor": "^9.2.0",
 		"markdown-it-budoux": "^1.0.6",
