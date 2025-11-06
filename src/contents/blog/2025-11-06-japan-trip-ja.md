@@ -138,6 +138,8 @@ lang: ja
 <Tweet id="1981917233065623633" />
 <!-- https://x.com/takeokunn/status/1982378013166866799 -->
 <Tweet id="1982378013166866799" />
+<!-- https://x.com/ryoppippi/status/1983073785919287344 -->
+<Tweet id="1983073785919287344" />
 <!-- https://x.com/tech_world18/status/1983073604670783837 -->
 <Tweet id="1983073604670783837" />
 <!-- https://x.com/ryoppippi/status/1983452562075603319 -->
