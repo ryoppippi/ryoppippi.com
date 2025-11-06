@@ -14,6 +14,9 @@ lang: ja
 
 ### [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/)
 
+現地に300人以上、配信では1000人以上の方が視聴してくださっていました。
+これに合わせて日本滞在を決めました。いろんな人に会えて嬉しかったです。
+
 [Slideはこちら](https://talks.ryoppippi.com/2025-10-17)
 
 <!-- https://www.youtube.com/live/u8I_LujFXeU?t=2296s -->

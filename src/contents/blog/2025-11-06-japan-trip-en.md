@@ -14,6 +14,9 @@ Here's what I did.
 
 ### [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/)
 
+Over 300 people attended in person, and more than 1000 people watched the live stream.
+I decided to come to Japan for this event. I was happy to meet so many people.
+
 [Slides available here](https://talks.ryoppippi.com/2025-10-17)
 
 <!-- https://www.youtube.com/live/u8I_LujFXeU?t=2296s -->
