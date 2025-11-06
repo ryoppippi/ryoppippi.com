@@ -64,7 +64,7 @@ function additionalProcessMd(proceed) {
 }
 
 /**
- * @param md {import('markdown-it').default}
+ * @param md {import('markdown-exit').MarkdownExit}
  * @returns {import('svelte/types/compiler/preprocess').PreprocessorGroup} preprocessor
  */
 function svelteMarkdown(md) {
