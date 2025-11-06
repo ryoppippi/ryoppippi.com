@@ -134,8 +134,12 @@ lang: ja
 <Tweet id="1981590541117907112" />
 <!-- https://x.com/schroneko/status/1981607292354359468 -->
 <Tweet id="1981607292354359468" />
+<!-- https://x.com/ryoppippi/status/1986389072630157357 -->
+<Tweet id="1986389072630157357" />
 <!-- https://x.com/ryoppippi/status/1981917233065623633 -->
 <Tweet id="1981917233065623633" />
+<!-- https://x.com/ryoppippi/status/1986388591702950213 -->
+<Tweet id="1986388591702950213" />
 <!-- https://x.com/takeokunn/status/1982378013166866799 -->
 <Tweet id="1982378013166866799" />
 <!-- https://x.com/ryoppippi/status/1983073785919287344 -->
