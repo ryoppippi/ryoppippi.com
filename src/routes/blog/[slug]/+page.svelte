@@ -54,7 +54,7 @@
 	<article class={['prose dark:prose-invert', !dev && 'slide-enter-content']} mxa pb-8 text-text='700 dark:200'>
 		<Markdown />
 	</article>
-	<div op50 pb-8 prose>
+	<div op50 pb-8>
 		<span op70>comment on</span>
 		<a href={bskyUrl} target='_blank'>bluesky</a>
 		<span op35> / </span>
