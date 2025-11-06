@@ -10,7 +10,7 @@ Here's what I did.
 
 # What I Did
 
-## 5 Speaking Engagements
+## 5 Talks
 
 ### [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/)
 
@@ -66,7 +66,7 @@ I hadn't planned to attend, but I extended my Tokyo stay by a week, so it became
 <!-- https://x.com/ryoppippi/status/1984899595030446495 -->
 <Tweet id="1984899595030446495" />
 
-## 5 YouTube Appearances (Scheduled)
+## 5 YouTubes (Scheduled)
 
 I appeared on several YouTube videos!
 Not all of them are uploaded yet, so I'll update this as they come out.
@@ -94,7 +94,7 @@ Not all of them are uploaded yet, so I'll update this as they come out.
 
 ~~Will update as they come out~~
 
-## Event Participation
+## Events
 
 I attended several events even when I wasn't speaking!
 
@@ -106,7 +106,7 @@ Also, I was happy to participate in recording as {vim-jp-radio} staff for the fi
 
 ~~I wanted to attend Hono Conf, but the tickets were released while I was sleeping and by the time I woke up, they were gone.~~
 
-## Shopping Spree
+## Shopping
 
 I bought various things:
 
