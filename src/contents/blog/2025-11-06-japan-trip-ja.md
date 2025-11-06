@@ -24,6 +24,8 @@ lang: ja
 
 ### [ Work≠Build Meetup feat ryoppippi ](https://wnb.connpass.com/event/371722/)
 
+[Slideはこちら](https://talks.ryoppippi.com/2025-10-22)
+
 <!-- https://x.com/eerm16g/status/1980977522860003429 -->
 <Tweet id="1980977522860003429" />
 
