@@ -25,6 +25,9 @@ I decided to come to Japan for this event. I was happy to meet so many people.
 <!-- https://x.com/ryoppippi/status/1979149319237439870 -->
 <Tweet id="1979149319237439870" />
 
+<!-- https://x.com/ryoppippi/status/1986640780883075473 -->
+<Tweet id="1986640780883075473" />
+
 ### [Work≠Build Meetup feat ryoppippi](https://wnb.connpass.com/event/371722/)
 
 A meetup where I gathered people I wanted to talk with and let them speak freely. I wasn't feeling 100%, so I didn't speak much, but everyone else's talks were really interesting. The panel discussion with this group was great.
@@ -36,6 +39,9 @@ A meetup where I gathered people I wanted to talk with and let them speak freely
 
 <!-- https://x.com/wnb_community/status/1981177952961515958 -->
 <Tweet id="1981177952961515958" />
+
+<!-- https://x.com/YKirin0418/status/1980963724375810103 -->
+<Tweet id="1980963724375810103" />
 
 ### [Svelte Japan Offline Meetup #5 LT](https://svelte-jp.connpass.com/event/367967/)
 

@@ -25,6 +25,9 @@ lang: ja
 <!-- https://x.com/ryoppippi/status/1979149319237439870 -->
 <Tweet id="1979149319237439870" />
 
+<!-- https://x.com/ryoppippi/status/1986640780883075473 -->
+<Tweet id="1986640780883075473" />
+
 ### [ Work≠Build Meetup feat ryoppippi ](https://wnb.connpass.com/event/371722/)
 
 自分 ryoppippi が話したい人を集めて自由に話してもらう会。自分は体調が万全でなかったのであまり喋らなかったのですが、他の皆様のトークが本当に面白かったです。このメンバーでのパネルディスカッションが最高に面白かった。
@@ -36,6 +39,9 @@ lang: ja
 
 <!-- https://x.com/wnb_community/status/1981177952961515958 -->
 <Tweet id="1981177952961515958" />
+
+<!-- https://x.com/YKirin0418/status/1980963724375810103 -->
+<Tweet id="1980963724375810103" />
 
 ### [Svelte Japan Offline Meetup #5 LT](https://svelte-jp.connpass.com/event/367967/)
 
