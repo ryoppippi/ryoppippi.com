@@ -73,7 +73,7 @@
 		],
 	}}
 	{title}
-	titleTemplate={title !== 'home' ? `%s | ${page.url.origin}` : page.url.origin}
+	titleTemplate={title !== 'home' ? `%s | ${page.url.hostname}` : page.url.hostname}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
