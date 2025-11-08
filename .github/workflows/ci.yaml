@@ -18,7 +18,7 @@ jobs:
       - run: pnpm lint
 
   spell-check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout Actions Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -29,7 +29,7 @@ jobs:
           config: ./typos.toml
 
   secretlint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
@@ -43,6 +43,6 @@ jobs:
       - spell-check
       - secretlint
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - uses: Kesin11/actions-timeline@54d513e0b5ff1158f1cf8321108d666a5a6c1fca # v2.2.5
