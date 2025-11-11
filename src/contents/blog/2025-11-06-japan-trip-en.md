@@ -98,6 +98,12 @@ Not all of them are uploaded yet, so I'll update this as they come out.
 
 <YouTube youTubeId="61RIvdM0xJ0" />
 
+<!-- https://youtu.be/Ls5FmNoLLws -->
+
+### [Introduction to Split Keyboards] Exploring the charm of split keyboards beloved by foreign IT engineers
+
+<YouTube youTubeId="Ls5FmNoLLws" />
+
 ~~Will update as they come out~~
 
 ## Events

@@ -96,6 +96,12 @@ lang: ja
 
 <YouTube youTubeId="61RIvdM0xJ0" />
 
+<!-- https://youtu.be/Ls5FmNoLLws -->
+
+### 【分割キーボード入門】外資ITエンジニアが愛用する分割キーボードの魅力に迫る
+
+<YouTube youTubeId="Ls5FmNoLLws" />
+
 ~~順次更新予定~~
 
 ## 参加イベント
