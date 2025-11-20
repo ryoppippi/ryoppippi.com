@@ -65,11 +65,14 @@
 	<div fyc>
 		<img
 			style:view-transition-name={`sponsor-${currentView}`}
-			class='mx-auto h-auto max-w-5xl w-full'
 			alt={currentImage?.alt}
 			decoding='async'
+			h-auto
 			loading='lazy'
+			max-w-5xl
+			mx-auto
 			src={currentImage?.src}
+			w-full
 		/>
 	</div>
 </div>
