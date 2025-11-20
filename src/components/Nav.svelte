@@ -11,6 +11,7 @@
 		{ name: 'projects', href: resolve('/projects') },
 		{ name: 'talks', href: resolve('/talks') },
 		{ name: 'blog', href: resolve('/blog') },
+		{ name: 'sponsors', href: resolve('/sponsors') },
 		{
 			name: 'cv',
 			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
