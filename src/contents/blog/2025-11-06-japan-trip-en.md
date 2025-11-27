@@ -104,6 +104,12 @@ Not all of them are uploaded yet, so I'll update this as they come out.
 
 <YouTube youTubeId="Ls5FmNoLLws" />
 
+<!-- https://youtu.be/XsAlXYWzcv4 -->
+
+### [Foreign IT Engineer's Dev Environment] A Vim video by a Vimmer for Vimmers (and aspiring Vimmers)
+
+<YouTube youTubeId="XsAlXYWzcv4" />
+
 ~~Will update as they come out~~
 
 ## Events

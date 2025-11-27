@@ -102,6 +102,12 @@ lang: ja
 
 <YouTube youTubeId="Ls5FmNoLLws" />
 
+<!-- https://youtu.be/XsAlXYWzcv4 -->
+
+### 【外資ITエンジニアの開発環境】VimmerによるVimmer(になりたい人)のためのVim動画
+
+<YouTube youTubeId="XsAlXYWzcv4" />
+
 ~~順次更新予定~~
 
 ## 参加イベント
