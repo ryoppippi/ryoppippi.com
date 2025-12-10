@@ -72,7 +72,7 @@
 		"markdown-it-link-preview": "^1.1.4",
 		"markdown-it-magic-link": "^0.1.4",
 		"markdown-it-mdc": "^0.2.6",
-		"open-editor": "^5.1.0",
+		"open-editor": "^6.0.0",
 		"reading-time": "^1.5.0",
 		"rss-parser": "^3.13.0",
 		"secretlint": "^11.2.5",
