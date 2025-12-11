@@ -21,6 +21,26 @@ function relativePath(...args: string[]): string {
 
 export default defineConfig({
 	plugins: [
+		/* blog記事の追加・削除時にサーバーを再起動してブラウザをリロード */
+		{
+			name: 'blog-watcher',
+			configureServer(server) {
+				server.watcher.on('add', (file) => {
+					if (file.includes('src/contents/blog') && file.endsWith('.md')) {
+						void server.restart().then(() => {
+							server.ws.send({ type: 'full-reload' });
+						});
+					}
+				});
+				server.watcher.on('unlink', (file) => {
+					if (file.includes('src/contents/blog') && file.endsWith('.md')) {
+						void server.restart().then(() => {
+							server.ws.send({ type: 'full-reload' });
+						});
+					}
+				});
+			},
+		},
 		/* favicon と metadata の設定 */
 		faviconsPlugin({
 			cache: true,
