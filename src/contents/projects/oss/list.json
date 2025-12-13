@@ -130,6 +130,16 @@
 			"icon": "i-file-icons:opencv"
 		}
 	],
+	"Web Apps": [
+		{
+			"name": "deepwiki-badge-maker",
+			"icon": "i-ph:badge-light"
+		},
+		{
+			"name": "chatgpt-heatmap",
+			"icon": "i-ph:fire-light"
+		}
+	],
 	"Configs": [
 		{
 			"name": "dotfiles",
