@@ -1,6 +1,4 @@
 {
-  description = "StackOne AI Node SDK development environment";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -18,8 +16,6 @@
           ];
 
           shellHook = ''
-            echo "StackOne AI Node SDK development environment"
-
             # Install dependencies only if node_modules/.pnpm/lock.yaml is older than pnpm-lock.yaml
             if [ ! -f node_modules/.pnpm/lock.yaml ] || [ pnpm-lock.yaml -nt node_modules/.pnpm/lock.yaml ]; then
               echo "📦 Installing dependencies..."
