@@ -1,11 +1,11 @@
 ---
 title: ドキュメントをnpm packageとしてpublishしよう
-date: '2025-12-15'
+date: '2025-12-14'
 isPublished: false
 lang: ja
 ---
 
-> [English](https://ryoppippi.com/blog/2025-12-15-publish-docs-on-npm-en)
+> [English](https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en)
 
 # TL;DR
 
