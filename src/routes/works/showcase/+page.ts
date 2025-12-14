@@ -1,4 +1,4 @@
-import { getProjects } from '$contents/projects/showcase';
+import { getProjects } from '$contents/works/showcase';
 
 export function load() {
 	return {
