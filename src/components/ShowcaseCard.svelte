@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import type { Project } from '$contents/projects/showcase';
+	import type { Project } from '$contents/works/showcase';
 	import { formatDate } from '$lib/util';
 	import Image from './Image.svelte';
 
