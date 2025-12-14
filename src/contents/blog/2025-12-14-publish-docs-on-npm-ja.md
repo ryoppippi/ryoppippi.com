@@ -114,6 +114,12 @@ libraryの提供者はどうやれば最小手で自分のlibraryやframeworkを
 
 `npm` packageとしてドキュメントを提供することにはいくつかの利点があります。
 
+### ローカルへの自動配置
+
+`npm`の大きな特徴として、インストールしたpackageが`node_modules`ディレクトリに実体として配置されることが挙げられます。
+パスは常に`./node_modules/<package-name>`と予測可能で、Coding Agentが参照しやすい構造になっています。
+ドキュメントを`npm` packageとしてpublishすれば、`npm install`するだけで自動的にプロジェクト内にドキュメントが配置されるのです。
+
 ### ドキュメント参照容易性
 
 ドキュメントをCoding Agentに参照させるのは非常に簡単です。

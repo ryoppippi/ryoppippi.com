@@ -114,6 +114,12 @@ I propose that library authors **bundle documentation with their `npm` package, 
 
 Providing documentation as an `npm` package has several advantages.
 
+### Automatic Local Placement
+
+A key characteristic of `npm` is that installed packages are placed as actual files in the `node_modules` directory.
+The path is always predictable as `./node_modules/<package-name>`, making it easy for Coding Agents to reference.
+By publishing documentation as an `npm` package, simply running `npm install` automatically places the documentation within your project.
+
 ### Easy Documentation Reference
 
 Making Coding Agents reference documentation is straightforward:
