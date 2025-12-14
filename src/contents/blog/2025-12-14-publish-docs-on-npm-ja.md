@@ -78,14 +78,14 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 しかし、MCP Serverには大きな問題点がありました。
 
 - [Coding Agentに登録できるMCP Serverの数には上限があります](https://www.reddit.com/r/cursor/comments/1k3pob9/mcp_server_40tool_limit_in_cursor_is_this/#:~:text=Limit%20Consequences:%20The%2040%2Dtool%20limit%20forces%20users,could%20lead%20to%20clunky%2C%20less%20functional%20tools.%22)。そのため、いろいろな情報を駆使してコーディングをさせたいときには、この上限が大きなネックになります。
-- 多くのMCP Serverを登録すると、その定義だけでコンテキストウィンドウを大きく圧迫することになります。1セッションあたりにこなせるタスク量が減ってしまいます。 このブログの趣旨とは違いますが、[例えば`Playwright` MCPをClaude Codeに接続しただけでほとんどのコンテキストウィンドウを使い果たしてしまい、肝心の作業がほとんどできないといったことも起こっています](https://x.com/HclHno3/status/1982850594667933789)。
+- 多くのMCP Serverを登録すると、その定義だけでcontext windowを大きく圧迫することになります。1セッションあたりにこなせるタスク量が減ってしまいます。 このブログの趣旨とは違いますが、[例えば`Playwright` MCPをClaude Codeに接続しただけでほとんどのcontext windowを使い果たしてしまい、肝心の作業がほとんどできないといったことも起こっています](https://x.com/HclHno3/status/1982850594667933789)。
 - MCP Serverが一度に返せる情報量には限りがあり、多くの情報を返そうと思うと、何度かやり取りをしなければならず、[N+1問題](https://planetscale.com/blog/what-is-n-1-query-problem-and-how-to-solve-it)が容易に発生します。[`sitemcp`でもこの問題に対処するためにPaginationを導入しました](https://github.com/ryoppippi/sitemcp/blob/716a4e6ff299cd9ef9aca7f7f3f458e6aff49cb8/src/server.ts#L166-L174)が、文字通りこれはN+1問題を引き起こしている例と言えるでしょう。
 
 また、`llms.txt`にも共通する問題点として
 
 - 毎回リモートにあるドキュメントを参照するのに時間もコストもかかる
 - ドキュメントがバージョンごとに存在しているのは稀で、バージョンが古いlibraryを使っているときに情報のミスマッチが起きる
-- 実際にCoding Agentが使うのは得られた情報の一部でしかないのにもかかわらず、取得したすべての情報をコンテキストウィンドウに保持することになり、非常に効率が悪い
+- 実際にCoding Agentが使うのは得られた情報の一部でしかないのにもかかわらず、取得したすべての情報をcontext windowに保持することになり、非常に効率が悪い
 
 最後の問題に関しては、[Claude Code](https://code.claude.com/) は [Subagents](https://code.claude.com/docs/en/sub-agents) という仕組みを導入することで、部分的に解決しています。
 しかし他の問題は残ります。
