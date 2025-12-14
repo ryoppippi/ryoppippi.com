@@ -15,6 +15,8 @@
             pnpm_10
             typos
             typos-lsp
+            svelte-language-server # Svelte
+            yaml-language-server # YAML
           ];
 
           shellHook = ''
