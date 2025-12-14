@@ -11,6 +11,7 @@ lang: en
 
 - The most efficient LLM-friendly documentation delivery method is to download it locally
 - Library authors should consider publishing documentation with their `npm` packages
+- In today's era of vibe coding, making libraries and frameworks LLM-friendly is crucial
 
 > Note: This blog focuses primarily on the JavaScript ecosystem, so I'm discussing publishing to the `npm` registry. For other ecosystems, consider the equivalent package distribution mechanisms.
 
@@ -28,6 +29,8 @@ To solve these problems, setting up an environment that provides as much informa
 Throughout the past year, various discussions have taken place across different venues. Some approaches were considered good at the time, others not so much in retrospect.
 
 # The Bottom Line
+
+In today's era of vibe coding, making libraries and frameworks LLM-friendly is becoming increasingly important. Libraries that don't work well with LLMs risk being overlooked entirely. So how can library authors achieve an LLM-friendly environment?
 
 To put it simply, the most efficient LLM-friendly documentation delivery method currently is **downloading documentation locally and letting Coding Agents read it freely**.
 I believe the most effective approach for library authors is to upload documentation to registries like `npm` in a version-controlled manner.
