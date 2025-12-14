@@ -5,6 +5,8 @@ isPublished: false
 lang: en
 ---
 
+> [日本語版](https://ryoppippi.com/blog/2025-12-15-publish-docs-on-npm-ja)
+
 # TL;DR
 
 - The most efficient LLM-friendly documentation delivery method is to download it locally
@@ -114,11 +116,11 @@ Providing documentation as an `npm` package has several advantages.
 Making Coding Agents reference documentation is straightforward:
 
 ```md
-If we need implement xxx feature, use @your-library package.
-Please refer to the documentation located at ./node_modules/@your-library/docs/\*\*.md for more information about how to use the library.
+If you need to implement feature X, use the `@your-library` package.
+Please refer to the documentation located at `./node_modules/@your-library/docs/**/*.md` for more information about how to use the library.
 ```
 
-You can write this directly in `CLAUDE.md` or `Agents.md`, or define it as one of your [`Agent Skills`](https://code.claude.com/docs/en/skills) to reference as needed.
+You can write this directly in `CLAUDE.md` or `AGENTS.md`, or define it as one of your [`Agent Skills`](https://code.claude.com/docs/en/skills) to reference as needed.
 
 ### Easy Distribution
 
@@ -157,6 +159,8 @@ Comparing using `gunshi` documentation versus web search only:
 - Zero rework needed!
 
 These were the observed effects.
+
+[Code available](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
 
 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 300px;">
@@ -204,4 +208,4 @@ Publishing documentation to the `npm` registry may be a good solution to advance
 
 <!-- ja: https://x.com/ryoppippi/status/1997459320091332729?s=20 -->
 <!-- en: https://x.com/ryoppippi/status/1997456196723208373?s=20 -->
-<Tweet id="1997456196723208373" lang="en" />
+<Tweet id="1997456196723208373" />

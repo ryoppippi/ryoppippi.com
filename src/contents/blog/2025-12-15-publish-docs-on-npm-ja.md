@@ -5,6 +5,8 @@ isPublished: false
 lang: ja
 ---
 
+> [English](https://ryoppippi.com/blog/2025-12-15-publish-docs-on-npm-en)
+
 # TL;DR
 
 - LLMフレンドリーなドキュメント提供方法としては、ローカルにダウンロードさせるのが現時点では最も効率が良い
@@ -46,7 +48,7 @@ RAG (Retrieval-Augmented Generation)は、LLMに外部知識を与えるため�
 ChatGPTが能動的に情報をネットから探して、それについて回答を生成することが可能になりました。
 ただし、HTMLという構造はLLMフレンドリーではなく、また毎回検索をするのはコストが高いため、決して効率のいい方法とは言えません。
 Coding Agentはウェブ検索機能を搭載するのが普通ですが、この問題は今後もついて回ることになるでしょう。
-こと現在の[Context Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)の常識を鑑みるにWeb Searchに頼るのは最終手段にすべきでしょう
+こと現在の[Context Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)の常識を鑑みるにWeb Searchに頼るのは最終手段にすべきでしょう。
 
 ## llms.txt
 
@@ -74,7 +76,7 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 
 - [Coding Agentに登録できるMCP Serverの数には上限があります](https://www.reddit.com/r/cursor/comments/1k3pob9/mcp_server_40tool_limit_in_cursor_is_this/#:~:text=Limit%20Consequences:%20The%2040%2Dtool%20limit%20forces%20users,could%20lead%20to%20clunky%2C%20less%20functional%20tools.%22)。そのため、いろいろな情報を駆使してコーディングをさせたいときには、この上限が大きなネックになります。
 - 多くのMCP Serverを登録すると、その定義だけでコンテキストウィンドウを大きく圧迫することになります。1セッションあたりにこなせるタスク量が減ってしまいます。 このブログの趣旨とは違いますが、[例えば`Playwright` MCPをClaude Codeに接続した場合このようなことだけでほとんどのコンテキストウィンドウを使い果たしてしまい、肝心の作業がほとんどできないといったことも起こっています](https://x.com/HclHno3/status/1982850594667933789)。
-- MCP Serverが一度に返せる情報量には限りがあり、多くの情報を返そうと思うと、何度かやり取りをしなければならず、[N+1問題](https://planetscale.com/blog/what-is-n-1-query-problem-and-how-to-solve-it)が容易に発生します。[`sitemcp`でもこの問題に対処するために、Paginationを導入しました](https://github.com/ryoppippi/sitemcp/blob/716a4e6ff299cd9ef9aca7f7f3f458e6aff49cb8/src/server.ts#L166-L174)が、文字通りこれはN+1問題を引き起こしている例と言えるでしょうか。
+- MCP Serverが一度に返せる情報量には限りがあり、多くの情報を返そうと思うと、何度かやり取りをしなければならず、[N+1問題](https://planetscale.com/blog/what-is-n-1-query-problem-and-how-to-solve-it)が容易に発生します。[`sitemcp`でもこの問題に対処するためにPaginationを導入しました](https://github.com/ryoppippi/sitemcp/blob/716a4e6ff299cd9ef9aca7f7f3f458e6aff49cb8/src/server.ts#L166-L174)が、文字通りこれはN+1問題を引き起こしている例と言えるでしょう。
 
 また、`llms.txt`にも共通する問題点として
 
@@ -83,7 +85,7 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 - 実際にCoding Agentが使うのは得られた情報の一部でしかないのにもかかわらず、取得したすべての情報をコンテキストウィンドウに保持することになり、効率がとても悪い
 
 最後の問題に関しては、[Claude Code](https://code.claude.com/) は [Subagents](https://code.claude.com/docs/en/sub-agents) という仕組みを導入することで、部分的に解決しています。
-しかし他の問題点に関しては、いろいろ問題点があると言えるでしょう。
+しかし他の問題は残ります。
 
 # 原点回帰: ローカルドキュメント
 
@@ -114,11 +116,11 @@ libraryの提供者はどうやれば最小手で自分のlibraryやframeworkを
 ドキュメントをCoding Agentに参照させるのは非常に簡単です。
 
 ```md
-If we need implement xxx feature, use @your-library package.
-Please refer to the documentation located at ./node_modules/@your-library/docs/\*\*.md for more information about how to use the library.
+If you need to implement feature X, use the `@your-library` package.
+Please refer to the documentation located at `./node_modules/@your-library/docs/**/*.md` for more information about how to use the library.
 ```
 
-これをそのまま`CLAUDE.md`や`Agents.md`に書くこともできますし、より具体的には[`Agent Skills`](https://code.claude.com/docs/en/skills)の一つとして定義することで、必要に応じて参照させることもできるでしょう。
+これをそのまま`CLAUDE.md`や`AGENTS.md`に書くこともできますし、より具体的には[`Agent Skills`](https://code.claude.com/docs/en/skills)の一つとして定義することで、必要に応じて参照させることもできるでしょう。
 
 ### 配布容易性
 
@@ -145,8 +147,6 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 [gunshi](https://github.com/kazupon/gunshi) by {@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。自分が今もっとも愛用しているCLI libraryです。
 
-<!-- TODO: 英語版を書くときはこれを-enにする -->
-
 https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 
 このlibraryは`gunshi` packageとは別に[`@gunshi/docs`](https://www.npmjs.com/package/@gunshi/docs)というドキュメント専用packageを提供しています。Coding Agentは`bun-types`と同様にこのドキュメントを参照することで、`gunshi`の使い方を学習することができます。
@@ -159,6 +159,8 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 - 手戻りも0回に！
 
 などの効果がありました。
+
+[コードはこちら](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
 
 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 300px;">
@@ -206,4 +208,4 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 
 <!-- ja: https://x.com/ryoppippi/status/1997459320091332729?s=20 -->
 <!-- en: https://x.com/ryoppippi/status/1997456196723208373?s=20 -->
-<Tweet id="1997459320091332729" lang="ja" />
+<Tweet id="1997459320091332729" />
