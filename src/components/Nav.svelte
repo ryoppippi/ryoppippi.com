@@ -8,8 +8,7 @@
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
 	const LINKS = [
-		{ name: 'projects', href: resolve('/projects') },
-		{ name: 'talks', href: resolve('/talks') },
+		{ name: 'works', href: resolve('/works') },
 		{ name: 'blog', href: resolve('/blog') },
 		{ name: 'sponsors', href: resolve('/sponsors') },
 		{
