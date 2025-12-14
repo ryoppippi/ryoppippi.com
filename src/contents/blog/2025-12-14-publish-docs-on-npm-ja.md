@@ -218,3 +218,6 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 <!-- ja: https://x.com/ryoppippi/status/1997459320091332729?s=20 -->
 <!-- en: https://x.com/ryoppippi/status/1997456196723208373?s=20 -->
 <Tweet id="1997459320091332729" />
+
+<!-- https://x.com/kyutaro15/status/2000342747459485933?s=20 -->
+<Tweet id="2000342747459485933" />
