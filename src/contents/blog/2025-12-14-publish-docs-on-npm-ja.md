@@ -14,7 +14,7 @@ lang: ja
 
 > Note: このブログでは主にJavaScriptエコシステムに絞って話をするので、`npm` registryにpublishする話を書いています。他のエコシステムについては他のエコシステムなりのpackage配布手段があるので、そこに置き換えて考えてみてください
 
-# 2025年はCoding AgentとMCPの年
+# 2025年は漢字は「Coding Agent」と「MCP」
 
 2025年はCoding Agentの年でした。3月に[Claude Code](https://code.claude.com/)が発表され、5月にGAになってからはその勢いはとどまることなく、その後[Codex](https://codex.dev/)や[OpenCode](https://opencode.dev/)などのAgent人気にも火がつきました。
 世の中を見渡すと、日頃どのようなモデルがCodingに良いか、どのエージェントがうまく出力を出すか、どのようなツールがコード生成をサポートするかといった話題で持ちきりです。
