@@ -1,7 +1,7 @@
 ---
 title: Publish Your Documentation as an npm Package
 date: '2025-12-14'
-isPublished: false
+isPublished: true
 lang: en
 ---
 
