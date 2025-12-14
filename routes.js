@@ -14,4 +14,7 @@ export const Route = /** @as{const} */([
 	{ from: '/bsky', to: 'https://bsky.app/profile/ryoppippi.com' },
 	{ from: '/reddit', to: '/https://www.reddit.com/user/ryoppippi' },
 	{ from: '/youtube', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
+	// Backward compatibility redirects
+	{ from: '/talks*', to: '/works/talks' },
+	{ from: '/projects*', to: '/works' },
 ]);
