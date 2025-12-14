@@ -14,7 +14,7 @@ lang: ja
 
 > Note: このブログでは主にJavaScriptエコシステムに絞って話をするので、`npm` registryにpublishする話を書いています。他のエコシステムについては他のエコシステムなりのpackage配布手段があるので、そこに置き換えて考えてみてください
 
-# 2025年は漢字は「Coding Agent」と「MCP」
+# 2025年の漢字は「Coding Agent」と「MCP」
 
 2025年はCoding Agentの年でした。3月に[Claude Code](https://code.claude.com/)が発表され、5月にGAになってからはその勢いはとどまることなく、その後[Codex](https://codex.dev/)や[OpenCode](https://opencode.dev/)などのAgent人気にも火がつきました。
 世の中を見渡すと、日頃どのようなモデルがCodingに良いか、どのエージェントがうまく出力を出すか、どのようなツールがコード生成をサポートするかといった話題で持ちきりです。
@@ -40,14 +40,14 @@ libraryの提供者は、ドキュメントをバージョン管理可能な状�
 RAG (Retrieval-Augmented Generation)は、LLMに外部知識を与えるための方法として広く知られています。
 2022年11月にChatGPTが公開された後、人々の間で、「関連情報とプロンプトを一緒に渡せば知識に基づいた望ましい出力が得られる」という認識が広まりました。
 これに伴ってプロンプトからいかに関連した情報を取り出して渡すかという議論が盛んになりました。
-ここでは、RAGの具体的な手法には述べませんが、ドキュメントを渡してone-shotで回答を得るということの大切さの議論は、ここから盛んになったものと考えられます。
+ここではRAGの具体的な手法には触れませんが、ドキュメントを渡してone-shotで回答を得るということの大切さの議論は、ここから盛んになったものと考えられます。
 
 ## Web Search
 
 2023年、ChatGPTにWeb検索機能が追加されました。これにより、LLMはインターネット上の最新情報にアクセスできるようになりました。
 ChatGPTが能動的に情報をネットから探して、それについて回答を生成することが可能になりました。
 ただし、HTMLという構造はLLMフレンドリーではなく、また毎回検索をするのはコストが高いため、決して効率のいい方法とは言えません。
-Coding Agentはウェブ検索機能を搭載するのが普通ですが、この問題は今後もついて回ることになるでしょう。
+現代のCoding Agentはウェブ検索機能を搭載するのが当たり前になっている一方、この問題は今後もついて回ることになるでしょう。
 こと現在の[Context Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)の常識を鑑みるにWeb Searchに頼るのは最終手段にすべきでしょう。
 
 ## llms.txt
@@ -75,14 +75,14 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 しかし、MCP Serverには大きな問題点がありました。
 
 - [Coding Agentに登録できるMCP Serverの数には上限があります](https://www.reddit.com/r/cursor/comments/1k3pob9/mcp_server_40tool_limit_in_cursor_is_this/#:~:text=Limit%20Consequences:%20The%2040%2Dtool%20limit%20forces%20users,could%20lead%20to%20clunky%2C%20less%20functional%20tools.%22)。そのため、いろいろな情報を駆使してコーディングをさせたいときには、この上限が大きなネックになります。
-- 多くのMCP Serverを登録すると、その定義だけでコンテキストウィンドウを大きく圧迫することになります。1セッションあたりにこなせるタスク量が減ってしまいます。 このブログの趣旨とは違いますが、[例えば`Playwright` MCPをClaude Codeに接続した場合このようなことだけでほとんどのコンテキストウィンドウを使い果たしてしまい、肝心の作業がほとんどできないといったことも起こっています](https://x.com/HclHno3/status/1982850594667933789)。
+- 多くのMCP Serverを登録すると、その定義だけでコンテキストウィンドウを大きく圧迫することになります。1セッションあたりにこなせるタスク量が減ってしまいます。 このブログの趣旨とは違いますが、[例えば`Playwright` MCPをClaude Codeに接続しただけでほとんどのコンテキストウィンドウを使い果たしてしまい、肝心の作業がほとんどできないといったことも起こっています](https://x.com/HclHno3/status/1982850594667933789)。
 - MCP Serverが一度に返せる情報量には限りがあり、多くの情報を返そうと思うと、何度かやり取りをしなければならず、[N+1問題](https://planetscale.com/blog/what-is-n-1-query-problem-and-how-to-solve-it)が容易に発生します。[`sitemcp`でもこの問題に対処するためにPaginationを導入しました](https://github.com/ryoppippi/sitemcp/blob/716a4e6ff299cd9ef9aca7f7f3f458e6aff49cb8/src/server.ts#L166-L174)が、文字通りこれはN+1問題を引き起こしている例と言えるでしょう。
 
 また、`llms.txt`にも共通する問題点として
 
 - 毎回リモートにあるドキュメントを参照するのに時間もコストもかかる
 - ドキュメントがバージョンごとに存在しているのは稀で、バージョンが古いlibraryを使っているときに情報のミスマッチが起きる
-- 実際にCoding Agentが使うのは得られた情報の一部でしかないのにもかかわらず、取得したすべての情報をコンテキストウィンドウに保持することになり、効率がとても悪い
+- 実際にCoding Agentが使うのは得られた情報の一部でしかないのにもかかわらず、取得したすべての情報をコンテキストウィンドウに保持することになり、非常に効率が悪い
 
 最後の問題に関しては、[Claude Code](https://code.claude.com/) は [Subagents](https://code.claude.com/docs/en/sub-agents) という仕組みを導入することで、部分的に解決しています。
 しかし他の問題は残ります。
@@ -92,11 +92,11 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 MCPが普及し始めた2025年4月ごろから、[MCPとCLIはどっちがいいんだ](https://mariozechner.at/posts/2025-08-15-mcp-vs-cli/)という議論が度々話題になっていました。Coding Agentもこの半年でいくつか世代を経るごとに、CLIツールの呼び出し方については、めきめきと精度が上がっていきました(これと比較して、[MCPなどのツール呼び出しの精度は実はあんまり上がってないんですよね...](https://gorilla.cs.berkeley.edu/leaderboard.html))。
 
 これを踏まえると、できる限りドキュメントやlibraryのソースコードを手元に置いておくのがいいのではないかなというアイデアを自分の周りではより頻繁に聞くようになりました。
-例えば友人である {@natsukium} は [`ghq`を使って使用しているlibraryをローカルにクローンして参照するようにPromptを書いている](https://github.com/natsukium/dotfiles/blob/b1cef897b5142462103167a1a02ed4341cf80547/modules/home/coding-agents/common/AGENTS.md?plain=1#L64-L85)ように`CLAUDE.md`に指示を書いています。また、[`btca`](https://btca.dev/)というCLIツールでは、指定したlibraryを実際にGitHubからクローンしてきて、その情報を与えるための仕組みを整備していたりします。
+例えば友人である {@natsukium} は [`ghq`を使って使用しているlibraryをローカルにクローンして参照する](https://github.com/natsukium/dotfiles/blob/b1cef897b5142462103167a1a02ed4341cf80547/modules/home/coding-agents/common/AGENTS.md?plain=1#L64-L85)ように`CLAUDE.md`に指示を書いています。また、[`btca`](https://btca.dev/)というCLIツールでは、指定したlibraryを実際にGitHubからクローンしてきて、その情報を与えるための仕組みを整備していたりします。
 
 一度手元にドキュメントをおいて仕舞えば、あとはCoding Agentが`fd`, `rg`などを使って必要な情報を探し出し、必要な部分だけを読み込んで処理すればよいわけです。
 しかもわざわざリモートに情報を取りに行く必要もないわけですから、非常に効率的です。
-レポジトリにドキュメントが置いてあったとしても、それは大抵Markdownでしょう。2025年現在何かドキュメントを書くとした場合に、それがマークダウンでない確率の方が低いと考えられます。
+repositoryにドキュメントが置いてあったとしても、それは大抵Markdownでしょう。2025年現在何かドキュメントを書くとした場合に、それがマークダウンでない確率の方が低いと考えられます。
 
 # ドキュメントをpublishしよう
 
@@ -124,8 +124,8 @@ Please refer to the documentation located at `./node_modules/@your-library/docs/
 
 ### 配布容易性
 
-あなたがlibraryの作者である場合、ドキュメントとlibrary本体をモノレポで管理している場合がほとんどでしょう。その場合、ドキュメントを管理しているレポジトリを同時にバージョンを付けてpublishすることができます。
-またすでにレポジトリにあるMarkdownをそのままコピーしてpublishするだけで完了するのでとても簡単です。
+あなたがlibraryの作者である場合、ドキュメントとlibrary本体をモノレポで管理している場合がほとんどでしょう。その場合、ドキュメントを管理しているrepositoryを同時にバージョンを付けてpublishすることができます。
+またすでにrepositoryにあるMarkdownをそのままコピーしてpublishするだけで完了するのでとても簡単です。
 
 ### バージョン管理容易性
 
