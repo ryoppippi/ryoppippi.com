@@ -55,7 +55,7 @@ Coding Agentはウェブ検索機能を搭載するのが普通ですが、こ�
 [`llms.txt`](https://llmstxt.org/)は、2024年9月に提案された、比較的新しいウェブ標準"案"です。
 `llms.txt`を用いることで、WebサイトはHTMLのような人間にとっての構造を廃し、LLMにとって必要最低限の情報をマークダウンで記述することで、トークン量を減らしつつ正確な情報を提供することができます。
 
-[ Mintlify ](https://www.mintlify.com/blog/simplifying-docs-with-llms-txt)など、Coding Agentをアクセスすると、HTMLではなく自動的に`llms.txt`を返してくれるようなドキュメントサービスも増えています。
+[Mintlify](https://www.mintlify.com/blog/simplifying-docs-with-llms-txt)など、Coding Agentをアクセスすると、HTMLではなく自動的に`llms.txt`を返してくれるようなドキュメントサービスも増えています。
 
 ## MCP Server
 
@@ -136,14 +136,14 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 実はこの方法はすでにいくつかのlibraryで行われているものです。
 
-### [ `bun-types` ](https://www.npmjs.com/package/bun-types)
+### [`bun-types`](https://www.npmjs.com/package/bun-types)
 
 [Bun](https://bun.sh/)はJavaScriptランタイムですが、その型定義を提供するために`bun-types`というpackageを提供しています。
-このpackageにはBunの型定義だけでなく、[ Bunのドキュメントも同梱されています ](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/packages/bun-types/scripts/build.ts)。
+このpackageにはBunの型定義だけでなく、[Bunのドキュメントも同梱されています](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/packages/bun-types/scripts/build.ts)。
 
 また面白いことに`bun init -y`コマンドでプロジェクトを生成させると、`bun`は`CLAUDE.md`ファイルを自動生成します。その中には[Bunのドキュメントを参照する指示](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/src/init/rule.md?plain=1#L111)が含まれています。
 
-### [ `gunshi` ](https://github.com/kazupon/gunshi)
+### [`gunshi`](https://github.com/kazupon/gunshi)
 
 [gunshi](https://github.com/kazupon/gunshi) by {@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。自分が今もっとも愛用しているCLI libraryです。
 
@@ -179,7 +179,7 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
   </div>
 </div>
 
-### [ `byethrow` ](https://github.com/praha-inc/byethrow)
+### [`byethrow`](https://github.com/praha-inc/byethrow)
 
 また同じく自分が愛用している新しいResult型library[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash} も同様に [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs) というドキュメント専用packageを提供しています。
 `byethrow`は以前から`mcp`を提供していましたが、docs packageの方が高速に実装をすることができます。
