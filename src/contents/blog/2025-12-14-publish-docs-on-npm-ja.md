@@ -156,7 +156,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 [gunshi](https://github.com/kazupon/gunshi) by {@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。自分が今もっとも愛用しているCLI libraryです。
 
-https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
+[@preview](https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja)
 
 このlibraryは`gunshi` packageとは別に[`@gunshi/docs`](https://www.npmjs.com/package/@gunshi/docs)というドキュメント専用packageを提供しています。Coding Agentは`bun-types`と同様にこのドキュメントを参照することで、`gunshi`の使い方を学習することができます。
 また、[`bunx @gunshi/docs`コマンドを叩くと、`CLAUDE.md`や`Cursor Rule`を自動生成してくれる仕組み](https://gunshi.dev/guide/introduction/setup#llm-assisted-development)も提供しています。
@@ -169,7 +169,7 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 
 などの効果がありました。
 
-[コードはこちら](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
+[@preview](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
 
 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 300px;">
@@ -190,7 +190,7 @@ https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja
 
 ### [`byethrow`](https://github.com/praha-inc/byethrow)
 
-また同じく自分が愛用している新しいResult型library[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash} も同様に [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs) というドキュメント専用packageを提供しています。
+また同じく自分が愛用している新しいResult型libraryである[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash} も同様に [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs) というドキュメント専用packageを提供しています。
 `byethrow`は以前から`mcp`を提供していましたが、docs packageの方が高速に実装をすることができます。
 
 # 注意点

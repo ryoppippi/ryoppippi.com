@@ -156,7 +156,7 @@ Interestingly, when you generate a project with `bun init -y`, Bun auto-generate
 
 [gunshi](https://github.com/kazupon/gunshi) by {@kazupon} is a library for building CLI tools in TypeScript. It's currently my favourite CLI library.
 
-https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en
+[@preview](https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en)
 
 This library provides a dedicated documentation package [`@gunshi/docs`](https://www.npmjs.com/package/@gunshi/docs) separate from the main `gunshi` package. Like `bun-types`, Coding Agents can learn how to use `gunshi` by referencing this documentation.
 It also provides [a mechanism to auto-generate `CLAUDE.md` or `Cursor Rule` by running `bunx @gunshi/docs`](https://gunshi.dev/guide/introduction/setup#llm-assisted-development).
@@ -169,7 +169,7 @@ Comparing using `gunshi` documentation versus web search only:
 
 These were the observed effects.
 
-[Code available](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
+[@preview](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
 
 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 300px;">
