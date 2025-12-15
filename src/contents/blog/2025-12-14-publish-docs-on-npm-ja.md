@@ -58,7 +58,7 @@ ChatGPTが能動的に情報をネットから探して、それについて回�
 [`llms.txt`](https://llmstxt.org/)は、2024年9月に提案された、比較的新しいウェブ標準"案"です。
 `llms.txt`を用いることで、WebサイトはHTMLのような人間にとっての構造を廃し、LLMにとって必要最低限の情報をマークダウンで記述することで、トークン量を減らしつつ正確な情報を提供することができます。
 
-[Mintlify](https://www.mintlify.com/blog/simplifying-docs-with-llms-txt)など、Coding Agentをアクセスすると、HTMLではなく自動的に`llms.txt`を返してくれるようなドキュメントサービスも増えています。
+[Mintlify](https://www.mintlify.com/blog/simplifying-docs-with-llms-txt)など、Coding Agentからアクセスすると、HTMLではなく自動的に`llms.txt`を返してくれるようなドキュメントサービスも増えています。
 
 ## MCP Server
 
