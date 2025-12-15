@@ -148,7 +148,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 ### [`bun-types`](https://www.npmjs.com/package/bun-types)
 
 [Bun](https://bun.sh/)はJavaScriptランタイムですが、その型定義を提供するために`bun-types`というpackageを提供しています。
-このpackageにはBunの型定義だけでなく、[Bunのドキュメントも同梱されています](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/packages/bun-types/scripts/build.ts)。
+このpackageにはBunの型定義だけでなく、[Bunのドキュメントも同梱されています](https://app.unpkg.com/bun-types@1.3.4/files/docs)。
 
 また面白いことに`bun init -y`コマンドでプロジェクトを生成させると、`bun`は`CLAUDE.md`ファイルを自動生成します。その中には[Bunのドキュメントを参照する指示](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/src/init/rule.md?plain=1#L111)が含まれています。
 

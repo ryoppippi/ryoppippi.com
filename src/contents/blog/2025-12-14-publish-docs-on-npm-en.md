@@ -148,7 +148,7 @@ This method is actually already practised by several libraries.
 ### [`bun-types`](https://www.npmjs.com/package/bun-types)
 
 [Bun](https://bun.sh/) is a JavaScript runtime that provides a `bun-types` package for type definitions.
-This package contains not just Bun's type definitions but also [Bun's documentation](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/packages/bun-types/scripts/build.ts).
+This package contains not just Bun's type definitions but also [Bun's documentation](https://app.unpkg.com/bun-types@1.3.4/files/docs).
 
 Interestingly, when you generate a project with `bun init -y`, Bun auto-generates a `CLAUDE.md` file containing [instructions to reference Bun's documentation](https://github.com/oven-sh/bun/blob/e9e93244cb3fee8bc4d734e7a4f3f2883eb1bf4a/src/init/rule.md?plain=1#L111).
 
