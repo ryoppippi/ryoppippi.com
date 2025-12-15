@@ -94,7 +94,7 @@ libraryやframeworkの提供者がそれを使うための MCP Serverを個別�
 
 MCPが普及し始めた2025年4月ごろから、[MCPとCLIはどっちがいいんだ](https://mariozechner.at/posts/2025-08-15-mcp-vs-cli/)という議論が度々話題になっていました。Coding Agentもこの半年でいくつか世代を経るごとに、CLIツールの呼び出し方については、めきめきと精度が上がっていきました(これと比較して、[MCPなどのツール呼び出しの精度は実はあんまり上がってないんですよね...](https://gorilla.cs.berkeley.edu/leaderboard.html))。
 
-これを踏まえると、できる限りドキュメントやlibraryのソースコードを手元に置いておくのがいいのではないかなというアイデアを自分の周りではより頻繁に聞くようになりました。
+これを踏まえると、できる限りドキュメントやlibraryのソースコードを手元に置いておくのがいいのではないかなというアイデアを筆者の周りではより頻繁に聞くようになりました。
 例えば友人である {@natsukium} は [`ghq`を使って使用しているlibraryをローカルにクローンして参照する](https://github.com/natsukium/dotfiles/blob/b1cef897b5142462103167a1a02ed4341cf80547/modules/home/coding-agents/common/AGENTS.md?plain=1#L64-L85)ように`CLAUDE.md`に指示を書いています。また、[`btca`](https://btca.dev/)というCLIツールでは、指定したlibraryを実際にGitHubからクローンしてきて、その情報を与えるための仕組みを整備していたりします。
 
 一度手元にドキュメントをおいて仕舞えば、あとはCoding Agentが`fd`, `rg`などを使って必要な情報を探し出し、必要な部分だけを読み込んで処理すればよいわけです。
@@ -154,7 +154,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 ### [`gunshi`](https://github.com/kazupon/gunshi)
 
-[gunshi](https://github.com/kazupon/gunshi) by {@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。自分が今もっとも愛用しているCLI libraryです。
+[gunshi](https://github.com/kazupon/gunshi) by {@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。筆者が今もっとも愛用しているCLI libraryです。
 
 [@preview](https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja)
 
@@ -190,7 +190,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 ### [`byethrow`](https://github.com/praha-inc/byethrow)
 
-また同じく自分が愛用している新しいResult型libraryである[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash} も同様に [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs) というドキュメント専用packageを提供しています。
+また同じく筆者が愛用している新しいResult型libraryである[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash} も同様に [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs) というドキュメント専用packageを提供しています。
 `byethrow`は以前から`mcp`を提供していましたが、docs packageの方が高速に実装をすることができます。
 
 # 注意点
