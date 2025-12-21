@@ -8,14 +8,6 @@
 			"type": "http",
 			"url": "https://mcp.grep.app"
 		},
-		"chrome-devtools": {
-			"type": "stdio",
-			"command": "pnpm",
-			"args": [
-				"chrome-devtools-mcp"
-			],
-			"env": {}
-		},
 		"svelte": {
 			"type": "stdio",
 			"command": "pnpm",
