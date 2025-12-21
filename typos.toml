@@ -1,17 +1,15 @@
 [default]
-locale = 'en-gb'
+locale = 'en-us'
 extend-ignore-re = [
   "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
   "(?s)<!--\\s*spellchecker:off.*?\\n\\s*spellchecker:on\\s*-->",
   "(?Rm)^.*#\\s*spellchecker:disable-line$",
   "(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$"
-  "(?s)```.*?``` ", # ignore code blocks
-  "(?s)```[a-zA-Z0-9]*\n.*?```", # ignore code blocks
-  "(?s)`.*?` ", # ignore inline code
 ]
 
 [default.extend-words]
 Edn = "Edn"
+Garph = "Garph"
 
 [files]
-extend-exclude = [ "node_modules/**" ]
+extend-exclude = [ "node_modules/**", ]
