@@ -45,6 +45,8 @@
             just
             typos
             typos-lsp
+            git
+            gh
           ];
         };
       };
