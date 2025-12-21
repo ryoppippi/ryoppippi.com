@@ -11,6 +11,9 @@
     "dependencies",
     "renovate"
   ],
+  "nix": {
+    "enabled": true
+  },
   "platformAutomerge": true,
   "dependencyDashboard": false,
   "automerge": true,
