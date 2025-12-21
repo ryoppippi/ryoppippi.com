@@ -106,7 +106,8 @@
 	},
 	"lint-staged": {
 		"*": [
-			"eslint --cache --fix"
+			"eslint --cache --fix",
+			"secretlint"
 		],
 		"package.json": [
 			"sort-package-json"
