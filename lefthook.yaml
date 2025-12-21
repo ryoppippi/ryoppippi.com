@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: '*'
+      run: pnpm eslint --cache --fix {staged_files}
+      stage_fixed: true
+    secretlint:
+      glob: '*'
+      run: pnpm secretlint {staged_files}
+    sort-package-json:
+      glob: package.json
+      run: pnpm sort-package-json {staged_files}
+      stage_fixed: true

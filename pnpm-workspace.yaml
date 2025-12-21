@@ -3,8 +3,8 @@ minimumReleaseAge: 1440
 onlyBuiltDependencies:
   - core-js
   - esbuild
+  - lefthook
   - sharp
-  - simple-git-hooks
   - unrs-resolver
   - workerd
 
