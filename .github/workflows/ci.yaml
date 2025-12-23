@@ -32,11 +32,11 @@ jobs:
       - name: Run Typo Check
         run: nix develop --command typos ./src/contents/**/*.md
 
-      - name: Run Lint
-        run: nix develop --command pnpm run lint
-
       - name: Run Check
         run: nix develop --command pnpm run check
+
+      - name: Run Lint
+        run: nix develop --command pnpm run lint
 
   action-timeline:
     needs:
