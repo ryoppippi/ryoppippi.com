@@ -1,36 +1,46 @@
+name: CI
+
 on:
   push:
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions: read-all
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      - run: mv .env.example .env
-      - run: pnpm i --frozen-lockfile
-      - run: pnpm secretlint ./**/*
-      - run: pnpm check
-      - run: pnpm lint
-
-  spell-check:
-    runs-on: ubuntu-slim
-    steps:
-      - name: Checkout Actions Repository
+      - name: Checkout repository
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-
-      - uses: crate-ci/typos@626c4bedb751ce0b7f03262ca97ddda9a076ae1c # v1.39.2
         with:
-          files: ./src/contents/**/*.md
-          config: ./typos.toml
+          fetch-depth: 0
+
+      - name: Setup Nix
+        uses: ./.github/actions/setup-nix
+
+      - name: Setup Environment
+        run: mv .env.example .env
+
+      - name: Run Gitleaks
+        run: nix develop --command gitleaks detect --source . --config .gitleaks.toml
+
+      - name: Run Typo Check
+        run: nix develop --command typos ./src/contents/**/*.md
+
+      - name: Run Lint
+        run: nix develop --command pnpm run lint
+
+      - name: Run Check
+        run: nix develop --command pnpm run check
 
   action-timeline:
     needs:
       - ci
-      - spell-check
     if: ${{ always() }}
     runs-on: ubuntu-slim
     steps:

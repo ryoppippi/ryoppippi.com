@@ -7,9 +7,8 @@ pre-commit:
       glob: '*'
       run: pnpm eslint --cache --fix {staged_files}
       stage_fixed: true
-    secretlint:
-      glob: '*'
-      run: pnpm secretlint {staged_files}
+    gitleaks:
+      run: gitleaks protect --staged --config .gitleaks.toml
     sort-package-json:
       glob: package.json
       run: pnpm sort-package-json {staged_files}
