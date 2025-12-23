@@ -23,9 +23,6 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
-      - name: Setup Environment
-        run: mv .env.example .env
-
       - name: Run Gitleaks
         run: nix develop --command gitleaks detect --source . --config .gitleaks.toml
 

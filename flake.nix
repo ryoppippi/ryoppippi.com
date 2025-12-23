@@ -25,6 +25,16 @@
               echo "📦 Installing dependencies..."
               pnpm install --frozen-lockfile
             fi
+
+            # Generate .env from .env.example if needed
+            if [ -f .env.example ]; then
+              if [ ! -f .env ]; then
+                echo "📝 Generating .env from .env.example..."
+                cp .env.example .env
+              elif [ .env.example -nt .env ]; then
+                echo "⚠️  .env.example has been updated, please review and update .env manually"
+              fi
+            fi
           '';
         };
       };
