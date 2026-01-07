@@ -102,17 +102,17 @@
 </main>
 
 <style>
-	:global {
-		body {
-			--uno: font-sans text-base bg-white text-text-800 dark: (bg-bg-base text-text-100) motion-safe: (transition transition-duration-1s scroll-smooth);
 
-			text-autospace: normal; /* Add spacing around alphanumeric characters in Japanese text */
-			overflow-wrap: anywhere; /* Wrap text when it doesn't fit */
-			word-break: normal; /* Use default word breaking behaviour */
-			line-break: strict; /* Apply strict line breaking rules */
-		}
-		@view-transition {
-			navigation: auto;
-		}
+:global {
+	body {
+		--uno: font-sans text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
+		text-autospace: normal; /* Add spacing around alphanumeric characters in Japanese text */
+		overflow-wrap: anywhere; /* Wrap text when it doesn't fit */
+		word-break: normal; /* Use default word breaking behaviour */
+		line-break: strict; /* Apply strict line breaking rules */
 	}
+	@view-transition {
+		navigation: auto;
+	}
+}
 </style>
