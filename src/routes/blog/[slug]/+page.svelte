@@ -13,6 +13,7 @@
 	import './magic-link.css';
 	import './prose.css';
 	import './anchor.css';
+	import './collapse.css';
 
 	const { data } = $props();
 	const { metadata, Markdown } = data;

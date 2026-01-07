@@ -1,0 +1,38 @@
+summary {
+	display: flex;
+	align-items: start;
+	outline: none;
+	list-style: none;
+	user-select: none;
+	cursor: pointer;
+	padding-bottom: 1rem;
+}
+
+summary > h1,
+summary > h2,
+summary > h3,
+summary > h4,
+summary > h5,
+summary > h6 {
+	display: inline-block;
+	margin: 0;
+}
+
+details > *:not(summary) {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	margin-left: 1.25rem;
+}
+
+.details-marker::before {
+	content: '▶︎';
+	display: inline-block;
+	margin-right: 0.5ch;
+	flex-shrink: 0;
+	transition: 0.3s;
+}
+
+details[open] > summary .details-marker::before {
+	transform: rotate(90deg);
+	transform-origin: 40% 45% 0;
+}
