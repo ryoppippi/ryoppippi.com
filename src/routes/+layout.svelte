@@ -73,7 +73,9 @@
 		],
 	}}
 	{title}
-	titleTemplate={title !== 'home' ? `%s | ${page.url.hostname}` : page.url.hostname}
+	titleTemplate={title !== 'home'
+		? `%s | ${page.url.hostname}`
+		: page.url.hostname}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
@@ -81,7 +83,8 @@
 		description,
 		image: ryoppippi,
 		imageAlt: 'ryoppippi\'s icon',
-	}} />
+	}}
+/>
 <svelte:head>
 	{#each faviconLinks.split('\n') as link (link)}
 		{#if !link.includes('theme-color')}
@@ -91,13 +94,7 @@
 	{/each}
 </svelte:head>
 
-<main
-	max-w-4xl
-	mxa
-	my3
-	px-8
-	un-dark
->
+<main max-w-4xl mxa my3 px-8 un-dark>
 	<Nav />
 	{#key page.url}
 		{@render children()}
@@ -105,12 +102,17 @@
 </main>
 
 <style>
-:global {
-	body {
-		--uno: font-sans text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
+	:global {
+		body {
+			--uno: font-sans text-base bg-white text-text-800 dark: (bg-bg-base text-text-100) motion-safe: (transition transition-duration-1s scroll-smooth);
+
+			text-autospace: normal; /* Add spacing around alphanumeric characters in Japanese text */
+			overflow-wrap: anywhere; /* Wrap text when it doesn't fit */
+			word-break: normal; /* Use default word breaking behaviour */
+			line-break: strict; /* Apply strict line breaking rules */
+		}
+		@view-transition {
+			navigation: auto;
+		}
 	}
-	@view-transition {
-		navigation: auto;
-	}
-}
 </style>
