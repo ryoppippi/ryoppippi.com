@@ -7,7 +7,6 @@
 	const ICONS = ([
 		{ class: 'i-line-md:github-loop', url: '/github' },
 		{ class: 'i-ph-git-pull-request-duotone', url: '/pr' },
-		{ class: 'i-simple-icons:zenn', url: '/zenn' },
 		{ class: 'i-line-md:linkedin', url: '/linkedin' },
 		{ class: 'i-line-md:twitter', url: '/twitter' },
 		{ class: 'i-simple-icons:bluesky', url: '/bsky' },

@@ -8,7 +8,6 @@ export const Route = /** @as{const} */([
 	{ from: '/gh-by-stars', to: 'https://github.com/ryoppippi?tab=repositories&sort=stargazers' },
 	{ from: '/sponsor', to: 'https://github.com/sponsors/ryoppippi' },
 	{ from: '/pr', to: 'https://pr.ryoppippi.com' },
-	{ from: '/zenn', to: 'https://zenn.dev/ryoppippi' },
 	{ from: '/linkedin', to: 'https://www.linkedin.com/in/ryoppippi/' },
 	{ from: '/twitter', to: 'https://x.com/ryoppippi' },
 	{ from: '/bsky', to: 'https://bsky.app/profile/ryoppippi.com' },
