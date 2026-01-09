@@ -31,7 +31,6 @@
 						'blog-list-icon',
 						{
 							'i-simple-icons-markdown': !item.external,
-							'i-simple-icons-zenn group-hover:text-#3EA8FF': item.link.includes('zenn'),
 							'i-quill-link-out': item.external, // default for external links
 						},
 					]}

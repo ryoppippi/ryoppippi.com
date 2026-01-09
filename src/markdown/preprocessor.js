@@ -45,10 +45,23 @@ export function processMeta(filepath, content, data) {
 }
 
 /**
+ * Escape curly braces inside <code> tags for Svelte compatibility
+ * @param {string} html
+ */
+function escapeCodeBraces(html) {
+	return html.replace(/<code([^>]*)>([\s\S]*?)<\/code>/g, (match, attrs, content) => {
+		const escaped = content
+			.replace(/\{/g, '&#123;')
+			.replace(/\}/g, '&#125;');
+		return `<code${attrs}>${escaped}</code>`;
+	});
+}
+
+/**
  * @param {string} proceed
  */
 function additionalProcessMd(proceed) {
-	return Array.from(
+	let result = Array.from(
 		pipe(
 			proceed.split('\n'),
 			map((line) => {
@@ -61,6 +74,11 @@ function additionalProcessMd(proceed) {
 			}),
 		),
 	).join('\n');
+
+	// Escape curly braces in <code> tags
+	result = escapeCodeBraces(result);
+
+	return result;
 }
 
 /**
