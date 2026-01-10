@@ -64,7 +64,6 @@ md.use(LinkAttributes, {
 	},
 });
 
-// eslint-disable-next-line ts/no-unsafe-argument
 md.use(LinkPreview);
 
 // @ts-expect-error markdown-exit type mismatch

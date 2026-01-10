@@ -7,6 +7,11 @@ settings:
 overrides:
   sharp: ^0.34.5
 
+patchedDependencies:
+  markdown-it-link-preview:
+    hash: 51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae
+    path: patches/markdown-it-link-preview.patch
+
 importers:
 
   .:
@@ -148,7 +153,7 @@ importers:
         version: 4.0.1
       markdown-it-link-preview:
         specifier: ^1.1.4
-        version: 1.1.4
+        version: 1.1.4(patch_hash=51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae)
       markdown-it-magic-link:
         specifier: ^0.1.4
         version: 0.1.4
@@ -7459,7 +7464,7 @@ snapshots:
 
   markdown-it-link-attributes@4.0.1: {}
 
-  markdown-it-link-preview@1.1.4:
+  markdown-it-link-preview@1.1.4(patch_hash=51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae):
     dependencies:
       jsdom: 17.0.0
       xmlhttprequest: 1.8.0

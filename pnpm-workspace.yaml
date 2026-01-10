@@ -1,9 +1,11 @@
 minimumReleaseAge: 1440
 
-shellEmulator: true
-
 overrides:
   sharp: ^0.34.5
+
+patchedDependencies:
+  markdown-it-link-preview: patches/markdown-it-link-preview.patch
+
 onlyBuiltDependencies:
   - core-js
   - esbuild
@@ -11,3 +13,5 @@ onlyBuiltDependencies:
   - sharp
   - unrs-resolver
   - workerd
+
+shellEmulator: true
