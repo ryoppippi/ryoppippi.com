@@ -5,8 +5,6 @@ extend-ignore-re = [
   "(?s)<!--\\s*spellchecker:off\\s*-->[\\s\\S]*?<!--\\s*spellchecker:on\\s*-->",
   "(?Rm)^.*#\\s*spellchecker:disable-line$",
   "(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$",
-  # Ignore entire file if <!-- spellchecker:off --> appears after frontmatter
-  "(?s)\\A---[\\s\\S]*?---\\n+<!--\\s*spellchecker:off\\s*-->[\\s\\S]*\\z",
 ]
 
 [default.extend-words]
@@ -15,4 +13,8 @@ items-center = "items-center"
 justify-center = "justify-center"
 
 [files]
-extend-exclude = [ "node_modules/**", ]
+extend-exclude = [
+  "node_modules/**",
+  # Migrated Zenn blog posts
+  "**/*-zenn-*.md",
+]

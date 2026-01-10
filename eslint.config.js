@@ -8,8 +8,8 @@ export default ryoppippi({
 		tsconfigPath: './tsconfig.json',
 	},
 	ignores: [
-		// Migrated Zenn blog posts (date-hash format, e.g. 2024-06-12-c4775a3a5f3c11-ja.md)
-		'src/contents/blog/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]-ja.md',
+		// Migrated Zenn blog posts with legacy code formatting
+		'src/contents/blog/*-zenn-*-ja.md',
 	],
 }, {
 	rules: {

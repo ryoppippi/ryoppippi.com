@@ -162,10 +162,10 @@ https://github.com/ryoppippi/sveltekit-form-examples
 このサイトは、名前と何秒後にレスポンスを返すかを入力すると、その秒数後に `Hello {name}!` というメッセージを返す。
 是非ともブラウザで JavaScript を無効化したり、遅い回線をエミュレートして試していただきたい。
 
-![form_1](./2023-04-28/form_1.gif)
+![form_1](./2023-04-28-zenn/form_1.gif)
 _通常の回線での Form の挙動。ローディングアニメーションなどリッチな画面が実現できている。_
 
-![form_2](./2023-04-28/form_2.gif)
+![form_2](./2023-04-28-zenn/form_2.gif)
 _50kbps の回線での Form の挙動。JavaScript が完全に読み込まれていないため、通常の Form の挙動になっている。_
 
 # SvelteKit における型安全
@@ -178,7 +178,7 @@ SvelteKitは型安全の保証を頑張っていて、かなり開発体験が�
 
 以下にスクリーンショットを掲載する。
 
-![form_3](./2023-04-28/form_3.gif)
+![form_3](./2023-04-28-zenn/form_3.gif)
 
 SvelteKitに馴染みがない方に説明すると、
 SvelteKitではページを表すためのファイルが３種類ある。`+page.js`, `+page.server.js`, `+page.svelte`である。
