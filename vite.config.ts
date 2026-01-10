@@ -47,6 +47,14 @@ export default defineConfig({
 			path: `/favicons`,
 			lang: 'ja-JP',
 			orientation: 'portrait',
+			icons: {
+				android: false,
+				appleIcon: false,
+				appleStartup: false,
+				favicons: true,
+				windows: false,
+				yandex: false,
+			},
 		}),
 		cloudflareRedirect({
 			mode: 'generate',
