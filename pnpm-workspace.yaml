@@ -4,6 +4,7 @@ overrides:
   sharp: ^0.34.5
 
 patchedDependencies:
+  markdown-it-image-figures: patches/markdown-it-image-figures.patch
   markdown-it-link-preview: patches/markdown-it-link-preview.patch
 
 onlyBuiltDependencies:

@@ -8,7 +8,6 @@ import MarkdownItCollapsible from 'markdown-it-collapsible';
 
 import GitHubAlerts from 'markdown-it-github-alerts';
 
-// @ts-expect-error no types
 import Figures from 'markdown-it-image-figures';
 
 import LinkAttributes from 'markdown-it-link-attributes';
@@ -69,7 +68,6 @@ md.use(LinkPreview);
 // @ts-expect-error markdown-exit type mismatch
 md.use(GitHubAlerts);
 
-// eslint-disable-next-line ts/no-unsafe-argument
 md.use(Figures, {
 	figcaption: true,
 	lazy: true,
