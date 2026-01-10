@@ -6,10 +6,7 @@ import { remove } from 'diacritics';
 const rControl = /[\u0000-\u001F]/g;
 const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
 
-/**
- * @param {string} str
- */
-export function slugify(str) {
+export function slugify(str: string) {
 	return (
 		remove(str)
 		// Remove control characters
