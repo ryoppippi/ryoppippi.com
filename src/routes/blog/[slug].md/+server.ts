@@ -5,18 +5,29 @@ import { error } from '@sveltejs/kit';
 
 export const prerender = true;
 
+async function tryImportMarkdown(slug: string): Promise<{ md: MarkdownImport<Metadata>; raw: string }> {
+	// Try directory structure first: slug/index.md
+	try {
+		const md = await import(`../../../contents/blog/${slug}/index.md`) as unknown as MarkdownImport<Metadata>;
+		const rawMd = await import(`../../../contents/blog/${slug}/index.md?raw`) as { default: string };
+		return { md, raw: rawMd.default };
+	}
+	catch {
+		// Fall back to flat structure: slug.md
+		const md = await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
+		const rawMd = await import(`../../../contents/blog/${slug}.md?raw`) as { default: string };
+		return { md, raw: rawMd.default };
+	}
+}
+
 export const GET: RequestHandler = async ({ params: { slug } }) => {
 	try {
-		// Verify the blog post exists by importing it
-		await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
+		const { raw } = await tryImportMarkdown(slug);
 
-		// Import the raw markdown content
-		const rawMd = await import(`../../../contents/blog/${slug}.md?raw`) as { default: string };
-
-		return new Response(rawMd.default, {
+		return new Response(raw, {
 			headers: {
-				'Content-Type': 'text/plain; charset=utf-8'
-			}
+				'Content-Type': 'text/plain; charset=utf-8',
+			},
 		});
 	}
 	catch (e) {

@@ -1,0 +1,148 @@
+---
+title: "Raspberry Pi PicoでLチカをZigでやってみた(そしてあまりのバイナリサイズの小ささに驚きを隠せない)"
+date: '2022-11-05'
+isPublished: true
+lang: 'ja'
+---
+
+# はじめに
+
+最近Raspberry Pi Picoを買いました。
+そこで、ZigでLチカする手順を書いておきます。
+
+https://www.switch-science.com/catalog/6900/
+
+# PCとラズパイを接続する
+
+ラズパイ上にBOOTSELがついているので、これを押しながらUSB接続します。
+すると、ストレージとして認識されます。
+ここにuf2ファイルをコピーすることで、プログラムを実行することができます。
+
+![](./rspipicozig_finder.png)
+
+# MicroZigを使う
+
+MicroZigは組み込みにZigを使用するための仕組みを提供しています。
+
+https://github.com/ZigEmbeddedGroup/microzig
+
+このプロジェクトは*ZigEmbeddedGroup*というコミュニティによってメンテ、開発が行われています。
+
+今回はこのコミュニティが提供している以下の二つのレポジトリを使います。
+
+1. ZigEmbeddedGroup/rp2040 - ラズパイPicoに最適化されたMicroZig
+
+https://github.com/ZigEmbeddedGroup/rp2040
+
+2. ZigEmbeddedGroup/uf2 - elfからUF2ファイルを生成してくれる
+
+https://github.com/ZigEmbeddedGroup/uf2
+
+# ビルドしよう
+
+今回は上のレポジトリを含んだサンプルレポジトリを作成しました。
+
+https://github.com/ryoppippi/zig-raspberrypi-pico
+
+コードも以下に載せておきます。とてもシンプルです。
+
+```zig
+const microzig = @import("microzig");
+const rp2040 = microzig.hal;
+const gpio = rp2040.gpio;
+const time = rp2040.time;
+
+const led = 25;
+
+pub fn main() void {
+    gpio.reset();
+
+    gpio.setFunction(led, .sio);
+
+    gpio.setDir(led, .out);
+
+    while (true) {
+        gpio.toggle(led);
+        time.sleepMs(1000);
+    }
+}
+```
+
+上のリポジトリをクローンしてbuildすると、`zig-out/bin`ディレクトリにuf2ファイルが生成されます。
+これを先ほど紹介したマウントされたラズパイのディレクトリにコピーすると動きます。
+
+![](./rspipicozig-finder-copy.png)
+_uf2ファイルをコピーする_
+
+![](./rspipicozig.gif)
+_チカチカ_
+
+# バイナリサイズ
+
+最も驚愕したのは生成されるバイナリサイズの大きさです。
+参考までに、いろいろなLチカと比較してみました。
+
+| 言語             | ビルドコマンド                                | サイズ      |
+| ---------------- | --------------------------------------------- | ----------- |
+| Zig              | zig build                                     | 32KB        |
+| Zig              | zig build -Drelease-small=true                | **3.2KB**   |
+| Zig              | zig build -Drelease-safe=true                 | 5.1KB       |
+| TinyGo[^1]       | tinygo build -target pico -o main.uf2 main.go | 17KB        |
+| C [^2]           | mkdir build && cd build && cmake .. && make   | 26KB        |
+| MicroPython [^3] | --                                            | 614KB + 1KB |
+
+[^1]: https://zenn.dev/mattn/articles/453893e3fde4b1
+
+[^2]: https://github.com/raspberrypi/pico-examples/blob/master/blink/blink.c
+
+[^3]: https://www.raspberrypi.com/documentation/microcontrollers/micropython.html
+
+<details>
+<summary>TinyGoでの実装</summary>
+
+```go
+package main
+
+import (
+	"machine"
+	"time"
+)
+
+func main() {
+	led := machine.LED
+	led.Configure(machine.PinConfig{
+		Mode: machine.PinOutput,
+	})
+	for {
+		led.Low()
+		time.Sleep(time.Second)
+		led.High()
+		time.Sleep(time.Second)
+	}
+}
+```
+
+</details>
+
+<details>
+<summary>MicroPythonでの実装</summary>
+
+```python
+import machine
+import utime
+led = machine.Pin(25, machine.Pin.OUT)
+while True:
+    led.value(1)
+    utime.sleep(1)
+    led.value(0)
+    utime.sleep(1)
+```
+
+</details>:
+
+以前からZigで吐き出されるバイナリがとても小さいと一部界隈では話題になっていましたが、今回改めてその小ささに驚きました。
+
+# 終わりに
+
+Zigは組み込みにもいい感じに使えそうです。
+今後の発展にも期待ですね。

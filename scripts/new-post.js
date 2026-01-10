@@ -35,10 +35,9 @@ if (p.isCancel(lang)) {
 p.log.message('Creating post...');
 
 const blogDir = join(import.meta.dirname, '..', 'src', 'contents', 'blog');
-const md = join(
-	blogDir,
-	`${date}-${title.toLowerCase().replace(/ /g, '-')}.md`,
-);
+const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}`;
+const postDir = join(blogDir, slug);
+const md = join(postDir, 'index.md');
 const frontMatter = matter.stringify('', {
 	title,
 	date,
@@ -46,7 +45,7 @@ const frontMatter = matter.stringify('', {
 	lang,
 });
 
-await fs.ensureFile(md);
+await fs.ensureDir(postDir);
 await fs.writeFile(md, frontMatter);
 
 p.log.success(`Post created at ${md}`);

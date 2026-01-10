@@ -9,7 +9,11 @@ import { processMeta } from '../../markdown/preprocessor';
 export const blogPosts = await (async () => {
 	const blogDir = import.meta.dirname;
 
-	const blogs = await glob(`${blogDir}/*.md`);
+	// Support both flat .md files and slug/index.md directory structure
+	const blogs = await glob([
+		`${blogDir}/*.md`,
+		`${blogDir}/*/index.md`,
+	]);
 
 	const frontMatters: Item[] = [];
 

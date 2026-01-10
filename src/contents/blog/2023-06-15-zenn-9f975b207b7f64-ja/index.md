@@ -1,0 +1,191 @@
+---
+title: "Hono RPCとSvelteKitの併用について"
+date: '2023-06-15'
+isPublished: true
+lang: 'ja'
+---
+
+<!-- spellchecker:off -->
+
+# SvelteKit の Endpoint における型安全をめぐる考察
+
+SvelteKit で Endpoint を書く場合、現行の実装ではそれを呼び出すためには fetch 関数を用いることになる。
+
+https://kit.svelte.jp/docs/routing#server
+
+fetch 関数を用いるということはつまり、Endpoint の URL や request 時の引数を渡す部分は型安全が担保されない。
+そのため、個人的には「標準の方法で Endpoint を設計+fetch」はなるだけ使いたくないなと思っている。
+
+この問題を解決するライブラリの候補は以下の通り
+
+- tRPC
+- Hono RPC
+- Garph + GQty
+
+どれを使うべきかは以下のスレッドを読んでいただきたい。
+
+https://twitter.com/ryoppippi/status/1664258993118740480
+https://twitter.com/ryoppippi/status/1664259029227524097
+https://twitter.com/ryoppippi/status/1664259247079653379
+
+で、JS/TS で完結する場合は tRPC が筋がいいのだが、他の言語から叩くとなると Garph（GraphQL）もしくは Hono（Rest）が候補に上がる。
+Garph に関しては試したところ、まだ GQty の実装が成熟していないので今後に期待かなというところ。
+(つまり GraphQL Schema は定義ができるんだが、tRPC like に呼び出す部分がまだ)
+https://github.com/ryoppippi/garph-sveltekit
+
+なので、JS の世界では型安全に Endpoint を呼び出し、その他の言語からも通常の API として叩けるようにするには、現状 Hono が最適解だと考えている。
+
+# Hono RPC + SvelteKit + Cloudflare の落とし穴
+
+Hono RPC についての解説は以下をご覧いただきたい。
+https://zenn.dev/kosei28/articles/f4bac1ed2b64a7
+
+https://zenn.dev/yusukebe/articles/53713b41b906de#rpcモード
+
+kosei28 さんの記事通りに実装すれば SvelteKit で Hono が動くようになる。
+Node.js などで動かす場合はこれで完璧であろう。
+
+が、Cloudflare Pages/Workers で動かすときには注意が必要なので、差分をメモがわりに以下に示す。
+
+## Route を作る
+
+kosei28 さんの記事では`hooks.server.ts`でルートの分岐を書いている。
+
+```ts :src/hooks.server.ts
+import type { Handle } from '@sveltejs/kit';
+import { app } from '$lib/hono';
+
+export const handle: Handle = async ({ event, resolve }) => {
+	if (event.url.pathname.startsWith('/api')) {
+		return await app.handleEvent(event);
+	}
+
+	return resolve(event);
+};
+```
+
+しかし実際に wrangler でこれを動かすと、ルートが存在しない旨のエラーが出る。
+なので、実際にルートを定義してやる必要がある。
+
+```ts :src/route/api/[...rest]/+server.ts
+import { app } from '$lib/api/server.ts';
+
+export async function GET(event) {
+	return await app.handleEvent(event);
+}
+
+export const POST = GET;
+export const PUT = GET;
+```
+
+ちなみにこのエラーは Hono に限らず、yoga でも tRPC でも出たので、hook で処理するのは悪手かもしれない。
+
+## env や context を SvelteKit 側から Hono へ渡す
+
+Hono では`executionCtx`や`env`を通して Cloudflare の KV や R2、D1、環境変数にアクセスできる
+こんな感じ
+
+```ts
+import { Hono } from 'hono';
+
+const app = new Hono();
+
+app.post('/', async (c) => {
+	const key = 'example_key' as const satisfies string;
+	const result = c.env.BUCKET.get(key);
+	c.executionCtx.waitUntil(
+		c.env.KV.put(key, data)
+	);
+	return c.jsonT({ result }, 200);
+});
+```
+
+だけど、SvelteKit の`load`関数から`app.handleEvent`を使って hono に event を渡してしまうと、hono からは`env`や`context`にうまくアクセスができない。
+なので、上記の`+server.ts`関数を修正して、うまく`env`や`context`を渡してやる必要がある。
+
+ところで、SvelteKit の load 関数では`env`や`context`にアクセスするときには`platform`変数を経由することになっている。
+
+https://developers.cloudflare.com/pages/framework-guides/deploy-a-svelte-site/#sveltekit-cloudflare-configuration
+
+つまり`platform`変数から必要な情報を取り出して hono 側にどうにかして渡してやれば良いのである。
+
+どうするって？
+`app.handleEvent`の代わりに`app.fetch`を使う。
+`app.fetch`だと、`request`を渡すときに、`env` や `context` も明示的に渡せるのだ^[念の為触れておくと、`app.handleEvent`を使っても`platform`は取り出すことができる。なぜなら`app.handleEvent`は引数の`event`を`c.executionCtx`に格納するため。つまり`c.executionCtx?.platform?.env?.BUCKET`のようにしてアクセスすることは一応できる。ただ、Hono っぽくない]。
+
+https://hono.dev/api/hono#fetch
+
+まあここら辺の違いはソースを実際に読んでみるのが早いと思う。
+https://github.com/honojs/hono/blob/94812fcf2db49bc26dd5e421610433e7510c0529/src/hono-base.ts#L347-L353
+
+というわけで書き換えた`+server.ts`がこちら
+
+```ts :src/route/api/[...rest]/+server.ts
+import type { HonoBindings } from '$lib/api/server.ts';
+import { app } from '$lib/api/server.ts';
+
+export async function GET({ request, platform }) {
+	const Env = {
+		...platform?.env,
+		...(platform?.caches ? { caches: platform.caches } : {}),
+	} as const satisfies HonoBindings;
+
+	return await app.fetch(request, Env, platform?.context);
+}
+
+export const POST = GET;
+export const PUT = GET;
+```
+
+ちゃんと補完が効くように`HonoBindings`を定義しておく(定義は以下のコード参照)。
+この`HonoBindings`を Hono の app 初期化時に渡してやれば、Hono でルートを定義するときにも型補完がでてうまくいく。
+ついでに、API を叩くための`hc`を `hooks.server.ts`で定義しておくと、`locals`経由で他のルートにある`load`関数からアクセスできるようになる。
+
+```ts :src/lib/api/server.ts
+import { Hono } from 'hono';
+
+export type HonoBindings = Partial<
+  App.Platform['env'] & { caches: App.Platform['caches'] }
+>;
+
+export const app = new Hono<{ Bindings: HonoBindings }>().basePath('/api');
+
+const route = app.get('/hello', async (c) => {
+	const result = c?.env?.BUCKET?.get('hello');
+	return c.jsonT({ result });
+});
+
+export type AppType = typeof route;
+```
+
+```ts :src/lib/api/client.ts
+import type { AppType } from './server';
+import { hc } from 'hono/client';
+
+export function getClient({ fetch = globalThis.fetch } = {}) {
+	return hc<AppType>('/api', { fetch });
+}
+```
+
+```ts :src/hooks.server.ts
+import { getClient } from '$lib/api/client';
+import { User } from '$lib/type';
+
+export async function handle({ event, resolve }) {
+	/** hookのなかで認証系のAPIを叩いたりすると無限ループに陥るので、即resolveする */
+	if (event.url.pathname.startsWith('/api')) {
+		return resolve(event);
+	}
+
+	event.locals.honoClient = getClient({ fetch: event.fetch });
+
+	/** ... */
+
+	return resolve(event);
+}
+```
+
+# まとめ
+
+Happy Coding!
+質問等あればコメントにどうぞ。

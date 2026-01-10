@@ -29,9 +29,22 @@ export function processMeta(filepath, content, data) {
 			}
 		}
 	}
-	const filename = filepath.split('/').at(-1)?.replace('.md', '');
+	// Support both flat .md files and slug/index.md directory structure
+	const pathParts = filepath.split('/');
+	const lastPart = pathParts.at(-1);
+	let filename;
+
+	if (lastPart === 'index.md') {
+		// Directory structure: slug/index.md - use directory name as slug
+		filename = pathParts.at(-2);
+	}
+	else {
+		// Flat structure: slug.md
+		filename = lastPart?.replace('.md', '');
+	}
+
 	if (filename == null) {
-		throw new Error(`slug is not found in ${filename}`);
+		throw new Error(`slug is not found in ${filepath}`);
 	}
 
 	return {
