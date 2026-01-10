@@ -27,7 +27,7 @@ jobs:
         run: nix develop --command gitleaks detect --source . --config .gitleaks.toml
 
       - name: Run Typo Check
-        run: nix develop --command typos ./src/contents/**/*.md
+        run: nix develop --command pnpm run typos
 
       - name: Run Check
         run: nix develop --command pnpm run check

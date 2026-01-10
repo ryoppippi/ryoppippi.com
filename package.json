@@ -17,7 +17,8 @@
 		"lint": "eslint --cache .",
 		"new": "./scripts/new-post.js",
 		"preview": "vite preview",
-		"sync": "svelte-kit sync"
+		"sync": "svelte-kit sync",
+		"typos": "typos --force-exclude ./src/contents/**/*.md"
 	},
 	"devDependencies": {
 		"@antfu/ni": "^28.0.0",

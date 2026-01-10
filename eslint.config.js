@@ -7,6 +7,10 @@ export default ryoppippi({
 	typescript: {
 		tsconfigPath: './tsconfig.json',
 	},
+	ignores: [
+		// Migrated Zenn blog posts with legacy code formatting
+		'src/contents/blog/*-zenn-*-ja.md',
+	],
 }, {
 	rules: {
 		'antfu/no-top-level-await': 'off',

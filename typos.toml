@@ -13,4 +13,8 @@ items-center = "items-center"
 justify-center = "justify-center"
 
 [files]
-extend-exclude = [ "node_modules/**", ]
+extend-exclude = [
+  "node_modules/**",
+  # Migrated Zenn blog posts
+  "**/*-zenn-*.md",
+]
