@@ -4,14 +4,8 @@ import { pipe } from '@core/pipe';
 import { scope, type } from 'arktype';
 import { sort } from 'fast-sort';
 
-type EnhancedImg = typeof import('*.png?enhanced').default;
-
-const images = import.meta.glob<EnhancedImg>('./*.{gif,heif,jpeg,jpg,png,tiff,webp}', {
+const images = import.meta.glob<string>('./*.{gif,heif,jpeg,jpg,png,tiff,webp}', {
 	import: 'default',
-	query: {
-		enhanced: true,
-		w: '800;400',
-	},
 	eager: true,
 });
 
@@ -26,7 +20,7 @@ export const { Project, Metadata } = scope({
 	},
 	Project: {
 		'...': 'Required<Metadata>',
-		'image': type('unknown').pipe(v => v as EnhancedImg),
+		'image': 'string',
 		'Content': type('unknown').pipe(v => v as MarkdownImport<unknown>['default']),
 	},
 }).export();
