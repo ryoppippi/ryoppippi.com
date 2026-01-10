@@ -5,6 +5,10 @@ isPublished: true
 lang: ja
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+</script>
+
 こんにちは、ryoppippi です。はじめましての方ははじめまして。
 
 この数年、OSSとして色々なCLIツールを作ってきました。

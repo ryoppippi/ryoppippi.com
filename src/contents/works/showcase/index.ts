@@ -4,6 +4,17 @@ import { pipe } from '@core/pipe';
 import { scope, type } from 'arktype';
 import { sort } from 'fast-sort';
 
+type EnhancedImg = typeof import('*.png?enhanced').default;
+
+const images = import.meta.glob<EnhancedImg>('./*.{gif,heif,jpeg,jpg,png,tiff,webp}', {
+	import: 'default',
+	query: {
+		enhanced: true,
+		w: '800;400',
+	},
+	eager: true,
+});
+
 export const { Project, Metadata } = scope({
 	Metadata: {
 		'title': 'string',
@@ -15,6 +26,7 @@ export const { Project, Metadata } = scope({
 	},
 	Project: {
 		'...': 'Required<Metadata>',
+		'image': type('unknown').pipe(v => v as EnhancedImg),
 		'Content': type('unknown').pipe(v => v as MarkdownImport<unknown>['default']),
 	},
 }).export();
@@ -41,11 +53,16 @@ export function getProjects(): (typeof Project.inferOut)[] {
 		filter(({ metadata }) => !(Metadata(metadata) instanceof type.errors)),
 
 		/** process each markdown file */
-		map(({ metadata, default: Content }) => (Project.assert({
-			...metadata,
-			featured: metadata?.featured ?? false,
-			Content,
-		}))),
+		map(({ metadata, default: Content }) => {
+			const imagePath = metadata?.image;
+			const image = imagePath != null ? images[imagePath] : undefined;
+			return Project.assert({
+				...metadata,
+				featured: metadata?.featured ?? false,
+				image,
+				Content,
+			});
+		}),
 
 		/** separate featured and non-featured projects */
 		reduce((acc, project) => {

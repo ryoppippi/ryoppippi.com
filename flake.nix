@@ -12,6 +12,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             pnpm_10
+            wrangler
             gitleaks
             typos
             typos-lsp

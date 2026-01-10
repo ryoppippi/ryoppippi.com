@@ -5,6 +5,10 @@ isPublished: true
 lang: en
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+</script>
+
 Hello, I'm ryoppippi. Nice to meet you if we haven't met before!
 
 Over the past few years, I've created various CLI tools as OSS projects:

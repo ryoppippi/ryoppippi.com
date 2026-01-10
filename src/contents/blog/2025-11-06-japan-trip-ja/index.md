@@ -5,6 +5,11 @@ isPublished: true
 lang: ja
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+import { YouTube } from 'sveltekit-embed';
+</script>
+
 2025年10月16日から11月4日まで東京に滞在していました。
 振り返りをします。
 
