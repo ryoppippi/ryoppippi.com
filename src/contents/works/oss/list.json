@@ -140,6 +140,12 @@
 			"icon": "i-ph:fire-light"
 		}
 	],
+	"Nix": [
+		{
+			"name": "claude-code-overlay",
+			"icon": "i-simple-icons-nixos"
+		}
+	],
 	"Configs": [
 		{
 			"name": "dotfiles",
