@@ -1,10 +1,17 @@
 <script lang='ts'>
-	import { getTweet } from '$lib/tweet.remote.js';
+	import { hydratable } from 'svelte';
 	import * as st from 'sveltweet';
+	import * as stApi from 'sveltweet/api';
 
-	type Props = Parameters<typeof getTweet>[0];
+	type Props = {
+		id: string;
+	};
 
 	const { id }: Props = $props();
+
+	const tweet = await hydratable(`tweet-${id}`, async () => {
+		return stApi.getTweet(id);
+	});
 </script>
 
-<st.Tweet tweet={await getTweet({ id })} />
+<st.Tweet {tweet} />
