@@ -9,7 +9,7 @@ export default ryoppippi({
 	},
 	ignores: [
 		// Migrated Zenn blog posts with legacy code formatting
-		'src/contents/blog/*-zenn-*-ja.md',
+		'src/contents/blog/*-zenn-*-ja/index.md',
 	],
 }, {
 	rules: {

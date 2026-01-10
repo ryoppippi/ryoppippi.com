@@ -1,0 +1,198 @@
+---
+title: "Neovim + oil.nvim + Weztermで頑張って画像を表示する"
+date: '2024-04-24'
+isPublished: true
+lang: 'ja'
+---
+
+> [!NOTE]
+> この記事は[Vim 駅伝](https://vim-jp.org/ekiden/)の 4/24 の記事です。
+
+# TLDR
+
+![1.gif](./1.gif)
+_oil.nvimで画像を選択し、Weztermで画像を表示。 画像は[こちら](https://x.com/sawaratsuki1004/status/1782079506083381657)から_
+
+- Neovimで画像と向き合う方法を紹介
+- Quicklookを呼び出す方法は簡単
+- 今回はWeztermとoil.nvimをフル活用して、Terminal上で画像を表示する方法を紹介をメインに紹介
+
+# はじめに
+
+Vimmerたるもの、普段はTerminalに引きこもっているものです。
+特にVim(Neovim)上で作業をすることが多いはず。
+
+しかし、Terminalが苦手なファイルも存在します。
+ご存じ、画像ファイルです。
+
+これまで、自分は画像ファイルを見たいときは
+
+- `open`コマンドで画像を開く(MacならPreviewで開く)
+- `open .`でFinderを開いて画像を見る
+
+としてきましたが、やはり画像を見たいためだけにFinderを立ち上げたりアプリを起動、終了するのは面倒です。
+
+そこで、これらを改善することにしました。
+
+> [!NOTE]
+> 参考までに、筆者の環境は以下のとおりです。
+>
+> ```bash
+> │ neofetch
+>                     'c.          ryoppippi@ryoppippi.local
+>                  ,xNMM.          -------------------------
+>                .OMMMMo           OS: macOS 14.4.1 23E224 arm64
+>                OMMM0,            Host: Mac15,6
+>      .;loddo:' loolloddol;.      Kernel: 23.4.0
+>    cKMMMMMMMMMMNWMMMMMMMMMM0:    Uptime: 7 days, 2 hours, 15 mins
+>  .KMMMMMMMMMMMMMMMMMMMMMMMWd.    Packages: 1 (brew)
+>  XMMMMMMMMMMMMMMMMMMMMMMMX.      Shell: fish 3.7.1
+> ;MMMMMMMMMMMMMMMMMMMMMMMM:       Resolution: 2560x1080, 1512x982, 1080x1920
+> :MMMMMMMMMMMMMMMMMMMMMMMM:       DE: Aqua
+> .MMMMMMMMMMMMMMMMMMMMMMMMX.      WM: Rectangle
+>  kMMMMMMMMMMMMMMMMMMMMMMMMWd.    Terminal: WezTerm
+>  .XMMMMMMMMMMMMMMMMMMMMMMMMMMk   CPU: Apple M3 Pro
+>   .XMMMMMMMMMMMMMMMMMMMMMMMMK.   GPU: Apple M3 Pro
+>     kMMMMMMMMMMMMMMMMMMMMMMd     Memory: 5014MiB / 36864MiB
+>      ;KMMMMMMMWXXWMMMMMMMk.
+>        .cooc,.    .,coo:.
+>
+> ```
+
+本記事では、ファイラとして`oil.nvim`を使った例を紹介しますが、他のファイラでも同様のことができるはずです。
+https://github.com/stevearc/oil.nvim
+
+また、設定はluaで書かれています。
+
+# Step 1: Quicklookを使う
+
+macOS には標準でQuicklookという機能があります。
+みなさん、一度はお世話になったことのある、Finderでファイルを選択してスペースキーを押すと、ファイルの中身をプレビューできるあれです。
+
+実は、TerminalからもQuicklookを使うことができます。
+
+```sh
+qlmanage -p hoge.png
+```
+
+つまり、これをVim(Neovim)から呼び出せば、画像をプレビューできるはずです。
+
+https://github.com/ryoppippi/dotfiles/blob/359609ea44ddbc7b4b621aaea4ea5d4a9a06e88e/nvim/lua/core/utils.lua#L52-L55
+https://github.com/ryoppippi/dotfiles/blob/359609ea44ddbc7b4b621aaea4ea5d4a9a06e88e/nvim/lua/plugin/oil/actions.lua#L24-L31
+https://github.com/ryoppippi/dotfiles/blob/359609ea44ddbc7b4b621aaea4ea5d4a9a06e88e/nvim/lua/plugin/oil/init.lua#L41
+
+これで、oil.nvimで画像を選択し、Quicklookを呼び出すことができますね。
+
+![0.gif](./0.gif)
+_oil.nvimで画像を選択し、Quicklookを呼び出す_
+
+# Step 2: Weztermを分割&画像表示
+
+さて、Quicklookの方法にもまだ改善点があります。
+
+- いちいちEscキーを押してQuicklookを閉じるのは面倒
+- QuicklookにFocusが当たってしまうので、他のファイルを選択できない
+
+というわけで、本命択はTerminal上で画像を表示したいわけです。
+
+これまで、Vim/Neovimで画像を表示する試みはいくつかありました。
+
+https://github.com/kjuq/sixelview.nvim/
+https://zenn.dev/vim_jp/articles/358848a5144b63
+
+しかし、先の記事にも触れられているように、いくつか課題があります。
+
+- 画像のサイズをいい感じに調整するのが難しい。
+- gifをポンと渡しても再生されない。
+
+そのため、今回はTerminalの機能を使って画像を表示することにしました。
+
+自分の使用しているWeztermには、画像を表示する機能があります。
+https://wezfurlong.org/wezterm/imgcat.html
+https://wezfurlong.org/wezterm/cli/imgcat.html
+
+これにより、任意の画像をTerminal上で表示することができます。
+
+またWeztermには `wezterm cli`コマンドがあり、Weztermの動作をコマンドで制御することができます。
+
+https://wezfurlong.org/wezterm/cli/cli/index.html
+
+これらをフル活用して、次のような設定を行いました。
+
+（以下、この機能のことをWezterm Previewと呼びます）
+
+## oil.nvimで`gp`を押すとWezterm Previewを起動
+
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/init.lua#L40
+
+## 現在のNeovimが開かれているPane IDを取得
+
+現在のPane IDを取得するには、環境変数 `WEZTERM_PANE` を使います。
+
+https://wezfurlong.org/wezterm/cli/cli/spawn.html#synopsis
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L34-L41
+
+## Weztermの画面を分割して、分割されたpaneのidを取得
+
+Weztermで画面を分割するには、`wezterm cli split-pane`コマンドを使います。
+このコマンドの戻り値には、分割されたpaneのidが含まれています。
+https://wezfurlong.org/wezterm/cli/cli/split-pane.html
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L48-L66
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L140
+
+もしすでにpaneが分割されている場合は、そのpaneのidを取得します。
+この時は `wezterm cli list --format=json` コマンドを使います。
+
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L91-L117
+
+## Neovimが開かれているPaneにFocusを戻す
+
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L43-L45
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L153
+
+## oil.nvimでカーソルが動くたびに、Wezterm Previewを更新
+
+まず、カーソルが選択しているファイルの情報を取得します。
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L148-L151
+
+そしてその情報を元に、もし新しいファイルであれば、WeztermのPreview用のPaneにコマンドを送って実行します。
+この時
+
+- ディレクトリであれば、`ls`コマンド
+- 画像ファイルであれば、`wezterm imgcat`コマンド
+- そのほかは`bat`コマンド
+
+を実行するようにします。
+
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L151-L183
+
+Weztermでpaneにコマンドを送るには、 `wezterm cli send-text` コマンドを使います。
+https://wezfurlong.org/wezterm/cli/cli/send-text.html
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L77-L89
+
+## oil.nvimが終了したら、Wezterm Previewを閉じる
+
+oil.nvimの現在のバッファが閉じられたら、WeztermのPreview用のPaneも閉じるようにします。
+
+https://wezfurlong.org/wezterm/cli/cli/kill-pane.html
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L201-L211
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua#L68-L75
+
+## コードの全体像
+
+<details>
+<summary>全体像</summary>
+
+https://github.com/ryoppippi/dotfiles/blob/6c587dfbc3773a5adfff661f0943e0edf9288a7f/nvim/lua/plugin/oil/actions.lua
+
+</details>
+
+動作は[冒頭のGIF](#tldr)をご覧ください。
+
+# まとめ
+
+今回は、oil.nvimとWeztermを使って、Terminal上で画像を表示する方法を紹介しました。
+まだプラグインとして公開してないのですが、要望があれば公開するかもしれません。
+
+今回はWeztermの機能をフル活用しましたが、他のTerminal Emulatorでも同様のことができるはずです。
+ぜひみなさんも、自分の環境に合わせて設定してみてください。

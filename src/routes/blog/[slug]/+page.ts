@@ -3,9 +3,20 @@ import type { MarkdownImport } from '../../../markdown';
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 
+async function tryImportMarkdown(slug: string): Promise<MarkdownImport<Metadata>> {
+	// Try directory structure first: slug/index.md
+	try {
+		return await import(`../../../contents/blog/${slug}/index.md`) as unknown as MarkdownImport<Metadata>;
+	}
+	catch {
+		// Fall back to flat structure: slug.md
+		return await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
+	}
+}
+
 export const load = (async ({ params: { slug } }) => {
 	try {
-		const md = await import(`../../../contents/blog/${slug}.md`) as unknown as MarkdownImport<Metadata>;
+		const md = await tryImportMarkdown(slug);
 
 		return {
 			metadata: md.metadata,

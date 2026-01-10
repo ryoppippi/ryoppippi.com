@@ -1,0 +1,394 @@
+---
+title: "neovimconf 2024 & vimconf 2024 狂想曲"
+date: 2024-12-09
+isPublished: true
+lang: 'ja'
+---
+
+> 本記事は [Vim advent calendar 2024(Adventar)](https://mikoto2000.blogspot.com/2024/12/keyinput-delayervim-vim.html) の 9 日目の記事です。
+
+2024年11月19日に[ neovimconf 2024 ](https://neovimconf.live/)にて、11月23日に[ vimconf 2024 ](https://vimconf.org/2024/)にて登壇をしました。
+
+本記事では登壇の経緯や登壇で伝えたかったこと、登壇後の感想などをまとめています。
+
+> [!NOTE]
+> これまでこのような記事はzennに書いていましたが、今回初めての試みとして自身のブログに書いています。
+> 感想等を Twitter や Bluesky にて投稿していただけると励みになります (ページの下部に投稿用のリンクがあるので、そちらから投稿していただけると嬉しいです)。
+
+> [!WARNING]
+> neovimconf はオンラインイベントであり、また当日の配信には移動の関係で参加できなかったため、登壇の反応を見ることがいまだにできていません。
+> そのため、感想については vimconf での体験を中心に書いています。
+>
+> また、他の登壇者の方々の発表もとても面白かったので、是非とも動画でご覧になってください。
+
+# TL;DR
+
+- すっげー大変だった
+  - 計画性を持ちましょう
+  - 依頼を受けるのも断るのも計画性が必要
+- オフラインイベントの楽しさを再認識
+
+<Tweet id="1861885337104175124"/>
+
+# 発表資料
+
+以下に発表資料と動画のリンクを貼っておきます。
+是非ともご覧ください。
+
+## vimconf 24 (23rd, Nov)
+
+[slides](https://talks.ryoppippi.com/2024-11-23/){.text-xl}
+[video](https://www.youtube.com/watch?v=tBY3RxTrhkM){.text-xl}
+
+<YouTube youTubeId="tBY3RxTrhkM" />
+
+## neovimconf 24 (19th, Nov)
+
+[slides](https://talks.ryoppippi.com/2024-11-19/){.text-xl}
+[video](https://www.youtube.com/watch?v=D8qI9zkKATM){.text-xl}
+
+<YouTube youTubeId="D8qI9zkKATM" />
+
+<Divider />
+
+# 本記事の読者、vimconf/neovimconf 参加者へ伝えたいこと
+
+まず、発表を聞いていただいた方、イベント運営の皆様、スポンサーの皆様に感謝の意を表します。priceless な体験をさせていただき、本当にありがとうございました。
+
+vimconf の前後にも、共同で宿泊したり、イベントを企画したり、夜な夜な語り合ったり、とても楽しい時間を過ごすことができました。
+自分は普段東京にはおらず、オンライン中心のコミュニケーションがここ数年ほとんどを占めていたのですが、改めてオフラインイベントの楽しさを再認識しました。
+
+# 発表について
+
+## 登壇するということ
+
+自分は元々人前で話すことが大好きです。
+
+中高大の10年間、落語研究部に所属していました(自分の大学に落語研究部がなかったので立ち上げたくらいです)。
+また、中高時代は Steve Jobs のプレゼンや TED Talks を毎日のようにみていました。
+
+しかし、2020 年以降、伝染病の影響や自分が UK に引っ越してしまったこともあり、オフラインでのイベント参加が無くなってしまいました。
+
+そのため、今回の vimconf は久しぶりのオフラインイベント参加であり、また大勢の前で話すことができることを楽しみにしていました。
+
+## vimconfでの登壇に際して心がけていたこと
+
+まず、登壇者として、登壇を組み立てる上で以下のことを念頭に置いていました。
+
+- みんなは高額なチケット代を払ってきている
+  - 自分は旅費が出ている
+  - 高額なチケット代を払ってない
+- vimconfは普通のカンファと違って*講演の取捨選択権がない*、つまり全部の講演を強制的に聞かされる
+- 審査で落ちた人もいる中、初めて出したプロポーザルが通ってしまった（運要素も少なからずあるとは思っている）
+
+そのため、内容的にも面白さ的にも妥協することは自分の中では許されないと考えていました。
+
+~~とはいえ、頑張りすぎた感もありますが。~~
+
+また、ユーモアを忘れず聞いている人最大限が楽しめるような内容にすることを心がけました。
+よくあるミームを入れたり、コント仕立てにしてみたり、会場を盛り上げたり...。
+結果として、自分にしかできない発表になったのではないかと思います。
+そうだといいな。
+
+## 登壇後の反応
+
+vimconf での発表が想像以上に盛り上がったこと、講演中のたくさんの感想コメントを投稿していただけたこと、懇親会でたくさんの方とお話しできたこと、本当に嬉しかったです。
+
+自分としても、とても多くの時間を割いて準備をしてきたので、それが報われたと感じています。
+
+着物での登壇も好評で、多くの方から「着物が似合っている」と言っていただきました。ここ数年着物を着る機会に恵まれていなかったので、人前で着物を着ることができてとても嬉しかったです。
+
+(正直登壇中のことはほとんど覚えていないのですが、動画が公開されるまでの間は twitter や vim-jp slack で皆さんが投稿してくださった実況をみて毎日ニヤついておりました）
+
+<Tweet id="1860201973087371265" />
+
+<Divider />
+
+# 発表までの時系列
+
+以下は発表までの時系列を簡単に記したものです。
+お時間がありましたらみていっていただけると嬉しいです。
+
+## 31st, Aug
+
+遡ること2024年3月、{@thinca} さんとご飯に行った時に、「vimconf に登壇すると、交通費もチケット代も出ますよ。ぜひプロポーザルを書いて応募してみてください」と言っていただきました。そのため公募が開始されたらと応募していなーとは漠然と思っていました。また、 [vimconf 23 tiny](https://vimconf.org/2023) に参加できなかったので、今年こそは参加したいとも考えていました。
+
+とはいえ、やはりプロポーザルを書くのは面倒で、しかも直近でなかなか vim 活ができていなかったので、後回し後回しになっていました。
+
+やはり書こうと決心したのは8月最終日、締め切り６時間前でした(`GMT 10:00`)。学生時代は夏休みの宿題は1学期の終了式の日に全て学校で終わらせてしまうタイプだったのに、どこで道を踏み外したのか...。
+
+正直、ネタ出しから悩みました。自分は Neovim をガッツリ使っているし plugin も少し書いているものの、自分にだけ話せるネタはあるのか？と。
+
+考え抜いた結果、自分の普段の Web Frontend 開発の workflow について話すことにしました。
+自分があえて Neovim を使う理由、VSCode との違い、Neovim での開発フローに焦点を当てたプロポーザルを提出しました。
+
++++提出したプロポーザル
+
+## Title
+
+Neovim for Frontend Developers: Boosting Productivity and Creativity
+
+## Abstract
+
+In the world of frontend development, VSCode currently reigns as the mainstream editor. However, Neovim, with its high customizability and lightweight nature, has the potential to provide a development experience that rivals or even surpasses that of VSCode.
+
+This presentation will explain specific methods for utilising Neovim in frontend development and discuss its advantages compared to VSCode. We will explore how to overcome Neovim's potential weaknesses, how to construct Neovim-specific development workflows, introduce practical coding techniques, and provide know-how on maximising the benefits of choosing Neovim, including integration with AI-powered code generation.
+
+Participants will learn how to optimise Neovim for frontend development, from effective configuration to building next-generation code completion systems using LSP and AI, and even innovative browser integration. We will also introduce Neovim-specific development flows, such as rapid coding techniques using macros and snippets, and efficient task execution through close terminal integration.
+
+Furthermore, we will explain methods for integrating AI tools like GitHub Copilot and Ollama, exploring new possibilities in code generation and refactoring.
+
+The presentation will conclude with a live demonstration of a development workflow using an actual frontend project, showcasing efficient project construction methods utilising Neovim's editing techniques and plugins.
+
+Through this presentation, attendees will learn how to achieve a development experience superior to VSCode using Neovim, gaining concrete skills and knowledge to significantly improve productivity in frontend development. We will demonstrate practical solutions that maximise Neovim's potential and meet the demands of modern frontend development.
+
+## Self-promotion for Reviewers
+
+I have the following experience and contributions:
+
+- Experience in large-scale frontend project development using React, TypeScript, and Svelte
+- Introduction and mastery of Neovim plugins as alternatives to existing VSCode Extensions
+- Showcasing Neovim's advantages over VSCode (macros, snippets, faster editing operations, terminal integration)
+- Construction of advanced code completion systems utilising LSP (Language Server Protocol) and AI
+
+I plan to undertake the following initiatives in the future:
+
+- Development of a plugin to recreate VSCode's workspace functionality in Neovim
+- Integration with LSP-related features
+- Enhancing development efficiency by strengthening interaction between frontend (browser-based systems) and Neovim
+- Integration of AI-powered code review support tools with Neovim
+
+## Lecture Content
+
+This lecture will cover the following topics in detail:
+
+1. Basic Neovim Configuration and Customisation for Frontend Development
+   - Effective configuration methods for dotfiles
+   - Selection and setup of plugins specialised for frontend development
+
+2. Methods to Recreate VSCode's Key Features in Neovim
+   - Implementation of file tree, search, and Git integration
+   - Code completion, diagnostics display, and automated problem-solving through LSP integration
+   - Effective integration with code generation AI such as GitHub Copilot/Ollama
+
+3. Frontend Development Workflow Leveraging Neovim's Strengths
+   - Rapid coding techniques using macros and snippets
+   - Efficient task execution through close integration with the terminal
+
+4. Next-generation Code Completion and Generation System Utilising LSP and AI
+   - Building advanced code completion systems combining LSP and AI
+   - Automatic code generation and refactoring utilising code generation AI
+   - Incorporating AI into Git workflows
+
+5. Strengthening Browser and Neovim Integration
+   - Bidirectional communication between Neovim and browser using browser extensions
+   - Realising an interactive development environment with real-time display of debug information
+
+6. Practical Demonstration
+   - Demonstration of development workflow using an actual frontend project
+   - Demo of efficient project construction methods using Neovim's editing techniques and plugins
+
+Through this lecture, participants will learn how to achieve a development experience surpassing VSCode using Neovim, gaining skills and knowledge to significantly improve productivity in frontend development. We will present concrete methods to maximise Neovim's potential and meet the demands of modern frontend development.
+
++++
+
++++ Pitch for Reviewers
+
+## 登壇者について
+
+- Neovim 歴は2022年から数えて3年目
+- 普段はフロントエンドの開発がメイン
+  - React、TypeScript、Svelteを使用した大規模フロントエンドプロジェクトの開発経験
+- いくつかのOSSに貢献したり、自分自身もOSSをリリースしたりしている
+- 簡単なNeovimのプラグインを作りリリースしたこともある
+- vim駅伝やzennなどで頻繁に以下のような記事を書いている
+  - Neovimの設定
+  - Neovimを使ったフロントエンド開発
+  - VSCodeに存在するExtensionの代替となるNeovimプラグインの紹介、使いこなし方
+  - ブラウザで動いているツール等、一見Neovim/Terminalと相性が悪いとされるものをNeovimと連携させる方法
+- LSP (Language Server Protocol) とAIを活用した高度なコード補完システムやコード生成技術を開発フローに導入している
+
+## なぜ発表を行いたいのか
+
+自分はフロントエンド開発に入門して1年ほどで、VSCodeからNeovimに乗り換えるという、世間でも珍しい選択をしました。
+初心者ながらに何もわからないまま乗り換えたので最初はとても苦労しましたが、時間を経るごとに新しいNeovimの操作や設定を覚えていくにつれて、自分の作業効率が上がっていくのを実感できました。
+しかし、世間一般では（特にフロントエンド開発者の間では）VSCodeが主流であり、Neovimを使っている人は少数派です。そのため、ツールのサポートがどうしても遅れがちであり、情報も少ないというハンディーキャップを背負っています。
+また、AIを活用したツールもVSCode Extensionが先行してリリースされることが多いです。
+そのため、利便性では一見劣るように見えるNeovimですが、個人的にはVSCode以上の開発体験を得られています。
+vimconfでの発表であるため、聴衆の方々はVim/Neovimをメインで使っている方が多いと思われます。そのため、Neovimでもフロントエンドの開発は十分に行えることを知ってもらい、安心してこれからもVim/Neovimを使い続けてもらいたいという思いから発表を行いたいと考えています。
+
++++
+
+確度を上げるためには複数プロポーザルを提出することが望ましいことはわかった上で、今回は1つだけで応募しました。
+採択されるのは運だろうと思う一方、Workflow を demonstrate する形式は過去の発表をみてもほぼないため、新規性があるだろうという考えもあり、謎の自信だけはありました。
+
+## 8th, Sept
+
+プロポーザル提出から1週間後、acceptance notification を受け取りました！
+
+来日決定！嬉しい！
+
+と同時に、やばい、やばい、やばい、という気持ちが襲ってきました。
+
+プロポーザルは本当にざっくりとしたアイデアを書いただけで、実際にどうやって話すのか、どうやってデモをするのか、どうやって時間を使うのか、全く考えていなかったのです。
+
+## 10th, Oct
+
+スライドどうしようかな〜〜〜と考えている最中、突然、以下のようなメールが届きました。
+
+<!-- spellchecker:off -->
+
+```md
+Hi Ryotaro!
+
+How are you?
+
+My name is Adam. I'm one of the co-organizers of neovimconf.live along with the primeagen and TJ DeVries.
+
+I saw the talk you're going to give at Vimconf this year and think the subject matter is super compelling. Would you also be interested at presenting at Neovimconf this year as well?
+
+Our event is going to be in November this year, so I know that may be last minute for you. Its a virtual event and we ask speakers to pre-record their talks so that we can avoid any network connection issues in case streaming live has issues.
+
+Happy to chat if you're interested!
+```
+
+<!-- spellchecker:on -->
+
+お、内容かぶってもいけるならお得じゃないか！と思い、快諾しました。
+
+ただ、安請け合いをするもんじゃなかった...。
+
+Adam さんは結構おいそがしいようで、１週間に１回くらいのペースでしかメールのやり取りができませんでした。
+そのため、最後の方に全てがギリギリになり大変なことになります。
+
+## 15th, Oct
+
+vimconf のスライド作成を開始。初めて slidev を使ってみました。
+
+アウトラインを改めて考え直し、スライドの構成を決めました。
+
+slidev はアニメーションを凝るだけ凝れてしまうので、どうしても時間がかかってしまいました。
+スライド作成だけで 50時間くらいはかかっているのではないでしょうか。
+その分、出来上がったスライドのクオリティは高いものができたので苦労は報われました。
+
+その後、内容を主に {@ujihisa} さんにレビューしていただきました。
+
+## 23rd, Oct
+
+なんとか vimconf に初稿を提出...
+
+## 30th, Oct
+
+やっと neovimconf の Discord に参加できました。
+
+ここで neovimconf への登壇が正式に決定しました。
+
+vimconf のスライドを一部流用して neovimconf 用のスライド作成を開始。
+
+## 7th, Nov
+
+neovimconf の動画収録を終え、first draft の映像を提出。
+収録中に噛んだり止まったらその都度取り直しをしていたため、かなり時間がかかりました。
+
+## 14th, Nov
+
+Adam さんから neovimconf の改善点が送られてくる。
+
+~~(おいおい、on air は来週だよ....)~~
+
+## 17th, Nov
+
+neovimconf 用の動画のデモパートを修正、再収録。
+全体を再収録し直そうとしていたが、音質に差が出たり諸々の問題があったため断念。
+
+## 18th, Nov
+
+Adam さんから neovimconf の動画にゴーサインが出る。やっと neovimconf の作業が終わる。
+
+## 19th, Nov
+
+電車および飛行機での移動。家を出てから東京の居候先に到着するまでの時間は*27時間*でした。今年の vimconf 参加者の中では最も遠くからの参加だったのではないでしょうか。
+
+今年初の積雪があったため、家からHeathrow までの移動は本来は高速鉄道3.5時間のところ１時間遅れて4.5時間となるなど、移動中にいくつかのトラブルがありました。
+
+Heathrow からは LOT Polish Airlines での移動でした。最初の便は30分遅れだったものの、Warsaw での乗り継ぎがとても楽だったので総じて体験はよかったです。値段も手頃で、機内食も美味しかったのでまた利用しようと考えています。
+
+移動の最中には neovimconf の配信が行われていました。見たかったなー。日本時間でも深夜だったので、リアタイできた人は本当に少なかったそうです。
+とりあえず無事に配信されたようで、とても安心。
+
+## 20th, Nov
+
+成田着、30時間ぶりの風呂！日本食を居候先で振る舞っていただく。美味しかったです。
+
+## 21st, Nov
+
+時差ボケと格闘開始。某企業のコーディング試験があったので、それに取り組む。
+
+## 22nd, Nov
+
+丸一日 {@thinca} さん御一行と謎解き。朝10時集合、解散9時。楽しかった！けどへとへとです。
+
+その後、参加者有志で借りていた AirBnB に移動。おしゃべりがとても楽しかったです。
+
+## 23rd, Nov
+
+vimconf 当日。着物を着て会場へ向かいました。
+久しぶりの着物で、久しぶりのオフラインイベントで、テンションMaxでした。
+
+発表については先に述べたとおりです。
+
+本当に楽しかった。
+
+## 24th, Nov
+
+vimconf 翌日、サブイベとして AirBnB でスマブラ大会を主催。見事優勝しました。
+夜にやった桃鉄で {@lambdalisue} さんに負けました。俺はありすえを許さない...。
+
+## 25th, Nov
+
+AirBnB をチェックアウト。マンスリーマンションへと移動。
+夜は {@2KAbhishek} 送別会を開催。とても楽しかった。
+
+(時差ぼけと興奮でここまで１週間くらい毎日3時間しか眠れてなかった。お祭りすぎる)
+
+<Divider />
+
+# 反省点
+
+最後に、登壇に関して反省点を挙げておきます。
+
+- 個々のパートについては練習ができていたのだが、実のところ一度も通し練習をできなかった
+- デモは時間との勝負だったため、割とぶっつけ本番だった。もっと練習すべきだった
+- 全体の進行の関係で開始時間が遅れていたことを考慮に入れず(確か3分くらい遅れていたらしい)、デモの最中に焦って内容を一部削ってしまった
+  - 特に text object 系の発表を抜かしているので、[neovimconf でのデモ](https://youtu.be/D8qI9zkKATM?si=wC5HWx_oMkGDHqaC&t=260)を参照してください！
+  - vimconf、neovimconf ともに、 {@uga-rosa} さんの [ccc.nvim](https://github.com/uga-rosa/ccc.nvim) への言及を忘れてしまいました。`CCCPick` よく使っております。
+    ![CCCPick](./ccc.avif 'CCCPick')
+- 実は焦って削った内容にはいくつかジョークが含まれていたので、披露できず残念
+- 直前で neovimconf のスライドを一部流用したため、最後のスライドに登場する予定だった {@uhooi} さんロゴが消えてしまった。その分焦ってしまいもたついてしまった
+- 英語の問題だが、gap filler が多い。もっとスムーズに話せるようになりたい
+- 声がでかい、もう少し落ち着いて話したい
+- **単純にスケジュール無茶すぎた**
+
+# 終わりに
+
+vimconf に登壇できたこと、neovimconf にも登壇できたこと、本当に嬉しく思います。
+運営の皆様、登壇の背中を押してくれた皆様、当日盛り上がっていただいた皆様、本当にありがとうございました。
+
+Christian 先生や TJ の Keynote 、他の登壇者の方々の発表もとても刺激になりました。
+このブログを書きながら公開された動画を見ているのですが、学びがとても多いです。現地で参加できて本当によかったです。
+
+また vimconf を通して、人前で喋りたい欲、登壇欲が再燃しました。また意外と英語の発表も楽しいと感じました。UK に帰ったら登壇の機会を増やしていきたいと思いました。
+
+来年以降も vimconf には登壇したいと思っています。また会いましょう！
+
+# P.S.
+
+[@preview](https://podcasts.apple.com/jp/podcast/ujihisa%E3%81%95%E3%82%93%E3%81%A8mopp%E3%81%95%E3%82%93%E3%82%92%E3%81%8A%E8%BF%8E%E3%81%88%E3%81%97%E3%81%A6-vimconf-2024-%E3%82%92%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8A-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000678854019)
+
+先日公開された [vim-jpラジオ](https://vim-jp-radio.com/)のエピソードでも、{@lambdalisue}さんに「りょっぴっぴは無謀」と言われてしまった。実際無謀だった。
+
+vimconf および neovimconf の疲れが抜け切るのに２週間かかった。あまりにも無茶をした。
+ただ、その分だけ楽しい時間を過ごすことができた。一生忘れない思い出になりました。
+皆様に感謝!
+
+あ、12月後半の vim-jp ラジオに出演します! お楽しみに!

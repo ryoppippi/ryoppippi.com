@@ -1,5 +1,5 @@
 import { basename, join } from 'node:path';
-import { flatMap, map } from '@core/iterutil/pipe';
+import { flatMap } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import MarkdownItShiki from '@shikijs/markdown-it';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
@@ -154,12 +154,17 @@ const config = {
 				throw new Error(message);
 			},
 			entries: await (async () => {
+				const blogDir = join(import.meta.dirname, 'src/contents/blog');
+
+				// Support both flat .md files and slug/index.md directory structure
+				const flatFiles = await glob('*.md', { cwd: blogDir, absolute: true });
+				const indexFiles = await glob('*/index.md', { cwd: blogDir, absolute: true });
+
 				const iter = pipe(
-					await glob('*.md', {
-						cwd: join(import.meta.dirname, 'src/contents/blog'),
-						absolute: true,
-					}),
-					map(file => basename(file, '.md')),
+					[
+						...flatFiles.map(file => basename(file, '.md')),
+						...indexFiles.map(file => basename(file.replace('/index.md', ''))),
+					],
 					flatMap(slug => [
 						`/blog/${slug}`,
 						`/blog/${slug}.md`,
