@@ -3,3 +3,10 @@ declare namespace svelteHTML {
 
 	type HTMLAttributes = AttributifyAttributes;
 }
+
+declare module '*?enhanced&w=400' {
+	import type { Picture } from 'vite-imagetools';
+
+	const value: Picture;
+	export default value;
+}

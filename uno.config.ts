@@ -63,7 +63,10 @@ export default defineConfig({
 				wisper: 'Bad Script',
 				code: ['JetBrains Mono', 'Fira Code', 'monospace'],
 			},
-			timeoutFetch: 60000,
+			timeouts: {
+				warning: 5000,
+				failure: 60000,
+			},
 		}),
 		presetTypography({
 			cssExtend: {
