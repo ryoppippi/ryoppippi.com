@@ -1,3 +1,4 @@
+import type { PreprocessorGroup } from 'svelte/compiler';
 import { dirname, join } from 'node:path';
 import { map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
@@ -5,14 +6,15 @@ import { parse as dateParse } from 'date-fns';
 import matter from 'gray-matter';
 import MagicString from 'magic-string';
 import rt from 'reading-time';
-import { slugify } from '../lib/slugify.server.js';
+import { slugify } from '../lib/slugify.server.ts';
 
-/**
- * @param {string} filepath
- * @param {string} content
- * @param {Record<string, any>} data
- */
-export function processMeta(filepath, content, data) {
+import { md } from './markdown.ts';
+
+export function processMeta(
+	filepath: string,
+	content: string,
+	data: Record<string, any>,
+) {
 	const { date, ...metadataRest } = data;
 	const pubDate = date instanceof Date
 		? date.toJSON()
@@ -59,10 +61,9 @@ export function processMeta(filepath, content, data) {
 
 /**
  * Escape curly braces inside <code> tags for Svelte compatibility
- * @param {string} html
  */
-function escapeCodeBraces(html) {
-	return html.replace(/<code([^>]*)>([\s\S]*?)<\/code>/g, (match, attrs, content) => {
+function escapeCodeBraces(html: string) {
+	return html.replace(/<code([^>]*)>([\s\S]*?)<\/code>/g, (_match, attrs: string, content: string) => {
 		const escaped = content
 			.replace(/\{/g, '&#123;')
 			.replace(/\}/g, '&#125;');
@@ -70,10 +71,7 @@ function escapeCodeBraces(html) {
 	});
 }
 
-/**
- * @param {string} proceed
- */
-function additionalProcessMd(proceed) {
+function additionalProcessMd(proceed: string): string {
 	let result = Array.from(
 		pipe(
 			proceed.split('\n'),
@@ -94,14 +92,10 @@ function additionalProcessMd(proceed) {
 	return result;
 }
 
-/**
- * @param md {import('markdown-exit').MarkdownExit}
- * @returns {import('svelte/types/compiler/preprocess').PreprocessorGroup} preprocessor
- */
-function svelteMarkdown(md) {
+function svelteMarkdown(): PreprocessorGroup {
 	return {
 		name: 'svelte-markdown',
-		markup: ({ content, filename }) => {
+		markup: async ({ content, filename }) => {
 			if (filename == null || !filename.endsWith('.md')) {
 				return { code: content };
 			}
@@ -111,7 +105,7 @@ function svelteMarkdown(md) {
 				content: htmlWithoutMeta,
 			} = matter(content);
 
-			const processed = additionalProcessMd(md.render(htmlWithoutMeta));
+			const processed = additionalProcessMd(await md.renderAsync(htmlWithoutMeta));
 
 			const s = new MagicString(processed);
 

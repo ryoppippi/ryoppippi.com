@@ -7,6 +7,14 @@ settings:
 overrides:
   sharp: ^0.34.5
 
+patchedDependencies:
+  markdown-it-image-figures:
+    hash: 002424531d5f860f47e75d26e90ea3df3989c35712d27e8e7533bd25336049f8
+    path: patches/markdown-it-image-figures.patch
+  markdown-it-link-preview:
+    hash: 51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae
+    path: patches/markdown-it-link-preview.patch
+
 importers:
 
   .:
@@ -38,9 +46,6 @@ importers:
       '@ryoppippi/vite-plugin-cloudflare-redirect':
         specifier: ^1.1.2
         version: 1.1.2(vite@8.0.0-beta.7(@types/node@24.10.4)(esbuild@0.25.12)(jiti@2.6.1)(yaml@2.8.1))
-      '@shikijs/markdown-it':
-        specifier: ^3.21.0
-        version: 3.21.0
       '@shikijs/twoslash':
         specifier: ^3.21.0
         version: 3.21.0(typescript@5.9.3)
@@ -145,13 +150,13 @@ importers:
         version: 1.0.0(markdown-it@14.1.0)
       markdown-it-image-figures:
         specifier: ^2.1.1
-        version: 2.1.1(markdown-it@14.1.0)
+        version: 2.1.1(patch_hash=002424531d5f860f47e75d26e90ea3df3989c35712d27e8e7533bd25336049f8)(markdown-it@14.1.0)
       markdown-it-link-attributes:
         specifier: ^4.0.1
         version: 4.0.1
       markdown-it-link-preview:
         specifier: ^1.1.4
-        version: 1.1.4
+        version: 1.1.4(patch_hash=51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae)
       markdown-it-magic-link:
         specifier: ^0.1.4
         version: 0.1.4
@@ -1514,14 +1519,6 @@ packages:
 
   '@shikijs/langs@3.21.0':
     resolution: {integrity: sha512-g6mn5m+Y6GBJ4wxmBYqalK9Sp0CFkUqfNzUy2pJglUginz6ZpWbaWjDB4fbQ/8SHzFjYbtU6Ddlp1pc+PPNDVA==}
-
-  '@shikijs/markdown-it@3.21.0':
-    resolution: {integrity: sha512-1QBlCtdauoOu4limpl9WCf0A1PRq0SofB47NkNNGuSx4V2J4cwxX9Ksfzk71qJSZbJ1g8jesu771gsfSs1+5qQ==}
-    peerDependencies:
-      markdown-it-async: ^2.2.0
-    peerDependenciesMeta:
-      markdown-it-async:
-        optional: true
 
   '@shikijs/themes@3.21.0':
     resolution: {integrity: sha512-BAE4cr9EDiZyYzwIHEk7JTBJ9CzlPuM4PchfcA5ao1dWXb25nv6hYsoDiBq2aZK9E3dlt3WB78uI96UESD+8Mw==}
@@ -5543,11 +5540,6 @@ snapshots:
     dependencies:
       '@shikijs/types': 3.21.0
 
-  '@shikijs/markdown-it@3.21.0':
-    dependencies:
-      markdown-it: 14.1.0
-      shiki: 3.21.0
-
   '@shikijs/themes@3.21.0':
     dependencies:
       '@shikijs/types': 3.21.0
@@ -7469,13 +7461,13 @@ snapshots:
     dependencies:
       markdown-it: 14.1.0
 
-  markdown-it-image-figures@2.1.1(markdown-it@14.1.0):
+  markdown-it-image-figures@2.1.1(patch_hash=002424531d5f860f47e75d26e90ea3df3989c35712d27e8e7533bd25336049f8)(markdown-it@14.1.0):
     dependencies:
       markdown-it: 14.1.0
 
   markdown-it-link-attributes@4.0.1: {}
 
-  markdown-it-link-preview@1.1.4:
+  markdown-it-link-preview@1.1.4(patch_hash=51baf9a61256b8f10060163ba19d5f2f4a04b4088d2c45ab800adc650dde25ae):
     dependencies:
       jsdom: 17.0.0
       xmlhttprequest: 1.8.0

@@ -1,13 +1,11 @@
-/** @type {[RegExp, string][]} */
+import type { ShikiTransformer } from 'shiki';
+
 const entities = [
 	[/\{/g, '&#123;'],
 	[/\}/g, '&#125;'],
-];
+] as const satisfies [RegExp, string][];
 
-/**
- * @returns {import('shiki').ShikiTransformer} Escape brackets
- */
-export function transformerEscape() {
+export function transformerEscape(): ShikiTransformer {
 	return {
 		name: '@shikijs/transformers:escape-brackets',
 		postprocess(code) {

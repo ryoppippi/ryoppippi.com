@@ -1,0 +1,145 @@
+diff --git a/package.json b/package.json
+index 4191b554c7e4d3e2dcb15f7ebfb2909e9139a28c..119bfa07f53cabe90e22031b1f88ecc34c928820 100644
+--- a/package.json
++++ b/package.json
+@@ -3,6 +3,7 @@
+   "version": "1.1.4",
+   "description": "Markdown-it plugin to include link preview in your document",
+   "main": "src/index.js",
++  "types": "src/index.d.ts",
+   "scripts": {
+     "test": "jest",
+     "example": "node examples/index.js"
+@@ -37,6 +38,6 @@
+   },
+   "dependencies": {
+     "jsdom": "^17.0.0",
+-    "xmlhttprequest": "^1.8.0"
++    "markdown-exit": "*"
+   }
+ }
+diff --git a/src/get_html_sync.js b/src/get_html_sync.js
+deleted file mode 100644
+index a3586b31a9134d244fbcba80b97801c165be894c..0000000000000000000000000000000000000000
+diff --git a/src/get_og_data.js b/src/get_og_data.js
+index b9517458610bc935551f1a1fcecc92a3ec89f034..e4627c13e874decda2fe0ea6d61e49813ec4d7fc 100644
+--- a/src/get_og_data.js
++++ b/src/get_og_data.js
+@@ -1,15 +1,21 @@
+-const getHtmlSync = require('./get_html_sync');
+-const jsdom = require('jsdom');
+-const {JSDOM} = jsdom;
++const { JSDOM } = require('jsdom');
+ 
+-function getOgData(url) {
++async function getOgData(url) {
+   const ogData = {};
+ 
+   try {
+-    // const dom = JSDOM.fromURL(url);
+-    const html = getHtmlSync(url);
++    const response = await fetch(url, {
++      headers: {
++        'User-Agent': 'Mozilla/5.0 (compatible; LinkPreviewBot/1.0)',
++      },
++    });
++
++    if (!response.ok) {
++      throw new Error(`HTTP ${response.status}`);
++    }
++
++    const html = await response.text();
+     const dom = new JSDOM(html);
+-    // console.log(dom.serialize());
+     const doc = dom.window.document;
+ 
+     // title
+@@ -18,9 +24,6 @@ function getOgData(url) {
+     const titleMetaSelector = doc.querySelector('meta[property="og:title"]');
+     const titleMeta =
+       titleMetaSelector != null ? titleMetaSelector.content : undefined;
+-    // const title = doc.querySelector('title')?.textContent;
+-    // const titleMeta =
+-    //   doc.querySelector('meta[property="og:title"]')?.content;
+     ogData.title = titleMeta ? titleMeta : title;
+ 
+     // description
+@@ -29,38 +32,27 @@ function getOgData(url) {
+     const desc2Selector = doc.querySelector('meta[name="Description"]');
+     const desc2 = desc2Selector != null ? desc2Selector.content : undefined;
+     desc = desc ? desc : desc2;
+-    // let desc = doc.querySelector('meta[name="description"]')?.content;
+-    // desc = desc ?
+-    //   desc :
+-    //   doc.querySelector('meta[name="Description"]')?.content;
+     const descMetaSelector = doc.querySelector(
+         'meta[property="og:description"]',
+     );
+     const descMeta =
+       descMetaSelector != null ? descMetaSelector.content : undefined;
+-    // const descMeta = doc.querySelector('meta[property="og:description"]')
+-    //    ?.content;
+     ogData.description = descMeta ? descMeta : desc;
+ 
+     // image
+     const imageMetaSelector = doc.querySelector('meta[property="og:image"]');
+     ogData.image =
+       imageMetaSelector != null ? imageMetaSelector.content : undefined;
+-    // ogData.image = doc.querySelector('meta[property="og:image"]')?.content;
+ 
+     // site_name
+     const siteMetaSelector = doc.querySelector('meta[property="og:site_name"]');
+     ogData.site_name =
+       siteMetaSelector != null ? siteMetaSelector.content : undefined;
+-    // ogData.site_name = doc.querySelector(
+-    //     'meta[property="og:site_name"]',
+-    // )?.content;
+ 
+     // url
+     const urlMetaSelector = doc.querySelector('meta[property="og:url"]');
+     const urlMeta =
+       urlMetaSelector != null ? urlMetaSelector.content : undefined;
+-    // const urlMeta = doc.querySelector('meta[property="og:url"]')?.content;
+     ogData.url = urlMeta ? urlMeta : url;
+   } catch (error) {
+     console.log(error);
+diff --git a/src/index.d.ts b/src/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..b2cb41f3a12e5666786712e7b08fd01368be0c57
+--- /dev/null
++++ b/src/index.d.ts
+@@ -0,0 +1,15 @@
++import type { MarkdownExit } from 'markdown-exit';
++
++interface OgData {
++  title: string;
++  description: string;
++  image: string;
++  site_name: string;
++  url: string;
++}
++
++interface LinkPreviewPluginOptions {}
++
++declare function linkPreviewPlugin(md: MarkdownExit, options?: LinkPreviewPluginOptions): void;
++
++export = linkPreviewPlugin;
+diff --git a/src/index.js b/src/index.js
+index a9fc10aa050afe86c0cd1137beeb485625a88be8..8d42e23be50eff67c3e538656d7eb83c3bb4f4fa 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -87,11 +87,12 @@ function linkPreviewPlugin(md, options) {
+     return tokens[idx].attrs[hrefIdx][1];
+   }
+ 
+-  md.renderer.rules.link_open = function(tokens, idx, options, env, self) {
++  // Async renderer for markdown-exit compatibility
++  md.renderer.rules.link_open = async function(tokens, idx, options, env, self) {
+     if (isLinkPreview(tokens, idx)) {
+       hideTokensUntilLinkClose(tokens, idx);
+       const url = getHref(tokens, idx);
+-      const ogData = getOgData(url);
++      const ogData = await getOgData(url);
+ 
+       return linkPreviewHtml(ogData);
+     } else {

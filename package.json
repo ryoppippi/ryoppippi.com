@@ -30,7 +30,6 @@
 		"@ryoppippi/str-fns": "jsr:^0.1.2",
 		"@ryoppippi/unocss-preset": "^2.0.1",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "^1.1.2",
-		"@shikijs/markdown-it": "^3.21.0",
 		"@shikijs/twoslash": "^3.21.0",
 		"@std/collections": "jsr:^1.0.10",
 		"@sveltejs/adapter-static": "^3.0.10",

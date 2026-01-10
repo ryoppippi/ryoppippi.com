@@ -1,0 +1,156 @@
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..d3d8be81e4bd34fe48c29b5246cd35a25b75c51e
+--- /dev/null
++++ b/dist/index.d.ts
+@@ -0,0 +1,61 @@
++import type { MarkdownExit } from 'markdown-exit';
++
++export interface ImageFiguresOptions {
++	/**
++	 * Add data-type="image" attribute to figure element
++	 */
++	dataType?: boolean;
++
++	/**
++	 * Wrap image in a link to the image source
++	 */
++	link?: boolean;
++
++	/**
++	 * Generate figcaption from image alt text or title
++	 * - true: use title attribute
++	 * - false: no figcaption
++	 * - 'alt': use alt text
++	 * - 'title': use title attribute
++	 */
++	figcaption?: boolean | 'alt' | 'title';
++
++	/**
++	 * Copy attributes matching this pattern from img to figure
++	 * - true: copy all attributes
++	 * - string: regex pattern to match attribute names
++	 */
++	copyAttrs?: boolean | string;
++
++	/**
++	 * Add incremental tabindex to each figure
++	 */
++	tabindex?: boolean;
++
++	/**
++	 * Add loading="lazy" to images
++	 */
++	lazy?: boolean;
++
++	/**
++	 * Add decoding="async" to images
++	 */
++	async?: boolean;
++
++	/**
++	 * Add classes to image element
++	 */
++	classes?: string;
++
++	/**
++	 * Move src to data-src attribute (for lazy loading libraries)
++	 */
++	removeSrc?: boolean;
++}
++
++/**
++ * Markdown-it plugin to render images as figure elements with optional figcaption
++ */
++declare function imageFiguresPlugin(md: MarkdownExit, options?: ImageFiguresOptions): void;
++
++export default imageFiguresPlugin;
+diff --git a/dist/markdown-it-images-figures.cjs b/dist/markdown-it-images-figures.cjs
+deleted file mode 100644
+index 8a81a32c6ef2ee986843b01e83e71e4f2fa72b17..0000000000000000000000000000000000000000
+diff --git a/dist/markdown-it-images-figures.module.js b/dist/markdown-it-images-figures.module.js
+deleted file mode 100644
+index 5e960b5c5e643f467919a55206229659f73759b2..0000000000000000000000000000000000000000
+diff --git a/dist/markdown-it-images-figures.umd.js b/dist/markdown-it-images-figures.umd.js
+deleted file mode 100644
+index 8c3e26744cb2a8f32d92bdc2ed409aea7a35b339..0000000000000000000000000000000000000000
+diff --git a/package.json b/package.json
+index 7a3aab1f3d570e03230ea725e10f044f164a0ba2..a99bd37a81fc5a57b643d6ef6effc5a0a4c6f121 100644
+--- a/package.json
++++ b/package.json
+@@ -12,32 +12,13 @@
+   "engines": {
+     "node": ">=12.0.0"
+   },
+-  "source": "src/index.js",
+   "type": "module",
++  "types": "./dist/index.d.ts",
+   "exports": {
+-    "import": "./dist/markdown-it-images-figures.mjs",
+-    "require": "./dist/markdown-it-images-figures.cjs",
+-    "default": "./dist/markdown-it-images-figures.module.js"
++    "types": "./dist/index.d.ts",
++    "default": "./dist/markdown-it-images-figures.mjs"
+   },
+-  "main": "./dist/markdown-it-images-figures.cjs",
+-  "module": "./dist/markdown-it-images-figures.module.js",
+-  "unpkg": "./dist/markdown-it-images-figures.umd.js",
+-  "scripts": {
+-    "build": "microbundle --target node --compress --sourcemap false",
+-    "clean": "node -e \"fs.rmSync('./dist', { recursive: true, force: true });\"",
+-    "dev": "microbundle watch",
+-    "pretest": "npm run build",
+-    "test": "mocha ./test/index.test.js && npm run test:exports",
+-    "test:exports": "node ./test/_import.mjs && node ./test/_require.cjs",
+-    "lint": "eslint src/*.js lazy-example.js",
+-    "prepublishOnly": "npm run clean && npm run build && npm run lint && npm run test"
+-  },
+-  "files": [
+-    "src/index.js",
+-    "LICENSE",
+-    "README.md",
+-    "dist"
+-  ],
++  "main": "./dist/markdown-it-images-figures.mjs",
+   "homepage": "https://github.com/Antonio-Laguna/markdown-it-image-figures",
+   "keywords": [
+     "markdown-it",
+@@ -47,33 +28,10 @@
+     "lazy",
+     "image"
+   ],
+-  "eslintConfig": {
+-    "extends": [
+-      "firstandthird",
+-      "plugin:mocha/recommended"
+-    ],
+-    "plugins": [
+-      "mocha"
+-    ],
+-    "env": {
+-      "browser": false,
+-      "mocha": true,
+-      "node": true,
+-      "es6": true
+-    }
+-  },
+   "peerDependencies": {
+     "markdown-it": "*"
+   },
+-  "devDependencies": {
+-    "babel-eslint": "^10.1.0",
+-    "eslint": "^8.31.0",
+-    "eslint-config-firstandthird": "^6.0.3",
+-    "eslint-plugin-import": "^2.26.0",
+-    "eslint-plugin-mocha": "^10.1.0",
+-    "markdown-it": "*",
+-    "markdown-it-attrs": "*",
+-    "microbundle": "^0.15.1",
+-    "mocha": "^10.2.0"
++  "dependencies": {
++    "markdown-exit": "*"
+   }
+ }
+diff --git a/src/index.js b/src/index.js
+deleted file mode 100644
+index 7c79a1c4715d7b6f6d20b668e849209ff3715bc3..0000000000000000000000000000000000000000
