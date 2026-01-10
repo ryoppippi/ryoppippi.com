@@ -16,5 +16,7 @@ export const getTweet = prerender(getTweetPropsSchema, async ({ id }) => {
 	if (tweet == null) {
 		error(404, `Tweet not found: ${id}`);
 	}
+	// eslint-disable-next-line no-console
+	console.log('Fetched tweet:', id);
 	return tweet;
 });
