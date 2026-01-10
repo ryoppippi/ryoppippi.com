@@ -4,6 +4,8 @@ declare namespace svelteHTML {
 	type HTMLAttributes = AttributifyAttributes;
 }
 
+declare module 'markdown-it-link-preview';
+
 declare module '*?enhanced&w=400' {
 	import type { Picture } from 'vite-imagetools';
 

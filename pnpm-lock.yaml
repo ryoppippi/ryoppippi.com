@@ -38,9 +38,6 @@ importers:
       '@ryoppippi/vite-plugin-cloudflare-redirect':
         specifier: ^1.1.2
         version: 1.1.2(vite@8.0.0-beta.7(@types/node@24.10.4)(esbuild@0.25.12)(jiti@2.6.1)(yaml@2.8.1))
-      '@shikijs/markdown-it':
-        specifier: ^3.21.0
-        version: 3.21.0
       '@shikijs/twoslash':
         specifier: ^3.21.0
         version: 3.21.0(typescript@5.9.3)
@@ -1514,14 +1511,6 @@ packages:
 
   '@shikijs/langs@3.21.0':
     resolution: {integrity: sha512-g6mn5m+Y6GBJ4wxmBYqalK9Sp0CFkUqfNzUy2pJglUginz6ZpWbaWjDB4fbQ/8SHzFjYbtU6Ddlp1pc+PPNDVA==}
-
-  '@shikijs/markdown-it@3.21.0':
-    resolution: {integrity: sha512-1QBlCtdauoOu4limpl9WCf0A1PRq0SofB47NkNNGuSx4V2J4cwxX9Ksfzk71qJSZbJ1g8jesu771gsfSs1+5qQ==}
-    peerDependencies:
-      markdown-it-async: ^2.2.0
-    peerDependenciesMeta:
-      markdown-it-async:
-        optional: true
 
   '@shikijs/themes@3.21.0':
     resolution: {integrity: sha512-BAE4cr9EDiZyYzwIHEk7JTBJ9CzlPuM4PchfcA5ao1dWXb25nv6hYsoDiBq2aZK9E3dlt3WB78uI96UESD+8Mw==}
@@ -5542,11 +5531,6 @@ snapshots:
   '@shikijs/langs@3.21.0':
     dependencies:
       '@shikijs/types': 3.21.0
-
-  '@shikijs/markdown-it@3.21.0':
-    dependencies:
-      markdown-it: 14.1.0
-      shiki: 3.21.0
 
   '@shikijs/themes@3.21.0':
     dependencies:
