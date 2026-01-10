@@ -55,7 +55,9 @@ export function getProjects(): (typeof Project.inferOut)[] {
 		/** process each markdown file */
 		map(({ metadata, default: Content }) => {
 			const imagePath = metadata?.image;
-			const image = imagePath != null ? images[imagePath] : undefined;
+			// Convert absolute path to relative path for import.meta.glob lookup
+			const relativeImagePath = imagePath != null ? `./${imagePath.split('/').at(-1)}` : undefined;
+			const image = relativeImagePath != null ? images[relativeImagePath] : undefined;
 			return Project.assert({
 				...metadata,
 				featured: metadata?.featured ?? false,
