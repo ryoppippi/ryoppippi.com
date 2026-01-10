@@ -5,6 +5,11 @@ isPublished: true
 lang: en
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+import { YouTube } from 'sveltekit-embed';
+</script>
+
 I stayed in Tokyo from October 16th to November 4th, 2025.
 Here's what I did.
 

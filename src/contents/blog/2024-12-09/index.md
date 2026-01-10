@@ -5,6 +5,12 @@ isPublished: true
 lang: 'ja'
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+import Divider from '$components/Divider.svelte';
+import { YouTube } from 'sveltekit-embed';
+</script>
+
 > 本記事は [Vim advent calendar 2024(Adventar)](https://mikoto2000.blogspot.com/2024/12/keyinput-delayervim-vim.html) の 9 日目の記事です。
 
 2024年11月19日に[ neovimconf 2024 ](https://neovimconf.live/)にて、11月23日に[ vimconf 2024 ](https://vimconf.org/2024/)にて登壇をしました。

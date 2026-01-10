@@ -5,6 +5,10 @@ isPublished: true
 lang: ja
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+</script>
+
 > [English](https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en)
 
 # TL;DR

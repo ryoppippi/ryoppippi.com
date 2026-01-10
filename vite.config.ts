@@ -4,8 +4,6 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import extractorSvelte from '@unocss/extractor-svelte';
 import Macros from '@unplugin/macros/vite';
-// @ts-expect-error no type
-import autoImport from 'sveltekit-autoimport';
 import UnoCSS from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 
@@ -61,16 +59,6 @@ export default defineConfig({
 			extractors: [
 				extractorSvelte(),
 			],
-		}),
-		// eslint-disable-next-line ts/no-unsafe-call
-		autoImport({
-			include: ['**/*.(svelte|md)'],
-			components: ['./src/components'],
-			module: {
-				'sveltekit-embed': [
-					'YouTube',
-				],
-			},
 		}),
 		sveltekit(),
 	],

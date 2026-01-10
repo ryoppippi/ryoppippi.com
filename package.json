@@ -82,7 +82,6 @@
 		"svelte-meta-tags": "^4.5.0",
 		"svelte-preprocess-import-assets": "^1.1.0",
 		"svelte-sitemap": "^2.7.1",
-		"sveltekit-autoimport": "^1.8.2",
 		"sveltekit-embed": "^0.0.22",
 		"sveltweet": "^0.5.1",
 		"tinyglobby": "^0.2.15",

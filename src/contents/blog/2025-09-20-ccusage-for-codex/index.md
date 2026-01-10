@@ -5,6 +5,10 @@ isPublished: true
 lang: ja
 ---
 
+<script>
+import Tweet from '$components/Tweet.svelte';
+</script>
+
 > English version coming in a few days!
 
 # はじめに
