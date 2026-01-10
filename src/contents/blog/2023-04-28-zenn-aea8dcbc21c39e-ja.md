@@ -16,7 +16,7 @@ SvelteKit で最近さまざまな案件ができていて嬉しい限りであ�
 最後に、SvelteKit における型安全について触れ、この型安全を強化する Superforms というライブラリを紹介する。
 
 この記事は Rich Harris 氏の先日の講演の影響を多分に受けている。
-/blog/2023-04-26-8addfe62eb4d3e-ja
+/blog/2023-04-26-zenn-8addfe62eb4d3e-ja
 
 # Progressive Enhancement
 
