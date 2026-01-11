@@ -1,12 +1,12 @@
 import type { Item } from './types';
-import { dev } from '$app/environment';
 import { sort } from 'fast-sort';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
+import { isDevelopment } from 'std-env';
 import { glob } from 'tinyglobby';
-import { processMeta } from '../../markdown/preprocessor';
+import { processMeta } from '../../markdown/preprocessor.ts';
 
-export const blogPosts = await (async () => {
+const allBlogPosts = await (async () => {
 	const blogDir = import.meta.dirname;
 
 	// Support both flat .md files and slug/index.md directory structure
@@ -25,5 +25,9 @@ export const blogPosts = await (async () => {
 		frontMatters.push(metadata as unknown as Item);
 	}
 
-	return sort(frontMatters.filter(({ isPublished }) => dev || isPublished)).desc(({ pubDate }) => pubDate);
+	return sort(frontMatters).desc(({ pubDate }) => pubDate);
 })();
+
+export const blogPosts = allBlogPosts.filter(({ isPublished }) => isDevelopment || isPublished);
+
+export const publishedBlogPosts = allBlogPosts.filter(({ isPublished }) => isPublished);
