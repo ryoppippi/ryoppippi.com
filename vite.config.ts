@@ -1,6 +1,5 @@
 import path from 'node:path';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
-import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import extractorSvelte from '@unocss/extractor-svelte';
 import Macros from '@unplugin/macros/vite';
@@ -61,7 +60,6 @@ export default defineConfig({
 			entries: Route,
 		}),
 		Icons({ compiler: 'svelte' }),
-		enhancedImages(),
 		Macros(),
 		UnoCSS({
 			extractors: [
