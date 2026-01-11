@@ -1,6 +1,7 @@
 import type { Metadata } from '$contents/blog/types';
 import type { MarkdownImport } from '../../../markdown';
 import type { PageLoad } from './$types';
+import { dev } from '$app/environment';
 import { error } from '@sveltejs/kit';
 
 async function tryImportMarkdown(slug: string): Promise<MarkdownImport<Metadata>> {
@@ -17,6 +18,10 @@ async function tryImportMarkdown(slug: string): Promise<MarkdownImport<Metadata>
 export const load = (async ({ params: { slug } }) => {
 	try {
 		const md = await tryImportMarkdown(slug);
+
+		if (!dev && !md.metadata.isPublished) {
+			return error(404, 'Post not found');
+		}
 
 		return {
 			metadata: md.metadata,
