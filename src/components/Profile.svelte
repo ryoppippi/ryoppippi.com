@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import ryoppippi from '../lib/assets/ryoppippi.jpg?enhanced&w=400';
+	import { asset } from '$app/paths';
 	import Image from './Image.svelte';
 </script>
 
@@ -9,6 +9,6 @@
 		alt='profile'
 		fetchpriority='high'
 		loading='eager'
-		src={ryoppippi}
+		src={asset('/ryoppippi.avif')}
 	/>
 </div>
