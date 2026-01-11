@@ -1,13 +1,13 @@
-import { basename, join } from 'node:path';
+import { join } from 'node:path';
 import { flatMap } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { isDevelopment } from 'std-env';
 import { importAssets } from 'svelte-preprocess-import-assets';
-import { glob } from 'tinyglobby';
 
 import { Route } from './routes.js';
+import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -62,26 +62,13 @@ const config = {
 
 				throw new Error(message);
 			},
-			entries: await (async () => {
-				const blogDir = join(import.meta.dirname, 'src/contents/blog');
-
-				// Support both flat .md files and slug/index.md directory structure
-				const flatFiles = await glob('*.md', { cwd: blogDir, absolute: true });
-				const indexFiles = await glob('*/index.md', { cwd: blogDir, absolute: true });
-
-				const iter = pipe(
-					[
-						...flatFiles.map(file => basename(file, '.md')),
-						...indexFiles.map(file => basename(file.replace('/index.md', ''))),
-					],
-					flatMap(slug => [
-						`/blog/${slug}`,
-						`/blog/${slug}.md`,
-					]),
-				);
-
-				return Array.from(iter);
-			})(),
+			entries: Array.from(pipe(
+				publishedBlogPosts,
+				flatMap(({ filename }) => [
+					`/blog/${filename}`,
+					`/blog/${filename}.md`,
+				]),
+			)),
 		},
 	},
 };
