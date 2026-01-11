@@ -52,8 +52,6 @@ This is a personal portfolio and blog site built with SvelteKit, TypeScript, and
 ### Key Features Implementation
 
 - **Markdown Processing**: Custom preprocessor with plugins for syntax highlighting (Shiki), Japanese text (BudouX), social embeds, and GitHub alerts
-- **Image Optimisation**: Using `@sveltejs/enhanced-img` for responsive images
-- **Component Auto-imports**: Configured via `sveltekit-autoimport` for components and icons
 - **RSS Generation**: Custom feed.xml route that combines blog posts and external RSS
 - **Redirect Management**: Vite plugin for Cloudflare redirect rules
 
@@ -62,7 +60,7 @@ This is a personal portfolio and blog site built with SvelteKit, TypeScript, and
 - No test framework is configured - the project focuses on static content
 - Uses pnpm workspaces with strict dependency management
 - TypeScript in strict mode
-- Components are auto-imported - no need for manual imports
+- Components use `$components` path alias for imports
 - Icon components available via unplugin-icons (e.g., `<IconRi:github-fill />`)
 
 ### Svelte MCP
