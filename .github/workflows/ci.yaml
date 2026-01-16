@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  ci:
+  gitleaks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,22 +22,58 @@ jobs:
 
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
+        with:
+          tools: gitleaks
+          skip-pnpm-install: 'true'
 
       - name: Run Gitleaks
-        run: nix develop --command gitleaks detect --source . --config .gitleaks.toml
+        run: gitleaks detect --source . --config .gitleaks.toml
+
+  typos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Setup Nix
+        uses: ./.github/actions/setup-nix
+        with:
+          tools: typos
+          skip-pnpm-install: 'true'
 
       - name: Run Typo Check
-        run: nix develop --command pnpm run typos
+        run: typos
 
-      - name: Run Check
-        run: nix develop --command pnpm run check
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Setup Nix
+        uses: ./.github/actions/setup-nix
 
       - name: Run Lint
-        run: nix develop --command pnpm run lint
+        run: pnpm run lint
+
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: Setup Nix
+        uses: ./.github/actions/setup-nix
+
+      - name: Run Check
+        run: pnpm run check
 
   action-timeline:
     needs:
-      - ci
+      - gitleaks
+      - typos
+      - lint
+      - check
     if: ${{ always() }}
     runs-on: ubuntu-slim
     steps:
