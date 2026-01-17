@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path';
 import { map } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import { parse as dateParse } from 'date-fns';
-import matter from 'gray-matter-es';
+import { matter } from 'gray-matter-es';
 import MagicString from 'magic-string';
 import rt from 'reading-time';
 import { slugify } from '../lib/slugify.server.ts';

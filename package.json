@@ -55,7 +55,7 @@
 		"fast-sort": "^3.4.1",
 		"feed": "^5.1.0",
 		"fs-extra": "^11.3.3",
-		"gray-matter-es": "^0.1.0",
+		"gray-matter-es": "0.1.1",
 		"lefthook": "^2.0.13",
 		"magic-string": "^0.30.21",
 		"markdown-exit": "1.0.0-beta.7",

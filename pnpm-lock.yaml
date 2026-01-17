@@ -125,8 +125,8 @@ importers:
         specifier: ^11.3.3
         version: 11.3.3
       gray-matter-es:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: 0.1.1
+        version: 0.1.1
       lefthook:
         specifier: ^2.0.13
         version: 2.0.13
@@ -2826,8 +2826,8 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  gray-matter-es@0.1.0:
-    resolution: {integrity: sha512-jz4oONaUxXx0bINH20IWHSdO6+VGzyuq8jFb0iPGJ2f6YTNX1Bv2ZVIHT45EpWRxJduUyJqiWYWY7k0SGRhyCg==}
+  gray-matter-es@0.1.1:
+    resolution: {integrity: sha512-Awlqkt9z5UHGdrOo3rkm7CPR8ykDV9V5Rg7TZ4W1HgS6yqLpiOEDq247d8HS36YQAvjvdYId/jtboskflmHKeg==}
     engines: {node: '>=20.19.6'}
 
   gzip-size@6.0.0:
@@ -7042,7 +7042,7 @@ snapshots:
 
   graphemer@1.4.0: {}
 
-  gray-matter-es@0.1.0: {}
+  gray-matter-es@0.1.1: {}
 
   gzip-size@6.0.0:
     dependencies:
