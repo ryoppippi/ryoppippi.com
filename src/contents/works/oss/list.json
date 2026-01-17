@@ -105,6 +105,10 @@
 	],
 	"TypeScript Libraries": [
 		{
+			"name": "gray-matter-es",
+			"icon": "i-ph:file-text-light"
+		},
+		{
 			"name": "limo",
 			"icon": "i-material-symbols:edit-document-outline"
 		},
