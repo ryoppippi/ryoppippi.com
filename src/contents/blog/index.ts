@@ -1,7 +1,7 @@
 import type { Item } from './types';
 import { sort } from 'fast-sort';
 import fs from 'fs-extra';
-import matter from 'gray-matter';
+import matter from 'gray-matter-es';
 import { isDevelopment } from 'std-env';
 import { glob } from 'tinyglobby';
 import { processMeta } from '../../markdown/preprocessor.ts';
