@@ -5,18 +5,18 @@
 	"private": true,
 	"packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316",
 	"scripts": {
-		"build": "bun -b vite build",
-		"postbuild": "bun -b svelte-sitemap --domain https://ryoppippi.com -o ./build",
+		"build": "vite build",
+		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"deploy": "wrangler deploy",
 		"deploy:non-production": "wrangler versions upload",
-		"dev": "bun -b vite dev",
+		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "only-allow pnpm",
 		"lint": "eslint --cache .",
 		"new": "./scripts/new-post.js",
-		"preview": "bun -b vite preview",
+		"preview": "vite preview",
 		"sync": "svelte-kit sync",
 		"typos": "typos --force-exclude ./src/contents/**/*.md"
 	},
@@ -98,11 +98,6 @@
 			{
 				"name": "node",
 				"version": "^24.5.0",
-				"onFail": "download"
-			},
-			{
-				"name": "bun",
-				"version": "^1.3.2",
 				"onFail": "download"
 			}
 		]
