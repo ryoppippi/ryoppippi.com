@@ -28,6 +28,7 @@
               typos-lsp
               svelte-language-server # Svelte
               yaml-language-server # YAML
+              typescript-go
             ];
 
             shellHook = ''
