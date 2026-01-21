@@ -230,7 +230,7 @@ importers:
         specifier: ^23.0.1
         version: 23.0.1(@vue/compiler-sfc@3.5.24)(svelte@5.46.4)
       vite:
-        specifier: 8.0.0-beta.7
+        specifier: ^8.0.0-beta.7
         version: 8.0.0-beta.7(@types/node@24.10.9)(esbuild@0.25.12)(jiti@2.6.1)(yaml@2.8.1)
       vite-plugin-favicons:
         specifier: ^0.1.7
