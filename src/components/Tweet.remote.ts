@@ -8,8 +8,8 @@ const getTweetPropsSchema = type({
 });
 
 /**
- * tweet を取得するRemote function
- * https://svelte.dev/docs/kit/remote-functions
+ * Remote function to fetch a tweet
+ * @see https://svelte.dev/docs/kit/remote-functions
  */
 export const getTweet = prerender(getTweetPropsSchema, async ({ id }) => {
 	const tweet = await sveltweet.getTweet(id);
