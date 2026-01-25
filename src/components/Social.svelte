@@ -19,10 +19,12 @@
 </script>
 
 <article
+	style:--cols={ICONS.length}
 	animate='duration-3000 keyframes-fade-in'
 	gap-3
 	gcc
-	grid-cols='3 sm:7'
+	grid-cols-3
+	sm:grid-cols='[repeat(var(--cols),minmax(0,1fr))]'
 >
 	{#each ICONS as { class: _class, url } (url)}
 		{@const { pathname } = ufo.parseURL(url)}
