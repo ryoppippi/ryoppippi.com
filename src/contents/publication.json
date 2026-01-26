@@ -1,4 +1,12 @@
 {
+	"2026": [
+		{
+			"title": "ガードレールによる境界管理と外部ツール／サービスの活用 AIコーディングに正しさを求める試み (Boundary Management with Guardrails and External Tools: Pursuing Correctness in AI Coding)",
+			"link": "https://gihyo.jp/magazine/SD/archive/2026/202602",
+			"authors": "<span text-bold>ryoppippi</span>",
+			"publisher": "Software Design Feb 2026"
+		}
+	],
 	"2019": [
 		{
 			"title": "Artificial Neural Networks for Realized Volatility Prediction in Cryptocurrency Time Series",
