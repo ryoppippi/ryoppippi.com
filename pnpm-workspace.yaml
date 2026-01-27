@@ -19,7 +19,6 @@ shellEmulator: true
 # Prevents Shai-Hulud-style worm attacks that exploit automatic script execution
 strictDepBuilds: true
 
-# Replaces onlyBuiltDependencies (pnpm 10.26+)
 # true: allow build scripts, false: block build scripts
 allowBuilds:
   core-js: true
