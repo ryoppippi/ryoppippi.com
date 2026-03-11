@@ -51,7 +51,12 @@ async function processProject(
 		}
 		catch (e) {
 			console.error(`Error fetching or processing repo info for project ${project.name}:`, e);
-			// Continue with the original project data if fetch/processing fails
+			project = {
+				...project,
+				description: project.description ?? null,
+				slug: project.slug ?? `${GITHUB_USERNAME}-${project.name}`,
+				link,
+			} as const satisfies typeof ParsedProject.infer;
 		}
 	}
 
