@@ -35,3 +35,6 @@ blockExoticSubdeps: true
 # Prevents trust level downgrades between package versions
 # Blocks installations when publisher credentials downgrade from GitHub OIDC to basic auth
 trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  - chokidar@4.0.3
