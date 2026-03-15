@@ -1,6 +1,6 @@
 import type { RequestHandler } from './$types';
 import { asset, resolve } from '$app/paths';
-import { blogPosts } from '$contents/blog' with { type: 'macro' };
+import { blogPosts } from '$contents/blog';
 import { PUBLIC_ORIGIN } from '$env/static/public';
 import { Feed } from 'feed';
 import * as ufo from 'ufo';

@@ -1,5 +1,5 @@
 import { resolve } from '$app/paths';
-import { blogPosts } from '$contents/blog' with { type: 'macro' };
+import { blogPosts } from '$contents/blog';
 import { posts as rssPosts } from '$contents/external-rss';
 import { formatDate } from '$lib/util';
 import { parseJSON } from 'date-fns';

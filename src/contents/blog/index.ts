@@ -1,4 +1,6 @@
 import type { Item } from './types';
+import path from 'node:path';
+import process from 'node:process';
 import { sort } from 'fast-sort';
 import fs from 'fs-extra';
 import { matter } from 'gray-matter-es';
@@ -7,7 +9,7 @@ import { glob } from 'tinyglobby';
 import { processMeta } from '../../markdown/preprocessor.ts';
 
 const allBlogPosts = await (async () => {
-	const blogDir = import.meta.dirname;
+	const blogDir = path.resolve(process.cwd(), 'src/contents/blog');
 
 	// Support both flat .md files and slug/index.md directory structure
 	const blogs = await glob([
