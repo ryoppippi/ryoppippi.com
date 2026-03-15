@@ -3,7 +3,7 @@
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316",
+	"packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
 	"engines": {
 		"runtime": [
 			{
@@ -52,7 +52,7 @@
 		"@types/fs-extra": "^11.0.4",
 		"@types/markdown-it-link-attributes": "^3.0.5",
 		"@types/node": "^24.12.0",
-		"@unocss/eslint-plugin": "66.5.12",
+		"@unocss/eslint-plugin": "66.6.6",
 		"@unocss/extractor-svelte": "^66.6.6",
 		"@unocss/reset": "^66.6.6",
 		"arktype": "^2.2.0",
@@ -64,10 +64,10 @@
 		"fast-sort": "^3.4.1",
 		"feed": "^5.2.0",
 		"fs-extra": "^11.3.4",
-		"gray-matter-es": "0.1.1",
+		"gray-matter-es": "0.2.1",
 		"lefthook": "^2.1.4",
 		"magic-string": "^0.30.21",
-		"markdown-exit": "1.0.0-beta.7",
+		"markdown-exit": "1.0.0-beta.9",
 		"markdown-it-anchor": "^9.2.0",
 		"markdown-it-budoux": "^1.0.6",
 		"markdown-it-collapsible": "^2.0.2",
