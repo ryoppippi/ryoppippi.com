@@ -83,7 +83,7 @@
 		"rss-parser": "^3.13.0",
 		"shiki": "^3.23.0",
 		"sort-package-json": "^3.6.1",
-		"std-env": "^3.10.0",
+		"std-env": "^4.0.0",
 		"svelte": "^5.53.12",
 		"svelte-check": "^4.4.5",
 		"svelte-fancy-darkmode": "^1.1.4",
