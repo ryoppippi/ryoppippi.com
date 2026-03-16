@@ -198,8 +198,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(svelte@5.53.12)
       svelte-sitemap:
-        specifier: ^2.8.0
-        version: 2.8.0
+        specifier: ^3.0.0
+        version: 3.0.0
       sveltekit-embed:
         specifier: ^0.0.22
         version: 0.0.22(svelte@5.53.12)
@@ -3580,8 +3580,8 @@ packages:
     peerDependencies:
       svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.1
 
-  svelte-sitemap@2.8.0:
-    resolution: {integrity: sha512-JySvRZ/n7N7T2huDKfHb/y7kLClNiTUx+6HV1NE6gVG2Hviu7iM7PVfo/onLz7+8DMPBuce4KHmKpmZjQuNMyA==}
+  svelte-sitemap@3.0.0:
+    resolution: {integrity: sha512-0lhhlg6MPSaGg/ChbuzMzXjb33DOgDGBLaURdRTIi61vQBpv2sKO+FBqYZbRBUvEytTmBqrxwyjJZuO4kEtlQQ==}
     engines: {node: '>= 14.17.0'}
     hasBin: true
 
@@ -7512,9 +7512,10 @@ snapshots:
       svelte: 5.53.12
       svelte-parse-markup: 0.1.5(svelte@5.53.12)
 
-  svelte-sitemap@2.8.0:
+  svelte-sitemap@3.0.0:
     dependencies:
       fast-glob: 3.3.3
+      jiti: 2.6.1
       minimist: 1.2.8
       xmlbuilder2: 4.0.3
 
