@@ -38,6 +38,7 @@
               svelte-language-server # Svelte
               yaml-language-server # YAML
               typescript-go
+              gh
             ] ++ [ wrangler.packages.${system}.wrangler ];
 
             shellHook = ''
