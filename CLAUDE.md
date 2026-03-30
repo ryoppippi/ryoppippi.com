@@ -55,6 +55,29 @@ This is a personal portfolio and blog site built with SvelteKit, TypeScript, and
 - **RSS Generation**: Custom feed.xml route that combines blog posts and external RSS
 - **Redirect Management**: Vite plugin for Cloudflare redirect rules
 
+### Embedding Tweets in Blog Posts
+
+Tweet embeds are NOT automatic from URLs. You must use the `<Tweet />` Svelte component:
+
+1. Add a `<script>` block after the frontmatter to import the component
+2. Use `<Tweet id="..." />` with the tweet ID
+3. Add the original URL as an HTML comment for reference
+
+```md
+---
+title: Example
+---
+
+<script>
+import Tweet from '$components/Tweet.svelte';
+</script>
+
+<!-- https://x.com/user/status/1234567890 -->
+<Tweet id="1234567890" />
+```
+
+See `src/contents/blog/2024-10-12/index.md` for a full reference of available blog syntax (embeds, components, markdown features, etc.).
+
 ### Development Notes
 
 - No test framework is configured - the project focuses on static content

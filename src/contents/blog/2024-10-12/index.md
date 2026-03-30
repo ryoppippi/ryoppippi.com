@@ -34,6 +34,26 @@ Hello World
 
 _Italic_
 
+# Footnote
+
+Footnotes are supported.[^1]
+
+You can also attach them to a longer sentence when you want to keep the main flow readable.[^note]
+
+```md
+Footnotes are supported.[^1]
+
+You can also attach them to a longer sentence when you want to keep the main flow readable.[^note]
+
+[^1]: This is a footnote.
+
+[^note]: This is another footnote with a named label.
+```
+
+[^1]: This is a footnote.
+
+[^note]: This is another footnote with a named label.
+
 # GitHub Alert
 
 > [!NOTE]

@@ -109,5 +109,5 @@ export default defineConfig({
 	],
 	rules: [
 	],
-	safelist: [...projectSafelist],
+	safelist: [...projectSafelist, 'i-mdi:arrow-left-bottom'],
 });
