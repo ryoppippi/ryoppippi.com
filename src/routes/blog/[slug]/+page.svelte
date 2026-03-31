@@ -5,6 +5,7 @@
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { formatDate } from '$lib/util';
 	import * as ufo from 'ufo';
+	import IconMarkdown from '~icons/ri/markdown-line';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -19,6 +20,7 @@
 	const { metadata, Markdown } = data;
 
 	const url = ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname);
+	const mdUrl = `${page.url.pathname}.md`;
 	const shareText = (account: string) => encodeURIComponent(`Reading ${account}\'s ${url}\n\nI think...`);
 	const tweetUrl = `https://twitter.com/intent/tweet?text=${shareText('@ryoppippi')}`;
 	const bskyUrl = `https://bsky.app/intent/compose?text=${shareText('@ryoppippi.com')}`;
@@ -28,6 +30,7 @@
 
 <svelte:head>
 	<meta content='article' property='og:type' />
+	<link href={mdUrl} rel='alternate' title='Markdown source' type='text/plain' />
 </svelte:head>
 
 <div
@@ -45,7 +48,7 @@
 			title={metadata.title}
 			viewTransitionName='blog-{metadata.slug}'
 		/>
-		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text}</p>
+		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a href={mdUrl} op70 target='_blank' hover:op100><IconMarkdown class='inline align-middle' /></a></p>
 	</hgroup>
 
 	<div p2>
