@@ -29,6 +29,7 @@
 	});
 
 	const title = $derived(page.data.title ?? 'home');
+	const hostname = ufo.parseURL(PUBLIC_ORIGIN).host ?? page.url.hostname;
 	const ryoppippi = ufo.joinURL(PUBLIC_ORIGIN, asset('/ryoppippi.jpg'));
 	const description = `Portfolio of @ryoppippi`;
 </script>
@@ -74,8 +75,8 @@
 	}}
 	{title}
 	titleTemplate={title !== 'home'
-		? `%s | ${page.url.hostname}`
-		: page.url.hostname}
+		? `%s | ${hostname}`
+		: hostname}
 	twitter={{
 		cardType: 'summary',
 		site: '@ryoppippi',
