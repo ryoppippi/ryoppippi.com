@@ -20,7 +20,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"deploy": "wrangler deploy",
 		"deploy:non-production": "wrangler versions upload",
-		"dev": "gh-do vite dev",
+		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "only-allow pnpm",
 		"lint": "eslint --cache .",

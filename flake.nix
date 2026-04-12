@@ -39,7 +39,6 @@
               yaml-language-server # YAML
               typescript-go
               gh
-              gh-do
             ] ++ [ wrangler.packages.${system}.wrangler ];
 
             shellHook = ''
