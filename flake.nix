@@ -31,7 +31,7 @@
         {
           default = pkgs.mkShellNoCC {
             buildInputs = with pkgs; [
-              pnpm_10
+              pnpm_11
               gitleaks
               typos
               typos-lsp
