@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "wrangler",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1778794387,
@@ -39,29 +18,7 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "wrangler": "wrangler"
-      }
-    },
-    "wrangler": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1778857250,
-        "narHash": "sha256-VfELuxVPbDtIFitmQd7FlacdI6af9kXE7uCwWk0SNEY=",
-        "owner": "emrldnix",
-        "repo": "wrangler",
-        "rev": "55094a874492a63b117e4f9ec650822a9ad4205b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "emrldnix",
-        "repo": "wrangler",
-        "type": "github"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

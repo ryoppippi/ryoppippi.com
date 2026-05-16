@@ -1,19 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    wrangler = {
-      url = "github:emrldnix/wrangler";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
-  nixConfig = {
-    extra-substituters = [ "https://wrangler.cachix.org" ];
-    extra-trusted-public-keys = [ "wrangler.cachix.org-1:N/FIcG2qBQcolSpklb2IMDbsfjZKWg+ctxx0mSMXdSs=" ];
   };
 
   outputs =
-    { nixpkgs, wrangler, ... }:
+    { nixpkgs, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -39,7 +30,8 @@
               yaml-language-server # YAML
               typescript-go
               gh
-            ] ++ [ wrangler.packages.${system}.wrangler ];
+              wrangler
+            ];
 
             shellHook = ''
               # Install dependencies only if node_modules/.pnpm/lock.yaml is older than pnpm-lock.yaml
