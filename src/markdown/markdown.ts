@@ -49,7 +49,7 @@ md.use(anchor, {
 	slugify,
 	permalink: anchor.permalink.linkInsideHeader({
 		symbol: '#',
-		renderAttrs: () => ({ 'aria-hidden': 'true' }),
+		renderAttrs: () => ({ 'aria-hidden': 'true', 'tabindex': '-1' }),
 	}),
 });
 

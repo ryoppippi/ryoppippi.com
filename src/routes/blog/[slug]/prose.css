@@ -28,6 +28,36 @@ html:not(.dark) .shiki {
 	background-color: theme('colors.text.150') !important;
 }
 
+@media (prefers-contrast: more) {
+	.prose .markdown-alert-title {
+		color: #0969da;
+	}
+
+	html.dark .prose .markdown-alert-title {
+		color: #58a6ff;
+	}
+
+	html.dark .shiki span[style*='--shiki-dark:#737C73'] {
+		--shiki-dark: #94a094 !important;
+	}
+
+	html:not(.dark) .shiki span[style*='color:#6F894E'] {
+		color: #3f6728 !important;
+	}
+
+	html:not(.dark) .shiki span[style*='color:#716E61'] {
+		color: #5f5a4e !important;
+	}
+
+	html:not(.dark) .shiki span[style*='color:#6693BF'] {
+		color: #2f668f !important;
+	}
+
+	html:not(.dark) .shiki span[style*='color:#B35B79'] {
+		color: #8a3156 !important;
+	}
+}
+
 .prose pre code {
 	--uno: font-code;
 }

@@ -33,7 +33,8 @@
 					href={item.link}
 					mr-5
 					op-card
-					target={external ? '_blank' : ''}
+					rel={external ? 'noopener noreferrer' : undefined}
+					target={external ? '_blank' : undefined}
 					transition-base
 				>
 					{@render itemView(item)}

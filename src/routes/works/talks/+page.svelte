@@ -20,13 +20,18 @@
 </script>
 
 {#snippet link(_link: string | null | undefined, _text: string)}
-	<a
-		class={_link == null ? 'no-underline' : 'underline'}
-		href={_link}
-		target='_blank'
-	>
-		{_text}
-	</a>
+	{#if _link == null}
+		<span>{_text}</span>
+	{:else}
+		<a
+			class='underline'
+			href={_link}
+			rel='noopener noreferrer'
+			target='_blank'
+		>
+			{_text}
+		</a>
+	{/if}
 {/snippet}
 
 {#snippet itemView(_item: ListItem)}
@@ -57,10 +62,11 @@
 		href='https://talks.ryoppippi.com/feed.xml'
 		mya
 		op30
+		rel='noopener noreferrer'
 		target='_blank'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<span class='i-line-md:rss' />
+		<span class='i-line-md:rss' aria-hidden='true' />
 		Feed
 	</a>
 	<CheckButton
@@ -75,7 +81,7 @@
 		animate-delay-base
 		no-underline
 	>
-		<LargeTitle title={year} />
+		<LargeTitle level={2} title={year} />
 		<ListView
 			{itemView}
 			items={items as unknown as ListItem[]}

@@ -16,7 +16,8 @@
 <div>
 	<ProjectTitle />
 
-	<div
+	<nav
+		aria-label='Works sections'
 		fcol-sm-row
 		fw
 		gap='1 sm:3'
@@ -30,11 +31,12 @@
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'
 				class={{ op70: isCurrent }}
+				aria-current={isCurrent ? 'page' : undefined}
 				href={isCurrent ? null : lowercaseRoute}
 				op20
 			>{capitalize(route)}</a>
 		{/each}
-	</div>
+	</nav>
 
 	{@render children()}
 </div>

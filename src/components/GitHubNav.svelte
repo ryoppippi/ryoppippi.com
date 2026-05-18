@@ -15,10 +15,11 @@
 		fyc
 		gap-1
 		href={ufo.joinURL(PUBLIC_ORIGIN, _subdomain)}
+		rel='noopener noreferrer'
 		target='_blank'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<span class={icon} /> {name}
+		<span class={icon} aria-hidden='true' /> {name}
 	</a>
 {/snippet}
 

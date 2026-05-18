@@ -23,7 +23,12 @@
 	target={project.link.startsWith('http') ? '_blank' : '_self'}
 	transition-base
 >
-	<a href={project.link} no-underline target={project.link.startsWith('http') ? '_blank' : '_self'}>
+	<a
+		href={project.link}
+		no-underline
+		rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+		target={project.link.startsWith('http') ? '_blank' : '_self'}
+	>
 		{#if project.image != null}
 			<Image
 				alt={project.title}
@@ -42,10 +47,14 @@
 		pb3
 		transition-base
 	>
-		<a href={project.link}>
-			<h3 hover-underline text-2xl>
+		<a
+			href={project.link}
+			rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+			target={project.link.startsWith('http') ? '_blank' : undefined}
+		>
+			<h2 hover-underline text-2xl>
 				{project.title}
-			</h3>
+			</h2>
 		</a>
 		<div prose='base sm'><Content /></div>
 		{#if project.pubDate}

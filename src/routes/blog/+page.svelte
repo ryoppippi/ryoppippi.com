@@ -18,6 +18,8 @@
 	};
 </script>
 
+<h1 class='sr-only'>Blog</h1>
+
 {#snippet itemView(_item: Item)}
 	{@const item = _item as typeof data.posts[0]}
 	{@const filterByEnglish = !(isOnlyEnglish && item.lang !== 'en')}
@@ -34,6 +36,7 @@
 							'i-quill-link-out': item.external, // default for external links
 						},
 					]}
+					aria-hidden='true'
 				/>
 			</span>
 			<p

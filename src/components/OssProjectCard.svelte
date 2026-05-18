@@ -14,6 +14,7 @@
 	max-w-full
 	no-underline
 	op-card
+	rel='noopener noreferrer'
 	select-none
 	target='_blank'
 	transition-base
@@ -21,6 +22,7 @@
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		style:view-transition-name={slug}
+		aria-hidden='true'
 		gcc
 	>
 		<div class={icon} op50 text-3xl />
