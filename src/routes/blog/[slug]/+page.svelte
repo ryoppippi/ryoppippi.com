@@ -48,7 +48,7 @@
 			title={metadata.title}
 			viewTransitionName='blog-{metadata.slug}'
 		/>
-		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a href={mdUrl} op70 target='_blank' hover:op100><IconMarkdown class='inline align-middle' /></a></p>
+		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='hover:op100' aria-label='Markdown source' href={mdUrl} op70 rel='noopener noreferrer' target='_blank'><IconMarkdown class='inline align-middle' aria-hidden='true' /></a></p>
 	</hgroup>
 
 	<div p2>
@@ -60,13 +60,13 @@
 	</article>
 	<div op50 pb-8>
 		<span op70>comment on</span>
-		<a href={bskyUrl} target='_blank'>bluesky</a>
+		<a href={bskyUrl} rel='noopener noreferrer' target='_blank'>bluesky</a>
 		<span op35> / </span>
-		<a href={tweetUrl} target='_blank'>twitter</a>
+		<a href={tweetUrl} rel='noopener noreferrer' target='_blank'>twitter</a>
 	</div>
 
 	<div op50 pb-8>
-		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank'>CC BY-NC-SA 4.0</a> 2022-PRESENT © ryoppippi
+		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='noopener noreferrer' target='_blank'>CC BY-NC-SA 4.0</a> 2022-PRESENT © ryoppippi
 	</div>
 </div>
 

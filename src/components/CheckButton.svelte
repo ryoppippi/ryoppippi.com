@@ -15,6 +15,7 @@
 
 <button
 	{...rest}
+	aria-pressed={checked}
 	fyc='~'
 	gap-1='~'
 	op30='~'
@@ -27,6 +28,7 @@
 			'i-carbon-checkbox': !checked,
 			'i-carbon-checkbox-checked': checked,
 		}}
+		aria-hidden='true'
 	/>
 	{text}
 </button>

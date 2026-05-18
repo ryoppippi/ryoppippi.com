@@ -24,6 +24,8 @@
 </script>
 
 <div container fcol gap-8 mxa py-8>
+	<h1 class='sr-only'>Sponsors</h1>
+
 	<p op-card>
 		Thank you to everyone supporting my work—it keeps the OSS, blog, and talks
 		alive.
@@ -36,7 +38,7 @@
 			rel='noreferrer'
 			target='_blank'
 		>
-			<span class='i-ph-heart' />
+			<span class='i-ph-heart' aria-hidden='true' />
 			GitHub Sponsors
 		</a>
 	</p>

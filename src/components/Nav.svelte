@@ -64,6 +64,7 @@
 		</a>
 	</div>
 	<nav
+		aria-label='Primary navigation'
 		col-span-2
 		flex='wrap  '
 		font-bold
@@ -82,13 +83,14 @@
 					block
 					{href}
 					px-0
+					rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
 					relative
 					target={href.startsWith('http') ? '_blank' : undefined}
 				>
 					<div fyc>
 						{name}
 						<!-- svelte-ignore element_invalid_self_closing_tag -->
-						{#if icon != null} <span class={icon} /> {/if}
+						{#if icon != null} <span class={icon} aria-hidden='true' /> {/if}
 					</div>
 					{@render underline(isPath, false)}
 				</a>
@@ -106,21 +108,25 @@
 			</DarkMode.ToggleButton>
 			<a
 				class='i-line-md:rss'
+				aria-label='RSS feed'
 				fyc
 				href={resolve('/feed.xml')}
 				mya
+				rel='noopener noreferrer'
 				target='_blank'
 			>
-				source code
+				RSS feed
 			</a>
 			<a
 				class='i-teenyicons:github-solid'
+				aria-label='Source code on GitHub'
 				fyc
 				href='https://github.com/ryoppippi/ryoppippi.com'
 				mya
+				rel='noopener noreferrer'
 				target='_blank'
 			>
-				source code
+				Source code
 			</a>
 		</div>
 	</nav>

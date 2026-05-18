@@ -14,7 +14,7 @@
 <div grid='~ gap-16'>
 	{#each Object.entries(projects) as [genre, projectsByGenrne] (genre)}
 		<div>
-			<LargeTitle title={genre} />
+			<LargeTitle level={2} title={genre} />
 			<div
 				grid='~ gap-8'
 				grid-cols='1 md:2'

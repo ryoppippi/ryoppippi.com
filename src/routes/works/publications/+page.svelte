@@ -42,7 +42,7 @@
 	{@const displayTitle = isOnlyEnglish && en ? en : (en ? `${ja} (${en})` : ja)}
 	<div mt-5>
 		<h3 text-xl>
-			<a class='underline' href={item.link} target='_blank'>{displayTitle}</a>
+			<span class='underline'>{displayTitle}</span>
 		</h3>
 		<p op50>{item.publisher}</p>
 	</div>
@@ -62,7 +62,7 @@
 		animate-delay-base
 		no-underline
 	>
-		<LargeTitle title={year} />
+		<LargeTitle level={2} title={year} />
 		<ListView
 			{itemView}
 			{items}
