@@ -1,0 +1,9 @@
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+
+[mcp_servers.grep]
+url = "https://mcp.grep.app"
+
+[mcp_servers.svelte]
+args = [ "svelte-mcp" ]
+command = "pnpm"
