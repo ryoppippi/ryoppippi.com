@@ -5,7 +5,7 @@ import process from 'node:process';
 import * as p from '@clack/prompts';
 import * as d from 'date-fns';
 import fs from 'fs-extra';
-import { matter } from 'gray-matter-es';
+import { stringify } from 'gray-matter-es';
 import openEditor from 'open-editor';
 
 p.intro('Create a new blog post');
@@ -38,7 +38,7 @@ const blogDir = join(import.meta.dirname, '..', 'src', 'contents', 'blog');
 const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}`;
 const postDir = join(blogDir, slug);
 const md = join(postDir, 'index.md');
-const frontMatter = matter.stringify('', {
+const frontMatter = stringify('', {
 	title,
 	date,
 	isPublished: false,
