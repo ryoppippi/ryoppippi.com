@@ -67,6 +67,7 @@
 @utility gcc {
 	display: grid;
 	place-content: center;
+	place-items: center;
 }
 
 @utility blog-list-icon {
@@ -95,6 +96,7 @@
 @utility transition-base {
 	transition-property: all;
 	transition-duration: 500ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @utility f-text-32-64 {
