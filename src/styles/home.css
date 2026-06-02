@@ -1,0 +1,6 @@
+@import 'tailwindcss' source(none);
+@import './tailwind.css';
+
+@source '../routes/+page.svelte';
+@source '../components/Profile.svelte';
+@source '../components/Social.svelte';

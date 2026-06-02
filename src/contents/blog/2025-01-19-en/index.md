@@ -9,7 +9,7 @@ I watch Youtube and Twitch on my iPhone a lot. One of my friend {@yuki-yano} int
 
 When you configure this shortcut, the rotation lock is disabled when you open the Youtube app and enabled when you close it. I configure it for Twitch app as well.
 
-<div grid='~ cols-3 gap-2'>
+<div class='grid grid-cols-3 gap-2'>
 
 ![](./IMG_0941.png)
 

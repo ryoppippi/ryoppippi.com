@@ -15,18 +15,15 @@
 
 <button
 	{...rest}
+	class='fyc gap-1 opacity-30 text-sm'
 	aria-pressed={checked}
-	fyc='~'
-	gap-1='~'
-	op30='~'
-	text-sm='~'
 	type='button'
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		class={{
-			'i-carbon-checkbox': !checked,
-			'i-carbon-checkbox-checked': checked,
+			'icon-[carbon--checkbox]': !checked,
+			'icon-[carbon--checkbox-checked]': checked,
 		}}
 		aria-hidden='true'
 	/>

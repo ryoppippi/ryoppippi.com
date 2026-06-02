@@ -38,16 +38,16 @@
 	{@const item = _item as unknown as Talk}
 	{@const _link = item.links.at(0)}
 	{#if !(isOnlyEnglish && item.lang !== 'en')}
-		<div mt-5>
-			<h3 text-xl>
+		<div class='mt-5'>
+			<h3 class='text-xl'>
 				{@render link(_link, item.title)}
 			</h3>
-			<p op50>
+			<p class='opacity-50'>
 				{@render link(item.eventLink, item.event)}
-				<span op80 pl-2 text-sm truncate>{item.date}</span>
+				<span class='truncate pl-2 text-sm opacity-80'>{item.date}</span>
 			</p>
 			{#if item.videoLink}
-				<p op50 text-sm>
+				<p class='text-sm opacity-50'>
 					{@render link(item.videoLink, 'Watch the video')}
 				</p>
 			{/if}
@@ -55,18 +55,15 @@
 	{/if}
 {/snippet}
 
-<div fcol gap-1 mxa pt-10>
+<div class='fcol mx-auto gap-1 pt-10'>
 	<a
-		fyc
-		gap-1
+		class='fyc my-auto gap-1 opacity-30'
 		href='https://talks.ryoppippi.com/feed.xml'
-		mya
-		op30
 		rel='noopener noreferrer'
 		target='_blank'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<span class='i-line-md:rss' aria-hidden='true' />
+		<span class='icon-[line-md--rss]' aria-hidden='true' />
 		Feed
 	</a>
 	<CheckButton
@@ -77,9 +74,7 @@
 </div>
 
 {#each Object.entries(talks).sort(([a], [b]) => Number(b) - Number(a)) as [year, items] (year)}
-	<div
-		animate-delay-base
-		no-underline
+	<div class='no-underline'
 	>
 		<LargeTitle level={2} title={year} />
 		<ListView

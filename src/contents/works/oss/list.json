@@ -2,158 +2,158 @@
 	"CLI": [
 		{
 			"name": "ccusage",
-			"icon": "i-ph:chart-line-light"
+			"icon": "icon-[ph--chart-line-light]"
 		},
 		{
 			"name": "sitemcp",
-			"icon": "i-solar-cloud-download-line-duotone"
+			"icon": "icon-[solar--cloud-download-line-duotone]"
 		},
 		{
 			"name": "curxy",
-			"icon": "i-solar:cursor-square-broken"
+			"icon": "icon-[solar--cursor-square-broken]"
 		},
 		{
 			"name": "nyancat.zig",
-			"icon": "i-solar:cat-broken"
+			"icon": "icon-[solar--cat-broken]"
 		},
 		{
 			"name": "zigchat",
-			"icon": "i-ph:chat-light"
+			"icon": "icon-[ph--chat-light]"
 		}
 	],
 	"Vim/Neovim": [
 		{
 			"name": "nvim-pnpm-catalog-lens",
-			"icon": "i-catppuccin:pnpm?mask"
+			"icon": "iconify catppuccin--pnpm"
 		},
 		{
 			"name": "vim-bun-lock",
-			"icon": "i-catppuccin:bun"
+			"icon": "icon-[catppuccin--bun]"
 		},
 		{
 			"name": "vim-ray-so",
-			"icon": "i-ph:camera-light"
+			"icon": "icon-[ph--camera-light]"
 		},
 		{
 			"name": "vim-svelte-inspector",
-			"icon": "i-material-symbols-light:frame-inspect-rounded"
+			"icon": "icon-[material-symbols-light--frame-inspect-rounded]"
 		},
 		{
 			"name": "nvim-reset",
-			"icon": "i-system-uicons:reset-alt"
+			"icon": "icon-[system-uicons--reset-alt]"
 		},
 		{
 			"name": "vim-bad-apple",
-			"icon": "i-hugeicons:apple-01"
+			"icon": "icon-[hugeicons--apple-01]"
 		}
 	],
 	"Svelte Ecosystem": [
 		{
 			"name": "sveltweet",
-			"icon": "i-ph:twitter-logo"
+			"icon": "icon-[ph--twitter-logo]"
 		},
 		{
 			"name": "svelte-preprocess-budoux",
-			"icon": "i-tabler:language-hiragana"
+			"icon": "icon-[tabler--language-hiragana]"
 		},
 		{
 			"name": "svelte-html-event",
-			"icon": "i-ph:ticket-light"
+			"icon": "icon-[ph--ticket-light]"
 		},
 		{
 			"name": "svelte-preprocess-import-css",
-			"icon": "i-ph:palette-light"
+			"icon": "icon-[ph--palette-light]"
 		},
 		{
 			"name": "svelte-fancy-darkmode",
-			"icon": "i-ph:moon-stars-light"
+			"icon": "icon-[ph--moon-stars-light]"
 		}
 	],
 	"TypeScript Ecosystem": [
 		{
 			"name": "unplugin-typia",
-			"icon": "i-ph:magic-wand-light"
+			"icon": "icon-[ph--magic-wand-light]"
 		},
 		{
 			"name": "vite-plugin-favicons",
-			"icon": "i-tabler:favicon"
+			"icon": "icon-[tabler--favicon]"
 		},
 		{
 			"name": "slidev-transformer-budoux",
-			"icon": "i-tabler:language-hiragana"
+			"icon": "icon-[tabler--language-hiragana]"
 		},
 		{
 			"name": "typiautil",
-			"icon": "i-ph:toolbox-light"
+			"icon": "icon-[ph--toolbox-light]"
 		},
 		{
 			"name": "pkg-to-jsr",
-			"icon": "i-ph:selection-foreground-light"
+			"icon": "icon-[ph--selection-foreground-light]"
 		},
 		{
 			"name": "mirror-jsr-to-npm",
-			"icon": "i-octicon:mirror"
+			"icon": "icon-[octicon--mirror]"
 		},
 		{
 			"name": "bun-plugin-isolated-decl",
-			"icon": "i-ph:package"
+			"icon": "icon-[ph--package]"
 		},
 		{
 			"name": "bunpare",
-			"icon": "i-icon-park-outline:setting-config"
+			"icon": "icon-[icon-park-outline--setting-config]"
 		}
 	],
 	"TypeScript Libraries": [
 		{
 			"name": "gray-matter-es",
-			"icon": "i-ph:file-text-light"
+			"icon": "icon-[ph--file-text-light]"
 		},
 		{
 			"name": "limo",
-			"icon": "i-material-symbols:edit-document-outline"
+			"icon": "icon-[material-symbols--edit-document-outline]"
 		},
 		{
 			"name": "str-fns",
-			"icon": "i-oui:app-devtools"
+			"icon": "icon-[oui--app-devtools]"
 		}
 	],
 	"Fish Plugins": [
 		{
 			"name": "fish-na",
-			"icon": "i-ph:package"
+			"icon": "icon-[ph--package]"
 		},
 		{
 			"name": "fish-poetry",
-			"icon": "i-teenyicons:python-outline"
+			"icon": "icon-[teenyicons--python-outline]"
 		}
 	],
 	"Zig Ecosystem": [
 		{
 			"name": "zigcv",
 			"link": "https://github.com/zigcv/zigcv",
-			"icon": "i-file-icons:opencv"
+			"icon": "icon-[file-icons--opencv]"
 		}
 	],
 	"Web Apps": [
 		{
 			"name": "deepwiki-badge-maker",
-			"icon": "i-ph-seal-light"
+			"icon": "icon-[ph--seal-light]"
 		},
 		{
 			"name": "chatgpt-heatmap",
-			"icon": "i-ph:fire-light"
+			"icon": "icon-[ph--fire-light]"
 		}
 	],
 	"Nix": [
 		{
 			"name": "claude-code-overlay",
-			"icon": "i-simple-icons:nixos"
+			"icon": "icon-[simple-icons--nixos]"
 		}
 	],
 	"Configs": [
 		{
 			"name": "dotfiles",
-			"icon": "i-catppuccin:folder-config?mask"
+			"icon": "iconify catppuccin--folder-config"
 		}
 	]
 }

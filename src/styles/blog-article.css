@@ -1,0 +1,6 @@
+@import 'tailwindcss' source(none);
+@import './tailwind.css';
+
+@source '../routes/blog/[slug]/+page.svelte';
+@source '../components/LargeTitle.svelte';
+@source inline("icon-[mdi--arrow-left-bottom]");

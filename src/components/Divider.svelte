@@ -1,6 +1,1 @@
-<hr
-	bg='neutral-100 dark:white/10'
-	border-t-0
-	h='0.5'
-	my-12
-/>
+<hr class='my-12 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10' />

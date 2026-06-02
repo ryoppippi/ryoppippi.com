@@ -21,35 +21,24 @@
 		itemView,
 	}: Props = $props();
 </script>
-<div mxa px-10>
+<div class='mx-auto px-10'>
 	{#each items as item (item.slug)}
 		{@const external = typeof item.link === 'string' && item?.link.startsWith('http')}
-		<div my-2>
+		<div class='my-2'>
 			{#if item.link != null}
 				<a
-					class='group'
-					fyc
-					gap-3
+					class='group fyc gap-3 mr-5 op-card transition-base hover:no-underline'
 					href={item.link}
-					mr-5
-					op-card
 					rel={external ? 'noopener noreferrer' : undefined}
 					target={external ? '_blank' : undefined}
-					transition-base
 				>
 					{@render itemView(item)}
 				</a>
 			{:else}
-				<div class='group' fyc gap-3 mr-5 op-card transition-base>
+				<div class='group fyc gap-3 mr-5 op-card transition-base'>
 					{@render itemView(item)}
 				</div>
 			{/if}
 		</div>
 	{/each}
 </div>
-
-<style>
-a {
-	--uno: hover:no-underline;
-}
-</style>

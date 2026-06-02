@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import '../../styles/sponsors.css';
+
 	const sponsorViews = [
 		{
 			id: 'circles',
@@ -23,10 +25,10 @@
 	);
 </script>
 
-<div container fcol gap-8 mxa py-8>
+<div class='fcol container mx-auto gap-8 py-8'>
 	<h1 class='sr-only'>Sponsors</h1>
 
-	<p op-card>
+	<p class='op-card'>
 		Thank you to everyone supporting my work—it keeps the OSS, blog, and talks
 		alive.
 	</p>
@@ -38,25 +40,22 @@
 			rel='noreferrer'
 			target='_blank'
 		>
-			<span class='i-ph-heart' aria-hidden='true' />
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
+			<span class='icon-[ph--heart]' aria-hidden='true' />
 			GitHub Sponsors
 		</a>
 	</p>
 
-	<div fcol-sm-row fw gap='1 sm:3' text-2xl>
+	<div class='fcol-sm-row fw gap-1 text-2xl sm:gap-3'>
 		{#each sponsorViews as view (view.id)}
 			{@const isCurrent = currentView === view.id}
 			<button
-				class={{
-					'op70 text-text-100': isCurrent,
-				}}
+				class={[
+					'cursor-pointer border-none bg-transparent p-0 opacity-20',
+					{ 'opacity-70 text-text-100': isCurrent },
+				]}
 				aria-pressed={isCurrent}
-				bg-transparent
-				border-none
-				cursor-pointer
 				onclick={() => (currentView = view.id)}
-				op20
-				p-0
 				type='button'
 			>
 				{view.label}
@@ -64,17 +63,14 @@
 		{/each}
 	</div>
 
-	<div fyc>
+	<div class='fyc'>
 		<img
 			style:view-transition-name={`sponsor-${currentView}`}
+			class='mx-auto h-auto w-full max-w-5xl'
 			alt={currentImage?.alt}
 			decoding='async'
-			h-auto
 			loading='lazy'
-			max-w-5xl
-			mx-auto
 			src={currentImage?.src}
-			w-full
 		/>
 	</div>
 </div>

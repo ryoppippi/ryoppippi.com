@@ -5,36 +5,25 @@
 	const { name, description, icon, link, slug } = project;
 </script>
 
-<!-- card conmponrnt -->
 <a
-	font-sans
-	grid='~ cols-5'
-	hover='scale-101 shadow-xl z-10 bg-[#88888811]'
+	class='grid max-w-full select-none grid-cols-5 font-sans no-underline op-card transition-base hover:z-10 hover:scale-[1.01] hover:bg-[#88888811] hover:shadow-xl'
 	href={link}
-	max-w-full
-	no-underline
-	op-card
 	rel='noopener noreferrer'
-	select-none
 	target='_blank'
-	transition-base
 >
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		style:view-transition-name={slug}
+		class='gcc'
 		aria-hidden='true'
-		gcc
 	>
-		<div class={icon} op50 text-3xl />
+		<div class={[icon, 'text-3xl opacity-50']} />
 	</div>
-	<div
-		fcol
-		grid-col-span-4
-	>
-		<div text-lg truncate>
+	<div class='fcol col-span-4'>
+		<div class='truncate text-lg'>
 			{name}
 		</div>
-		<p h-8 line-clamp-2 text-xs>
+		<p class='h-8 line-clamp-2 text-xs'>
 			{description ?? ''}
 		</p>
 	</div>

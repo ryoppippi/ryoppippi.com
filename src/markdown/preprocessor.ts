@@ -312,7 +312,7 @@ async function renderFootnotes(footnotes: FootnoteDefinition[]) {
 
 	const items = await Promise.all(footnotes.map(async (footnote) => {
 		const renderedContent = additionalProcessMd(await md.renderAsync(footnote.content)).trim();
-		return `<li id="fn-${footnote.id}">\n${renderedContent}\n<p><a href="#${footnote.firstReferenceId}" class="footnote-backref i-mdi:arrow-left-bottom" aria-label="Back to content"></a></p>\n</li>`;
+		return `<li id="fn-${footnote.id}">\n${renderedContent}\n<p><a href="#${footnote.firstReferenceId}" class="footnote-backref icon-[mdi--arrow-left-bottom]" aria-label="Back to content"></a></p>\n</li>`;
 	}));
 
 	return [

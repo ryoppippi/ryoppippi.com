@@ -40,15 +40,15 @@
 	{@const item = _item as unknown as Item}
 	{@const { ja, en } = parseTitle(item.title)}
 	{@const displayTitle = isOnlyEnglish && en ? en : (en ? `${ja} (${en})` : ja)}
-	<div mt-5>
-		<h3 text-xl>
+	<div class='mt-5'>
+		<h3 class='text-xl'>
 			<span class='underline'>{displayTitle}</span>
 		</h3>
-		<p op50>{item.publisher}</p>
+		<p class='opacity-50'>{item.publisher}</p>
 	</div>
 {/snippet}
 
-<div fcol gap-1 mxa pt-10>
+<div class='fcol mx-auto gap-1 pt-10'>
 	<CheckButton
 		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
@@ -58,9 +58,7 @@
 
 {#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, _items] (year)}
 	{@const items = _items.map(item => ({ ...item, slug: JSON.stringify(item) }))}
-	<div
-		animate-delay-base
-		no-underline
+	<div class='no-underline'
 	>
 		<LargeTitle level={2} title={year} />
 		<ListView

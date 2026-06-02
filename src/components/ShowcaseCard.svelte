@@ -16,49 +16,37 @@
 
 <div
 	style:view-transition-name={project.title}
-	class='group'
-	border='~ base rounded-lg'
-	hover='scale-101 shadow-xl z-10'
-	select-none
-	target={project.link.startsWith('http') ? '_blank' : '_self'}
-	transition-base
+	class='group select-none rounded-lg border border-base transition-base hover:z-10 hover:scale-[1.01] hover:shadow-xl'
 >
 	<a
+		class='no-underline'
 		href={project.link}
-		no-underline
 		rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
 		target={project.link.startsWith('http') ? '_blank' : '_self'}
 	>
 		{#if project.image != null}
 			<Image
+				class='aspect-video w-full border-b border-base object-cover'
 				alt={project.title}
-				aspect-video='~'
-				border='b base'
-				object-cover='~'
 				src={project.image}
-				w-full='~'
 			/>
 		{/if}
 	</a>
 
-	<div
-		op-card
-		p4
-		pb3
-		transition-base
+	<div class='p-4 pb-3 op-card transition-base'
 	>
 		<a
 			href={project.link}
 			rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
 			target={project.link.startsWith('http') ? '_blank' : undefined}
 		>
-			<h2 hover-underline text-2xl>
+			<h2 class='text-2xl hover:underline'>
 				{project.title}
 			</h2>
 		</a>
-		<div prose='base sm'><Content /></div>
+		<div class='prose prose-base sm:prose-sm'><Content /></div>
 		{#if project.pubDate}
-			<div op50 pt2 text-sm>
+			<div class='pt-2 text-sm opacity-50'>
 				{formatDate(new Date(project.pubDate))}
 			</div>
 		{/if}

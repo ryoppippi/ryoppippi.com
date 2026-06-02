@@ -10,10 +10,7 @@
 	name: string
 )}
 	<a
-		class={color}
-		fcol-md-row
-		fyc
-		gap-1
+		class={[color, 'fcol-md-row fyc gap-1']}
 		href={ufo.joinURL(PUBLIC_ORIGIN, _subdomain)}
 		rel='noopener noreferrer'
 		target='_blank'
@@ -23,16 +20,12 @@
 	</a>
 {/snippet}
 
-<div
-	mt10
-	mxa
-	pb5
-	prose='~ dark:invert'
+<div class='prose mx-auto mt-10 pb-5 dark:prose-invert'
 >
-	<div fxc gap-2>
-		{@render link('/pr', 'i-ph-git-pull-request-duotone', 'btn-green', 'My Recent PRs')}
-		{@render link('/gh', 'i-ph-github-logo-duotone', 'btn-blue', 'GitHub')}
-		{@render link('/gh-by-stars', 'i-ph-star', 'btn-pink', 'Sort by Stars')}
+	<div class='fxc gap-2'>
+		{@render link('/pr', 'icon-[ph--git-pull-request-duotone]', 'btn-green', 'My Recent PRs')}
+		{@render link('/gh', 'icon-[ph--github-logo-duotone]', 'btn-blue', 'GitHub')}
+		{@render link('/gh-by-stars', 'icon-[ph--star]', 'btn-pink', 'Sort by Stars')}
 	</div>
 
 </div>
