@@ -2,6 +2,8 @@
 	import type { Item } from '$components/ListView.svelte';
 	import CheckButton from '$components/CheckButton.svelte';
 	import ListView from '$components/ListView.svelte';
+	import LinkOut from '~icons/quill/link-out';
+	import Markdown from '~icons/simple-icons/markdown';
 	import '../../styles/blog-list.css';
 
 	const { data } = $props();
@@ -28,17 +30,11 @@
 	{#if filterByEnglish && filterByRyoppippi}
 		<div class='my-2 flex items-start gap-2'>
 			<span class='mt-0.5'>
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div
-					class={[
-						'blog-list-icon',
-						{
-							'icon-[simple-icons--markdown]': !item.external,
-							'icon-[quill--link-out]': item.external,
-						},
-					]}
-					aria-hidden='true'
-				/>
+				{#if item.external}
+					<LinkOut class='blog-list-icon' aria-hidden='true' />
+				{:else}
+					<Markdown class='blog-list-icon' aria-hidden='true' />
+				{/if}
 			</span>
 			<p
 				style:view-transition-name='blog-{item.slug}'

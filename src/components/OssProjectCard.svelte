@@ -11,12 +11,12 @@
 	rel='noopener noreferrer'
 	target='_blank'
 >
-	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		style:view-transition-name={slug}
 		class='gcc'
 		aria-hidden='true'
 	>
+		<!-- svelte-ignore element_invalid_self_closing_tag -->
 		<div class={[icon, 'text-3xl opacity-50']} />
 	</div>
 	<div class='fcol col-span-4'>

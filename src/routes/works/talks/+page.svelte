@@ -3,6 +3,7 @@
 	import CheckButton from '$components/CheckButton.svelte';
 	import LargeTitle from '$components/LargeTitle.svelte';
 	import ListView from '$components/ListView.svelte';
+	import Rss from '~icons/line-md/rss';
 
 	const { data } = $props();
 	const { talks } = data;
@@ -62,8 +63,7 @@
 		rel='noopener noreferrer'
 		target='_blank'
 	>
-		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<span class='icon-[line-md--rss]' aria-hidden='true' />
+		<Rss aria-hidden='true' />
 		Feed
 	</a>
 	<CheckButton

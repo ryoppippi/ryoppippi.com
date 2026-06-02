@@ -1,4 +1,5 @@
 <script lang='ts'>
+	import Heart from '~icons/ph/heart';
 	import '../../styles/sponsors.css';
 
 	const sponsorViews = [
@@ -40,8 +41,7 @@
 			rel='noreferrer'
 			target='_blank'
 		>
-			<!-- svelte-ignore element_invalid_self_closing_tag -->
-			<span class='icon-[ph--heart]' aria-hidden='true' />
+			<Heart aria-hidden='true' />
 			GitHub Sponsors
 		</a>
 	</p>

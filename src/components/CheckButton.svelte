@@ -1,5 +1,7 @@
 <script lang='ts'>
 	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import Checkbox from '~icons/carbon/checkbox';
+	import CheckboxChecked from '~icons/carbon/checkbox-checked';
 
 	type Props = {
 		text: string;
@@ -9,23 +11,21 @@
 	const {
 		text,
 		checked = $bindable(false),
+		class: className,
 		...rest
 	}: Props = $props();
 </script>
 
 <button
 	{...rest}
-	class='fyc gap-1 opacity-30 text-sm'
+	class={[className, 'fyc gap-1 opacity-30 text-sm']}
 	aria-pressed={checked}
 	type='button'
 >
-	<!-- svelte-ignore element_invalid_self_closing_tag -->
-	<div
-		class={{
-			'icon-[carbon--checkbox]': !checked,
-			'icon-[carbon--checkbox-checked]': checked,
-		}}
-		aria-hidden='true'
-	/>
+	{#if checked}
+		<CheckboxChecked aria-hidden='true' />
+	{:else}
+		<Checkbox aria-hidden='true' />
+	{/if}
 	{text}
 </button>

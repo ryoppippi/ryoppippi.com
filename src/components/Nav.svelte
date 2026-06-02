@@ -4,8 +4,11 @@
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import * as DarkMode from 'svelte-fancy-darkmode';
 	import * as ufo from 'ufo';
+	import DownloadOutline from '~icons/line-md/download-outline';
 	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
+	import Rss from '~icons/line-md/rss';
 	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
+	import Github from '~icons/teenyicons/github-solid';
 
 	const LINKS = [
 		{ name: 'works', href: resolve('/works') },
@@ -14,9 +17,9 @@
 		{
 			name: 'cv',
 			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
-			icon: 'icon-[line-md--download-outline]',
+			icon: DownloadOutline,
 		},
-	] as const satisfies { href: string; name: string; icon?: string }[];
+	] as const satisfies { href: string; name: string; icon?: typeof DownloadOutline }[];
 </script>
 
 {#snippet underline(isPath: boolean, transparentDefault = false)}
@@ -57,7 +60,7 @@
 		<div class='flex gap-4'>
 			{#each LINKS as { href, name, ...rest } (href)}
 				{@const isPath = page.url.pathname.startsWith(href)}
-				{@const icon = 'icon' in rest ? rest.icon : null}
+				{@const Icon = 'icon' in rest ? rest.icon : null}
 				<a
 					style:view-transition-name='-nav-link-{name}'
 					class='relative block px-0'
@@ -67,8 +70,7 @@
 				>
 					<div class='fyc'>
 						{name}
-						<!-- svelte-ignore element_invalid_self_closing_tag -->
-						{#if icon != null} <span class={icon} aria-hidden='true' /> {/if}
+						{#if Icon != null} <Icon aria-hidden='true' /> {/if}
 					</div>
 					{@render underline(isPath, false)}
 				</a>
@@ -85,22 +87,24 @@
 				{/snippet}
 			</DarkMode.ToggleButton>
 			<a
-				class='icon-[line-md--rss] fyc my-auto'
+				class='fyc my-auto'
 				aria-label='RSS feed'
 				href={resolve('/feed.xml')}
 				rel='noopener noreferrer'
 				target='_blank'
 			>
-				RSS feed
+				<Rss aria-hidden='true' />
+				<span class='sr-only'>RSS feed</span>
 			</a>
 			<a
-				class='icon-[teenyicons--github-solid] fyc my-auto'
+				class='fyc my-auto'
 				aria-label='Source code on GitHub'
 				href='https://github.com/ryoppippi/ryoppippi.com'
 				rel='noopener noreferrer'
 				target='_blank'
 			>
-				Source code
+				<Github aria-hidden='true' />
+				<span class='sr-only'>Source code</span>
 			</a>
 		</div>
 	</nav>

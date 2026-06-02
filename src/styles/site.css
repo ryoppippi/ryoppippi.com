@@ -3,6 +3,7 @@
 @import './tailwind.css';
 
 @source '../routes/+layout.svelte';
+@source '../routes/+error.svelte';
 @source '../components/Nav.svelte';
 
 body {
