@@ -37,6 +37,9 @@ importers:
       '@iconify/tailwind4':
         specifier: ^1.2.3
         version: 1.2.3(tailwindcss@4.3.0)
+      '@ox-content/napi':
+        specifier: ^2.44.0
+        version: 2.44.0
       '@ryoppippi/eslint-config':
         specifier: ^0.4.0
         version: 0.4.0(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.58.2(typescript@5.9.3))(@typescript-eslint/utils@8.58.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint-plugin-format@2.0.1(eslint@9.39.4(jiti@2.6.1)))(eslint-plugin-svelte@3.17.1(eslint@9.39.4(jiti@2.6.1))(svelte@5.55.5))(eslint@9.39.4(jiti@2.6.1))(svelte-eslint-parser@1.6.0(svelte@5.55.5))(typescript@5.9.3)
@@ -696,6 +699,36 @@ packages:
   '@oozcitak/util@10.0.0':
     resolution: {integrity: sha512-hAX0pT/73190NLqBPPWSdBVGtbY6VOhWYK3qqHqtXQ1gK7kS2yz4+ivsN07hpJ6I3aeMtKP6J6npsEKOAzuTLA==}
     engines: {node: '>=20.0'}
+
+  '@ox-content/binding-darwin-arm64@2.44.0':
+    resolution: {integrity: sha512-66UPQv5bkQWQPGVgPTxi/3z4Gfa6OzPbsY+TSLsT3dlU4xRFC9/RVTzJ/tZxsSDuThPwdEYfr/i443UjYTiOdQ==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@ox-content/binding-darwin-x64@2.44.0':
+    resolution: {integrity: sha512-kSZFnHQj9Mm5NqHpplG6VlcD5GkjsN+TCBE+YeHaqH0TDV4WLXIAlHF/Fz7h52jaQYdd/n3L/znJbOxaQCaX6Q==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@ox-content/binding-linux-arm64-gnu@2.44.0':
+    resolution: {integrity: sha512-nOGoeDfYD2w9Y9vKjDHJ9/n0oigSsZGLM+Wos3GcoLxtkIkbOSZpxZo1SlT6uOs3Y17Bj8EgAbfC7BHH0ZBI7A==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@ox-content/binding-linux-x64-gnu@2.44.0':
+    resolution: {integrity: sha512-Zvo5oVsERR+AuIc6cIykP+zhtLZRWtZFk8PIQv98wgRBVlraaUzBxEQey2dLKfLlsXzawpc/mVHK2sZWwed1+Q==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@ox-content/binding-win32-x64-msvc@2.44.0':
+    resolution: {integrity: sha512-UuPDw87/293TjdpxMl4d5IbkznuxpayGGELEKcgHogiBBDa0eZtXVeTQmDTsj8uSJl3th4mmGP7pZzv60nfZKQ==}
+    cpu: [x64]
+    os: [win32]
+
+  '@ox-content/napi@2.44.0':
+    resolution: {integrity: sha512-EHszzG94F9+7MUDGRoGZandNdGQ+x7XOn5BdXtK32lApFodzdP+PyUklIOTvluCiq2q48Q0ew6iQsRmp3BM5HQ==}
 
   '@oxc-project/types@0.128.0':
     resolution: {integrity: sha512-huv1Y/LzBJkBVHt3OlC7u0zHBW9qXf1FdD7sGmc1rXc2P1mTwHssYv7jyGx5KAACSCH+9B3Bhn6Z9luHRvf7pQ==}
@@ -4259,6 +4292,29 @@ snapshots:
       '@oozcitak/util': 10.0.0
 
   '@oozcitak/util@10.0.0': {}
+
+  '@ox-content/binding-darwin-arm64@2.44.0':
+    optional: true
+
+  '@ox-content/binding-darwin-x64@2.44.0':
+    optional: true
+
+  '@ox-content/binding-linux-arm64-gnu@2.44.0':
+    optional: true
+
+  '@ox-content/binding-linux-x64-gnu@2.44.0':
+    optional: true
+
+  '@ox-content/binding-win32-x64-msvc@2.44.0':
+    optional: true
+
+  '@ox-content/napi@2.44.0':
+    optionalDependencies:
+      '@ox-content/binding-darwin-arm64': 2.44.0
+      '@ox-content/binding-darwin-x64': 2.44.0
+      '@ox-content/binding-linux-arm64-gnu': 2.44.0
+      '@ox-content/binding-linux-x64-gnu': 2.44.0
+      '@ox-content/binding-win32-x64-msvc': 2.44.0
 
   '@oxc-project/types@0.128.0': {}
 

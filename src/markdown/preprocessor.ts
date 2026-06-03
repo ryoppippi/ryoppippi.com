@@ -8,7 +8,8 @@ import MagicString from 'magic-string';
 import rt from 'reading-time';
 import { slugify } from '../lib/slugify.server.ts';
 
-import { md } from './markdown.ts';
+import { replaceMagicLinks } from './magic-link.ts';
+import { renderMarkdown } from './render.ts';
 
 type FootnoteDefinition = {
 	key: string;
@@ -96,6 +97,12 @@ function additionalProcessMd(proceed: string): string {
 
 	// Escape curly braces in <code> tags
 	result = escapeCodeBraces(result);
+	result = replaceMagicLinks(result);
+	result = result.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
+	result = result.replace(
+		/<p>(\s*<[A-Z][\w.]*\b[^>]*(?:\/>|>[\s\S]*?<\/[A-Z][\w.]*>)\s*)<\/p>/g,
+		'$1',
+	);
 
 	return result;
 }
@@ -311,7 +318,7 @@ async function renderFootnotes(footnotes: FootnoteDefinition[]) {
 	}
 
 	const items = await Promise.all(footnotes.map(async (footnote) => {
-		const renderedContent = additionalProcessMd(await md.renderAsync(footnote.content)).trim();
+		const renderedContent = additionalProcessMd(await renderMarkdown(footnote.content)).trim();
 		return `<li id="fn-${footnote.id}">\n${renderedContent}\n<p><a href="#${footnote.firstReferenceId}" class="footnote-backref icon-[mdi--arrow-left-bottom]" aria-label="Back to content"></a></p>\n</li>`;
 	}));
 
@@ -344,7 +351,7 @@ function svelteMarkdown(): PreprocessorGroup {
 				footnoteMap,
 			} = collectFootnotes(htmlWithoutMeta);
 			const contentWithFootnotes = replaceFootnoteReferences(contentWithoutFootnotes, footnoteMap);
-			const html = await md.renderAsync(contentWithFootnotes);
+			const html = await renderMarkdown(contentWithFootnotes);
 			const footnotesHtml = await renderFootnotes(footnotes);
 			const processed = additionalProcessMd(`${html}${footnotesHtml}`);
 
