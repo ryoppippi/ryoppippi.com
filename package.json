@@ -1,8 +1,18 @@
 {
 	"name": "ryoppippi.com",
+	"type": "module",
 	"version": "0.0.1",
 	"private": true,
-	"type": "module",
+	"packageManager": "pnpm@11.1.1",
+	"engines": {
+		"runtime": [
+			{
+				"name": "node",
+				"version": "^24.14.0",
+				"onFail": "download"
+			}
+		]
+	},
 	"scripts": {
 		"build": "vite build",
 		"postbuild": "svelte-sitemap --domain https://ryoppippi.com -o ./build",
@@ -88,15 +98,5 @@
 		"ufo": "^1.6.4",
 		"vite": "^8.0.11",
 		"vite-plugin-favicons": "^0.2.0"
-	},
-	"packageManager": "pnpm@11.1.1",
-	"engines": {
-		"runtime": [
-			{
-				"name": "node",
-				"version": "^24.14.0",
-				"onFail": "download"
-			}
-		]
 	}
 }
