@@ -1,7 +1,7 @@
 <script>
 	import Profile from '$components/Profile.svelte';
 	import Social from '$components/Social.svelte';
-	import '../styles/home.css';
+	import './page.css';
 </script>
 
 <article class='gcc container mx-auto mt-8'

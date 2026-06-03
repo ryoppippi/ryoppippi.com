@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import Heart from '~icons/ph/heart';
-	import '../../styles/sponsors.css';
+	import './page.css';
 
 	const sponsorViews = [
 		{

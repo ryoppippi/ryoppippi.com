@@ -4,7 +4,7 @@
 	import ListView from '$components/ListView.svelte';
 	import LinkOut from '~icons/quill/link-out';
 	import Markdown from '~icons/simple-icons/markdown';
-	import '../../styles/blog-list.css';
+	import './page.css';
 
 	const { data } = $props();
 

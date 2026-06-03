@@ -1,0 +1,12 @@
+@import 'tailwindcss' source(none);
+@import '../../styles/tailwind.css';
+
+@source './';
+@source '../../components/CheckButton.svelte';
+@source '../../components/GitHubNav.svelte';
+@source '../../components/LargeTitle.svelte';
+@source '../../components/ListView.svelte';
+@source '../../components/OssProjectCard.svelte';
+@source '../../components/ProjectTitle.svelte';
+@source '../../components/ShowcaseCard.svelte';
+@source '../../contents/works/oss/list.json';

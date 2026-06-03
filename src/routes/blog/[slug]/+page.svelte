@@ -15,7 +15,7 @@
 	import './prose.css';
 	import './anchor.css';
 	import './collapse.css';
-	import '../../../styles/blog-article.css';
+	import './article.css';
 
 	const { data } = $props();
 	const { metadata, Markdown } = data;

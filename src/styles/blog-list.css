@@ -1,6 +1,0 @@
-@import 'tailwindcss' source(none);
-@import './tailwind.css';
-
-@source '../routes/blog/+page.svelte';
-@source '../components/CheckButton.svelte';
-@source '../components/ListView.svelte';

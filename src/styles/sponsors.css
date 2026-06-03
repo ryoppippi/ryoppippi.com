@@ -1,4 +1,0 @@
-@import 'tailwindcss' source(none);
-@import './tailwind.css';
-
-@source '../routes/sponsors/+page.svelte';

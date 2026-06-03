@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import ProjectTitle from '$components/ProjectTitle.svelte';
 	import { capitalize, lowercase } from '@ryoppippi/str-fns';
-	import '../../styles/works.css';
+	import './layout.css';
 
 	const routes = [
 		'OSS',
