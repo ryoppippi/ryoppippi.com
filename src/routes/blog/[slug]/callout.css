@@ -62,11 +62,43 @@ html.dark .prose .ox-callout--caution {
 }
 
 @media (prefers-contrast: more) {
-	.prose .ox-callout-title {
-		color: #0969da;
+	.prose .ox-callout--note {
+		--callout-color: #0550ae;
 	}
 
-	html.dark .prose .ox-callout-title {
-		color: #58a6ff;
+	.prose .ox-callout--tip {
+		--callout-color: #116329;
+	}
+
+	.prose .ox-callout--important {
+		--callout-color: #6639ba;
+	}
+
+	.prose .ox-callout--warning {
+		--callout-color: #7d4e00;
+	}
+
+	.prose .ox-callout--caution {
+		--callout-color: #a40e26;
+	}
+
+	html.dark .prose .ox-callout--note {
+		--callout-color: #58a6ff;
+	}
+
+	html.dark .prose .ox-callout--tip {
+		--callout-color: #56d364;
+	}
+
+	html.dark .prose .ox-callout--important {
+		--callout-color: #bc8cff;
+	}
+
+	html.dark .prose .ox-callout--warning {
+		--callout-color: #e3b341;
+	}
+
+	html.dark .prose .ox-callout--caution {
+		--callout-color: #ff7b72;
 	}
 }

@@ -2,6 +2,7 @@ import type { JsParserOptions } from '@ox-content/napi';
 import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import { codeToHtml } from 'shiki';
+import { escapeHtml } from './html.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
@@ -44,14 +45,6 @@ async function highlightCode(code: string, lang: string) {
 			transformerEscape(),
 		],
 	});
-}
-
-function escapeHtml(value: string) {
-	return value
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;');
 }
 
 function transformOutsideFences(content: string, transform: (line: string) => string) {

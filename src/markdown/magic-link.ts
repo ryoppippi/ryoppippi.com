@@ -1,3 +1,5 @@
+import { escapeHtml } from './html.ts';
+
 export type MagicLink = {
 	link: string;
 	imageUrl: string;
@@ -13,16 +15,21 @@ export const magicLinks = {
 	'eerm16g': { link: 'https://x.com/eerm16g', imageUrl: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg' },
 } as const satisfies Record<string, MagicLink>;
 
-function escapeHtml(value: string) {
-	return value
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#39;');
+function isSafeHref(href: string) {
+	try {
+		const url = new URL(href);
+		return url.protocol === 'https:' || url.protocol === 'http:';
+	}
+	catch {
+		return false;
+	}
 }
 
 function renderLink(href: string, imageUrl: string, label: string, kind: 'github-at' | 'link') {
+	if (!isSafeHref(href) || !isSafeHref(imageUrl)) {
+		return null;
+	}
+
 	const className = `markdown-magic-link markdown-magic-link-${kind}`;
 	return `<a href="${escapeHtml(href)}" class="${className}" target="_blank" rel="noopener"><span class="markdown-magic-link-image" style="background-image: url('${escapeHtml(imageUrl)}');"></span>${escapeHtml(label)}</a>`;
 }
