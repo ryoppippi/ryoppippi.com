@@ -23,26 +23,28 @@ import { slugify } from '../lib/slugify.server.ts';
 import { magicLinks } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
+export async function highlightCode(code: string, lang: string) {
+	return codeToHtml(code, {
+		lang,
+		themes: {
+			dark: 'kanagawa-dragon',
+			light: 'kanagawa-lotus',
+		},
+		transformers: [
+			transformerTwoslash({
+				explicitTrigger: true,
+				renderer: rendererRich(),
+			}),
+			transformerEscape(),
+		],
+	});
+}
+
 const md = createMarkdownExit({
 	html: true,
 	linkify: true,
 	typographer: true,
-	async highlight(code, lang) {
-		return codeToHtml(code, {
-			lang,
-			themes: {
-				dark: 'kanagawa-dragon',
-				light: 'kanagawa-lotus',
-			},
-			transformers: [
-				transformerTwoslash({
-					explicitTrigger: true,
-					renderer: rendererRich(),
-				}),
-				transformerEscape(),
-			],
-		});
-	},
+	highlight: highlightCode,
 });
 
 // @ts-expect-error markdown-exit type mismatch
