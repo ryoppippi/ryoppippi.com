@@ -47,7 +47,7 @@
 			title={metadata.title}
 			viewTransitionName='blog-{metadata.slug}'
 		/>
-		<p class='text-text-400'>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={mdUrl} rel='noopener noreferrer' target='_blank'><Icon class='icon-[ri--markdown-line] inline align-middle' aria-hidden='true' /></a></p>
+		<p class='text-text-400'>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={mdUrl} rel='noopener noreferrer' target='_blank'><Icon class='icon-[ri--markdown-line] align-middle' aria-hidden='true' /></a></p>
 	</hgroup>
 
 	<div class='p-2'>
