@@ -30,7 +30,7 @@ const githubSpecialRoutes = [
 	'notifications',
 ];
 
-const githubScopePattern = /^(?:https?:\/\/)?github\.com\/([\w-]*)(?:$|\/)/;
+const githubScopePattern = /^(?:https?:\/\/)?github\.com\/([\w-]*)(?:$|[/?#])/;
 
 function isSafeHref(href: string) {
 	try {
@@ -46,6 +46,17 @@ function getFaviconUrl(href: string) {
 	return `https://favicon.yandex.net/favicon/${new URL(href).hostname}`;
 }
 
+function matchesImageOverride(matcher: RegExp | string, href: string) {
+	if (typeof matcher === 'string') {
+		return href === matcher;
+	}
+
+	matcher.lastIndex = 0;
+	const matched = matcher.test(href);
+	matcher.lastIndex = 0;
+	return matched;
+}
+
 function getImageUrl(href: string, imageUrl: string | undefined, options: MagicLinkOptions) {
 	let resolvedImageUrl = imageUrl ?? getFaviconUrl(href);
 	const githubScope = href.match(githubScopePattern);
@@ -57,7 +68,7 @@ function getImageUrl(href: string, imageUrl: string | undefined, options: MagicL
 	}
 
 	for (const [matcher, override] of options.imageOverrides ?? []) {
-		if (typeof matcher === 'string' ? href === matcher : matcher.test(href)) {
+		if (matchesImageOverride(matcher, href)) {
 			return override;
 		}
 	}
@@ -93,7 +104,7 @@ export function renderMagicLink(input: string, options: MagicLinkOptions = { lin
 	if (username != null && extra.length === 0 && /^[a-z\d][a-z\d-]*$/i.test(username)) {
 		return renderLink(
 			href?.length ? href : `https://github.com/${username}`,
-			`https://github.com/${username}.png`,
+			undefined,
 			label?.length ? label : username.toUpperCase(),
 			'github-at',
 			options,
@@ -115,9 +126,9 @@ export function renderMagicLink(input: string, options: MagicLinkOptions = { lin
 }
 
 export function replaceMagicLinks(html: string, options: MagicLinkOptions = { linksMap: magicLinks }) {
-	return html.replace(/\{([^{}\n]+)\}([^[\]{}()]|$)/g, (match, input: string, trailing: string) => {
+	return html.replace(/\{([^{}\n]+)\}/g, (match, input: string) => {
 		const rendered = renderMagicLink(input, options);
-		return rendered == null ? match : `${rendered}${trailing}`;
+		return rendered ?? match;
 	});
 }
 
@@ -208,6 +219,28 @@ if (import.meta.vitest != null) {
 		it('rejects unsafe custom hrefs', () => {
 			expect(renderMagicLink('@ryoppippi|bad|javascript:alert(1)')).toBeNull();
 		});
+
+		it('does not use GitHub avatar URLs for reserved GitHub routes', () => {
+			const html = renderMagicLink('@issues');
+
+			expect(html).toContain('href="https://github.com/issues"');
+			expect(html).toContain('background-image: url(\'https://favicon.yandex.net/favicon/github.com\')');
+			expect(html).not.toContain('https://github.com/issues.png');
+		});
+
+		it('matches global regex image overrides consistently across calls', () => {
+			const options = {
+				linksMap: {
+					VueUse: 'https://vueuse.org/1',
+				},
+				imageOverrides: [[/^https:\/\/vueuse\.org\//g, 'https://example.com/favicon.png']],
+			} satisfies MagicLinkOptions;
+
+			const expected = '<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon.png\');"></span>VueUse</a>';
+
+			expect(renderMagicLink('VueUse', options)).toBe(expected);
+			expect(renderMagicLink('VueUse', options)).toBe(expected);
+		});
 	});
 
 	describe('replaceMagicLinks', () => {
@@ -225,6 +258,14 @@ if (import.meta.vitest != null) {
 					VueUse: 'https://vueuse.org/1',
 				},
 			})).toBe('D {Vueuse} non-target');
+		});
+
+		it('renders magic links before closing parentheses and brackets', () => {
+			const html = replaceMagicLinks('({@github}) [{@github}]', {});
+
+			expect(html).toContain('(<a href="https://github.com/github"');
+			expect(html).toContain('>) [<a href="https://github.com/github"');
+			expect(html).toContain('</a>]');
 		});
 	});
 }

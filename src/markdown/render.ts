@@ -99,9 +99,14 @@ function renderLinkPreview(url: string) {
 		return null;
 	}
 
-	const parsed = new URL(url);
-	const escapedUrl = escapeHtml(url);
-	return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
+	try {
+		const parsed = new URL(url);
+		const escapedUrl = escapeHtml(url);
+		return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
+	}
+	catch {
+		return null;
+	}
 }
 
 function replaceLinkPreviews(line: string) {
@@ -240,15 +245,53 @@ function stripHtml(html: string) {
 	return html.replace(/<[^>]*>/g, '');
 }
 
+const idAttributePattern = /\sid=(["'])(.*?)\1/;
+
+function hasHeaderAnchor(innerHtml: string) {
+	for (const [anchor] of innerHtml.matchAll(/<a\b[^>]*>/g)) {
+		const className = anchor.match(/\sclass=(["'])(.*?)\1/)?.[2];
+		if (className != null && className.split(/\s+/).includes('header-anchor')) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function resolveUniqueHeadingId(id: string, usedIds: Map<string, number>) {
+	const usageCount = usedIds.get(id) ?? 0;
+	usedIds.set(id, usageCount + 1);
+	return usageCount === 0 ? id : `${id}-${usageCount + 1}`;
+}
+
+function resolveHeadingIdBase(existingId: string | undefined, innerHtml: string) {
+	const contentId = slugify(stripHtml(innerHtml));
+	if (existingId == null || existingId === contentId || existingId.startsWith(`${contentId}-`)) {
+		return contentId;
+	}
+
+	return existingId;
+}
+
 function addHeadingAnchors(html: string) {
+	const usedIds = new Map<string, number>();
+
 	return html.replace(/<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/g, (match, level: string, attrs: string, innerHtml: string) => {
-		if (innerHtml.includes('header-anchor')) {
+		const existingId = attrs.match(idAttributePattern)?.[2];
+		const idBase = resolveHeadingIdBase(existingId, innerHtml);
+
+		if (hasHeaderAnchor(innerHtml)) {
+			if (existingId != null) {
+				resolveUniqueHeadingId(idBase, usedIds);
+			}
 			return match;
 		}
 
-		const existingId = attrs.match(/\sid="([^"]*)"/)?.[1];
-		const id = existingId ?? slugify(stripHtml(innerHtml));
-		const resolvedAttrs = existingId == null ? `${attrs} id="${escapeHtml(id)}"` : attrs;
+		const id = resolveUniqueHeadingId(idBase, usedIds);
+		const escapedId = escapeHtml(id);
+		const resolvedAttrs = existingId == null
+			? `${attrs} id="${escapedId}"`
+			: attrs.replace(idAttributePattern, ` id="${escapedId}"`);
 		return `<h${level}${resolvedAttrs}>${innerHtml}<a class="header-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>`;
 	});
 }
@@ -294,6 +337,10 @@ if (import.meta.vitest != null) {
 			);
 		});
 
+		it('leaves malformed preview links untouched', () => {
+			expect(prepareOxContentMarkdown('[@preview](https://%)')).toBe('[@preview](https://%)');
+		});
+
 		it('escapes underscores in recognised magic links before ox-content parses emphasis', () => {
 			expect(prepareOxContentMarkdown('{tech_world18}')).toBe('{tech\\_world18}');
 		});
@@ -308,6 +355,20 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('# Hello World');
 
 			expect(html).toContain('<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-hidden="true" tabindex="-1">#</a></h1>');
+		});
+
+		it('deduplicates repeated heading anchors', async () => {
+			const html = await renderMarkdown('## Examples\n\n## Examples\n\n## Examples');
+
+			expect(html).toContain('<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<h2 id="examples-3">Examples<a class="header-anchor" href="#examples-3" aria-hidden="true" tabindex="-1">#</a></h2>');
+		});
+
+		it('does not treat heading text as an existing anchor', async () => {
+			const html = await renderMarkdown('# header-anchor literal');
+
+			expect(html).toContain('<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-hidden="true" tabindex="-1">#</a></h1>');
 		});
 
 		it('adds markdown-it-link-attributes compatible external link attributes', async () => {
