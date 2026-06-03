@@ -44,7 +44,7 @@
 				{project.title}
 			</h2>
 		</a>
-		<div class='prose prose-base sm:prose-sm'><Content /></div>
+		<div class='prose prose-base dark:prose-invert sm:prose-sm'><Content /></div>
 		{#if project.pubDate}
 			<div class='pt-2 text-sm opacity-50'>
 				{formatDate(new Date(project.pubDate))}
