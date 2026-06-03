@@ -2,7 +2,8 @@ import type { JsParserOptions } from '@ox-content/napi';
 import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import { codeToHtml } from 'shiki';
-import { escapeHtml } from './html.ts';
+import { slugify } from '../lib/slugify.server.ts';
+import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
@@ -93,12 +94,30 @@ function normalizeAngleLinks(line: string) {
 		.replace(/<(https?:\/\/[^>\s]+)>/g, (_match, url: string) => `[${url}](${normalizeAngleUrl(url)})`);
 }
 
+function renderLinkPreview(url: string) {
+	if (!/^https?:\/\//.test(url)) {
+		return null;
+	}
+
+	const parsed = new URL(url);
+	const escapedUrl = escapeHtml(url);
+	return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
+}
+
+function replaceLinkPreviews(line: string) {
+	return line.replace(/\[@preview\]\((https?:\/\/[^)\s]+)\)/g, (match, url: string) => renderLinkPreview(url) ?? match);
+}
+
+function renderImageFigure(alt: string, src: string, title: string) {
+	return `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" title="${escapeHtml(title)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(title)}</figcaption></figure>`;
+}
+
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(
 		content,
-		line => normalizeAngleLinks(escapeMagicLinkUnderscores(line)).replace(
+		line => replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))).replace(
 			/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
-			(_match, alt: string, src: string, _quote: string, title: string) => `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" title="${escapeHtml(title)}">`,
+			(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
 		),
 	);
 }
@@ -217,6 +236,27 @@ async function renderHighlightedCodeBlocks(source: string, html: string) {
 	return chunks.join('');
 }
 
+function stripHtml(html: string) {
+	return html.replace(/<[^>]*>/g, '');
+}
+
+function addHeadingAnchors(html: string) {
+	return html.replace(/<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/g, (match, level: string, attrs: string, innerHtml: string) => {
+		if (innerHtml.includes('header-anchor')) {
+			return match;
+		}
+
+		const existingId = attrs.match(/\sid="([^"]*)"/)?.[1];
+		const id = existingId ?? slugify(stripHtml(innerHtml));
+		const resolvedAttrs = existingId == null ? `${attrs} id="${escapeHtml(id)}"` : attrs;
+		return `<h${level}${resolvedAttrs}>${innerHtml}<a class="header-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>`;
+	});
+}
+
+function postprocessRenderedHtml(html: string) {
+	return addExternalLinkAttributes(addHeadingAnchors(html));
+}
+
 export async function renderMarkdown(content: string) {
 	const prepared = prepareOxContentMarkdown(content);
 	const result = parseAndRender(prepared, oxContentOptions);
@@ -225,5 +265,81 @@ export async function renderMarkdown(content: string) {
 		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	return mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html));
+	return postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html)));
+}
+
+if (import.meta.vitest != null) {
+	describe('prepareOxContentMarkdown', () => {
+		it('normalises angle links that contain parentheses', () => {
+			expect(prepareOxContentMarkdown('[release](<https://example.com/a(1)>)')).toBe(
+				'[release](https://example.com/a%281%29)',
+			);
+		});
+
+		it('normalises bare angle links that contain parentheses', () => {
+			expect(prepareOxContentMarkdown('<https://example.com/a(1)>')).toBe(
+				'[https://example.com/a(1)](https://example.com/a%281%29)',
+			);
+		});
+
+		it('converts markdown images with title attributes to image figures', () => {
+			expect(prepareOxContentMarkdown('![alt](./image.png "caption"){width=480}')).toBe(
+				'<figure><img src="./image.png" alt="alt" title="caption" loading="lazy" decoding="async"><figcaption>caption</figcaption></figure>',
+			);
+		});
+
+		it('converts preview links to link card html', () => {
+			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
+				'<div class="link-preview-widget"><a href="https://github.com/junkawa/figma_jp" rel="noopener" target="_blank"><div class="link-preview-widget-title">https://github.com/junkawa/figma_jp</div><div class="link-preview-widget-url">github.com</div></a></div>',
+			);
+		});
+
+		it('escapes underscores in recognised magic links before ox-content parses emphasis', () => {
+			expect(prepareOxContentMarkdown('{tech_world18}')).toBe('{tech\\_world18}');
+		});
+
+		it('does not transform fenced code contents', () => {
+			expect(prepareOxContentMarkdown('```md\n{tech_world18}\n```')).toBe('```md\n{tech_world18}\n```');
+		});
+	});
+
+	describe('renderMarkdown', () => {
+		it('adds markdown-it-anchor compatible heading anchors', async () => {
+			const html = await renderMarkdown('# Hello World');
+
+			expect(html).toContain('<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-hidden="true" tabindex="-1">#</a></h1>');
+		});
+
+		it('adds markdown-it-link-attributes compatible external link attributes', async () => {
+			const html = await renderMarkdown('[external](https://example.com) [local](/blog)');
+
+			expect(html).toContain('<a href="https://example.com" target="_blank" rel="noopener noreferrer">external</a>');
+			expect(html).toContain('<a href="/blog">local</a>');
+		});
+
+		it('renders GitHub alert blocks as ox callouts', async () => {
+			const html = await renderMarkdown('> [!WARNING]\n> Be careful');
+
+			expect(html).toContain('ox-callout');
+			expect(html).toContain('ox-callout--warning');
+			expect(html).toContain('Be careful');
+		});
+
+		it('keeps syntax highlighted code blocks', async () => {
+			const html = await renderMarkdown('```zig\nconst answer = 42;\n```');
+
+			expect(html).toContain('class="shiki shiki-themes');
+			expect(html).toContain('data-language="zig"');
+			expect(html).toContain('<span');
+		});
+
+		it('preserves raw details blocks used by existing posts', async () => {
+			const html = await renderMarkdown('<details>\n<summary>More</summary>\n\nbody\n</details>');
+
+			expect(html).toContain('<details>');
+			expect(html).toContain('<summary>More</summary>');
+			expect(html).toContain('body');
+			expect(html).toContain('</details>');
+		});
+	});
 }

@@ -8,6 +8,7 @@ import MagicString from 'magic-string';
 import rt from 'reading-time';
 import { slugify } from '../lib/slugify.server.ts';
 
+import { addExternalLinkAttributes } from './html.ts';
 import { replaceMagicLinks } from './magic-link.ts';
 import { renderMarkdown } from './render.ts';
 
@@ -98,6 +99,7 @@ function additionalProcessMd(proceed: string): string {
 	// Escape curly braces in <code> tags
 	result = escapeCodeBraces(result);
 	result = replaceMagicLinks(result);
+	result = addExternalLinkAttributes(result);
 	result = result.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 	result = result.replace(
 		/<p>(\s*<[A-Z][\w.]*\b[^>]*(?:\/>|>[\s\S]*?<\/[A-Z][\w.]*>)\s*)<\/p>/g,
@@ -380,3 +382,72 @@ function svelteMarkdown(): PreprocessorGroup {
 }
 
 export default svelteMarkdown;
+
+if (import.meta.vitest != null) {
+	describe('additionalProcessMd', () => {
+		it('replaces magic links in rendered html', () => {
+			const html = additionalProcessMd('<p>{@ryoppippi} {vim-jp}</p>');
+
+			expect(html).toContain('href="https://github.com/ryoppippi"');
+			expect(html).toContain('target="_blank" rel="noopener"');
+			expect(html).toContain('https://vim-jp.org/');
+		});
+
+		it('escapes braces inside code tags for Svelte compatibility', () => {
+			expect(additionalProcessMd('<p><code>{count}</code></p>')).toContain(
+				'<code>&#123;count&#125;</code>',
+			);
+		});
+
+		it('removes trailing markdown image attributes after html image tags', () => {
+			expect(additionalProcessMd('<p><img src="./image.png" alt="alt">{width=480}</p>')).toBe(
+				'<p><img src="./image.png" alt="alt"></p>',
+			);
+		});
+
+		it('unwraps Svelte component paragraphs', () => {
+			expect(additionalProcessMd('<p><Tweet id="123" /></p>')).toBe('<Tweet id="123" />');
+		});
+
+		it('unwraps link preview widgets from paragraphs', () => {
+			expect(additionalProcessMd('<p><div class="link-preview-widget"></div></p>')).toBe(
+				'<div class="link-preview-widget"></div>',
+			);
+		});
+	});
+
+	describe('footnote processing', () => {
+		it('collects footnote definitions without touching fenced code', () => {
+			const result = collectFootnotes('text[^note]\n\n```md\n[^code]: no\n```\n\n[^note]: body');
+
+			expect(result.footnotes).toHaveLength(1);
+			expect(result.footnotes[0]).toMatchObject({
+				key: 'note',
+				content: 'body',
+				id: 'note',
+			});
+			expect(result.content).toContain('```md\n[^code]: no\n```');
+			expect(result.content).not.toContain('[^note]: body');
+		});
+
+		it('replaces references while preserving inline code references', () => {
+			const result = collectFootnotes('`[^note]` and [^note]\n\n[^note]: body');
+			const html = replaceFootnoteReferences(result.content, result.footnoteMap);
+
+			expect(html).toContain('`[^note]`');
+			expect(html).toContain('<sup class="footnote-ref"><a href="#fn-note" id="fnref-note">1</a></sup>');
+		});
+
+		it('renders collected footnotes with a back reference', async () => {
+			const result = collectFootnotes('[^note]\n\n[^note]: footnote body');
+			const content = replaceFootnoteReferences(result.content, result.footnoteMap);
+			const html = await renderFootnotes(result.footnotes);
+
+			expect(content).toContain('id="fnref-note"');
+			expect(html).toContain('<section class="footnotes">');
+			expect(html).toContain('<li id="fn-note">');
+			expect(html).toContain('footnote body');
+			expect(html).toContain('href="#fnref-note"');
+		});
+	});
+}

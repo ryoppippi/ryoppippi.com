@@ -3,9 +3,8 @@ import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 
-import { defineConfig } from 'vite';
-
 import { faviconsPlugin } from 'vite-plugin-favicons';
+import { defineConfig } from 'vitest/config';
 
 import { Route } from './routes.js';
 
@@ -59,4 +58,9 @@ export default defineConfig({
 		tailwindcss(),
 		sveltekit(),
 	],
+	test: {
+		globals: true,
+		environment: 'node',
+		includeSource: ['src/markdown/**/*.ts'],
+	},
 });

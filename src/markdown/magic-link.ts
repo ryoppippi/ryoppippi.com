@@ -2,7 +2,12 @@ import { escapeHtml } from './html.ts';
 
 export type MagicLink = {
 	link: string;
-	imageUrl: string;
+	imageUrl?: string;
+};
+
+export type MagicLinkOptions = {
+	linksMap?: Record<string, string | MagicLink>;
+	imageOverrides?: [RegExp | string, string][];
 };
 
 export const magicLinks = {
@@ -13,7 +18,19 @@ export const magicLinks = {
 	'tech_world18': { link: 'https://x.com/tech_world18', imageUrl: 'https://pbs.twimg.com/profile_images/1717677089154088960/tDuRN0aB_400x400.jpg' },
 	'TECH WORLD': { link: 'https://www.youtube.com/channel/UCISDrqLMNq3w9AZ4otdoRuA', imageUrl: 'https://pbs.twimg.com/profile_images/1920681519682908160/0sY6R8FJ_400x400.jpg' },
 	'eerm16g': { link: 'https://x.com/eerm16g', imageUrl: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg' },
-} as const satisfies Record<string, MagicLink>;
+} as const satisfies Record<string, Required<MagicLink>>;
+
+const githubSpecialRoutes = [
+	'settings',
+	'pulls',
+	'issues',
+	'discussions',
+	'sponsor',
+	'sponsors',
+	'notifications',
+];
+
+const githubScopePattern = /^(?:https?:\/\/)?github\.com\/([\w-]*)(?:$|\/)/;
 
 function isSafeHref(href: string) {
 	try {
@@ -25,16 +42,49 @@ function isSafeHref(href: string) {
 	}
 }
 
-function renderLink(href: string, imageUrl: string, label: string, kind: 'github-at' | 'link') {
-	if (!isSafeHref(href) || !isSafeHref(imageUrl)) {
+function getFaviconUrl(href: string) {
+	return `https://favicon.yandex.net/favicon/${new URL(href).hostname}`;
+}
+
+function getImageUrl(href: string, imageUrl: string | undefined, options: MagicLinkOptions) {
+	let resolvedImageUrl = imageUrl ?? getFaviconUrl(href);
+	const githubScope = href.match(githubScopePattern);
+	if (githubScope != null && imageUrl == null) {
+		const login = githubScope[1];
+		if (!githubSpecialRoutes.includes(login)) {
+			resolvedImageUrl = `https://github.com/${login}.png`;
+		}
+	}
+
+	for (const [matcher, override] of options.imageOverrides ?? []) {
+		if (typeof matcher === 'string' ? href === matcher : matcher.test(href)) {
+			return override;
+		}
+	}
+
+	return resolvedImageUrl;
+}
+
+function renderLink(href: string, imageUrl: string | undefined, label: string, kind: 'github-at' | 'link', options: MagicLinkOptions) {
+	const resolvedImageUrl = getImageUrl(href, imageUrl, options);
+	if (!isSafeHref(href) || !isSafeHref(resolvedImageUrl)) {
 		return null;
 	}
 
 	const className = `markdown-magic-link markdown-magic-link-${kind}`;
-	return `<a href="${escapeHtml(href)}" class="${className}" target="_blank" rel="noopener"><span class="markdown-magic-link-image" style="background-image: url('${escapeHtml(imageUrl)}');"></span>${escapeHtml(label)}</a>`;
+	return `<a href="${escapeHtml(href)}" class="${className}"><span class="markdown-magic-link-image" style="background-image: url('${escapeHtml(resolvedImageUrl)}');"></span>${escapeHtml(label)}</a>`;
 }
 
-export function renderMagicLink(input: string) {
+function getConfiguredLink(input: string, options: MagicLinkOptions) {
+	const configured = options.linksMap?.[input];
+	if (typeof configured === 'string') {
+		return { link: configured };
+	}
+
+	return configured;
+}
+
+export function renderMagicLink(input: string, options: MagicLinkOptions = { linksMap: magicLinks }) {
 	const normalized = input.trim();
 	const [username, label, href, ...extra] = normalized.startsWith('@')
 		? normalized.slice(1).split('|').map(part => part.trim())
@@ -46,17 +96,135 @@ export function renderMagicLink(input: string) {
 			`https://github.com/${username}.png`,
 			label?.length ? label : username.toUpperCase(),
 			'github-at',
+			options,
 		);
 	}
 
-	const configured = magicLinks[normalized as keyof typeof magicLinks];
-	if (configured == null) {
+	const [text, explicitHref, ...linkExtra] = normalized.split('|').map(part => part.trim());
+	if (linkExtra.length > 0 || text == null) {
 		return null;
 	}
 
-	return renderLink(configured.link, configured.imageUrl, normalized, 'link');
+	const configured = getConfiguredLink(text, options);
+	const link = explicitHref?.length ? explicitHref : configured?.link ?? text;
+	if (!isSafeHref(link)) {
+		return null;
+	}
+
+	return renderLink(link, configured?.imageUrl, text.length > 0 ? text : link.replace(/^https?:\/\//i, ''), 'link', options);
 }
 
-export function replaceMagicLinks(html: string) {
-	return html.replace(/\{([^{}\n]+)\}/g, (match, input: string) => renderMagicLink(input) ?? match);
+export function replaceMagicLinks(html: string, options: MagicLinkOptions = { linksMap: magicLinks }) {
+	return html.replace(/\{([^{}\n]+)\}([^[\]{}()]|$)/g, (match, input: string, trailing: string) => {
+		const rendered = renderMagicLink(input, options);
+		return rendered == null ? match : `${rendered}${trailing}`;
+	});
+}
+
+if (import.meta.vitest != null) {
+	describe('renderMagicLink', () => {
+		it('renders a GitHub user shorthand with an avatar', () => {
+			expect(renderMagicLink('@ryoppippi')).toBe(
+				'<a href="https://github.com/ryoppippi" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/ryoppippi.png\');"></span>RYOPPIPPI</a>',
+			);
+		});
+
+		it.each([
+			[
+				'@antfu',
+				'<a href="https://github.com/antfu" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/antfu.png\');"></span>ANTFU</a>',
+			],
+			[
+				'@antfu|Anthony',
+				'<a href="https://github.com/antfu" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/antfu.png\');"></span>Anthony</a>',
+			],
+			[
+				'@antfu|Anthony|https://github.com/antfu?tab=sponsoring',
+				'<a href="https://github.com/antfu?tab=sponsoring" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/antfu.png\');"></span>Anthony</a>',
+			],
+		])('matches markdown-it-magic-link GitHub fixture for {%s}', (input, expected) => {
+			expect(renderMagicLink(input)).toBe(expected);
+		});
+
+		it.each([
+			[
+				'VueUse|https://vueuse.org',
+				'<a href="https://vueuse.org" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a>',
+			],
+			[
+				'VueUse',
+				'<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a>',
+			],
+			[
+				'Vue Use ',
+				'<a href="https://vueuse.org/2" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>Vue Use</a>',
+			],
+			[
+				'VueUse|https://vueuse.org/3',
+				'<a href="https://vueuse.org/3" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a>',
+			],
+		])('matches markdown-it-magic-link link fixture for {%s}', (input, expected) => {
+			expect(renderMagicLink(input, {
+				linksMap: {
+					'VueUse': 'https://vueuse.org/1',
+					'Vue Use': 'https://vueuse.org/2',
+				},
+			})).toBe(expected);
+		});
+
+		it('matches markdown-it-magic-link links map image fixture', () => {
+			expect(renderMagicLink('VueUse', {
+				linksMap: {
+					VueUse: { link: 'https://vueuse.org/1', imageUrl: 'https://example.com/favicon1.png' },
+				},
+			})).toBe(
+				'<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon1.png\');"></span>VueUse</a>',
+			);
+		});
+
+		it('matches markdown-it-magic-link image override fixture', () => {
+			const options = {
+				linksMap: {
+					VueUse: 'https://vueuse.org/1',
+				},
+				imageOverrides: [
+					[/^https:\/\/vueuse\.org\/1/, 'https://example.com/favicon1.png'],
+					[/^https:\/\/vueuse\.org\//, 'https://example.com/favicon2.png'],
+				],
+			} satisfies MagicLinkOptions;
+
+			expect(renderMagicLink('VueUse', options)).toBe(
+				'<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon1.png\');"></span>VueUse</a>',
+			);
+			expect(renderMagicLink('VueUse|https://vueuse.org/anything', options)).toBe(
+				'<a href="https://vueuse.org/anything" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon2.png\');"></span>VueUse</a>',
+			);
+		});
+
+		it('renders configured site links with spaces in the label', () => {
+			expect(renderMagicLink('Svelte Japan')).toContain('href="https://svelte.jp"');
+		});
+
+		it('rejects unsafe custom hrefs', () => {
+			expect(renderMagicLink('@ryoppippi|bad|javascript:alert(1)')).toBeNull();
+		});
+	});
+
+	describe('replaceMagicLinks', () => {
+		it('matches markdown-it-magic-link basic fixture', () => {
+			const html = replaceMagicLinks('Foo {@github} Bar\n\nFoo {VueUse|https://vueuse.org} Bar', {});
+
+			expect(html).toBe(
+				'Foo <a href="https://github.com/github" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/github.png\');"></span>GITHUB</a> Bar\n\nFoo <a href="https://vueuse.org" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a> Bar',
+			);
+		});
+
+		it('leaves unknown labels untouched', () => {
+			expect(replaceMagicLinks('D {Vueuse} non-target', {
+				linksMap: {
+					VueUse: 'https://vueuse.org/1',
+				},
+			})).toBe('D {Vueuse} non-target');
+		});
+	});
 }

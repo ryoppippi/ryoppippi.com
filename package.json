@@ -27,6 +27,7 @@
 		"new": "./scripts/new-post.js",
 		"preview": "vite preview",
 		"sync": "svelte-kit sync",
+		"test": "vitest run",
 		"typos": "typos --force-exclude ./src/contents/**/*.md"
 	},
 	"dependencies": {},
@@ -87,6 +88,7 @@
 		"typescript-svelte-plugin": "^0.3.52",
 		"ufo": "^1.6.4",
 		"vite": "^8.0.11",
-		"vite-plugin-favicons": "^0.2.0"
+		"vite-plugin-favicons": "^0.2.0",
+		"vitest": "^4.1.8"
 	}
 }
