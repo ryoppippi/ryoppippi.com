@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal portfolio and blog site built with SvelteKit, TypeScript, and UnoCSS. The site features:
+This is a personal portfolio and blog site built with SvelteKit, TypeScript, and Tailwind CSS v4. The site features:
 
 - Static site generation for Cloudflare Pages deployment
 - Markdown-based blog with rich content features
@@ -84,7 +84,13 @@ See `src/contents/blog/2024-10-12/index.md` for a full reference of available bl
 - Uses pnpm workspaces with strict dependency management
 - TypeScript in strict mode
 - Components use `$components` path alias for imports
-- Icon components available via unplugin-icons (e.g., `<IconRi:github-fill />`)
+- Styling uses Tailwind CSS v4. Keep shared CSS in `src/styles/`, and colocate page-specific Tailwind entry CSS beside the route that imports it.
+- For Svelte `class`, keep short static class lists as plain strings. For longer or dynamic class lists, use Svelte's array/object `ClassValue` syntax.
+- Class arrays should be flat by default. Use nested arrays only for meaningful groups, such as responsive pairs, border/background pairs, typography groups, and hover/focus state groups.
+- Do not wrap single utilities in nested arrays just to categorize them. Prefer readable utility order: layout, sizing, spacing, border/background, typography, color, state/transition.
+- Icons are CSS icons from `@iconify/tailwind4`. Use the local `$components/Icon.svelte` wrapper with classes like `<Icon class='icon-[ph--heart]' aria-hidden='true' />`.
+- Do not import icons from `~icons/...` or reintroduce `unplugin-icons`. Store content-driven icons as `icon-[collection--name]` strings.
+- Prefer monotone icons that inherit `currentColor`. Use colored brand icons only when the visual design explicitly needs brand color.
 
 ### Svelte MCP
 

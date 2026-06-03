@@ -27,7 +27,15 @@
 		<div class='my-2'>
 			{#if item.link != null}
 				<a
-					class='group fyc gap-3 mr-5 op-card transition-base hover:no-underline'
+					class={[
+						'group',
+						'fyc',
+						'mr-5',
+						'gap-3',
+						'op-card',
+						'transition-base',
+						'hover:no-underline',
+					]}
 					href={item.link}
 					rel={external ? 'noopener noreferrer' : undefined}
 					target={external ? '_blank' : undefined}
@@ -35,7 +43,16 @@
 					{@render itemView(item)}
 				</a>
 			{:else}
-				<div class='group fyc gap-3 mr-5 op-card transition-base'>
+				<div
+					class={[
+						'group',
+						'fyc',
+						'mr-5',
+						'gap-3',
+						'op-card',
+						'transition-base',
+					]}
+				>
 					{@render itemView(item)}
 				</div>
 			{/if}

@@ -54,7 +54,16 @@
 		<hr class='m-auto w-full max-w-100 opacity-25' />
 	</div>
 
-	<article class={['prose mx-auto pb-8 text-text-700 dark:prose-invert dark:text-text-200', !dev && 'slide-enter-content']}>
+	<article
+		class={[
+			'prose',
+			'mx-auto',
+			'pb-8',
+			['text-text-700', 'dark:text-text-200'],
+			'dark:prose-invert',
+			!dev && 'slide-enter-content',
+		]}
+	>
 		<Markdown />
 	</article>
 	<div class='pb-8 opacity-50'>

@@ -18,7 +18,13 @@
 			>
 				@ryoppippi
 			</span>
-			<span class='animate-pulse text-center text-xl font-medium text-text-700 dark:text-text-200'
+			<span
+				class={[
+					'animate-pulse',
+					'text-center',
+					['text-xl', 'font-medium'],
+					['text-text-700', 'dark:text-text-200'],
+				]}
 			>
 				Engineer
 

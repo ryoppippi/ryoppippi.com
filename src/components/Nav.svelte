@@ -22,7 +22,9 @@
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<span
 		class={[
-			'absolute h-0.5 w-full',
+			'absolute',
+			'h-0.5',
+			'w-full',
 			{
 				'bg-accent-100': isPath,
 				'bg-transparent': !isPath || transparentDefault,
@@ -32,11 +34,29 @@
 	/>
 {/snippet}
 
-<header class='fcol fyc view-transition--nav mx-auto grid grid-cols-1 gap-y-6 py-6 text-xl opacity-70 transition-base hover:opacity-100 md:grid-cols-3'
+<header
+	class={[
+		'fcol',
+		'fyc',
+		'view-transition--nav',
+		'mx-auto',
+		'grid',
+		['grid-cols-1', 'md:grid-cols-3'],
+		'gap-y-6',
+		'py-6',
+		'text-xl',
+		'opacity-70',
+		['transition-base', 'hover:opacity-100'],
+	]}
 >
 	<div class='flex'>
 		<a
-			class='relative mx-auto font-bold md:mb-0 md:mx-0'
+			class={[
+				'relative',
+				'mx-auto',
+				'font-bold',
+				['md:mx-0', 'md:mb-0'],
+			]}
 			aria-label='Home'
 			href={resolve('/')}
 		>
@@ -50,7 +70,16 @@
 		</a>
 	</div>
 	<nav
-		class='fxc col-span-2 mx-auto flex-wrap gap-4 text-lg font-bold md:mr-0 md:justify-end'
+		class={[
+			'fxc',
+			'col-span-2',
+			'mx-auto',
+			'flex-wrap',
+			'gap-4',
+			'text-lg',
+			'font-bold',
+			['md:mr-0', 'md:justify-end'],
+		]}
 		aria-label='Primary navigation'
 	>
 		<div class='flex gap-4'>
@@ -74,7 +103,13 @@
 				</a>
 			{/each}
 		</div>
-		<div class='view-transition--nav-icons flex gap-4 md:gap-2'>
+		<div
+			class={[
+				'view-transition--nav-icons',
+				'flex',
+				['gap-4', 'md:gap-2'],
+			]}
+		>
 			<DarkMode.ToggleButton>
 				{#snippet dark()}
 					<Icon class='icon-[line-md--sunny-filled-loop-to-moon-filled-transition]' aria-hidden='true' />

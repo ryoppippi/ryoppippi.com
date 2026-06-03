@@ -11,7 +11,7 @@
 	name: string
 )}
 	<a
-		class={[color, 'fcol-md-row fyc gap-1']}
+		class={[color, 'fcol-md-row', 'fyc', 'gap-1']}
 		href={ufo.joinURL(PUBLIC_ORIGIN, _subdomain)}
 		rel='noopener noreferrer'
 		target='_blank'

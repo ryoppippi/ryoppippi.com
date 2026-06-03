@@ -17,7 +17,7 @@
 
 <button
 	{...rest}
-	class={[className, 'fyc gap-1 opacity-30 text-sm']}
+	class={[className, 'fyc', 'gap-1', 'text-sm', 'opacity-30']}
 	aria-pressed={checked}
 	type='button'
 >

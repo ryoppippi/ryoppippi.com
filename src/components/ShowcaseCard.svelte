@@ -16,7 +16,13 @@
 
 <div
 	style:view-transition-name={project.title}
-	class='group select-none rounded-lg border border-base transition-base hover:z-10 hover:scale-[1.01] hover:shadow-xl'
+	class={[
+		'group',
+		'select-none',
+		['rounded-lg', 'border', 'border-base'],
+		'transition-base',
+		['hover:z-10', 'hover:scale-[1.01]', 'hover:shadow-xl'],
+	]}
 >
 	<a
 		class='no-underline'
@@ -26,14 +32,24 @@
 	>
 		{#if project.image != null}
 			<Image
-				class='aspect-video w-full border-b border-base object-cover'
+				class={[
+					'aspect-video',
+					'w-full',
+					['border-b', 'border-base'],
+					'object-cover',
+				]}
 				alt={project.title}
 				src={project.image}
 			/>
 		{/if}
 	</a>
 
-	<div class='p-4 pb-3 op-card transition-base'
+	<div
+		class={[
+			['p-4', 'pb-3'],
+			'op-card',
+			'transition-base',
+		]}
 	>
 		<a
 			href={project.link}

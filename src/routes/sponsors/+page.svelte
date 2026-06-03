@@ -51,7 +51,10 @@
 			{@const isCurrent = currentView === view.id}
 			<button
 				class={[
-					'cursor-pointer border-none bg-transparent p-0 opacity-20',
+					'cursor-pointer',
+					['border-none', 'bg-transparent'],
+					'p-0',
+					'opacity-20',
 					{ 'opacity-70 text-text-100': isCurrent },
 				]}
 				aria-pressed={isCurrent}

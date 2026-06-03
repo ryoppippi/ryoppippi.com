@@ -6,7 +6,18 @@
 </script>
 
 <a
-	class='grid max-w-full select-none grid-cols-5 font-sans no-underline op-card transition-base hover:z-10 hover:scale-[1.01] hover:bg-[#88888811] hover:shadow-xl'
+	class={[
+		'grid',
+		'grid-cols-5',
+		'max-w-full',
+		'select-none',
+		['font-sans', 'no-underline'],
+		'op-card',
+		'transition-base',
+		['hover:z-10', 'hover:scale-[1.01]'],
+		['hover:bg-[#88888811]'],
+		['hover:shadow-xl'],
+	]}
 	href={link}
 	rel='noopener noreferrer'
 	target='_blank'
@@ -17,7 +28,13 @@
 		aria-hidden='true'
 	>
 		<!-- svelte-ignore element_invalid_self_closing_tag -->
-		<div class={[icon, 'text-3xl opacity-50']} />
+		<div
+			class={[
+				icon,
+				'text-3xl',
+				'opacity-50',
+			]}
+		/>
 	</div>
 	<div class='fcol col-span-4'>
 		<div class='truncate text-lg'>

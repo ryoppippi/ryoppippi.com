@@ -21,8 +21,12 @@
 	this={tag}
 	style:view-transition-name={viewTransitionName}
 	class={[
-		'f-text-32-64 my-8 font-mono font-bold leading-none text-stroke-aaa text-transparent',
-		{ 'opacity-35 dark:opacity-20': opacity, 'select-none': selectDisabled },
+		'f-text-32-64',
+		'my-8',
+		['font-mono', 'font-bold', 'leading-none'],
+		['text-stroke-aaa', 'text-transparent'],
+		{ 'opacity-35 dark:opacity-20': opacity },
+		{ 'select-none': selectDisabled },
 	]}
 >
 	{title}
