@@ -1,7 +1,6 @@
 <script lang='ts'>
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import Checkbox from '~icons/carbon/checkbox';
-	import CheckboxChecked from '~icons/carbon/checkbox-checked';
+	import Icon from '$components/Icon.svelte';
 
 	type Props = {
 		text: string;
@@ -23,9 +22,9 @@
 	type='button'
 >
 	{#if checked}
-		<CheckboxChecked aria-hidden='true' />
+		<Icon class='icon-[carbon--checkbox-checked]' aria-hidden='true' />
 	{:else}
-		<Checkbox aria-hidden='true' />
+		<Icon class='icon-[carbon--checkbox]' aria-hidden='true' />
 	{/if}
 	{text}
 </button>

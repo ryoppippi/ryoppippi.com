@@ -1,9 +1,8 @@
 <script lang='ts'>
 	import type { Item } from '$components/ListView.svelte';
 	import CheckButton from '$components/CheckButton.svelte';
+	import Icon from '$components/Icon.svelte';
 	import ListView from '$components/ListView.svelte';
-	import LinkOut from '~icons/quill/link-out';
-	import Markdown from '~icons/simple-icons/markdown';
 	import './page.css';
 
 	const { data } = $props();
@@ -31,9 +30,9 @@
 		<div class='my-2 flex items-start gap-2'>
 			<span class='mt-0.5'>
 				{#if item.external}
-					<LinkOut class='blog-list-icon' aria-hidden='true' />
+					<Icon class='icon-[quill--link-out] blog-list-icon' aria-hidden='true' />
 				{:else}
-					<Markdown class='blog-list-icon' aria-hidden='true' />
+					<Icon class='icon-[simple-icons--markdown] blog-list-icon' aria-hidden='true' />
 				{/if}
 			</span>
 			<p

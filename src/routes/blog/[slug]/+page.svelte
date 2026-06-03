@@ -1,11 +1,11 @@
 <script lang='ts'>
 	import { dev } from '$app/environment';
 	import { page } from '$app/state';
+	import Icon from '$components/Icon.svelte';
 	import LargeTitle from '$components/LargeTitle.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { formatDate } from '$lib/util';
 	import * as ufo from 'ufo';
-	import IconMarkdown from '~icons/ri/markdown-line';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -47,7 +47,7 @@
 			title={metadata.title}
 			viewTransitionName='blog-{metadata.slug}'
 		/>
-		<p class='text-text-400'>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={mdUrl} rel='noopener noreferrer' target='_blank'><IconMarkdown class='inline align-middle' aria-hidden='true' /></a></p>
+		<p class='text-text-400'>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={mdUrl} rel='noopener noreferrer' target='_blank'><Icon class='icon-[ri--markdown-line] inline align-middle' aria-hidden='true' /></a></p>
 	</hgroup>
 
 	<div class='p-2'>

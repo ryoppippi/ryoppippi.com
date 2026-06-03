@@ -1,22 +1,17 @@
 <script lang='ts'>
+	import Icon from '$components/Icon.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import * as ufo from 'ufo';
-	import GithubLoop from '~icons/line-md/github-loop';
-	import Linkedin from '~icons/line-md/linkedin';
-	import Twitter from '~icons/line-md/twitter';
-	import GitPullRequest from '~icons/ph/git-pull-request-duotone';
-	import Youtube from '~icons/ri/youtube-line';
-	import Bluesky from '~icons/simple-icons/bluesky';
 
 	const { size = 4.5 } = $props();
 
 	const ICONS = ([
-		{ Icon: GithubLoop, label: 'GitHub profile', url: '/github' },
-		{ Icon: GitPullRequest, label: 'Recent pull requests', url: '/pr' },
-		{ Icon: Linkedin, label: 'LinkedIn profile', url: '/linkedin' },
-		{ Icon: Twitter, label: 'Twitter profile', url: '/twitter' },
-		{ Icon: Bluesky, label: 'Bluesky profile', url: '/bsky' },
-		{ Icon: Youtube, label: 'YouTube channel', url: '/youtube' },
+		{ icon: 'icon-[line-md--github-loop]', label: 'GitHub profile', url: '/github' },
+		{ icon: 'icon-[ph--git-pull-request-duotone]', label: 'Recent pull requests', url: '/pr' },
+		{ icon: 'icon-[line-md--linkedin]', label: 'LinkedIn profile', url: '/linkedin' },
+		{ icon: 'icon-[line-md--twitter]', label: 'Twitter profile', url: '/twitter' },
+		{ icon: 'icon-[simple-icons--bluesky]', label: 'Bluesky profile', url: '/bsky' },
+		{ icon: 'icon-[ri--youtube-line]', label: 'YouTube channel', url: '/youtube' },
 	] as const)
 		.map(({ url, ...rest }) => ({
 			url: ufo.joinURL(PUBLIC_ORIGIN, url),
@@ -28,13 +23,13 @@
 	style:--cols={ICONS.length}
 	class='gcc animate-[fade-in_3s_both] grid-cols-3 gap-3 sm:grid-cols-[repeat(var(--cols),minmax(0,1fr))]'
 >
-	{#each ICONS as { Icon, label, url } (url)}
+	{#each ICONS as { icon, label, url } (url)}
 		<div class='op-card transition-base hover:z-10 hover:scale-110 hover:bg-[#88888811] hover:opacity-100 hover:shadow-xl'
 		>
 			<a aria-label={label} href={url} rel='noopener noreferrer' target='_blank'>
 				<Icon
 					style={`--size: ${size}vh`}
-					class='text-[length:var(--size)]'
+					class={[icon, 'text-[length:var(--size)]']}
 					aria-hidden='true'
 				/>
 			</a>

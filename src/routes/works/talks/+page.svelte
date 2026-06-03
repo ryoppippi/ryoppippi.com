@@ -1,9 +1,9 @@
 <script lang='ts'>
 	import type { Item as ListItem } from '$components/ListView.svelte';
 	import CheckButton from '$components/CheckButton.svelte';
+	import Icon from '$components/Icon.svelte';
 	import LargeTitle from '$components/LargeTitle.svelte';
 	import ListView from '$components/ListView.svelte';
-	import Rss from '~icons/line-md/rss';
 
 	const { data } = $props();
 	const { talks } = data;
@@ -63,7 +63,7 @@
 		rel='noopener noreferrer'
 		target='_blank'
 	>
-		<Rss aria-hidden='true' />
+		<Icon class='icon-[line-md--rss]' aria-hidden='true' />
 		Feed
 	</a>
 	<CheckButton

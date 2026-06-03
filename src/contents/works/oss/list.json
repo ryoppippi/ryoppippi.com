@@ -24,11 +24,11 @@
 	"Vim/Neovim": [
 		{
 			"name": "nvim-pnpm-catalog-lens",
-			"icon": "iconify catppuccin--pnpm"
+			"icon": "icon-[simple-icons--pnpm]"
 		},
 		{
 			"name": "vim-bun-lock",
-			"icon": "icon-[catppuccin--bun]"
+			"icon": "icon-[simple-icons--bun]"
 		},
 		{
 			"name": "vim-ray-so",
@@ -153,7 +153,7 @@
 	"Configs": [
 		{
 			"name": "dotfiles",
-			"icon": "iconify catppuccin--folder-config"
+			"icon": "icon-[ph--folder-simple]"
 		}
 	]
 }

@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import Heart from '~icons/ph/heart';
+	import Icon from '$components/Icon.svelte';
 	import './page.css';
 
 	const sponsorViews = [
@@ -41,7 +41,7 @@
 			rel='noreferrer'
 			target='_blank'
 		>
-			<Heart aria-hidden='true' />
+			<Icon class='icon-[ph--heart]' aria-hidden='true' />
 			GitHub Sponsors
 		</a>
 	</p>
