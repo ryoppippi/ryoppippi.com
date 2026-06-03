@@ -1,11 +1,10 @@
 <script lang='ts'>
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import Icon from '$components/Icon.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import * as DarkMode from 'svelte-fancy-darkmode';
 	import * as ufo from 'ufo';
-	import MoonToSunny from '~icons/line-md/moon-filled-to-sunny-filled-loop-transition';
-	import SunnyToMoon from '~icons/line-md/sunny-filled-loop-to-moon-filled-transition';
 
 	const LINKS = [
 		{ name: 'works', href: resolve('/works') },
@@ -14,7 +13,7 @@
 		{
 			name: 'cv',
 			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
-			icon: 'i-line-md:download-outline',
+			icon: 'icon-[line-md--download-outline]',
 		},
 	] as const satisfies { href: string; name: string; icon?: string }[];
 </script>
@@ -22,37 +21,44 @@
 {#snippet underline(isPath: boolean, transparentDefault = false)}
 	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<span
-		class={{
-			'bg-accent-100': isPath,
-			'bg-transparent': !isPath || transparentDefault,
-			'view-transition--nav-underline': isPath,
-		}}
-		absolute
-		h-0.5
-		w-full
+		class={[
+			'absolute',
+			'h-0.5',
+			'w-full',
+			{
+				'bg-accent-100': isPath,
+				'bg-transparent': !isPath || transparentDefault,
+				'view-transition--nav-underline': isPath,
+			},
+		]}
 	/>
 {/snippet}
 
 <header
-	fcol
-	fyc
-	gap-y-lg
-	grid
-	grid-cols='1 md:3'
-	mxa
-	op='card hover:100'
-	py-6
-	text-xl
-	transition-base
-	view-transition--nav
+	class={[
+		'fcol',
+		'fyc',
+		'view-transition--nav',
+		'mx-auto',
+		'grid',
+		['grid-cols-1', 'md:grid-cols-3'],
+		'gap-y-6',
+		'py-6',
+		'text-xl',
+		'opacity-70',
+		['transition-base', 'hover:opacity-100'],
+	]}
 >
-	<div flex>
+	<div class='flex'>
 		<a
+			class={[
+				'relative',
+				'mx-auto',
+				'font-bold',
+				['md:mx-0', 'md:mb-0'],
+			]}
 			aria-label='Home'
-			font-bold
 			href={resolve('/')}
-			m='xa md:(b0 x0)'
-			relative
 		>
 			<div
 				style:view-transition-name='title-ryoppippi'
@@ -64,76 +70,81 @@
 		</a>
 	</div>
 	<nav
+		class={[
+			'fxc',
+			'col-span-2',
+			'mx-auto',
+			'flex-wrap',
+			'gap-4',
+			'text-lg',
+			'font-bold',
+			['md:mr-0', 'md:justify-end'],
+		]}
 		aria-label='Primary navigation'
-		col-span-2
-		flex='wrap  '
-		font-bold
-		fxc
-		gap-4
-		m='xa md:r0'
-		md-fxe
-		text-lg
 	>
-		<div flex gap-4>
+		<div class='flex gap-4'>
 			{#each LINKS as { href, name, ...rest } (href)}
 				{@const isPath = page.url.pathname.startsWith(href)}
 				{@const icon = 'icon' in rest ? rest.icon : null}
 				<a
 					style:view-transition-name='-nav-link-{name}'
-					block
+					class='relative block px-0'
 					{href}
-					px-0
 					rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-					relative
 					target={href.startsWith('http') ? '_blank' : undefined}
 				>
-					<div fyc>
+					<div class='fyc'>
 						{name}
-						<!-- svelte-ignore element_invalid_self_closing_tag -->
-						{#if icon != null} <span class={icon} aria-hidden='true' /> {/if}
+						{#if icon != null}
+							<Icon class={icon} aria-hidden='true' />
+						{/if}
 					</div>
 					{@render underline(isPath, false)}
 				</a>
 			{/each}
 		</div>
-		<div flex gap='4 md:2' view-transition--nav-icons>
+		<div
+			class={[
+				'view-transition--nav-icons',
+				'flex',
+				['gap-4', 'md:gap-2'],
+			]}
+		>
 			<DarkMode.ToggleButton>
 				{#snippet dark()}
-					<SunnyToMoon />
+					<Icon class='icon-[line-md--sunny-filled-loop-to-moon-filled-transition]' aria-hidden='true' />
 				{/snippet}
 
 				{#snippet light()}
-					<MoonToSunny />
+					<Icon class='icon-[line-md--moon-filled-to-sunny-filled-loop-transition]' aria-hidden='true' />
 				{/snippet}
 			</DarkMode.ToggleButton>
 			<a
-				class='i-line-md:rss'
+				class='fyc my-auto'
 				aria-label='RSS feed'
-				fyc
 				href={resolve('/feed.xml')}
-				mya
 				rel='noopener noreferrer'
 				target='_blank'
 			>
-				RSS feed
+				<Icon class='icon-[line-md--rss]' aria-hidden='true' />
+				<span class='sr-only'>RSS feed</span>
 			</a>
 			<a
-				class='i-teenyicons:github-solid'
+				class='fyc my-auto'
 				aria-label='Source code on GitHub'
-				fyc
 				href='https://github.com/ryoppippi/ryoppippi.com'
-				mya
 				rel='noopener noreferrer'
 				target='_blank'
 			>
-				Source code
+				<Icon class='icon-[teenyicons--github-solid]' aria-hidden='true' />
+				<span class='sr-only'>Source code</span>
 			</a>
 		</div>
 	</nav>
 </header>
 
 <style>
-a{
-	--uno: no-underline;
+a {
+	text-decoration-line: none;
 }
 </style>

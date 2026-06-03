@@ -1,9 +1,7 @@
 import path from 'node:path';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { sveltekit } from '@sveltejs/kit/vite';
-import extractorSvelte from '@unocss/extractor-svelte';
-import UnoCSS from 'unocss/vite';
-import Icons from 'unplugin-icons/vite';
+import tailwindcss from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 
@@ -58,12 +56,7 @@ export default defineConfig({
 			mode: 'generate',
 			entries: Route,
 		}),
-		Icons({ compiler: 'svelte' }),
-		UnoCSS({
-			extractors: [
-				extractorSvelte(),
-			],
-		}),
+		tailwindcss(),
 		sveltekit(),
 	],
 });

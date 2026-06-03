@@ -1,34 +1,30 @@
 <script>
 	import Profile from '$components/Profile.svelte';
 	import Social from '$components/Social.svelte';
+	import './page.css';
 </script>
 
-<article
-	container
-	gcc
-	mt8
-	mxa
+<article class='gcc container mx-auto mt-8'
 >
-	<div animate='duration-1000 keyframes-flip-in-x'>
+	<div class='animate-[flip-in-x_1s_both]'>
 		<Profile />
 	</div>
-	<div mt8>
+	<div class='mt-8'>
 		<h1
 			style:view-transition-name='title-ryoppippi'
-			font-bold
-			mb6
-			text='4xl center'
+			class='mb-6 text-center text-4xl font-bold'
 		>
-			<span
-				block
-				inline='sm:~'
+			<span class='block sm:inline'
 			>
 				@ryoppippi
 			</span>
 			<span
-				animate-pulse
-				font-medium
-				text='center xl text-700 dark:text-200'
+				class={[
+					'animate-pulse',
+					'text-center',
+					['text-xl', 'font-medium'],
+					['text-text-700', 'dark:text-text-200'],
+				]}
 			>
 				Engineer
 
@@ -38,11 +34,7 @@
 	</div>
 </article>
 
-<div
-	container
-	fcc
-	h-full
-	mxa
+<div class='fcc container mx-auto h-full'
 >
 	<Social />
 </div>

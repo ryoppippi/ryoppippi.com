@@ -46,7 +46,6 @@ const config = {
 		},
 		typescript: {
 			config(config) {
-				config.include.push(join(import.meta.dirname, 'uno.config.ts'));
 				config.include.push(join(import.meta.dirname, 'scripts/**/*.ts'));
 			},
 		},

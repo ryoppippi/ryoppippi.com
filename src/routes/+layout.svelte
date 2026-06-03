@@ -10,8 +10,7 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import * as ufo from 'ufo';
 	import faviconLinks from 'virtual:favicons';
-	import 'uno.css';
-	import '@unocss/reset/tailwind.css';
+	import '../styles/site.css';
 
 	const { children } = $props();
 
@@ -97,7 +96,7 @@
 
 <a class='skip-link' href='#main-content'>Skip to content</a>
 
-<div max-w-4xl mxa my3 px-8 un-dark>
+<div class='mx-auto my-3 max-w-4xl px-8'>
 	<Nav />
 	<main id='main-content' tabindex='-1'>
 		{#key page.url}
@@ -107,21 +106,9 @@
 </div>
 
 <style>
-
-:global {
-	body {
-		--uno: font-sans text-base bg-white text-text-800 dark:(bg-bg-base text-text-100) motion-safe:(transition transition-duration-1s scroll-smooth);
-		text-autospace: normal; /* Add spacing around alphanumeric characters in Japanese text */
-		overflow-wrap: anywhere; /* Wrap text when it doesn't fit */
-		word-break: normal; /* Use default word breaking behaviour */
-		line-break: strict; /* Apply strict line breaking rules */
+	:global {
+		@view-transition {
+			navigation: auto;
+		}
 	}
-	@view-transition {
-		navigation: auto;
-	}
-
-	.skip-link {
-		--uno: sr-only focus:(not-sr-only fixed left-4 top-4 z-50 rounded bg-white px-4 py-2 text-text-800 shadow-lg outline-2 outline-accent-100 dark:bg-bg-100 dark:text-text-100);
-	}
-}
 </style>

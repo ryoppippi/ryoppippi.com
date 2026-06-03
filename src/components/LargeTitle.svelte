@@ -20,13 +20,14 @@
 <svelte:element
 	this={tag}
 	style:view-transition-name={viewTransitionName}
-	class={{ 'op-35 dark:op-20': opacity, 'select-none': selectDisabled }}
-	f-text-32-64
-	font='mono bold'
-	line-height-none
-	my-8
-	text-stroke='hex-aaa [1.5px]'
-	text-transparent
+	class={[
+		'f-text-32-64',
+		'my-8',
+		['font-mono', 'font-bold', 'leading-none'],
+		['text-stroke-aaa', 'text-transparent'],
+		{ 'opacity-35 dark:opacity-20': opacity },
+		{ 'select-none': selectDisabled },
+	]}
 >
 	{title}
 </svelte:element>

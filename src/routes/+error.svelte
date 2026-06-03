@@ -2,13 +2,10 @@
 	import { page } from '$app/state';
 </script>
 
-<div
-	fcol
-	gcc
-	pt-10
+<div class='fcol gcc pt-10'
 >
 	{page.url}
 	{page.status}
-	<div p2> <hr ma op25 w-50 /> </div>
+	<div class='p-2'> <hr class='m-auto w-50 opacity-25' /> </div>
 	<a href='/'>Return to Home</a>
 </div>

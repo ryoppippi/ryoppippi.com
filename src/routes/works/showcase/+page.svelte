@@ -6,9 +6,7 @@
 
 </script>
 
-<div
-	grid='~ gap-4'
-	grid-cols='1 lg:2'
+<div class='grid grid-cols-1 gap-4 lg:grid-cols-2'
 >
 	{#each projects as project, count (count)}
 		<div>

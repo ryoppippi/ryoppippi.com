@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import ProjectTitle from '$components/ProjectTitle.svelte';
 	import { capitalize, lowercase } from '@ryoppippi/str-fns';
+	import './layout.css';
 
 	const routes = [
 		'OSS',
@@ -17,12 +18,8 @@
 	<ProjectTitle />
 
 	<nav
+		class='fcol-sm-row fw mb-8 gap-1 text-3xl sm:gap-3'
 		aria-label='Works sections'
-		fcol-sm-row
-		fw
-		gap='1 sm:3'
-		mb-8
-		text-3xl
 	>
 		{#each routes as route (route)}
 			{@const lowercaseRoute = lowercase(route)}
@@ -30,10 +27,9 @@
 			<a
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'
-				class={{ op70: isCurrent }}
+				class={['opacity-20', { 'opacity-70': isCurrent }]}
 				aria-current={isCurrent ? 'page' : undefined}
 				href={isCurrent ? null : lowercaseRoute}
-				op20
 			>{capitalize(route)}</a>
 		{/each}
 	</nav>
