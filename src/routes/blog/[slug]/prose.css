@@ -29,14 +29,6 @@ html:not(.dark) .shiki {
 }
 
 @media (prefers-contrast: more) {
-	.prose .markdown-alert-title {
-		color: #0969da;
-	}
-
-	html.dark .prose .markdown-alert-title {
-		color: #58a6ff;
-	}
-
 	html.dark .shiki span[style*='--shiki-dark:#737C73'] {
 		--shiki-dark: #94a094 !important;
 	}
