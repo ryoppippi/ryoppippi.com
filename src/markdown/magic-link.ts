@@ -30,7 +30,7 @@ const githubSpecialRoutes = [
 	'notifications',
 ];
 
-const githubScopePattern = /^(?:https?:\/\/)?github\.com\/([\w-]*)(?:$|[/?#])/;
+const githubScopePattern = /^(?:https?:\/\/)?github\.com\/([\w-]+)(?:$|[/?#])/;
 
 function isSafeHref(href: string) {
 	try {
@@ -226,6 +226,14 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('href="https://github.com/issues"');
 			expect(html).toContain('background-image: url(\'https://favicon.yandex.net/favicon/github.com\')');
 			expect(html).not.toContain('https://github.com/issues.png');
+		});
+
+		it('does not treat GitHub root links as user scopes', () => {
+			const html = renderMagicLink('GitHub|https://github.com/?tab=repositories', {});
+
+			expect(html).toContain('href="https://github.com/?tab=repositories"');
+			expect(html).toContain('background-image: url(\'https://favicon.yandex.net/favicon/github.com\')');
+			expect(html).not.toContain('https://github.com/.png');
 		});
 
 		it('matches global regex image overrides consistently across calls', () => {
