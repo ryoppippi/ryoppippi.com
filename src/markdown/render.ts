@@ -1,8 +1,9 @@
 import type { JsParserOptions } from '@ox-content/napi';
-import process from 'node:process';
 import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
+import { codeToHtml } from 'shiki';
 import { renderMagicLink } from './magic-link.ts';
-import { highlightCode, md } from './markdown.ts';
+import { transformerEscape } from './shiki-transformer.ts';
 
 const oxContentOptions = {
 	gfm: true,
@@ -27,6 +28,23 @@ type FenceLine = {
 	marker: string;
 	info: string;
 };
+
+async function highlightCode(code: string, lang: string) {
+	return codeToHtml(code, {
+		lang,
+		themes: {
+			dark: 'kanagawa-dragon',
+			light: 'kanagawa-lotus',
+		},
+		transformers: [
+			transformerTwoslash({
+				explicitTrigger: true,
+				renderer: rendererRich(),
+			}),
+			transformerEscape(),
+		],
+	});
+}
 
 function escapeHtml(value: string) {
 	return value
@@ -206,23 +224,13 @@ async function renderHighlightedCodeBlocks(source: string, html: string) {
 	return chunks.join('');
 }
 
-export type MarkdownRenderer = 'markdown-it' | 'ox-content';
-
-export function getMarkdownRenderer(): MarkdownRenderer {
-	return process.env.OX_CONTENT_MARKDOWN === '0' ? 'markdown-it' : 'ox-content';
-}
-
 export async function renderMarkdown(content: string) {
-	if (getMarkdownRenderer() === 'ox-content') {
-		const prepared = prepareOxContentMarkdown(content);
-		const result = parseAndRender(prepared, oxContentOptions);
+	const prepared = prepareOxContentMarkdown(content);
+	const result = parseAndRender(prepared, oxContentOptions);
 
-		if (result.errors.length > 0) {
-			throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
-		}
-
-		return mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html));
+	if (result.errors.length > 0) {
+		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	return md.renderAsync(content);
+	return mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html));
 }

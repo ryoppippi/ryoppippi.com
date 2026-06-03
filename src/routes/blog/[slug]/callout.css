@@ -1,0 +1,72 @@
+.prose .ox-callout {
+	--callout-color: #0969da;
+	padding: 0.5rem 1rem;
+	margin-bottom: 1rem;
+	color: inherit;
+	border-left: 0.25em solid var(--callout-color);
+}
+
+.prose .ox-callout > :first-child {
+	margin-top: 0;
+}
+
+.prose .ox-callout > :last-child {
+	margin-bottom: 0;
+}
+
+.prose .ox-callout-title {
+	color: var(--callout-color);
+	font-weight: 500;
+	line-height: 1;
+	text-transform: capitalize;
+}
+
+.prose .ox-callout--note {
+	--callout-color: #0969da;
+}
+
+.prose .ox-callout--tip {
+	--callout-color: #1a7f37;
+}
+
+.prose .ox-callout--important {
+	--callout-color: #8250df;
+}
+
+.prose .ox-callout--warning {
+	--callout-color: #9a6700;
+}
+
+.prose .ox-callout--caution {
+	--callout-color: #d1242f;
+}
+
+html.dark .prose .ox-callout--note {
+	--callout-color: #2f81f7;
+}
+
+html.dark .prose .ox-callout--tip {
+	--callout-color: #3fb950;
+}
+
+html.dark .prose .ox-callout--important {
+	--callout-color: #a371f7;
+}
+
+html.dark .prose .ox-callout--warning {
+	--callout-color: #d29922;
+}
+
+html.dark .prose .ox-callout--caution {
+	--callout-color: #f85149;
+}
+
+@media (prefers-contrast: more) {
+	.prose .ox-callout-title {
+		color: #0969da;
+	}
+
+	html.dark .prose .ox-callout-title {
+		color: #58a6ff;
+	}
+}

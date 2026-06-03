@@ -7,14 +7,12 @@
 	import { formatDate } from '$lib/util';
 	import * as ufo from 'ufo';
 	import '@shikijs/twoslash/style-rich.css';
-	import 'markdown-it-github-alerts/styles/github-colors-light.css';
-	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
-	import 'markdown-it-github-alerts/styles/github-base.css';
 	import './link-card.css';
 	import './magic-link.css';
 	import './prose.css';
 	import './anchor.css';
 	import './collapse.css';
+	import './callout.css';
 	import './article.css';
 
 	const { data } = $props();
