@@ -1,0 +1,19 @@
+@import url('https://fonts.bunny.net/css?family=bad-script:400|dm-mono:400,600|inter:400,600,800|jetbrains-mono:400,600|roboto-condensed:400,700&display=swap');
+@import 'tailwindcss' source(none);
+@import './tailwind.css';
+
+@source '../routes/+layout.svelte';
+@source '../routes/+error.svelte';
+@source '../components/Nav.svelte';
+
+body {
+	@apply bg-white font-sans text-base text-text-800 motion-safe:scroll-smooth motion-safe:transition motion-safe:duration-1000 dark:bg-bg-base dark:text-text-100;
+	text-autospace: normal;
+	overflow-wrap: anywhere;
+	word-break: normal;
+	line-break: strict;
+}
+
+.skip-link {
+	@apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-text-800 focus:shadow-lg focus:outline-2 focus:outline-accent-100 dark:focus:bg-bg-100 dark:focus:text-text-100;
+}

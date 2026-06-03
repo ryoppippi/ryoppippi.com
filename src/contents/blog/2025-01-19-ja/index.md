@@ -9,7 +9,7 @@ lang: 'ja'
 
 このショートカットを設定すると、YouTubeアプリを開いたときに画面の回転ロックが解除され、アプリを閉じると再び有効になります。私はTwitchアプリにも同じ設定をしています。
 
-<div grid='~ cols-3 gap-2'>
+<div class='grid grid-cols-3 gap-2'>
 
 ![](./IMG_0941.png)
 

@@ -1,7 +1,9 @@
 <script lang='ts'>
 	import type { Item } from '$components/ListView.svelte';
 	import CheckButton from '$components/CheckButton.svelte';
+	import Icon from '$components/Icon.svelte';
 	import ListView from '$components/ListView.svelte';
+	import './page.css';
 
 	const { data } = $props();
 
@@ -25,33 +27,27 @@
 	{@const filterByEnglish = !(isOnlyEnglish && item.lang !== 'en')}
 	{@const filterByRyoppippi = !(isOnlyRyoppippi && item.link.includes('http'))}
 	{#if filterByEnglish && filterByRyoppippi}
-		<div flex gap-2 items-start my-2>
-			<span mt-0.5>
-				<!-- svelte-ignore element_invalid_self_closing_tag -->
-				<div
-					class={[
-						'blog-list-icon',
-						{
-							'i-simple-icons-markdown': !item.external,
-							'i-quill-link-out': item.external, // default for external links
-						},
-					]}
-					aria-hidden='true'
-				/>
+		<div class='my-2 flex items-start gap-2'>
+			<span class='mt-0.5'>
+				{#if item.external}
+					<Icon class='icon-[quill--link-out] blog-list-icon' aria-hidden='true' />
+				{:else}
+					<Icon class='icon-[simple-icons--markdown] blog-list-icon' aria-hidden='true' />
+				{/if}
 			</span>
 			<p
 				style:view-transition-name='blog-{item.slug}'
-				gap-x-2
+				class='gap-x-2'
 			>
-				{#if 'isPublished' in item && !item?.isPublished}<span bg-red>(draft)</span>{/if}
+				{#if 'isPublished' in item && !item?.isPublished}<span class='bg-red-500'>(draft)</span>{/if}
 				{item.title}
-				<span op50 pl-2 text-sm truncate>{item.date}</span>
+				<span class='truncate pl-2 text-sm opacity-50'>{item.date}</span>
 			</p>
 		</div>
 	{/if}
 {/snippet}
 
-<div fcol gap-1 mxa pt-10 px-10>
+<div class='fcol mx-auto gap-1 px-10 pt-10'>
 	<CheckButton
 		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}

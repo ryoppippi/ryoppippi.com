@@ -5,7 +5,13 @@
 	transform: translateY(3px);
 	line-height: 100%;
 	color: var(--fg-light) !important;
-	--uno: gap-1 transition rounded px1.5 py1 important-border-0 font-condensed;
+	gap: calc(var(--spacing) * 1);
+	border-width: 0 !important;
+	border-radius: var(--radius-sm);
+	padding: calc(var(--spacing) * 1) calc(var(--spacing) * 1.5);
+	font-family: var(--font-condensed);
+	transition-property: all;
+	transition-duration: 150ms;
 }
 
 .markdown-magic-link:hover {
@@ -25,7 +31,10 @@
 
 .markdown-magic-link.markdown-magic-link-github-at {
 	transform: translateY(6px);
-	--uno: pl-0 py-0 pr2 text-sm gap-1.2 rounded-full;
+	gap: calc(var(--spacing) * 1.2);
+	border-radius: 9999px;
+	padding: 0 calc(var(--spacing) * 2) 0 0;
+	font-size: var(--text-sm);
 }
 
 .markdown-magic-link.markdown-magic-link-github-at .markdown-magic-link-image {

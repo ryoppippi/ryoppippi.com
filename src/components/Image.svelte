@@ -1,13 +1,16 @@
 <script lang='ts'>
+	import type { HTMLImgAttributes } from 'svelte/elements';
+
 	type Props = {
 		src: string;
 		alt: string;
-	} & { [key: string]: unknown };
+	} & HTMLImgAttributes;
 
-	const { src, alt, ...rest }: Props = $props();
+	const { src, alt, class: className, ...rest }: Props = $props();
 </script>
 
 <img
+	class={className}
 	{alt}
 	loading='lazy'
 	{src}

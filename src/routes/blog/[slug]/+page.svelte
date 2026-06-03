@@ -1,11 +1,11 @@
 <script lang='ts'>
 	import { dev } from '$app/environment';
 	import { page } from '$app/state';
+	import Icon from '$components/Icon.svelte';
 	import LargeTitle from '$components/LargeTitle.svelte';
 	import { PUBLIC_ORIGIN } from '$env/static/public';
 	import { formatDate } from '$lib/util';
 	import * as ufo from 'ufo';
-	import IconMarkdown from '~icons/ri/markdown-line';
 	import '@shikijs/twoslash/style-rich.css';
 	import 'markdown-it-github-alerts/styles/github-colors-light.css';
 	import 'markdown-it-github-alerts/styles/github-colors-dark-class.css';
@@ -15,6 +15,7 @@
 	import './prose.css';
 	import './anchor.css';
 	import './collapse.css';
+	import './article.css';
 
 	const { data } = $props();
 	const { metadata, Markdown } = data;
@@ -33,45 +34,56 @@
 	<link href={mdUrl} rel='alternate' title='Markdown source' type='text/plain' />
 </svelte:head>
 
-<div
-	min-w-0
-	mxa
+<div class='mx-auto min-w-0'
 >
 	{#if !metadata.isPublished}
-		<p bg-red text='4xl center'>This article is not published yet.</p>
+		<p class='bg-red-500 text-center text-4xl'>This article is not published yet.</p>
 	{/if}
 
-	<hgroup fcol fyc gap-1 mb-3 text-center>
+	<hgroup class='fcol fyc mb-3 gap-1 text-center'>
 		<LargeTitle
 			opacity={false}
 			selectDisabled={false}
 			title={metadata.title}
 			viewTransitionName='blog-{metadata.slug}'
 		/>
-		<p text-text-400>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='hover:op100' aria-label='Markdown source' href={mdUrl} op70 rel='noopener noreferrer' target='_blank'><IconMarkdown class='inline align-middle' aria-hidden='true' /></a></p>
+		<p class='text-text-400'>{formatDate(new Date(metadata.pubDate))} ・ {metadata.readingTime.text} ・ <a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={mdUrl} rel='noopener noreferrer' target='_blank'><Icon class='icon-[ri--markdown-line] align-middle' aria-hidden='true' /></a></p>
 	</hgroup>
 
-	<div p2>
-		<hr ma max-w-100 op25 w-full />
+	<div class='p-2'>
+		<hr class='m-auto w-full max-w-100 opacity-25' />
 	</div>
 
-	<article class={['prose dark:prose-invert', !dev && 'slide-enter-content']} mxa pb-8 text-text='700 dark:200'>
+	<article
+		class={[
+			'prose',
+			'mx-auto',
+			'pb-8',
+			['text-text-700', 'dark:text-text-200'],
+			'dark:prose-invert',
+			!dev && 'slide-enter-content',
+		]}
+	>
 		<Markdown />
 	</article>
-	<div op50 pb-8>
-		<span op70>comment on</span>
+	<div class='pb-8 opacity-50'>
+		<span class='opacity-70'>comment on</span>
 		<a href={bskyUrl} rel='noopener noreferrer' target='_blank'>bluesky</a>
-		<span op35> / </span>
+		<span class='opacity-35'> / </span>
 		<a href={tweetUrl} rel='noopener noreferrer' target='_blank'>twitter</a>
 	</div>
 
-	<div op50 pb-8>
+	<div class='pb-8 opacity-50'>
 		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='noopener noreferrer' target='_blank'>CC BY-NC-SA 4.0</a> 2022-PRESENT © ryoppippi
 	</div>
 </div>
 
 <style>
 a {
-	--uno: no-underline hover:underline
+	text-decoration-line: none;
+}
+
+a:hover {
+	text-decoration-line: underline;
 }
 </style>

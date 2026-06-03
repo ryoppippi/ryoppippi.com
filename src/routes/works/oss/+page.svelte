@@ -7,17 +7,15 @@
 	const { projects } = data;
 </script>
 
-<div text-center>
+<div class='text-center'>
 	<GitHubNav />
 </div>
 
-<div grid='~ gap-16'>
+<div class='grid gap-16'>
 	{#each Object.entries(projects) as [genre, projectsByGenrne] (genre)}
 		<div>
 			<LargeTitle level={2} title={genre} />
-			<div
-				grid='~ gap-8'
-				grid-cols='1 md:2'
+			<div class='grid grid-cols-1 gap-8 md:grid-cols-2'
 			>
 				{#each projectsByGenrne as project (project.link)}
 					<OssProjectCard {project} />
