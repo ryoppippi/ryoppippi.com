@@ -1,6 +1,43 @@
-@import 'tailwindcss' source(none);
-@import '../styles/tailwind.css';
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@reference '../styles/tailwind.css';
 
 @source './+page.svelte';
 @source '../components/Profile.svelte';
 @source '../components/Social.svelte';
+
+@keyframes root-fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes root-flip-in-x {
+	0% {
+		opacity: 0;
+		animation-timing-function: ease-in;
+		transform: perspective(400px) rotateX(90deg);
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: perspective(400px) rotateX(-20deg);
+	}
+
+	60% {
+		opacity: 1;
+		transform: perspective(400px) rotateX(10deg);
+	}
+
+	80% {
+		transform: perspective(400px) rotateX(-5deg);
+	}
+
+	to {
+		transform: perspective(400px);
+	}
+}

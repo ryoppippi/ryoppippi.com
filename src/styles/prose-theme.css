@@ -1,0 +1,7 @@
+.prose {
+	--tw-prose-code: var(--color-text-800);
+	--tw-prose-invert-code: var(--color-text-100);
+	--tw-prose-hr: #7d7d7d4d;
+	--tw-prose-th-borders: #7d7d7d4d;
+	--tw-prose-td-borders: #7d7d7d4d;
+}
