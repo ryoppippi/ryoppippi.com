@@ -106,14 +106,14 @@
 				'flex',
 				'w-[4.375rem]',
 				'justify-between',
-				'[&_button]:my-auto',
 				'[&_button]:flex',
 				'[&_button]:items-center',
-				'[&_button]:cursor-pointer',
+				'[&_button]:my-auto',
+				'[&_button]:p-0',
 				'[&_button]:border-0',
 				'[&_button]:bg-transparent',
-				'[&_button]:p-0',
 				'[&_button]:text-inherit',
+				'[&_button]:cursor-pointer',
 			]}
 		>
 			<DarkMode.ToggleButton>
