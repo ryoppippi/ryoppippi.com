@@ -6,7 +6,7 @@
 
 <article class='gcc container mx-auto mt-8'
 >
-	<div class='animate-[flip-in-x_1s_both]'>
+	<div class='animate-[root-flip-in-x_1s_both]'>
 		<Profile />
 	</div>
 	<div class='mt-8'>

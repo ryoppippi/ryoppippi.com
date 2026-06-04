@@ -3,7 +3,9 @@
 	"compilerOptions": {
 		"resolveJsonModule": true,
 		"types": [
-			"@total-typescript/ts-reset"
+			"@total-typescript/ts-reset",
+			"vitest/globals",
+			"vitest/importMeta"
 		],
 		"allowImportingTsExtensions": true,
 		"allowJs": true,

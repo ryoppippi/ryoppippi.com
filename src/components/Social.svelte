@@ -23,7 +23,7 @@
 	style:--cols={ICONS.length}
 	class={[
 		'gcc',
-		'animate-[fade-in_3s_both]',
+		'animate-[root-fade-in_3s_both]',
 		['grid-cols-3', 'sm:grid-cols-[repeat(var(--cols),minmax(0,1fr))]'],
 		'gap-3',
 	]}
