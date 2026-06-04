@@ -108,6 +108,14 @@
 				'view-transition--nav-icons',
 				'flex',
 				['gap-4', 'md:gap-2'],
+				'[&_button]:my-auto',
+				'[&_button]:flex',
+				'[&_button]:items-center',
+				'[&_button]:cursor-pointer',
+				'[&_button]:border-0',
+				'[&_button]:bg-transparent',
+				'[&_button]:p-0',
+				'[&_button]:text-inherit',
 			]}
 		>
 			<DarkMode.ToggleButton>
