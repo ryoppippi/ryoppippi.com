@@ -45,7 +45,7 @@
 	display: flex;
 	flex-direction: column;
 
-	@media (width >= 48rem) {
+	@media (width >= theme(--breakpoint-md)) {
 		flex-direction: row;
 	}
 }
@@ -54,7 +54,7 @@
 	display: flex;
 	flex-direction: column;
 
-	@media (width >= 40rem) {
+	@media (width >= theme(--breakpoint-sm)) {
 		flex-direction: row;
 	}
 }

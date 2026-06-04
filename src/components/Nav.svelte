@@ -77,10 +77,11 @@
 		aria-label='Primary navigation'
 	>
 		{#each LINKS as { href, name } (href)}
-			{@const isPath = page.url.pathname.startsWith(href)}
+			{@const resolvedHref = resolve(href)}
+			{@const isPath = page.url.pathname.startsWith(resolvedHref)}
 			<a
 				class='relative block shrink-0 whitespace-nowrap px-0'
-				href={resolve(href)}
+				href={resolvedHref}
 			>
 				<div class='fyc'>
 					{name}

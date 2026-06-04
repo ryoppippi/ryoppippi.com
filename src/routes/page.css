@@ -6,7 +6,7 @@
 @source '../components/Profile.svelte';
 @source '../components/Social.svelte';
 
-@keyframes fade-in {
+@keyframes root-fade-in {
 	from {
 		opacity: 0;
 	}
@@ -16,7 +16,7 @@
 	}
 }
 
-@keyframes flip-in-x {
+@keyframes root-flip-in-x {
 	0% {
 		opacity: 0;
 		animation-timing-function: ease-in;
