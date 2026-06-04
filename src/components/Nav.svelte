@@ -7,15 +7,13 @@
 	import * as ufo from 'ufo';
 
 	const LINKS = [
-		{ name: 'works', href: resolve('/works') },
-		{ name: 'blog', href: resolve('/blog') },
-		{ name: 'sponsors', href: resolve('/sponsors') },
-		{
-			name: 'cv',
-			href: ufo.joinURL(PUBLIC_ORIGIN, '/cv'),
-			icon: 'icon-[line-md--download-outline]',
-		},
-	] as const satisfies { href: string; name: string; icon?: string }[];
+		{ name: 'works', href: '/works' },
+		{ name: 'blog', href: '/blog' },
+		{ name: 'sponsors', href: '/sponsors' },
+	] as const satisfies { href: string; name: string }[];
+
+	const CV_HREF = ufo.joinURL(PUBLIC_ORIGIN, '/cv');
+	const isHome = $derived(page.url.pathname === '/');
 </script>
 
 {#snippet underline(isPath: boolean, transparentDefault = false)}
@@ -28,7 +26,6 @@
 			{
 				'bg-accent-100': isPath,
 				'bg-transparent': !isPath || transparentDefault,
-				'view-transition--nav-underline': isPath,
 			},
 		]}
 	/>
@@ -36,12 +33,10 @@
 
 <header
 	class={[
-		'fcol',
-		'fyc',
-		'view-transition--nav',
 		'mx-auto',
 		'grid',
-		['grid-cols-1', 'md:grid-cols-3'],
+		['max-md:grid-cols-1', 'md:grid-cols-3'],
+		'items-center',
 		'gap-y-6',
 		'py-6',
 		'text-xl',
@@ -49,65 +44,67 @@
 		['transition-base', 'hover:opacity-100'],
 	]}
 >
-	<div class='flex'>
-		<a
-			class={[
-				'relative',
-				'mx-auto',
-				'font-bold',
-				['md:mx-0', 'md:mb-0'],
-			]}
-			aria-label='Home'
-			href={resolve('/')}
-		>
-			<div
-				style:view-transition-name='title-ryoppippi'
-				class={{ hidden: page.url.pathname === '/' }}
+	<div class={isHome ? ['max-md:hidden', 'md:flex'] : 'flex'}>
+		{#if !isHome}
+			<a
+				class={[
+					'relative',
+					'font-bold',
+					['max-md:mx-auto', 'md:mx-0', 'md:mb-0'],
+				]}
+				aria-label='Home'
+				href={resolve('/')}
 			>
-				@ryoppippi
-			</div>
-			<div>{@render underline(page.url.pathname === '/', true)}</div>
-		</a>
+				<div style:view-transition-name='title-ryoppippi'>@ryoppippi</div>
+				<div>{@render underline(isHome, true)}</div>
+			</a>
+		{/if}
 	</div>
 	<nav
 		class={[
-			'fxc',
-			'col-span-2',
-			'mx-auto',
+			'flex',
+			'w-full',
+			'max-w-full',
+			'md:col-span-2',
 			'flex-wrap',
-			'gap-4',
+			'gap-x-4',
+			'gap-y-4',
 			'text-lg',
 			'font-bold',
-			['md:mr-0', 'md:justify-end'],
+			['max-md:mx-auto', 'md:ml-auto', 'md:mr-0'],
+			['max-md:justify-center', 'md:justify-end'],
 		]}
 		aria-label='Primary navigation'
 	>
-		<div class='flex gap-4'>
-			{#each LINKS as { href, name, ...rest } (href)}
-				{@const isPath = page.url.pathname.startsWith(href)}
-				{@const icon = 'icon' in rest ? rest.icon : null}
-				<a
-					style:view-transition-name='-nav-link-{name}'
-					class='relative block px-0'
-					{href}
-					rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-					target={href.startsWith('http') ? '_blank' : undefined}
-				>
-					<div class='fyc'>
-						{name}
-						{#if icon != null}
-							<Icon class={icon} aria-hidden='true' />
-						{/if}
-					</div>
-					{@render underline(isPath, false)}
-				</a>
-			{/each}
-		</div>
+		{#each LINKS as { href, name } (href)}
+			{@const isPath = page.url.pathname.startsWith(href)}
+			<a
+				class='relative block shrink-0 whitespace-nowrap px-0'
+				href={resolve(href)}
+			>
+				<div class='fyc'>
+					{name}
+				</div>
+				{@render underline(isPath, false)}
+			</a>
+		{/each}
+		<a
+			class='relative block w-10 shrink-0 whitespace-nowrap px-0'
+			href={CV_HREF}
+			rel='noopener noreferrer'
+			target='_blank'
+		>
+			<div class='fyc'>
+				cv
+				<Icon class='icon-[line-md--download-outline] size-[1em] shrink-0' aria-hidden='true' />
+			</div>
+			{@render underline(false, false)}
+		</a>
 		<div
 			class={[
-				'view-transition--nav-icons',
 				'flex',
-				['gap-4', 'md:gap-2'],
+				'w-[4.375rem]',
+				'justify-between',
 			]}
 		>
 			<DarkMode.ToggleButton>
