@@ -2,6 +2,7 @@ import path from 'node:path';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { FontaineTransform } from 'fontaine';
 
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
@@ -54,6 +55,15 @@ export default defineConfig({
 		cloudflareRedirect({
 			mode: 'generate',
 			entries: Route,
+		}),
+		FontaineTransform.vite({
+			fallbacks: {
+				'Bad Script': ['Segoe UI'],
+				'DM Mono': ['Courier New'],
+				'Inter': ['Arial'],
+				'JetBrains Mono': ['Courier New'],
+				'Roboto Condensed': ['Arial'],
+			},
 		}),
 		tailwindcss(),
 		sveltekit(),

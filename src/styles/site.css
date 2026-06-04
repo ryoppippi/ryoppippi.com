@@ -1,4 +1,3 @@
-@import url('https://fonts.bunny.net/css?family=bad-script:400|dm-mono:400,600|inter:400,600,800|jetbrains-mono:400,600|roboto-condensed:400,700&display=swap');
 @import './tailwind.css';
 
 @source '../routes/+layout.svelte';

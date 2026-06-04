@@ -23,11 +23,11 @@
 	--color-bg-100: #1e1e1e;
 	--color-bg-200: #2d2d2d;
 	--color-bg-300: #454545;
-	--font-sans: Inter, sans-serif;
-	--font-mono: 'DM Mono', monospace;
-	--font-condensed: 'Roboto Condensed', sans-serif;
-	--font-wisper: 'Bad Script', cursive;
-	--font-code: 'JetBrains Mono', 'Fira Code', monospace;
+	--font-sans: Inter, 'Inter fallback', sans-serif;
+	--font-mono: 'DM Mono', 'DM Mono fallback', monospace;
+	--font-condensed: 'Roboto Condensed', 'Roboto Condensed fallback', sans-serif;
+	--font-wisper: 'Bad Script', 'Bad Script fallback', cursive;
+	--font-code: 'JetBrains Mono', 'JetBrains Mono fallback', 'Fira Code', monospace;
 }
 
 @utility fcc {
