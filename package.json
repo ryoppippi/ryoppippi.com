@@ -68,6 +68,7 @@
 		"eslint-plugin-svelte": "^3.17.1",
 		"fast-sort": "^3.4.1",
 		"feed": "^5.2.1",
+		"fontaine": "^0.8.0",
 		"fs-extra": "^11.3.5",
 		"gray-matter-es": "0.2.1",
 		"lefthook": "^2.1.6",

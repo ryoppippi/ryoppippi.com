@@ -10,6 +10,26 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import * as ufo from 'ufo';
 	import faviconLinks from 'virtual:favicons';
+	import '@fontsource/bad-script/latin-400.css';
+	import '@fontsource/bad-script/latin-ext-400.css';
+	import '@fontsource/dm-mono/latin-400.css';
+	import '@fontsource/dm-mono/latin-500.css';
+	import '@fontsource/dm-mono/latin-ext-400.css';
+	import '@fontsource/dm-mono/latin-ext-500.css';
+	import '@fontsource/inter/latin-400.css';
+	import '@fontsource/inter/latin-600.css';
+	import '@fontsource/inter/latin-800.css';
+	import '@fontsource/inter/latin-ext-400.css';
+	import '@fontsource/inter/latin-ext-600.css';
+	import '@fontsource/inter/latin-ext-800.css';
+	import '@fontsource/jetbrains-mono/latin-400.css';
+	import '@fontsource/jetbrains-mono/latin-600.css';
+	import '@fontsource/jetbrains-mono/latin-ext-400.css';
+	import '@fontsource/jetbrains-mono/latin-ext-600.css';
+	import '@fontsource/roboto-condensed/latin-400.css';
+	import '@fontsource/roboto-condensed/latin-700.css';
+	import '@fontsource/roboto-condensed/latin-ext-400.css';
+	import '@fontsource/roboto-condensed/latin-ext-700.css';
 	import '../styles/site.css';
 
 	const { children } = $props();
