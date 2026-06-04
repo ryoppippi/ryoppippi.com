@@ -1,5 +1,6 @@
-@import 'tailwindcss' source(none);
-@import '../../styles/tailwind.css';
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@reference '../../styles/tailwind.css';
 
 @source './+page.svelte';
 @source '../../components/CheckButton.svelte';

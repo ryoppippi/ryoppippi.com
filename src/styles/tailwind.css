@@ -1,3 +1,6 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss' source(none);
+
 @plugin '@tailwindcss/typography';
 @plugin '@iconify/tailwind4';
 
@@ -41,11 +44,19 @@
 @utility fcol-md-row {
 	display: flex;
 	flex-direction: column;
+
+	@media (width >= 48rem) {
+		flex-direction: row;
+	}
 }
 
 @utility fcol-sm-row {
 	display: flex;
 	flex-direction: column;
+
+	@media (width >= 40rem) {
+		flex-direction: row;
+	}
 }
 
 @utility fw {
@@ -109,18 +120,6 @@
 	view-transition-name: name---profile;
 }
 
-@utility view-transition--nav {
-	view-transition-name: -nav;
-}
-
-@utility view-transition--nav-icons {
-	view-transition-name: -nav-icons;
-}
-
-@utility view-transition--nav-underline {
-	view-transition-name: -nav-underline;
-}
-
 @utility btn-blue {
 	@apply border border-base rounded px-2.5 py-1 opacity-50 no-underline transition-all duration-200 ease-out hover:bg-[#60a5fa1a] hover:text-[#60a5fa] hover:opacity-100;
 }
@@ -131,60 +130,4 @@
 
 @utility btn-pink {
 	@apply border border-base rounded px-2.5 py-1 opacity-50 no-underline transition-all duration-200 ease-out hover:bg-[#f472b61a] hover:text-[#f472b6] hover:opacity-100;
-}
-
-@media (min-width: theme(--breakpoint-sm)) {
-	.fcol-sm-row {
-		flex-direction: row;
-	}
-}
-
-@media (min-width: theme(--breakpoint-md)) {
-	.fcol-md-row {
-		flex-direction: row;
-	}
-}
-
-@keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-}
-
-@keyframes flip-in-x {
-	0% {
-		opacity: 0;
-		animation-timing-function: ease-in;
-		transform: perspective(400px) rotateX(90deg);
-	}
-
-	40% {
-		animation-timing-function: ease-in;
-		transform: perspective(400px) rotateX(-20deg);
-	}
-
-	60% {
-		opacity: 1;
-		transform: perspective(400px) rotateX(10deg);
-	}
-
-	80% {
-		transform: perspective(400px) rotateX(-5deg);
-	}
-
-	to {
-		transform: perspective(400px);
-	}
-}
-
-.prose {
-	--tw-prose-code: var(--color-text-800);
-	--tw-prose-invert-code: var(--color-text-100);
-	--tw-prose-hr: #7d7d7d4d;
-	--tw-prose-th-borders: #7d7d7d4d;
-	--tw-prose-td-borders: #7d7d7d4d;
 }
