@@ -1,3 +1,5 @@
+import type { Plugin } from 'vite';
+import { copyFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -7,10 +9,28 @@ import { FontaineTransform } from 'fontaine';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
+import { fontAssets } from './font-assets.js';
 import { Route } from './routes.js';
 
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
+}
+
+function fontAssetsPlugin(): Plugin {
+	return {
+		name: 'font-assets',
+		async buildStart() {
+			await Promise.all(
+				fontAssets.map(async ({ packageName, fileName }) => {
+					const source = relativePath('node_modules', packageName, 'files', fileName);
+					const destination = relativePath('static', 'fonts', fileName);
+
+					await mkdir(path.dirname(destination), { recursive: true });
+					await copyFile(source, destination);
+				}),
+			);
+		},
+	};
 }
 
 export default defineConfig({
@@ -56,6 +76,7 @@ export default defineConfig({
 			mode: 'generate',
 			entries: Route,
 		}),
+		fontAssetsPlugin(),
 		FontaineTransform.vite({
 			fallbacks: {
 				'Bad Script': ['Segoe UI'],
