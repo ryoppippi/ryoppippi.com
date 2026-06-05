@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import process from 'node:process';
 import { flatMap } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import adapter from '@sveltejs/adapter-static';
@@ -9,6 +10,8 @@ import { importAssets } from 'svelte-preprocess-import-assets';
 import { Route } from './routes.js';
 import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
+
+process.env.PUBLIC_ORIGIN ??= 'https://ryoppippi.com';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
