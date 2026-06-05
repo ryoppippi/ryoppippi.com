@@ -11,7 +11,7 @@ import { Route } from './routes.js';
 import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
 
-process.env.PUBLIC_ORIGIN ??= 'https://ryoppippi.com';
+process.env.PUBLIC_ORIGIN ??= isDevelopment ? 'http://localhost:5173' : 'https://ryoppippi.com';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
