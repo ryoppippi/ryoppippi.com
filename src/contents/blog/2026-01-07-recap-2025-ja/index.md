@@ -60,7 +60,7 @@ import Tweet from '$components/Tweet.svelte';
 特に[toyokumo様にThanks OSS Award](https://oss.toyokumo.co.jp/results/2025-last-half)に選んでいただいたのは、一つの目標でもあったのでとても嬉しかった。
 感謝してもしきれない。
 
-![sponsor](https://cdn.jsdelivr.net/gh/ryoppippi/sponsors@main/sponsors.circles.svg)
+![sponsor](https://sponsors.ryoppippi.com/sponsors.circles.svg)
 
 ## 2026年に向けて
 
