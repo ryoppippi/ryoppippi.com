@@ -29,7 +29,7 @@ lang: 'ja'
 >
 > スポンサーしていただいている方々にはとても感謝しています。ありがとうございます！
 >
-> [![spnosors](https://cdn.jsdelivr.net/gh/ryoppippi/sponsors/sponsors.circles.svg)](https://github.com/ryoppippi/sponsors)
+> [![spnosors](https://sponsors.ryoppippi.com/sponsors.circles.svg)](https://github.com/ryoppippi/sponsors)
 
 # はじめに
 

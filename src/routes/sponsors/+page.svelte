@@ -6,13 +6,13 @@
 		{
 			id: 'circles',
 			label: 'Sponsor Circles',
-			src: 'https://cdn.jsdelivr.net/gh/ryoppippi/sponsors@main/sponsors.circles.svg',
+			src: 'https://sponsors.ryoppippi.com/sponsors.circles.svg',
 			alt: 'GitHub Sponsors',
 		},
 		{
 			id: 'tiers',
 			label: 'Sponsor Tiers',
-			src: 'https://cdn.jsdelivr.net/gh/ryoppippi/sponsors@main/sponsors.past.svg',
+			src: 'https://sponsors.ryoppippi.com/sponsors.past.svg',
 			alt: 'Sponsor Tiers',
 		},
 	] as const;
