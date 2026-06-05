@@ -46,6 +46,7 @@ const config = {
 		},
 		typescript: {
 			config(config) {
+				config.include.push(join(import.meta.dirname, '*.ts'));
 				config.include.push(join(import.meta.dirname, 'scripts/**/*.ts'));
 			},
 		},

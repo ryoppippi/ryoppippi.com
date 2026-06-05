@@ -5,11 +5,6 @@ export default ryoppippi({
 	svelte: true,
 	typescript: {
 		tsconfigPath: './tsconfig.json',
-		parserOptions: {
-			projectService: {
-				allowDefaultProject: ['./*.js', 'tailwind-fonts.ts'],
-			},
-		},
 	},
 	ignores: [
 		'.ox-content-compare/**',
