@@ -23,6 +23,7 @@
 		"dev": "vite dev",
 		"format": "nr lint --fix",
 		"preinstall": "only-allow pnpm",
+		"prelint": "svelte-kit sync",
 		"lint": "eslint --cache .",
 		"new": "./scripts/new-post.js",
 		"preview": "vite preview",

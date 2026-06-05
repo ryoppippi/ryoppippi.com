@@ -1,3 +1,10 @@
+type FontAsset = {
+	family: string;
+	packageName: `@fontsource/${string}`;
+	fileName: `${string}.woff2`;
+	weight: number;
+};
+
 export const fontAssets = [
 	{
 		family: 'Bad Script',
@@ -59,4 +66,4 @@ export const fontAssets = [
 		fileName: 'roboto-condensed-latin-700-normal.woff2',
 		weight: 700,
 	},
-];
+] as const satisfies readonly FontAsset[];

@@ -9,7 +9,7 @@ import { FontaineTransform } from 'fontaine';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
-import { fontAssets } from './font-assets.js';
+import { fontAssets } from './font-assets.ts';
 import { Route } from './routes.js';
 
 function relativePath(...args: string[]): string {
@@ -25,8 +25,20 @@ function fontAssetsPlugin(): Plugin {
 					const source = relativePath('node_modules', packageName, 'files', fileName);
 					const destination = relativePath('static', 'fonts', fileName);
 
-					await mkdir(path.dirname(destination), { recursive: true });
-					await copyFile(source, destination);
+					try {
+						await mkdir(path.dirname(destination), { recursive: true });
+						await copyFile(source, destination);
+					}
+					catch (error) {
+						const reason = error instanceof Error ? error.message : String(error);
+
+						this.error([
+							`Failed to copy font asset ${packageName}/${fileName}.`,
+							`Source: ${source}`,
+							`Destination: ${destination}`,
+							`Reason: ${reason}`,
+						].join('\n'));
+					}
 				}),
 			);
 		},

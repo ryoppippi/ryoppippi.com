@@ -1,9 +1,9 @@
 import plugin from 'tailwindcss/plugin';
 
-import { fontAssets } from './font-assets.js';
+import { fontAssets } from './font-assets.ts';
 
-export default plugin(({ addBase }) => {
-	addBase(
+export default plugin((api) => {
+	api.addBase(
 		fontAssets.map(({ family, fileName, weight }) => ({
 			'@font-face': {
 				fontFamily: family,
