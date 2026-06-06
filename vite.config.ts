@@ -1,13 +1,21 @@
 import path from 'node:path';
+import { flatMap } from '@core/iterutil/pipe';
+import { pipe } from '@core/pipe';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
+import { isDevelopment } from 'std-env';
+import { importAssets } from 'svelte-preprocess-import-assets';
 
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
 import { Route } from './routes.js';
+import { publishedBlogPosts } from './src/contents/blog/index.ts';
+import svelteMarkdown from './src/markdown/preprocessor.ts';
 
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
@@ -15,7 +23,7 @@ function relativePath(...args: string[]): string {
 
 export default defineConfig({
 	plugins: [
-		/* blog記事の追加・削除時にサーバーを再起動してブラウザをリロード */
+		/* Restart the dev server and reload the browser when a blog post is added or removed */
 		{
 			name: 'blog-watcher',
 			configureServer(server) {
@@ -35,11 +43,11 @@ export default defineConfig({
 				});
 			},
 		},
-		/* favicon と metadata の設定 */
+		/* favicon and metadata configuration */
 		faviconsPlugin({
 			cache: true,
 			imgSrc: relativePath('./static/ryoppippi.jpg'),
-			/* ===== metadataの設定 ===== */
+			/* ===== metadata configuration ===== */
 			path: `/favicons`,
 			lang: 'ja-JP',
 			orientation: 'portrait',
@@ -66,7 +74,58 @@ export default defineConfig({
 			},
 		}),
 		tailwindcss(),
-		sveltekit(),
+		sveltekit({
+			extensions: ['.svelte', '.md'],
+			// Consult https://svelte.dev/docs/kit/integrations#preprocessors
+			// for more information about preprocessors
+			preprocess: [
+				svelteMarkdown(),
+				importAssets(),
+				vitePreprocess(),
+			],
+			vitePlugin: {
+				inspector: isDevelopment,
+				dynamicCompileOptions({ filename }) {
+					if (!filename.includes('node_modules')) {
+						return { runes: true };
+					}
+				},
+			},
+			compilerOptions: {
+				experimental: {
+					async: true,
+				},
+			},
+			adapter: adapter(),
+			experimental: {
+				remoteFunctions: true,
+			},
+			typescript: {
+				config(config) {
+					(config.include as string[]).push(path.join(import.meta.dirname, 'scripts/**/*.ts'));
+				},
+			},
+			alias: {
+				$contents: './src/contents',
+				$components: './src/components',
+			},
+			prerender: {
+				handleHttpError: ({ path, message }) => {
+					if (Route.find(({ from }) => from === path) != null) {
+						return;
+					}
+
+					throw new Error(message);
+				},
+				entries: Array.from(pipe(
+					publishedBlogPosts,
+					flatMap(({ filename }) => [
+						`/blog/${filename}`,
+						`/blog/${filename}.md`,
+					] as const),
+				)),
+			},
+		}),
 	],
 	test: {
 		globals: true,
