@@ -66,6 +66,15 @@
 		<Icon class='icon-[line-md--rss]' aria-hidden='true' />
 		Feed
 	</a>
+	<a
+		class='fyc my-auto gap-1 opacity-30'
+		href='/yt-talks'
+		rel='noopener noreferrer'
+		target='_blank'
+	>
+		<Icon class='icon-[ri--youtube-line]' aria-hidden='true' />
+		Watch all talks on YouTube
+	</a>
 	<CheckButton
 		checked={isOnlyEnglish}
 		onclick={() => isOnlyEnglish = !isOnlyEnglish}
