@@ -386,11 +386,11 @@ export default svelteMarkdown;
 if (import.meta.vitest != null) {
 	describe('additionalProcessMd', () => {
 		it('replaces magic links in rendered html', () => {
-			const html = additionalProcessMd('<p>{@ryoppippi} {vim-jp}</p>');
+			const html = additionalProcessMd('<p>{@ryoppippi} {Svelte Japan}</p>');
 
 			expect(html).toContain('href="https://github.com/ryoppippi"');
 			expect(html).toContain('target="_blank" rel="noopener"');
-			expect(html).toContain('https://vim-jp.org/');
+			expect(html).toContain('https://svelte.jp');
 		});
 
 		it('escapes braces inside code tags for Svelte compatibility', () => {
