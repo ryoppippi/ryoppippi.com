@@ -180,5 +180,5 @@ bunx @ccusage/mcp@latest --help
 
 （いただいたスポンサーのうち、一部は ccusage の contributor に再分配しています）
 
-![sponsor](https://cdn.jsdelivr.net/gh/ryoppippi/sponsor@main/sponsors.circles.svg)
+![sponsor](https://sponsors.ryoppippi.com/sponsors.circles.svg)
 [@preview](https://ccusage.com/sponsor)
