@@ -138,6 +138,7 @@ export default defineConfig({
 			},
 			typescript: {
 				config(config) {
+					(config.include as string[]).push(path.join(import.meta.dirname, '*.ts'));
 					(config.include as string[]).push(path.join(import.meta.dirname, 'scripts/**/*.ts'));
 				},
 			},
