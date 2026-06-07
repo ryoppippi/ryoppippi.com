@@ -3,7 +3,7 @@
 
 @plugin '@tailwindcss/typography';
 @plugin '@iconify/tailwind4';
-@plugin '../../tailwind-fonts.js';
+@plugin '../../tailwind-fonts.ts';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

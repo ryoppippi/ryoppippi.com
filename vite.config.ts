@@ -1,4 +1,7 @@
+import type { Plugin } from 'vite';
+import { copyFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import process from 'node:process';
 import { flatMap } from '@core/iterutil/pipe';
 import { pipe } from '@core/pipe';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
@@ -13,12 +16,44 @@ import { importAssets } from 'svelte-preprocess-import-assets';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
+import { fontAssets } from './font-assets.ts';
 import { Route } from './routes.js';
 import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
 
+process.env.PUBLIC_ORIGIN ??= isDevelopment ? 'http://localhost:5173' : 'https://ryoppippi.com';
+
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
+}
+
+function fontAssetsPlugin(): Plugin {
+	return {
+		name: 'font-assets',
+		async buildStart() {
+			await Promise.all(
+				fontAssets.map(async ({ packageName, fileName }) => {
+					const source = relativePath('node_modules', packageName, 'files', fileName);
+					const destination = relativePath('static', 'fonts', fileName);
+
+					try {
+						await mkdir(path.dirname(destination), { recursive: true });
+						await copyFile(source, destination);
+					}
+					catch (error) {
+						const reason = error instanceof Error ? error.message : String(error);
+
+						this.error([
+							`Failed to copy font asset ${packageName}/${fileName}.`,
+							`Source: ${source}`,
+							`Destination: ${destination}`,
+							`Reason: ${reason}`,
+						].join('\n'));
+					}
+				}),
+			);
+		},
+	};
 }
 
 export default defineConfig({
@@ -64,6 +99,7 @@ export default defineConfig({
 			mode: 'generate',
 			entries: Route,
 		}),
+		fontAssetsPlugin(),
 		FontaineTransform.vite({
 			fallbacks: {
 				'Bad Script': ['Segoe UI'],
@@ -102,6 +138,7 @@ export default defineConfig({
 			},
 			typescript: {
 				config(config) {
+					(config.include as string[]).push(path.join(import.meta.dirname, '*.ts'));
 					(config.include as string[]).push(path.join(import.meta.dirname, 'scripts/**/*.ts'));
 				},
 			},
