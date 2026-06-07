@@ -10,6 +10,7 @@
 	import { MetaTags } from 'svelte-meta-tags';
 	import * as ufo from 'ufo';
 	import faviconLinks from 'virtual:favicons';
+	import 'virtual:font-face/inter.css';
 	import '../styles/site.css';
 
 	const { children } = $props();

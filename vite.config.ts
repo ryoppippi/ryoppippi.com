@@ -16,7 +16,7 @@ import { importAssets } from 'svelte-preprocess-import-assets';
 import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
-import { fontAssets } from './font-assets.ts';
+import { fontAssets, fontFaceGroups } from './font-assets.ts';
 import { Route } from './routes.js';
 import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
@@ -52,6 +52,56 @@ function fontAssetsPlugin(): Plugin {
 					}
 				}),
 			);
+		},
+	};
+}
+
+function fontFaceVirtualCssPlugin(): Plugin {
+	const prefix = 'virtual:font-face/';
+	const resolvedPrefix = `\0${prefix}`;
+
+	type FontFaceGroupName = keyof typeof fontFaceGroups;
+
+	function isFontFaceGroupName(value: string): value is FontFaceGroupName {
+		return value in fontFaceGroups;
+	}
+
+	function fontFaceCss(groupName: FontFaceGroupName): string {
+		const families = new Set<string>(fontFaceGroups[groupName]);
+
+		return fontAssets
+			.filter(({ family }) => families.has(family))
+			.map(({ family, fileName, weight }) => `
+@font-face {
+	font-family: ${JSON.stringify(family)};
+	font-style: normal;
+	font-display: swap;
+	font-weight: ${weight};
+	src: url('/fonts/${fileName}') format('woff2');
+}
+			`.trim())
+			.join('\n\n');
+	}
+
+	return {
+		name: 'font-face-virtual-css',
+		resolveId(id) {
+			if (id.startsWith(prefix)) {
+				return `${resolvedPrefix}${id.slice(prefix.length)}`;
+			}
+		},
+		load(id) {
+			if (!id.startsWith(resolvedPrefix)) {
+				return;
+			}
+
+			const groupName = id.slice(resolvedPrefix.length).replace(/\.css$/, '');
+
+			if (!isFontFaceGroupName(groupName)) {
+				this.error(`Unknown font face group: ${groupName}`);
+			}
+
+			return fontFaceCss(groupName);
 		},
 	};
 }
@@ -100,9 +150,9 @@ export default defineConfig({
 			entries: Route,
 		}),
 		fontAssetsPlugin(),
+		fontFaceVirtualCssPlugin(),
 		FontaineTransform.vite({
 			fallbacks: {
-				'Bad Script': ['Segoe UI'],
 				'DM Mono': ['Courier New'],
 				'Inter': ['Arial'],
 				'JetBrains Mono': ['Courier New'],

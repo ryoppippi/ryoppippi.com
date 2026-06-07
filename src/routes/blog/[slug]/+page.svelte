@@ -7,6 +7,7 @@
 	import { formatDate } from '$lib/util';
 	import * as ufo from 'ufo';
 	import '@shikijs/twoslash/style-rich.css';
+	import 'virtual:font-face/blog.css';
 	import './link-card.css';
 	import './magic-link.css';
 	import './prose.css';

@@ -27,9 +27,6 @@ importers:
       '@core/pipe':
         specifier: jsr:^0.4.0
         version: '@jsr/core__pipe@0.4.0'
-      '@fontsource/bad-script':
-        specifier: ^5.2.8
-        version: 5.2.8
       '@fontsource/dm-mono':
         specifier: ^5.2.7
         version: 5.2.7
@@ -408,9 +405,6 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@fontsource/bad-script@5.2.8':
-    resolution: {integrity: sha512-yUNQzQs6gsaqbtf575M4eucrM24FWAdWorRaF29vWjCuerjJVlwR02L5fRbwfGuBe/yekkAIUDCmobUgqv9sYQ==}
 
   '@fontsource/dm-mono@5.2.7':
     resolution: {integrity: sha512-Ma1az2atTVgQWuOWwjuxx26p/6A6CU9HBNKq1CFV6YKpKhpswnf9ry9Ql4+T6bTZzkdtSfS6tjJvqZOljVzIFQ==}
@@ -3744,8 +3738,6 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
-
-  '@fontsource/bad-script@5.2.8': {}
 
   '@fontsource/dm-mono@5.2.7': {}
 

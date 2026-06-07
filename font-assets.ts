@@ -7,12 +7,6 @@ type FontAsset = {
 
 export const fontAssets = [
 	{
-		family: 'Bad Script',
-		packageName: '@fontsource/bad-script',
-		fileName: 'bad-script-latin-400-normal.woff2',
-		weight: 400,
-	},
-	{
 		family: 'DM Mono',
 		packageName: '@fontsource/dm-mono',
 		fileName: 'dm-mono-latin-400-normal.woff2',
@@ -67,3 +61,11 @@ export const fontAssets = [
 		weight: 700,
 	},
 ] as const satisfies readonly FontAsset[];
+
+type FontFamily = typeof fontAssets[number]['family'];
+
+export const fontFaceGroups = {
+	'inter': ['Inter'],
+	'work-title': ['DM Mono'],
+	'blog': ['DM Mono', 'JetBrains Mono', 'Roboto Condensed'],
+} as const satisfies Record<string, readonly FontFamily[]>;

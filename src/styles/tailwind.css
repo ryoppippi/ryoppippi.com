@@ -3,7 +3,6 @@
 
 @plugin '@tailwindcss/typography';
 @plugin '@iconify/tailwind4';
-@plugin '../../tailwind-fonts.ts';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -27,7 +26,6 @@
 	--font-sans: Inter, 'Inter fallback', sans-serif;
 	--font-mono: 'DM Mono', 'DM Mono fallback', monospace;
 	--font-condensed: 'Roboto Condensed', 'Roboto Condensed fallback', sans-serif;
-	--font-wisper: 'Bad Script', 'Bad Script fallback', cursive;
 	--font-code: 'JetBrains Mono', 'JetBrains Mono fallback', 'Fira Code', monospace;
 }
 
