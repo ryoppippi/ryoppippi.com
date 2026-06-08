@@ -37,7 +37,7 @@
               # Install dependencies only if node_modules/.pnpm/lock.yaml is older than pnpm-lock.yaml
               if [ ! -f node_modules/.pnpm/lock.yaml ] || [ pnpm-lock.yaml -nt node_modules/.pnpm/lock.yaml ]; then
                 echo "📦 Installing dependencies..."
-                pnpm install --frozen-lockfile
+                pnpm install --frozen-lockfile --config.confirmModulesPurge=false
               fi
 
               # Generate .env from .env.example if needed
