@@ -4,7 +4,7 @@
 	import OssProjectCard from '$components/OssProjectCard.svelte';
 
 	const { data } = $props();
-	const { projects } = data;
+	const { projects } = $derived(data);
 </script>
 
 <div class='text-center'>

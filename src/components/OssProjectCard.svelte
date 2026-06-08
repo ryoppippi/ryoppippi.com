@@ -2,7 +2,7 @@
 	import type { Project } from '$contents/works/oss/types';
 
 	const { project }: { project: typeof Project.infer } = $props();
-	const { name, description, icon, link, slug } = project;
+	const { name, description, icon, link, slug } = $derived(project);
 </script>
 
 <a

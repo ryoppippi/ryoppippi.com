@@ -11,7 +11,7 @@
 		project,
 	}: Props = $props();
 
-	const { Content } = project;
+	const { Content } = $derived(project);
 </script>
 
 <div

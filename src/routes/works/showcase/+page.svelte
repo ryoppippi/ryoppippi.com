@@ -2,7 +2,7 @@
 	import ShowcaseCard from '$components/ShowcaseCard.svelte';
 
 	const { data } = $props();
-	const { projects } = data;
+	const { projects } = $derived(data);
 
 </script>
 

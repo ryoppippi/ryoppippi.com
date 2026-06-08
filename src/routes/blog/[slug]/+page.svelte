@@ -17,7 +17,7 @@
 	import './article.css';
 
 	const { data } = $props();
-	const { metadata, Markdown } = data;
+	const { metadata, Markdown } = $derived(data);
 
 	const url = ufo.joinURL(PUBLIC_ORIGIN, page.url.pathname);
 	const mdUrl = `${page.url.pathname}.md`;

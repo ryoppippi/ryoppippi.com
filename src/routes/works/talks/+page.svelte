@@ -6,7 +6,7 @@
 	import ListView from '$components/ListView.svelte';
 
 	const { data } = $props();
-	const { talks } = data;
+	const { talks } = $derived(data);
 
 	type Talk = typeof talks[string][0];
 
