@@ -1,6 +1,4 @@
 import type { MarkdownImport } from '../../../markdown';
-import { filter, flatten, map, reduce } from '@core/iterutil/pipe';
-import { pipe } from '@core/pipe';
 import { scope, type } from 'arktype';
 import { sort } from 'fast-sort';
 
@@ -27,29 +25,18 @@ export const { Project, Metadata } = scope({
 
 /** list of web projects */
 export function getProjects(): (typeof Project.inferOut)[] {
-	const projectsIter = pipe(
-		/** import all markdown files in the directory */
-		Object.entries(import.meta.glob('./*.md', { eager: true })) as Iterable<[string, MarkdownImport<typeof Metadata.infer>]>,
-
-		/** get slug from the file path */
-		map(([filepath, md]) => {
+	const projects = Object.entries(import.meta.glob<MarkdownImport<typeof Metadata.infer>>('./*.md', { eager: true }))
+		.map(([filepath, md]) => {
 			const slug = filepath.split('/').at(-1)?.replace('.md', '');
 			return {
 				...md,
 				slug,
 			};
-		}),
-
-		/** filter out files without slug */
-		filter(({ slug }) => slug != null),
-
-		/** filter with valid metadata */
-		filter(({ metadata }) => !(Metadata(metadata) instanceof type.errors)),
-
-		/** process each markdown file */
-		map(({ metadata, default: Content }) => {
+		})
+		.filter(({ slug }) => slug != null)
+		.filter(({ metadata }) => !(Metadata(metadata) instanceof type.errors))
+		.map(({ metadata, default: Content }) => {
 			const imagePath = metadata?.image;
-			// Convert absolute path to relative path for import.meta.glob lookup
 			const relativeImagePath = imagePath != null ? `./${imagePath.split('/').at(-1)}` : undefined;
 			const image = relativeImagePath != null ? images[relativeImagePath] : undefined;
 			return Project.assert({
@@ -58,20 +45,12 @@ export function getProjects(): (typeof Project.inferOut)[] {
 				image,
 				Content,
 			});
-		}),
+		});
 
-		/** separate featured and non-featured projects */
-		reduce((acc, project) => {
-			acc[project.featured ? 0 : 1].push(project);
-			return acc;
-		}, [[], []] as [typeof Project.inferOut[], typeof Project.inferOut[]]),
+	const projectGroups = projects.reduce((acc, project) => {
+		acc[project.featured ? 0 : 1].push(project);
+		return acc;
+	}, [[], []] as [typeof Project.inferOut[], typeof Project.inferOut[]]);
 
-		/** sort projects by pubDate */
-		map(projectGroups => sort(projectGroups).desc(({ pubDate }) => pubDate)),
-
-		/** flatten the two iterables */
-		flatten,
-	);
-
-	return Array.from(projectsIter);
+	return projectGroups.flatMap(projectGroup => sort(projectGroup).desc(({ pubDate }) => pubDate));
 }

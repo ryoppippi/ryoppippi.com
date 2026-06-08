@@ -1,7 +1,5 @@
 import { Lang } from '$contents/types';
 import { slugify } from '$lib/slugify.server';
-import { flatten, map } from '@core/iterutil/pipe/async';
-import { pipe } from '@core/pipe';
 import { scope } from 'arktype';
 import { sort } from 'fast-sort';
 
@@ -22,22 +20,13 @@ const { Item } = scope({
 }).export();
 
 export async function getPosts() {
-	const feedsIter = pipe(
-		rss,
-		map(async feed => parser.parseURL(feed)),
-		map(async feed => feed.items),
-		flatten,
-		map(
-			({ pubDate, ...rest }) => ({
-				...rest,
-				slug: slugify(rest.title ?? ''),
-				lang: 'ja',
-				pubDate: new Date(pubDate ?? '').toJSON(),
-			}),
-		),
-	);
-
-	const _feeds = await Array.fromAsync(feedsIter);
+	const feedItems = await Promise.all(rss.map(async feed => (await parser.parseURL(feed)).items));
+	const _feeds = feedItems.flat().map(({ pubDate, ...rest }) => ({
+		...rest,
+		slug: slugify(rest.title ?? ''),
+		lang: 'ja',
+		pubDate: new Date(pubDate ?? '').toJSON(),
+	}));
 
 	const feeds = Item.array().assert(_feeds);
 

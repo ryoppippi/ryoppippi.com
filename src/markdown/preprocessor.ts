@@ -1,7 +1,5 @@
 import type { PreprocessorGroup } from 'svelte/compiler';
 import { dirname, join } from 'node:path';
-import { map } from '@core/iterutil/pipe';
-import { pipe } from '@core/pipe';
 import { parse as dateParse } from 'date-fns';
 import { matter } from 'gray-matter-es';
 import MagicString from 'magic-string';
@@ -82,18 +80,12 @@ function escapeCodeBraces(html: string) {
 }
 
 function additionalProcessMd(proceed: string): string {
-	let result = Array.from(
-		pipe(
-			proceed.split('\n'),
-			map((line) => {
-				if (line.includes(`link-preview-widget`)) {
-					line = line.replace(/<p\b[^>]*>/g, '').replace(/<\/p>/g, '');
-					return line;
-				}
-				return line;
-			}),
-		),
-	).join('\n');
+	let result = proceed.split('\n').map((line) => {
+		if (line.includes(`link-preview-widget`)) {
+			return line.replace(/<p\b[^>]*>/g, '').replace(/<\/p>/g, '');
+		}
+		return line;
+	}).join('\n');
 
 	// Escape curly braces in <code> tags
 	result = escapeCodeBraces(result);
