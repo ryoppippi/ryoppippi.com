@@ -2,8 +2,6 @@ import type { Plugin } from 'vite';
 import { copyFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { flatMap } from '@core/iterutil/pipe';
-import { pipe } from '@core/pipe';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
@@ -25,6 +23,10 @@ process.env.PUBLIC_ORIGIN ??= isDevelopment ? 'http://localhost:5173' : 'https:/
 
 function relativePath(...args: string[]): string {
 	return path.resolve(import.meta.dirname, ...args);
+}
+
+function blogEntry(filename: string): `/blog/${string}` {
+	return `/blog/${filename}`;
 }
 
 function fontAssetsPlugin(): Plugin {
@@ -204,19 +206,16 @@ export default defineConfig({
 
 					throw new Error(message);
 				},
-				entries: Array.from(pipe(
-					publishedBlogPosts,
-					flatMap(({ filename }) => [
-						`/blog/${filename}`,
-						`/blog/${filename}.md`,
-					] as const),
-				)),
+				entries: publishedBlogPosts.flatMap(({ filename }) => [
+					blogEntry(filename),
+					blogEntry(`${filename}.md`),
+				]),
 			},
 		}),
 	],
 	test: {
 		globals: true,
 		environment: 'node',
-		includeSource: ['src/markdown/**/*.ts'],
+		includeSource: ['src/lib/**/*.ts', 'src/markdown/**/*.ts'],
 	},
 });
