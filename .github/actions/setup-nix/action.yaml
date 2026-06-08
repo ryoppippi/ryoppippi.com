@@ -10,8 +10,6 @@ runs:
       uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31.10.6
       with:
         github_access_token: ${{ github.token }}
-        extra_nix_config: |
-          access-tokens = github.com=${{ github.token }}
 
     - name: Cache Nix store
       uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # v7.0.2
