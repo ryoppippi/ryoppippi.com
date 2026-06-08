@@ -1,5 +1,5 @@
 .prose figure figcaption {
-	color: var(--color-text-400);
+	color: #808080;
 	font-size: 0.875em;
 	line-height: 1.4285714;
 	margin-top: 0.8571429em;
@@ -25,7 +25,7 @@ html.dark .shiki span {
 
 html:not(.dark) .shiki {
 	color: var(--shiki-light) !important;
-	background-color: var(--color-text-150) !important;
+	background-color: #fafafa !important;
 }
 
 @media (prefers-contrast: more) {
@@ -62,17 +62,17 @@ html:not(.dark) .shiki {
 }
 
 .prose .footnote-ref a {
-	color: var(--color-text-400);
+	color: #808080;
 	text-decoration: none;
 }
 
 .prose .footnote-ref a:hover {
-	color: var(--color-text-600);
+	color: #262626;
 	text-decoration: underline;
 }
 
 .prose .footnotes {
-	color: var(--color-text-400);
+	color: #808080;
 	font-size: 0.95em;
 }
 
@@ -95,7 +95,7 @@ html:not(.dark) .shiki {
 }
 
 .prose .footnote-backref {
-	color: var(--color-text-400);
+	color: #808080;
 	width: 0.9em;
 	height: 0.9em;
 	display: inline-block;
@@ -105,6 +105,6 @@ html:not(.dark) .shiki {
 }
 
 .prose .footnote-backref:hover {
-	color: var(--color-text-500);
+	color: #4d4d4d;
 	opacity: 1;
 }

@@ -3,7 +3,12 @@ import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.server.ts';
+import { applyBudouxHtml } from './budoux.ts';
+import { transformCollapsibleBlocks } from './collapsible.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
+import { replaceImageFigures } from './image-figures.ts';
+import { replaceLinkPreviews } from './link-preview.ts';
+import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
@@ -84,46 +89,14 @@ function escapeMagicLinkUnderscores(line: string) {
 	});
 }
 
-function normalizeAngleUrl(url: string) {
-	return url.replace(/\(/g, '%28').replace(/\)/g, '%29');
-}
-
-function normalizeAngleLinks(line: string) {
-	return line
-		.replace(/\[([^\]]+)\]\(<(https?:\/\/[^>\s]+)>\)/g, (_match, label: string, url: string) => `[${label}](${normalizeAngleUrl(url)})`)
-		.replace(/<(https?:\/\/[^>\s]+)>/g, (_match, url: string) => `[${url}](${normalizeAngleUrl(url)})`);
-}
-
-function renderLinkPreview(url: string) {
-	if (!/^https?:\/\//.test(url)) {
-		return null;
-	}
-
-	try {
-		const parsed = new URL(url);
-		const escapedUrl = escapeHtml(url);
-		return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
-	}
-	catch {
-		return null;
-	}
-}
-
-function replaceLinkPreviews(line: string) {
-	return line.replace(/\[@preview\]\((https?:\/\/[^)\s]+)\)/g, (match, url: string) => renderLinkPreview(url) ?? match);
-}
-
-function renderImageFigure(alt: string, src: string, title: string) {
-	return `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" title="${escapeHtml(title)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(title)}</figcaption></figure>`;
-}
-
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(
-		content,
-		line => replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))).replace(
-			/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
-			(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
-		),
+		transformCollapsibleBlocks(content),
+		(line) => {
+			const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))));
+
+			return replaceBareUrls(preparedLine);
+		},
 	);
 }
 
@@ -308,7 +281,7 @@ export async function renderMarkdown(content: string) {
 		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	return postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html)));
+	return applyBudouxHtml(postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html))));
 }
 
 if (import.meta.vitest != null) {
@@ -335,6 +308,34 @@ if (import.meta.vitest != null) {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
 				'<div class="link-preview-widget"><a href="https://github.com/junkawa/figma_jp" rel="noopener" target="_blank"><div class="link-preview-widget-title">https://github.com/junkawa/figma_jp</div><div class="link-preview-widget-url">github.com</div></a></div>',
 			);
+		});
+
+		it('converts collapsible blocks to details html', () => {
+			expect(prepareOxContentMarkdown('+++ More\nbody\n+++')).toBe(
+				'<details><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
+			);
+		});
+
+		it('converts open collapsible blocks to open details html', () => {
+			expect(prepareOxContentMarkdown('++> More\nbody\n++>')).toBe(
+				'<details open><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
+			);
+		});
+
+		it('leaves collapsible markers inside fenced code untouched', () => {
+			expect(prepareOxContentMarkdown('```md\n+++ More\n```\n+++ Real\nbody\n+++')).toBe(
+				'```md\n+++ More\n```\n<details><summary><span class="details-marker"></span>Real</summary>\nbody\n</details>',
+			);
+		});
+
+		it('converts bare URLs to markdown links', () => {
+			expect(prepareOxContentMarkdown('> https://example.com/a(1).')).toBe(
+				'> [https://example.com/a(1)](https://example.com/a%281%29).',
+			);
+		});
+
+		it('leaves existing markdown links untouched when converting bare URLs', () => {
+			expect(prepareOxContentMarkdown('[site](https://example.com)')).toBe('[site](https://example.com)');
 		});
 
 		it('leaves malformed preview links untouched', () => {
@@ -386,6 +387,13 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('Be careful');
 		});
 
+		it('applies markdown-it-budoux compatible paragraph rendering', async () => {
+			const html = await renderMarkdown('今日は天気です。');
+
+			expect(html).toContain('<p style="word-break:keep-all;overflow-wrap:anywhere;">');
+			expect(html).toContain('今日は\u200B天気です。');
+		});
+
 		it('keeps syntax highlighted code blocks', async () => {
 			const html = await renderMarkdown('```zig\nconst answer = 42;\n```');
 
@@ -400,6 +408,26 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary>More</summary>');
 			expect(html).toContain('body');
+			expect(html).toContain('</details>');
+		});
+
+		it('renders collapsible block contents as parsed markdown inside details', async () => {
+			const html = await renderMarkdown('+++ More\n\n## Hidden\n\nbody\n+++');
+
+			expect(html).toContain('<details>');
+			expect(html).toContain('<summary><span class="details-marker"></span>More</summary>');
+			expect(html).toContain('<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('</details>');
+		});
+
+		it('renders the recap appendix as a closed details block', async () => {
+			const html = await renderMarkdown('## おまけ\n\n+++ おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n+++');
+
+			expect(html).toContain('<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<details>');
+			expect(html).toContain('<summary><span class="details-marker"></span>おまけ</summary>');
+			expect(html).toContain('<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<code>ccusage</code>');
 			expect(html).toContain('</details>');
 		});
 	});

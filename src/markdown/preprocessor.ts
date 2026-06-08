@@ -87,8 +87,7 @@ function additionalProcessMd(proceed: string): string {
 			proceed.split('\n'),
 			map((line) => {
 				if (line.includes(`link-preview-widget`)) {
-					/* remove <p>, </p> */
-					line = line.replace(/<p>/g, '').replace(/<\/p>/g, '');
+					line = line.replace(/<p\b[^>]*>/g, '').replace(/<\/p>/g, '');
 					return line;
 				}
 				return line;
@@ -102,7 +101,7 @@ function additionalProcessMd(proceed: string): string {
 	result = addExternalLinkAttributes(result);
 	result = result.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 	result = result.replace(
-		/<p>(\s*<[A-Z][\w.]*\b[^>]*(?:\/>|>[\s\S]*?<\/[A-Z][\w.]*>)\s*)<\/p>/g,
+		/<p\b[^>]*>(\s*<[A-Z][\w.]*\b[^>]*(?:\/>|>[\s\S]*?<\/[A-Z][\w.]*>)\s*)<\/p>/g,
 		'$1',
 	);
 
@@ -409,8 +408,18 @@ if (import.meta.vitest != null) {
 			expect(additionalProcessMd('<p><Tweet id="123" /></p>')).toBe('<Tweet id="123" />');
 		});
 
+		it('unwraps Svelte component paragraphs with attributes', () => {
+			expect(additionalProcessMd('<p style="word-break:keep-all"><Tweet id="123" /></p>')).toBe('<Tweet id="123" />');
+		});
+
 		it('unwraps link preview widgets from paragraphs', () => {
 			expect(additionalProcessMd('<p><div class="link-preview-widget"></div></p>')).toBe(
+				'<div class="link-preview-widget"></div>',
+			);
+		});
+
+		it('unwraps link preview widgets from paragraphs with attributes', () => {
+			expect(additionalProcessMd('<p style="word-break:keep-all"><div class="link-preview-widget"></div></p>')).toBe(
 				'<div class="link-preview-widget"></div>',
 			);
 		});
