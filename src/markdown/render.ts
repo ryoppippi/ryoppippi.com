@@ -31,6 +31,12 @@ type FenceLine = {
 	info: string;
 };
 
+type CollapsibleMarker = {
+	marker: string;
+	title: string;
+	open: boolean;
+};
+
 async function highlightCode(code: string, lang: string) {
 	return codeToHtml(code, {
 		lang,
@@ -71,6 +77,103 @@ function transformOutsideFences(content: string, transform: (line: string) => st
 		}
 
 		return inFence ? line : transform(line);
+	}).join('\n');
+}
+
+function parseCollapsibleMarker(line: string): CollapsibleMarker | null {
+	let indent = 0;
+	while (indent < line.length && line[indent] === ' ') {
+		indent += 1;
+	}
+
+	if (indent > 3) {
+		return null;
+	}
+
+	const rest = line.slice(indent);
+	let markerLength = 0;
+	while (markerLength < rest.length && rest[markerLength] === '+') {
+		markerLength += 1;
+	}
+
+	if (markerLength < 2) {
+		return null;
+	}
+
+	const open = rest[markerLength] === '>';
+	if (markerLength < 3 && !open) {
+		return null;
+	}
+
+	const marker = `${'+'.repeat(markerLength)}${open ? '>' : ''}`;
+	return {
+		marker,
+		title: rest.slice(marker.length).trim(),
+		open,
+	};
+}
+
+function renderCollapsibleSummary(title: string) {
+	return `<summary><span class="details-marker"></span>${escapeHtml(title)}</summary>`;
+}
+
+function transformCollapsibleBlocks(content: string) {
+	const lines = content.split('\n');
+	const markerStack: string[] = [];
+	let inFence = false;
+	let fenceMarker = '';
+	let inScript = false;
+
+	return lines.map((line) => {
+		const trimmed = line.trimStart();
+		const fence = trimmed.match(/^(`{3,}|~{3,})/)?.[1];
+
+		if (inScript) {
+			if (trimmed === '</script>') {
+				inScript = false;
+			}
+			return line;
+		}
+
+		if (/^<script(?:\s|>)/.test(trimmed)) {
+			inScript = true;
+			return line;
+		}
+
+		if (fence != null) {
+			if (!inFence) {
+				inFence = true;
+				fenceMarker = fence;
+			}
+			else if (trimmed.startsWith(fenceMarker[0]) && fence.length >= fenceMarker.length) {
+				inFence = false;
+				fenceMarker = '';
+			}
+
+			return line;
+		}
+
+		if (inFence) {
+			return line;
+		}
+
+		const collapsible = parseCollapsibleMarker(line);
+		if (collapsible == null) {
+			return line;
+		}
+
+		if (collapsible.title.length === 0) {
+			const lastMarker = markerStack.at(-1);
+			if (lastMarker !== collapsible.marker) {
+				return line;
+			}
+
+			markerStack.pop();
+			return '</details>';
+		}
+
+		markerStack.push(collapsible.marker);
+		return `<details${collapsible.open ? ' open' : ''}>${renderCollapsibleSummary(collapsible.title)}`;
 	}).join('\n');
 }
 
@@ -117,13 +220,57 @@ function renderImageFigure(alt: string, src: string, title: string) {
 	return `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" title="${escapeHtml(title)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(title)}</figcaption></figure>`;
 }
 
+const trailingBareUrlPunctuationPattern = /[),.:;!?]+$/;
+
+function shouldTrimTrailingBareUrlPunctuation(url: string) {
+	const last = url.at(-1);
+	if (last == null) {
+		return false;
+	}
+
+	if (last !== ')') {
+		return trailingBareUrlPunctuationPattern.test(last);
+	}
+
+	const openingParens = (url.match(/\(/g) ?? []).length;
+	const closingParens = (url.match(/\)/g) ?? []).length;
+	return closingParens > openingParens;
+}
+
+function normaliseBareUrlLink(url: string) {
+	let linkUrl = url;
+	let trailingPunctuation = '';
+
+	while (shouldTrimTrailingBareUrlPunctuation(linkUrl)) {
+		trailingPunctuation = `${linkUrl.at(-1)}${trailingPunctuation}`;
+		linkUrl = linkUrl.slice(0, -1);
+	}
+
+	const normalisedLinkUrl = normalizeAngleUrl(linkUrl);
+	return `[${linkUrl}](${normalisedLinkUrl})${trailingPunctuation}`;
+}
+
+function replaceBareUrls(line: string) {
+	if (line.includes('`') || line.includes('<') || line.includes('](')) {
+		return line;
+	}
+
+	return line.replace(/(^|[\s([>])(https?:\/\/[^\s<]+)/g, (_match, prefix: string, url: string) => {
+		return `${prefix}${normaliseBareUrlLink(url)}`;
+	});
+}
+
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(
-		content,
-		line => replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))).replace(
-			/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
-			(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
-		),
+		transformCollapsibleBlocks(content),
+		(line) => {
+			const preparedLine = replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))).replace(
+				/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
+				(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
+			);
+
+			return replaceBareUrls(preparedLine);
+		},
 	);
 }
 
@@ -337,6 +484,34 @@ if (import.meta.vitest != null) {
 			);
 		});
 
+		it('converts collapsible blocks to details html', () => {
+			expect(prepareOxContentMarkdown('+++ More\nbody\n+++')).toBe(
+				'<details><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
+			);
+		});
+
+		it('converts open collapsible blocks to open details html', () => {
+			expect(prepareOxContentMarkdown('++> More\nbody\n++>')).toBe(
+				'<details open><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
+			);
+		});
+
+		it('leaves collapsible markers inside fenced code untouched', () => {
+			expect(prepareOxContentMarkdown('```md\n+++ More\n```\n+++ Real\nbody\n+++')).toBe(
+				'```md\n+++ More\n```\n<details><summary><span class="details-marker"></span>Real</summary>\nbody\n</details>',
+			);
+		});
+
+		it('converts bare URLs to markdown links', () => {
+			expect(prepareOxContentMarkdown('> https://example.com/a(1).')).toBe(
+				'> [https://example.com/a(1)](https://example.com/a%281%29).',
+			);
+		});
+
+		it('leaves existing markdown links untouched when converting bare URLs', () => {
+			expect(prepareOxContentMarkdown('[site](https://example.com)')).toBe('[site](https://example.com)');
+		});
+
 		it('leaves malformed preview links untouched', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://%)')).toBe('[@preview](https://%)');
 		});
@@ -400,6 +575,26 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary>More</summary>');
 			expect(html).toContain('body');
+			expect(html).toContain('</details>');
+		});
+
+		it('renders collapsible block contents as parsed markdown inside details', async () => {
+			const html = await renderMarkdown('+++ More\n\n## Hidden\n\nbody\n+++');
+
+			expect(html).toContain('<details>');
+			expect(html).toContain('<summary><span class="details-marker"></span>More</summary>');
+			expect(html).toContain('<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('</details>');
+		});
+
+		it('renders the recap appendix as a closed details block', async () => {
+			const html = await renderMarkdown('## おまけ\n\n+++ おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n+++');
+
+			expect(html).toContain('<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<details>');
+			expect(html).toContain('<summary><span class="details-marker"></span>おまけ</summary>');
+			expect(html).toContain('<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain('<code>ccusage</code>');
 			expect(html).toContain('</details>');
 		});
 	});
