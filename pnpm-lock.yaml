@@ -166,6 +166,9 @@ importers:
       budoux:
         specifier: ^0.8.4
         version: 0.8.4
+      cockatiel:
+        specifier: ^4.0.0
+        version: 4.0.0
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -1589,6 +1592,10 @@ packages:
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+
+  cockatiel@4.0.0:
+    resolution: {integrity: sha512-XpUZJnogsd03BGB19T9sv7Xb8SwvD8JddZV2Tlp0LNspopZ6Idv24ZwCl8vAGJ6JwODZ0zLRYVj3NWvmRcUDqA==}
+    engines: {node: '>=22'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -4959,6 +4966,8 @@ snapshots:
   cloudflare-redirect-parser@1.0.0: {}
 
   clsx@2.1.1: {}
+
+  cockatiel@4.0.0: {}
 
   color-convert@2.0.1:
     dependencies:
