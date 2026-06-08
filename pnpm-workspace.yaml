@@ -34,3 +34,6 @@ trustPolicy: no-downgrade
 
 trustPolicyExclude:
   - chokidar@4.0.3
+
+configDependencies:
+  '@pnpm/pacquet': 0.11.1
