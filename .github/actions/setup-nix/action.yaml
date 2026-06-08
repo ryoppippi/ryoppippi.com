@@ -1,24 +1,26 @@
 name: Setup Nix
-description: Install Nix and configure Cachix
+description: Install Nix and restore the Nix store from the GitHub Actions cache
 runs:
   using: composite
   steps:
+    - name: Setup takumi guard
+      uses: flatt-security/setup-takumi-guard-npm@9a5d797c2085b6326d3a2985c08e3a114b9b88c1 # v1.1.1
+
     - name: Install Nix
       uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31.10.6
       with:
         github_access_token: ${{ github.token }}
 
-    - name: Setup Cachix (numtide)
-      uses: cachix/cachix-action@1eb2ef646ac0255473d23a5907ad7b04ce94065c # v17
-      with:
-        name: numtide
-        authToken: ''
-
     - name: Cache Nix store
       uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # v7.0.2
       with:
-        primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock') }}
+        primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock', 'flake.nix') }}
         restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}-
+        gc-max-store-size-linux: 3500000000
+        purge: true
+        purge-prefixes: nix-${{ runner.os }}-${{ runner.arch }}-
+        purge-created: 172800
+        purge-primary-key: never
 
     - name: Load Nix development environment
       shell: bash
