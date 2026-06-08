@@ -3,7 +3,12 @@ import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.server.ts';
+import { applyBudouxHtml } from './budoux.ts';
+import { transformCollapsibleBlocks } from './collapsible.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
+import { replaceImageFigures } from './image-figures.ts';
+import { replaceLinkPreviews } from './link-preview.ts';
+import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
@@ -29,12 +34,6 @@ type OpenCodeBlock = {
 type FenceLine = {
 	marker: string;
 	info: string;
-};
-
-type CollapsibleMarker = {
-	marker: string;
-	title: string;
-	open: boolean;
 };
 
 async function highlightCode(code: string, lang: string) {
@@ -80,103 +79,6 @@ function transformOutsideFences(content: string, transform: (line: string) => st
 	}).join('\n');
 }
 
-function parseCollapsibleMarker(line: string): CollapsibleMarker | null {
-	let indent = 0;
-	while (indent < line.length && line[indent] === ' ') {
-		indent += 1;
-	}
-
-	if (indent > 3) {
-		return null;
-	}
-
-	const rest = line.slice(indent);
-	let markerLength = 0;
-	while (markerLength < rest.length && rest[markerLength] === '+') {
-		markerLength += 1;
-	}
-
-	if (markerLength < 2) {
-		return null;
-	}
-
-	const open = rest[markerLength] === '>';
-	if (markerLength < 3 && !open) {
-		return null;
-	}
-
-	const marker = `${'+'.repeat(markerLength)}${open ? '>' : ''}`;
-	return {
-		marker,
-		title: rest.slice(marker.length).trim(),
-		open,
-	};
-}
-
-function renderCollapsibleSummary(title: string) {
-	return `<summary><span class="details-marker"></span>${escapeHtml(title)}</summary>`;
-}
-
-function transformCollapsibleBlocks(content: string) {
-	const lines = content.split('\n');
-	const markerStack: string[] = [];
-	let inFence = false;
-	let fenceMarker = '';
-	let inScript = false;
-
-	return lines.map((line) => {
-		const trimmed = line.trimStart();
-		const fence = trimmed.match(/^(`{3,}|~{3,})/)?.[1];
-
-		if (inScript) {
-			if (trimmed === '</script>') {
-				inScript = false;
-			}
-			return line;
-		}
-
-		if (/^<script(?:\s|>)/.test(trimmed)) {
-			inScript = true;
-			return line;
-		}
-
-		if (fence != null) {
-			if (!inFence) {
-				inFence = true;
-				fenceMarker = fence;
-			}
-			else if (trimmed.startsWith(fenceMarker[0]) && fence.length >= fenceMarker.length) {
-				inFence = false;
-				fenceMarker = '';
-			}
-
-			return line;
-		}
-
-		if (inFence) {
-			return line;
-		}
-
-		const collapsible = parseCollapsibleMarker(line);
-		if (collapsible == null) {
-			return line;
-		}
-
-		if (collapsible.title.length === 0) {
-			const lastMarker = markerStack.at(-1);
-			if (lastMarker !== collapsible.marker) {
-				return line;
-			}
-
-			markerStack.pop();
-			return '</details>';
-		}
-
-		markerStack.push(collapsible.marker);
-		return `<details${collapsible.open ? ' open' : ''}>${renderCollapsibleSummary(collapsible.title)}`;
-	}).join('\n');
-}
-
 function escapeMagicLinkUnderscores(line: string) {
 	return line.replace(/\{([^{}\n]+)\}/g, (match, input: string) => {
 		if (renderMagicLink(input) == null) {
@@ -187,87 +89,11 @@ function escapeMagicLinkUnderscores(line: string) {
 	});
 }
 
-function normalizeAngleUrl(url: string) {
-	return url.replace(/\(/g, '%28').replace(/\)/g, '%29');
-}
-
-function normalizeAngleLinks(line: string) {
-	return line
-		.replace(/\[([^\]]+)\]\(<(https?:\/\/[^>\s]+)>\)/g, (_match, label: string, url: string) => `[${label}](${normalizeAngleUrl(url)})`)
-		.replace(/<(https?:\/\/[^>\s]+)>/g, (_match, url: string) => `[${url}](${normalizeAngleUrl(url)})`);
-}
-
-function renderLinkPreview(url: string) {
-	if (!/^https?:\/\//.test(url)) {
-		return null;
-	}
-
-	try {
-		const parsed = new URL(url);
-		const escapedUrl = escapeHtml(url);
-		return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
-	}
-	catch {
-		return null;
-	}
-}
-
-function replaceLinkPreviews(line: string) {
-	return line.replace(/\[@preview\]\((https?:\/\/[^)\s]+)\)/g, (match, url: string) => renderLinkPreview(url) ?? match);
-}
-
-function renderImageFigure(alt: string, src: string, title: string) {
-	return `<figure><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" title="${escapeHtml(title)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(title)}</figcaption></figure>`;
-}
-
-const trailingBareUrlPunctuationPattern = /[),.:;!?]+$/;
-
-function shouldTrimTrailingBareUrlPunctuation(url: string) {
-	const last = url.at(-1);
-	if (last == null) {
-		return false;
-	}
-
-	if (last !== ')') {
-		return trailingBareUrlPunctuationPattern.test(last);
-	}
-
-	const openingParens = (url.match(/\(/g) ?? []).length;
-	const closingParens = (url.match(/\)/g) ?? []).length;
-	return closingParens > openingParens;
-}
-
-function normaliseBareUrlLink(url: string) {
-	let linkUrl = url;
-	let trailingPunctuation = '';
-
-	while (shouldTrimTrailingBareUrlPunctuation(linkUrl)) {
-		trailingPunctuation = `${linkUrl.at(-1)}${trailingPunctuation}`;
-		linkUrl = linkUrl.slice(0, -1);
-	}
-
-	const normalisedLinkUrl = normalizeAngleUrl(linkUrl);
-	return `[${linkUrl}](${normalisedLinkUrl})${trailingPunctuation}`;
-}
-
-function replaceBareUrls(line: string) {
-	if (line.includes('`') || line.includes('<') || line.includes('](')) {
-		return line;
-	}
-
-	return line.replace(/(^|[\s([>])(https?:\/\/[^\s<]+)/g, (_match, prefix: string, url: string) => {
-		return `${prefix}${normaliseBareUrlLink(url)}`;
-	});
-}
-
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(
 		transformCollapsibleBlocks(content),
 		(line) => {
-			const preparedLine = replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))).replace(
-				/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
-				(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
-			);
+			const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))));
 
 			return replaceBareUrls(preparedLine);
 		},
@@ -455,7 +281,7 @@ export async function renderMarkdown(content: string) {
 		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	return postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html)));
+	return applyBudouxHtml(postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html))));
 }
 
 if (import.meta.vitest != null) {
@@ -559,6 +385,13 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('ox-callout');
 			expect(html).toContain('ox-callout--warning');
 			expect(html).toContain('Be careful');
+		});
+
+		it('applies markdown-it-budoux compatible paragraph rendering', async () => {
+			const html = await renderMarkdown('今日は天気です。');
+
+			expect(html).toContain('<p style="word-break:keep-all;overflow-wrap:anywhere;">');
+			expect(html).toContain('今日は\u200B天気です。');
 		});
 
 		it('keeps syntax highlighted code blocks', async () => {
