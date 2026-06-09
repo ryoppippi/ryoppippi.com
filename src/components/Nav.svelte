@@ -77,8 +77,8 @@
 		aria-label='Primary navigation'
 	>
 		{#each LINKS as { href, name } (href)}
-			{@const resolvedHref = resolve(href)}
-			{@const isPath = page.url.pathname.startsWith(resolvedHref)}
+			{const resolvedHref = resolve(href);}
+			{const isPath = $derived(page.url.pathname.startsWith(resolvedHref));}
 			<a
 				class='relative block shrink-0 whitespace-nowrap px-0'
 				href={resolvedHref}

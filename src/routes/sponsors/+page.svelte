@@ -48,7 +48,7 @@
 
 	<div class='fcol-sm-row fw gap-1 text-2xl sm:gap-3'>
 		{#each sponsorViews as view (view.id)}
-			{@const isCurrent = currentView === view.id}
+			{const isCurrent = $derived(currentView === view.id);}
 			<button
 				class={[
 					'cursor-pointer',

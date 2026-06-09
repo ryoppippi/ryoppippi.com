@@ -23,8 +23,8 @@
 		aria-label='Works sections'
 	>
 		{#each routes as route (route)}
-			{@const lowercaseRoute = lowercase(route)}
-			{@const isCurrent = page.route.id?.endsWith(lowercaseRoute)}
+			{const lowercaseRoute = lowercase(route);}
+			{const isCurrent = $derived(page.route.id?.endsWith(lowercaseRoute));}
 			<a
 				style:--nav-title='project-nav-{route}'
 				style:view-transition-name='project-nav-{route}'

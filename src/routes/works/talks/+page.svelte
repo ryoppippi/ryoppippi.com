@@ -36,8 +36,8 @@
 {/snippet}
 
 {#snippet itemView(_item: ListItem)}
-	{@const item = _item as unknown as Talk}
-	{@const _link = item.links.at(0)}
+	{const item = _item as unknown as Talk;}
+	{const _link = item.links.at(0);}
 	{#if !(isOnlyEnglish && item.lang !== 'en')}
 		<div class='mt-5'>
 			<h3 class='text-xl'>

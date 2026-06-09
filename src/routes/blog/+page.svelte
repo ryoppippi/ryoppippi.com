@@ -23,9 +23,9 @@
 <h1 class='sr-only'>Blog</h1>
 
 {#snippet itemView(_item: Item)}
-	{@const item = _item as typeof data.posts[0]}
-	{@const filterByEnglish = !(isOnlyEnglish && item.lang !== 'en')}
-	{@const filterByRyoppippi = !(isOnlyRyoppippi && item.link.includes('http'))}
+	{const item = _item as typeof data.posts[0];}
+	{const filterByEnglish = $derived(!(isOnlyEnglish && item.lang !== 'en'));}
+	{const filterByRyoppippi = $derived(!(isOnlyRyoppippi && item.link.includes('http')));}
 	{#if filterByEnglish && filterByRyoppippi}
 		<div class='my-2 flex items-start gap-2'>
 			<span class='mt-0.5'>

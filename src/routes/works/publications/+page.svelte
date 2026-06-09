@@ -37,9 +37,9 @@
 </script>
 
 {#snippet itemView(_item: ListItem)}
-	{@const item = _item as unknown as Item}
-	{@const { ja, en } = parseTitle(item.title)}
-	{@const displayTitle = isOnlyEnglish && en ? en : (en ? `${ja} (${en})` : ja)}
+	{const item = _item as unknown as Item;}
+	{const { ja, en } = parseTitle(item.title);}
+	{const displayTitle = $derived(isOnlyEnglish && en ? en : (en ? `${ja} (${en})` : ja));}
 	<div class='mt-5'>
 		<h3 class='text-xl'>
 			<span class='underline'>{displayTitle}</span>
@@ -57,7 +57,7 @@
 </div>
 
 {#each Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a)) as [year, _items] (year)}
-	{@const items = _items.map(item => ({ ...item, slug: JSON.stringify(item) }))}
+	{const items = _items.map(item => ({ ...item, slug: JSON.stringify(item) }));}
 	<div class='no-underline'
 	>
 		<LargeTitle level={2} title={year} />

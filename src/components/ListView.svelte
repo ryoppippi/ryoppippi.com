@@ -23,7 +23,7 @@
 </script>
 <div class='mx-auto px-10'>
 	{#each items as item (item.slug)}
-		{@const external = typeof item.link === 'string' && item?.link.startsWith('http')}
+		{const external = typeof item.link === 'string' && item?.link.startsWith('http');}
 		<div class='my-2'>
 			{#if item.link != null}
 				<a
