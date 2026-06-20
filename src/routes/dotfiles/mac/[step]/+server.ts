@@ -19,12 +19,12 @@ async function stepCommands(fetch: typeof globalThis.fetch): Promise<{ step: num
 	return parseStepCommands(extractInstallSection(readme, OS));
 }
 
-export const entries: EntryGenerator = async () => {
+export const entries = (async () => {
 	const steps = await stepCommands(fetch);
 	return steps.map(({ step }) => ({ step: String(step) }));
-};
+}) satisfies EntryGenerator;
 
-export const GET: RequestHandler = async ({ params, fetch }) => {
+export const GET = (async ({ params, fetch }) => {
 	try {
 		const steps = await stepCommands(fetch);
 		const found = steps.find(({ step }) => String(step) === params.step);
@@ -43,4 +43,4 @@ export const GET: RequestHandler = async ({ params, fetch }) => {
 		console.error(e);
 		error(502, 'Failed to build dotfiles macOS install step');
 	}
-};
+}) satisfies RequestHandler;

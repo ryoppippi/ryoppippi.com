@@ -9,7 +9,7 @@ export const prerender = true;
  *
  * Read with `curl https://ryoppippi.com/dotfiles/linux`.
  */
-export const GET: RequestHandler = async ({ fetch }) => {
+export const GET = (async ({ fetch }) => {
 	try {
 		const readme = await fetchDotfilesReadme(fetch);
 		const install = extractInstallSection(readme, 'Linux');
@@ -24,4 +24,4 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		console.error(e);
 		error(502, 'Failed to build dotfiles Linux install section');
 	}
-};
+}) satisfies RequestHandler;

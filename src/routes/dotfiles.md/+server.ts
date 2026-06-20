@@ -11,7 +11,7 @@ export const prerender = true;
  * CLI clients can read the markdown directly via
  * `curl https://ryoppippi.com/dotfiles.md`.
  */
-export const GET: RequestHandler = async ({ fetch }) => {
+export const GET = (async ({ fetch }) => {
 	try {
 		const raw = await fetchDotfilesReadme(fetch);
 
@@ -25,4 +25,4 @@ export const GET: RequestHandler = async ({ fetch }) => {
 		console.error(e);
 		error(502, 'Failed to fetch dotfiles README');
 	}
-};
+}) satisfies RequestHandler;

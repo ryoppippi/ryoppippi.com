@@ -20,7 +20,7 @@ async function tryImportMarkdown(slug: string): Promise<{ md: MarkdownImport<Met
 	}
 }
 
-export const GET: RequestHandler = async ({ params: { slug } }) => {
+export const GET = (async ({ params: { slug } }) => {
 	try {
 		const { raw } = await tryImportMarkdown(slug);
 
@@ -34,4 +34,4 @@ export const GET: RequestHandler = async ({ params: { slug } }) => {
 		console.error(e);
 		error(404, 'Post not found');
 	}
-};
+}) satisfies RequestHandler;
