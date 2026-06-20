@@ -206,10 +206,13 @@ export default defineConfig({
 
 					throw new Error(message);
 				},
-				entries: publishedBlogPosts.flatMap(({ filename }) => [
-					blogEntry(filename),
-					blogEntry(`${filename}.md`),
-				]),
+				entries: [
+					'/dotfiles.md',
+					...publishedBlogPosts.flatMap(({ filename }) => [
+						blogEntry(filename),
+						blogEntry(`${filename}.md`),
+					]),
+				],
 			},
 		}),
 	],

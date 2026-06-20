@@ -1,2 +1,5 @@
 /blog/*.md
   Content-Type: text/plain; charset=utf-8
+
+/dotfiles.md
+  Content-Type: text/plain; charset=utf-8
