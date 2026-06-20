@@ -3,3 +3,12 @@
 
 /dotfiles.md
   Content-Type: text/plain; charset=utf-8
+
+/dotfiles/install
+  Content-Type: text/plain; charset=utf-8
+
+/dotfiles/mac
+  Content-Type: text/plain; charset=utf-8
+
+/dotfiles/linux
+  Content-Type: text/plain; charset=utf-8

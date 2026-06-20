@@ -208,6 +208,9 @@ export default defineConfig({
 				},
 				entries: [
 					'/dotfiles.md',
+					'/dotfiles/install',
+					'/dotfiles/mac',
+					'/dotfiles/linux',
 					...publishedBlogPosts.flatMap(({ filename }) => [
 						blogEntry(filename),
 						blogEntry(`${filename}.md`),
