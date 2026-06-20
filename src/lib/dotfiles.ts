@@ -108,6 +108,108 @@ export function extractInstallSection(readme: string, os: string): string {
 	return extractSection(install, os);
 }
 
+/**
+ * Remove the shared leading indentation from a block of lines.
+ *
+ * @param lines - The lines to dedent.
+ * @returns The lines joined back together with the common indent stripped.
+ */
+function dedent(lines: string[]): string {
+	// Measure indentation only on non-blank lines so blank lines do not force
+	// the common indent down to zero.
+	const indents = lines
+		.filter(line => line.trim() !== '')
+		.map(line => line.length - line.trimStart().length);
+	const min = indents.length > 0 ? Math.min(...indents) : 0;
+	return lines.map(line => line.slice(min)).join('\n');
+}
+
+/**
+ * Extract the contents of the first fenced code block in a block of lines.
+ *
+ * @param lines - The lines to scan (typically the body of one list item).
+ * @returns The dedented, trimmed code, or `null` if there is no code block.
+ */
+function firstFencedCode(lines: string[]): string | null {
+	const collected: string[] = [];
+	let insideFence = false;
+
+	for (const line of lines) {
+		// A fence marker may be indented because it lives inside a list item.
+		const isFence = line.trimStart().startsWith('```');
+
+		if (isFence) {
+			// First marker opens the block; the next one closes it, so we stop.
+			if (!insideFence) {
+				insideFence = true;
+				continue;
+			}
+			break;
+		}
+
+		if (insideFence) {
+			collected.push(line);
+		}
+	}
+
+	if (collected.length === 0) {
+		return null;
+	}
+
+	return dedent(collected).trim();
+}
+
+/**
+ * Parse the numbered steps of an install section into their shell commands.
+ *
+ * Only steps that contain a fenced code block are returned, so prose-only
+ * steps are skipped. The step number is taken from the markdown ordered list.
+ *
+ * @param section - An OS install section (e.g. the result of {@link extractInstallSection}).
+ * @returns The steps that carry a command, in document order.
+ * @example
+ * ```ts
+ * const steps = parseStepCommands(extractInstallSection(readme, 'macOS'));
+ * // [{ step: 1, command: 'curl -sSfL ... | sh ...' }, ...]
+ * ```
+ */
+export function parseStepCommands(section: string): { step: number; command: string }[] {
+	const lines = section.split('\n');
+	const steps: { step: number; lines: string[] }[] = [];
+	let current: { step: number; lines: string[] } | null = null;
+
+	for (const line of lines) {
+		// A top-level ordered-list item starts a new step: a number, a dot and
+		// whitespace with no leading indentation (indented lines belong to the
+		// current step's body, including its code fences and notes).
+		const match = /^(\d+)\.\s/.exec(line);
+
+		if (match != null) {
+			if (current != null) {
+				steps.push(current);
+			}
+			current = { step: Number(match[1]), lines: [] };
+		}
+		else if (current != null) {
+			current.lines.push(line);
+		}
+	}
+
+	if (current != null) {
+		steps.push(current);
+	}
+
+	const result: { step: number; command: string }[] = [];
+	for (const { step, lines: body } of steps) {
+		const command = firstFencedCode(body);
+		if (command != null && command !== '') {
+			result.push({ step, command });
+		}
+	}
+
+	return result;
+}
+
 if (import.meta.vitest != null) {
 	const sample = [
 		'# Title',
@@ -178,6 +280,55 @@ if (import.meta.vitest != null) {
 
 		it('extracts the last OS section up to the end of Initial Setup', () => {
 			expect(extractInstallSection(readme, 'Linux')).toBe('#### Linux\n\nlinux steps');
+		});
+	});
+
+	const macSection = [
+		'#### macOS',
+		'',
+		'1. Install Nix:',
+		'',
+		'   ```sh',
+		'    curl -sSfL https://example.com/install | sh',
+		'   ```',
+		'',
+		'2. Clone:',
+		'',
+		'   ```sh',
+		'   git clone https://example.com/repo',
+		'   cd repo',
+		'   ```',
+		'',
+		'3. Sign in:',
+		'',
+		'   ```sh',
+		'   open -a "App Store"',
+		'   ```',
+		'',
+		'   > [!NOTE]',
+		'   > Do it manually.',
+	].join('\n');
+
+	describe(parseStepCommands, () => {
+		it('returns one entry per numbered step with its command', () => {
+			expect(parseStepCommands(macSection)).toEqual([
+				{ step: 1, command: 'curl -sSfL https://example.com/install | sh' },
+				{ step: 2, command: 'git clone https://example.com/repo\ncd repo' },
+				{ step: 3, command: 'open -a "App Store"' },
+			]);
+		});
+
+		it('dedents code regardless of inconsistent indentation', () => {
+			expect(parseStepCommands(macSection)[0].command).not.toMatch(/^\s/);
+		});
+
+		it('ignores non-code content such as note blockquotes', () => {
+			expect(parseStepCommands(macSection)[2].command).toBe('open -a "App Store"');
+		});
+
+		it('skips steps that have no code block', () => {
+			const section = ['1. Just read this.', '', '2. Run:', '', '   ```sh', '   echo hi', '   ```'].join('\n');
+			expect(parseStepCommands(section)).toEqual([{ step: 2, command: 'echo hi' }]);
 		});
 	});
 }

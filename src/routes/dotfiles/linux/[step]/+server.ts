@@ -1,0 +1,46 @@
+import type { EntryGenerator, RequestHandler } from './$types';
+import { extractInstallSection, fetchDotfilesReadme, parseStepCommands } from '$lib/dotfiles';
+import { error } from '@sveltejs/kit';
+
+export const prerender = true;
+
+/** OS sub-heading whose steps this route exposes. */
+const OS = 'Linux';
+
+/**
+ * Resolve the command for a single Linux install step.
+ *
+ * `curl https://ryoppippi.com/dotfiles/linux/2` returns just the command of
+ * step 2 (no prose, no numbering, no code fences) so it can be piped to a
+ * clipboard or, once reviewed, to a shell.
+ */
+async function stepCommands(fetch: typeof globalThis.fetch): Promise<{ step: number; command: string }[]> {
+	const readme = await fetchDotfilesReadme(fetch);
+	return parseStepCommands(extractInstallSection(readme, OS));
+}
+
+export const entries: EntryGenerator = async () => {
+	const steps = await stepCommands(fetch);
+	return steps.map(({ step }) => ({ step: String(step) }));
+};
+
+export const GET: RequestHandler = async ({ params, fetch }) => {
+	try {
+		const steps = await stepCommands(fetch);
+		const found = steps.find(({ step }) => String(step) === params.step);
+
+		if (found == null) {
+			error(404, `No Linux install step ${params.step}`);
+		}
+
+		return new Response(found.command, {
+			headers: {
+				'Content-Type': 'text/plain; charset=utf-8',
+			},
+		});
+	}
+	catch (e) {
+		console.error(e);
+		error(502, 'Failed to build dotfiles Linux install step');
+	}
+};

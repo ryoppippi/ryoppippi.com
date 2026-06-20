@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite';
+import type { Connect, Plugin } from 'vite';
 import { copyFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
@@ -108,6 +108,37 @@ function fontFaceVirtualCssPlugin(): Plugin {
 	};
 }
 
+function extensionlessDotfilesPlugin(): Plugin {
+	const endpoints = new Map([
+		['/dotfiles/mac', '/dotfiles/mac.html'],
+		['/dotfiles/linux', '/dotfiles/linux.html'],
+	]);
+	const middleware: Connect.NextHandleFunction = (req, _res, next) => {
+		if (req.url != null) {
+			const url = new URL(req.url, 'http://localhost');
+			const endpoint = endpoints.get(url.pathname);
+
+			if (endpoint != null) {
+				const rewrittenUrl = `${endpoint}${url.search}`;
+				req.url = rewrittenUrl;
+				req.originalUrl = rewrittenUrl;
+			}
+		}
+
+		next();
+	};
+
+	return {
+		name: 'extensionless-dotfiles',
+		configureServer(server) {
+			server.middlewares.use(middleware);
+		},
+		configurePreviewServer(server) {
+			server.middlewares.use(middleware);
+		},
+	};
+}
+
 export default defineConfig({
 	plugins: [
 		/* Restart the dev server and reload the browser when a blog post is added or removed */
@@ -130,6 +161,7 @@ export default defineConfig({
 				});
 			},
 		},
+		extensionlessDotfilesPlugin(),
 		/* favicon and metadata configuration */
 		faviconsPlugin({
 			cache: true,
@@ -209,8 +241,8 @@ export default defineConfig({
 				entries: [
 					'/dotfiles.md',
 					'/dotfiles/install',
-					'/dotfiles/mac',
-					'/dotfiles/linux',
+					'/dotfiles/mac.html',
+					'/dotfiles/linux.html',
 					...publishedBlogPosts.flatMap(({ filename }) => [
 						blogEntry(filename),
 						blogEntry(`${filename}.md`),
