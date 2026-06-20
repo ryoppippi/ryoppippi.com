@@ -55,7 +55,7 @@ const isOpen = await p.confirm({
 	initialValue: true,
 });
 if (isOpen === true) {
-	openEditor([{ file: md }]);
+	await openEditor([{ file: md }]);
 }
 
 p.outro('Done!');

@@ -25,7 +25,7 @@
 		"preinstall": "only-allow pnpm",
 		"prelint": "svelte-kit sync",
 		"lint": "eslint --cache .",
-		"new": "./scripts/new-post.js",
+		"new": "./scripts/new-post.ts",
 		"preview": "vite preview",
 		"sync": "svelte-kit sync",
 		"test": "vitest run",

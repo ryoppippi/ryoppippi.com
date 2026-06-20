@@ -15,7 +15,7 @@ import { faviconsPlugin } from 'vite-plugin-favicons';
 import { defineConfig } from 'vitest/config';
 
 import { fontAssets, fontFaceGroups } from './font-assets.ts';
-import { Route } from './routes.js';
+import { Route } from './routes.ts';
 import { publishedBlogPosts } from './src/contents/blog/index.ts';
 import svelteMarkdown from './src/markdown/preprocessor.ts';
 
