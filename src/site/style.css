@@ -3,17 +3,17 @@
 @import '@fontsource/jetbrains-mono/latin.css';
 @import '@fontsource/roboto-condensed/latin.css';
 @import '../styles/site.css';
-@import '../routes/page.css';
-@import '../routes/blog/page.css';
-@import '../routes/blog/[slug]/article.css';
-@import '../routes/blog/[slug]/anchor.css';
-@import '../routes/blog/[slug]/callout.css';
-@import '../routes/blog/[slug]/collapse.css';
-@import '../routes/blog/[slug]/link-card.css';
-@import '../routes/blog/[slug]/magic-link.css';
-@import '../routes/blog/[slug]/prose.css';
-@import '../routes/works/layout.css';
-@import '../routes/sponsors/page.css';
+@import '../styles/home.css';
+@import '../styles/blog/index.css';
+@import '../styles/blog/article.css';
+@import '../styles/blog/anchor.css';
+@import '../styles/blog/callout.css';
+@import '../styles/blog/collapse.css';
+@import '../styles/blog/link-card.css';
+@import '../styles/blog/magic-link.css';
+@import '../styles/blog/prose.css';
+@import '../styles/works.css';
+@import '../styles/sponsors.css';
 
 @source './**/*.ts';
 

@@ -1,0 +1,6 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import './prose-theme.css';
+@reference './tailwind.css';
+
+@source '../contents/works/oss/list.json';

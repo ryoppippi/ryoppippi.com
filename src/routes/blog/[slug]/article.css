@@ -1,9 +1,0 @@
-@layer theme, base, components, utilities;
-@import 'tailwindcss/utilities.css' layer(utilities) source(none);
-@import '../../../styles/prose-theme.css';
-@reference '../../../styles/tailwind.css';
-
-@source './+page.svelte';
-@source '../../../contents/blog/**/*.md';
-@source '../../../components/LargeTitle.svelte';
-@source inline("icon-[mdi--arrow-left-bottom]");

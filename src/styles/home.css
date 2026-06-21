@@ -1,10 +1,6 @@
 @layer theme, base, components, utilities;
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
-@reference '../styles/tailwind.css';
-
-@source './+page.svelte';
-@source '../components/Profile.svelte';
-@source '../components/Social.svelte';
+@reference './tailwind.css';
 
 @keyframes root-fade-in {
 	from {
