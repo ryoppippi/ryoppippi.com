@@ -21,3 +21,19 @@ for (const input of document.querySelectorAll<HTMLInputElement>('[data-filter]')
 		}
 	});
 }
+
+const sponsorImage = document.querySelector<HTMLImageElement>('[data-sponsor-image]');
+for (const button of document.querySelectorAll<HTMLButtonElement>('[data-sponsor-view]')) {
+	button.addEventListener('click', () => {
+		if (sponsorImage == null) {
+			return;
+		}
+		const circles = button.dataset.sponsorView === 'circles';
+		sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
+		sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
+		for (const candidate of document.querySelectorAll<HTMLElement>('[data-sponsor-view]')) {
+			candidate.classList.toggle('opacity-70', candidate === button);
+			candidate.classList.toggle('opacity-20', candidate !== button);
+		}
+	});
+}

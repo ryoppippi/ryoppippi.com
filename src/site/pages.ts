@@ -54,7 +54,7 @@ function article(post: BlogPost, assets: string): GeneratedFile[] {
 	<div class="pb-8 opacity-50"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 2022-PRESENT © ryoppippi</div>`;
 	return [
 		{ path: `blog/${post.filename}/index.html`, content: page({ title: `${post.title} | blog`, pathname, content, assets, article: true }) },
-		{ path: `blog/${post.filename}.md`, content: `---\ntitle: ${JSON.stringify(post.title)}\ndate: '${post.pubDate.slice(0, 10)}'\nisPublished: true\nlang: '${post.lang}'\n---\n${post.content}` },
+		{ path: `blog/${post.filename}.md`, content: post.source },
 	];
 }
 

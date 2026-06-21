@@ -11,6 +11,7 @@ export type BlogPost = {
 	title: string;
 	filename: string;
 	filepath: string;
+	source: string;
 	content: string;
 	html: string;
 	pubDate: string;
@@ -45,6 +46,7 @@ export async function loadBlogPosts(root = process.cwd()): Promise<BlogPost[]> {
 			title: String(data.title),
 			filename,
 			filepath,
+			source,
 			content,
 			html: await renderMarkdown(content),
 			pubDate: new Date(String(data.date)).toJSON(),

@@ -12,6 +12,8 @@
 @import '../routes/blog/[slug]/link-card.css';
 @import '../routes/blog/[slug]/magic-link.css';
 @import '../routes/blog/[slug]/prose.css';
+@import '../routes/works/layout.css';
+@import '../routes/sponsors/page.css';
 
 @source './**/*.ts';
 
