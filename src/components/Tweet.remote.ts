@@ -133,7 +133,5 @@ export const getTweet = prerender(getTweetPropsSchema, async ({ id }) => {
 		error(404, `Tweet not found: ${id}`);
 	}
 	backfillEntities(tweet as TweetLike);
-	// eslint-disable-next-line no-console
-	console.log('Fetched tweet:', id);
 	return tweet;
 });
