@@ -39,6 +39,7 @@ type FenceLine = {
 async function highlightCode(code: string, lang: string) {
 	return codeToHtml(code, {
 		lang,
+		tabindex: false,
 		themes: {
 			dark: 'kanagawa-dragon',
 			light: 'kanagawa-lotus',
@@ -400,6 +401,7 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('class="shiki shiki-themes');
 			expect(html).toContain('data-language="zig"');
 			expect(html).toContain('<span');
+			expect(html).not.toContain('tabindex="0"');
 		});
 
 		it('preserves raw details blocks used by existing posts', async () => {
