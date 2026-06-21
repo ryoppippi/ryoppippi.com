@@ -9,7 +9,6 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .eslintcache
-/static/favicons/*
 /static/fonts/*
 /static/_redirects
 /src/lib/assets/favicons.html

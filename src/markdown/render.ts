@@ -12,12 +12,8 @@ import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
-const {
-	mergeHighlightedCodeBlocks,
-	parseAndRender,
-	transformMediaEmbeds,
-	transformYoutubeEmbeds,
-} = oxContent;
+const { mergeHighlightedCodeBlocks, parseAndRender, transformMediaEmbeds, transformYoutubeEmbeds } =
+	oxContent;
 
 const oxContentOptions = {
 	gfm: true,
@@ -43,6 +39,12 @@ type FenceLine = {
 	info: string;
 };
 
+export type TweetRenderer = (id: string) => Promise<string>;
+
+type RenderMarkdownOptions = {
+	renderTweet?: TweetRenderer;
+};
+
 async function highlightCode(code: string, lang: string) {
 	return codeToHtml(code, {
 		lang,
@@ -66,25 +68,26 @@ function transformOutsideFences(content: string, transform: (line: string) => st
 	let inFence = false;
 	let fenceMarker = '';
 
-	return lines.map((line) => {
-		const trimmed = line.trimStart();
-		const fence = trimmed.match(/^(`{3,}|~{3,})/)?.[1];
+	return lines
+		.map((line) => {
+			const trimmed = line.trimStart();
+			const fence = trimmed.match(/^(`{3,}|~{3,})/)?.[1];
 
-		if (fence != null) {
-			if (!inFence) {
-				inFence = true;
-				fenceMarker = fence;
+			if (fence != null) {
+				if (!inFence) {
+					inFence = true;
+					fenceMarker = fence;
+				} else if (trimmed.startsWith(fenceMarker[0]) && fence.length >= fenceMarker.length) {
+					inFence = false;
+					fenceMarker = '';
+				}
+
+				return line;
 			}
-			else if (trimmed.startsWith(fenceMarker[0]) && fence.length >= fenceMarker.length) {
-				inFence = false;
-				fenceMarker = '';
-			}
 
-			return line;
-		}
-
-		return inFence ? line : transform(line);
-	}).join('\n');
+			return inFence ? line : transform(line);
+		})
+		.join('\n');
 }
 
 function escapeMagicLinkUnderscores(line: string) {
@@ -98,17 +101,19 @@ function escapeMagicLinkUnderscores(line: string) {
 }
 
 function prepareOxContentMarkdown(content: string) {
-	return transformOutsideFences(
-		transformCollapsibleBlocks(content),
-		(line) => {
-			const embeds = line
-				.replace(/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g, '<youtube id="$2" />')
-				.replace(/<Divider\s*\/>/g, '<hr>');
-			const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))));
+	return transformOutsideFences(transformCollapsibleBlocks(content), (line) => {
+		const embeds = line
+			.replace(
+				/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
+				'<youtube id="$2" />',
+			)
+			.replace(/<Divider\s*\/>/g, '<hr>');
+		const preparedLine = replaceImageFigures(
+			replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))),
+		);
 
-			return replaceBareUrls(preparedLine);
-		},
-	);
+		return replaceBareUrls(preparedLine);
+	});
 }
 
 function resolveCodeBlockLanguage(language: string, languageClass: string | undefined) {
@@ -176,10 +181,10 @@ function extractFencedCodeBlocks(source: string) {
 
 		const closingFence = parseFenceLine(line);
 		if (
-			closingFence != null
-			&& closingFence.info.trim().length === 0
-			&& closingFence.marker[0] === fenceMarker[0]
-			&& closingFence.marker.length >= fenceMarker.length
+			closingFence != null &&
+			closingFence.info.trim().length === 0 &&
+			closingFence.marker[0] === fenceMarker[0] &&
+			closingFence.marker.length >= fenceMarker.length
 		) {
 			codeBlocks.push({
 				language: current.language,
@@ -213,9 +218,13 @@ async function renderHighlightedCodeBlocks(source: string, html: string) {
 
 		if (codeBlock == null) {
 			chunks.push(codeBlockHtml);
-		}
-		else {
-			chunks.push(await highlightCode(codeBlock.code, resolveCodeBlockLanguage(codeBlock.language, languageClass)));
+		} else {
+			chunks.push(
+				await highlightCode(
+					codeBlock.code,
+					resolveCodeBlockLanguage(codeBlock.language, languageClass),
+				),
+			);
 		}
 
 		lastIndex = index + codeBlockHtml.length;
@@ -260,24 +269,28 @@ function resolveHeadingIdBase(existingId: string | undefined, innerHtml: string)
 function addHeadingAnchors(html: string) {
 	const usedIds = new Map<string, number>();
 
-	return html.replace(/<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/g, (match, level: string, attrs: string, innerHtml: string) => {
-		const existingId = attrs.match(idAttributePattern)?.[2];
-		const idBase = resolveHeadingIdBase(existingId, innerHtml);
+	return html.replace(
+		/<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/g,
+		(match, level: string, attrs: string, innerHtml: string) => {
+			const existingId = attrs.match(idAttributePattern)?.[2];
+			const idBase = resolveHeadingIdBase(existingId, innerHtml);
 
-		if (hasHeaderAnchor(innerHtml)) {
-			if (existingId != null) {
-				resolveUniqueHeadingId(idBase, usedIds);
+			if (hasHeaderAnchor(innerHtml)) {
+				if (existingId != null) {
+					resolveUniqueHeadingId(idBase, usedIds);
+				}
+				return match;
 			}
-			return match;
-		}
 
-		const id = resolveUniqueHeadingId(idBase, usedIds);
-		const escapedId = escapeHtml(id);
-		const resolvedAttrs = existingId == null
-			? `${attrs} id="${escapedId}"`
-			: attrs.replace(idAttributePattern, ` id="${escapedId}"`);
-		return `<h${level}${resolvedAttrs}>${innerHtml}<a class="header-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>`;
-	});
+			const id = resolveUniqueHeadingId(idBase, usedIds);
+			const escapedId = escapeHtml(id);
+			const resolvedAttrs =
+				existingId == null
+					? `${attrs} id="${escapedId}"`
+					: attrs.replace(idAttributePattern, ` id="${escapedId}"`);
+			return `<h${level}${resolvedAttrs}>${innerHtml}<a class="header-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>`;
+		},
+	);
 }
 
 function postprocessRenderedHtml(html: string) {
@@ -289,7 +302,34 @@ function postprocessRenderedHtml(html: string) {
 	return addExternalLinkAttributes(addHeadingAnchors(blockEmbeds));
 }
 
-export async function renderMarkdown(content: string) {
+async function replaceAsync(
+	value: string,
+	pattern: RegExp,
+	replacer: (match: RegExpExecArray) => Promise<string>,
+) {
+	const matches = [...value.matchAll(pattern)];
+	if (matches.length === 0) {
+		return value;
+	}
+
+	const replacements = await Promise.all(matches.map(replacer));
+	let output = '';
+	let offset = 0;
+	for (const [index, match] of matches.entries()) {
+		output += value.slice(offset, match.index) + replacements[index];
+		offset = match.index + match[0].length;
+	}
+	return output + value.slice(offset);
+}
+
+async function renderTweets(html: string, renderTweet: TweetRenderer) {
+	const blockPattern = /<p>\s*<Tweet\s+id=(['"])(\d+)\1\s*\/>\s*<\/p>/g;
+	const blocks = await replaceAsync(html, blockPattern, (match) => renderTweet(match[2]));
+	const inlinePattern = /<Tweet\s+id=(['"])(\d+)\1\s*\/>/g;
+	return replaceAsync(blocks, inlinePattern, (match) => renderTweet(match[2]));
+}
+
+export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const prepared = prepareOxContentMarkdown(content);
 	const result = parseAndRender(prepared, oxContentOptions);
 
@@ -297,11 +337,20 @@ export async function renderMarkdown(content: string) {
 		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	const highlighted = mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html));
-	const media = transformYoutubeEmbeds(transformMediaEmbeds(highlighted, {
-		twitter: true,
-		bluesky: true,
-	}));
+	const highlighted = mergeHighlightedCodeBlocks(
+		result.html,
+		await renderHighlightedCodeBlocks(prepared, result.html),
+	);
+	const tweets =
+		options.renderTweet == null
+			? highlighted
+			: await renderTweets(highlighted, options.renderTweet);
+	const media = transformYoutubeEmbeds(
+		transformMediaEmbeds(tweets, {
+			twitter: true,
+			bluesky: true,
+		}),
+	);
 
 	return applyBudouxHtml(postprocessRenderedHtml(media));
 }
@@ -357,7 +406,9 @@ if (import.meta.vitest != null) {
 		});
 
 		it('leaves existing markdown links untouched when converting bare URLs', () => {
-			expect(prepareOxContentMarkdown('[site](https://example.com)')).toBe('[site](https://example.com)');
+			expect(prepareOxContentMarkdown('[site](https://example.com)')).toBe(
+				'[site](https://example.com)',
+			);
 		});
 
 		it('leaves malformed preview links untouched', () => {
@@ -369,7 +420,9 @@ if (import.meta.vitest != null) {
 		});
 
 		it('does not transform fenced code contents', () => {
-			expect(prepareOxContentMarkdown('```md\n{tech_world18}\n```')).toBe('```md\n{tech_world18}\n```');
+			expect(prepareOxContentMarkdown('```md\n{tech_world18}\n```')).toBe(
+				'```md\n{tech_world18}\n```',
+			);
 		});
 	});
 
@@ -381,6 +434,17 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('href="https://x.com/i/web/status/1234567890"');
 			expect(html).not.toContain('<p><article');
 			expect(html).not.toContain('<Tweet');
+		});
+
+		it('uses the SSG tweet renderer when provided', async () => {
+			const html = await renderMarkdown('<Tweet id="1234567890" />', {
+				renderTweet: async (id) =>
+					`<article class="sveltweet-ssg" data-tweet-id="${id}">Tweet body</article>`,
+			});
+
+			expect(html).toContain('class="sveltweet-ssg"');
+			expect(html).toContain('data-tweet-id="1234567890"');
+			expect(html).not.toContain('class="ox-tweet"');
 		});
 
 		it('renders legacy Svelte YouTube embeds with ox-content', async () => {
@@ -402,27 +466,39 @@ if (import.meta.vitest != null) {
 		it('adds markdown-it-anchor compatible heading anchors', async () => {
 			const html = await renderMarkdown('# Hello World');
 
-			expect(html).toContain('<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-hidden="true" tabindex="-1">#</a></h1>');
+			expect(html).toContain(
+				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-hidden="true" tabindex="-1">#</a></h1>',
+			);
 		});
 
 		it('deduplicates repeated heading anchors', async () => {
 			const html = await renderMarkdown('## Examples\n\n## Examples\n\n## Examples');
 
-			expect(html).toContain('<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-hidden="true" tabindex="-1">#</a></h2>');
-			expect(html).toContain('<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-hidden="true" tabindex="-1">#</a></h2>');
-			expect(html).toContain('<h2 id="examples-3">Examples<a class="header-anchor" href="#examples-3" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain(
+				'<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
+			expect(html).toContain(
+				'<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
+			expect(html).toContain(
+				'<h2 id="examples-3">Examples<a class="header-anchor" href="#examples-3" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
 		});
 
 		it('does not treat heading text as an existing anchor', async () => {
 			const html = await renderMarkdown('# header-anchor literal');
 
-			expect(html).toContain('<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-hidden="true" tabindex="-1">#</a></h1>');
+			expect(html).toContain(
+				'<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-hidden="true" tabindex="-1">#</a></h1>',
+			);
 		});
 
 		it('adds markdown-it-link-attributes compatible external link attributes', async () => {
 			const html = await renderMarkdown('[external](https://example.com) [local](/blog)');
 
-			expect(html).toContain('<a href="https://example.com" target="_blank" rel="noopener noreferrer">external</a>');
+			expect(html).toContain(
+				'<a href="https://example.com" target="_blank" rel="noopener noreferrer">external</a>',
+			);
 			expect(html).toContain('<a href="/blog">local</a>');
 		});
 
@@ -464,17 +540,25 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary><span class="details-marker"></span>More</summary>');
-			expect(html).toContain('<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain(
+				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
 			expect(html).toContain('</details>');
 		});
 
 		it('renders the recap appendix as a closed details block', async () => {
-			const html = await renderMarkdown('## おまけ\n\n+++ おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n+++');
+			const html = await renderMarkdown(
+				'## おまけ\n\n+++ おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n+++',
+			);
 
-			expect(html).toContain('<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain(
+				'<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary><span class="details-marker"></span>おまけ</summary>');
-			expect(html).toContain('<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-hidden="true" tabindex="-1">#</a></h2>');
+			expect(html).toContain(
+				'<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-hidden="true" tabindex="-1">#</a></h2>',
+			);
 			expect(html).toContain('<code>ccusage</code>');
 			expect(html).toContain('</details>');
 		});

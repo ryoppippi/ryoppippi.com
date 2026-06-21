@@ -1,6 +1,15 @@
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - gray-matter-es
+  - '@ox-content/binding-darwin-arm64@2.72.0'
+  - '@ox-content/binding-darwin-x64@2.72.0'
+  - '@ox-content/binding-linux-arm64-gnu@2.72.0'
+  - '@ox-content/binding-linux-x64-gnu@2.72.0'
+  - '@ox-content/binding-win32-x64-msvc@2.72.0'
+  - '@ox-content/islands@2.72.0'
+  - '@ox-content/napi@2.72.0'
+  - '@ox-content/vite-plugin-svelte@2.72.0'
+  - '@ox-content/vite-plugin@2.72.0'
 
 overrides:
   sharp: ^0.34.5
