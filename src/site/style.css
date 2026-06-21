@@ -1,0 +1,42 @@
+@import '@fontsource/inter/latin.css';
+@import '@fontsource/dm-mono/latin.css';
+@import '@fontsource/jetbrains-mono/latin.css';
+@import '@fontsource/roboto-condensed/latin.css';
+@import '../styles/site.css';
+@import '../routes/page.css';
+@import '../routes/blog/page.css';
+@import '../routes/blog/[slug]/article.css';
+@import '../routes/blog/[slug]/anchor.css';
+@import '../routes/blog/[slug]/callout.css';
+@import '../routes/blog/[slug]/collapse.css';
+@import '../routes/blog/[slug]/link-card.css';
+@import '../routes/blog/[slug]/magic-link.css';
+@import '../routes/blog/[slug]/prose.css';
+
+@source './**/*.ts';
+
+.ox-tweet {
+	display: block;
+	margin-block: 1rem;
+}
+
+.ox-tweet > a {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding: 1rem;
+	border: 1px solid #8884;
+	border-radius: 0.5rem;
+	text-decoration: none;
+}
+
+.ox-youtube {
+	width: 100%;
+	margin-block: 1.5rem;
+}
+
+.ox-youtube iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+}

@@ -7,6 +7,8 @@ export default ryoppippi({
 		tsconfigPath: './tsconfig.json',
 	},
 	ignores: [
+		'.claude/**',
+		'build-static/**',
 		'.ox-content-compare/**',
 		// Migrated Zenn blog posts with legacy code formatting
 		'src/contents/blog/*-zenn-*-ja/index.md',
