@@ -1,7 +1,4 @@
-@import '@fontsource/inter/latin.css';
-@import '@fontsource/dm-mono/latin.css';
-@import '@fontsource/jetbrains-mono/latin.css';
-@import '@fontsource/roboto-condensed/latin.css';
+@import '../styles/fonts.css';
 @import '../styles/site.css';
 @import '../styles/home.css';
 @import '../styles/blog/index.css';
