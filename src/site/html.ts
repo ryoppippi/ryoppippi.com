@@ -27,10 +27,12 @@ function navigation(pathname: string): string {
 			${navLink(pathname, '/works/', 'works')}
 			${navLink(pathname, '/blog/', 'blog')}
 			${navLink(pathname, '/sponsors/', 'sponsors')}
-			<a class="relative block shrink-0 whitespace-nowrap" href="/cv" rel="noopener noreferrer" target="_blank">cv <span class="icon-[line-md--download-outline] align-middle" aria-hidden="true"></span></a>
-			<button class="flex cursor-pointer items-center border-0 bg-transparent p-0 text-inherit" aria-label="Toggle colour scheme" data-theme-toggle type="button"><span class="icon-[line-md--moon-filled-to-sunny-filled-loop-transition]" aria-hidden="true"></span></button>
-			<a class="flex items-center" aria-label="RSS feed" href="/feed.xml"><span class="icon-[line-md--rss]" aria-hidden="true"></span></a>
-			<a class="flex items-center" aria-label="Source code on GitHub" href="https://github.com/ryoppippi/ryoppippi.com" rel="noopener noreferrer" target="_blank"><span class="icon-[teenyicons--github-solid]" aria-hidden="true"></span></a>
+			<a class="relative block w-10 shrink-0 whitespace-nowrap px-0" href="/cv" rel="noopener noreferrer" target="_blank"><span class="fyc">cv <span class="icon-[line-md--download-outline] size-[1em] shrink-0" aria-hidden="true"></span></span></a>
+			<div class="flex w-[4.375rem] justify-between [&_button]:my-auto [&_button]:flex [&_button]:cursor-pointer [&_button]:items-center [&_button]:border-0 [&_button]:bg-transparent [&_button]:p-0 [&_button]:text-inherit">
+				<span class="flex items-center" data-dark-mode></span>
+				<a class="fyc my-auto" aria-label="RSS feed" href="/feed.xml"><span class="icon-[line-md--rss]" aria-hidden="true"></span><span class="sr-only">RSS feed</span></a>
+				<a class="fyc my-auto" aria-label="Source code on GitHub" href="https://github.com/ryoppippi/ryoppippi.com" rel="noopener noreferrer" target="_blank"><span class="icon-[teenyicons--github-solid]" aria-hidden="true"></span><span class="sr-only">Source code</span></a>
+			</div>
 		</nav>
 	</header>`;
 }
@@ -62,7 +64,9 @@ export function page({ title, pathname, content, description = 'Portfolio of @ry
 	<meta property="og:image" content="${ORIGIN}/ryoppippi.jpg">
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:site" content="@ryoppippi">
+	<script>if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');</script>
 	<title>${escapeHtml(fullTitle)}</title>
+	<link rel="icon" href="/ryoppippi.jpg">
 	<link rel="alternate" title="${escapeHtml(description)}" type="application/rss+xml" href="/feed.xml">
 	${assets}
 </head>

@@ -8,9 +8,9 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 function worksNav(active: string): string {
 	return `<div class="text-center font-mono">
 		<h1 class="pb-4 text-5xl font-bold opacity-70">Projects</h1>
-		<p class="mb-5 text-lg italic opacity-50">... that I (&#39;m working | &#39;ve worked) on</p>
-		<nav class="mb-8 flex flex-wrap justify-center gap-4" aria-label="Works">
-			${['oss', 'showcase', 'talks', 'publications'].map(item => `<a class="${item === active ? 'text-accent-100' : 'opacity-50'}" href="/works/${item}/">${item}</a>`).join('')}
+		<p class="mb-5 text-lg italic opacity-50"><span class="text-nowrap">... that</span> <span class="text-nowrap">I</span> <span class="text-nowrap">(&rsquo;m working | &rsquo;ve worked)</span> <span class="text-nowrap">on</span></p>
+		<nav class="fcol-sm-row fw mb-8 gap-1 text-3xl sm:gap-3" aria-label="Works sections">
+			${['oss', 'showcase', 'talks', 'publications'].map(item => `<a class="opacity-20${item === active ? ' opacity-70' : ''}"${item === active ? ' aria-current="page"' : ''} href="/works/${item}/">${item === 'oss' ? 'Oss' : item[0].toUpperCase() + item.slice(1)}</a>`).join('')}
 		</nav>
 	</div>`;
 }
@@ -18,13 +18,13 @@ function worksNav(active: string): string {
 function projectCard(project: { name: string; description: string | null; icon: string; link: string }): string {
 	return `<a class="grid grid-cols-5 max-w-full select-none font-sans no-underline op-card transition-base hover:scale-[1.01] hover:shadow-xl" href="${project.link}" rel="noopener noreferrer" target="_blank">
 		<div class="gcc"><span class="${project.icon} text-3xl opacity-50" aria-hidden="true"></span></div>
-		<div class="fcol col-span-4"><strong class="truncate text-lg">${escapeHtml(project.name)}</strong><p class="h-8 line-clamp-2 text-xs">${escapeHtml(project.description ?? '')}</p></div>
+		<div class="fcol col-span-4"><div class="truncate text-lg">${escapeHtml(project.name)}</div><p class="h-8 line-clamp-2 text-xs">${escapeHtml(project.description ?? '')}</p></div>
 	</a>`;
 }
 
 export function ossPage(projects: Record<string, OssProject[]>, assets: string): GeneratedFile {
 	const groups = Object.entries(projects).map(([genre, items]) => `<section>${largeTitle(genre, 2)}<div class="grid grid-cols-1 gap-8 md:grid-cols-2">${items.map(projectCard).join('')}</div></section>`).join('');
-	const links = `<div class="prose mx-auto mt-10 pb-5 dark:prose-invert"><div class="fxc gap-2"><a class="btn-green" href="/pr">My Recent PRs</a><a class="btn-blue" href="/gh">GitHub</a><a class="btn-pink" href="/gh-by-stars">Sort by Stars</a></div></div>`;
+	const links = `<div class="prose mx-auto mt-10 pb-5 dark:prose-invert"><div class="fxc gap-2"><a class="btn-green fcol-md-row fyc gap-1" href="https://ryoppippi.com/pr" rel="noopener noreferrer" target="_blank"><span class="icon-[ph--git-pull-request-duotone]" aria-hidden="true"></span>My Recent PRs</a><a class="btn-blue fcol-md-row fyc gap-1" href="https://ryoppippi.com/gh" rel="noopener noreferrer" target="_blank"><span class="icon-[ph--github-logo-duotone]" aria-hidden="true"></span>GitHub</a><a class="btn-pink fcol-md-row fyc gap-1" href="https://ryoppippi.com/gh-by-stars" rel="noopener noreferrer" target="_blank"><span class="icon-[ph--star]" aria-hidden="true"></span>Sort by Stars</a></div></div>`;
 	return { path: 'works/oss/index.html', content: page({ title: 'oss', pathname: '/works/oss/', content: `${worksNav('oss')}${links}<div class="grid gap-16">${groups}</div>`, assets }) };
 }
 

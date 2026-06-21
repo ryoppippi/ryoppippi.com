@@ -8,7 +8,6 @@ export default ryoppippi({
 	},
 	ignores: [
 		'.claude/**',
-		'build-static/**',
 		'.ox-content-compare/**',
 		// Migrated Zenn blog posts with legacy code formatting
 		'src/contents/blog/*-zenn-*-ja/index.md',
@@ -16,5 +15,6 @@ export default ryoppippi({
 }, {
 	rules: {
 		'antfu/no-top-level-await': 'off',
+		'svelte/html-self-closing': 'off',
 	},
 });

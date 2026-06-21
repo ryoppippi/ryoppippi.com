@@ -1,24 +1,18 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
+		"target": "ES2024",
+		"lib": ["ES2024", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
-		"types": [
-			"@total-typescript/ts-reset",
-			"vitest/globals",
-			"vitest/importMeta"
-		],
+		"types": ["node", "vite/client", "vitest/globals", "vitest/importMeta"],
 		"allowImportingTsExtensions": true,
-		"allowJs": true,
-		"checkJs": true,
 		"strict": true,
-		"sourceMap": true,
+		"noEmit": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"plugins": [
-			{
-				"name": "typescript-svelte-plugin"
-			}
-		]
-	}
+		"isolatedModules": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/**/*.ts", "src/**/*.svelte", "scripts/**/*.ts", "*.ts"]
 }

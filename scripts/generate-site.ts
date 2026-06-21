@@ -10,7 +10,7 @@ import { errorPage, ossPage, publicationsPage, showcasePage, sponsorsPage, talks
 import { loadOssProjects, loadPublications, loadShowcase, loadTalks } from '../src/site/sections.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
-const outDir = path.join(root, 'build-static');
+const outDir = path.join(root, 'build');
 
 async function assetTags(): Promise<string> {
 	const index = await readFile(path.join(outDir, 'index.html'), 'utf8');
@@ -82,7 +82,7 @@ for (const [slug, heading] of osSections) {
 	plainFiles.push(...parseStepCommands(section).map(({ step, command }) => ({ path: `dotfiles/${slug}/${step}`, content: command })));
 }
 
-const urls = pages.filter(file => file.path.endsWith('.html')).map(file => `https://ryoppippi.com/${file.path.replace(/(?:index)?\.html$/, '')}`);
+const urls = pages.filter(file => file.path.endsWith('.html') && file.path !== '404.html').map(file => `https://ryoppippi.com/${file.path.replace(/(?:index)?\.html$/, '')}`);
 plainFiles.push({ path: 'sitemap.xml', content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(url => `<url><loc>${url}</loc></url>`).join('')}</urlset>` });
 plainFiles.push({ path: '_redirects', content: [...Route.map(({ from, to }) => `${from} ${to} 301`), '/works /works/oss 301'].join('\n') });
 

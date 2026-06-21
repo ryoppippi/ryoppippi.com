@@ -1,21 +1,20 @@
+import { mount } from 'svelte';
+import DarkModeToggle from './DarkModeToggle.svelte';
 import './style.css';
 
-function applyTheme(theme: 'dark' | 'light'): void {
-	document.documentElement.classList.toggle('dark', theme === 'dark');
-	localStorage.setItem('theme', theme);
+const darkModeTarget = document.querySelector<HTMLElement>('[data-dark-mode]');
+if (darkModeTarget != null) {
+	mount(DarkModeToggle, { target: darkModeTarget });
 }
 
-const storedTheme = localStorage.getItem('theme');
-applyTheme(storedTheme === 'dark' || (storedTheme == null && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
-
-document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
-	applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
-});
-
-for (const input of document.querySelectorAll<HTMLInputElement>('[data-filter]')) {
-	input.addEventListener('change', () => {
-		const english = document.querySelector<HTMLInputElement>('[data-filter="english"]')?.checked === true;
-		const local = document.querySelector<HTMLInputElement>('[data-filter="local"]')?.checked === true;
+for (const button of document.querySelectorAll<HTMLButtonElement>('[data-filter]')) {
+	button.addEventListener('click', () => {
+		const pressed = button.ariaPressed !== 'true';
+		button.ariaPressed = String(pressed);
+		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox]', !pressed);
+		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox-checked]', pressed);
+		const english = document.querySelector<HTMLButtonElement>('[data-filter="english"]')?.ariaPressed === 'true';
+		const local = document.querySelector<HTMLButtonElement>('[data-filter="local"]')?.ariaPressed === 'true';
 		for (const item of document.querySelectorAll<HTMLElement>('.blog-item')) {
 			item.hidden = (english && item.dataset.lang !== 'en') || (local && item.dataset.origin !== 'local');
 		}
