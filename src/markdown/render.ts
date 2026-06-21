@@ -1,5 +1,5 @@
 import type { JsParserOptions } from '@ox-content/napi';
-import { mergeHighlightedCodeBlocks, parseAndRender } from '@ox-content/napi';
+import oxContent from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
 import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.server.ts';
@@ -11,6 +11,13 @@ import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
+
+const {
+	mergeHighlightedCodeBlocks,
+	parseAndRender,
+	transformMediaEmbeds,
+	transformYoutubeEmbeds,
+} = oxContent;
 
 const oxContentOptions = {
 	gfm: true,
@@ -94,7 +101,10 @@ function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(
 		transformCollapsibleBlocks(content),
 		(line) => {
-			const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(line))));
+			const embeds = line
+				.replace(/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g, '<youtube id="$2" />')
+				.replace(/<Divider\s*\/>/g, '<hr>');
+			const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))));
 
 			return replaceBareUrls(preparedLine);
 		},
@@ -282,7 +292,13 @@ export async function renderMarkdown(content: string) {
 		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
 	}
 
-	return applyBudouxHtml(postprocessRenderedHtml(mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html))));
+	const highlighted = mergeHighlightedCodeBlocks(result.html, await renderHighlightedCodeBlocks(prepared, result.html));
+	const media = transformYoutubeEmbeds(transformMediaEmbeds(highlighted, {
+		twitter: true,
+		bluesky: true,
+	}));
+
+	return applyBudouxHtml(postprocessRenderedHtml(media));
 }
 
 if (import.meta.vitest != null) {
@@ -353,6 +369,29 @@ if (import.meta.vitest != null) {
 	});
 
 	describe('renderMarkdown', () => {
+		it('renders tweets as static ox-content cards', async () => {
+			const html = await renderMarkdown('<Tweet id="1234567890" />');
+
+			expect(html).toContain('class="ox-tweet"');
+			expect(html).toContain('href="https://x.com/i/web/status/1234567890"');
+			expect(html).not.toContain('<Tweet');
+		});
+
+		it('renders legacy Svelte YouTube embeds with ox-content', async () => {
+			const html = await renderMarkdown('<YouTube youTubeId="dQw4w9WgXcQ" />');
+
+			expect(html).toContain('class="ox-youtube"');
+			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
+			expect(html).not.toContain('<YouTube');
+		});
+
+		it('renders legacy dividers as horizontal rules', async () => {
+			const html = await renderMarkdown('<Divider />');
+
+			expect(html).toContain('<hr>');
+			expect(html).not.toContain('<Divider');
+		});
+
 		it('adds markdown-it-anchor compatible heading anchors', async () => {
 			const html = await renderMarkdown('# Hello World');
 
