@@ -11,13 +11,35 @@ export type MagicLinkOptions = {
 };
 
 export const magicLinks = {
-	'vim-jp': { link: 'https://vim-jp.org/', imageUrl: 'https://vim-jp.org/assets/images/vim2-128.png' },
-	'vim-jp-radio': { link: 'https://vim-jp-radio.com/', imageUrl: 'https://cdn.jsdelivr.net/gh/vim-jp-radio/LP@main/src/assets/vimjp-radio-cover-art/800x800-fs8.png' },
-	'Svelte Japan': { link: 'https://svelte.jp', imageUrl: 'https://cdn.jsdelivr.net/gh/sveltejs/branding/svelte-logo-square.png' },
-	'ryoppippi.com': { link: 'https://ryoppippi.com', imageUrl: 'https://ryoppippi.com/ryoppippi.jpg' },
-	'tech_world18': { link: 'https://x.com/tech_world18', imageUrl: 'https://pbs.twimg.com/profile_images/1717677089154088960/tDuRN0aB_400x400.jpg' },
-	'TECH WORLD': { link: 'https://www.youtube.com/channel/UCISDrqLMNq3w9AZ4otdoRuA', imageUrl: 'https://pbs.twimg.com/profile_images/1920681519682908160/0sY6R8FJ_400x400.jpg' },
-	'eerm16g': { link: 'https://x.com/eerm16g', imageUrl: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg' },
+	'vim-jp': {
+		link: 'https://vim-jp.org/',
+		imageUrl: 'https://vim-jp.org/assets/images/vim2-128.png',
+	},
+	'vim-jp-radio': {
+		link: 'https://vim-jp-radio.com/',
+		imageUrl:
+			'https://cdn.jsdelivr.net/gh/vim-jp-radio/LP@main/src/assets/vimjp-radio-cover-art/800x800-fs8.png',
+	},
+	'Svelte Japan': {
+		link: 'https://svelte.jp',
+		imageUrl: 'https://cdn.jsdelivr.net/gh/sveltejs/branding/svelte-logo-square.png',
+	},
+	'ryoppippi.com': {
+		link: 'https://ryoppippi.com',
+		imageUrl: 'https://ryoppippi.com/ryoppippi.jpg',
+	},
+	tech_world18: {
+		link: 'https://x.com/tech_world18',
+		imageUrl: 'https://pbs.twimg.com/profile_images/1717677089154088960/tDuRN0aB_400x400.jpg',
+	},
+	'TECH WORLD': {
+		link: 'https://www.youtube.com/channel/UCISDrqLMNq3w9AZ4otdoRuA',
+		imageUrl: 'https://pbs.twimg.com/profile_images/1920681519682908160/0sY6R8FJ_400x400.jpg',
+	},
+	eerm16g: {
+		link: 'https://x.com/eerm16g',
+		imageUrl: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg',
+	},
 } as const satisfies Record<string, Required<MagicLink>>;
 
 const githubSpecialRoutes = [
@@ -36,8 +58,7 @@ function isSafeHref(href: string) {
 	try {
 		const url = new URL(href);
 		return url.protocol === 'https:' || url.protocol === 'http:';
-	}
-	catch {
+	} catch {
 		return false;
 	}
 }
@@ -76,7 +97,13 @@ function getImageUrl(href: string, imageUrl: string | undefined, options: MagicL
 	return resolvedImageUrl;
 }
 
-function renderLink(href: string, imageUrl: string | undefined, label: string, kind: 'github-at' | 'link', options: MagicLinkOptions) {
+function renderLink(
+	href: string,
+	imageUrl: string | undefined,
+	label: string,
+	kind: 'github-at' | 'link',
+	options: MagicLinkOptions,
+) {
 	const resolvedImageUrl = getImageUrl(href, imageUrl, options);
 	if (!isSafeHref(href) || !isSafeHref(resolvedImageUrl)) {
 		return null;
@@ -95,10 +122,16 @@ function getConfiguredLink(input: string, options: MagicLinkOptions) {
 	return configured;
 }
 
-export function renderMagicLink(input: string, options: MagicLinkOptions = { linksMap: magicLinks }) {
+export function renderMagicLink(
+	input: string,
+	options: MagicLinkOptions = { linksMap: magicLinks },
+) {
 	const normalized = input.trim();
 	const [username, label, href, ...extra] = normalized.startsWith('@')
-		? normalized.slice(1).split('|').map(part => part.trim())
+		? normalized
+				.slice(1)
+				.split('|')
+				.map((part) => part.trim())
 		: [];
 
 	if (username != null && extra.length === 0 && /^[a-z\d][a-z\d-]*$/i.test(username)) {
@@ -111,21 +144,30 @@ export function renderMagicLink(input: string, options: MagicLinkOptions = { lin
 		);
 	}
 
-	const [text, explicitHref, ...linkExtra] = normalized.split('|').map(part => part.trim());
+	const [text, explicitHref, ...linkExtra] = normalized.split('|').map((part) => part.trim());
 	if (linkExtra.length > 0 || text == null) {
 		return null;
 	}
 
 	const configured = getConfiguredLink(text, options);
-	const link = explicitHref?.length ? explicitHref : configured?.link ?? text;
+	const link = explicitHref?.length ? explicitHref : (configured?.link ?? text);
 	if (!isSafeHref(link)) {
 		return null;
 	}
 
-	return renderLink(link, configured?.imageUrl, text.length > 0 ? text : link.replace(/^https?:\/\//i, ''), 'link', options);
+	return renderLink(
+		link,
+		configured?.imageUrl,
+		text.length > 0 ? text : link.replace(/^https?:\/\//i, ''),
+		'link',
+		options,
+	);
 }
 
-export function replaceMagicLinks(html: string, options: MagicLinkOptions = { linksMap: magicLinks }) {
+export function replaceMagicLinks(
+	html: string,
+	options: MagicLinkOptions = { linksMap: magicLinks },
+) {
 	return html.replace(/\{([^{}\n]+)\}/g, (match, input: string) => {
 		const rendered = renderMagicLink(input, options);
 		return rendered ?? match;
@@ -175,20 +217,24 @@ if (import.meta.vitest != null) {
 				'<a href="https://vueuse.org/3" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a>',
 			],
 		])('matches markdown-it-magic-link link fixture for {%s}', (input, expected) => {
-			expect(renderMagicLink(input, {
-				linksMap: {
-					'VueUse': 'https://vueuse.org/1',
-					'Vue Use': 'https://vueuse.org/2',
-				},
-			})).toBe(expected);
+			expect(
+				renderMagicLink(input, {
+					linksMap: {
+						VueUse: 'https://vueuse.org/1',
+						'Vue Use': 'https://vueuse.org/2',
+					},
+				}),
+			).toBe(expected);
 		});
 
 		it('matches markdown-it-magic-link links map image fixture', () => {
-			expect(renderMagicLink('VueUse', {
-				linksMap: {
-					VueUse: { link: 'https://vueuse.org/1', imageUrl: 'https://example.com/favicon1.png' },
-				},
-			})).toBe(
+			expect(
+				renderMagicLink('VueUse', {
+					linksMap: {
+						VueUse: { link: 'https://vueuse.org/1', imageUrl: 'https://example.com/favicon1.png' },
+					},
+				}),
+			).toBe(
 				'<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon1.png\');"></span>VueUse</a>',
 			);
 		});
@@ -224,7 +270,9 @@ if (import.meta.vitest != null) {
 			const html = renderMagicLink('@issues');
 
 			expect(html).toContain('href="https://github.com/issues"');
-			expect(html).toContain('background-image: url(\'https://favicon.yandex.net/favicon/github.com\')');
+			expect(html).toContain(
+				"background-image: url('https://favicon.yandex.net/favicon/github.com')",
+			);
 			expect(html).not.toContain('https://github.com/issues.png');
 		});
 
@@ -232,7 +280,9 @@ if (import.meta.vitest != null) {
 			const html = renderMagicLink('GitHub|https://github.com/?tab=repositories', {});
 
 			expect(html).toContain('href="https://github.com/?tab=repositories"');
-			expect(html).toContain('background-image: url(\'https://favicon.yandex.net/favicon/github.com\')');
+			expect(html).toContain(
+				"background-image: url('https://favicon.yandex.net/favicon/github.com')",
+			);
 			expect(html).not.toContain('https://github.com/.png');
 		});
 
@@ -244,7 +294,8 @@ if (import.meta.vitest != null) {
 				imageOverrides: [[/^https:\/\/vueuse\.org\//g, 'https://example.com/favicon.png']],
 			} satisfies MagicLinkOptions;
 
-			const expected = '<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon.png\');"></span>VueUse</a>';
+			const expected =
+				'<a href="https://vueuse.org/1" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://example.com/favicon.png\');"></span>VueUse</a>';
 
 			expect(renderMagicLink('VueUse', options)).toBe(expected);
 			expect(renderMagicLink('VueUse', options)).toBe(expected);
@@ -253,7 +304,10 @@ if (import.meta.vitest != null) {
 
 	describe('replaceMagicLinks', () => {
 		it('matches markdown-it-magic-link basic fixture', () => {
-			const html = replaceMagicLinks('Foo {@github} Bar\n\nFoo {VueUse|https://vueuse.org} Bar', {});
+			const html = replaceMagicLinks(
+				'Foo {@github} Bar\n\nFoo {VueUse|https://vueuse.org} Bar',
+				{},
+			);
 
 			expect(html).toBe(
 				'Foo <a href="https://github.com/github" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/github.png\');"></span>GITHUB</a> Bar\n\nFoo <a href="https://vueuse.org" class="markdown-magic-link markdown-magic-link-link"><span class="markdown-magic-link-image" style="background-image: url(\'https://favicon.yandex.net/favicon/vueuse.org\');"></span>VueUse</a> Bar',
@@ -261,11 +315,13 @@ if (import.meta.vitest != null) {
 		});
 
 		it('leaves unknown labels untouched', () => {
-			expect(replaceMagicLinks('D {Vueuse} non-target', {
-				linksMap: {
-					VueUse: 'https://vueuse.org/1',
-				},
-			})).toBe('D {Vueuse} non-target');
+			expect(
+				replaceMagicLinks('D {Vueuse} non-target', {
+					linksMap: {
+						VueUse: 'https://vueuse.org/1',
+					},
+				}),
+			).toBe('D {Vueuse} non-target');
 		});
 
 		it('renders magic links before closing parentheses and brackets', () => {

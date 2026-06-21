@@ -21,10 +21,7 @@ if (p.isCancel(title)) {
 const date = d.format(new Date(), 'yyyy-MM-dd');
 const lang = await p.select({
 	message: 'Select the language of the post',
-	options: [
-		{ value: 'ja' },
-		{ value: 'en' },
-	],
+	options: [{ value: 'ja' }, { value: 'en' }],
 	initialValue: 'en',
 });
 if (p.isCancel(lang)) {

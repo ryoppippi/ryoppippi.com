@@ -4,7 +4,8 @@
  * The README is not part of this repository, so it is fetched at prerender
  * time and emitted as static `.md` assets.
  */
-export const DOTFILES_README_URL = 'https://raw.githubusercontent.com/ryoppippi/dotfiles/main/README.md';
+export const DOTFILES_README_URL =
+	'https://raw.githubusercontent.com/ryoppippi/dotfiles/main/README.md';
 
 /**
  * Fetch the raw dotfiles README.
@@ -118,10 +119,10 @@ function dedent(lines: string[]): string {
 	// Measure indentation only on non-blank lines so blank lines do not force
 	// the common indent down to zero.
 	const indents = lines
-		.filter(line => line.trim() !== '')
-		.map(line => line.length - line.trimStart().length);
+		.filter((line) => line.trim() !== '')
+		.map((line) => line.length - line.trimStart().length);
 	const min = indents.length > 0 ? Math.min(...indents) : 0;
-	return lines.map(line => line.slice(min)).join('\n');
+	return lines.map((line) => line.slice(min)).join('\n');
 }
 
 /**
@@ -189,8 +190,7 @@ export function parseStepCommands(section: string): { step: number; command: str
 				steps.push(current);
 			}
 			current = { step: Number(match[1]), lines: [] };
-		}
-		else if (current != null) {
+		} else if (current != null) {
 			current.lines.push(line);
 		}
 	}
@@ -327,7 +327,15 @@ if (import.meta.vitest != null) {
 		});
 
 		it('skips steps that have no code block', () => {
-			const section = ['1. Just read this.', '', '2. Run:', '', '   ```sh', '   echo hi', '   ```'].join('\n');
+			const section = [
+				'1. Just read this.',
+				'',
+				'2. Run:',
+				'',
+				'   ```sh',
+				'   echo hi',
+				'   ```',
+			].join('\n');
 			expect(parseStepCommands(section)).toEqual([{ step: 2, command: 'echo hi' }]);
 		});
 	});

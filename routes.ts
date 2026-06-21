@@ -13,8 +13,14 @@ export const Route = [
 	{ from: '/reddit', to: '/https://www.reddit.com/user/ryoppippi' },
 	{ from: '/youtube', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
 	{ from: '/yt', to: 'https://www.youtube.com/channel/UCJbUM-yZx6mESJw82-OpMuQ' },
-	{ from: '/yt-list', to: 'https://www.youtube.com/playlist?list=PLWGCczNC6JbWsgyb0q5McgpdcAWnLxeii' },
-	{ from: '/yt-talks', to: 'https://www.youtube.com/playlist?list=PLWGCczNC6JbU8q4NlbfM_xGR34mJbLL_F' },
+	{
+		from: '/yt-list',
+		to: 'https://www.youtube.com/playlist?list=PLWGCczNC6JbWsgyb0q5McgpdcAWnLxeii',
+	},
+	{
+		from: '/yt-talks',
+		to: 'https://www.youtube.com/playlist?list=PLWGCczNC6JbU8q4NlbfM_xGR34mJbLL_F',
+	},
 	// Backward compatibility redirects
 	{ from: '/talks*', to: '/works/talks' },
 	{ from: '/projects*', to: '/works' },

@@ -7,7 +7,8 @@ function renderImageFigure(alt: string, src: string, title: string) {
 export function replaceImageFigures(line: string) {
 	return line.replace(
 		/!\[([^\]]*)\]\((\S+)\s+(['"])(.*?)\3\)(?:\{[^}\n]+\})?/g,
-		(_match, alt: string, src: string, _quote: string, title: string) => renderImageFigure(alt, src, title),
+		(_match, alt: string, src: string, _quote: string, title: string) =>
+			renderImageFigure(alt, src, title),
 	);
 }
 

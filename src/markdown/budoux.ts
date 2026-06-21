@@ -29,7 +29,9 @@ function segmentText(text: string) {
 
 	return text
 		.split(/(&(?:#\d+|#x[\da-f]+|[a-z][a-z\d]+);)/i)
-		.map((chunk, index) => index % 2 === 1 ? chunk : japaneseParser.parse(chunk).join(zeroWidthSpace))
+		.map((chunk, index) =>
+			index % 2 === 1 ? chunk : japaneseParser.parse(chunk).join(zeroWidthSpace),
+		)
 		.join('');
 }
 
@@ -48,8 +50,7 @@ export function applyBudouxHtml(html: string) {
 		const normalizedTagName = tagName?.toLowerCase();
 		if (normalizedTagName === 'p' && /^<p(?:\s|>)/i.test(tag)) {
 			chunks.push(applyParagraphStyle(tag));
-		}
-		else {
+		} else {
 			chunks.push(tag);
 		}
 
@@ -59,8 +60,7 @@ export function applyBudouxHtml(html: string) {
 				if (stackIndex >= 0) {
 					skipStack.splice(stackIndex, 1);
 				}
-			}
-			else if (!tag.endsWith('/>')) {
+			} else if (!tag.endsWith('/>')) {
 				skipStack.push(normalizedTagName);
 			}
 		}
@@ -88,9 +88,9 @@ if (import.meta.vitest != null) {
 		});
 
 		it('does not segment code block contents', () => {
-			expect(applyBudouxHtml('<p>今日は天気です。</p><pre><code>今日は天気です。</code></pre>')).toContain(
-				'<pre><code>今日は天気です。</code></pre>',
-			);
+			expect(
+				applyBudouxHtml('<p>今日は天気です。</p><pre><code>今日は天気です。</code></pre>'),
+			).toContain('<pre><code>今日は天気です。</code></pre>');
 		});
 
 		it('preserves html entities while segmenting text', () => {

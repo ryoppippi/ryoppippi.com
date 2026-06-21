@@ -4,8 +4,14 @@ function normalizeAngleUrl(url: string) {
 
 export function normalizeAngleLinks(line: string) {
 	return line
-		.replace(/\[([^\]]+)\]\(<(https?:\/\/[^>\s]+)>\)/g, (_match, label: string, url: string) => `[${label}](${normalizeAngleUrl(url)})`)
-		.replace(/<(https?:\/\/[^>\s]+)>/g, (_match, url: string) => `[${url}](${normalizeAngleUrl(url)})`);
+		.replace(
+			/\[([^\]]+)\]\(<(https?:\/\/[^>\s]+)>\)/g,
+			(_match, label: string, url: string) => `[${label}](${normalizeAngleUrl(url)})`,
+		)
+		.replace(
+			/<(https?:\/\/[^>\s]+)>/g,
+			(_match, url: string) => `[${url}](${normalizeAngleUrl(url)})`,
+		);
 }
 
 const trailingBareUrlPunctuationPattern = /[),.:;!?]+$/;

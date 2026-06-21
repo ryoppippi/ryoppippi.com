@@ -11,9 +11,7 @@
 		"svelte": {
 			"type": "stdio",
 			"command": "pnpm",
-			"args": [
-				"svelte-mcp"
-			],
+			"args": ["svelte-mcp"],
 			"env": {}
 		}
 	}

@@ -9,14 +9,16 @@ function renderLinkPreview(url: string) {
 		const parsed = new URL(url);
 		const escapedUrl = escapeHtml(url);
 		return `<div class="link-preview-widget"><a href="${escapedUrl}" rel="noopener" target="_blank"><div class="link-preview-widget-title">${escapeHtml(url)}</div><div class="link-preview-widget-url">${escapeHtml(parsed.hostname)}</div></a></div>`;
-	}
-	catch {
+	} catch {
 		return null;
 	}
 }
 
 export function replaceLinkPreviews(line: string) {
-	return line.replace(/\[@preview\]\((https?:\/\/[^)\s]+)\)/g, (match, url: string) => renderLinkPreview(url) ?? match);
+	return line.replace(
+		/\[@preview\]\((https?:\/\/[^)\s]+)\)/g,
+		(match, url: string) => renderLinkPreview(url) ?? match,
+	);
 }
 
 if (import.meta.vitest != null) {

@@ -9,11 +9,10 @@ export function transformerEscape(): ShikiTransformer {
 	return {
 		name: '@shikijs/transformers:escape-brackets',
 		postprocess(code) {
-			return entities
-				.reduce((
-					acc,
-					[pattern, replacement],
-				) => acc.replace(pattern, replacement), code);
+			return entities.reduce(
+				(acc, [pattern, replacement]) => acc.replace(pattern, replacement),
+				code,
+			);
 		},
 	};
 }
