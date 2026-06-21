@@ -5,11 +5,6 @@ isPublished: true
 lang: ja
 ---
 
-<script>
-import Tweet from '$components/Tweet.svelte';
-import { YouTube } from 'sveltekit-embed';
-</script>
-
 ## 最初に言っておく
 
 この記事には嫉妬が含まれている。それは認める。

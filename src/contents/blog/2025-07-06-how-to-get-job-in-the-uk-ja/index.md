@@ -5,10 +5,6 @@ isPublished: true
 lang: ja
 ---
 
-<script>
-import Tweet from '$components/Tweet.svelte';
-</script>
-
 > [English](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en)
 
 こんにちは、ryoppippi です。はじめましての方ははじめまして。

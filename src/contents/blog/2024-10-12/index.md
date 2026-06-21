@@ -5,11 +5,6 @@ isPublished: true
 lang: 'en'
 ---
 
-<script>
-import Tweet from '$components/Tweet.svelte';
-import { YouTube } from 'sveltekit-embed';
-</script>
-
 > This post is a demonstration of how rich this blog system is. Continuously updated.
 
 # Titles

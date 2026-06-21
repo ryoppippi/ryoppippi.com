@@ -5,10 +5,6 @@ isPublished: true
 lang: 'ja'
 ---
 
-<script>
-import Tweet from '$components/Tweet.svelte';
-</script>
-
 ![2025](./2025-year-of-code.png 'https://git-wrapped.com/profiles/ryoppippi')
 
 もう三が日も過ぎてしまったが、2025年の振り返りをしようと思う。

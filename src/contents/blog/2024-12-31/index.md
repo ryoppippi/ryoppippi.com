@@ -5,10 +5,6 @@ isPublished: true
 lang: 'en'
 ---
 
-<script>
-import { YouTube } from 'sveltekit-embed';
-</script>
-
 ![2024](./wrap.png 'https://git-wrapped.com/profiles/ryoppippi')
 
 ## The year of OSS
