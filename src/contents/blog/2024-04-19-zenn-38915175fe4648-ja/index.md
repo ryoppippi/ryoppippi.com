@@ -203,7 +203,7 @@ vim.keymap.set("n", "<leader>r", 'yiw:%s/<C-r><C-r>"//g<Left><Left>')
 
 0. `y`で選択範囲をヤンク
 1. `:%s//g`でBuffer全体に対して置換コマンドを開始
-2. `<C-r><C-r>"`でヤンクした内容をペースト^[[<C-r><C-r>](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-R_CTRL-R)]
+2. `<C-r><C-r>"`でヤンクした内容をペースト^[`<C-r><C-r>`](https://vim-jp.org/vimdoc-ja/insert.html#i_CTRL-R_CTRL-R)]
 3. `<Left><Left>`で最初の`//`の間にカーソルを移動
 
 ![4.gif](./4.gif)

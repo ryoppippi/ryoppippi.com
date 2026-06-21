@@ -25,7 +25,8 @@ I decided to come to Japan for this event. I was happy to meet so many people.
 [Slides available here](https://talks.ryoppippi.com/2025-10-17)
 
 <!-- https://www.youtube.com/live/u8I_LujFXeU?t=2296s -->
-<YouTube youTubeId="u8I_LujFXeU" skipTo="{{h:0,m:38,s:16}}" />
+
+<YouTube youTubeId="u8I_LujFXeU" skipTo={{ h: 0, m: 38, s: 16 }} />
 
 <!-- https://x.com/ryoppippi/status/1979149319237439870 -->
 <Tweet id="1979149319237439870" />
@@ -51,7 +52,8 @@ A meetup where I gathered people I wanted to talk with and let them speak freely
 ### [Svelte Japan Offline Meetup #5 LT](https://svelte-jp.connpass.com/event/367967/)
 
 <!-- https://youtu.be/8ZdcsNLbDpQ?si=mn-p8WaFHnPq7O0x&t=5616 -->
-<YouTube youTubeId="8ZdcsNLbDpQ" skipTo="{{h:1,m:33,s:36}}" />
+
+<YouTube youTubeId="8ZdcsNLbDpQ" skipTo={{ h: 1, m: 33, s: 36 }} />
 
 <!-- https://x.com/Yuki_Ishii_Dev/status/1981868952860098579 -->
 <Tweet id="1981868952860098579" />
@@ -70,7 +72,9 @@ I hadn't planned to attend, but I extended my Tokyo stay by a week, so it became
 [ryoppippi/nvim-in-the-loop](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
 
 <!-- https://www.youtube.com/live/9MQpu0nxl5E?si=0NneqV0WyJYwD6X8&t=26926 -->
-<YouTube youTubeId="9MQpu0nxl5E" skipTo="{{h:7,m:28,s:46}}" />
+
+<YouTube youTubeId="9MQpu0nxl5E" skipTo={{ h: 7, m: 28, s: 46 }} />
+
 <!-- https://x.com/tomoyaton/status/1984893370674921592 -->
 <Tweet id="1984893370674921592" />
 
