@@ -281,7 +281,12 @@ function addHeadingAnchors(html: string) {
 }
 
 function postprocessRenderedHtml(html: string) {
-	return addExternalLinkAttributes(addHeadingAnchors(html));
+	const blockEmbeds = html
+		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
+		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1')
+		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
+
+	return addExternalLinkAttributes(addHeadingAnchors(blockEmbeds));
 }
 
 export async function renderMarkdown(content: string) {
@@ -374,6 +379,7 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('class="ox-tweet"');
 			expect(html).toContain('href="https://x.com/i/web/status/1234567890"');
+			expect(html).not.toContain('<p><article');
 			expect(html).not.toContain('<Tweet');
 		});
 
@@ -382,6 +388,7 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('class="ox-youtube"');
 			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
+			expect(html).not.toContain('<p><div');
 			expect(html).not.toContain('<YouTube');
 		});
 
