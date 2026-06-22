@@ -1,0 +1,26 @@
+{
+	"https://ccusage.com/sponsor": {
+		"url": "https://ccusage.com/sponsor",
+		"title": "Sponsor @ryoppippi on GitHub Sponsors",
+		"description": "Open-source developer @ryoppippi building tools in TypeScript, Zig &amp; Neovim. Creating CLI utilities, bundle optimizers &amp; CV libraries that enhance developer workflows. UK/JP background, 7+ years ex...",
+		"image": "https://avatars.githubusercontent.com/u/1560508?s=400&amp;v=4",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=ccusage.com&sz=32"
+	},
+	"https://github.com/openai/codex/pull/3135": {
+		"url": "https://github.com/openai/codex/pull/3135",
+		"title": "TUI: Add session resume picker (--resume) and quick resume (--continue) by aibrahim-oai · Pull Request #3135 · openai/codex",
+		"description": "Adds a TUI resume flow with an interactive picker and quick resume.\n\nCLI:\n\n--resume / -r: open picker to resume a prior session\n--continue   / -l: resume the most recent session (no picker)\n\n\nBehav...",
+		"image": "https://opengraph.githubassets.com/315c1df18ac2aaf8557dfc48b6c60a3643237f0bbb51049736d61303ff3cdbc2/openai/codex/pull/3135",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=github.com&sz=32"
+	},
+	"https://github.com/ryoppippi/ccusage/issues/626": {
+		"url": "https://github.com/ryoppippi/ccusage/issues/626",
+		"title": "Is it possible to support codex? · Issue #626 · ccusage/ccusage",
+		"description": "npx ccusage. Contribute to ccusage/ccusage development by creating an account on GitHub.",
+		"image": "https://opengraph.githubassets.com/a4445db3265b140f78045422830634b8f6c57c67f7acf63a4e0c1c9de4bd4fb0/ccusage/ccusage/issues/626",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=github.com&sz=32"
+	}
+}

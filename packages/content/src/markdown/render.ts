@@ -1,6 +1,7 @@
 import oxContent from '@ox-content/napi';
 import { transformOgp } from '@ox-content/vite-plugin';
 import type { TweetData } from '../tweet-renderer.ts';
+import type { OgpSnapshots } from '../ogp-snapshots.ts';
 import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
@@ -19,6 +20,7 @@ export type TweetSnapshots = Record<string, TweetData>;
 export type TweetRenderer = (id: string, tweet?: TweetData) => Promise<string>;
 
 export type RenderMarkdownOptions = {
+	openGraph?: OgpSnapshots;
 	renderTweet?: TweetRenderer;
 	tweets?: TweetSnapshots;
 };
@@ -214,7 +216,9 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 			bluesky: true,
 		}),
 	);
-	const openGraph = await transformOgp(media, undefined, { timeout: 8_000 });
+	const openGraphData =
+		options.openGraph == null ? undefined : new Map(Object.entries(options.openGraph));
+	const openGraph = await transformOgp(media, openGraphData, { timeout: 8_000 });
 
 	const body = applyBudouxHtml(postprocessRenderedHtml(openGraph));
 	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
@@ -230,6 +234,15 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('class="ox-ogp-simple"');
 			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
+		});
+
+		it('renders a fallback preview without fetching when metadata is unavailable', async () => {
+			const html = await renderMarkdown('[@preview](https://example.com/post)', {
+				openGraph: {},
+			});
+
+			expect(html).toContain('class="ox-ogp-simple"');
+			expect(html).toContain('href="https://example.com/post"');
 		});
 
 		it('normalises angle links that contain parentheses', () => {

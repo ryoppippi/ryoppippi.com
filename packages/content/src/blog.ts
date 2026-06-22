@@ -5,6 +5,7 @@ import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
 import { blogDirectory } from './paths.ts';
+import { loadOgpSnapshots } from './ogp-snapshots.ts';
 import { loadTweetSnapshots } from './tweet-snapshots.ts';
 
 export type BlogPost = {
@@ -29,6 +30,14 @@ function filenameFor(filepath: string): string {
 	return path.basename(filepath) === 'index.md'
 		? path.basename(path.dirname(filepath))
 		: path.basename(filepath, '.md');
+}
+
+async function loadRenderOptions(content: string, filepath: string) {
+	const [openGraph, tweets] = await Promise.all([
+		loadOgpSnapshots(content, filepath),
+		loadTweetSnapshots(content, filepath),
+	]);
+	return openGraph == null && tweets == null ? undefined : { openGraph, tweets };
 }
 
 async function findBlogPostSource(slug: string, directory: string) {
@@ -71,14 +80,14 @@ export async function loadBlogPost(
 
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
-	const tweets = await loadTweetSnapshots(content, entry.filepath);
+	const renderOptions = await loadRenderOptions(content, entry.filepath);
 	return {
 		title: String(data.title),
 		filename: filenameFor(entry.filepath),
 		filepath: entry.filepath,
 		source: entry.source,
 		content,
-		html: tweets == null ? await render(content) : await render(content, { tweets }),
+		html: renderOptions == null ? await render(content) : await render(content, renderOptions),
 		pubDate: new Date(String(data.date)).toJSON(),
 		lang: typeof data.lang === 'string' ? data.lang : 'ja',
 		isPublished: data.isPublished === true,
@@ -118,14 +127,14 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const source = await readFile(filepath, 'utf8');
 			const { data, content } = matter(source);
 			const filename = filenameFor(filepath);
-			const tweets = await loadTweetSnapshots(content, filepath);
+			const renderOptions = await loadRenderOptions(content, filepath);
 			return {
 				title: String(data.title),
 				filename,
 				filepath,
 				source,
 				content,
-				html: tweets == null ? await render(content) : await render(content, { tweets }),
+				html: renderOptions == null ? await render(content) : await render(content, renderOptions),
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
 				isPublished: data.isPublished === true,

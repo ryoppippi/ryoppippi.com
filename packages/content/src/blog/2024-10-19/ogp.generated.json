@@ -1,0 +1,18 @@
+{
+	"https://github.com/ryoppippi/dotfiles/tree/65dc955a4187c9c375793a99271b8af4c2014d3e/karabiner": {
+		"url": "https://github.com/ryoppippi/dotfiles/tree/65dc955a4187c9c375793a99271b8af4c2014d3e/karabiner",
+		"title": "dotfiles/karabiner at 65dc955a4187c9c375793a99271b8af4c2014d3e · ryoppippi/dotfiles",
+		"description": "ryoppippi&#39;s dotfiles. Contribute to ryoppippi/dotfiles development by creating an account on GitHub.",
+		"image": "https://opengraph.githubassets.com/fa2c955a5adbe10733b992fb1dd3b3ba7353adc891700afbee7751f87938fd06/ryoppippi/dotfiles",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=github.com&sz=32"
+	},
+	"https://karabiner-elements.pqrs.org/": {
+		"url": "https://karabiner-elements.pqrs.org/",
+		"title": "Karabiner-Elements",
+		"description": "Karabiner-Elements A powerful and stable keyboard customizer for macOS. Download v16.0.0 Toggle Dropdown Download v16.0.0 For macOS 27 Golden Gate For macOS 26 Tahoe For macOS 15 Sequoia For macOS 14 Sonoma For macOS 13 Ventura Download v14.13.0 For macOS 12 Monterey For macOS 11 Big Sur Download v13.7.0 For macOS 10.15 Catalina (10.15.6 or later) Download v12.10.0 For macOS 10.15 Catalina For macOS 10.14 Mojave For macOS 10.13 High Sierra For macOS 10.12 Sierra Download v11.6.0 For macOS 10.11 El Capitan Download v10.22.0 For macOS 10.11 El Capitan For macOS 10.10 Yosemite For macOS 10.9 Mavericks Learn more Privacy Supported systems macOS 27 Golden Gate\nmacOS 26 Tahoe\nmacOS 15 Sequoia\nmacOS 14 Sonoma\nmacOS 13 Ventura\nBoth Intel-based Macs and Apple Silicon Macs are supported. Predefined rules by community Release notes GitHub Sponsor Easy to use You can configure simple key mappings from GUI.",
+		"image": "https://karabiner-elements.pqrs.org/images/logo.png",
+		"siteName": "Karabiner-Elements",
+		"favicon": "https://www.google.com/s2/favicons?domain=karabiner-elements.pqrs.org&sz=32"
+	}
+}

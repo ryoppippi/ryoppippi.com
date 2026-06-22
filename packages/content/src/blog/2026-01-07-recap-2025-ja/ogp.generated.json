@@ -1,0 +1,48 @@
+{
+	"https://gihyo.jp/magazine/SD/archive/2026/202602": {
+		"url": "https://gihyo.jp/magazine/SD/archive/2026/202602",
+		"title": "Software Design 2026年2月号 | 技術評論社",
+		"description": "第1特集\r\nVibe Coding完全攻略\r\nコードを1行も書かない、新時代のAIプログラミング手法\r\n\r\nエンジニアは自然言語によるAIへの指示のみ行い、AIエージェントがコーディングをすべて行うプログラミング手法「Vibe Coding」が話題になっています。AIに大きな裁量を与えることで、その圧倒的なコード生成能力の恩恵を最大限に発揮させられるこの手法は、コーディングと言いながら実際にコードを書くことのない、プログラミングの新たな形と言えるでしょう。\r\n\r\nしかし、コーディングをAIに任せるといっても、Vibe Codingを業務に使えるレベルで活用するためには、ソフトウェア開発への深い理解と、適切に問題を発見し修正を指示する能力、そしてVibe Codingならではの課題に対処する必要があります。本特集では、このVibe Codingを使いこなすためのノウハウを、生成AIの登場直後から手探りで可能性を切り拓いてきたエンジニアの方々に解説してもらいます。\r\n\r\n第2特集\r\nあらためて学ぶAmazon S3\r\nイベント機能＆データレイク機能を使いこなそう\r\n\r\nAmazon S3はAWSが提供するオブジェクトストレージサービスです。データ保管・保護・コスト最適化・サービス連携を一体で提供するマネージドサービスとして設計されています。みなさんは、S3を「単なるデータの保存場所」と考えていませんか？　S3をデータ中心アーキテクチャの起点としてとらえることで、システム全体をシンプルで自動化しやすい構造にすることができます。本特集では、みなさんが開発・運用の業務でS3を活用するアイデアがひらめくように、「S3をうまく使うための情報やユースケース」を取り上げます。\r\n\r\n特別付録\r\nIIJ謹製「インターネット便利帳」\r\n\r\n特別企画\r\nPlaywrightで実現するE2Eテスト自動化\r\n誰がやっても何度やっても効果のある自動テストを目指して\r\n\r\n「Playwright」というWebアプリケーションのエンドツーエンドテストツールの利用が広がっています。その背景には、継続的に自動テストを回せるしくみが整っていることが挙げられます。本稿では、Playwrightを使って「繰り返し実行でき、ソフトウェアの品質維持／向上につながる自動テスト」を実現するためのノウハウを解説します。\r\n\r\n特別企画\r\n「LLMのしくみ」発展編（1月号第1特集フォローアップ）\r\n大規模化するLLMの学習・開発を支える技術\r\n\r\n本誌2026年1月号の第1特集「LLMのしくみ」では、LLMの基本を理解することを重視し、基本構造、学習プロセス、学習・推論を小さく試すハンズオン、モデルの順に学びました。一方で、実際に私たちが利用しているLLMは大規模であり、GPU資源や学習時間の制約がある中で、効率よく学習する必要があります。本稿では、LLMを実現している技術として、分散並列学習や混合精度による学習、低精度表現、モデルマージといった手法を学びます。\r\n\r\n短期連載\r\nPodmanで実践 AI駆動開発のためのコンテナ環境構築入門\r\n【1】AI駆動開発のためのサンドボックス戦略とPodmanの基本\r\n\r\nこの一年ほどで、環境構築からプログラミングまで多くの作業をAIに任せる開発スタイルが現実的になりました。しかしAIも完璧ではないため、安心してAIに作業を任せられる隔離環境や気軽に試行錯誤できる開発環境が求められています。そんなAI駆動開発に適したコンテナ環境をPodmanで作るノウハウを解説します。",
+		"image": "https://gihyo.jp/assets/images/ogp/2026/642602.jpg",
+		"siteName": "技術評論社",
+		"favicon": "https://www.google.com/s2/favicons?domain=gihyo.jp&sz=32"
+	},
+	"https://podcasts.apple.com/jp/podcast/ryoppippi%E3%81%95%E3%82%93%E3%81%A8dr-tani%E3%81%95%E3%82%93%E3%81%AB%E8%81%9E%E3%81%8F-oss%E6%B4%BB%E5%8B%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E3%81%A8-%E8%8B%A5%E3%81%95%E3%81%AE%E4%BE%A1%E5%80%A4-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000681358605": {
+		"url": "https://podcasts.apple.com/jp/podcast/ryoppippi%E3%81%95%E3%82%93%E3%81%A8dr-tani%E3%81%95%E3%82%93%E3%81%AB%E8%81%9E%E3%81%8F-oss%E6%B4%BB%E5%8B%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E3%81%A8-%E8%8B%A5%E3%81%95%E3%81%AE%E4%BE%A1%E5%80%A4-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000681358605",
+		"title": "【ryoppippiさんとDr.taniさんに聞く！&quot;OSS活動について”と&quot;若さの価値&quot;】エンジニアの楽園 vim-jp ラジオ #24",
+		"description": "ポッドキャストのエピソード · エンジニアの楽園 vim-jp ラジオ · 2024年12月23日 · 37分",
+		"image": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/77/3e/25/773e2586-3c1a-ed86-1d6f-e2ab0952cfdb/mza_5053986711867975784.jpg/1200x1200ECA.PESS01-60.jpg?imgShow=Podcasts221/v4/c4/9a/05/c49a05f8-788e-118f-1254-a4b44592667b/mza_10609190194704288450.jpg",
+		"siteName": "Apple Podcast",
+		"favicon": "https://www.google.com/s2/favicons?domain=podcasts.apple.com&sz=32"
+	},
+	"https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja": {
+		"url": "https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja",
+		"title": "半年強で533ポジションに応募してやっとUKでエンジニア就職を果たした話 | blog | ryoppippi.com",
+		"description": "Portfolio of @ryoppippi",
+		"image": "https://ryoppippi.com/ryoppippi.jpg",
+		"favicon": "https://www.google.com/s2/favicons?domain=ryoppippi.com&sz=32"
+	},
+	"https://ryoppippi.com/blog/2025-11-06-japan-trip-ja": {
+		"url": "https://ryoppippi.com/blog/2025-11-06-japan-trip-ja",
+		"title": "2025年10-11月東京滞在 | blog | ryoppippi.com",
+		"description": "Portfolio of @ryoppippi",
+		"image": "https://ryoppippi.com/ryoppippi.jpg",
+		"favicon": "https://www.google.com/s2/favicons?domain=ryoppippi.com&sz=32"
+	},
+	"https://ryoppippi.com/dotfiles": {
+		"url": "https://ryoppippi.com/dotfiles",
+		"title": "GitHub - ryoppippi/dotfiles: ryoppippi&#39;s dotfiles",
+		"description": "ryoppippi&#39;s dotfiles. Contribute to ryoppippi/dotfiles development by creating an account on GitHub.",
+		"image": "https://opengraph.githubassets.com/fa2c955a5adbe10733b992fb1dd3b3ba7353adc891700afbee7751f87938fd06/ryoppippi/dotfiles",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=ryoppippi.com&sz=32"
+	},
+	"https://sosukesuzuki.dev/posts/joining-bun/": {
+		"url": "https://sosukesuzuki.dev/posts/joining-bun/",
+		"title": "Bunに入社した",
+		"description": "sosukesuzuki",
+		"image": "https://sosukesuzuki.dev/img/large-logo.jpeg",
+		"siteName": "sosukesuzuki.dev",
+		"favicon": "https://www.google.com/s2/favicons?domain=sosukesuzuki.dev&sz=32"
+	}
+}
