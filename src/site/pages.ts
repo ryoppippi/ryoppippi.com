@@ -1,4 +1,4 @@
-import type { BlogPost } from '@ryoppippi/content';
+import type { BlogPost, BlogPostMetadata } from '@ryoppippi/content';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
@@ -12,14 +12,14 @@ export type GeneratedFile = {
 	content: string;
 };
 
-function home(assets: string): GeneratedFile {
+export function homePage(assets: string): GeneratedFile {
 	return {
 		path: 'index.html',
 		content: page({ title: 'home', pathname: '/', content: renderComponent(Home, {}), assets }),
 	};
 }
 
-function blogList(items: PostListItem[], assets: string): GeneratedFile {
+export function blogListPage(items: PostListItem[], assets: string): GeneratedFile {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return {
 		path: 'blog/index.html',
@@ -32,7 +32,7 @@ function blogList(items: PostListItem[], assets: string): GeneratedFile {
 	};
 }
 
-function article(post: BlogPost, assets: string): GeneratedFile[] {
+export function articlePages(post: BlogPost, assets: string): GeneratedFile[] {
 	const pathname = `/blog/${post.filename}/`;
 	const content = renderComponent(Article, {
 		date: formatDate(new Date(post.pubDate)),
@@ -48,7 +48,7 @@ function article(post: BlogPost, assets: string): GeneratedFile[] {
 	];
 }
 
-export function feed(posts: BlogPost[]): GeneratedFile {
+export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 	const output = new Feed({
 		title: 'blog | ryoppippi.com',
 		description: 'blog | ryoppippi.com',
@@ -87,9 +87,9 @@ export function corePages(
 			external: false,
 		}));
 	return [
-		home(assets),
-		blogList([...externalPosts, ...localPosts], assets),
-		...posts.filter((post) => post.isPublished).flatMap((post) => article(post, assets)),
+		homePage(assets),
+		blogListPage([...externalPosts, ...localPosts], assets),
+		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
 		feed(posts),
 	];
 }

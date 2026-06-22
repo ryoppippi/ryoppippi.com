@@ -1,4 +1,4 @@
-import type { BlogPost } from '@ryoppippi/content';
+import type { BlogPostMetadata } from '@ryoppippi/content';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 import Parser from 'rss-parser';
@@ -42,7 +42,7 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
 	});
 }
 
-export function postListItems(posts: BlogPost[]): PostListItem[] {
+export function postListItems(posts: BlogPostMetadata[]): PostListItem[] {
 	return posts
 		.filter((post) => post.isPublished)
 		.map((post) => ({
