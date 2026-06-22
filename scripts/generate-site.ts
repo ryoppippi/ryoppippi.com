@@ -17,6 +17,7 @@ async function readAssetTags(outDir: string): Promise<string> {
 		readFile(path.join(outDir, '.vite/manifest.json'), 'utf8'),
 	]);
 	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[] }>;
+	// The SSG tweet needs its lazy chunk's CSS before hydration, but Vite omits it from index.html.
 	const tweetStyles = manifest['src/site/Tweet.svelte']?.css ?? [];
 	const tags = [
 		...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g),
