@@ -2,6 +2,26 @@
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
 @reference './tailwind.css';
 
+@font-face {
+	font-family: 'Inter Home';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400;
+	src: url('./fonts/inter-home-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Inter Home';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 800;
+	src: url('./fonts/inter-home-800.woff2') format('woff2');
+}
+
+body[data-page-style='home'] {
+	font-family: 'Inter Home', 'Inter fallback', sans-serif;
+}
+
 @keyframes root-fade-in {
 	from {
 		opacity: 0;
