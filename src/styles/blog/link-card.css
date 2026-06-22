@@ -2,9 +2,13 @@
 	display: table;
 
 	width: 100%;
+	max-width: 100%;
+	margin-block: 1.25em;
 
 	border: 0.125rem solid;
 	border-radius: 4px;
+	box-sizing: border-box;
+	table-layout: fixed;
 }
 
 .link-preview-widget-title {
@@ -55,6 +59,7 @@
 
 .link-preview-widget > a {
 	display: table-cell;
+	min-width: 0;
 	flex-direction: column;
 
 	padding: 16px;
@@ -88,4 +93,12 @@
 
 	-webkit-box-flex: 0;
 	flex: 0;
+}
+
+@media (max-width: 640px) {
+	.link-preview-widget-image {
+		width: 42%;
+		min-width: 0;
+		height: auto;
+	}
 }

@@ -6,9 +6,10 @@ import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.server.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
+import { extractFootnotes, renderFootnotes } from './footnotes.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
-import { replaceLinkPreviews } from './link-preview.ts';
+import { preloadLinkPreviews, replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
@@ -332,8 +333,9 @@ function postprocessRenderedHtml(html: string) {
 		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
 		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1')
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
+	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 
-	return addExternalLinkAttributes(addHeadingAnchors(blockEmbeds));
+	return addExternalLinkAttributes(addHeadingAnchors(withoutTrailingAttributes));
 }
 
 async function replaceAsync(
@@ -364,7 +366,9 @@ async function renderTweets(html: string, renderTweet: TweetRenderer) {
 }
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
-	const prepared = prepareOxContentMarkdown(content);
+	const extracted = extractFootnotes(content);
+	await preloadLinkPreviews(extracted.content);
+	const prepared = prepareOxContentMarkdown(extracted.content);
 	const result = parseAndRender(prepared, oxContentOptions);
 
 	if (result.errors.length > 0) {
@@ -385,7 +389,11 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		}),
 	);
 
-	return applyBudouxHtml(postprocessRenderedHtml(media));
+	const body = applyBudouxHtml(postprocessRenderedHtml(media));
+	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
+		renderMarkdown(footnote, options),
+	);
+	return body + footnotes;
 }
 
 if (import.meta.vitest != null) {
@@ -549,6 +557,30 @@ if (import.meta.vitest != null) {
 				'<a href="https://example.com" target="_blank" rel="noopener noreferrer">external</a>',
 			);
 			expect(html).toContain('<a href="/blog">local</a>');
+		});
+
+		it('removes trailing markdown attributes from links and images', async () => {
+			const html = await renderMarkdown(
+				'[slides](https://example.com){.text-xl}\n\n![alt](./image.png){width=480}',
+			);
+
+			expect(html).not.toContain('{.text-xl}');
+			expect(html).not.toContain('{width=480}');
+		});
+
+		it('renders footnotes with back references', async () => {
+			const html = await renderMarkdown(
+				'Footnote[^note] and again[^note].\n\n[^note]: **footnote body**',
+			);
+
+			expect(html).toContain(
+				'<sup class="footnote-ref"><a href="#fn-note" id="fnref-note">1</a></sup>',
+			);
+			expect(html).toContain('id="fnref-note-2"');
+			expect(html).toContain('<section class="footnotes">');
+			expect(html).toContain('<li id="fn-note">');
+			expect(html).toContain('<strong>footnote body</strong>');
+			expect(html).toContain('href="#fnref-note"');
 		});
 
 		it('renders GitHub alert blocks as ox callouts', async () => {
