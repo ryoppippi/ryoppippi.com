@@ -10,41 +10,36 @@
 }
 
 .shiki {
+	color-scheme: light;
 	background-color: #fafafa !important;
-}
 
-.shiki,
-.shiki span {
 	@variant dark {
-		color: var(--shiki-dark) !important;
-		background-color: var(--shiki-dark-bg) !important;
-		font-style: var(--shiki-dark-font-style) !important;
-		font-weight: var(--shiki-dark-font-weight) !important;
-		text-decoration: var(--shiki-dark-text-decoration) !important;
+		color-scheme: dark;
+		background-color: #181616 !important;
 	}
 }
 
 @media (prefers-contrast: more) {
 	@variant dark {
-		.shiki span[style*='--shiki-dark:#737C73'] {
-			--shiki-dark: #94a094 !important;
+		.shiki span[style*='#737C73'] {
+			color: #94a094 !important;
 		}
 	}
 
 	@variant light {
-		.shiki span[style*='color:#6F894E'] {
+		.shiki span[style*='#6F894E'] {
 			color: #3f6728 !important;
 		}
 
-		.shiki span[style*='color:#716E61'] {
+		.shiki span[style*='#716E61'] {
 			color: #5f5a4e !important;
 		}
 
-		.shiki span[style*='color:#6693BF'] {
+		.shiki span[style*='#6693BF'] {
 			color: #2f668f !important;
 		}
 
-		.shiki span[style*='color:#B35B79'] {
+		.shiki span[style*='#B35B79'] {
 			color: #8a3156 !important;
 		}
 	}

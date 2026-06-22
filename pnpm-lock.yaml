@@ -107,6 +107,9 @@ importers:
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
       budoux:
         specifier: ^0.8.4
         version: 0.8.4
@@ -134,6 +137,12 @@ importers:
       reading-time:
         specifier: ^1.5.0
         version: 1.5.0
+      rehype-parse:
+        specifier: ^9.0.1
+        version: 9.0.1
+      rehype-stringify:
+        specifier: ^10.0.1
+        version: 10.0.1
       shiki:
         specifier: ^4.0.2
         version: 4.0.2
@@ -146,6 +155,9 @@ importers:
       tinyglobby:
         specifier: ^0.2.16
         version: 0.2.17
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@^0.2.1
         version: '@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.12.3)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.9.0)'

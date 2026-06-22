@@ -1,8 +1,5 @@
-import type { JsParserOptions } from '@ox-content/napi';
 import oxContent from '@ox-content/napi';
 import { transformOgp } from '@ox-content/vite-plugin';
-import { performance } from 'node:perf_hooks';
-import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
@@ -12,62 +9,15 @@ import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
-import { transformerEscape } from './shiki-transformer.ts';
+import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
-const { mergeHighlightedCodeBlocks, parseAndRender, transformMediaEmbeds, transformYoutubeEmbeds } =
-	oxContent;
-
-const oxContentOptions = {
-	gfm: true,
-	footnotes: true,
-	taskLists: true,
-	tables: true,
-	strikethrough: true,
-	autolinks: true,
-} as const satisfies JsParserOptions;
-
-type CodeBlock = {
-	language: string;
-	meta: string;
-	code: string;
-};
-
-type OpenCodeBlock = {
-	language: string;
-	meta: string;
-	lines: string[];
-};
-
-type FenceLine = {
-	marker: string;
-	info: string;
-};
+const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
 
 export type TweetRenderer = (id: string) => Promise<string>;
 
 type RenderMarkdownOptions = {
 	renderTweet?: TweetRenderer;
 };
-
-async function highlightCode(code: string, lang: string, meta: string) {
-	const start = performance.now();
-	try {
-		return await codeToHtml(code, {
-			lang,
-			meta: { __raw: meta },
-			tabindex: false,
-			themes: {
-				dark: 'kanagawa-dragon',
-				light: 'kanagawa-lotus',
-			},
-			transformers: [transformerEscape()],
-		});
-	} finally {
-		console.info(
-			`[perf] shiki lang=${lang} chars=${code.length} duration=${(performance.now() - start).toFixed(1)}ms`,
-		);
-	}
-}
 
 function transformOutsideFences(content: string, transform: (line: string) => string) {
 	const lines = content.split('\n');
@@ -109,6 +59,7 @@ function escapeMagicLinkUnderscores(line: string) {
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(transformCollapsibleBlocks(content), (line) => {
 		const embeds = line
+			.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
 			.replace(
 				/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
 				'<youtube id="$2" />',
@@ -120,129 +71,6 @@ function prepareOxContentMarkdown(content: string) {
 
 		return replaceBareUrls(preparedLine);
 	});
-}
-
-function resolveCodeBlockLanguage(language: string, languageClass: string | undefined) {
-	if (language.length > 0) {
-		return language;
-	}
-
-	if (languageClass != null && languageClass.length > 0) {
-		return languageClass;
-	}
-
-	return 'text';
-}
-
-function parseFenceLine(line: string): FenceLine | null {
-	let indent = 0;
-	while (indent < line.length && line[indent] === ' ') {
-		indent += 1;
-	}
-
-	if (indent > 3) {
-		return null;
-	}
-
-	const start = line[indent];
-	if (start !== '`' && start !== '~') {
-		return null;
-	}
-
-	let markerLength = 0;
-	while (indent + markerLength < line.length && line[indent + markerLength] === start) {
-		markerLength += 1;
-	}
-
-	if (markerLength < 3) {
-		return null;
-	}
-
-	return {
-		marker: start.repeat(markerLength),
-		info: line.slice(indent + markerLength),
-	};
-}
-
-function extractFencedCodeBlocks(source: string) {
-	const codeBlocks: CodeBlock[] = [];
-	const lines = source.split('\n');
-	let current: OpenCodeBlock | null = null;
-	let fenceMarker = '';
-
-	for (const line of lines) {
-		if (current == null) {
-			const openingFence = parseFenceLine(line);
-			if (openingFence == null) {
-				continue;
-			}
-
-			const info = openingFence.info.trim();
-			const separator = info.search(/\s/);
-			fenceMarker = openingFence.marker;
-			current = {
-				language: separator === -1 ? info : info.slice(0, separator),
-				meta: separator === -1 ? '' : info.slice(separator).trim(),
-				lines: [],
-			};
-			continue;
-		}
-
-		const closingFence = parseFenceLine(line);
-		if (
-			closingFence != null &&
-			closingFence.info.trim().length === 0 &&
-			closingFence.marker[0] === fenceMarker[0] &&
-			closingFence.marker.length >= fenceMarker.length
-		) {
-			codeBlocks.push({
-				language: current.language,
-				meta: current.meta,
-				code: current.lines.join('\n'),
-			});
-			current = null;
-			fenceMarker = '';
-			continue;
-		}
-
-		current.lines.push(line);
-	}
-
-	return codeBlocks;
-}
-
-async function renderHighlightedCodeBlocks(source: string, html: string) {
-	const codeBlocks = extractFencedCodeBlocks(source);
-	const codeBlockPattern = /<pre><code(?: class="language-([^"]*)")?>[\s\S]*?<\/code><\/pre>/g;
-	const chunks: string[] = [];
-	let codeBlockIndex = 0;
-	let lastIndex = 0;
-
-	for (const match of html.matchAll(codeBlockPattern)) {
-		const [codeBlockHtml, languageClass] = match;
-		const index = match.index;
-		const codeBlock = codeBlocks[codeBlockIndex];
-		codeBlockIndex += 1;
-
-		chunks.push(html.slice(lastIndex, index));
-
-		if (codeBlock == null) {
-			chunks.push(codeBlockHtml);
-		} else {
-			chunks.push(
-				await highlightCode(
-					codeBlock.code,
-					resolveCodeBlockLanguage(codeBlock.language, languageClass),
-					codeBlock.meta,
-				),
-			);
-		}
-
-		lastIndex = index + codeBlockHtml.length;
-	}
-
-	chunks.push(html.slice(lastIndex));
-	return chunks.join('');
 }
 
 function stripHtml(html: string) {
@@ -353,29 +181,21 @@ async function replaceAsync(
 	return output + value.slice(offset);
 }
 
-async function renderTweets(html: string, renderTweet: TweetRenderer) {
-	const blockPattern = /<p>\s*<Tweet\s+id=(['"])(\d+)\1\s*\/>\s*<\/p>/g;
-	const blocks = await replaceAsync(html, blockPattern, (match) => renderTweet(match[2]));
-	const inlinePattern = /<Tweet\s+id=(['"])(\d+)\1\s*\/>/g;
-	return replaceAsync(blocks, inlinePattern, (match) => renderTweet(match[2]));
+async function renderTweets(html: string, renderTweet?: TweetRenderer) {
+	const replacement = (match: RegExpExecArray) =>
+		renderTweet == null ? Promise.resolve(`<Tweet id="${match[1]}" />`) : renderTweet(match[1]);
+	const blockPattern = /<p>\s*<span data-tweet-placeholder="(\d+)"><\/span>\s*<\/p>/g;
+	const blocks = await replaceAsync(html, blockPattern, replacement);
+	const inlinePattern = /<span data-tweet-placeholder="(\d+)"><\/span>/g;
+	return replaceAsync(blocks, inlinePattern, replacement);
 }
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const extracted = extractFootnotes(content);
 	const prepared = prepareOxContentMarkdown(extracted.content);
-	const result = parseAndRender(prepared, oxContentOptions);
-
-	if (result.errors.length > 0) {
-		throw new Error(`ox-content failed to render Markdown: ${result.errors.join('\n')}`);
-	}
-
-	const highlighted = mergeHighlightedCodeBlocks(
-		result.html,
-		await renderHighlightedCodeBlocks(prepared, result.html),
-	);
+	const highlighted = await renderHighlightedMarkdown(prepared);
 	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
-	const tweets =
-		options.renderTweet == null ? magicLinks : await renderTweets(magicLinks, options.renderTweet);
+	const tweets = await renderTweets(magicLinks, options.renderTweet);
 	const media = transformYoutubeEmbeds(
 		transformMediaEmbeds(tweets, {
 			twitter: true,
