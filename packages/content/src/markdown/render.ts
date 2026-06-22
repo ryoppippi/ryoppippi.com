@@ -218,7 +218,9 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 	);
 	const openGraphData =
 		options.openGraph == null ? undefined : new Map(Object.entries(options.openGraph));
-	const openGraph = await transformOgp(media, openGraphData, { timeout: 8_000 });
+	const openGraph = /<ogcard\b/i.test(media)
+		? await transformOgp(media, openGraphData, { timeout: 8_000 })
+		: media;
 
 	const body = applyBudouxHtml(postprocessRenderedHtml(openGraph));
 	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
