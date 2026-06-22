@@ -1,0 +1,346 @@
+{
+	"1997459320091332729": {
+		"__typename": "Tweet",
+		"favorite_count": 271,
+		"lang": "ja",
+		"created_at": "2025-12-07T00:13:07.000Z",
+		"display_text_range": [
+			0,
+			158
+		],
+		"entities": {
+			"user_mentions": [
+				{
+					"id_str": "17755912",
+					"indices": [
+						150,
+						158
+					],
+					"name": "",
+					"screen_name": "kazupon"
+				}
+			]
+		},
+		"id_str": "1997459320091332729",
+		"text": "僕はgunshiというtypescript製のcliを構築するためのライブラリが好きです(ccusageでもsitemcpでも使ってる）。\nしかし、このライブラリ、めちゃくちゃ新しいのでLLMがgunshiについての知識は持っていません。なのでvibe codingと相性がめっちゃ悪い。\n\nそこで @kazupon",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"initial_tweet_id": "1997458914213048518",
+			"edit_tweet_ids": [
+				"1997458914213048518",
+				"1997459320091332729"
+			],
+			"editable_until_msecs": "1765069890000",
+			"edits_remaining": "4",
+			"is_edit_eligible": false
+		},
+		"conversation_count": 1,
+		"news_action_type": "conversation",
+		"quoted_tweet": {
+			"favorite_count": 10,
+			"lang": "en",
+			"possibly_sensitive": false,
+			"reply_count": 1,
+			"retweet_count": 1,
+			"created_at": "2025-12-07T00:00:42.000Z",
+			"display_text_range": [
+				0,
+				264
+			],
+			"entities": {
+				"media": [
+					{
+						"display_url": "pic.x.com/uisvEeNvzN",
+						"expanded_url": "https://x.com/ryoppippi/status/1997456196723208373/video/1",
+						"indices": [
+							265,
+							288
+						],
+						"url": "https://t.co/uisvEeNvzN"
+					}
+				]
+			},
+			"id_str": "1997456196723208373",
+			"text": "So actually, if I took a benchmark of how effective our Claude code skills for Gunshi are, the result is amazing:\n\nWith Skills\n• 0.44 USD\n• 40s for implementation\n• 1:05 for implementation + debugging\n\nWithout Skills\n• 1.37 USD\n• 3:31 for implementation\n• 3:52 for https://t.co/uisvEeNvzN",
+			"user": {
+				"id_str": "113598297",
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi",
+				"is_blue_verified": true,
+				"profile_image_shape": "Circle",
+				"verified": false,
+				"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+				"highlighted_label": {
+					"badge": {
+						"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+					},
+					"description": "Rork",
+					"url": {
+						"url": "https://twitter.com/rork",
+						"url_type": "DeepLink"
+					},
+					"user_label_display_type": "Badge",
+					"user_label_type": "BusinessLabel"
+				}
+			},
+			"edit_control": {
+				"edit_tweet_ids": [
+					"1997456196723208373"
+				],
+				"editable_until_msecs": "1765069242000",
+				"edits_remaining": "5",
+				"is_edit_eligible": false
+			},
+			"mediaDetails": [
+				{
+					"additional_media_info": {},
+					"display_url": "pic.x.com/uisvEeNvzN",
+					"expanded_url": "https://x.com/ryoppippi/status/1997456196723208373/video/1",
+					"ext_media_availability": {
+						"status": "Available"
+					},
+					"indices": [
+						265,
+						288
+					],
+					"media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1997456075633647616/img/tB74J0evbfRdNr6Z.jpg",
+					"original_info": {
+						"focus_rects": [],
+						"height": 1252,
+						"width": 1604
+					},
+					"sizes": {
+						"large": {
+							"h": 1252,
+							"resize": "fit",
+							"w": 1604
+						},
+						"medium": {
+							"h": 937,
+							"resize": "fit",
+							"w": 1200
+						},
+						"small": {
+							"h": 531,
+							"resize": "fit",
+							"w": 680
+						},
+						"thumb": {
+							"h": 150,
+							"resize": "crop",
+							"w": 150
+						}
+					},
+					"type": "video",
+					"url": "https://t.co/uisvEeNvzN",
+					"video_info": {
+						"aspect_ratio": [
+							401,
+							313
+						],
+						"duration_millis": 65123,
+						"variants": [
+							{
+								"content_type": "application/x-mpegURL",
+								"url": "https://video.twimg.com/amplify_video/1997456075633647616/pl/1o9EZn6wvD9hBJD8.m3u8"
+							},
+							{
+								"bitrate": 256000,
+								"content_type": "video/mp4",
+								"url": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/344x270/8_lr4p2gth0IOLHa.mp4"
+							},
+							{
+								"bitrate": 832000,
+								"content_type": "video/mp4",
+								"url": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/460x360/G9D8xZk6_hyzBK2t.mp4"
+							},
+							{
+								"bitrate": 2176000,
+								"content_type": "video/mp4",
+								"url": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/922x720/38hypIxksjHkGfLH.mp4"
+							},
+							{
+								"bitrate": 10368000,
+								"content_type": "video/mp4",
+								"url": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/1604x1252/kmRf8zVKVZBsRS3H.mp4"
+							}
+						]
+					}
+				}
+			],
+			"photos": [],
+			"video": {
+				"aspectRatio": [
+					401,
+					313
+				],
+				"contentType": "media_entity",
+				"durationMs": 65123,
+				"mediaAvailability": {
+					"status": "available"
+				},
+				"poster": "https://pbs.twimg.com/amplify_video_thumb/1997456075633647616/img/tB74J0evbfRdNr6Z.jpg",
+				"variants": [
+					{
+						"type": "application/x-mpegURL",
+						"src": "https://video.twimg.com/amplify_video/1997456075633647616/pl/1o9EZn6wvD9hBJD8.m3u8"
+					},
+					{
+						"type": "video/mp4",
+						"src": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/344x270/8_lr4p2gth0IOLHa.mp4"
+					},
+					{
+						"type": "video/mp4",
+						"src": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/460x360/G9D8xZk6_hyzBK2t.mp4"
+					},
+					{
+						"type": "video/mp4",
+						"src": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/922x720/38hypIxksjHkGfLH.mp4"
+					},
+					{
+						"type": "video/mp4",
+						"src": "https://video.twimg.com/amplify_video/1997456075633647616/vid/avc1/1604x1252/kmRf8zVKVZBsRS3H.mp4"
+					}
+				],
+				"videoId": {
+					"type": "tweet",
+					"id": "1997456196723208373"
+				},
+				"viewCount": 0
+			},
+			"isEdited": false,
+			"isStaleEdit": false
+		},
+		"isEdited": true,
+		"isStaleEdit": false,
+		"previous_counts": {
+			"favorite_count": 0,
+			"quote_count": 0,
+			"reply_count": 0,
+			"retweet_count": 0
+		},
+		"note_tweet": {
+			"id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTk3NDU5MzIwMDE1ODg4Mzg1"
+		}
+	},
+	"2000342747459485933": {
+		"__typename": "Tweet",
+		"favorite_count": 4,
+		"lang": "ja",
+		"created_at": "2025-12-14T23:10:50.000Z",
+		"display_text_range": [
+			0,
+			132
+		],
+		"entities": {},
+		"id_str": "2000342747459485933",
+		"text": "面白い。DaaP(Documents as a Package)と言うのかな？これ普及すればContext7のMCPが不要になるかもしれませんね。デフォルトはこれになって欲しいですし、Context7ではなくDeepWikiみたいなものでMCPを消費したいですね。",
+		"user": {
+			"id_str": "1136603416057094144",
+			"name": "Kyutaro@Web x AI x DX",
+			"screen_name": "kyutaro15",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1195945546604695553/rmPDNsUt_normal.jpg"
+		},
+		"edit_control": {
+			"initial_tweet_id": "2000339503786176780",
+			"edit_tweet_ids": [
+				"2000339503786176780",
+				"2000342747459485933"
+			],
+			"editable_until_msecs": "1765756676000",
+			"edits_remaining": "4",
+			"is_edit_eligible": true
+		},
+		"conversation_count": 0,
+		"news_action_type": "conversation",
+		"quoted_tweet": {
+			"favorite_count": 100,
+			"lang": "ja",
+			"possibly_sensitive": false,
+			"reply_count": 4,
+			"retweet_count": 21,
+			"created_at": "2025-12-14T20:08:11.000Z",
+			"display_text_range": [
+				0,
+				82
+			],
+			"entities": {
+				"urls": [
+					{
+						"display_url": "ryoppippi.com/blog/2025-12-1…",
+						"expanded_url": "https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-ja",
+						"indices": [
+							59,
+							82
+						],
+						"url": "https://t.co/XGh38fiGCN"
+					}
+				]
+			},
+			"id_str": "2000296784304992720",
+			"text": "新しい記事！\nドキュメントをnpm packageとしてpublishしよう | blog | ryoppippi\n\nhttps://t.co/XGh38fiGCN",
+			"user": {
+				"id_str": "113598297",
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi",
+				"is_blue_verified": true,
+				"profile_image_shape": "Circle",
+				"verified": false,
+				"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+				"highlighted_label": {
+					"badge": {
+						"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+					},
+					"description": "Rork",
+					"url": {
+						"url": "https://twitter.com/rork",
+						"url_type": "DeepLink"
+					},
+					"user_label_display_type": "Badge",
+					"user_label_type": "BusinessLabel"
+				}
+			},
+			"edit_control": {
+				"edit_tweet_ids": [
+					"2000296784304992720"
+				],
+				"editable_until_msecs": "1765746491000",
+				"edits_remaining": "5",
+				"is_edit_eligible": false
+			},
+			"isEdited": false,
+			"isStaleEdit": false
+		},
+		"isEdited": true,
+		"isStaleEdit": false,
+		"previous_counts": {
+			"favorite_count": 2,
+			"quote_count": 0,
+			"reply_count": 0,
+			"retweet_count": 1
+		}
+	}
+}

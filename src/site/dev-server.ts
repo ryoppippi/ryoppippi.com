@@ -36,7 +36,10 @@ type SectionsModule = {
 };
 
 type MarkdownModule = {
-	renderMarkdown: (content: string, options: { renderTweet: TweetRenderer }) => Promise<string>;
+	renderMarkdown: (
+		content: string,
+		options: NonNullable<Parameters<MarkdownRenderer>[1]> & { renderTweet: TweetRenderer },
+	) => Promise<string>;
 };
 
 type DevRoutesModule = {
@@ -123,14 +126,14 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 
 function createDependencies(server: ViteDevServer): DevRouteDependencies {
 	const root = server.config.root;
-	const renderContent = async (content: string) => {
+	const renderContent: MarkdownRenderer = async (content, options) => {
 		const [markdown, tweets] = await Promise.all([
 			server.ssrLoadModule('/packages/content/src/markdown/render.ts') as Promise<MarkdownModule>,
 			server.ssrLoadModule('/packages/content/src/tweet-renderer.ts') as Promise<{
 				renderTweet: TweetRenderer;
 			}>,
 		]);
-		return markdown.renderMarkdown(content, { renderTweet: tweets.renderTweet });
+		return markdown.renderMarkdown(content, { ...options, renderTweet: tweets.renderTweet });
 	};
 	const loadBlogModule = () =>
 		server.ssrLoadModule('/packages/content/src/blog.ts') as Promise<BlogModule>;

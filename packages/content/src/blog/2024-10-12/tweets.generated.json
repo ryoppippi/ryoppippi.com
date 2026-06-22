@@ -1,0 +1,48 @@
+{
+	"1844335472719561111": {
+		"__typename": "Tweet",
+		"favorite_count": 5,
+		"lang": "ja",
+		"created_at": "2024-10-10T11:13:37.000Z",
+		"display_text_range": [
+			0,
+			47
+		],
+		"entities": {},
+		"id_str": "1844335472719561111",
+		"text": "Svelteでcomponentごとにserver loadしたい！！！\nあとIslandくれ",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1844335472719561111"
+			],
+			"editable_until_msecs": "1728562417000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"conversation_count": 0,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	}
+}

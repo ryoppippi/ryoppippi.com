@@ -1,0 +1,800 @@
+{
+	"1961355222363570477": {
+		"__typename": "Tweet",
+		"favorite_count": 44,
+		"lang": "ja",
+		"created_at": "2025-08-29T09:08:19.000Z",
+		"display_text_range": [
+			0,
+			20
+		],
+		"entities": {},
+		"id_str": "1961355222363570477",
+		"text": "codex usage 無理で絶望してる",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1961355222363570477"
+			],
+			"editable_until_msecs": "1756462099000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"conversation_count": 1,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"1967522154414825584": {
+		"__typename": "Tweet",
+		"favorite_count": 4,
+		"lang": "en",
+		"possibly_sensitive": false,
+		"created_at": "2025-09-15T09:33:31.000Z",
+		"display_text_range": [
+			0,
+			11
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/A1gc3BnFG6",
+					"expanded_url": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+					"indices": [
+						12,
+						35
+					],
+					"url": "https://t.co/A1gc3BnFG6"
+				}
+			]
+		},
+		"id_str": "1967522154414825584",
+		"text": "Thanks 8K ✨ https://t.co/A1gc3BnFG6",
+		"user": {
+			"id_str": "1955952925496233986",
+			"name": "ccusage",
+			"screen_name": "cc_usage",
+			"is_blue_verified": false,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1955953085412438018/xOfFsAbj_normal.jpg"
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1967522154414825584"
+			],
+			"editable_until_msecs": "1757932411000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/A1gc3BnFG6",
+				"expanded_url": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					12,
+					35
+				],
+				"media_url_https": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 655,
+							"w": 1170,
+							"x": 0,
+							"y": 517
+						},
+						{
+							"h": 1170,
+							"w": 1170,
+							"x": 0,
+							"y": 259
+						},
+						{
+							"h": 1334,
+							"w": 1170,
+							"x": 0,
+							"y": 136
+						},
+						{
+							"h": 1470,
+							"w": 735,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1470,
+							"w": 1170,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 1470,
+					"width": 1170
+				},
+				"sizes": {
+					"large": {
+						"h": 1470,
+						"resize": "fit",
+						"w": 1170
+					},
+					"medium": {
+						"h": 1200,
+						"resize": "fit",
+						"w": 955
+					},
+					"small": {
+						"h": 680,
+						"resize": "fit",
+						"w": 541
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/A1gc3BnFG6"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 655,
+						"w": 1170,
+						"x": 0,
+						"y": 517
+					},
+					{
+						"h": 1170,
+						"w": 1170,
+						"x": 0,
+						"y": 259
+					},
+					{
+						"h": 1334,
+						"w": 1170,
+						"x": 0,
+						"y": 136
+					},
+					{
+						"h": 1470,
+						"w": 735,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1470,
+						"w": 1170,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+				"url": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",
+				"width": 1170,
+				"height": 1470
+			}
+		],
+		"conversation_count": 0,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"1968476404229751199": {
+		"__typename": "Tweet",
+		"favorite_count": 1,
+		"in_reply_to_screen_name": "ryoppippi",
+		"in_reply_to_status_id_str": "1968462931282002427",
+		"in_reply_to_user_id_str": "113598297",
+		"lang": "en",
+		"possibly_sensitive": false,
+		"created_at": "2025-09-18T00:45:21.000Z",
+		"display_text_range": [
+			11,
+			88
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/5yFjfl1YQl",
+					"expanded_url": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+					"indices": [
+						89,
+						112
+					],
+					"url": "https://t.co/5yFjfl1YQl"
+				}
+			],
+			"user_mentions": [
+				{
+					"id_str": "113598297",
+					"indices": [
+						0,
+						10
+					],
+					"name": "ryoppippi",
+					"screen_name": "ryoppippi"
+				}
+			]
+		},
+		"id_str": "1968476404229751199",
+		"text": "@ryoppippi Looking good - I need to step up my use... it's so much cheaper than Claude!! https://t.co/5yFjfl1YQl",
+		"user": {
+			"id_str": "89291422",
+			"name": "Ben Vargas",
+			"screen_name": "benvargas",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1460668143072780288/bO9r23tT_normal.jpg"
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1968476404229751199"
+			],
+			"editable_until_msecs": "1758159921000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/5yFjfl1YQl",
+				"expanded_url": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					89,
+					112
+				],
+				"media_url_https": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 1049,
+							"w": 1874,
+							"x": 0,
+							"y": 145
+						},
+						{
+							"h": 1194,
+							"w": 1194,
+							"x": 105,
+							"y": 0
+						},
+						{
+							"h": 1194,
+							"w": 1047,
+							"x": 179,
+							"y": 0
+						},
+						{
+							"h": 1194,
+							"w": 597,
+							"x": 404,
+							"y": 0
+						},
+						{
+							"h": 1194,
+							"w": 1874,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 1194,
+					"width": 1874
+				},
+				"sizes": {
+					"large": {
+						"h": 1194,
+						"resize": "fit",
+						"w": 1874
+					},
+					"medium": {
+						"h": 765,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 433,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/5yFjfl1YQl"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 1049,
+						"w": 1874,
+						"x": 0,
+						"y": 145
+					},
+					{
+						"h": 1194,
+						"w": 1194,
+						"x": 105,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 1047,
+						"x": 179,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 597,
+						"x": 404,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 1874,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+				"url": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
+				"width": 1874,
+				"height": 1194
+			}
+		],
+		"conversation_count": 1,
+		"news_action_type": "conversation",
+		"parent": {
+			"favorite_count": 0,
+			"in_reply_to_screen_name": "ryoppippi",
+			"in_reply_to_status_id_str": "1968458369187868712",
+			"in_reply_to_user_id_str": "113598297",
+			"lang": "en",
+			"reply_count": 2,
+			"retweet_count": 0,
+			"created_at": "2025-09-17T23:51:49.000Z",
+			"display_text_range": [
+				11,
+				169
+			],
+			"entities": {
+				"user_mentions": [
+					{
+						"id_str": "89291422",
+						"indices": [
+							0,
+							10
+						],
+						"name": "",
+						"screen_name": "benvargas"
+					}
+				]
+			},
+			"id_str": "1968462931282002427",
+			"text": "@benvargas if you are fine, I'll release it tomorrow.\n\nit gonna be really big  release\n\nI gonna go sleep, so if you find some bug, create a PR towards this codex branch!",
+			"user": {
+				"id_str": "113598297",
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi",
+				"is_blue_verified": true,
+				"profile_image_shape": "Circle",
+				"verified": false,
+				"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+				"highlighted_label": {
+					"badge": {
+						"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+					},
+					"description": "Rork",
+					"url": {
+						"url": "https://twitter.com/rork",
+						"url_type": "DeepLink"
+					},
+					"user_label_display_type": "Badge",
+					"user_label_type": "BusinessLabel"
+				}
+			},
+			"edit_control": {
+				"edit_tweet_ids": [
+					"1968462931282002427"
+				],
+				"editable_until_msecs": "1758156709000",
+				"edits_remaining": "5",
+				"is_edit_eligible": false
+			},
+			"isEdited": false,
+			"isStaleEdit": false
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"1968827159809769970": {
+		"__typename": "Tweet",
+		"favorite_count": 290,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"created_at": "2025-09-18T23:59:08.000Z",
+		"display_text_range": [
+			0,
+			184
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/603fFFZQyv",
+					"expanded_url": "https://x.com/ryoppippi/status/1968827159809769970/photo/1",
+					"indices": [
+						184,
+						207
+					],
+					"url": "https://t.co/603fFFZQyv"
+				}
+			]
+		},
+		"id_str": "1968827159809769970",
+		"text": "🚀 ccusage v17.0 リリース！\ncodex対応です！！\n\nこれでccusageシリーズでccとcodex両方いけます！！\n\nコマンドはこちら↓\n```\nnpx @ccusage/codex\nbunx @ccusage/codex@latest  # ⚠️bunxは@latest必須なことに注意してください。つけ忘れるとcodex本体が起動します\n``` https://t.co/603fFFZQyv",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1968827159809769970"
+			],
+			"editable_until_msecs": "1758243548000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/603fFFZQyv",
+				"expanded_url": "https://x.com/ryoppippi/status/1968827159809769970/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					184,
+					207
+				],
+				"media_url_https": "https://pbs.twimg.com/media/G1Kr_HYW0AIZ_GC.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 1332,
+							"w": 2379,
+							"x": 43,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 1332,
+							"x": 1089,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 1168,
+							"x": 1171,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 666,
+							"x": 1422,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 2422,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 1332,
+					"width": 2422
+				},
+				"sizes": {
+					"large": {
+						"h": 1126,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 660,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 374,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/603fFFZQyv"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 1332,
+						"w": 2379,
+						"x": 43,
+						"y": 0
+					},
+					{
+						"h": 1332,
+						"w": 1332,
+						"x": 1089,
+						"y": 0
+					},
+					{
+						"h": 1332,
+						"w": 1168,
+						"x": 1171,
+						"y": 0
+					},
+					{
+						"h": 1332,
+						"w": 666,
+						"x": 1422,
+						"y": 0
+					},
+					{
+						"h": 1332,
+						"w": 2422,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/ryoppippi/status/1968827159809769970/photo/1",
+				"url": "https://pbs.twimg.com/media/G1Kr_HYW0AIZ_GC.jpg",
+				"width": 2422,
+				"height": 1332
+			}
+		],
+		"conversation_count": 1,
+		"news_action_type": "conversation",
+		"quoted_tweet": {
+			"favorite_count": 35,
+			"lang": "en",
+			"possibly_sensitive": false,
+			"reply_count": 1,
+			"retweet_count": 9,
+			"created_at": "2025-09-18T23:48:21.000Z",
+			"display_text_range": [
+				0,
+				273
+			],
+			"entities": {
+				"media": [
+					{
+						"display_url": "pic.x.com/FjGvtICwOD",
+						"expanded_url": "https://x.com/cc_usage/status/1968824444320718865/photo/1",
+						"indices": [
+							273,
+							296
+						],
+						"url": "https://t.co/FjGvtICwOD"
+					}
+				]
+			},
+			"id_str": "1968824444320718865",
+			"text": "🚀 ccusage v17.0 is here! Now with OpenAI Codex support!\n\nTrack token usage &amp; costs across Claude Code AND Codex in one CLI. Monitor GPT-5, 1M context windows, and all your AI coding expenses.\n\nnpx @ccusage/codex\nbunx @ccusage/codex@latest ⚠️(@latest required for bunx) https://t.co/FjGvtICwOD",
+			"user": {
+				"id_str": "1955952925496233986",
+				"name": "ccusage",
+				"screen_name": "cc_usage",
+				"is_blue_verified": false,
+				"profile_image_shape": "Circle",
+				"verified": false,
+				"profile_image_url_https": "https://pbs.twimg.com/profile_images/1955953085412438018/xOfFsAbj_normal.jpg"
+			},
+			"edit_control": {
+				"edit_tweet_ids": [
+					"1968824444320718865"
+				],
+				"editable_until_msecs": "1758242901000",
+				"edits_remaining": "5",
+				"is_edit_eligible": false
+			},
+			"mediaDetails": [
+				{
+					"display_url": "pic.x.com/FjGvtICwOD",
+					"expanded_url": "https://x.com/cc_usage/status/1968824444320718865/photo/1",
+					"ext_media_availability": {
+						"status": "Available"
+					},
+					"indices": [
+						273,
+						296
+					],
+					"media_url_https": "https://pbs.twimg.com/media/G1KofXYXEAAMCoW.jpg",
+					"original_info": {
+						"focus_rects": [
+							{
+								"h": 1332,
+								"w": 2379,
+								"x": 43,
+								"y": 0
+							},
+							{
+								"h": 1332,
+								"w": 1332,
+								"x": 1089,
+								"y": 0
+							},
+							{
+								"h": 1332,
+								"w": 1168,
+								"x": 1171,
+								"y": 0
+							},
+							{
+								"h": 1332,
+								"w": 666,
+								"x": 1422,
+								"y": 0
+							},
+							{
+								"h": 1332,
+								"w": 2422,
+								"x": 0,
+								"y": 0
+							}
+						],
+						"height": 1332,
+						"width": 2422
+					},
+					"sizes": {
+						"large": {
+							"h": 1126,
+							"resize": "fit",
+							"w": 2048
+						},
+						"medium": {
+							"h": 660,
+							"resize": "fit",
+							"w": 1200
+						},
+						"small": {
+							"h": 374,
+							"resize": "fit",
+							"w": 680
+						},
+						"thumb": {
+							"h": 150,
+							"resize": "crop",
+							"w": 150
+						}
+					},
+					"type": "photo",
+					"url": "https://t.co/FjGvtICwOD"
+				}
+			],
+			"photos": [
+				{
+					"backgroundColor": {
+						"red": 204,
+						"green": 214,
+						"blue": 221
+					},
+					"cropCandidates": [
+						{
+							"h": 1332,
+							"w": 2379,
+							"x": 43,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 1332,
+							"x": 1089,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 1168,
+							"x": 1171,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 666,
+							"x": 1422,
+							"y": 0
+						},
+						{
+							"h": 1332,
+							"w": 2422,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"expandedUrl": "https://x.com/cc_usage/status/1968824444320718865/photo/1",
+					"url": "https://pbs.twimg.com/media/G1KofXYXEAAMCoW.jpg",
+					"width": 2422,
+					"height": 1332
+				}
+			],
+			"isEdited": false,
+			"isStaleEdit": false
+		},
+		"isEdited": false,
+		"isStaleEdit": false,
+		"note_tweet": {
+			"id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTY4ODI3MTU5NjA4NTAwMjI0"
+		}
+	}
+}

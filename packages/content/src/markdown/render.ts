@@ -1,5 +1,6 @@
 import oxContent from '@ox-content/napi';
 import { transformOgp } from '@ox-content/vite-plugin';
+import type { TweetData } from '../tweet-renderer.ts';
 import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
@@ -13,10 +14,13 @@ import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
 const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
 
-export type TweetRenderer = (id: string) => Promise<string>;
+export type TweetSnapshots = Record<string, TweetData>;
 
-type RenderMarkdownOptions = {
+export type TweetRenderer = (id: string, tweet?: TweetData) => Promise<string>;
+
+export type RenderMarkdownOptions = {
 	renderTweet?: TweetRenderer;
+	tweets?: TweetSnapshots;
 };
 
 function transformOutsideFences(content: string, transform: (line: string) => string) {
@@ -181,9 +185,17 @@ async function replaceAsync(
 	return output + value.slice(offset);
 }
 
-async function renderTweets(html: string, renderTweet?: TweetRenderer) {
-	const replacement = (match: RegExpExecArray) =>
-		renderTweet == null ? Promise.resolve(`<Tweet id="${match[1]}" />`) : renderTweet(match[1]);
+async function renderTweets(
+	html: string,
+	{ renderTweet, tweets }: Pick<RenderMarkdownOptions, 'renderTweet' | 'tweets'>,
+) {
+	const replacement = (match: RegExpExecArray) => {
+		if (renderTweet == null) {
+			return Promise.resolve(`<Tweet id="${match[1]}" />`);
+		}
+
+		return renderTweet(match[1], tweets?.[match[1]]);
+	};
 	const blockPattern = /<p>\s*<span data-tweet-placeholder="(\d+)"><\/span>\s*<\/p>/g;
 	const blocks = await replaceAsync(html, blockPattern, replacement);
 	const inlinePattern = /<span data-tweet-placeholder="(\d+)"><\/span>/g;
@@ -195,7 +207,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 	const prepared = prepareOxContentMarkdown(extracted.content);
 	const highlighted = await renderHighlightedMarkdown(prepared);
 	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
-	const tweets = await renderTweets(magicLinks, options.renderTweet);
+	const tweets = await renderTweets(magicLinks, options);
 	const media = transformYoutubeEmbeds(
 		transformMediaEmbeds(tweets, {
 			twitter: true,
@@ -324,6 +336,16 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('class="sveltweet-ssg"');
 			expect(html).toContain('data-tweet-id="1234567890"');
 			expect(html).not.toContain('class="ox-tweet"');
+		});
+
+		it('passes no data to the renderer when a tweet snapshot is unavailable', async () => {
+			const renderTweet = vi.fn(
+				async (id: string) => `<a href="https://x.com/i/web/status/${id}">Tweet</a>`,
+			);
+
+			await renderMarkdown('<Tweet id="1234567890" />', { renderTweet, tweets: {} });
+
+			expect(renderTweet).toHaveBeenCalledWith('1234567890', undefined);
 		});
 
 		it('renders legacy Svelte YouTube embeds with ox-content', async () => {

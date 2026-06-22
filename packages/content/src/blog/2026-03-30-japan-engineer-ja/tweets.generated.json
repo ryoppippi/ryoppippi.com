@@ -1,0 +1,437 @@
+{
+	"1986740701854335020": {
+		"__typename": "Tweet",
+		"favorite_count": 93,
+		"lang": "ja",
+		"created_at": "2025-11-07T10:21:09.000Z",
+		"display_text_range": [
+			0,
+			136
+		],
+		"entities": {
+			"hashtags": [
+				{
+					"indices": [
+						0,
+						8
+					],
+					"text": "ccusage"
+				},
+				{
+					"indices": [
+						48,
+						56
+					],
+					"text": "ccusage"
+				}
+			]
+		},
+		"id_str": "1986740701854335020",
+		"text": "#ccusage をお使いの企業様へ【拡散希望】\n今回日本に滞在して、予想以上に多くの企業様で #ccusage が使われている話を聞いて驚きました。ありがとうございます。\nジョークツールから始まった個人プロジェクトがここまで大きくなっていることに大きな喜びを感じています",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"initial_tweet_id": "1986740463320047728",
+			"edit_tweet_ids": [
+				"1986740463320047728",
+				"1986740701854335020"
+			],
+			"editable_until_msecs": "1762514412000",
+			"edits_remaining": "4",
+			"is_edit_eligible": false
+		},
+		"conversation_count": 1,
+		"news_action_type": "conversation",
+		"isEdited": true,
+		"isStaleEdit": false,
+		"previous_counts": {
+			"favorite_count": 0,
+			"quote_count": 0,
+			"reply_count": 0,
+			"retweet_count": 0
+		},
+		"note_tweet": {
+			"id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTg2NzQwNzAxNzMyNjY3Mzky"
+		}
+	},
+	"2013344262562123779": {
+		"__typename": "Tweet",
+		"favorite_count": 179,
+		"lang": "en",
+		"possibly_sensitive": false,
+		"created_at": "2026-01-19T20:14:12.000Z",
+		"display_text_range": [
+			0,
+			94
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/0iiQ4QRTSD",
+					"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+					"indices": [
+						95,
+						118
+					],
+					"url": "https://t.co/0iiQ4QRTSD"
+				}
+			],
+			"user_mentions": [
+				{
+					"id_str": "113598297",
+					"indices": [
+						50,
+						60
+					],
+					"name": "ryoppippi",
+					"screen_name": "ryoppippi"
+				}
+			]
+		},
+		"id_str": "2013344262562123779",
+		"text": "“I built ccusage and because of that I got a job” @ryoppippi at Claude Code Anonymous @ London https://t.co/0iiQ4QRTSD",
+		"user": {
+			"id_str": "25401953",
+			"name": "Peter Steinberger 🦞",
+			"screen_name": "steipete",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1131851609774985216/OcsssQ9J_normal.png",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2017100664984186880/orbYx-3U_bigger.jpg"
+				},
+				"description": "OpenClaw🦞",
+				"url": {
+					"url": "https://twitter.com/openclaw",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"2013344262562123779"
+			],
+			"editable_until_msecs": "1768857252000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/0iiQ4QRTSD",
+				"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					95,
+					118
+				],
+				"media_url_https": "https://pbs.twimg.com/media/G_DV7xQXAAA_sP0.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 1147,
+							"w": 2048,
+							"x": 0,
+							"y": 92
+						},
+						{
+							"h": 1536,
+							"w": 1536,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 1347,
+							"x": 95,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 768,
+							"x": 384,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 2048,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 1536,
+					"width": 2048
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/0iiQ4QRTSD"
+			},
+			{
+				"display_url": "pic.x.com/0iiQ4QRTSD",
+				"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					95,
+					118
+				],
+				"media_url_https": "https://pbs.twimg.com/media/G_DV7xPXcAAgCas.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 1147,
+							"w": 2048,
+							"x": 0,
+							"y": 92
+						},
+						{
+							"h": 1536,
+							"w": 1536,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 1347,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 768,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1536,
+							"w": 2048,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 1536,
+					"width": 2048
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/0iiQ4QRTSD"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 1147,
+						"w": 2048,
+						"x": 0,
+						"y": 92
+					},
+					{
+						"h": 1536,
+						"w": 1536,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 1347,
+						"x": 95,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 768,
+						"x": 384,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 2048,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/steipete/status/2013344262562123779/photo/1",
+				"url": "https://pbs.twimg.com/media/G_DV7xQXAAA_sP0.jpg",
+				"width": 2048,
+				"height": 1536
+			},
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 1147,
+						"w": 2048,
+						"x": 0,
+						"y": 92
+					},
+					{
+						"h": 1536,
+						"w": 1536,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 1347,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 768,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 2048,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/steipete/status/2013344262562123779/photo/1",
+				"url": "https://pbs.twimg.com/media/G_DV7xPXcAAgCas.jpg",
+				"width": 2048,
+				"height": 1536
+			}
+		],
+		"conversation_count": 10,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"2037855816988893497": {
+		"__typename": "Tweet",
+		"conversation_control": {
+			"policy": "Community"
+		},
+		"favorite_count": 3111,
+		"lang": "ja",
+		"created_at": "2026-03-28T11:34:22.000Z",
+		"display_text_range": [
+			0,
+			125
+		],
+		"entities": {},
+		"id_str": "2037855816988893497",
+		"text": "フルスタックとかなんとかエンジニアになるにはこの技術わかってないといけないみたいな投稿めっちゃ流れてくるけど、お前らいつまで受験生の思考回路なんだよ\n\n目の前の！課題を！解くの！スキルセットとかじゃないの！解くの！\n\n一生準備運動だけして人生終わるぞ",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"initial_tweet_id": "2037855534389301724",
+			"edit_tweet_ids": [
+				"2037855534389301724",
+				"2037855816988893497"
+			],
+			"editable_until_msecs": "1774701195000",
+			"edits_remaining": "4",
+			"is_edit_eligible": false
+		},
+		"conversation_count": 5,
+		"news_action_type": "conversation",
+		"isEdited": true,
+		"isStaleEdit": false,
+		"previous_counts": {
+			"favorite_count": 1,
+			"quote_count": 0,
+			"reply_count": 0,
+			"retweet_count": 0
+		}
+	}
+}

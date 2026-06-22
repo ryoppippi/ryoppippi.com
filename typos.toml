@@ -15,6 +15,7 @@ justify-center = "justify-center"
 [files]
 extend-exclude = [
 	"node_modules/**",
+	"**/*.json",
 	# Migrated Zenn blog posts
 	"**/*-zenn-*/**",
 ]

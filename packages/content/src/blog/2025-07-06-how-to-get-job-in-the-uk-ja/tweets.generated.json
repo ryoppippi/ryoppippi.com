@@ -1,0 +1,191 @@
+{
+	"1941072675872641440": {
+		"__typename": "Tweet",
+		"favorite_count": 336,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"created_at": "2025-07-04T09:52:43.000Z",
+		"display_text_range": [
+			0,
+			71
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/RuhVUWRmP7",
+					"expanded_url": "https://x.com/ryoppippi/status/1941072675872641440/photo/1",
+					"indices": [
+						72,
+						95
+					],
+					"url": "https://t.co/RuhVUWRmP7"
+				}
+			],
+			"urls": [
+				{
+					"display_url": "linkedin.com/posts/guillaum…",
+					"expanded_url": "https://www.linkedin.com/posts/guillaumelebedel_15-weeks-into-joining-stackone-and-ryotaro-activity-7346829034900676609-JGCK/?rcm=ACoAABiLs0wBRhUJn9NHWNX75VQB3xh9ckc-P8Y",
+					"indices": [
+						48,
+						71
+					],
+					"url": "https://t.co/Iv1oaVVIMP"
+				}
+			]
+		},
+		"id_str": "1941072675872641440",
+		"text": "入社してすぐですが、すでにCTOにバチクソ褒められているので英語が読める方は見ていってください\nhttps://t.co/Iv1oaVVIMP https://t.co/RuhVUWRmP7",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"1941072675872641440"
+			],
+			"editable_until_msecs": "1751626363000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/RuhVUWRmP7",
+				"expanded_url": "https://x.com/ryoppippi/status/1941072675872641440/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					72,
+					95
+				],
+				"media_url_https": "https://pbs.twimg.com/media/GvATMLmWgAApNlC.png",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 282,
+							"w": 504,
+							"x": 0,
+							"y": 73
+						},
+						{
+							"h": 400,
+							"w": 400,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 400,
+							"w": 351,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 400,
+							"w": 200,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 400,
+							"w": 504,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 400,
+					"width": 504
+				},
+				"sizes": {
+					"large": {
+						"h": 400,
+						"resize": "fit",
+						"w": 504
+					},
+					"medium": {
+						"h": 400,
+						"resize": "fit",
+						"w": 504
+					},
+					"small": {
+						"h": 400,
+						"resize": "fit",
+						"w": 504
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/RuhVUWRmP7"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 282,
+						"w": 504,
+						"x": 0,
+						"y": 73
+					},
+					{
+						"h": 400,
+						"w": 400,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 400,
+						"w": 351,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 400,
+						"w": 200,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 400,
+						"w": 504,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/ryoppippi/status/1941072675872641440/photo/1",
+				"url": "https://pbs.twimg.com/media/GvATMLmWgAApNlC.png",
+				"width": 504,
+				"height": 400
+			}
+		],
+		"conversation_count": 2,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	}
+}

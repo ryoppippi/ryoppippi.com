@@ -1,8 +1,12 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json
 
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
+    snapshot-tweets:
+      glob: 'packages/content/src/blog/**/*.md'
+      run: packages/content/scripts/snapshot-tweets.ts {staged_files}
+      stage_fixed: true
     check:
       glob: '*'
       run: vp check --fix

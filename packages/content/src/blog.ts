@@ -5,6 +5,7 @@ import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
 import { blogDirectory } from './paths.ts';
+import { loadTweetSnapshots } from './tweet-snapshots.ts';
 
 export type BlogPost = {
 	title: string;
@@ -70,13 +71,14 @@ export async function loadBlogPost(
 
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
+	const tweets = await loadTweetSnapshots(content, entry.filepath);
 	return {
 		title: String(data.title),
 		filename: filenameFor(entry.filepath),
 		filepath: entry.filepath,
 		source: entry.source,
 		content,
-		html: await render(content),
+		html: tweets == null ? await render(content) : await render(content, { tweets }),
 		pubDate: new Date(String(data.date)).toJSON(),
 		lang: typeof data.lang === 'string' ? data.lang : 'ja',
 		isPublished: data.isPublished === true,
@@ -116,13 +118,14 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const source = await readFile(filepath, 'utf8');
 			const { data, content } = matter(source);
 			const filename = filenameFor(filepath);
+			const tweets = await loadTweetSnapshots(content, filepath);
 			return {
 				title: String(data.title),
 				filename,
 				filepath,
 				source,
 				content,
-				html: await render(content),
+				html: tweets == null ? await render(content) : await render(content, { tweets }),
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
 				isPublished: data.isPublished === true,

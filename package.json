@@ -15,7 +15,7 @@
 		"new": "vp run @ryoppippi/content#new",
 		"preview": "vp preview",
 		"test": "vp test --run",
-		"typos": "typos --force-exclude --exclude '**/*.json' src/contents packages/content/src/blog packages/content/src/showcase"
+		"typos": "typos --force-exclude src/contents packages/content/src/blog packages/content/src/showcase"
 	},
 	"devDependencies": {
 		"@fontsource/dm-mono": "^5.2.7",
