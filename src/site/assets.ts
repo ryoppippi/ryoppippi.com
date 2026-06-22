@@ -9,6 +9,7 @@ export type SiteAssets = {
 		base: string;
 		page: string;
 	};
+	homePreloads?: string;
 	pages: Record<PageStyle, string>;
 	tweet: string;
 };
@@ -32,6 +33,8 @@ type ManifestChunk = {
 	file: string;
 };
 
+const HOME_FONT_FILES = ['inter-latin-400-normal.woff2', 'inter-latin-800-normal.woff2'] as const;
+
 export function resolveSiteAssets(
 	index: string,
 	manifest: Record<string, ManifestChunk>,
@@ -50,10 +53,18 @@ export function resolveSiteAssets(
 		}
 		return styles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`).join('\n\t');
 	};
+	const homePreloads = HOME_FONT_FILES.map((suffix) => {
+		const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
+		if (chunk == null) {
+			throw new Error(`Missing font asset for ${suffix}`);
+		}
+		return `<link rel="preload" href="/${chunk.file}" as="font" type="font/woff2" crossorigin>`;
+	}).join('\n\t');
 
 	return {
 		base,
 		client,
+		homePreloads,
 		pages: {
 			article: stylesFor('/styles/article.css'),
 			blog: stylesFor('/styles/blog.css'),
@@ -83,6 +94,7 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
 export function renderAssetTags(assets: SiteAssets, style: PageStyle, tweet: boolean): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
 	return [
+		style === 'home' ? assets.homePreloads : '',
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pages[style],
 		tweet ? assets.tweet : '',
@@ -134,12 +146,20 @@ if (import.meta.vitest != null) {
 						file: 'assets/Tweet.js',
 						css: ['assets/Tweet.css'],
 					},
+					'node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2': {
+						file: 'assets/inter-400.woff2',
+					},
+					'node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2': {
+						file: 'assets/inter-800.woff2',
+					},
 				},
 			);
 
 			expect(result).toEqual({
 				base: '<link rel="stylesheet" href="/base.css">',
 				client: '<script type="module" src="/client.js"></script>',
+				homePreloads:
+					'<link rel="preload" href="/assets/inter-400.woff2" as="font" type="font/woff2" crossorigin>\n\t<link rel="preload" href="/assets/inter-800.woff2" as="font" type="font/woff2" crossorigin>',
 				pages: {
 					article: '<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
@@ -154,6 +174,16 @@ if (import.meta.vitest != null) {
 	});
 
 	describe(renderAssetTags, () => {
+		it('preloads home fonts only on the home page', () => {
+			const withPreloads = {
+				...assets,
+				homePreloads: '<link rel="preload" href="/inter.woff2" as="font">',
+			};
+
+			expect(renderAssetTags(withPreloads, 'home', false)).toContain('/inter.woff2');
+			expect(renderAssetTags(withPreloads, 'blog', false)).not.toContain('/inter.woff2');
+		});
+
 		it('includes Tweet styles only when the page embeds a Tweet', () => {
 			expect(renderAssetTags(assets, 'article', false)).not.toContain('/tweet.css');
 			expect(renderAssetTags(assets, 'article', true)).toContain('/tweet.css');
