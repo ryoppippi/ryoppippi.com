@@ -1,4 +1,5 @@
 import type { TweetData } from '@ryoppippi/content';
+import '../styles/fonts.css';
 import './style.css';
 
 const tweetCleanups = new Set<() => Promise<void>>();

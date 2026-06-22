@@ -2,6 +2,7 @@ import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
+import { FontaineTransform } from 'fontaine';
 import { defineConfig } from 'vite-plus';
 import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
@@ -27,6 +28,15 @@ export default defineConfig({
 		}),
 		staticSiteBuild(),
 		staticSiteDevServer(),
+		FontaineTransform.vite({
+			fallbacks: {
+				'DM Mono': ['Courier New'],
+				Inter: ['Arial'],
+				'JetBrains Mono': ['Courier New'],
+				'Roboto Condensed': ['Arial'],
+			},
+			resolvePath: (id) => new URL(import.meta.resolve(id)),
+		}),
 		tailwindcss(),
 	],
 	build: {
@@ -45,7 +55,6 @@ export default defineConfig({
 					'tsconfig.json',
 					'vite.config.ts',
 					'routes.ts',
-					'font-assets.ts',
 					'scripts/**',
 					'src/**',
 					'packages/content/dist/**',
