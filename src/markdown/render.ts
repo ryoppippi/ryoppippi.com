@@ -10,7 +10,7 @@ import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
-import { renderMagicLink } from './magic-link.ts';
+import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
 
 const { mergeHighlightedCodeBlocks, parseAndRender, transformMediaEmbeds, transformYoutubeEmbeds } =
@@ -309,6 +309,24 @@ function addHeadingAnchors(html: string) {
 	);
 }
 
+function replaceMagicLinksOutsideProtectedHtml(html: string) {
+	const protectedBlockPattern = /<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\1>/gi;
+	let output = '';
+	let offset = 0;
+
+	for (const match of html.matchAll(protectedBlockPattern)) {
+		if (match.index == null) {
+			continue;
+		}
+
+		output += replaceMagicLinks(html.slice(offset, match.index));
+		output += match[0];
+		offset = match.index + match[0].length;
+	}
+
+	return output + replaceMagicLinks(html.slice(offset));
+}
+
 function postprocessRenderedHtml(html: string) {
 	const blockEmbeds = html
 		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
@@ -357,10 +375,9 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		result.html,
 		await renderHighlightedCodeBlocks(prepared, result.html),
 	);
+	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
 	const tweets =
-		options.renderTweet == null
-			? highlighted
-			: await renderTweets(highlighted, options.renderTweet);
+		options.renderTweet == null ? magicLinks : await renderTweets(magicLinks, options.renderTweet);
 	const media = transformYoutubeEmbeds(
 		transformMediaEmbeds(tweets, {
 			twitter: true,
@@ -443,6 +460,22 @@ if (import.meta.vitest != null) {
 	});
 
 	describe('renderMarkdown', () => {
+		it('renders configured and GitHub magic links', async () => {
+			const html = await renderMarkdown('{@ryoppippi} {vim-jp} {Svelte Japan}');
+
+			expect(html).toContain('href="https://github.com/ryoppippi"');
+			expect(html).toContain('href="https://vim-jp.org/"');
+			expect(html).toContain('href="https://svelte.jp"');
+			expect(html.match(/<a [^>]*class="markdown-magic-link/g)).toHaveLength(3);
+		});
+
+		it('leaves magic link syntax inside code unchanged', async () => {
+			const html = await renderMarkdown('`{@github}`\n\n```md\n{@github}\n```');
+
+			expect(html).toContain('{@github}');
+			expect(html).not.toContain('class="markdown-magic-link');
+		});
+
 		it('renders tweets as static ox-content cards', async () => {
 			const html = await renderMarkdown('<Tweet id="1234567890" />');
 
