@@ -62,10 +62,10 @@ export const fontAssets = [
 	},
 ] as const satisfies readonly FontAsset[];
 
-type FontFamily = typeof fontAssets[number]['family'];
+type FontFamily = (typeof fontAssets)[number]['family'];
 
 export const fontFaceGroups = {
-	'inter': ['Inter'],
+	inter: ['Inter'],
 	'work-title': ['DM Mono'],
-	'blog': ['DM Mono', 'JetBrains Mono', 'Roboto Condensed'],
+	blog: ['DM Mono', 'JetBrains Mono', 'Roboto Condensed'],
 } as const satisfies Record<string, readonly FontFamily[]>;

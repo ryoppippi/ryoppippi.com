@@ -1,0 +1,105 @@
+.prose figure figcaption {
+	color: #808080;
+	font-size: 0.875em;
+	line-height: 1.4285714;
+	margin-top: 0.8571429em;
+}
+
+.prose {
+	--un-prose-borders: #7d7d7d4d !important;
+}
+
+.shiki {
+	color-scheme: light;
+	background-color: #fafafa !important;
+
+	@variant dark {
+		color-scheme: dark;
+		background-color: #181616 !important;
+	}
+}
+
+@media (prefers-contrast: more) {
+	@variant dark {
+		.shiki span[style*='#737C73'] {
+			color: #94a094 !important;
+		}
+	}
+
+	@variant light {
+		.shiki span[style*='#6F894E'] {
+			color: #3f6728 !important;
+		}
+
+		.shiki span[style*='#716E61'] {
+			color: #5f5a4e !important;
+		}
+
+		.shiki span[style*='#6693BF'] {
+			color: #2f668f !important;
+		}
+
+		.shiki span[style*='#B35B79'] {
+			color: #8a3156 !important;
+		}
+	}
+}
+
+.prose pre code {
+	font-family: var(--font-code);
+}
+
+.prose .footnote-ref {
+	font-size: 0.75em;
+	line-height: 0;
+	margin-left: 0.125em;
+	vertical-align: super;
+}
+
+.prose .footnote-ref a {
+	color: #808080;
+	text-decoration: none;
+}
+
+.prose .footnote-ref a:hover {
+	color: #262626;
+	text-decoration: underline;
+}
+
+.prose .footnotes {
+	color: #808080;
+	font-size: 0.95em;
+}
+
+.prose .footnotes ol {
+	margin-top: 1rem;
+	padding-left: 1.25rem;
+}
+
+.prose .footnotes li {
+	margin-bottom: 0.75rem;
+}
+
+.prose .footnotes li p {
+	display: inline;
+	margin: 0;
+}
+
+.prose .footnotes li p + p {
+	margin-left: 0.375rem;
+}
+
+.prose .footnote-backref {
+	color: #808080;
+	width: 0.9em;
+	height: 0.9em;
+	display: inline-block;
+	vertical-align: -0.125em;
+	opacity: 0.8;
+	text-decoration: none;
+}
+
+.prose .footnote-backref:hover {
+	color: #4d4d4d;
+	opacity: 1;
+}

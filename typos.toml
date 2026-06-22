@@ -1,10 +1,10 @@
 [default]
 locale = 'en-gb'
 extend-ignore-re = [
-  "(?s)(#|//)\\s*spellchecker:off[\\s\\S]*?(#|//)\\s*spellchecker:on",
-  "(?s)<!--\\s*spellchecker:off\\s*-->[\\s\\S]*?<!--\\s*spellchecker:on\\s*-->",
-  "(?Rm)^.*#\\s*spellchecker:disable-line$",
-  "(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$",
+	"(?s)(#|//)\\s*spellchecker:off[\\s\\S]*?(#|//)\\s*spellchecker:on",
+	"(?s)<!--\\s*spellchecker:off\\s*-->[\\s\\S]*?<!--\\s*spellchecker:on\\s*-->",
+	"(?Rm)^.*#\\s*spellchecker:disable-line$",
+	"(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$",
 ]
 
 [default.extend-words]
@@ -14,7 +14,7 @@ justify-center = "justify-center"
 
 [files]
 extend-exclude = [
-  "node_modules/**",
-  # Migrated Zenn blog posts
-  "**/*-zenn-*/**",
+	"node_modules/**",
+	# Migrated Zenn blog posts
+	"**/*-zenn-*/**",
 ]

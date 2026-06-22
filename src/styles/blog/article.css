@@ -1,0 +1,7 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import '../prose-theme.css';
+@reference '../tailwind.css';
+
+@import '@ryoppippi/content/article.css';
+@source inline("icon-[mdi--arrow-left-bottom]");

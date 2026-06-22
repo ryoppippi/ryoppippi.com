@@ -4,7 +4,29 @@
 @plugin '@tailwindcss/typography';
 @plugin '@iconify/tailwind4';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark {
+	&:where(html.dark, html.dark *) {
+		@slot;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		&:where(html:not(.js), html:not(.js) *) {
+			@slot;
+		}
+	}
+}
+
+@custom-variant light {
+	&:where(html.js:not(.dark), html.js:not(.dark) *) {
+		@slot;
+	}
+
+	@media (prefers-color-scheme: light) {
+		&:where(html:not(.js), html:not(.js) *) {
+			@slot;
+		}
+	}
+}
 
 @theme {
 	--color-accent-100: #ff6b6b;
@@ -79,8 +101,8 @@
 }
 
 @utility blog-list-icon {
-	width: calc(var(--spacing) * 5);
-	height: calc(var(--spacing) * 5);
+	width: calc(var(--spacing, 0.25rem) * 5);
+	height: calc(var(--spacing, 0.25rem) * 5);
 	flex-shrink: 0;
 }
 
@@ -90,10 +112,10 @@
 
 .op-card {
 	opacity: 0.7;
-}
 
-.dark .op-card {
-	opacity: 0.5;
+	@variant dark {
+		opacity: 0.5;
+	}
 }
 
 .op-card:hover,

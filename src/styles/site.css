@@ -1,9 +1,5 @@
 @import './tailwind.css';
 
-@source '../routes/+layout.svelte';
-@source '../routes/+error.svelte';
-@source '../components/Nav.svelte';
-
 body {
 	@apply bg-white font-sans text-base text-text-800 motion-safe:scroll-smooth motion-safe:transition motion-safe:duration-1000 dark:bg-bg-base dark:text-text-100;
 	text-autospace: normal;

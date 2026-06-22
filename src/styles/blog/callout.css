@@ -1,0 +1,104 @@
+.prose .ox-callout {
+	--callout-color: #0969da;
+	padding: 0.5rem 1rem;
+	margin-bottom: 1rem;
+	color: inherit;
+	border-left: 0.25em solid var(--callout-color);
+}
+
+.prose .ox-callout > :first-child {
+	margin-top: 0;
+}
+
+.prose .ox-callout > :last-child {
+	margin-bottom: 0;
+}
+
+.prose .ox-callout-title {
+	color: var(--callout-color);
+	font-weight: 500;
+	line-height: 1;
+	text-transform: capitalize;
+}
+
+.prose .ox-callout--note {
+	--callout-color: #0969da;
+
+	@variant dark {
+		--callout-color: #2f81f7;
+	}
+}
+
+.prose .ox-callout--tip {
+	--callout-color: #1a7f37;
+
+	@variant dark {
+		--callout-color: #3fb950;
+	}
+}
+
+.prose .ox-callout--important {
+	--callout-color: #8250df;
+
+	@variant dark {
+		--callout-color: #a371f7;
+	}
+}
+
+.prose .ox-callout--warning {
+	--callout-color: #9a6700;
+
+	@variant dark {
+		--callout-color: #d29922;
+	}
+}
+
+.prose .ox-callout--caution {
+	--callout-color: #d1242f;
+
+	@variant dark {
+		--callout-color: #f85149;
+	}
+}
+
+@media (prefers-contrast: more) {
+	.prose .ox-callout--note {
+		--callout-color: #0550ae;
+
+		@variant dark {
+			--callout-color: #58a6ff;
+		}
+	}
+
+	.prose .ox-callout--tip {
+		--callout-color: #116329;
+
+		@variant dark {
+			--callout-color: #56d364;
+		}
+	}
+
+	.prose .ox-callout--important {
+		--callout-color: #6639ba;
+
+		@variant dark {
+			--callout-color: #bc8cff;
+		}
+	}
+
+	.prose .ox-callout--warning {
+		--callout-color: #7d4e00;
+
+		@variant dark {
+			--callout-color: #e3b341;
+		}
+	}
+
+	.prose .ox-callout--caution {
+		--callout-color: #a40e26;
+
+		@variant dark {
+			--callout-color: #ff7b72;
+		}
+	}
+}
