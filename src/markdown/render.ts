@@ -1,6 +1,7 @@
 import type { JsParserOptions } from '@ox-content/napi';
 import oxContent from '@ox-content/napi';
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
+import { performance } from 'node:perf_hooks';
 import { codeToHtml } from 'shiki';
 import { slugify } from '../lib/slugify.server.ts';
 import { applyBudouxHtml } from './budoux.ts';
@@ -26,11 +27,13 @@ const oxContentOptions = {
 
 type CodeBlock = {
 	language: string;
+	meta: string;
 	code: string;
 };
 
 type OpenCodeBlock = {
 	language: string;
+	meta: string;
 	lines: string[];
 };
 
@@ -45,22 +48,30 @@ type RenderMarkdownOptions = {
 	renderTweet?: TweetRenderer;
 };
 
-async function highlightCode(code: string, lang: string) {
-	return codeToHtml(code, {
-		lang,
-		tabindex: false,
-		themes: {
-			dark: 'kanagawa-dragon',
-			light: 'kanagawa-lotus',
-		},
-		transformers: [
-			transformerTwoslash({
-				explicitTrigger: true,
-				renderer: rendererRich(),
-			}),
-			transformerEscape(),
-		],
-	});
+async function highlightCode(code: string, lang: string, meta: string) {
+	const start = performance.now();
+	try {
+		return await codeToHtml(code, {
+			lang,
+			meta: { __raw: meta },
+			tabindex: false,
+			themes: {
+				dark: 'kanagawa-dragon',
+				light: 'kanagawa-lotus',
+			},
+			transformers: [
+				transformerTwoslash({
+					explicitTrigger: true,
+					renderer: rendererRich(),
+				}),
+				transformerEscape(),
+			],
+		});
+	} finally {
+		console.info(
+			`[perf] shiki lang=${lang} chars=${code.length} duration=${(performance.now() - start).toFixed(1)}ms`,
+		);
+	}
 }
 
 function transformOutsideFences(content: string, transform: (line: string) => string) {
@@ -171,9 +182,12 @@ function extractFencedCodeBlocks(source: string) {
 				continue;
 			}
 
+			const info = openingFence.info.trim();
+			const separator = info.search(/\s/);
 			fenceMarker = openingFence.marker;
 			current = {
-				language: openingFence.info.trim().split(/\s+/, 1)[0] ?? '',
+				language: separator === -1 ? info : info.slice(0, separator),
+				meta: separator === -1 ? '' : info.slice(separator).trim(),
 				lines: [],
 			};
 			continue;
@@ -188,6 +202,7 @@ function extractFencedCodeBlocks(source: string) {
 		) {
 			codeBlocks.push({
 				language: current.language,
+				meta: current.meta,
 				code: current.lines.join('\n'),
 			});
 			current = null;
@@ -223,6 +238,7 @@ async function renderHighlightedCodeBlocks(source: string, html: string) {
 				await highlightCode(
 					codeBlock.code,
 					resolveCodeBlockLanguage(codeBlock.language, languageClass),
+					codeBlock.meta,
 				),
 			);
 		}
@@ -524,6 +540,13 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('data-language="zig"');
 			expect(html).toContain('<span');
 			expect(html).not.toContain('tabindex="0"');
+		});
+
+		it('passes code fence metadata to Twoslash', async () => {
+			const html = await renderMarkdown('```ts twoslash\nconst answer = 42\n//    ^?\n```');
+
+			expect(html).toContain('twoslash lsp');
+			expect(html).toContain('twoslash-hover');
 		});
 
 		it('preserves raw details blocks used by existing posts', async () => {
