@@ -30,6 +30,6 @@ export function page({
 		props: { article, content, description, pathname, title },
 	});
 	const theme =
-		"if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark');";
+		"document.documentElement.classList.add('js');try{const theme=localStorage.theme;document.documentElement.classList.toggle('dark',theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{document.documentElement.classList.toggle('dark',matchMedia('(prefers-color-scheme: dark)').matches)}";
 	return `<!doctype html><html lang="en"><head>${head}<script>${theme}</script>${assets}</head><body>${body}</body></html>`;
 }

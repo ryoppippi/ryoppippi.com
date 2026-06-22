@@ -9,44 +9,44 @@
 	--un-prose-borders: #7d7d7d4d !important;
 }
 
-.shiki,
-.shiki span {
-	/* Optional, if you also want font styles */
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
-}
-
-html.dark .shiki,
-html.dark .shiki span {
-	color: var(--shiki-dark) !important;
-	background-color: var(--shiki-dark-bg) !important;
-}
-
-html:not(.dark) .shiki {
-	color: var(--shiki-light) !important;
+.shiki {
 	background-color: #fafafa !important;
 }
 
+.shiki,
+.shiki span {
+	@variant dark {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
+}
+
 @media (prefers-contrast: more) {
-	html.dark .shiki span[style*='--shiki-dark:#737C73'] {
-		--shiki-dark: #94a094 !important;
+	@variant dark {
+		.shiki span[style*='--shiki-dark:#737C73'] {
+			--shiki-dark: #94a094 !important;
+		}
 	}
 
-	html:not(.dark) .shiki span[style*='color:#6F894E'] {
-		color: #3f6728 !important;
-	}
+	@variant light {
+		.shiki span[style*='color:#6F894E'] {
+			color: #3f6728 !important;
+		}
 
-	html:not(.dark) .shiki span[style*='color:#716E61'] {
-		color: #5f5a4e !important;
-	}
+		.shiki span[style*='color:#716E61'] {
+			color: #5f5a4e !important;
+		}
 
-	html:not(.dark) .shiki span[style*='color:#6693BF'] {
-		color: #2f668f !important;
-	}
+		.shiki span[style*='color:#6693BF'] {
+			color: #2f668f !important;
+		}
 
-	html:not(.dark) .shiki span[style*='color:#B35B79'] {
-		color: #8a3156 !important;
+		.shiki span[style*='color:#B35B79'] {
+			color: #8a3156 !important;
+		}
 	}
 }
 
