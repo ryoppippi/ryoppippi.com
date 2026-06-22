@@ -1,5 +1,6 @@
 import type { TweetData } from '@ryoppippi/content';
 import '../styles/fonts.css';
+import { loadPageStyle, missingPageStyles, obsoletePageStyles } from './page-styles.ts';
 import './style.css';
 
 const tweetCleanups = new Set<() => Promise<void>>();
@@ -178,6 +179,41 @@ function syncHead(next: Document): void {
 
 let navigation: AbortController | undefined;
 
+function stylesheetLinks(target: Document): HTMLLinkElement[] {
+	return [...target.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
+}
+
+function stylesheetHrefs(target: Document): string[] {
+	return stylesheetLinks(target).map((link) => link.href);
+}
+
+async function loadLinkedPageStyles(next: Document): Promise<void> {
+	await Promise.all(
+		missingPageStyles(stylesheetHrefs(document), stylesheetHrefs(next)).map(
+			(href) =>
+				new Promise<void>((resolve, reject) => {
+					const link = document.createElement('link');
+					link.rel = 'stylesheet';
+					link.href = href;
+					link.addEventListener('load', () => resolve(), { once: true });
+					link.addEventListener('error', () => reject(new Error(`Failed to load ${href}`)), {
+						once: true,
+					});
+					document.head.append(link);
+				}),
+		),
+	);
+}
+
+function removeObsoletePageStyles(next: Document): void {
+	const obsolete = new Set(obsoletePageStyles(stylesheetHrefs(document), stylesheetHrefs(next)));
+	for (const link of stylesheetLinks(document)) {
+		if (obsolete.has(link.href)) {
+			link.remove();
+		}
+	}
+}
+
 async function navigate(url: URL, push: boolean): Promise<void> {
 	navigation?.abort();
 	navigation = new AbortController();
@@ -191,8 +227,11 @@ async function navigate(url: URL, push: boolean): Promise<void> {
 	}
 
 	const next = new DOMParser().parseFromString(await response.text(), 'text/html');
+	await loadPageStyle(next.body.dataset.pageStyle);
+	await loadLinkedPageStyles(next);
 	const update = () => {
 		destroyPage();
+		removeObsoletePageStyles(next);
 		syncHead(next);
 		document.body.replaceWith(next.body);
 		if (push) {
@@ -240,4 +279,4 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener('popstate', () => void navigate(new URL(location.href), false));
-initialisePage();
+void loadPageStyle(document.body.dataset.pageStyle).then(initialisePage);

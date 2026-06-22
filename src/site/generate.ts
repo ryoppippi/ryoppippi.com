@@ -1,5 +1,6 @@
 import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
+import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -28,7 +29,7 @@ import {
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
 
 type GenerateSiteOptions = {
-	assets: string;
+	assets: SiteAssets;
 	content?: ContentArtifact;
 	outDir: string;
 	renderTweet?: TweetRenderer;

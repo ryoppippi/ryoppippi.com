@@ -1,31 +1,25 @@
 import { readContentArtifact, type ContentArtifact } from '@ryoppippi/content/artifact';
+import type { SiteAssets } from '../src/site/assets.ts';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { createServer } from 'vite';
+import { resolveSiteAssets } from '../src/site/assets.ts';
 
 type GenerateSite = (options: {
-	assets: string;
+	assets: SiteAssets;
 	content: ContentArtifact;
 	outDir: string;
 	root: string;
 }) => Promise<void>;
 
-async function readAssetTags(outDir: string): Promise<string> {
+async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 	const [index, manifestSource] = await Promise.all([
 		readFile(path.join(outDir, 'index.html'), 'utf8'),
 		readFile(path.join(outDir, '.vite/manifest.json'), 'utf8'),
 	]);
-	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[] }>;
-	// The SSG tweet needs its lazy chunk's CSS before hydration, but Vite omits it from index.html.
-	const tweetStyles =
-		Object.entries(manifest).find(([source]) => source.endsWith('/Tweet.svelte'))?.[1].css ?? [];
-	const tags = [
-		...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g),
-		...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g),
-	].map((match) => match[0]);
-	tags.push(...tweetStyles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`));
-	return tags.join('\n\t');
+	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[]; file: string }>;
+	return resolveSiteAssets(index, manifest);
 }
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -44,7 +38,7 @@ try {
 		generateSite: GenerateSite;
 	};
 	await generateSite({
-		assets: await readAssetTags(outDir),
+		assets: await readSiteAssets(outDir),
 		content: await readContentArtifact(path.join(root, 'packages/content/dist/content.json')),
 		outDir,
 		root,

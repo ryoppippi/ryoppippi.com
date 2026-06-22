@@ -1,4 +1,5 @@
 import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '@ryoppippi/content';
+import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
@@ -19,7 +20,7 @@ type Publications = Record<
 >;
 
 export type DevRouteDependencies = {
-	assets: string;
+	assets: SiteAssets;
 	loadBlogPost: (slug: string) => Promise<BlogPost | null>;
 	loadBlogPostMetadata: () => Promise<BlogPostMetadata[]>;
 	loadBlogPostSource: (slug: string) => Promise<string | null>;
@@ -142,7 +143,7 @@ export async function renderDevRoute(
 	return renderDotfilesRoute(pathname, dependencies);
 }
 
-export function renderDevNotFound(assets: string): DevRouteResponse {
+export function renderDevNotFound(assets: SiteAssets): DevRouteResponse {
 	return response(errorPage(assets).content, htmlContentType, 404);
 }
 
@@ -166,7 +167,11 @@ if (import.meta.vitest != null) {
 
 	function dependencies() {
 		return {
-			assets: '<script type="module" src="/src/site/client.ts"></script>',
+			assets: {
+				base: '<script type="module" src="/src/site/client.ts"></script>',
+				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+				tweet: '',
+			},
 			loadBlogPost: vi.fn(async () => post),
 			loadBlogPostMetadata: vi.fn(async () => [metadata]),
 			loadBlogPostSource: vi.fn(async () => post.source),
@@ -222,6 +227,9 @@ if (import.meta.vitest != null) {
 	});
 
 	it('renders the site error page with a 404 status', () => {
-		expect(renderDevNotFound('')).toMatchObject({ status: 404, contentType: htmlContentType });
+		expect(renderDevNotFound(dependencies().assets)).toMatchObject({
+			status: 404,
+			contentType: htmlContentType,
+		});
 	});
 }

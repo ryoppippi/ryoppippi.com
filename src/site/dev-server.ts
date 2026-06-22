@@ -8,10 +8,12 @@ import type {
 import type { DevRouteDependencies, DevRouteResponse } from './dev-routes.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
+import type { SiteAssets } from './assets.ts';
 import type { Plugin, ViteDevServer } from 'vite';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { DEV_ASSETS } from './assets.ts';
 
 type BlogModule = {
 	loadBlogPost: (slug: string, renderContent?: MarkdownRenderer) => Promise<BlogPost | null>;
@@ -38,14 +40,12 @@ type MarkdownModule = {
 };
 
 type DevRoutesModule = {
-	renderDevNotFound: (assets: string) => DevRouteResponse;
+	renderDevNotFound: (assets: SiteAssets) => DevRouteResponse;
 	renderDevRoute: (
 		pathname: string,
 		dependencies: DevRouteDependencies,
 	) => Promise<DevRouteResponse | null>;
 };
-
-const DEV_ASSETS = '<script type="module" src="/src/site/client.ts"></script>';
 
 function contentType(file: string): string {
 	const extension = path.extname(file);

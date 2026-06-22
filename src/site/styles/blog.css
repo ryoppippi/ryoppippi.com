@@ -1,0 +1,3 @@
+@import '../../styles/blog/index.css';
+
+@source '../templates/BlogList.svelte';

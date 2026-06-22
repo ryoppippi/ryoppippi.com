@@ -1,0 +1,5 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@reference '../../styles/tailwind.css';
+
+@source '../templates/Error.svelte';

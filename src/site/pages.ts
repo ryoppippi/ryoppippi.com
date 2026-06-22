@@ -1,4 +1,5 @@
 import type { BlogPost, BlogPostMetadata } from '@ryoppippi/content';
+import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
@@ -12,14 +13,20 @@ export type GeneratedFile = {
 	content: string;
 };
 
-export function homePage(assets: string): GeneratedFile {
+export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		content: page({ title: 'home', pathname: '/', content: renderComponent(Home, {}), assets }),
+		content: page({
+			title: 'home',
+			pathname: '/',
+			content: renderComponent(Home, {}),
+			assets,
+			style: 'home',
+		}),
 	};
 }
 
-export function blogListPage(items: PostListItem[], assets: string): GeneratedFile {
+export function blogListPage(items: PostListItem[], assets: SiteAssets): GeneratedFile {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return {
 		path: 'blog/index.html',
@@ -28,11 +35,12 @@ export function blogListPage(items: PostListItem[], assets: string): GeneratedFi
 			pathname: '/blog/',
 			content: renderComponent(BlogList, { items: sorted }),
 			assets,
+			style: 'blog',
 		}),
 	};
 }
 
-export function articlePages(post: BlogPost, assets: string): GeneratedFile[] {
+export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
 	const pathname = `/blog/${post.filename}/`;
 	const content = renderComponent(Article, {
 		date: formatDate(new Date(post.pubDate)),
@@ -42,7 +50,15 @@ export function articlePages(post: BlogPost, assets: string): GeneratedFile[] {
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
-			content: page({ title: `${post.title} | blog`, pathname, content, assets, article: true }),
+			content: page({
+				title: `${post.title} | blog`,
+				pathname,
+				content,
+				assets,
+				article: true,
+				style: 'article',
+				tweet: post.html.includes('data-tweet-id'),
+			}),
 		},
 		{ path: `blog/${post.filename}.md`, content: post.source },
 	];
@@ -74,7 +90,7 @@ export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 export function corePages(
 	posts: BlogPost[],
 	externalPosts: PostListItem[],
-	assets: string,
+	assets: SiteAssets,
 ): GeneratedFile[] {
 	const localPosts = posts
 		.filter((post) => post.isPublished)

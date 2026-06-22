@@ -1,0 +1,7 @@
+@import '../../styles/works.css';
+
+@source '../templates/Oss.svelte';
+@source '../templates/Publications.svelte';
+@source '../templates/Showcase.svelte';
+@source '../templates/Talks.svelte';
+@source '../templates/WorksNav.svelte';
