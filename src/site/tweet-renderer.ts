@@ -1,6 +1,7 @@
 import type { getTweet as getTweetType } from 'sveltweet/api';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { performance } from 'node:perf_hooks';
 import { render } from 'svelte/server';
 import { getTweet } from 'sveltweet/api';
 import Tweet from './Tweet.svelte';
@@ -20,6 +21,7 @@ type TweetLike = {
 };
 
 const tweetCache = new Map<string, Promise<TweetData | null>>();
+const renderedTweetCache = new Map<string, Promise<string>>();
 const cacheDirectory = path.join(process.cwd(), 'node_modules/.cache/ryoppippi-tweets/v1');
 
 function normaliseEntities(tweet: TweetLike | null | undefined): void {
@@ -105,13 +107,29 @@ export async function loadTweet(id: string): Promise<TweetData | null> {
 	return pending;
 }
 
-export async function renderTweet(id: string): Promise<string> {
-	const tweet = await loadTweet(id);
-	normaliseEntities(tweet as TweetLike | null);
-	const rendered = render(Tweet, { props: { id, tweet: tweet ?? undefined } });
-	const data =
-		tweet == null
-			? ''
-			: `<script type="application/json" data-tweet-props>${JSON.stringify(tweet).replaceAll('<', '\\u003c')}</script>`;
-	return `<div class="sveltweet-ssg" data-tweet-id="${id}"><div data-tweet-root>${rendered.body}</div>${data}</div>`;
+async function renderTweetHtml(id: string): Promise<string> {
+	const start = performance.now();
+	try {
+		const tweet = await loadTweet(id);
+		normaliseEntities(tweet as TweetLike | null);
+		const rendered = render(Tweet, { props: { id, tweet: tweet ?? undefined } });
+		const data =
+			tweet == null
+				? ''
+				: `<script type="application/json" data-tweet-props>${JSON.stringify(tweet).replaceAll('<', '\\u003c')}</script>`;
+		return `<div class="sveltweet-ssg" data-tweet-id="${id}"><div data-tweet-root>${rendered.body}</div>${data}</div>`;
+	} finally {
+		console.info(`[perf] tweet id=${id} duration=${(performance.now() - start).toFixed(1)}ms`);
+	}
+}
+
+export function renderTweet(id: string): Promise<string> {
+	const cached = renderedTweetCache.get(id);
+	if (cached != null) {
+		return cached;
+	}
+
+	const pending = renderTweetHtml(id);
+	renderedTweetCache.set(id, pending);
+	return pending;
 }
