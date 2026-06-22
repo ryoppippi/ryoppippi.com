@@ -1,9 +1,9 @@
 import { readContentArtifact, type ContentArtifact } from '@ryoppippi/content/artifact';
 import type { SiteAssets } from '../src/site/assets.ts';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { plugin } from 'bun';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { createServer } from 'vite';
+import { compile } from 'svelte/compiler';
 import { resolveSiteAssets } from '../src/site/assets.ts';
 
 type GenerateSite = (options: {
@@ -24,25 +24,26 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 
 const root = path.resolve(import.meta.dirname, '..');
 const outDir = path.join(root, 'build');
-const server = await createServer({
-	appType: 'custom',
-	configFile: false,
-	logLevel: 'error',
-	plugins: [svelte()],
-	publicDir: false,
-	server: { middlewareMode: true },
+
+plugin({
+	name: 'svelte-server-components',
+	setup(build) {
+		build.onLoad({ filter: /\.svelte$/ }, async ({ path: filename }) => ({
+			contents: compile(await Bun.file(filename).text(), {
+				filename,
+				generate: 'server',
+			}).js.code,
+			loader: 'js',
+		}));
+	},
 });
 
-try {
-	const { generateSite } = (await server.ssrLoadModule('/src/site/generate.ts')) as {
-		generateSite: GenerateSite;
-	};
-	await generateSite({
-		assets: await readSiteAssets(outDir),
-		content: await readContentArtifact(path.join(root, 'packages/content/dist/content.json')),
-		outDir,
-		root,
-	});
-} finally {
-	await server.close();
-}
+const { generateSite } = (await import('../src/site/generate.ts')) as {
+	generateSite: GenerateSite;
+};
+await generateSite({
+	assets: await readSiteAssets(outDir),
+	content: await readContentArtifact(path.join(root, 'packages/content/dist/content.json')),
+	outDir,
+	root,
+});
