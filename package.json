@@ -15,7 +15,7 @@
 		"new": "./scripts/new-post.ts",
 		"preview": "vp preview",
 		"test": "vp test --run",
-		"typos": "typos --force-exclude ./src/contents/**/*.md"
+		"typos": "typos --force-exclude --exclude '**/*.json' src/contents"
 	},
 	"dependencies": {},
 	"devDependencies": {
