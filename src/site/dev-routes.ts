@@ -142,6 +142,10 @@ export async function renderDevRoute(
 	return renderDotfilesRoute(pathname, dependencies);
 }
 
+export function renderDevNotFound(assets: string): DevRouteResponse {
+	return response(errorPage(assets).content, htmlContentType, 404);
+}
+
 if (import.meta.vitest != null) {
 	const metadata = {
 		title: 'Lazy article',
@@ -215,5 +219,9 @@ if (import.meta.vitest != null) {
 			expect(loaders.loadBlogPostSource).toHaveBeenCalledWith('lazy-article');
 			expect(loaders.loadBlogPost).not.toHaveBeenCalled();
 		});
+	});
+
+	it('renders the site error page with a 404 status', () => {
+		expect(renderDevNotFound('')).toMatchObject({ status: 404, contentType: htmlContentType });
 	});
 }

@@ -100,7 +100,7 @@ export default defineConfig({
 		environment: 'node',
 		includeSource: [
 			'src/lib/**/*.ts',
-			'src/site/dev-routes.ts',
+			'src/site/{dev-routes,dev-server}.ts',
 			'packages/content/src/{artifact,blog,paths}.ts',
 			'packages/content/src/markdown/**/*.ts',
 		],
