@@ -4,7 +4,7 @@ import { plugin } from 'bun';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { compile } from 'svelte/compiler';
-import { resolveSiteAssets } from '../src/site/assets.ts';
+import { inlineHomeStyles, resolveSiteAssets } from '../src/site/assets.ts';
 
 type GenerateSite = (options: {
 	assets: SiteAssets;
@@ -19,7 +19,19 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 		readFile(path.join(outDir, '.vite/manifest.json'), 'utf8'),
 	]);
 	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[]; file: string }>;
-	return resolveSiteAssets(index, manifest);
+	const assets = resolveSiteAssets(index, manifest);
+	const baseFiles = manifest['index.html']?.css ?? [];
+	const homeFile = manifest['src/site/styles/home.css']?.file;
+	if (baseFiles.length === 0 || homeFile == null) {
+		throw new Error('Missing CSS assets for inline home styles');
+	}
+	const [base, home] = await Promise.all([
+		Promise.all(baseFiles.map((file) => readFile(path.join(outDir, file), 'utf8'))).then((files) =>
+			files.join('\n'),
+		),
+		readFile(path.join(outDir, homeFile), 'utf8'),
+	]);
+	return inlineHomeStyles(assets, base, home);
 }
 
 const root = path.resolve(import.meta.dirname, '..');

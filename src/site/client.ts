@@ -1,6 +1,11 @@
 import type { TweetData } from '@ryoppippi/content';
 import '../styles/fonts.css';
-import { loadPageStyle, missingPageStyles, obsoletePageStyles } from './page-styles.ts';
+import {
+	loadPageStyle,
+	missingPageStyles,
+	needsInitialPageStyle,
+	obsoletePageStyles,
+} from './page-styles.ts';
 import './style.css';
 
 const tweetCleanups = new Set<() => Promise<void>>();
@@ -214,6 +219,19 @@ function removeObsoletePageStyles(next: Document): void {
 	}
 }
 
+function syncInlineStyles(next: Document): void {
+	for (const style of document.querySelectorAll(
+		'style[data-inline-base-style], style[data-inline-page-style]',
+	)) {
+		style.remove();
+	}
+	for (const style of next.querySelectorAll(
+		'style[data-inline-base-style], style[data-inline-page-style]',
+	)) {
+		document.head.append(style.cloneNode(true));
+	}
+}
+
 async function navigate(url: URL, push: boolean): Promise<void> {
 	navigation?.abort();
 	navigation = new AbortController();
@@ -227,11 +245,14 @@ async function navigate(url: URL, push: boolean): Promise<void> {
 	}
 
 	const next = new DOMParser().parseFromString(await response.text(), 'text/html');
-	await loadPageStyle(next.body.dataset.pageStyle);
+	if (next.querySelector('style[data-inline-page-style]') == null) {
+		await loadPageStyle(next.body.dataset.pageStyle);
+	}
 	await loadLinkedPageStyles(next);
 	const update = () => {
 		destroyPage();
 		removeObsoletePageStyles(next);
+		syncInlineStyles(next);
 		syncHead(next);
 		document.body.replaceWith(next.body);
 		if (push) {
@@ -279,4 +300,9 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener('popstate', () => void navigate(new URL(location.href), false));
-void loadPageStyle(document.body.dataset.pageStyle).then(initialisePage);
+const initialStyle = document.body.dataset.pageStyle;
+const inlineStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')?.dataset
+	.inlinePageStyle;
+void (
+	needsInitialPageStyle(initialStyle, inlineStyle) ? loadPageStyle(initialStyle) : Promise.resolve()
+).then(initialisePage);

@@ -4,12 +4,18 @@ export type PageStyle = (typeof PAGE_STYLES)[number];
 
 export type SiteAssets = {
 	base: string;
+	client: string;
+	homeInline?: {
+		base: string;
+		page: string;
+	};
 	pages: Record<PageStyle, string>;
 	tweet: string;
 };
 
 export const DEV_ASSETS = {
-	base: '<script type="module" src="/src/site/client.ts"></script>',
+	base: '',
+	client: '<script type="module" src="/src/site/client.ts"></script>',
 	pages: {
 		article: '',
 		blog: '',
@@ -30,10 +36,10 @@ export function resolveSiteAssets(
 	index: string,
 	manifest: Record<string, ManifestChunk>,
 ): SiteAssets {
-	const base = [
-		...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g),
-		...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g),
-	]
+	const base = [...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g)]
+		.map((match) => match[0])
+		.join('\n\t');
+	const client = [...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g)]
 		.map((match) => match[0])
 		.join('\n\t');
 	const stylesFor = (suffix: string): string => {
@@ -47,6 +53,7 @@ export function resolveSiteAssets(
 
 	return {
 		base,
+		client,
 		pages: {
 			article: stylesFor('/styles/article.css'),
 			blog: stylesFor('/styles/blog.css'),
@@ -59,13 +66,36 @@ export function resolveSiteAssets(
 	};
 }
 
+function inlineStyle(css: string, attribute: string): string {
+	return `<style ${attribute}>${css.replaceAll('</style', '<\\/style')}</style>`;
+}
+
+export function inlineHomeStyles(assets: SiteAssets, base: string, page: string): SiteAssets {
+	return {
+		...assets,
+		homeInline: {
+			base: inlineStyle(base, 'data-inline-base-style'),
+			page: inlineStyle(page, 'data-inline-page-style="home"'),
+		},
+	};
+}
+
 export function renderAssetTags(assets: SiteAssets, style: PageStyle, tweet: boolean): string {
-	return [assets.base, assets.pages[style], tweet ? assets.tweet : ''].filter(Boolean).join('\n\t');
+	const inline = style === 'home' ? assets.homeInline : undefined;
+	return [
+		inline?.base ?? assets.base,
+		inline?.page ?? assets.pages[style],
+		tweet ? assets.tweet : '',
+		assets.client,
+	]
+		.filter(Boolean)
+		.join('\n\t');
 }
 
 if (import.meta.vitest != null) {
 	const assets = {
 		base: '<link href="/base.css"><script src="/client.js"></script>',
+		client: '<script type="module" src="/client.js"></script>',
 		pages: {
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
@@ -108,7 +138,8 @@ if (import.meta.vitest != null) {
 			);
 
 			expect(result).toEqual({
-				base: '<link rel="stylesheet" href="/base.css">\n\t<script type="module" src="/client.js"></script>',
+				base: '<link rel="stylesheet" href="/base.css">',
+				client: '<script type="module" src="/client.js"></script>',
 				pages: {
 					article: '<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
@@ -126,6 +157,24 @@ if (import.meta.vitest != null) {
 		it('includes Tweet styles only when the page embeds a Tweet', () => {
 			expect(renderAssetTags(assets, 'article', false)).not.toContain('/tweet.css');
 			expect(renderAssetTags(assets, 'article', true)).toContain('/tweet.css');
+		});
+	});
+
+	describe(inlineHomeStyles, () => {
+		it('inlines home styles without changing other page assets', () => {
+			const inlined = inlineHomeStyles(
+				assets,
+				'body { color: red }',
+				'.home::after { content: "</style>" }',
+			);
+
+			expect(renderAssetTags(inlined, 'home', false)).toContain(
+				'<style data-inline-base-style>body { color: red }</style>',
+			);
+			expect(renderAssetTags(inlined, 'home', false)).toContain('<\\/style>');
+			expect(renderAssetTags(inlined, 'home', false)).not.toContain('/home.css');
+			expect(renderAssetTags(inlined, 'blog', false)).toContain('/base.css');
+			expect(renderAssetTags(inlined, 'blog', false)).toContain('/blog.css');
 		});
 	});
 }

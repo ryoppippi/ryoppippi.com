@@ -168,7 +168,8 @@ if (import.meta.vitest != null) {
 	function dependencies() {
 		return {
 			assets: {
-				base: '<script type="module" src="/src/site/client.ts"></script>',
+				base: '',
+				client: '<script type="module" src="/src/site/client.ts"></script>',
 				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 				tweet: '',
 			},

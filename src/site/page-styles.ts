@@ -22,6 +22,13 @@ export function obsoletePageStyles(current: readonly string[], next: readonly st
 	return current.filter((href) => !required.has(href));
 }
 
+export function needsInitialPageStyle(
+	style: string | undefined,
+	inlineStyle: string | undefined,
+): boolean {
+	return style != null && style !== inlineStyle;
+}
+
 function isPageStyle(value: string): value is PageStyle {
 	return PAGE_STYLES.some((candidate) => candidate === value);
 }
@@ -56,6 +63,13 @@ if (import.meta.vitest != null) {
 					['/assets/base.css', '/assets/blog.css'],
 				),
 			).toEqual(['/assets/home.css']);
+		});
+	});
+
+	describe(needsInitialPageStyle, () => {
+		it('skips a page style already inlined by the static document', () => {
+			expect(needsInitialPageStyle('home', 'home')).toBe(false);
+			expect(needsInitialPageStyle('blog', undefined)).toBe(true);
 		});
 	});
 
