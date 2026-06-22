@@ -10,6 +10,7 @@ export type SiteAssets = {
 		page: string;
 	};
 	pages: Record<PageStyle, string>;
+	preloads?: Partial<Record<PageStyle, string>>;
 	tweet: string;
 };
 
@@ -24,6 +25,7 @@ export const DEV_ASSETS = {
 		sponsors: '',
 		works: '',
 	},
+	preloads: {},
 	tweet: '',
 } as const satisfies SiteAssets;
 
@@ -50,6 +52,17 @@ export function resolveSiteAssets(
 		}
 		return styles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`).join('\n\t');
 	};
+	const preloadFonts = (suffixes: string[]): string =>
+		suffixes
+			.map((suffix) => {
+				const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
+				if (chunk == null) {
+					throw new Error(`Missing font asset for ${suffix}`);
+				}
+				return `<link rel="preload" href="/${chunk.file}" as="font" type="font/woff2" crossorigin>`;
+			})
+			.join('\n\t');
+
 	return {
 		base,
 		client,
@@ -60,6 +73,9 @@ export function resolveSiteAssets(
 			home: stylesFor('/styles/home.css'),
 			sponsors: stylesFor('/styles/sponsors.css'),
 			works: stylesFor('/styles/works.css'),
+		},
+		preloads: {
+			works: preloadFonts(['dm-mono-latin-400-normal.woff2', 'dm-mono-latin-500-normal.woff2']),
 		},
 		tweet: stylesFor('/Tweet.svelte'),
 	};
@@ -82,6 +98,7 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
 export function renderAssetTags(assets: SiteAssets, style: PageStyle, tweet: boolean): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
 	return [
+		assets.preloads?.[style] ?? '',
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pages[style],
 		tweet ? assets.tweet : '',
@@ -103,6 +120,7 @@ if (import.meta.vitest != null) {
 			sponsors: '<link href="/sponsors.css">',
 			works: '<link href="/works.css">',
 		},
+		preloads: {},
 		tweet: '<link href="/tweet.css">',
 	} as const satisfies SiteAssets;
 
@@ -133,6 +151,12 @@ if (import.meta.vitest != null) {
 						file: 'assets/Tweet.js',
 						css: ['assets/Tweet.css'],
 					},
+					'node_modules/@fontsource/dm-mono/files/dm-mono-latin-400-normal.woff2': {
+						file: 'assets/dm-mono-400.woff2',
+					},
+					'node_modules/@fontsource/dm-mono/files/dm-mono-latin-500-normal.woff2': {
+						file: 'assets/dm-mono-500.woff2',
+					},
 				},
 			);
 
@@ -147,12 +171,26 @@ if (import.meta.vitest != null) {
 					sponsors: '<link rel="stylesheet" crossorigin href="/assets/sponsors.css">',
 					works: '<link rel="stylesheet" crossorigin href="/assets/works.css">',
 				},
+				preloads: {
+					works:
+						'<link rel="preload" href="/assets/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>\n\t<link rel="preload" href="/assets/dm-mono-500.woff2" as="font" type="font/woff2" crossorigin>',
+				},
 				tweet: '<link rel="stylesheet" crossorigin href="/assets/Tweet.css">',
 			});
 		});
 	});
 
 	describe(renderAssetTags, () => {
+		it('includes preloads only for the current page style', () => {
+			const withPreloads = {
+				...assets,
+				preloads: { works: '<link rel="preload" href="/dm-mono.woff2">' },
+			};
+
+			expect(renderAssetTags(withPreloads, 'works', false)).toContain('/dm-mono.woff2');
+			expect(renderAssetTags(withPreloads, 'home', false)).not.toContain('/dm-mono.woff2');
+		});
+
 		it('includes Tweet styles only when the page embeds a Tweet', () => {
 			expect(renderAssetTags(assets, 'article', false)).not.toContain('/tweet.css');
 			expect(renderAssetTags(assets, 'article', true)).toContain('/tweet.css');
