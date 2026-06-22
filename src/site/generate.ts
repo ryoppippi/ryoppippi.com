@@ -11,7 +11,6 @@ import {
 	parseStepCommands,
 } from '../lib/dotfiles.ts';
 import {
-	appendAssetRedirects,
 	contentAssetSources,
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
@@ -94,7 +93,6 @@ export async function generateSite({
 	];
 
 	await writeGeneratedFiles(outDir, pages);
-	await appendAssetRedirects(path.join(outDir, '_redirects'), emittedAssets.redirects);
 
 	const install = extractSection(dotfiles, 'Initial Setup');
 	const osSections = [

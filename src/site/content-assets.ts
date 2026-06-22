@@ -1,6 +1,6 @@
 import type { DefaultTreeAdapterMap } from 'parse5';
 import { createHash } from 'node:crypto';
-import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { link, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseFragment, serialize } from 'parse5';
 import { glob } from 'tinyglobby';
@@ -11,18 +11,8 @@ export type ContentAssetSource = {
 };
 
 export type EmittedContentAssets = {
-	redirects: string[];
 	urls: ReadonlyMap<string, string>;
 };
-
-export async function appendAssetRedirects(
-	file: string,
-	redirects: readonly string[],
-): Promise<void> {
-	if (redirects.length > 0) {
-		await appendFile(file, `${redirects.join('\n')}\n`);
-	}
-}
 
 export async function contentAssetSources(
 	blogDir: string,
@@ -68,7 +58,6 @@ export async function emitDeduplicatedAssets(
 	);
 	const emitted = new Map<string, { content: Buffer; target: string }>();
 	const urls = new Map<string, string>();
-	const redirects: string[] = [];
 
 	for (const asset of loaded) {
 		let output = emitted.get(asset.hash);
@@ -81,7 +70,6 @@ export async function emitDeduplicatedAssets(
 			emitted.set(asset.hash, output);
 		}
 		urls.set(asset.url, output.target);
-		redirects.push(`${asset.url} ${output.target} 301`);
 	}
 
 	await mkdir(path.join(outDir, 'assets', 'content'), { recursive: true });
@@ -90,8 +78,22 @@ export async function emitDeduplicatedAssets(
 			writeFile(path.join(outDir, asset.target.slice(1)), asset.content),
 		),
 	);
+	await Promise.all(
+		loaded.map(async (asset) => {
+			const target = urls.get(asset.url);
+			if (target == null) {
+				throw new Error(`Missing emitted asset for ${asset.url}`);
+			}
+			const alias = path.join(
+				outDir,
+				...asset.url.split('/').filter(Boolean).map(decodeURIComponent),
+			);
+			await mkdir(path.dirname(alias), { recursive: true });
+			await link(path.join(outDir, target.slice(1)), alias);
+		}),
+	);
 
-	return { redirects, urls };
+	return { urls };
 }
 
 export function rewriteContentAssetUrls(
@@ -131,26 +133,6 @@ export function rewriteContentAssetUrls(
 }
 
 if (import.meta.vitest != null) {
-	describe(appendAssetRedirects, () => {
-		it('appends asset redirects after existing route rules', async () => {
-			const [{ createFixture }, { readFile }] = await Promise.all([
-				import('fs-fixture'),
-				import('node:fs/promises'),
-			]);
-			await using fixture = await createFixture({
-				_redirects: '/old /new 301\n',
-			});
-
-			await appendAssetRedirects(fixture.getPath('_redirects'), [
-				'/blog/image.png /assets/content/hash.png 301',
-			]);
-
-			expect(await readFile(fixture.getPath('_redirects'), 'utf8')).toBe(
-				'/old /new 301\n/blog/image.png /assets/content/hash.png 301\n',
-			);
-		});
-	});
-
 	describe(contentAssetSources, () => {
 		it('lists non-Markdown assets with encoded public URLs', async () => {
 			const { createFixture } = await import('fs-fixture');
@@ -205,8 +187,11 @@ if (import.meta.vitest != null) {
 			expect(output).toHaveLength(2);
 		});
 
-		it('maps legacy URLs to content-addressed assets', async () => {
-			const { createFixture } = await import('fs-fixture');
+		it('maps legacy URLs to content-addressed assets and emits static aliases', async () => {
+			const [{ createFixture }, { readFile, stat }] = await Promise.all([
+				import('fs-fixture'),
+				import('node:fs/promises'),
+			]);
 			await using fixture = await createFixture({
 				'input/first.png': 'same image',
 				'input/second.png': 'same image',
@@ -226,14 +211,13 @@ if (import.meta.vitest != null) {
 			expect(result.urls.get('/blog/second/image.png')).toBe(
 				result.urls.get('/blog/first/image.png'),
 			);
-			expect(result.redirects).toEqual([
-				expect.stringMatching(
-					/^\/blog\/first\/image\.png \/assets\/content\/[\da-f]{64}\.png 301$/,
-				),
-				expect.stringMatching(
-					/^\/blog\/second\/image\.png \/assets\/content\/[\da-f]{64}\.png 301$/,
-				),
-			]);
+			expect(await readFile(fixture.getPath('output/blog/first/image.png'), 'utf8')).toBe(
+				'same image',
+			);
+			expect(await readFile(fixture.getPath('output/blog/second/image.png'), 'utf8')).toBe(
+				'same image',
+			);
+			expect((await stat(fixture.getPath('output/blog/first/image.png'))).nlink).toBe(3);
 		});
 	});
 
