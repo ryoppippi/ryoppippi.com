@@ -26,9 +26,11 @@ strictDepBuilds: true
 
 # true: allow build scripts, false: block build scripts
 allowBuilds:
+  bun: true
   core-js: true
   esbuild: true
   lefthook: true
+  puppeteer: false
   sharp: true
   unrs-resolver: true
   workerd: true
@@ -43,6 +45,3 @@ trustPolicy: no-downgrade
 
 trustPolicyExclude:
   - chokidar@4.0.3
-
-configDependencies:
-  '@pnpm/pacquet': 0.11.1

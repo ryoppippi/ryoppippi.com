@@ -1,9 +1,15 @@
 import type { Plugin } from 'vite';
 import { spawn } from 'node:child_process';
+import path from 'node:path';
 
 async function generateStaticSite(): Promise<void> {
 	await new Promise<void>((resolve, reject) => {
-		const child = spawn(process.execPath, ['scripts/generate-site.ts'], {
+		const bun = path.join(
+			process.cwd(),
+			'node_modules/.bin',
+			process.platform === 'win32' ? 'bun.cmd' : 'bun',
+		);
+		const child = spawn(bun, ['scripts/generate-site.ts'], {
 			cwd: process.cwd(),
 			stdio: 'inherit',
 		});
