@@ -1,0 +1,41 @@
+{
+	"name": "@ryoppippi/content",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./artifact": "./src/artifact.ts",
+		"./article.css": "./article.css",
+		"./build": "./src/build.ts",
+		"./paths": "./src/paths.ts",
+		"./Tweet.svelte": "./src/Tweet.svelte",
+		"./tweet-renderer": "./src/tweet-renderer.ts"
+	},
+	"scripts": {
+		"new": "./scripts/new-post.ts"
+	},
+	"devDependencies": {
+		"@clack/prompts": "^1.3.0",
+		"@ox-content/napi": "2.72.0",
+		"@ox-content/vite-plugin": "2.72.0",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@types/diacritics": "^1.3.3",
+		"@types/fs-extra": "^11.0.4",
+		"budoux": "^0.8.4",
+		"bun": "1.3.14",
+		"date-fns": "^4.1.0",
+		"diacritics": "^1.3.0",
+		"fs-extra": "^11.3.5",
+		"fs-fixture": "^2.14.0",
+		"gray-matter-es": "0.2.1",
+		"open-editor": "^6.0.0",
+		"reading-time": "^1.5.0",
+		"shiki": "^4.0.2",
+		"svelte": "^5.56.2",
+		"sveltweet": "0.5.1",
+		"tinyglobby": "^0.2.16",
+		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.1",
+		"vite-plus": "0.2.1"
+	}
+}

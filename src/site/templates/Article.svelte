@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
-	import type { BlogPost } from '../content.ts';
+	import type { BlogPost } from '@ryoppippi/content';
 
 	let { date, pathname, post }: { date: string; pathname: string; post: BlogPost } = $props();
 	const markdownPath = $derived(`${pathname.slice(0, -1)}.md`);

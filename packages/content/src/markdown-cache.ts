@@ -1,5 +1,5 @@
-import type { TweetRenderer } from '../markdown/render.ts';
-import { renderMarkdown } from '../markdown/render.ts';
+import type { TweetRenderer } from './markdown/render.ts';
+import { renderMarkdown } from './markdown/render.ts';
 
 export type MarkdownRenderer = (content: string) => Promise<string>;
 

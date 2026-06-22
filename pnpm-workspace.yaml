@@ -1,3 +1,6 @@
+packages:
+  - packages/*
+
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - gray-matter-es

@@ -1,5 +1,5 @@
 import type { Plugin, ViteDevServer } from 'vite';
-import type { TweetRenderer } from '../markdown/render.ts';
+import type { TweetRenderer } from '@ryoppippi/content';
 import { mkdir, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -55,7 +55,7 @@ function watchesSite(file: string, root: string): boolean {
 		relative === 'routes.ts' ||
 		relative === 'scripts/generate-site.ts' ||
 		relative.startsWith('src/contents/') ||
-		relative.startsWith('src/markdown/') ||
+		relative.startsWith('packages/content/src/') ||
 		relative.startsWith('src/site/templates/') ||
 		/^src\/site\/(content|generate|html|pages|secondary-pages|sections)\.ts$/.test(relative)
 	);
@@ -84,7 +84,7 @@ export function staticSiteDevServer(): Plugin {
 			const outDir = path.join(root, 'node_modules/.vite/ryoppippi-site');
 			const generate = async () => {
 				const renderTweet = (
-					(await server.ssrLoadModule('/src/site/tweet-renderer.ts')) as {
+					(await server.ssrLoadModule('/packages/content/src/tweet-renderer.ts')) as {
 						renderTweet: TweetRenderer;
 					}
 				).renderTweet;

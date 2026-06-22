@@ -1,4 +1,5 @@
-import type { BlogPost, PostListItem } from './content.ts';
+import type { BlogPost } from '@ryoppippi/content';
+import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
 import { page, renderComponent } from './html.ts';

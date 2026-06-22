@@ -1,4 +1,4 @@
-import type { TweetRenderer } from '../src/markdown/render.ts';
+import { readContentArtifact, type ContentArtifact } from '@ryoppippi/content/artifact';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -6,8 +6,8 @@ import { createServer } from 'vite';
 
 type GenerateSite = (options: {
 	assets: string;
+	content: ContentArtifact;
 	outDir: string;
-	renderTweet: TweetRenderer;
 	root: string;
 }) => Promise<void>;
 
@@ -18,7 +18,8 @@ async function readAssetTags(outDir: string): Promise<string> {
 	]);
 	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[] }>;
 	// The SSG tweet needs its lazy chunk's CSS before hydration, but Vite omits it from index.html.
-	const tweetStyles = manifest['src/site/Tweet.svelte']?.css ?? [];
+	const tweetStyles =
+		Object.entries(manifest).find(([source]) => source.endsWith('/Tweet.svelte'))?.[1].css ?? [];
 	const tags = [
 		...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g),
 		...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g),
@@ -39,14 +40,13 @@ const server = await createServer({
 });
 
 try {
-	const [{ renderTweet }, { generateSite }] = await Promise.all([
-		server.ssrLoadModule('/src/site/tweet-renderer.ts') as Promise<{ renderTweet: TweetRenderer }>,
-		server.ssrLoadModule('/src/site/generate.ts') as Promise<{ generateSite: GenerateSite }>,
-	]);
+	const { generateSite } = (await server.ssrLoadModule('/src/site/generate.ts')) as {
+		generateSite: GenerateSite;
+	};
 	await generateSite({
 		assets: await readAssetTags(outDir),
+		content: await readContentArtifact(path.join(root, 'packages/content/dist/content.json')),
 		outDir,
-		renderTweet,
 		root,
 	});
 } finally {

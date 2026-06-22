@@ -1,5 +1,6 @@
-import type { TweetRenderer } from '../markdown/render.ts';
+import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
+import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
 import { access, cp, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
@@ -9,8 +10,7 @@ import {
 	fetchDotfilesReadme,
 	parseStepCommands,
 } from '../lib/dotfiles.ts';
-import { loadBlogPosts, loadExternalPosts } from './content.ts';
-import { createMarkdownRenderer } from './markdown-cache.ts';
+import { loadExternalPosts } from './content.ts';
 import { corePages } from './pages.ts';
 import {
 	errorPage,
@@ -20,17 +20,18 @@ import {
 	sponsorsPage,
 	talksPage,
 } from './secondary-pages.ts';
-import { loadOssProjects, loadPublications, loadShowcase, loadTalks } from './sections.ts';
+import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
 
 type GenerateSiteOptions = {
 	assets: string;
+	content?: ContentArtifact;
 	outDir: string;
-	renderTweet: TweetRenderer;
+	renderTweet?: TweetRenderer;
 	root: string;
 };
 
-async function copyContentAssets(root: string, outDir: string): Promise<void> {
-	const blogDir = path.join(root, 'src/contents/blog');
+async function copyContentAssets(outDir: string): Promise<void> {
+	const blogDir = blogDirectory();
 	const assets = await glob(['**/*', '!**/*.md'], { cwd: blogDir, onlyFiles: true });
 	await Promise.all(
 		assets.map(async (asset) => {
@@ -55,21 +56,27 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
 
 export async function generateSite({
 	assets,
+	content,
 	outDir,
 	renderTweet,
 	root,
 }: GenerateSiteOptions): Promise<void> {
-	const renderContent = createMarkdownRenderer(renderTweet);
-	const [posts, externalPosts, ossProjects, showcase, publications, talks, dotfiles] =
-		await Promise.all([
-			loadBlogPosts(root, renderContent),
-			loadExternalPosts(root),
-			loadOssProjects(root),
-			loadShowcase(root, renderContent),
-			loadPublications(root),
-			loadTalks(),
-			fetchDotfilesReadme(fetch),
-		]);
+	let localContent = content;
+	if (localContent == null) {
+		if (renderTweet == null) {
+			throw new Error('renderTweet is required when no content artifact is provided');
+		}
+		const { buildContentArtifact } = await import('@ryoppippi/content/build');
+		localContent = await buildContentArtifact(renderTweet);
+	}
+	const [externalPosts, ossProjects, publications, talks, dotfiles] = await Promise.all([
+		loadExternalPosts(root),
+		loadOssProjects(root),
+		loadPublications(root),
+		loadTalks(),
+		fetchDotfilesReadme(fetch),
+	]);
+	const { posts, showcase } = localContent;
 
 	const pages = [
 		...corePages(posts, externalPosts, assets),
@@ -82,15 +89,11 @@ export async function generateSite({
 	];
 
 	await writeGeneratedFiles(outDir, pages);
-	await copyContentAssets(root, outDir);
-	await cp(
-		path.join(root, 'src/contents/works/showcase'),
-		path.join(outDir, 'works/showcase/assets'),
-		{
-			recursive: true,
-			filter: (source) => !source.endsWith('.md') && !source.endsWith('index.ts'),
-		},
-	);
+	await copyContentAssets(outDir);
+	await cp(showcaseDirectory(), path.join(outDir, 'works/showcase/assets'), {
+		recursive: true,
+		filter: (source) => !source.endsWith('.md') && !source.endsWith('index.ts'),
+	});
 
 	const install = extractSection(dotfiles, 'Initial Setup');
 	const osSections = [

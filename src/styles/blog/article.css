@@ -3,5 +3,5 @@
 @import '../prose-theme.css';
 @reference '../tailwind.css';
 
-@source '../../contents/blog/**/*.md';
+@import '@ryoppippi/content/article.css';
 @source inline("icon-[mdi--arrow-left-bottom]");

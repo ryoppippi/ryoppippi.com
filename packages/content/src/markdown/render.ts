@@ -1,15 +1,15 @@
 import type { JsParserOptions } from '@ox-content/napi';
 import oxContent from '@ox-content/napi';
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash';
+import { transformOgp } from '@ox-content/vite-plugin';
 import { performance } from 'node:perf_hooks';
 import { codeToHtml } from 'shiki';
-import { slugify } from '../lib/slugify.server.ts';
+import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { extractFootnotes, renderFootnotes } from './footnotes.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
-import { preloadLinkPreviews, replaceLinkPreviews } from './link-preview.ts';
+import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
 import { transformerEscape } from './shiki-transformer.ts';
@@ -60,13 +60,7 @@ async function highlightCode(code: string, lang: string, meta: string) {
 				dark: 'kanagawa-dragon',
 				light: 'kanagawa-lotus',
 			},
-			transformers: [
-				transformerTwoslash({
-					explicitTrigger: true,
-					renderer: rendererRich(),
-				}),
-				transformerEscape(),
-			],
+			transformers: [transformerEscape()],
 		});
 	} finally {
 		console.info(
@@ -331,6 +325,7 @@ function replaceMagicLinksOutsideProtectedHtml(html: string) {
 function postprocessRenderedHtml(html: string) {
 	const blockEmbeds = html
 		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
+		.replace(/<p\b[^>]*>(\s*<a class="ox-ogp-(?:card|simple)"[\s\S]*?<\/a>\s*)<\/p>/g, '$1')
 		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1')
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
@@ -367,7 +362,6 @@ async function renderTweets(html: string, renderTweet: TweetRenderer) {
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const extracted = extractFootnotes(content);
-	await preloadLinkPreviews(extracted.content);
 	const prepared = prepareOxContentMarkdown(extracted.content);
 	const result = parseAndRender(prepared, oxContentOptions);
 
@@ -388,8 +382,9 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 			bluesky: true,
 		}),
 	);
+	const openGraph = await transformOgp(media, undefined, { timeout: 8_000 });
 
-	const body = applyBudouxHtml(postprocessRenderedHtml(media));
+	const body = applyBudouxHtml(postprocessRenderedHtml(openGraph));
 	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
 		renderMarkdown(footnote, options),
 	);
@@ -398,6 +393,13 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 
 if (import.meta.vitest != null) {
 	describe('prepareOxContentMarkdown', () => {
+		it('renders preview links through the Ox Content open graph embed', async () => {
+			const html = await renderMarkdown('[@preview](http://localhost/post)');
+
+			expect(html).toContain('class="ox-ogp-simple"');
+			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
+		});
+
 		it('normalises angle links that contain parentheses', () => {
 			expect(prepareOxContentMarkdown('[release](<https://example.com/a(1)>)')).toBe(
 				'[release](https://example.com/a%281%29)',
@@ -418,7 +420,7 @@ if (import.meta.vitest != null) {
 
 		it('converts preview links to link card html', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
-				'<div class="link-preview-widget"><a href="https://github.com/junkawa/figma_jp" rel="noopener" target="_blank"><div class="link-preview-widget-title">https://github.com/junkawa/figma_jp</div><div class="link-preview-widget-url">github.com</div></a></div>',
+				'<OgCard url="https://github.com/junkawa/figma_jp" />',
 			);
 		});
 
@@ -605,13 +607,6 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('data-language="zig"');
 			expect(html).toContain('<span');
 			expect(html).not.toContain('tabindex="0"');
-		});
-
-		it('passes code fence metadata to Twoslash', async () => {
-			const html = await renderMarkdown('```ts twoslash\nconst answer = 42\n//    ^?\n```');
-
-			expect(html).toContain('twoslash lsp');
-			expect(html).toContain('twoslash-hover');
 		});
 
 		it('preserves raw details blocks used by existing posts', async () => {

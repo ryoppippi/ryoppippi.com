@@ -6,7 +6,7 @@ import { render } from 'svelte/server';
 import { getTweet } from 'sveltweet/api';
 import Tweet from './Tweet.svelte';
 
-type TweetData = NonNullable<Awaited<ReturnType<typeof getTweetType>>>;
+export type TweetData = NonNullable<Awaited<ReturnType<typeof getTweetType>>>;
 
 type TweetLike = {
 	entities?: {
@@ -22,7 +22,8 @@ type TweetLike = {
 
 const tweetCache = new Map<string, Promise<TweetData | null>>();
 const renderedTweetCache = new Map<string, Promise<string>>();
-const cacheDirectory = path.join(process.cwd(), 'node_modules/.cache/ryoppippi-tweets/v1');
+const workspaceRoot = path.resolve(import.meta.dirname, '../../..');
+const cacheDirectory = path.join(workspaceRoot, 'node_modules/.cache/ryoppippi-tweets/v1');
 
 function normaliseEntities(tweet: TweetLike | null | undefined): void {
 	if (tweet == null) {

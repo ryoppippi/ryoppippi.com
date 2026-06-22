@@ -1,7 +1,5 @@
-import type { getTweet } from 'sveltweet/api';
+import type { TweetData } from '@ryoppippi/content';
 import './style.css';
-
-type TweetData = NonNullable<Awaited<ReturnType<typeof getTweet>>>;
 
 const tweetCleanups = new Set<() => Promise<void>>();
 
@@ -105,7 +103,7 @@ async function hydrateTweet(element: HTMLElement): Promise<void> {
 		const tweet = JSON.parse(data) as TweetData;
 		const [{ hydrate, unmount }, { default: Tweet }] = await Promise.all([
 			import('svelte'),
-			import('./Tweet.svelte'),
+			import('@ryoppippi/content/Tweet.svelte'),
 		]);
 		const instance = hydrate(Tweet, { target: root, props: { id, tweet } });
 		element.dataset.hydrated = 'true';

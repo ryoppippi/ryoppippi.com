@@ -21,8 +21,8 @@ export default defineConfig({
 			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
 		}),
 		...oxContentSvelte({
-			components: { Tweet: './src/site/Tweet.svelte' },
-			srcDir: 'src/contents/blog',
+			components: { Tweet: './packages/content/src/Tweet.svelte' },
+			srcDir: 'packages/content/src/blog',
 			ssg: false,
 		}),
 		staticSiteBuild(),
@@ -38,6 +38,7 @@ export default defineConfig({
 		tasks: {
 			'site-build': {
 				command: 'vp build',
+				dependsOn: ['@ryoppippi/content#build'],
 				input: [
 					'package.json',
 					'pnpm-lock.yaml',
@@ -47,6 +48,11 @@ export default defineConfig({
 					'font-assets.ts',
 					'scripts/**',
 					'src/**',
+					'packages/content/dist/**',
+					'packages/content/article.css',
+					'packages/content/package.json',
+					'packages/content/src/**',
+					'!packages/content/src/**/*.md',
 					'static/**',
 				],
 				output: ['build/**'],
@@ -61,6 +67,8 @@ export default defineConfig({
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
+			'packages/content/src/blog/**',
+			'packages/content/src/showcase/**',
 			'static/**',
 		],
 		singleQuote: true,
@@ -75,6 +83,8 @@ export default defineConfig({
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
+			'packages/content/src/blog/**',
+			'packages/content/src/showcase/**',
 			'static/**',
 		],
 		options: {
@@ -88,6 +98,6 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'node',
-		includeSource: ['src/lib/**/*.ts', 'src/markdown/**/*.ts'],
+		includeSource: ['src/lib/**/*.ts', 'packages/content/src/markdown/**/*.ts'],
 	},
 });

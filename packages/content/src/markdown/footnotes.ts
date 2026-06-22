@@ -1,4 +1,4 @@
-import { slugify } from '../lib/slugify.server.ts';
+import { slugify } from '../lib/slugify.ts';
 
 export type FootnoteDefinition = {
 	content: string;

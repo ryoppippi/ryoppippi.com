@@ -1,5 +1,6 @@
+import type { ShowcaseProject } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
-import type { OssProject, ShowcaseProject, Talk } from './sections.ts';
+import type { OssProject, Talk } from './sections.ts';
 import { page, renderComponent } from './html.ts';
 import ErrorPage from './templates/Error.svelte';
 import Oss from './templates/Oss.svelte';

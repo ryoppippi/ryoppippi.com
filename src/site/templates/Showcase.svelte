@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
-	import type { ShowcaseProject } from '../sections.ts';
+	import type { ShowcaseProject } from '@ryoppippi/content';
 	import { formatDate } from '../../lib/util.ts';
 	import WorksNav from './WorksNav.svelte';
 
