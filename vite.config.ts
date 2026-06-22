@@ -1,7 +1,9 @@
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
+import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite-plus';
+import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
 
@@ -14,6 +16,10 @@ export default defineConfig({
 	},
 	plugins: [
 		svelte(),
+		cloudflareRedirect({
+			mode: 'generate',
+			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
+		}),
 		...oxContentSvelte({
 			components: { Tweet: './src/site/Tweet.svelte' },
 			srcDir: 'src/contents/blog',

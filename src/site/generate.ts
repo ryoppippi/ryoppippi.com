@@ -3,7 +3,6 @@ import type { GeneratedFile } from './pages.ts';
 import { access, cp, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import { Route } from '../../routes.ts';
 import {
 	extractInstallSection,
 	extractSection,
@@ -125,12 +124,6 @@ export async function generateSite({
 	plainFiles.push({
 		path: 'sitemap.xml',
 		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`,
-	});
-	plainFiles.push({
-		path: '_redirects',
-		content: [...Route.map(({ from, to }) => `${from} ${to} 301`), '/works /works/oss 301'].join(
-			'\n',
-		),
 	});
 	await writeGeneratedFiles(outDir, plainFiles);
 

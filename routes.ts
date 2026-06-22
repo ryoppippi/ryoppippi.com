@@ -1,3 +1,5 @@
+import type { Options } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+
 export const Route = [
 	{ from: '/dotfiles', to: 'https://github.com/ryoppippi/dotfiles' },
 	{ from: '/cv', to: 'https://cv.ryoppippi.com' },
@@ -24,4 +26,4 @@ export const Route = [
 	// Backward compatibility redirects
 	{ from: '/talks*', to: '/works/talks' },
 	{ from: '/projects*', to: '/works' },
-] as const satisfies readonly { from: string; to: string }[];
+] as const satisfies Options['entries'];
