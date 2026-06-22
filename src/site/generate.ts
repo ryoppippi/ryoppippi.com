@@ -1,15 +1,20 @@
 import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
-import { access, cp, mkdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { glob } from 'tinyglobby';
 import {
 	extractInstallSection,
 	extractSection,
 	fetchDotfilesReadme,
 	parseStepCommands,
 } from '../lib/dotfiles.ts';
+import {
+	appendAssetRedirects,
+	contentAssetSources,
+	emitDeduplicatedAssets,
+	rewriteContentAssetUrls,
+} from './content-assets.ts';
 import { loadExternalPosts } from './content.ts';
 import { corePages } from './pages.ts';
 import {
@@ -29,22 +34,6 @@ type GenerateSiteOptions = {
 	renderTweet?: TweetRenderer;
 	root: string;
 };
-
-async function copyContentAssets(outDir: string): Promise<void> {
-	const blogDir = blogDirectory();
-	const assets = await glob(['**/*', '!**/*.md'], { cwd: blogDir, onlyFiles: true });
-	await Promise.all(
-		assets.map(async (asset) => {
-			const parts = asset.split('/');
-			if (parts.length < 2) {
-				return;
-			}
-			const destination = path.join(outDir, 'blog', parts[0], ...parts.slice(1));
-			await mkdir(path.dirname(destination), { recursive: true });
-			await cp(path.join(blogDir, asset), destination);
-		}),
-	);
-}
 
 async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Promise<void> {
 	for (const file of files) {
@@ -76,7 +65,22 @@ export async function generateSite({
 		loadTalks(),
 		fetchDotfilesReadme(fetch),
 	]);
-	const { posts, showcase } = localContent;
+	const emittedAssets = await emitDeduplicatedAssets(
+		await contentAssetSources(blogDirectory(), showcaseDirectory()),
+		outDir,
+	);
+	const posts = localContent.posts.map((post) => ({
+		...post,
+		html: rewriteContentAssetUrls(post.html, `/blog/${post.filename}/`, emittedAssets.urls),
+	}));
+	const showcase = localContent.showcase.map((project) => ({
+		...project,
+		image:
+			project.image == null
+				? undefined
+				: (emittedAssets.urls.get(new URL(project.image, 'https://content.invalid').pathname) ??
+					project.image),
+	}));
 
 	const pages = [
 		...corePages(posts, externalPosts, assets),
@@ -89,11 +93,7 @@ export async function generateSite({
 	];
 
 	await writeGeneratedFiles(outDir, pages);
-	await copyContentAssets(outDir);
-	await cp(showcaseDirectory(), path.join(outDir, 'works/showcase/assets'), {
-		recursive: true,
-		filter: (source) => !source.endsWith('.md') && !source.endsWith('index.ts'),
-	});
+	await appendAssetRedirects(path.join(outDir, '_redirects'), emittedAssets.redirects);
 
 	const install = extractSection(dotfiles, 'Initial Setup');
 	const osSections = [
