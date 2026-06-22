@@ -1,5 +1,5 @@
 import { createFixture } from 'fs-fixture';
-import { loadBlogPost, loadBlogPostMetadata } from './blog.ts';
+import { loadBlogPost, loadBlogPostMetadata, loadBlogPostSource } from './blog.ts';
 
 describe('blog loaders', () => {
 	it('returns null for an unknown blog slug', async () => {
@@ -27,6 +27,14 @@ describe('blog loaders', () => {
 		expect(renderContent).toHaveBeenCalledOnce();
 		expect(renderContent).toHaveBeenCalledWith('Second body');
 		expect(post).toEqual(expect.objectContaining({ filename: 'second', title: 'Second' }));
+	});
+
+	it('loads raw source without invoking a renderer', async () => {
+		await using fixture = await createFixture({
+			'first.md': '---\ntitle: First\ndate: 2025-01-01\n---\n\nFirst body',
+		});
+
+		expect(await loadBlogPostSource('first', fixture.getPath())).toContain('First body');
 	});
 
 	it('loads list metadata without rendered article HTML', async () => {

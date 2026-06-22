@@ -3,7 +3,6 @@ import path from 'node:path';
 import { matter } from 'gray-matter-es';
 import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
-import { renderMarkdown } from './markdown/render.ts';
 import type { MarkdownRenderer } from './markdown-cache.ts';
 import { blogDirectory } from './paths.ts';
 
@@ -31,7 +30,7 @@ function filenameFor(filepath: string): string {
 		: path.basename(filepath, '.md');
 }
 
-async function readBlogPostSource(slug: string, directory: string) {
+async function findBlogPostSource(slug: string, directory: string) {
 	if (slug.length === 0 || path.basename(slug) !== slug) {
 		return null;
 	}
@@ -52,16 +51,24 @@ async function readBlogPostSource(slug: string, directory: string) {
 	return null;
 }
 
+export async function loadBlogPostSource(
+	slug: string,
+	directory = blogDirectory(),
+): Promise<string | null> {
+	return (await findBlogPostSource(slug, directory))?.source ?? null;
+}
+
 export async function loadBlogPost(
 	slug: string,
-	renderContent: MarkdownRenderer = renderMarkdown,
+	renderContent?: MarkdownRenderer,
 	directory = blogDirectory(),
 ): Promise<BlogPost | null> {
-	const entry = await readBlogPostSource(slug, directory);
+	const entry = await findBlogPostSource(slug, directory);
 	if (entry == null) {
 		return null;
 	}
 
+	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
 	return {
 		title: String(data.title),
@@ -69,7 +76,7 @@ export async function loadBlogPost(
 		filepath: entry.filepath,
 		source: entry.source,
 		content,
-		html: await renderContent(content),
+		html: await render(content),
 		pubDate: new Date(String(data.date)).toJSON(),
 		lang: typeof data.lang === 'string' ? data.lang : 'ja',
 		isPublished: data.isPublished === true,
@@ -100,9 +107,8 @@ export async function loadBlogPostMetadata(
 	return posts.sort((a, b) => b.pubDate.localeCompare(a.pubDate));
 }
 
-export async function loadBlogPosts(
-	renderContent: MarkdownRenderer = renderMarkdown,
-): Promise<BlogPost[]> {
+export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
+	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const blogDir = blogDirectory();
 	const files = await glob(['*.md', '*/index.md'], { cwd: blogDir, absolute: true });
 	const posts = await Promise.all(
@@ -116,7 +122,7 @@ export async function loadBlogPosts(
 				filepath,
 				source,
 				content,
-				html: await renderContent(content),
+				html: await render(content),
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
 				isPublished: data.isPublished === true,
