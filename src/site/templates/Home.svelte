@@ -15,8 +15,12 @@
 			class='mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64'
 			alt='ryoppippi'
 			fetchpriority='high'
+			height='400'
 			loading='eager'
 			src='/ryoppippi.avif'
+			srcset='/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w'
+			sizes='(min-width: 48rem) 256px, calc(50vw - 2rem)'
+			width='400'
 		/>
 	</div>
 	<div class='mt-8'>
