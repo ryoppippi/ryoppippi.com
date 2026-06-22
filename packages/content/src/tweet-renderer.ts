@@ -1,5 +1,4 @@
 import type { getTweet as getTweetType } from 'sveltweet/api';
-import { performance } from 'node:perf_hooks';
 import { render } from 'svelte/server';
 import Tweet from './Tweet.svelte';
 
@@ -37,18 +36,13 @@ function normaliseEntities(tweet: TweetLike | null | undefined): void {
 }
 
 async function renderTweetHtml(id: string, tweet?: TweetData): Promise<string> {
-	const start = performance.now();
-	try {
-		normaliseEntities(tweet as TweetLike | undefined);
-		const rendered = render(Tweet, { props: { id, tweet } });
-		const data =
-			tweet == null
-				? ''
-				: `<script type="application/json" data-tweet-props>${JSON.stringify(tweet).replaceAll('<', '\\u003c')}</script>`;
-		return `<div class="sveltweet-ssg" data-tweet-id="${id}"><div data-tweet-root>${rendered.body}</div>${data}</div>`;
-	} finally {
-		console.info(`[perf] tweet id=${id} duration=${(performance.now() - start).toFixed(1)}ms`);
-	}
+	normaliseEntities(tweet as TweetLike | undefined);
+	const rendered = render(Tweet, { props: { id, tweet } });
+	const data =
+		tweet == null
+			? ''
+			: `<script type="application/json" data-tweet-props>${JSON.stringify(tweet).replaceAll('<', '\\u003c')}</script>`;
+	return `<div class="sveltweet-ssg" data-tweet-id="${id}"><div data-tweet-root>${rendered.body}</div>${data}</div>`;
 }
 
 export function renderTweet(id: string, tweet?: TweetData): Promise<string> {
