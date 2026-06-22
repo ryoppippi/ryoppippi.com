@@ -7,6 +7,7 @@
 		".": "./src/index.ts",
 		"./artifact": "./src/artifact.ts",
 		"./article.css": "./article.css",
+		"./blog": "./src/blog.ts",
 		"./build": "./src/build.ts",
 		"./paths": "./src/paths.ts",
 		"./Tweet.svelte": "./src/Tweet.svelte",
