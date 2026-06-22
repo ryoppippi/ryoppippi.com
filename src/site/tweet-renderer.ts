@@ -39,7 +39,7 @@ function normaliseEntities(tweet: TweetLike | null | undefined): void {
 	normaliseEntities(tweet.quoted_tweet);
 }
 
-async function fetchFallbackTweet(id: string): Promise<TweetData | null> {
+async function fetchVercelTweet(id: string): Promise<TweetData | null> {
 	const response = await fetch(`https://react-tweet.vercel.app/api/tweet/${id}`);
 	if (!response.ok) {
 		return null;
@@ -50,6 +50,13 @@ async function fetchFallbackTweet(id: string): Promise<TweetData | null> {
 }
 
 async function fetchTweet(id: string): Promise<TweetData | null> {
+	try {
+		const tweet = await fetchVercelTweet(id);
+		if (tweet != null) {
+			return tweet;
+		}
+	} catch {}
+
 	for (let attempt = 0; attempt < 3; attempt += 1) {
 		try {
 			const tweet = await getTweet(id);
@@ -62,12 +69,7 @@ async function fetchTweet(id: string): Promise<TweetData | null> {
 			}
 		}
 	}
-
-	try {
-		return await fetchFallbackTweet(id);
-	} catch {
-		return null;
-	}
+	return null;
 }
 
 async function loadPersistentTweet(id: string): Promise<TweetData | null> {
