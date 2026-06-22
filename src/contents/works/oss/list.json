@@ -2,158 +2,192 @@
 	"CLI": [
 		{
 			"name": "ccusage",
-			"icon": "icon-[ph--chart-line-light]"
+			"icon": "icon-[ph--chart-line-light]",
+			"description": "npx ccusage"
 		},
 		{
 			"name": "sitemcp",
-			"icon": "icon-[solar--cloud-download-line-duotone]"
+			"icon": "icon-[solar--cloud-download-line-duotone]",
+			"description": "Fetch an entire site and use it as an MCP Server"
 		},
 		{
 			"name": "curxy",
-			"icon": "icon-[solar--cursor-square-broken]"
+			"icon": "icon-[solar--cursor-square-broken]",
+			"description": "Simple proxy worker for using ollama in cursor"
 		},
 		{
 			"name": "nyancat.zig",
-			"icon": "icon-[solar--cat-broken]"
+			"icon": "icon-[solar--cat-broken]",
+			"description": "Nyancat in Zig"
 		},
 		{
 			"name": "zigchat",
-			"icon": "icon-[ph--chat-light]"
+			"icon": "icon-[ph--chat-light]",
+			"description": "Command that sends a prompt to OpenAI and returns a reply"
 		}
 	],
 	"Vim/Neovim": [
 		{
 			"name": "nvim-pnpm-catalog-lens",
-			"icon": "icon-[simple-icons--pnpm]"
+			"icon": "icon-[simple-icons--pnpm]",
+			"description": "Neovim plugin to show versions as diagnostics for pnpm catalog: field."
 		},
 		{
 			"name": "vim-bun-lock",
-			"icon": "icon-[simple-icons--bun]"
+			"icon": "icon-[simple-icons--bun]",
+			"description": " If you gaze long enough into a bun.locb, the bun.locb will gaze back into you"
 		},
 		{
 			"name": "vim-ray-so",
-			"icon": "icon-[ph--camera-light]"
+			"icon": "icon-[ph--camera-light]",
+			"description": "Generate a beautiful code image with  https://ray.so on your Neovim/Vim"
 		},
 		{
 			"name": "vim-svelte-inspector",
-			"icon": "icon-[material-symbols-light--frame-inspect-rounded]"
+			"icon": "icon-[material-symbols-light--frame-inspect-rounded]",
+			"description": "Use Svelte Inspector in Vim/Neovim! (Actually you can use this with React, Vue and so on..."
 		},
 		{
 			"name": "nvim-reset",
-			"icon": "icon-[system-uicons--reset-alt]"
+			"icon": "icon-[system-uicons--reset-alt]",
+			"description": "Neovim plugin to disable all default keymaps with a single command"
 		},
 		{
 			"name": "vim-bad-apple",
-			"icon": "icon-[hugeicons--apple-01]"
+			"icon": "icon-[hugeicons--apple-01]",
+			"description": "Do you wanna watch \"Bad Apple!!\" on your vim/neovim?"
 		}
 	],
 	"Svelte Ecosystem": [
 		{
 			"name": "sveltweet",
-			"icon": "icon-[ph--twitter-logo]"
+			"icon": "icon-[ph--twitter-logo]",
+			"description": "Svelte/SvelteKit version of react-tweet"
 		},
 		{
 			"name": "svelte-preprocess-budoux",
-			"icon": "icon-[tabler--language-hiragana]"
+			"icon": "icon-[tabler--language-hiragana]",
+			"description": "svelte-preprocess plugin for Budoux"
 		},
 		{
 			"name": "svelte-html-event",
-			"icon": "icon-[ph--ticket-light]"
+			"icon": "icon-[ph--ticket-light]",
+			"description": "A simple type function to extract the event types of a built-in HTML element in Svelte"
 		},
 		{
 			"name": "svelte-preprocess-import-css",
-			"icon": "icon-[ph--palette-light]"
+			"icon": "icon-[ph--palette-light]",
+			"description": "Svelte preprocessor to import scoped CSS files into Component"
 		},
 		{
 			"name": "svelte-fancy-darkmode",
-			"icon": "icon-[ph--moon-stars-light]"
+			"icon": "icon-[ph--moon-stars-light]",
+			"description": "svelte-fancy-darkmode.pages.dev"
 		}
 	],
 	"TypeScript Ecosystem": [
 		{
 			"name": "unplugin-typia",
-			"icon": "icon-[ph--magic-wand-light]"
+			"icon": "icon-[ph--magic-wand-light]",
+			"description": "unplugin for Typia with an extra Bun plugin 🫶"
 		},
 		{
 			"name": "vite-plugin-favicons",
-			"icon": "icon-[tabler--favicon]"
+			"icon": "icon-[tabler--favicon]",
+			"description": "Generate favicons for your Vite project with ease!"
 		},
 		{
 			"name": "slidev-transformer-budoux",
-			"icon": "icon-[tabler--language-hiragana]"
+			"icon": "icon-[tabler--language-hiragana]",
+			"description": "Slidev transformer integrating BudouX for better text wrapping!"
 		},
 		{
 			"name": "typiautil",
-			"icon": "icon-[ph--toolbox-light]"
+			"icon": "icon-[ph--toolbox-light]",
+			"description": "utility functions for typia"
 		},
 		{
 			"name": "pkg-to-jsr",
-			"icon": "icon-[ph--selection-foreground-light]"
+			"icon": "icon-[ph--selection-foreground-light]",
+			"description": "Zero-config tool that generates jsr.json from package.json"
 		},
 		{
 			"name": "mirror-jsr-to-npm",
-			"icon": "icon-[octicon--mirror]"
+			"icon": "icon-[octicon--mirror]",
+			"description": "a tool designed to mirror packages from JSR to NPM"
 		},
 		{
 			"name": "bun-plugin-isolated-decl",
-			"icon": "icon-[ph--package]"
+			"icon": "icon-[ph--package]",
+			"description": "This is ultrafast dts generator powered by Bun and oxc"
 		},
 		{
 			"name": "bunpare",
-			"icon": "icon-[icon-park-outline--setting-config]"
+			"icon": "icon-[icon-park-outline--setting-config]",
+			"description": "A simple prepare script for bun.lockb"
 		}
 	],
 	"TypeScript Libraries": [
 		{
 			"name": "gray-matter-es",
-			"icon": "icon-[ph--file-text-light]"
+			"icon": "icon-[ph--file-text-light]",
+			"description": "ESM-only gray-matter implementation."
 		},
 		{
 			"name": "limo",
-			"icon": "icon-[material-symbols--edit-document-outline]"
+			"icon": "icon-[material-symbols--edit-document-outline]",
+			"description": "limo (Lire + Memo): auto load and save files"
 		},
 		{
 			"name": "str-fns",
-			"icon": "icon-[oui--app-devtools]"
+			"icon": "icon-[oui--app-devtools]",
+			"description": "A collection of utilities for TS/JS string "
 		}
 	],
 	"Fish Plugins": [
 		{
 			"name": "fish-na",
-			"icon": "icon-[ph--package]"
+			"icon": "icon-[ph--package]",
+			"description": "@antfu/ni alternative written in fish shell using abbr feature"
 		},
 		{
 			"name": "fish-poetry",
-			"icon": "icon-[teenyicons--python-outline]"
+			"icon": "icon-[teenyicons--python-outline]",
+			"description": "🐟🐍 a fish plugin that automatically activates the poetry subshell"
 		}
 	],
 	"Zig Ecosystem": [
 		{
 			"name": "zigcv",
 			"link": "https://github.com/zigcv/zigcv",
-			"icon": "icon-[file-icons--opencv]"
+			"icon": "icon-[file-icons--opencv]",
+			"description": "zig bindings for OpenCV4"
 		}
 	],
 	"Web Apps": [
 		{
 			"name": "deepwiki-badge-maker",
-			"icon": "icon-[ph--seal-light]"
+			"icon": "icon-[ph--seal-light]",
+			"description": "deepwiki.ryoppippi.com "
 		},
 		{
 			"name": "chatgpt-heatmap",
-			"icon": "icon-[ph--fire-light]"
+			"icon": "icon-[ph--fire-light]",
+			"description": "Upload ChatGPT's exported data and get insights on your usage patterns."
 		}
 	],
 	"Nix": [
 		{
 			"name": "claude-code-overlay",
-			"icon": "icon-[simple-icons--nixos]"
+			"icon": "icon-[simple-icons--nixos]",
+			"description": "A Nix flake overlay that provides pre-built Claude Code CLI binaries from official Anthropic releases."
 		}
 	],
 	"Configs": [
 		{
 			"name": "dotfiles",
-			"icon": "icon-[ph--folder-simple]"
+			"icon": "icon-[ph--folder-simple]",
+			"description": "ryoppippi's dotfiles"
 		}
 	]
 }
