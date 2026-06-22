@@ -14,10 +14,12 @@
 	<nav class='fcol-sm-row fw mb-8 gap-1 text-3xl sm:gap-3' aria-label='Works sections'>
 		{#each sections as item (item)}
 			<a
+				class='transition-base'
 				class:opacity-70={item === active}
 				class:opacity-20={item !== active}
 				aria-current={item === active ? 'page' : undefined}
 				href={`/works/${item}/`}
+				style={`view-transition-name:works-nav-${item}`}
 			>
 				{item === 'oss' ? 'Oss' : item[0].toUpperCase() + item.slice(1)}
 			</a>
