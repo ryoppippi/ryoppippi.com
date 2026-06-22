@@ -9,3 +9,11 @@ export function blogDirectory(root = contentRoot) {
 export function showcaseDirectory(root = contentRoot) {
 	return path.join(root, 'src', 'showcase');
 }
+
+if (import.meta.vitest != null) {
+	describe(blogDirectory, () => {
+		it('targets the content workspace', () => {
+			expect(blogDirectory('/workspace')).toBe(path.join('/workspace', 'src', 'blog'));
+		});
+	});
+}

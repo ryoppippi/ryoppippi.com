@@ -98,6 +98,11 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'node',
-		includeSource: ['src/lib/**/*.ts', 'packages/content/src/markdown/**/*.ts'],
+		includeSource: [
+			'src/lib/**/*.ts',
+			'src/site/dev-routes.ts',
+			'packages/content/src/{artifact,blog,paths}.ts',
+			'packages/content/src/markdown/**/*.ts',
+		],
 	},
 });
