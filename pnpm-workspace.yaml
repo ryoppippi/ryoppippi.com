@@ -32,7 +32,6 @@ allowBuilds:
   bun: true
   core-js: true
   esbuild: true
-  lefthook: true
   puppeteer: false
   sharp: true
   unrs-resolver: true

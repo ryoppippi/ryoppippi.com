@@ -102,7 +102,13 @@ export default defineConfig({
 		},
 	},
 	staged: {
+		'packages/content/src/blog/**/*.md': [
+			'packages/content/scripts/snapshot-tweets.ts',
+			'packages/content/scripts/snapshot-ogp.ts',
+		],
 		'*.{css,js,json,svelte,ts,yaml,yml}': 'vp check --fix',
+		// gitleaks scans the whole staged diff itself, so no file arguments
+		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
 	},
 	test: {
 		globals: true,
