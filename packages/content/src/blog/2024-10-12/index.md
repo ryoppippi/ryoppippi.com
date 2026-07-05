@@ -113,6 +113,10 @@ pub fn main() void {
 
 <YouTube youTubeId="XezoLvr1dX0" />
 
+# Not By AI Badge
+
+<NotByAI />
+
 # BudouX (Japanese Line Break)
 
 > あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
