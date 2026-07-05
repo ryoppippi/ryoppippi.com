@@ -14,16 +14,21 @@ export type SiteAssets = {
 	tweet: string;
 };
 
+// In development the client entry also imports these stylesheets as JS
+// modules, but that injection happens after first paint and causes a flash of
+// unstyled (light) content on every reload. Blocking <link> tags make the dev
+// server paint styled pages immediately, matching production; Vite serves the
+// CSS sources directly because stylesheet requests carry `Accept: text/css`.
 export const DEV_ASSETS = {
-	base: '',
+	base: '<link rel="stylesheet" href="/src/styles/fonts.css">\n\t<link rel="stylesheet" href="/src/site/style.css">',
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	pages: {
-		article: '',
-		blog: '',
-		error: '',
-		home: '',
-		sponsors: '',
-		works: '',
+		article: '<link rel="stylesheet" href="/src/site/styles/article.css">',
+		blog: '<link rel="stylesheet" href="/src/site/styles/blog.css">',
+		error: '<link rel="stylesheet" href="/src/site/styles/error.css">',
+		home: '<link rel="stylesheet" href="/src/site/styles/home.css">',
+		sponsors: '<link rel="stylesheet" href="/src/site/styles/sponsors.css">',
+		works: '<link rel="stylesheet" href="/src/site/styles/works.css">',
 	},
 	preloads: {},
 	tweet: '',
