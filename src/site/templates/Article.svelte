@@ -13,6 +13,10 @@
 <link href={markdownPath} rel='alternate' title='Markdown source' type='text/plain' />
 
 <div class='mx-auto min-w-0'>
+	{#if !post.isPublished}
+		<p class='mt-4 rounded bg-red-500 p-2 text-center text-xl font-bold text-white'>This article is not published yet.</p>
+	{/if}
+
 	<hgroup class='fcol fyc mb-3 gap-1 text-center'>
 		<h1 class='f-text-32-64 my-8 font-mono font-bold leading-none text-stroke-aaa text-transparent' style={`view-transition-name:blog-${post.filename}`}>{post.title}</h1>
 		<p class='text-text-400'>

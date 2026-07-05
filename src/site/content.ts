@@ -11,6 +11,7 @@ export type PostListItem = {
 	pubDate: string;
 	lang: string;
 	external: boolean;
+	draft?: boolean;
 };
 
 export async function loadExternalPosts(root = process.cwd()): Promise<PostListItem[]> {
@@ -42,9 +43,20 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
 	});
 }
 
-export function postListItems(posts: BlogPostMetadata[]): PostListItem[] {
+/**
+ * Converts blog post metadata into blog list entries.
+ *
+ * @param posts - Blog post metadata to list
+ * @param options - Set `includeDrafts` to keep unpublished posts (used by the
+ * dev server so drafts appear with a draft mark)
+ * @returns List items for the blog index page
+ */
+export function postListItems(
+	posts: BlogPostMetadata[],
+	options: { includeDrafts?: boolean } = {},
+): PostListItem[] {
 	return posts
-		.filter((post) => post.isPublished)
+		.filter((post) => (options.includeDrafts ?? false) || post.isPublished)
 		.map((post) => ({
 			title: post.title,
 			slug: post.filename,
@@ -52,5 +64,6 @@ export function postListItems(posts: BlogPostMetadata[]): PostListItem[] {
 			pubDate: post.pubDate,
 			lang: post.lang,
 			external: false,
+			draft: !post.isPublished,
 		}));
 }

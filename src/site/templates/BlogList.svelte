@@ -35,6 +35,9 @@
 						></span>
 					</span>
 					<p class='gap-x-2' style={`view-transition-name:blog-${item.slug}`}>
+						{#if item.draft === true}
+							<span class='rounded bg-red-500 px-1 text-sm font-bold text-white'>(draft)</span>
+						{/if}
 						{item.title}
 						<span class='truncate pl-2 text-sm opacity-50'>{formatDate(new Date(item.pubDate))}</span>
 					</p>

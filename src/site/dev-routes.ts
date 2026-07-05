@@ -56,7 +56,10 @@ async function renderBlogRoute(
 			dependencies.loadExternalPosts(),
 		]);
 		return response(
-			blogListPage([...externalPosts, ...postListItems(posts)], dependencies.assets).content,
+			blogListPage(
+				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],
+				dependencies.assets,
+			).content,
 		);
 	}
 
@@ -174,7 +177,7 @@ if (import.meta.vitest != null) {
 				tweet: '',
 			},
 			loadBlogPost: vi.fn(async () => post),
-			loadBlogPostMetadata: vi.fn(async () => [metadata]),
+			loadBlogPostMetadata: vi.fn(async (): Promise<BlogPostMetadata[]> => [metadata]),
 			loadBlogPostSource: vi.fn(async () => post.source),
 			loadDotfiles: vi.fn(async () => '# Dotfiles'),
 			loadExternalPosts: vi.fn(async () => []),
@@ -204,6 +207,16 @@ if (import.meta.vitest != null) {
 			expect(result?.body).toContain('Lazy article');
 			expect(loaders.loadBlogPostMetadata).toHaveBeenCalledOnce();
 			expect(loaders.loadBlogPost).not.toHaveBeenCalled();
+		});
+
+		it('lists unpublished posts with a draft mark', async () => {
+			const loaders = dependencies();
+			loaders.loadBlogPostMetadata.mockResolvedValue([{ ...metadata, isPublished: false }]);
+
+			const result = await renderDevRoute('/blog/', loaders);
+
+			expect(result?.body).toContain('Lazy article');
+			expect(result?.body).toContain('(draft)');
 		});
 
 		it('renders only the requested article', async () => {
