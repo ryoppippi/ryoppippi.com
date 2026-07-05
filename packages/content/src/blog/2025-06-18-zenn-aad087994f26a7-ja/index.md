@@ -5,9 +5,7 @@ isPublished: true
 lang: 'ja'
 ---
 
-> [!NOTE]
-> ![not by AI](./Written-By-Human-Not-By-AI-Badge-white.png)
-> _[not by AI](https://notbyai.fyi)_
+<NotByAI />
 
 > [!NOTE]
 > I'll write this article in English later, please wait for a while.
