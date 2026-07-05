@@ -4,6 +4,7 @@
 @import '../../styles/blog/collapse.css';
 @import '../../styles/blog/link-card.css';
 @import '../../styles/blog/magic-link.css';
+@import '../../styles/blog/not-by-ai.css';
 @import '../../styles/blog/prose.css';
 
 @source '../templates/Article.svelte';

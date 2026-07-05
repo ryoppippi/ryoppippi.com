@@ -1,0 +1,23 @@
+.prose .not-by-ai {
+	display: block;
+	width: fit-content;
+	margin-inline: auto;
+	line-height: 0;
+}
+
+/* Show the badge variant that matches the page background: the white badge on
+   light backgrounds, the black badge on dark ones. Both variants ship in the
+   HTML so the manual theme toggle works without JavaScript re-rendering. */
+.prose .not-by-ai-badge--light {
+	@variant dark {
+		display: none;
+	}
+}
+
+.prose .not-by-ai-badge--dark {
+	display: none;
+
+	@variant dark {
+		display: inline;
+	}
+}

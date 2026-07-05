@@ -11,6 +11,7 @@ import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
+import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
 const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
@@ -64,13 +65,15 @@ function escapeMagicLinkUnderscores(line: string) {
 
 function prepareOxContentMarkdown(content: string) {
 	return transformOutsideFences(transformCollapsibleBlocks(content), (line) => {
-		const embeds = line
-			.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
-			.replace(
-				/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
-				'<youtube id="$2" />',
-			)
-			.replace(/<Divider\s*\/>/g, '<hr>');
+		const embeds = replaceNotByAIEmbeds(
+			line
+				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
+				.replace(
+					/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
+					'<youtube id="$2" />',
+				)
+				.replace(/<Divider\s*\/>/g, '<hr>'),
+		);
 		const preparedLine = replaceImageFigures(
 			replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))),
 		);
@@ -222,7 +225,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		? await transformOgp(media, openGraphData, { timeout: 8_000 })
 		: media;
 
-	const body = applyBudouxHtml(postprocessRenderedHtml(openGraph));
+	const body = applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph)));
 	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
 		renderMarkdown(footnote, options),
 	);
@@ -377,6 +380,33 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('<hr>');
 			expect(html).not.toContain('<Divider');
+		});
+
+		it('renders the NotByAI badge as an external link with both colour variants', async () => {
+			const html = await renderMarkdown('<NotByAI />');
+
+			expect(html).toContain(
+				'<a href="https://notbyai.fyi" class="not-by-ai" aria-label="Written by human, not by AI" target="_blank" rel="noopener">',
+			);
+			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--light"');
+			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--dark"');
+			expect(html).not.toContain('<NotByAI');
+			expect(html).not.toContain('data-not-by-ai-placeholder');
+		});
+
+		it('renders the NotByAI badge inside callout blocks', async () => {
+			const html = await renderMarkdown('> [!NOTE]\n> <NotByAI />');
+
+			expect(html).toContain('ox-callout--note');
+			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--light"');
+		});
+
+		it('leaves NotByAI syntax inside code fences unchanged', async () => {
+			const html = await renderMarkdown('```md\n<NotByAI />\n```');
+
+			expect(html).toContain('NotByAI');
+			expect(html).not.toContain('not-by-ai-badge');
+			expect(html).not.toContain('data-not-by-ai-placeholder');
 		});
 
 		it('adds markdown-it-anchor compatible heading anchors', async () => {
