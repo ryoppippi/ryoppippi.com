@@ -22,7 +22,7 @@
 		<p class='text-text-400'>
 			{date} ・ {post.readingTime.text} ・
 			<a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={markdownPath} rel='noopener noreferrer' target='_blank'>
-				<span class='icon-[ri--markdown-line] align-middle' aria-hidden='true'></span>
+				<span class='icon-[ri--markdown-line] size-6 align-middle' aria-hidden='true'></span>
 			</a>
 		</p>
 	</hgroup>
