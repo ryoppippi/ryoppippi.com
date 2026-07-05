@@ -3,6 +3,7 @@ import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
+import { postListItems } from './content.ts';
 import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
@@ -92,19 +93,9 @@ export function corePages(
 	externalPosts: PostListItem[],
 	assets: SiteAssets,
 ): GeneratedFile[] {
-	const localPosts = posts
-		.filter((post) => post.isPublished)
-		.map((post) => ({
-			title: post.title,
-			slug: post.filename,
-			link: `/blog/${post.filename}/`,
-			pubDate: post.pubDate,
-			lang: post.lang,
-			external: false,
-		}));
 	return [
 		homePage(assets),
-		blogListPage([...externalPosts, ...localPosts], assets),
+		blogListPage([...externalPosts, ...postListItems(posts)], assets),
 		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
 		feed(posts),
 	];
