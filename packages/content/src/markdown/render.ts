@@ -162,7 +162,11 @@ function replaceMagicLinksOutsideProtectedHtml(html: string) {
 function postprocessRenderedHtml(html: string) {
 	const blockEmbeds = html
 		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
-		.replace(/<p\b[^>]*>(\s*<a class="ox-ogp-(?:card|simple)"[\s\S]*?<\/a>\s*)<\/p>/g, '$1')
+		.replace(
+			/<p\b([^>]*)>([\s\S]*?)(\s*<a class="ox-ogp-(?:card|simple)"[\s\S]*?<\/a>)\s*<\/p>/g,
+			(_match, attrs: string, text: string, card: string) =>
+				text.trim().length === 0 ? card : `<p${attrs}>${text.trimEnd()}</p>${card}`,
+		)
 		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1')
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
@@ -248,6 +252,23 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('class="ox-ogp-simple"');
 			expect(html).toContain('href="https://example.com/post"');
+		});
+
+		it('separates a preview card from preceding prose', async () => {
+			const url = 'https://example.com/post';
+			const html = await renderMarkdown(`説明文\n[@preview](${url})`, {
+				openGraph: {
+					[url]: {
+						url,
+						title: 'Example post',
+						description: 'Example description',
+						siteName: 'Example',
+					},
+				},
+			});
+
+			expect(html).toMatch(/<\/p>\s*<a class="ox-ogp-card"/);
+			expect(html).not.toMatch(/<p\b[^>]*>[^<]*<a class="ox-ogp-card"/);
 		});
 
 		it('normalises angle links that contain parentheses', () => {
