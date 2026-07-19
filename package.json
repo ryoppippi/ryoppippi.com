@@ -23,17 +23,17 @@
 		"@fontsource/inter": "^5.2.8",
 		"@fontsource/jetbrains-mono": "^5.2.8",
 		"@fontsource/roboto-condensed": "^5.2.8",
-		"@iconify/json": "^2.2.470",
+		"@iconify/json": "^2.2.500",
 		"@iconify/tailwind4": "^1.2.3",
-		"@ox-content/vite-plugin": "2.72.0",
-		"@ox-content/vite-plugin-svelte": "2.72.0",
+		"@ox-content/vite-plugin": "2.76.0",
+		"@ox-content/vite-plugin-svelte": "2.76.0",
 		"@ryoppippi/content": "workspace:*",
 		"@ryoppippi/vite-plugin-cloudflare-redirect": "^1.1.3",
-		"@sveltejs/vite-plugin-svelte": "^7.1.2",
-		"@tailwindcss/typography": "^0.5.19",
-		"@tailwindcss/vite": "^4.3.0",
+		"@sveltejs/vite-plugin-svelte": "^7.2.0",
+		"@tailwindcss/typography": "^0.5.20",
+		"@tailwindcss/vite": "^4.3.2",
 		"@types/bun": "^1.3.14",
-		"@types/node": "^24.12.3",
+		"@types/node": "^24.13.3",
 		"bun": "1.3.14",
 		"feed": "^5.2.1",
 		"fontaine": "^0.8.0",
@@ -41,11 +41,11 @@
 		"only-allow": "^1.2.2",
 		"parse5": "^7.3.0",
 		"rss-parser": "^3.13.0",
-		"svelte": "^5.56.2",
-		"tailwindcss": "^4.3.0",
-		"tinyglobby": "^0.2.16",
-		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.1",
-		"vite-plus": "0.2.1"
+		"svelte": "^5.56.5",
+		"tailwindcss": "^4.3.2",
+		"tinyglobby": "^0.2.17",
+		"vite": "npm:@voidzero-dev/vite-plus-core@^0.2.4",
+		"vite-plus": "0.2.4"
 	},
 	"devEngines": {
 		"runtime": [
@@ -56,5 +56,5 @@
 			}
 		]
 	},
-	"packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916"
+	"packageManager": "pnpm@11.13.1+sha512.b2fc7683b8a6525414e7d13e1ba28caaddde96bf66ec540bfaeb7e702b81f3e0be4d1f295edf7f9fe0396740a8dce4509c582ddf79891f4543fea32d37645f25"
 }
