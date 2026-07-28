@@ -49,6 +49,27 @@
 	font-family: var(--font-code);
 }
 
+/*
+ * BudouX inserts zero-width spaces into every text node, so a numeric cell like
+ * "5,000人以上" can collapse to the width of "5,000" and wrap over three lines.
+ * Right-aligned columns are numeric by convention here, so keep them on one line.
+ */
+.prose table :is(th, td)[align='right'] {
+	white-space: nowrap;
+}
+
+/*
+ * Auto table layout hands the leftover width to whichever column has the most
+ * text, so a prose-heavy last column starves the row label down to its
+ * min-content width. Reserve a floor for the label column, but only where the
+ * remaining columns still have room to spare.
+ */
+@media (min-width: 48rem) {
+	.prose table :is(th, td):first-child {
+		min-width: 18ch;
+	}
+}
+
 .prose .footnote-ref {
 	font-size: 0.75em;
 	line-height: 0;
