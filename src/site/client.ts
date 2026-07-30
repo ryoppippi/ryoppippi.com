@@ -227,7 +227,7 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 
 	element.dataset.oxMounted = 'true';
 	try {
-		const [{ mount, unmount }, { resolveIsland }] = await Promise.all([
+		const [{ hydrate, mount, unmount }, { resolveIsland }] = await Promise.all([
 			import('svelte'),
 			import('@ryoppippi/content/islands-client'),
 		]);
@@ -238,11 +238,15 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 		}
 
 		const { default: Component } = await load();
-		const props = element.dataset.oxProps;
-		const instance = mount(Component, {
-			target: element,
-			props: props == null ? {} : (JSON.parse(props) as Record<string, unknown>),
-		});
+		const serialised = element.dataset.oxProps;
+		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
+		// Server-rendered islands carry a root element to adopt. Without one the
+		// component was never rendered on the server, so mount it fresh.
+		const root = element.querySelector<HTMLElement>('[data-ox-island-root]');
+		const instance =
+			root == null
+				? mount(Component, { target: element, props })
+				: hydrate(Component, { target: root, props });
 		islandCleanups.add(() => unmount(instance));
 	} catch {
 		element.dataset.oxMounted = 'false';

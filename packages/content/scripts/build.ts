@@ -1,4 +1,4 @@
-import type { TweetRenderer } from '../src/markdown/render.ts';
+import type { IslandRenderer, TweetRenderer } from '../src/markdown/render.ts';
 import type { ContentArtifact } from '../src/artifact.ts';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { rm } from 'node:fs/promises';
@@ -7,7 +7,14 @@ import { performance } from 'node:perf_hooks';
 import { createServer } from 'vite';
 
 type ContentArtifactModule = {
-	buildContentArtifact: (renderTweet: TweetRenderer) => Promise<ContentArtifact>;
+	buildContentArtifact: (
+		renderTweet: TweetRenderer,
+		renderIsland: IslandRenderer,
+	) => Promise<ContentArtifact>;
+};
+
+type IslandRendererModule = {
+	createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
 };
 
 type ContentArtifactFormatModule = {
@@ -28,12 +35,14 @@ const server = await createServer({
 
 const start = performance.now();
 try {
-	const [{ renderTweet }, builder, format] = await Promise.all([
+	const [{ renderTweet }, builder, format, islands] = await Promise.all([
 		server.ssrLoadModule('/src/tweet-renderer.ts') as Promise<{ renderTweet: TweetRenderer }>,
 		server.ssrLoadModule('/src/build.ts') as Promise<ContentArtifactModule>,
 		server.ssrLoadModule('/src/artifact.ts') as Promise<ContentArtifactFormatModule>,
+		server.ssrLoadModule('/src/island-renderer.ts') as Promise<IslandRendererModule>,
 	]);
-	const artifact = await builder.buildContentArtifact(renderTweet);
+	const renderIsland = islands.createIslandRenderer((path) => server.ssrLoadModule(path));
+	const artifact = await builder.buildContentArtifact(renderTweet, renderIsland);
 	await rm(outDir, { recursive: true, force: true });
 	await format.writeContentArtifact(path.join(outDir, 'content.json'), artifact);
 	console.info(

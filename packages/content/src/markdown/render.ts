@@ -8,7 +8,7 @@ import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { replaceComponentIslands } from './component-islands.ts';
 import { extractFootnotes, renderFootnotes } from './footnotes.ts';
-import { addExternalLinkAttributes, escapeHtml } from './html.ts';
+import { addExternalLinkAttributes, escapeHtml, unescapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
@@ -22,9 +22,22 @@ export type TweetSnapshots = Record<string, TweetData>;
 
 export type TweetRenderer = (id: string, tweet?: TweetData) => Promise<string>;
 
+/**
+ * Renders a post-colocated component to HTML so its island is present before
+ * any JavaScript runs.
+ *
+ * Implemented by the callers that have a Vite SSR loader to hand, because a
+ * `.svelte` file has to be compiled before it can be rendered.
+ */
+export type IslandRenderer = (
+	moduleId: string,
+	props: Record<string, unknown>,
+) => Promise<string | null>;
+
 export type RenderMarkdownOptions = {
 	/** Component names available to this document, mapped to their module ids. */
 	islands?: IslandModules;
+	renderIsland?: IslandRenderer;
 	openGraph?: OgpSnapshots;
 	renderTweet?: TweetRenderer;
 	tweets?: TweetSnapshots;
@@ -201,6 +214,31 @@ async function replaceAsync(
 	return output + value.slice(offset);
 }
 
+// Matches the placeholder emitted by replaceComponentIslands.
+const islandPlaceholderPattern =
+	/<div data-ox-island="([^"]*)"(?: data-ox-props="([^"]*)")?><\/div>/g;
+
+async function renderIslands(html: string, renderIsland: IslandRenderer | undefined) {
+	if (renderIsland == null) {
+		return html;
+	}
+
+	return replaceAsync(html, islandPlaceholderPattern, async (match) => {
+		const moduleId = unescapeHtml(match[1]);
+		const props =
+			match[2] == null ? {} : (JSON.parse(unescapeHtml(match[2])) as Record<string, unknown>);
+		const rendered = await renderIsland(moduleId, props);
+
+		// A component that fails to render leaves its placeholder in place so the
+		// client can still mount it.
+		if (rendered == null) {
+			return match[0];
+		}
+
+		return match[0].replace('></div>', `><div data-ox-island-root>${rendered}</div></div>`);
+	});
+}
+
 async function renderTweets(
 	html: string,
 	{ renderTweet, tweets }: Pick<RenderMarkdownOptions, 'renderTweet' | 'tweets'>,
@@ -236,7 +274,12 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		? await transformOgp(media, openGraphData, { timeout: 8_000 })
 		: media;
 
-	const body = applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph)));
+	// Islands are rendered after every HTML transform so BudouX and the link
+	// rewrites cannot alter component markup that the client then hydrates.
+	const body = await renderIslands(
+		applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph))),
+		options.renderIsland,
+	);
 	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
 		renderMarkdown(footnote, options),
 	);

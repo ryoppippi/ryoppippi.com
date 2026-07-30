@@ -7,6 +7,27 @@ export function escapeHtml(value: string) {
 		.replace(/'/g, '&#39;');
 }
 
+/**
+ * Reverses {@link escapeHtml} so values round-tripped through an attribute can
+ * be read back.
+ *
+ * `&amp;` is decoded last so an escaped entity such as `&amp;quot;` survives as
+ * the literal text `&quot;` instead of becoming a quote character.
+ *
+ * @param value - Text that was escaped for an HTML attribute.
+ * @returns The original text.
+ * @example
+ * unescapeHtml('{&quot;a&quot;:1}'); // '{"a":1}'
+ */
+export function unescapeHtml(value: string) {
+	return value
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&#39;/g, "'")
+		.replace(/&amp;/g, '&');
+}
+
 export function addExternalLinkAttributes(html: string) {
 	return html.replace(
 		/<a href="(https?:\/\/[^"]*)"([^>]*)>/g,
@@ -37,6 +58,18 @@ export function addExternalLinkAttributes(html: string) {
 }
 
 if (import.meta.vitest != null) {
+	describe(unescapeHtml, () => {
+		it('round-trips escaped values', () => {
+			const value = `<a href="x">&'</a>`;
+
+			expect(unescapeHtml(escapeHtml(value))).toBe(value);
+		});
+
+		it('does not decode an entity that was itself escaped', () => {
+			expect(unescapeHtml(escapeHtml('&quot;'))).toBe('&quot;');
+		});
+	});
+
 	describe('addExternalLinkAttributes', () => {
 		it('adds target and rel to external links', () => {
 			expect(addExternalLinkAttributes('<a href="https://example.com">external</a>')).toBe(

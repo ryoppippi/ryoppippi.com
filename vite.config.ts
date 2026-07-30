@@ -116,7 +116,7 @@ export default defineConfig({
 		includeSource: [
 			'src/lib/**/*.ts',
 			'src/site/{assets,content-assets,dev-routes,dev-server,page-styles}.ts',
-			'packages/content/src/{artifact,blog,islands,islands-client,ogp-snapshots,paths,tweet-snapshots}.ts',
+			'packages/content/src/{artifact,blog,island-renderer,islands,islands-client,ogp-snapshots,paths,tweet-snapshots}.ts',
 			'packages/content/src/markdown/**/*.ts',
 		],
 	},
