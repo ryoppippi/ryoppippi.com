@@ -91,7 +91,8 @@ packages/content/src/blog/2026-07-23-example/
 - Only components in that post's own directory are available to it, so names cannot collide between posts. Single-file posts (`2026-07-23-example.md`) have no directory and therefore no islands.
 - Props follow the ox-content syntax: `prop="text"` is a string, `prop={42}` is JSON (numbers, booleans, objects, arrays), and a bare `prop` is `true`.
 - Unknown component tags are left in the output untouched, so a typo shows up in the page instead of silently disappearing.
-- Islands are mounted on the client after load; they are not server-rendered. Content that must exist without JS belongs in the markdown.
+- Islands are server-rendered into the page and hydrated on the client, so their content is in the HTML without JS. Anything that only exists after mount (measured sizes, animations, timers) still needs a sensible server-rendered starting state.
+- Component-scoped CSS ships with the island's own chunk, so heavily styled islands can paint unstyled for a moment before hydration.
 - `Tweet` predates this mechanism and stays hand-wired because it is server-rendered from cached snapshots.
 
 ### Development Notes
