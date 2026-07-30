@@ -74,6 +74,26 @@ title: Example
 
 See `packages/content/src/blog/2024-10-12/index.md` for a full reference of available blog syntax (embeds, components, markdown features, etc.).
 
+### Post-Specific Svelte Islands
+
+A post can use its own Svelte components without registering them anywhere. Put the component next to the post's `index.md` and reference it by file name:
+
+```
+packages/content/src/blog/2026-07-23-example/
+├── index.md
+└── SalesChart.svelte
+```
+
+```md
+<SalesChart title="Growth" bars={3} compact />
+```
+
+- Only components in that post's own directory are available to it, so names cannot collide between posts. Single-file posts (`2026-07-23-example.md`) have no directory and therefore no islands.
+- Props follow the ox-content syntax: `prop="text"` is a string, `prop={42}` is JSON (numbers, booleans, objects, arrays), and a bare `prop` is `true`.
+- Unknown component tags are left in the output untouched, so a typo shows up in the page instead of silently disappearing.
+- Islands are mounted on the client after load; they are not server-rendered. Content that must exist without JS belongs in the markdown.
+- `Tweet` predates this mechanism and stays hand-wired because it is server-rendered from cached snapshots.
+
 ### Development Notes
 
 - Vitest tests run through Vite+
