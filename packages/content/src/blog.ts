@@ -4,6 +4,7 @@ import { matter } from 'gray-matter-es';
 import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
+import { discoverPostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 import { loadOgpSnapshots } from './ogp-snapshots.ts';
 import { loadTweetSnapshots } from './tweet-snapshots.ts';
@@ -32,12 +33,16 @@ function filenameFor(filepath: string): string {
 		: path.basename(filepath, '.md');
 }
 
-async function loadRenderOptions(content: string, filepath: string) {
-	const [openGraph, tweets] = await Promise.all([
+async function loadRenderOptions(content: string, filepath: string, directory: string) {
+	const [openGraph, tweets, islands] = await Promise.all([
 		loadOgpSnapshots(content, filepath),
 		loadTweetSnapshots(content, filepath),
+		discoverPostIslands(filepath, directory),
 	]);
-	return openGraph == null && tweets == null ? undefined : { openGraph, tweets };
+	const hasIslands = Object.keys(islands).length > 0;
+	return openGraph == null && tweets == null && !hasIslands
+		? undefined
+		: { openGraph, tweets, islands };
 }
 
 async function findBlogPostSource(slug: string, directory: string) {
@@ -80,7 +85,7 @@ export async function loadBlogPost(
 
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
-	const renderOptions = await loadRenderOptions(content, entry.filepath);
+	const renderOptions = await loadRenderOptions(content, entry.filepath, directory);
 	return {
 		title: String(data.title),
 		filename: filenameFor(entry.filepath),
@@ -127,7 +132,7 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const source = await readFile(filepath, 'utf8');
 			const { data, content } = matter(source);
 			const filename = filenameFor(filepath);
-			const renderOptions = await loadRenderOptions(content, filepath);
+			const renderOptions = await loadRenderOptions(content, filepath, blogDir);
 			return {
 				title: String(data.title),
 				filename,

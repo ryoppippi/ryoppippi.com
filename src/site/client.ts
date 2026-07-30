@@ -1,4 +1,5 @@
 import type { TweetData } from '@ryoppippi/content';
+import type { Component } from 'svelte';
 import '../styles/fonts.css';
 import {
 	loadPageStyle,
@@ -217,12 +218,62 @@ function initialiseTweets(): void {
 	}
 }
 
+// Every component colocated with a post is a potential island, so the loaders
+// are collected by glob rather than listed by hand. Vite keeps each one in its
+// own chunk, so a post only downloads the islands it actually uses.
+const islandLoaders = import.meta.glob('../../packages/content/src/blog/**/*.svelte') as Record<
+	string,
+	() => Promise<{ default: Component<Record<string, unknown>> }>
+>;
+
+const islandCleanups = new Set<() => void>();
+
+async function mountIsland(element: HTMLElement): Promise<void> {
+	const moduleId = element.dataset.oxIsland;
+	if (moduleId == null || element.dataset.oxMounted === 'true') {
+		return;
+	}
+
+	element.dataset.oxMounted = 'true';
+	try {
+		const load = islandLoaders[`../../packages/content/src/blog/${moduleId}`];
+		if (load == null) {
+			element.dataset.oxMounted = 'false';
+			return;
+		}
+
+		const [{ hydrate, mount, unmount }, { default: Component }] = await Promise.all([
+			import('svelte'),
+			load(),
+		]);
+		const serialised = element.dataset.oxProps;
+		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
+		// Server-rendered islands carry a root element to adopt. Without one the
+		// component was never rendered on the server, so mount it fresh.
+		const root = element.querySelector<HTMLElement>('[data-ox-island-root]');
+		const instance =
+			root == null
+				? mount(Component, { target: element, props })
+				: hydrate(Component, { target: root, props });
+		islandCleanups.add(() => unmount(instance));
+	} catch {
+		element.dataset.oxMounted = 'false';
+	}
+}
+
+function initialiseIslands(): void {
+	for (const element of document.querySelectorAll<HTMLElement>('[data-ox-island]')) {
+		void mountIsland(element);
+	}
+}
+
 function initialisePage(): void {
 	initialiseDarkMode();
 	initialiseFilters();
 	initialiseTalkFilter();
 	initialiseSponsors();
 	initialiseTweets();
+	initialiseIslands();
 }
 
 function destroyPage(): void {
@@ -230,6 +281,11 @@ function destroyPage(): void {
 		void cleanup();
 	}
 	tweetCleanups.clear();
+	for (const cleanup of islandCleanups) {
+		cleanup();
+	}
+
+	islandCleanups.clear();
 }
 
 function syncHead(next: Document): void {

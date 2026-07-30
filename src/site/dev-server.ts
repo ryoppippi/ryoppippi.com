@@ -1,6 +1,7 @@
 import type {
 	BlogPost,
 	BlogPostMetadata,
+	IslandRenderer,
 	MarkdownRenderer,
 	ShowcaseProject,
 	TweetData,
@@ -39,7 +40,10 @@ type SectionsModule = {
 type MarkdownModule = {
 	renderMarkdown: (
 		content: string,
-		options: NonNullable<Parameters<MarkdownRenderer>[1]> & { renderTweet: TweetRenderer },
+		options: NonNullable<Parameters<MarkdownRenderer>[1]> & {
+			renderIsland: IslandRenderer;
+			renderTweet: TweetRenderer;
+		},
 	) => Promise<string>;
 };
 
@@ -154,15 +158,22 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 		return pending;
 	};
 	const renderContent: MarkdownRenderer = async (content, options) => {
-		const [markdown, tweets] = await Promise.all([
+		const [markdown, tweets, islands] = await Promise.all([
 			server.ssrLoadModule('/packages/content/src/markdown/render.ts') as Promise<MarkdownModule>,
 			server.ssrLoadModule('/packages/content/src/tweet-renderer.ts') as Promise<{
 				renderTweet: TweetRenderer;
 			}>,
+			server.ssrLoadModule('/packages/content/src/island-renderer.ts') as Promise<{
+				createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
+			}>,
 		]);
+		const { createIslandRenderer } = islands;
 		const renderTweet: TweetRenderer = async (id, tweet) =>
 			tweets.renderTweet(id, tweet ?? (await fetchMissingTweet(id)) ?? undefined);
-		return markdown.renderMarkdown(content, { ...options, renderTweet });
+		const renderIsland = createIslandRenderer((path) =>
+			server.ssrLoadModule(`/packages/content${path}`),
+		);
+		return markdown.renderMarkdown(content, { ...options, renderIsland, renderTweet });
 	};
 	const loadBlogModule = () =>
 		server.ssrLoadModule('/packages/content/src/blog.ts') as Promise<BlogModule>;
