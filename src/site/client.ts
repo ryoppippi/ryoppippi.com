@@ -217,12 +217,51 @@ function initialiseTweets(): void {
 	}
 }
 
+const islandCleanups = new Set<() => void>();
+
+async function mountIsland(element: HTMLElement): Promise<void> {
+	const moduleId = element.dataset.oxIsland;
+	if (moduleId == null || element.dataset.oxMounted === 'true') {
+		return;
+	}
+
+	element.dataset.oxMounted = 'true';
+	try {
+		const [{ mount, unmount }, { resolveIsland }] = await Promise.all([
+			import('svelte'),
+			import('@ryoppippi/content/islands-client'),
+		]);
+		const load = resolveIsland(moduleId);
+		if (load == null) {
+			element.dataset.oxMounted = 'false';
+			return;
+		}
+
+		const { default: Component } = await load();
+		const props = element.dataset.oxProps;
+		const instance = mount(Component, {
+			target: element,
+			props: props == null ? {} : (JSON.parse(props) as Record<string, unknown>),
+		});
+		islandCleanups.add(() => unmount(instance));
+	} catch {
+		element.dataset.oxMounted = 'false';
+	}
+}
+
+function initialiseIslands(): void {
+	for (const element of document.querySelectorAll<HTMLElement>('[data-ox-island]')) {
+		void mountIsland(element);
+	}
+}
+
 function initialisePage(): void {
 	initialiseDarkMode();
 	initialiseFilters();
 	initialiseTalkFilter();
 	initialiseSponsors();
 	initialiseTweets();
+	initialiseIslands();
 }
 
 function destroyPage(): void {
@@ -230,6 +269,11 @@ function destroyPage(): void {
 		void cleanup();
 	}
 	tweetCleanups.clear();
+	for (const cleanup of islandCleanups) {
+		cleanup();
+	}
+
+	islandCleanups.clear();
 }
 
 function syncHead(next: Document): void {

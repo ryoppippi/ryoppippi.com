@@ -4,7 +4,9 @@ import type { TweetData } from '../tweet-renderer.ts';
 import type { OgpSnapshots } from '../ogp-snapshots.ts';
 import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
+import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
+import { replaceComponentIslands } from './component-islands.ts';
 import { extractFootnotes, renderFootnotes } from './footnotes.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
@@ -21,6 +23,8 @@ export type TweetSnapshots = Record<string, TweetData>;
 export type TweetRenderer = (id: string, tweet?: TweetData) => Promise<string>;
 
 export type RenderMarkdownOptions = {
+	/** Component names available to this document, mapped to their module ids. */
+	islands?: IslandModules;
 	openGraph?: OgpSnapshots;
 	renderTweet?: TweetRenderer;
 	tweets?: TweetSnapshots;
@@ -63,16 +67,19 @@ function escapeMagicLinkUnderscores(line: string) {
 	});
 }
 
-function prepareOxContentMarkdown(content: string) {
+function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) {
 	return transformOutsideFences(transformCollapsibleBlocks(content), (line) => {
-		const embeds = replaceNotByAIEmbeds(
-			line
-				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
-				.replace(
-					/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
-					'<youtube id="$2" />',
-				)
-				.replace(/<Divider\s*\/>/g, '<hr>'),
+		const embeds = replaceComponentIslands(
+			replaceNotByAIEmbeds(
+				line
+					.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
+					.replace(
+						/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
+						'<youtube id="$2" />',
+					)
+					.replace(/<Divider\s*\/>/g, '<hr>'),
+			),
+			islands,
 		);
 		const preparedLine = replaceImageFigures(
 			replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))),
@@ -213,7 +220,7 @@ async function renderTweets(
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const extracted = extractFootnotes(content);
-	const prepared = prepareOxContentMarkdown(extracted.content);
+	const prepared = prepareOxContentMarkdown(extracted.content, options.islands);
 	const highlighted = await renderHighlightedMarkdown(prepared);
 	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
 	const tweets = await renderTweets(magicLinks, options);
@@ -499,6 +506,22 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('ox-callout');
 			expect(html).toContain('ox-callout--warning');
 			expect(html).toContain('Be careful');
+		});
+
+		it('turns registered component tags into island placeholders', async () => {
+			const html = await renderMarkdown('<Chart title="Growth" bars={3} />', {
+				islands: { Chart: 'post/Chart.svelte' },
+			});
+
+			expect(html).toContain('data-ox-island="post/Chart.svelte"');
+			expect(html).toContain('data-ox-props=');
+			expect(html).not.toContain('<Chart');
+		});
+
+		it('leaves component tags alone when the post has no such component', async () => {
+			const html = await renderMarkdown('<Chart />');
+
+			expect(html).not.toContain('data-ox-island');
 		});
 
 		it('applies markdown-it-budoux compatible paragraph rendering', async () => {
