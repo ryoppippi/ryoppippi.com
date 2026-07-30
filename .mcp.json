@@ -1,18 +1,8 @@
 {
 	"mcpServers": {
-		"context7": {
-			"type": "http",
-			"url": "https://mcp.context7.com/mcp"
-		},
-		"grep": {
-			"type": "http",
-			"url": "https://mcp.grep.app"
-		},
 		"svelte": {
-			"type": "stdio",
-			"command": "pnpm",
-			"args": ["svelte-mcp"],
-			"env": {}
+			"type": "http",
+			"url": "https://mcp.svelte.dev/mcp"
 		}
 	}
 }

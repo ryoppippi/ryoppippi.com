@@ -1,9 +1,4 @@
-[mcp_servers.context7]
-url = "https://mcp.context7.com/mcp"
-
-[mcp_servers.grep]
-url = "https://mcp.grep.app"
+experimental_use_rmcp_client = true
 
 [mcp_servers.svelte]
-args = [ "svelte-mcp" ]
-command = "pnpm"
+url = "https://mcp.svelte.dev/mcp"
