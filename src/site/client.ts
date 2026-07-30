@@ -1,4 +1,5 @@
 import type { TweetData } from '@ryoppippi/content';
+import type { Component } from 'svelte';
 import '../styles/fonts.css';
 import {
 	loadPageStyle,
@@ -217,6 +218,14 @@ function initialiseTweets(): void {
 	}
 }
 
+// Every component colocated with a post is a potential island, so the loaders
+// are collected by glob rather than listed by hand. Vite keeps each one in its
+// own chunk, so a post only downloads the islands it actually uses.
+const islandLoaders = import.meta.glob('../../packages/content/src/blog/**/*.svelte') as Record<
+	string,
+	() => Promise<{ default: Component<Record<string, unknown>> }>
+>;
+
 const islandCleanups = new Set<() => void>();
 
 async function mountIsland(element: HTMLElement): Promise<void> {
@@ -227,17 +236,16 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 
 	element.dataset.oxMounted = 'true';
 	try {
-		const [{ hydrate, mount, unmount }, { resolveIsland }] = await Promise.all([
-			import('svelte'),
-			import('@ryoppippi/content/islands-client'),
-		]);
-		const load = resolveIsland(moduleId);
+		const load = islandLoaders[`../../packages/content/src/blog/${moduleId}`];
 		if (load == null) {
 			element.dataset.oxMounted = 'false';
 			return;
 		}
 
-		const { default: Component } = await load();
+		const [{ hydrate, mount, unmount }, { default: Component }] = await Promise.all([
+			import('svelte'),
+			load(),
+		]);
 		const serialised = element.dataset.oxProps;
 		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
 		// Server-rendered islands carry a root element to adopt. Without one the

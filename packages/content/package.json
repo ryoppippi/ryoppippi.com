@@ -9,7 +9,6 @@
 		"./article.css": "./article.css",
 		"./blog": "./src/blog.ts",
 		"./build": "./src/build.ts",
-		"./islands-client": "./src/islands-client.ts",
 		"./paths": "./src/paths.ts",
 		"./Tweet.svelte": "./src/Tweet.svelte",
 		"./tweet-renderer": "./src/tweet-renderer.ts"
