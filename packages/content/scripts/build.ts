@@ -5,6 +5,7 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { createServer } from 'vite';
+import { svelteRootDir } from '../src/paths.ts';
 
 type ContentArtifactModule = {
 	buildContentArtifact: (
@@ -23,17 +24,11 @@ type ContentArtifactFormatModule = {
 
 const root = path.resolve(import.meta.dirname, '..');
 const outDir = path.join(root, 'dist');
-// Svelte derives a component's style scope class from its path relative to
-// `rootDir`, which defaults to the working directory. This build runs from the
-// content package while the site build runs from the workspace root, so without
-// pinning it the two disagree and the island CSS shipped by the site build
-// cannot match the markup rendered here.
-const workspaceRoot = path.resolve(root, '../..');
 const server = await createServer({
 	appType: 'custom',
 	configFile: false,
 	logLevel: 'error',
-	plugins: [svelte({ compilerOptions: { rootDir: workspaceRoot } })],
+	plugins: [svelte({ compilerOptions: { rootDir: svelteRootDir() } })],
 	publicDir: false,
 	root,
 	server: { middlewareMode: true },
