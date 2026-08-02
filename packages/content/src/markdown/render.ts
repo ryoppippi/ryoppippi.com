@@ -7,7 +7,9 @@ import { applyBudouxHtml } from './budoux.ts';
 import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { replaceComponentIslands } from './component-islands.ts';
+import { transformOutsideFences } from './fences.ts';
 import { extractFootnotes, renderFootnotes } from './footnotes.ts';
+import { stripIslandImports } from './island-imports.ts';
 import { addExternalLinkAttributes, escapeHtml, unescapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
@@ -43,33 +45,6 @@ export type RenderMarkdownOptions = {
 	tweets?: TweetSnapshots;
 };
 
-function transformOutsideFences(content: string, transform: (line: string) => string) {
-	const lines = content.split('\n');
-	let inFence = false;
-	let fenceMarker = '';
-
-	return lines
-		.map((line) => {
-			const trimmed = line.trimStart();
-			const fence = trimmed.match(/^(`{3,}|~{3,})/)?.[1];
-
-			if (fence != null) {
-				if (!inFence) {
-					inFence = true;
-					fenceMarker = fence;
-				} else if (trimmed.startsWith(fenceMarker[0]) && fence.length >= fenceMarker.length) {
-					inFence = false;
-					fenceMarker = '';
-				}
-
-				return line;
-			}
-
-			return inFence ? line : transform(line);
-		})
-		.join('\n');
-}
-
 function escapeMagicLinkUnderscores(line: string) {
 	return line.replace(/\{([^{}\n]+)\}/g, (match, input: string) => {
 		if (renderMagicLink(input) == null) {
@@ -81,7 +56,9 @@ function escapeMagicLinkUnderscores(line: string) {
 }
 
 function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) {
-	return transformOutsideFences(transformCollapsibleBlocks(content), (line) => {
+	const body = stripIslandImports(transformCollapsibleBlocks(content), islands);
+
+	return transformOutsideFences(body, (line) => {
 		const embeds = replaceComponentIslands(
 			replaceNotByAIEmbeds(
 				line
@@ -565,6 +542,21 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('<Chart />');
 
 			expect(html).not.toContain('data-ox-island');
+		});
+
+		it('drops the import statement of a resolved component', async () => {
+			const html = await renderMarkdown("import Chart from './Chart.svelte'\n\n<Chart />", {
+				islands: { Chart: 'post/Chart.svelte' },
+			});
+
+			expect(html).toContain('data-ox-island="post/Chart.svelte"');
+			expect(html).not.toContain('import Chart');
+		});
+
+		it('keeps an import that resolved to nothing so the mistake is visible', async () => {
+			const html = await renderMarkdown("import Chart from './Missing.svelte'");
+
+			expect(html).toContain('import Chart');
 		});
 
 		it('applies markdown-it-budoux compatible paragraph rendering', async () => {

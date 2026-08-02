@@ -4,7 +4,7 @@ import { matter } from 'gray-matter-es';
 import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
-import { discoverPostIslands } from './islands.ts';
+import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 import { loadOgpSnapshots } from './ogp-snapshots.ts';
 import { loadTweetSnapshots } from './tweet-snapshots.ts';
@@ -37,7 +37,7 @@ async function loadRenderOptions(content: string, filepath: string, directory: s
 	const [openGraph, tweets, islands] = await Promise.all([
 		loadOgpSnapshots(content, filepath),
 		loadTweetSnapshots(content, filepath),
-		discoverPostIslands(filepath, directory),
+		resolvePostIslands(content, filepath, directory),
 	]);
 	const hasIslands = Object.keys(islands).length > 0;
 	return openGraph == null && tweets == null && !hasIslands
