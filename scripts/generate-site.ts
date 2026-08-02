@@ -1,5 +1,5 @@
 import { readContentArtifact, type ContentArtifact } from '@ryoppippi/content/artifact';
-import type { SiteAssets } from '../src/site/assets.ts';
+import type { ManifestChunk, SiteAssets } from '../src/site/assets.ts';
 import { plugin } from 'bun';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -18,7 +18,7 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 		readFile(path.join(outDir, 'index.html'), 'utf8'),
 		readFile(path.join(outDir, '.vite/manifest.json'), 'utf8'),
 	]);
-	const manifest = JSON.parse(manifestSource) as Record<string, { css?: string[]; file: string }>;
+	const manifest = JSON.parse(manifestSource) as Record<string, ManifestChunk>;
 	const assets = resolveSiteAssets(index, manifest);
 	const baseFiles = manifest['index.html']?.css ?? [];
 	const homeFile = manifest['src/site/styles/home.css']?.file;

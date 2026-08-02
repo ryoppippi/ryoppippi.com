@@ -5,6 +5,7 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { createServer } from 'vite';
+import { svelteRootDir } from '../src/paths.ts';
 
 type ContentArtifactModule = {
 	buildContentArtifact: (
@@ -27,7 +28,7 @@ const server = await createServer({
 	appType: 'custom',
 	configFile: false,
 	logLevel: 'error',
-	plugins: [svelte()],
+	plugins: [svelte({ compilerOptions: { rootDir: svelteRootDir() } })],
 	publicDir: false,
 	root,
 	server: { middlewareMode: true },

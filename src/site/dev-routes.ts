@@ -173,6 +173,7 @@ if (import.meta.vitest != null) {
 			assets: {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
+				islands: {},
 				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 				tweet: '',
 			},

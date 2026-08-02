@@ -3,6 +3,7 @@ import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
+import { islandModuleIds } from './assets.ts';
 import { postListItems } from './content.ts';
 import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
@@ -57,6 +58,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 				content,
 				assets,
 				article: true,
+				islands: islandModuleIds(post.html),
 				style: 'article',
 				tweet: post.html.includes('data-tweet-id'),
 			}),

@@ -1,5 +1,6 @@
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
+import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
@@ -16,7 +17,7 @@ export default defineConfig({
 		},
 	},
 	plugins: [
-		svelte(),
+		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		cloudflareRedirect({
 			mode: 'generate',
 			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],

@@ -92,7 +92,7 @@ packages/content/src/blog/2026-07-23-example/
 - Props follow the ox-content syntax: `prop="text"` is a string, `prop={42}` is JSON (numbers, booleans, objects, arrays), and a bare `prop` is `true`.
 - Unknown component tags are left in the output untouched, so a typo shows up in the page instead of silently disappearing.
 - Islands are server-rendered into the page and hydrated on the client, so their content is in the HTML without JS. Anything that only exists after mount (measured sizes, animations, timers) still needs a sensible server-rendered starting state.
-- Component-scoped CSS ships with the island's own chunk, so heavily styled islands can paint unstyled for a moment before hydration.
+- Component-scoped CSS is linked from the page head for the islands a post uses, so a server-rendered island is styled before — and without — its JS. Svelte derives the scope class from the component path relative to `rootDir`, so `packages/content/scripts/build.ts` pins it to the workspace root to match the site build.
 - `Tweet` predates this mechanism and stays hand-wired because it is server-rendered from cached snapshots.
 
 ### Development Notes
