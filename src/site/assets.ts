@@ -9,6 +9,14 @@ export type SiteAssets = {
 		base: string;
 		page: string;
 	};
+	/**
+	 * Stylesheet hrefs for each post-colocated island, keyed by the module id
+	 * that `data-ox-island` carries.
+	 *
+	 * Hrefs rather than rendered tags because a page can use several islands
+	 * that share a chunk, and the duplicates have to be dropped at render time.
+	 */
+	islands: Record<string, string[]>;
 	pages: Record<PageStyle, string>;
 	preloads?: Partial<Record<PageStyle, string>>;
 	tweet: string;
@@ -30,14 +38,60 @@ export const DEV_ASSETS = {
 		sponsors: '<link rel="stylesheet" href="/src/site/styles/sponsors.css">',
 		works: '<link rel="stylesheet" href="/src/site/styles/works.css">',
 	},
+	islands: {},
 	preloads: {},
 	tweet: '',
 } as const satisfies SiteAssets;
 
-type ManifestChunk = {
+export type ManifestChunk = {
 	css?: string[];
 	file: string;
+	imports?: string[];
 };
+
+/** Prefix every island module id carries in the Vite manifest. */
+const ISLAND_SOURCE_PREFIX = 'packages/content/src/blog/';
+
+/**
+ * Collects the stylesheets a chunk needs, including those of the chunks it
+ * statically imports.
+ *
+ * An island's own `css` entry only covers its own `<style>` block, so a chart
+ * built from child components would otherwise ship without their styles.
+ */
+function chunkStyles(
+	manifest: Record<string, ManifestChunk>,
+	source: string,
+	seen = new Set<string>(),
+): string[] {
+	if (seen.has(source)) {
+		return [];
+	}
+	seen.add(source);
+
+	const chunk = manifest[source];
+	if (chunk == null) {
+		return [];
+	}
+
+	return [
+		...(chunk.css ?? []),
+		...(chunk.imports ?? []).flatMap((imported) => chunkStyles(manifest, imported, seen)),
+	];
+}
+
+/**
+ * Reads the island module ids a rendered page mounts.
+ *
+ * @param html - Rendered page or post markup.
+ * @returns Module ids as they appear on the island placeholders.
+ * @example
+ * islandModuleIds('<div data-ox-island="post/Chart.svelte"></div>');
+ * // ['post/Chart.svelte']
+ */
+export function islandModuleIds(html: string): string[] {
+	return [...new Set([...html.matchAll(/data-ox-island="([^"]*)"/g)].map((match) => match[1]))];
+}
 
 export function resolveSiteAssets(
 	index: string,
@@ -68,9 +122,19 @@ export function resolveSiteAssets(
 			})
 			.join('\n\t');
 
+	const islands = Object.fromEntries(
+		Object.keys(manifest)
+			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.svelte'))
+			.map((source) => [
+				source.slice(ISLAND_SOURCE_PREFIX.length),
+				[...new Set(chunkStyles(manifest, source))],
+			]),
+	);
+
 	return {
 		base,
 		client,
+		islands,
 		pages: {
 			article: stylesFor('/styles/article.css'),
 			blog: stylesFor('/styles/blog.css'),
@@ -100,13 +164,38 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
 	};
 }
 
-export function renderAssetTags(assets: SiteAssets, style: PageStyle, tweet: boolean): string {
+/**
+ * Renders the stylesheets for the islands a page mounts.
+ *
+ * Islands are server-rendered, so without these the markup is in the page but
+ * its styles only arrive with the island's JS chunk — the finished chart would
+ * never paint for a reader without JavaScript.
+ */
+function renderIslandStyles(assets: SiteAssets, islands: string[]): string {
+	const hrefs = new Set(islands.flatMap((moduleId) => assets.islands[moduleId] ?? []));
+	return [...hrefs]
+		.map((href) => {
+			// Development hrefs carry Vite's query string, and `&lang.css` reads as a
+			// character reference unless the ampersand is escaped.
+			const escaped = href.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+			return `<link rel="stylesheet" crossorigin href="/${escaped}">`;
+		})
+		.join('\n\t');
+}
+
+export function renderAssetTags(
+	assets: SiteAssets,
+	style: PageStyle,
+	tweet: boolean,
+	islands: string[] = [],
+): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
 	return [
 		assets.preloads?.[style] ?? '',
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pages[style],
 		tweet ? assets.tweet : '',
+		renderIslandStyles(assets, islands),
 		assets.client,
 	]
 		.filter(Boolean)
@@ -117,6 +206,10 @@ if (import.meta.vitest != null) {
 	const assets = {
 		base: '<link href="/base.css"><script src="/client.js"></script>',
 		client: '<script type="module" src="/client.js"></script>',
+		islands: {
+			'post/Chart.svelte': ['assets/Chart.css', 'assets/Legend.css'],
+			'post/Table.svelte': ['assets/Legend.css'],
+		},
 		pages: {
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
@@ -156,6 +249,15 @@ if (import.meta.vitest != null) {
 						file: 'assets/Tweet.js',
 						css: ['assets/Tweet.css'],
 					},
+					'packages/content/src/blog/post/Chart.svelte': {
+						file: 'assets/Chart.js',
+						css: ['assets/Chart.css'],
+						imports: ['_Legend.js'],
+					},
+					'_Legend.js': {
+						file: 'assets/Legend.js',
+						css: ['assets/Legend.css'],
+					},
 					'node_modules/@fontsource/dm-mono/files/dm-mono-latin-400-normal.woff2': {
 						file: 'assets/dm-mono-400.woff2',
 					},
@@ -168,6 +270,9 @@ if (import.meta.vitest != null) {
 			expect(result).toEqual({
 				base: '<link rel="stylesheet" href="/base.css">',
 				client: '<script type="module" src="/client.js"></script>',
+				islands: {
+					'post/Chart.svelte': ['assets/Chart.css', 'assets/Legend.css'],
+				},
 				pages: {
 					article: '<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
@@ -199,6 +304,63 @@ if (import.meta.vitest != null) {
 		it('includes Tweet styles only when the page embeds a Tweet', () => {
 			expect(renderAssetTags(assets, 'article', false)).not.toContain('/tweet.css');
 			expect(renderAssetTags(assets, 'article', true)).toContain('/tweet.css');
+		});
+
+		it('links the styles of the islands the page mounts', () => {
+			const tags = renderAssetTags(assets, 'article', false, ['post/Chart.svelte']);
+
+			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Chart.css">');
+			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Legend.css">');
+		});
+
+		it('links a shared island stylesheet once', () => {
+			const tags = renderAssetTags(assets, 'article', false, [
+				'post/Chart.svelte',
+				'post/Table.svelte',
+			]);
+
+			expect(tags.match(/assets\/Legend\.css/g)).toHaveLength(1);
+		});
+
+		it('escapes the query string of a development island stylesheet', () => {
+			const dev = {
+				...assets,
+				islands: { 'post/Chart.svelte': ['post/Chart.svelte?svelte&lang.css'] },
+			};
+
+			expect(renderAssetTags(dev, 'article', false, ['post/Chart.svelte'])).toContain(
+				'href="/post/Chart.svelte?svelte&amp;lang.css"',
+			);
+		});
+
+		it('omits island styles for a page without islands', () => {
+			expect(renderAssetTags(assets, 'article', false)).not.toContain('/assets/Chart.css');
+		});
+
+		it('ignores an island with no styles of its own', () => {
+			expect(renderAssetTags(assets, 'article', false, ['post/Unknown.svelte'])).not.toContain(
+				'/assets/',
+			);
+		});
+	});
+
+	describe(islandModuleIds, () => {
+		it('reads the module ids off island placeholders', () => {
+			const html =
+				'<div data-ox-island="post/Chart.svelte"></div><div data-ox-island="post/Table.svelte"></div>';
+
+			expect(islandModuleIds(html)).toEqual(['post/Chart.svelte', 'post/Table.svelte']);
+		});
+
+		it('reports a repeated island once', () => {
+			const html =
+				'<div data-ox-island="post/Chart.svelte"></div><div data-ox-island="post/Chart.svelte"></div>';
+
+			expect(islandModuleIds(html)).toEqual(['post/Chart.svelte']);
+		});
+
+		it('returns nothing for markup without islands', () => {
+			expect(islandModuleIds('<p>plain</p>')).toEqual([]);
 		});
 	});
 
