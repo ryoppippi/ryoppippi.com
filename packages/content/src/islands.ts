@@ -1,4 +1,4 @@
-import { access } from 'node:fs/promises';
+import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from './markdown/component-islands.ts';
 import { parseIslandImports } from './markdown/island-imports.ts';
@@ -11,8 +11,10 @@ import { blogDirectory } from './paths.ts';
  * are local to the post that declares them and cannot collide across posts.
  *
  * An import that points outside the blog directory or at a file that is not
- * there is dropped: the import line and the component tag both stay in the
- * rendered post, which shows the author the path is wrong.
+ * there is dropped, and so is a name two imports share, because there is no
+ * telling which of them the tags in the post meant. A dropped import keeps both
+ * its line and its component tag in the rendered post, which shows the author
+ * something is wrong.
  *
  * @param content - Markdown body, frontmatter already removed.
  * @param filepath - Absolute path of the post's markdown file.
@@ -28,8 +30,19 @@ export async function resolvePostIslands(
 	directory = blogDirectory(),
 ): Promise<IslandModules> {
 	const postDirectory = path.dirname(filepath);
+	const imports = parseIslandImports(content);
+	// A name bound twice cannot be resolved to one component, and picking either
+	// would silently drop the other import while its tags rendered as the one
+	// that won.
+	const duplicates = new Set(
+		imports.map(({ name }) => name).filter((name, index, names) => names.indexOf(name) !== index),
+	);
 	const resolved = await Promise.all(
-		parseIslandImports(content).map(async ({ name, specifier }) => {
+		imports.map(async ({ name, specifier }) => {
+			if (duplicates.has(name)) {
+				return null;
+			}
+
 			const absolute = path.resolve(postDirectory, specifier);
 			const moduleId = path.relative(directory, absolute).replaceAll(path.sep, '/');
 			// A specifier that climbs out of the blog directory would give the
@@ -39,7 +52,11 @@ export async function resolvePostIslands(
 			}
 
 			try {
-				await access(absolute);
+				// A directory can be named `Chart.svelte` and would pass an existence
+				// check, so the entry has to be a file the renderer can import.
+				if (!(await stat(absolute)).isFile()) {
+					return null;
+				}
 			} catch {
 				return null;
 			}
@@ -123,6 +140,54 @@ if (import.meta.vitest != null) {
 			);
 
 			expect(islands).toEqual({});
+		});
+
+		it('refuses a directory that happens to be named like a component', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'post/index.md': '# Post',
+				'post/Chart.svelte/keep.txt': '',
+			});
+			const islands = await resolvePostIslands(
+				"import Chart from './Chart.svelte'",
+				fixture.getPath('post/index.md'),
+				fixture.getPath(),
+			);
+
+			expect(islands).toEqual({});
+		});
+
+		it('drops a name that two imports bind', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'post/index.md': '# Post',
+				'post/A.svelte': '<p>a</p>',
+				'post/B.svelte': '<p>b</p>',
+			});
+			const islands = await resolvePostIslands(
+				"import Chart from './A.svelte'\nimport Chart from './B.svelte'",
+				fixture.getPath('post/index.md'),
+				fixture.getPath(),
+			);
+
+			expect(islands).toEqual({});
+		});
+
+		it('keeps the other imports when one name is duplicated', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'post/index.md': '# Post',
+				'post/A.svelte': '<p>a</p>',
+				'post/B.svelte': '<p>b</p>',
+				'post/Table.svelte': '<p>table</p>',
+			});
+			const islands = await resolvePostIslands(
+				"import Chart from './A.svelte'\nimport Chart from './B.svelte'\nimport Table from './Table.svelte'",
+				fixture.getPath('post/index.md'),
+				fixture.getPath(),
+			);
+
+			expect(islands).toEqual({ Table: 'post/Table.svelte' });
 		});
 
 		it('returns nothing for a post that imports no components', async () => {
