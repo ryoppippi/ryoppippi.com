@@ -76,21 +76,30 @@ See `packages/content/src/blog/2024-10-12/index.md` for a full reference of avai
 
 ### Post-Specific Svelte Islands
 
-A post can use its own Svelte components without registering them anywhere. Put the component next to the post's `index.md` and reference it by file name:
+A post can use its own Svelte components without registering them anywhere. Put the component beside the post and import it the way MDX would:
 
 ```
 packages/content/src/blog/2026-07-23-example/
 ├── index.md
-└── SalesChart.svelte
+└── charts/
+    └── SalesChart.svelte
 ```
 
 ```md
+---
+title: Example
+---
+
+import SalesChart from './charts/SalesChart.svelte'
+
 <SalesChart title="Growth" bars={3} compact />
 ```
 
-- Only components in that post's own directory are available to it, so names cannot collide between posts. Single-file posts (`2026-07-23-example.md`) have no directory and therefore no islands.
+- Posts stay `.md`. The import line is the only MDX-shaped syntax supported — there are no JS expressions, no `export`, and no arbitrary JSX, so the file is still ordinary markdown and is served as-is at `/blog/<slug>.md`.
+- Only default imports of a relative `.svelte` path are recognised, and the path must stay inside the blog directory. The binding name is what the tag is called, so names are local to the post and cannot collide between posts.
+- Subdirectories are fine, which is how a component built from several files keeps them together.
 - Props follow the ox-content syntax: `prop="text"` is a string, `prop={42}` is JSON (numbers, booleans, objects, arrays), and a bare `prop` is `true`.
-- Unknown component tags are left in the output untouched, so a typo shows up in the page instead of silently disappearing.
+- Unknown component tags are left in the output untouched, and an import that resolves to nothing is left in the page as a literal line, so a typo shows up instead of silently disappearing.
 - Islands are server-rendered into the page and hydrated on the client, so their content is in the HTML without JS. Anything that only exists after mount (measured sizes, animations, timers) still needs a sensible server-rendered starting state.
 - Component-scoped CSS is linked from the page head for the islands a post uses, so a server-rendered island is styled before — and without — its JS. Svelte derives the scope class from the component path relative to `rootDir`, so `packages/content/scripts/build.ts` pins it to the workspace root to match the site build.
 - `Tweet` predates this mechanism and stays hand-wired because it is server-rendered from cached snapshots.
