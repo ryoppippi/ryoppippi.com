@@ -117,11 +117,11 @@ importers:
         specifier: ^7.1.2
         version: 7.1.2(@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.12.3)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.9.0))(svelte@5.56.2(@typescript-eslint/types@8.58.2))
       '@tanstack/charts':
-        specifier: 0.0.0
-        version: 0.0.0
+        specifier: 0.5.1
+        version: 0.5.1
       '@tanstack/svelte-charts':
-        specifier: 0.0.0
-        version: 0.0.0(svelte@5.56.2(@typescript-eslint/types@8.58.2))
+        specifier: 0.5.1
+        version: 0.5.1(svelte@5.56.2(@typescript-eslint/types@8.58.2))
       '@types/d3-scale':
         specifier: ^4.0.9
         version: 4.0.9
@@ -1433,8 +1433,8 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
 
-  '@tanstack/charts@0.0.0':
-    resolution: {integrity: sha512-hDsCx2AmYd4P/Bygqdkxxk2MERmGludXxHrLZv3YRh3aVuq18+y7rFgDCpqOz5YHMyoWz0Umzf1XQIoSzE2jkQ==}
+  '@tanstack/charts@0.5.1':
+    resolution: {integrity: sha512-qfWNnDnRNZ465FrAgJ9//pgyHcT8EjCIZ4/t3qNdj7NO0TkP7e6junIrBcV/9Wv8Zcx3FwpF5+NiYYLhFsb6Gg==}
 
   '@tanstack/react-virtual@3.14.3':
     resolution: {integrity: sha512-k/cnHPVaOfn46hSbiY6n4Dzf4QjCGWSF40zR5QIIYUqPAjpA6TN7InfYmcMiDVQGP2iUn9xsRbAl8u1v3UmeVQ==}
@@ -1442,8 +1442,8 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@tanstack/svelte-charts@0.0.0':
-    resolution: {integrity: sha512-4ahzKkGJg+ltXLRaw7GlprJnSwrh/x0ifY+e7CYCN6CwnPaTV8QXgUvmNc4zU26F+pX86jUrMh4CoHwbOP+2xg==}
+  '@tanstack/svelte-charts@0.5.1':
+    resolution: {integrity: sha512-533TOUZAVUphkUOTSZ2JArPDHkX3Z/sa/N5uBwpGZ1qV+1iwxct52LdAvaMTM9WbTyuqoBFze3YJGJKrJOIGTw==}
     peerDependencies:
       svelte: ^5.20.0
 
@@ -4559,13 +4559,12 @@ snapshots:
       tailwindcss: 4.3.0
       vite: '@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.12.3)(jiti@2.6.1)(typescript@6.0.3)(yaml@2.9.0)'
 
-  '@tanstack/charts@0.0.0':
+  '@tanstack/charts@0.5.1':
     dependencies:
       '@types/d3-geo': 3.1.0
       '@types/d3-shape': 3.1.8
       d3-array: 3.2.4
       d3-geo: 3.1.1
-      d3-scale: 4.0.2
       d3-shape: 3.2.0
 
   '@tanstack/react-virtual@3.14.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
@@ -4574,9 +4573,9 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
 
-  '@tanstack/svelte-charts@0.0.0(svelte@5.56.2(@typescript-eslint/types@8.58.2))':
+  '@tanstack/svelte-charts@0.5.1(svelte@5.56.2(@typescript-eslint/types@8.58.2))':
     dependencies:
-      '@tanstack/charts': 0.0.0
+      '@tanstack/charts': 0.5.1
       svelte: 5.56.2(@typescript-eslint/types@8.58.2)
 
   '@tanstack/virtual-core@3.17.1': {}
