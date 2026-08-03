@@ -1,4 +1,4 @@
-import type { ChartFocusStrategy } from '@tanstack/charts';
+import type { ChartFocusStrategy, ChartPoint } from '@tanstack/charts';
 import type { Row, StarPoint } from './rows.ts';
 
 /** Marks whose `datumIndex` is an index into the row list. */
@@ -22,23 +22,38 @@ export function isRowMark(markId: string): boolean {
 	return ROW_MARKS.has(markId);
 }
 
+type GtvPoint = ChartPoint<Row | StarPoint>;
+
+/**
+ * Collects the row-mark points belonging to the row nearest an x position.
+ *
+ * @param points - Every point in the rendered scene.
+ * @param x - Scene x coordinate to resolve against.
+ * @returns The row-mark points at the nearest row, or an empty list.
+ */
+function rowPointsNearestX(
+	points: readonly GtvPoint[],
+	x: number,
+): readonly GtvPoint[] {
+	const candidates = points.filter((point) => isRowMark(point.markId));
+	if (candidates.length === 0) {
+		return [];
+	}
+
+	const nearest = candidates.reduce((best, point) =>
+		Math.abs(point.x - x) < Math.abs(best.x - x) ? point : best,
+	);
+
+	return candidates.filter((point) => point.x === nearest.x);
+}
+
 /**
  * Focuses by x position alone, so moving anywhere over the plot follows the
  * timeline instead of requiring the cursor to be near a line.
  */
 export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
-	resolve: (points, x) => {
-		const candidates = points.filter((point) => isRowMark(point.markId));
-		if (candidates.length === 0) {
-			return [];
-		}
-
-		const nearest = candidates.reduce((best, point) =>
-			Math.abs(point.x - x) < Math.abs(best.x - x) ? point : best,
-		);
-
-		return candidates.filter((point) => point.x === nearest.x);
-	},
+	// maxDistance is ignored on purpose: the whole plot tracks the timeline.
+	resolve: (points, x) => rowPointsNearestX(points, x),
 	group: (points, focused) => [
 		focused,
 		...points.filter(
@@ -48,6 +63,7 @@ export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
 				point.datumIndex === focused.datumIndex,
 		),
 	],
+	// One stop per row, keyed by datumIndex so star-only rows stay reachable.
 	navigation: (points) => {
 		const seen = new Set<number>();
 		return points
