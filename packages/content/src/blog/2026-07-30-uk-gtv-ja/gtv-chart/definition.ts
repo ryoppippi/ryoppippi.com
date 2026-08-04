@@ -1,6 +1,7 @@
 import { areaY, d3Curve, defineChart, dot, lineY, rect, ruleX, text } from '@tanstack/charts';
 import { scaleLinear, scaleUtc } from 'd3-scale';
 import { curveMonotoneX, curveStepAfter } from 'd3-shape';
+import { focusByX } from './focus.ts';
 import {
 	firstAt,
 	lastAt,
@@ -10,23 +11,25 @@ import {
 	starTicks,
 } from './rows.ts';
 
-export type ChartInput = {
-	/** Index of the row under the cursor, or null. */
-	focused: number | null;
-};
-
 const axisDate = new Intl.DateTimeFormat('ja-JP', {
 	year: '2-digit',
 	month: 'numeric',
 	timeZone: 'UTC',
 });
 
-export const chartDefinition = defineChart<ChartInput>({
-	inputEqual: (previous, next) => previous.focused === next.focused,
-	chart: ({ input: { focused } }) => {
-		const focusedAt = focused == null ? null : rows[focused].at;
+/**
+ * Builds the timeline chart definition for a given focus state.
+ *
+ * Since charts 0.3.0 a definition has no external input channel, so the host
+ * re-renders by being handed a fresh definition whenever the focus changes.
+ *
+ * @param focused - Index of the row under the cursor, or null.
+ * @returns The chart definition for that focus state.
+ */
+export function buildChartDefinition(focused: number | null) {
+	const focusedAt = focused == null ? null : rows[focused].at;
 
-		return {
+	return defineChart({
 		marks: [
 			areaY(rows, {
 				id: 'band',
@@ -144,19 +147,31 @@ export const chartDefinition = defineChart<ChartInput>({
 			}),
 		],
 		x: {
-			scale: scaleUtc().domain([firstAt, lastAt]),
-			ticks: 6,
-			format: (value: Date) => axisDate.format(value),
+			// A factory, not a configured instance: charts 0.5.1 drops a configured
+			// domain on date-valued axes (fixed upstream in 0.6.4). The inferred
+			// domain equals [firstAt, lastAt] because those are the data's ends.
+			scale: scaleUtc,
 			grid: false,
+			axis: {
+				ticks: {
+					count: 6,
+					format: (value: Date) => axisDate.format(value),
+				},
+			},
 		},
 		y: {
 			scale: scaleLinear().domain([0, 100]),
-			ticks: 5,
-			format: (value: number) => `${value}%`,
 			grid: true,
+			axis: {
+				ticks: {
+					count: 5,
+					format: (value: number) => `${value}%`,
+				},
+			},
 		},
-			clip: false,
-			margin: { top: 16, right: 52, bottom: 32, left: 44 },
-		};
-	},
-});
+		clip: false,
+		margin: { top: 16, right: 52, bottom: 32, left: 44 },
+		focus: focusByX,
+		animate: false,
+	});
+}
