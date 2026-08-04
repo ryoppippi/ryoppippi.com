@@ -9,6 +9,7 @@ extend-ignore-re = [
 
 [default.extend-words]
 Edn = "Edn"
+IHS = "IHS"
 items-center = "items-center"
 justify-center = "justify-center"
 
