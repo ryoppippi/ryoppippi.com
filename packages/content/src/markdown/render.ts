@@ -368,6 +368,17 @@ if (import.meta.vitest != null) {
 	});
 
 	describe('renderMarkdown', () => {
+		it('preserves multiline HTML comments without transforming their contents', async () => {
+			const html = await renderMarkdown(
+				'before\n\n<!--\nhttps://x.com/example/status/1234567890\n-->\n\nafter',
+			);
+
+			expect(html).toContain('before');
+			expect(html).toContain('after');
+			expect(html).toContain('<!--\nhttps://x.com/example/status/1234567890\n-->');
+			expect(html).not.toContain('[https://x.com/example/status/1234567890]');
+		});
+
 		it('renders configured and GitHub magic links', async () => {
 			const html = await renderMarkdown('{@ryoppippi} {vim-jp} {Svelte Japan}');
 

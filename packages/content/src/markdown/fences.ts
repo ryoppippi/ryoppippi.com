@@ -1,8 +1,8 @@
 /**
  * Applies a line transform to everything outside fenced code blocks.
  *
- * Fenced code is left untouched so a component tag or an import shown as an
- * example in a code block stays literal instead of being rewritten.
+ * Fenced code and HTML comments are left untouched so literal examples and
+ * metadata do not get rewritten by Markdown preprocessing.
  *
  * @param content - Markdown source.
  * @param transform - Applied to each line outside a fence.
@@ -18,6 +18,7 @@ export function transformOutsideFences(
 	const lines = content.split('\n');
 	let inFence = false;
 	let fenceMarker = '';
+	let inHtmlComment = false;
 
 	return lines
 		.map((line) => {
@@ -36,7 +37,24 @@ export function transformOutsideFences(
 				return line;
 			}
 
-			return inFence ? line : transform(line);
+			if (inFence) {
+				return line;
+			}
+
+			if (inHtmlComment) {
+				if (line.includes('-->')) {
+					inHtmlComment = false;
+				}
+				return line;
+			}
+
+			const commentStart = line.indexOf('<!--');
+			if (commentStart !== -1) {
+				inHtmlComment = line.indexOf('-->', commentStart + 4) === -1;
+				return line;
+			}
+
+			return transform(line);
 		})
 		.join('\n');
 }
