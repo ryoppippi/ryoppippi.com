@@ -32,6 +32,9 @@ const server = await createServer({
 	publicDir: false,
 	root,
 	server: { middlewareMode: true },
+	// @tanstack/svelte-charts ships an uncompiled Chart.svelte, so Node cannot
+	// import it directly and it has to go through the Svelte plugin.
+	ssr: { noExternal: ['@tanstack/svelte-charts'] },
 });
 
 const start = performance.now();

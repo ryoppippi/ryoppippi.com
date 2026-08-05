@@ -26,6 +26,14 @@
         in
         {
           default = pkgs.mkShellNoCC {
+            # Playwright browsers for Vitest browser-mode tests, provided by Nix
+            # instead of a global `playwright install`.
+            # PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD stops the npm package from
+            # re-downloading them. The driver's browser revision must match the
+            # repo's `playwright` version, so bump the nixpkgs input alongside it.
+            PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+
             buildInputs = [
               pkgs.nodejs_24
               nix-vite-plus.packages.${system}.vp

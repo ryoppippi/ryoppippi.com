@@ -36,6 +36,18 @@ export const magicLinks = {
 		link: 'https://www.youtube.com/channel/UCISDrqLMNq3w9AZ4otdoRuA',
 		imageUrl: 'https://pbs.twimg.com/profile_images/1920681519682908160/0sY6R8FJ_400x400.jpg',
 	},
+	Rork: {
+		link: 'https://rork.com/',
+		imageUrl: 'https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg',
+	},
+	typia: {
+		link: 'https://github.com/samchon/typia',
+		imageUrl: 'https://github.com/samchon.png',
+	},
+	NeovimConf: {
+		link: 'https://neovimconf.live/',
+		imageUrl: 'https://github.com/neovim.png',
+	},
 	eerm16g: {
 		link: 'https://x.com/eerm16g',
 		imageUrl: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg',
@@ -260,6 +272,15 @@ if (import.meta.vitest != null) {
 
 		it('renders configured site links with spaces in the label', () => {
 			expect(renderMagicLink('Svelte Japan')).toContain('href="https://svelte.jp"');
+		});
+
+		it('renders the configured Rork magic link with its brand image', () => {
+			const html = renderMagicLink('Rork');
+
+			expect(html).toContain('href="https://rork.com/"');
+			expect(html).toContain(
+				"background-image: url('https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg')",
+			);
 		});
 
 		it('rejects unsafe custom hrefs', () => {

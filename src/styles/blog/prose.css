@@ -101,6 +101,11 @@
 	margin-bottom: 0.75rem;
 }
 
+.prose .footnotes a:not(.footnote-backref) {
+	color: inherit;
+	font-weight: inherit;
+}
+
 .prose .footnotes li p {
 	display: inline;
 	margin: 0;
@@ -123,4 +128,13 @@
 .prose .footnote-backref:hover {
 	color: #4d4d4d;
 	opacity: 1;
+}
+
+/* A paragraph holding nothing but italics right after a table reads as the
+   table's caption, matching the chart's figcaption. */
+.prose table + p:has(> em:only-child) {
+	margin-top: -0.5rem;
+	font-size: 0.75rem;
+	line-height: 1.6;
+	opacity: 0.6;
 }
