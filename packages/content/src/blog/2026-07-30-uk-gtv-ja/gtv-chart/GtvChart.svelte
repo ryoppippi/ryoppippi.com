@@ -18,7 +18,7 @@
 
 <figure class='gtv-chart' data-testid='gtv-chart' {@attach scrollReveal.attach}>
 	<Legend />
-	<p aria-live='polite' class='readout'>{readout || '\u00a0'}</p>
+	<p aria-atomic='true' aria-live='polite' class='readout'>{readout || '\u00a0'}</p>
 	<div class='wipe' class:revealed={scrollReveal.revealed}>
 		<Timeline bind:focused />
 	</div>
@@ -75,6 +75,7 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.wipe {
+			clip-path: inset(0);
 			transition: none;
 		}
 	}

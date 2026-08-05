@@ -9,10 +9,28 @@
 	const starLabel = (value: number | null) =>
 		value == null ? '—' : value === 0 ? 'ほぼ0' : `~${value}K`;
 
+	function scrollHorizontally(event: KeyboardEvent) {
+		const direction = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
+		const element = event.currentTarget as HTMLDivElement;
+		if (direction === 0 || element.scrollWidth <= element.clientWidth) {
+			return;
+		}
+
+		event.preventDefault();
+		element.scrollLeft += direction * 80;
+	}
 </script>
 
-<div class='scroll'>
-	<table class:focusing={focused != null}>
+<!-- svelte-ignore a11y_no_noninteractive_tabindex, a11y_no_noninteractive_element_interactions (horizontal overflow must be keyboard-scrollable) -->
+<div
+	aria-label='グラフの数値データ'
+	class='scroll'
+	onkeydown={scrollHorizontally}
+	role='region'
+	tabindex='0'
+>
+	<table>
+		<caption class='sr-only'>申請時点ごとの通過見込みとccusageのstar数</caption>
 		<thead>
 			<tr>
 				<th scope='col'>時点（年/月）</th>
@@ -32,7 +50,7 @@
 					onmouseenter={() => (focused = index)}
 					onmouseleave={() => (focused = null)}
 				>
-					<th scope='row' tabindex='0'>
+					<th scope='row'>
 						{row.label}（{#if row.milestoneHref == null}{row.milestone}{:else}<a
 								href={row.milestoneHref}
 								rel='noopener noreferrer'
@@ -66,6 +84,11 @@
 		margin-top: 1.5rem;
 	}
 
+	.scroll:focus-visible {
+		outline: 2px solid var(--gtv-mid);
+		outline-offset: 2px;
+	}
+
 	table {
 		width: 100%;
 		border-collapse: collapse;
@@ -95,11 +118,7 @@
 		white-space: nowrap;
 	}
 
-	.focusing tbody tr {
-		opacity: 0.3;
-	}
-
-	.focusing tbody tr.focused {
+	tbody tr.focused {
 		opacity: 1;
 		background-color: color-mix(in oklab, var(--gtv-mid) 12%, transparent);
 	}

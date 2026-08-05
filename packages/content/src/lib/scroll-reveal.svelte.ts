@@ -1,3 +1,5 @@
+import { prefersReducedMotion } from 'svelte/motion';
+
 export type ScrollRevealOptions = {
 	/**
 	 * `rootMargin` for the underlying `IntersectionObserver`.
@@ -37,7 +39,7 @@ export function createScrollReveal(options: ScrollRevealOptions = {}): ScrollRev
 	let revealed = $state(true);
 
 	function attach(node: HTMLElement) {
-		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		if (prefersReducedMotion.current) {
 			return;
 		}
 

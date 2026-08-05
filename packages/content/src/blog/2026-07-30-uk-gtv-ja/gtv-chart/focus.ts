@@ -39,4 +39,26 @@ export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
 
 		return candidates.filter((point) => point.x === nearest.x);
 	},
+	group: (points, focused) => [
+		focused,
+		...points.filter(
+			(point) =>
+				point !== focused &&
+				isRowMark(point.markId) &&
+				point.datumIndex === focused.datumIndex,
+		),
+	],
+	navigation: (points) => {
+		const seen = new Set<number>();
+		return points
+			.filter((point) => isRowMark(point.markId))
+			.toSorted((left, right) => left.x - right.x || left.y - right.y)
+			.filter((point) => {
+				if (seen.has(point.datumIndex)) {
+					return false;
+				}
+				seen.add(point.datumIndex);
+				return true;
+			});
+	},
 };

@@ -1,9 +1,9 @@
 <ul class='legend'>
-	<li><span class='swatch swatch--mid'></span>中央推定（左軸）</li>
-	<li><span class='swatch swatch--high'></span>高め</li>
-	<li><span class='swatch swatch--low'></span>低め</li>
-	<li><span class='swatch swatch--stars'></span>ccusage stars（右軸）</li>
-	<li><span class='swatch swatch--after'></span>提出後（審査対象外）</li>
+	<li><span aria-hidden='true' class='swatch swatch--mid'></span>中央推定（左軸）</li>
+	<li><span aria-hidden='true' class='swatch swatch--high'></span>高め</li>
+	<li><span aria-hidden='true' class='swatch swatch--low'></span>低め</li>
+	<li><span aria-hidden='true' class='swatch swatch--stars'></span>ccusage stars（右軸）</li>
+	<li><span aria-hidden='true' class='swatch swatch--after'></span>提出後（審査対象外）</li>
 </ul>
 
 <style>
