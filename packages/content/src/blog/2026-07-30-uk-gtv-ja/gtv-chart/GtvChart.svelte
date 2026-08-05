@@ -29,6 +29,7 @@
 </figure>
 
 <style>
+	/* spellchecker:off */
 	.gtv-chart {
 		--gtv-mid: oklch(55% 0.2 260);
 		--gtv-band: oklch(55% 0.2 260);
@@ -77,4 +78,5 @@
 			transition: none;
 		}
 	}
+	/* spellchecker:on */
 </style>

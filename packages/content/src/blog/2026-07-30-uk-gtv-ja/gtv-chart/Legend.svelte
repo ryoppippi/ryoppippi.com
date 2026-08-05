@@ -7,6 +7,7 @@
 </ul>
 
 <style>
+	/* spellchecker:off */
 	.legend {
 		display: flex;
 		flex-wrap: wrap;
@@ -53,4 +54,5 @@
 		border-top-style: dashed;
 		border-top-color: var(--gtv-stars);
 	}
+	/* spellchecker:on */
 </style>

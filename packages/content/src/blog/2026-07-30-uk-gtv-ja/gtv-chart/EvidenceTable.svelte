@@ -60,6 +60,7 @@
 </div>
 
 <style>
+	/* spellchecker:off */
 	.scroll {
 		overflow-x: auto;
 		margin-top: 1.5rem;
@@ -102,4 +103,5 @@
 		opacity: 1;
 		background-color: color-mix(in oklab, var(--gtv-mid) 12%, transparent);
 	}
+	/* spellchecker:on */
 </style>
