@@ -55,7 +55,7 @@ function animateThemeChange(x: number, y: number, apply: () => void): void {
 			// fill: 'forwards' holds the final clip-path after the animation ends,
 			// otherwise the unclipped old snapshot flashes for one frame before the
 			// view transition is torn down.
-			document.documentElement.animate(
+			const animation = document.documentElement.animate(
 				{ clipPath: dark ? [...clipPath].reverse() : clipPath },
 				{
 					duration: 400,
@@ -63,6 +63,11 @@ function animateThemeChange(x: number, y: number, apply: () => void): void {
 					fill: 'forwards',
 					pseudoElement: dark ? '::view-transition-old(root)' : '::view-transition-new(root)',
 				},
+			);
+			// Remove the finished animation so a later transition cannot reuse its final clip-path.
+			void Promise.all([transition.finished, animation.finished]).then(
+				() => animation.cancel(),
+				() => undefined,
 			);
 		}),
 	);
