@@ -29,6 +29,7 @@
 	role='region'
 	tabindex='0'
 >
+	<span aria-hidden='true' class='table-scroll-hint'>← scroll →</span>
 	<table>
 		<caption class='sr-only'>申請時点ごとの通過見込みとccusageのstar数</caption>
 		<thead>
@@ -91,6 +92,7 @@
 
 	table {
 		width: 100%;
+		min-width: 52rem;
 		border-collapse: collapse;
 		font-size: 0.8125rem;
 	}
@@ -101,6 +103,7 @@
 		text-align: left;
 		vertical-align: top;
 		border-bottom: 1px solid var(--gtv-edge);
+		overflow-wrap: normal;
 	}
 
 	thead th {
@@ -110,6 +113,12 @@
 
 	tbody th {
 		font-weight: 400;
+		white-space: nowrap;
+	}
+
+	th:last-child,
+	td:last-child {
+		min-width: 20rem;
 	}
 
 	.num {

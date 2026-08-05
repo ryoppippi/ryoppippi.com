@@ -49,6 +49,42 @@
 	font-family: var(--font-code);
 }
 
+.prose .table-scroll {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.prose .table-scroll:focus-visible {
+	outline: 2px solid currentcolor;
+	outline-offset: 2px;
+}
+
+.prose .table-scroll-hint {
+	display: none;
+}
+
+@media (max-width: 47.999rem) {
+	.prose .table-scroll:has(table tr > :nth-child(3)) > .table-scroll-hint,
+	.prose [data-testid='gtv-chart'] .scroll > .table-scroll-hint {
+		position: sticky;
+		left: 0;
+		display: block;
+		width: max-content;
+		margin-bottom: 0.25rem;
+		color: #808080;
+		font-size: 0.75rem;
+		line-height: 1.5;
+	}
+}
+
+.prose .table-scroll table:has(tr > :nth-child(3)) {
+	min-width: 42rem;
+}
+
+.prose .table-scroll table :is(th, td) {
+	overflow-wrap: normal;
+}
+
 /*
  * BudouX inserts zero-width spaces into every text node, so a numeric cell like
  * "5,000人以上" can collapse to the width of "5,000" and wrap over three lines.
@@ -132,7 +168,7 @@
 
 /* A paragraph holding nothing but italics right after a table reads as the
    table's caption, matching the chart's figcaption. */
-.prose table + p:has(> em:only-child) {
+.prose :is(table, .table-scroll) + p:has(> em:only-child) {
 	margin-top: -0.5rem;
 	font-size: 0.75rem;
 	line-height: 1.6;
