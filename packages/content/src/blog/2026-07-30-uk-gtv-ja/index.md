@@ -238,6 +238,8 @@ OSS maintainerでも不承認になった公開例はある[^oss-vs-tn]。Tech N
 
 <GtvChart />
 
+<div hidden>グラフを取得できない場合は元データを参照: /blog/2026-07-30-uk-gtv-ja/gtv-chart/timeline.json</div>
+
 仕事がない間もOSSは書き続けた。2024年はそれまでの人生で最もOSSのコードを書いた年だった。この時期のOSS活動、{typia}への貢献、{NeovimConf}での登壇が後のキャリアの下地になった。
 
 [@preview](https://ryoppippi.com/blog/2024-12-31)
