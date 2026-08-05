@@ -1,7 +1,7 @@
 ---
 title: OSS開発者としてUK Global Talent Visa（Exceptional Talent）を取った
 date: "2026-07-30"
-isPublished: false
+isPublished: true
 lang: ja
 ---
 
