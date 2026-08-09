@@ -18,7 +18,7 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 - [好きで続けたOSSや登壇が後から仕事やビザに繋がった](#20代の最後に一発逆転した)
 - [Tech Nationの直近の承認率は約14%](#どのくらい難しいのか)
 - [OSSを軸に取った公開例は世界でも極めて少ない（況んや日本をや）](#どのくらい珍しいのか)
-- [承認率や希少性の推定](#追記)
+- [希少性の推定](#追記)
 - [パソコン好きのオタクにも海外で暮らす道はある](#おわりに)
 
 申請手順ではなく、自分が何を出したのかと、そこに至るまでのキャリアを書く。
@@ -78,7 +78,7 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 | └ Design industry | Design Business Association |
 | [prestigious prize](https://www.gov.uk/government/publications/global-talent-eligible-prize-list)の受賞者 | endorsement不要 |
 
-制度は変わり続けている。たとえばgraphic design、brand design、product design（工業デザイン）には、[Design industryの専用ルート](https://www.gov.uk/global-talent-arts-culture/design-industry)ができた（2026年7月1日開始）[^design-uxui]。いま自分の分野がなくても、今後追加されるかもしれない。
+制度は変わり続けている。たとえばgraphic design、brand design、product design（工業デザイン）には、[Design industryの専用ルート](https://www.gov.uk/global-talent-arts-culture/design-industry)ができた（2026年7月1日開始）[^design-uxui]。
 
 +++
 
@@ -87,8 +87,6 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 ## Exceptional TalentとExceptional Promise
 
 申請の形式はよく似ている。どちらも推薦状3通とCV、基準を満たす証拠を最大10点提出する。ビザを取った後にできることも変わらない[^talent-promise-format]。ただし、難易度は同じではない。
-
-違いはleadingとpotentialのどちらで評価されるかにある。
 
 | | Exceptional Talent | Exceptional Promise |
 |---|---|---|
@@ -101,9 +99,7 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 
 *割合は全分野の調査回答者ベースで、残り19%は区分不明。*
 
-Talentは「すでにleading talentであること」、Promiseは「将来リーダーになりうること」を証明する。Talentの方が申請時点で求められる実績の水準は明確に高い。Talentで申請してもPromiseとしてendorseされた例がある[^talent-to-promise]。
-
-Promiseはキャリア初期の人を将来性で評価する独立した区分だ。早い段階なら、Talentの実績が揃うのを待たずPromiseで申請できる。詳しい日本語の体験記もある[^promise-writeup]。自分はtechnology分野で5年を超える経験があり、それまでに得ていた外部評価を基にTalentで申請した。
+同じ形式でも、Talentはすでにリーダーであること、Promiseは将来リーダーになりうることを証明する。求められる像が違う[^talent-to-promise]。自分はtechnology分野で5年を超える経験があり、それまでに得ていた外部評価を基にTalentで申請した。
 
 ## ここでいう「リーダー」
 
@@ -142,8 +138,6 @@ Skilled Workerとの差は年数だけではない。標準の年収要件は202
 
 さらにSkilled Workerはスポンサー企業にビザが紐づく。レイオフされると通常60日以内に[^curtailment]次のスポンサーを見つけるかUKを離れることになる。そんな状態でILRまでの5年（改革案どおりなら10年）を走り切るのは怖い。Global Talentは職に紐づいていないから職を失ってもビザはそのまま残る。
 
-その先の帰化（市民権）は考えていない[^naturalisation]。自分にとってはILRがゴールだ。
-
 ## 何を満たせばいいのか
 
 要件は区分共通だ。自己評価ではなく、外部から確認できる証拠を出す。
@@ -162,13 +156,9 @@ OCは次の4つだ[^oc-promise]。
 
 満たすのは2つでいい。OC1とOC3は従業員でも該当する。OC2は職務外の活動で、OC4は研究なので**founderである必要はない**。過去10年にendorseされた人の4人に3人はfounder以外だ[^founder-share]。
 
-ただしfounderとそうでない従業員では出せる証拠の性質が違う。founderやsenior executiveは資金調達や事業の成長といった会社の実績をリーダーシップの証拠に使える。founderではない従業員は会社全体の売上や調達額だけでは自分の実績にならない。その数字に自分がどう貢献したかを自分の名前に紐づく証拠で示す必要がある。
+ただしfounderではない従業員は、会社の売上や調達額だけでは自分の実績にならない。自分がどう貢献したかを、自分の名前に紐づく証拠で示す必要がある。社名や肩書きだけでは足りない[^company-evidence]。
 
-大手tech企業で働いていても社名や肩書きだけでは自分の実績にならない。大きな会社では仕事がチームの成果になりやすい。NDAもあるので個人の貢献を外から見える証拠にするのは難しい。
-
-コミュニティへの還元が全員の必須要件というわけではない（OC1とOC3を選ぶ申請もできる）。OC2を選ぶ場合は、職務外で分野に貢献し、それが評価された証拠が必要になる。
-
-そこでOSSが効く。個人の名前に紐づき外から確認できるからだ。Tech Nationもopen source codeを証拠の例として明記している[^open-source-evidence]。登壇、メディア、受賞も同じだ。会社の中だけで完結する日常業務はOC2には使いにくい。通常の職務を超えて分野に貢献し、その仕事が外部から評価されている必要がある[^oc2-wording]。
+そこでOSSが効く。個人の名前に紐づき外から確認できるからだ。Tech Nationもopen source codeを証拠の例として明記している[^open-source-evidence]。登壇、メディア、受賞も同じだ。OC2を選ぶなら、通常の職務を超えて分野に貢献し、その仕事が外部から評価されている必要がある[^oc2-wording]。
 
 推薦状も誰にでも頼めるわけではない。分野の専門家として認められている必要がある。さらに申請者の仕事を12か月以上詳しく知っている人が3人必要になる。身近な同僚や上司というだけでは足りない[^letters]。
 
@@ -192,13 +182,13 @@ Tech Nationの直近値は約14%で、1年前の約27%からほぼ半減した�
 
 Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
 
-難しいビザではある。ただ著名なfounderや大企業の役員だけが対象ではない。OCは4つのうち2つを選べる。従業員としての実績も職務外のOSSも使える。
+難しいビザではある。ただ著名なfounderや大企業の役員だけが対象ではない。従業員としての実績も職務外のOSSも使える。
 
 # なぜ取ったのか
 
 dependantでも自由に働けたので転職のために取ったわけではない。妻のビザの期限を気にせず自分で次を選べるようにしたかった。いまは{Rork}で働きながらOSSも続けているが、ずっと同じ会社にいるとは限らないしこの先何が起こるかも分からない。
 
-出口が近いのも大きい。このビザは3年でILR（永住）に届く。
+出口が近いのも大きい。このビザは3年でILR（永住）に届く。自分の実績に基づく在留資格で、安心してUKに住み続けられる。
 
 Rorkに勧められて初めてこのビザを知った。通る自信はなかったが、やってみることにした。
 
@@ -224,9 +214,9 @@ Rorkに勧められて初めてこのビザを知った。通る自信はなか�
 
 Tech Nationからは結果しか返ってこなかった。なぜ通ったのかを自分なりにAIと分析した。
 
-ccusageはコードを公開しただけではなかった。提出時点で約12.9k starsがあった。利用者、issue、PR、派生ツールも増えていた。Tech Nationがopen source codeの目安として挙げるsignificant engagementを数字で出せた[^open-source-evidence]。
+ccusageはコードを公開しただけではなかった。提出時点の約12.9k starsに加え、利用者、issue、PR、派生ツールも増えていた。Tech Nationがopen source codeの目安として挙げるsignificant engagementを数字で出せた[^open-source-evidence]。
 
-OSSの外にも自分の名前が残っていた。登壇ページと動画、メディアの記事、受賞ページ、仕事のオファーもあった。どれもccusageの作者として外から確認できた。OSSの成果を審査する人にも分かる形にできていた。
+OSSの外にも自分の名前が残っていた。登壇ページと動画、メディアの記事、受賞ページ、仕事のオファーもあった。どれもccusageの作者として外から確認できた。
 
 OSS maintainerでも不承認になった公開例はある[^oss-vs-tn]。Tech Nationが見るのはmaintainerという肩書きだけではない。
 
@@ -236,7 +226,7 @@ OSS maintainerでも不承認になった公開例はある[^oss-vs-tn]。Tech N
 
 その間にやっていたOSSや登壇はビザのためでも一発逆転を狙ったものでもない。おもしろそうだから手を動かした。人前で話すのが好きだから登壇した。ccusageも[Claude Maxプランでどれだけ得しているか見てニヤニヤするために作ったCLI](https://ryoppippi.com/blog/2025-05-29-zenn-6c9a8fe6629cd6-ja)で最初の実装は2時間だった。
 
-当時はどれも別々にやっていた。あとから振り返ると全部つながっていた。仕事もビザも取れた。
+当時は面白いと思ってやっていたことが、あとから繋がった。別に予期していたわけでもないし、そもそもビザに繋がるとも思っていなかった。
 
 グラフに示した通過見込みは、申請時の実績を後から見て自分で推定したもの（Tech Nationの採点ではない）。
 
@@ -254,7 +244,7 @@ UKでの就職活動については、以前のブログにまとめている。
 
 2025年にccusageを公開すると急速に伸びて状況が変わった。ここで初めて「自分は何の人なのか」を外部から説明しやすくなった。
 
-2025年5月末から7月末にかけてstarはほぼ0から約4.9Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。当時はそれがビザに繋がるとは思っていなかった。振り返ると、その一つひとつがビザに繋がっていた。
+2025年5月末から7月末にかけてstarはほぼ0から約4.9Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。
 
 [@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
 
@@ -280,7 +270,6 @@ Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^s
 
 # おわりに
 
-
 自分はただコードを書くのが好きな、どこにでもいるごく普通のパソコン大好きオタクだ。とりあえず面白いと思うものを作り続けてたらいくつかがバズり、目立ちたがり屋なのが功を奏してメディアや登壇に呼んでもらえた。
 大企業にいたわけでもスタートアップの創業者でもない。でも好きなことをやり続けていたらそれまでの点と点が全部結びついてこのビザに繋がった。
 
@@ -289,7 +278,6 @@ Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^s
 これからも自分はモノを作り続けて楽しんでいけたらいいなと思っている。
 
 そして、このブログが、海外に興味がある人、OSS大好きな人、そういう人にとって参考になれば幸いである。
-
 
 # 謝辞
 
@@ -384,8 +372,7 @@ UKには問題が多い。移民への風当たりは年々強くなっている
 [^design-uxui]: UX/UIは対象外で、従来どおり[Tech Nationの管轄](https://www.gov.uk/government/publications/global-talent-endorsing-bodies/technical-or-business-skills-covered-by-tech-nation)。
 [^talent-promise-format]: [Home Officeのcaseworker guidance](https://www.gov.uk/government/publications/global-talent-appendix-w-workers)と[Tech Nationの申請ガイド](https://technation.io/global-talent-visa-guide)による。必須基準と証拠例も同資料を参照した。
 [^promise-share]: [Home OfficeのWave 2調査](https://www.gov.uk/government/publications/global-talent-visa-evaluation-wave-2-report/global-talent-visa-evaluation-wave-2-report)より。取得者の調査回答者4,025人の内訳はTalent 37%、Promise 44%、残り19%は区分不明・その他。全endorsing bodyの合算で、Tech Nation単独の内訳は公表されていない。
-[^talent-to-promise]: Talentで申請し、Promiseとしてendorseされた[申請者の報告](https://discourse.tnvisaforum.org/t/applied-for-exceptional-talent-but-got-endorsed-as-exceptional-promise-can-i-appeal/17598)がある。
-[^promise-writeup]: [Global Talent Visa（Exceptional Promise）取得記](https://note.com/921kiyo/n/n1f8bf10b9f79)。エンジニアによる、申請プロセス全体の日本語の解説。
+[^talent-to-promise]: Talentで申請し、Promiseとしてendorseされた[申請者の報告](https://discourse.tnvisaforum.org/t/applied-for-exceptional-talent-but-got-endorsed-as-exceptional-promise-can-i-appeal/17598)もある。Promise側の詳しい日本語の体験記として、[Global Talent Visa（Exceptional Promise）取得記](https://note.com/921kiyo/n/n1f8bf10b9f79)もある。
 [^leader-assessment]: [GOV.UKの審査項目](https://www.gov.uk/global-talent-digital-technology/eligibility)には、career history、仕事のinternational reputationとimpact、推薦状と証拠の強さ、過去の仕事のcommercial impactなどが挙げられている。管理職であることは要件に含まれない。
 [^ilr-clock]: [Home Officeのcaseworker guidance](https://www.gov.uk/government/publications/global-talent-appendix-w-workers)による。この資格期間に数えられるのは、Global Talentと一部の就労ルートでの滞在だけ。自分は2022年からUKに住んでいるが、Studentビザ系のdependantだった期間はカウントされず、3年はここからやり直しになる。
 [^ihs]: [GOV.UKのIHS料金表](https://www.gov.uk/healthcare-immigration-application/how-much-pay)による。
@@ -395,10 +382,10 @@ UKには問題が多い。移民への風当たりは年々強くなっている
 [^young-job-market]: 16〜24歳の失業率は[ONSの時系列](https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgwy/lms)、応募数は[Institute of Student Employersの2025年調査](https://ise.org.uk/knowledge/insights/552/the_application_explosion_key_insights_for_employers/)による。卒業後の進路は、HESAのGraduate Outcomesを基にした[What do graduates do? 2025/26](https://luminate.prospects.ac.uk/what-do-graduates-do)から。2022/23年度に卒業し、15か月後の調査に回答したUK-domiciledのfirst-degree卒業生179,675人が対象。
 [^graduate-ilr]: [Immigration RulesのGlobal Talentに関するqualifying period](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent)と[Skilled Workerに関するqualifying period](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-skilled-worker)のどちらにも、Graduate routeは対象として含まれていない。10-year long residenceは別の制度。
 [^curtailment]: [Home Officeのcancellation and curtailment guidance](https://www.gov.uk/government/publications/immigration-status-and-enforcement-action-caseworker-guidance/cancellation-and-curtailment-of-permission-accessible)による運用。
-[^naturalisation]: 日本国籍の自分が自らUKの市民権を取得すると、[国籍法第11条](https://www.moj.go.jp/MINJI/minji06.html)により日本国籍を失う。[世界最強クラスのパスポート](https://www.passportindex.org/byRank.php)を手放してまで、UKのパスポートが欲しいわけではない。
 [^evidence-split]: [Tech Nationの申請ガイド](https://technation.io/global-talent-visa-guide)による。内訳にも決まりがある。MCに最低2点、選んだOC2つに最低4点（1基準あたり2点）。同じ証拠を複数の基準には使い回せない。
 [^oc-promise]: [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent)とTech Nationの申請ガイドによる。Promiseではキャリア初期であることも見られる。OC1はfounderまたは従業員、OC3もfounderまたは従業員が対象で、Talentにあるsenior executiveやboard memberの文言はない。
 [^founder-share]: [Tech Nationの2024年レポート](https://technation.io/global-talent-visa-report-2024/)による。
+[^company-evidence]: founderやsenior executiveは資金調達や事業の成長といった会社の実績をリーダーシップの証拠に使いやすい。大きな会社では仕事がチームの成果になりやすく、NDAもあるので個人の貢献を外から見える証拠にするのは難しい。コミュニティへの還元が全員の必須要件というわけではない（OC1とOC3を選ぶ申請もできる）。
 [^open-source-evidence]: Tech Nationはtechnical applicantの[目安](https://technation.io/home/global-talent-visa-what-to-consider/)として、reputable platformでopen source codeを公開しsignificant engagementを得ていることを挙げている。[Application Guide](https://technation.io/global-talent-visa-guide)にもrepo stars、download統計、commitサマリーがmetricsの例として書かれている。
 [^oc2-wording]: [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent)の原文は「work beyond the applicant's occupation」。雇用契約や報酬の有無を境界にはしていない。
 [^letters]: [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent)と[Tech Nationの公式ガイド](https://technation.io/global-talent-visa-guide)による。公式ガイドは、別の目的で書かれた手紙の使い回しも、テンプレート的な内容も認めていない。なおImmigration Rulesの文言は「3人の別々の専門家」で、caseworker guidanceでは「別々の組織」と表現されている。自分は別々の組織の3人に頼んだ。
