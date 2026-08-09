@@ -122,7 +122,7 @@ Promiseはキャリア初期の人を将来性で評価する独立した区分�
 - 家族を帯同できる
 - 最低給与要件も英語要件もない
 
-同じく実績で評価される枠組みは他国にもある。ただし米国の[O-1](https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement)は雇用主かagentによるpetitionが必要で、本人単独では出せない。自己申請できるEB-1Aは永住権そのもので、審査も期間も別物だ。雇用に紐づかず自分の実績だけで申請して住める点で、このビザはかなり珍しい。
+働くためのビザは雇用主やスポンサーに紐づくのが普通だ。どこにも紐づかず、自分の実績だけで申請して住める。この形はかなり珍しい。
 
 ## ILR
 
@@ -191,8 +191,6 @@ Tech Nationの直近値は約14%で、1年前の約27%からほぼ半減した�
 自分が提出したのは、開示された中で最も承認率の低い年度が終わった直後の2026年4月だった。
 
 Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
-
-落ちた場合の救済手段も限られる。[endorsementのreview](https://www.gov.uk/global-talent-digital-technology/if-your-endorsement-application-is-refused)（再審査）は無料で請求できる。ただし確認されるのは証拠の見落としや処理上の誤りで新しい証拠は出せない。判断そのものに不服があるなら手数料を払って新規申請をやり直すことになる。
 
 難しいビザではある。ただ著名なfounderや大企業の役員だけが対象ではない。OCは4つのうち2つを選べる。従業員としての実績も職務外のOSSも使える。
 
