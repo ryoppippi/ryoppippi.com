@@ -122,7 +122,7 @@ Promiseはキャリア初期の人を将来性で評価する独立した区分�
 - 家族を帯同できる
 - 最低給与要件も英語要件もない
 
-似た枠組みは他国にもある。たとえば米国の[O-1](https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement)は雇用主かagentによる申請が必要で本人単独では申請できない。雇用に紐づかず自分の実績だけで申請して住める点でこのビザはかなり珍しい。
+同じく実績で評価される枠組みは他国にもある。ただし米国の[O-1](https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement)は雇用主かagentによるpetitionが必要で、本人単独では出せない。自己申請できるEB-1Aは永住権そのもので、審査も期間も別物だ。雇用に紐づかず自分の実績だけで申請して住める点で、このビザはかなり珍しい。
 
 ## ILR
 
