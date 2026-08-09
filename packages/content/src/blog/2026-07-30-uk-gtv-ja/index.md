@@ -275,7 +275,7 @@ UK企業からやっと最初のオファーにありついたのは2025年5月�
 | 5/10 | Home Officeが申請をTech Nationへ回付[^stage1-process] |
 | 6/5 | Exceptional Talentとしてendorsement承認 |
 | 6/7 | Stage 2: ビザ申請 |
-| 6/9 | 30歳の誕生日にbiometrics（指紋・顔写真） |
+| 6/9 | biometrics（指紋・顔写真） |
 | 8/9 | ビザ承認 |
 
 Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^stage1-weeks]の範囲内だが、下限の5週間は超えている[^stage1-slowdown]。Stage 2も申請から承認まで9週間かかり、UK国内からの申請の公式目安である8週間[^stage2-weeks]を超えた。目安を過ぎても連絡がない間は精神的にきつかった。
