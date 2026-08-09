@@ -13,6 +13,7 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 
 - [UK Global Talent VisaのDigital Technology / Exceptional Talentを取った](#自分の申請)
 - [Global Talent Visaとは？](#global-talent-visaとは)
+- [申請スケジュール](#申請スケジュール)
 - [founderでもmanagerでもなく個人の名前に紐づく実績を中心に通った](#何が良かったのか)
 - [好きで続けたOSSや登壇が後から仕事やビザに繋がった](#20代の最後に一発逆転した)
 - [Tech Nationの直近の承認率は約14%](#どのくらい難しいのか)
@@ -261,21 +262,23 @@ UKでの就職活動については、以前のブログにまとめている。
 
 その後{Rork}に入社した。申請を始めたのは入社後だった。
 
+UK企業からやっと最初のオファーにありついたのは2025年5月末だった。ccusageが生まれたのも同じ月だ。その1年後、「分野のリーダーとして認識されているか」の審査を通った。
+
+正直PromiseではなくTalentで通ったのはかなり嬉しかった。将来性だけではなくそれまでに積んだキャリアをleading talentとして認めてもらえたからだ。
+
+## 申請スケジュール
+
 | 2026年 | できごと |
 |---|---|
 | 1月末 | 準備開始 |
 | 4/20 | Stage 1: endorsement申請の全書類をHome Officeへ提出 |
-| 5/10 | Home Officeが申請をTech Nationへ回付 |
+| 5/10 | Home Officeが申請をTech Nationへ回付[^stage1-process] |
 | 6/5 | Exceptional Talentとしてendorsement承認 |
 | 6/7 | Stage 2: ビザ申請 |
 | 6/9 | biometrics（指紋・顔写真） |
 | 8/9 | ビザ承認 |
 
-Stage 1は提出から承認まで46日だった[^stage1-slowdown]。Stage 2も申請から承認まで9週間かかり、UK国内からの申請の公式目安である8週間[^stage2-weeks]を超えた。目安を過ぎても連絡がない間は精神的にきつかった。
-
-UK企業からやっと最初のオファーにありついたのは2025年5月末だった。ccusageが生まれたのも同じ月だ。その1年後、「分野のリーダーとして認識されているか」の審査を通った。
-
-正直PromiseではなくTalentで通ったのはかなり嬉しかった。将来性だけではなくそれまでに積んだキャリアをleading talentとして認めてもらえたからだ。
+Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^stage1-weeks]の範囲内だが、下限の5週間は超えている[^stage1-slowdown]。Stage 2も申請から承認まで9週間かかり、UK国内からの申請の公式目安である8週間[^stage2-weeks]を超えた。目安を過ぎても連絡がない間は精神的にきつかった。
 
 # おわりに
 
@@ -409,6 +412,7 @@ UKには問題が多い。移民への風当たりは年々強くなっている
 [^foi-gap]: 本文の分数はEndorsed÷Totalで計算した。2025-26年度は開示表のEndorsed 587とNot Endorsed 3,497の合計が4,084で、Totalの4,087と3件ずれている（保留・取下げ分とみられる）。
 [^holistic-review]: [Tech Nationの公式ガイド](https://technation.io/global-talent-visa-guide)による。
 [^oss-vs-tn]: OSSの実績で申請して不採択になり、[審査への批判を公開しているmaintainer](https://art-deco.github.io/open-source/)もいる。コードを書いて公開していることと、それが分野への価値として審査側に見えることは、別の問題だ。
+[^stage1-process]: 2025年8月4日からTech Nationの独自ポータルが廃止され、申請はHome Officeに提出してからTech Nationへ回付される方式になった（[Tech Nationの公式FAQ](https://technation.io/visa_faq/)）。変更前には数日でendorsementされた公開例もあるが、個別の速い例であって通常処理の平均ではない。[3営業日の例](https://discourse.tnvisaforum.org/t/endorsed-for-talent-in-3-working-days/8350)もある。自分の申請でも4/20の提出から5/10のTech Nationへの回付まで20日かかった。
 [^stage1-slowdown]: 2026年1月には、Home OfficeのGlobal Talent窓口が「前例のない量の申請を処理している」と遅延を詫びる自動返信を出していた。gov.uk上に公式な告知はなく、[申請者フォーラムへの転載](https://web.archive.org/web/20260804184309/https://discourse.tnvisaforum.org/t/current-stage-1-waiting-time-2026/25207)が唯一の公開情報。
 [^stage2-weeks]: [GOV.UK](https://www.gov.uk/global-talent)による。UK外からの申請は3週間、UK内からの申請は8週間が目安。
 [^jp-founder-talent]: インタビュー記事や登壇者紹介での言及がいくつか確認できる。ただし、いずれもendorsing bodyの明示や、本人による詳細な体験記はない。
