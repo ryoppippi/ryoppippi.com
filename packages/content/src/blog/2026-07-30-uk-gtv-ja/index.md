@@ -43,13 +43,6 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 
 自分は2022年から妻のビザのdependantとしてUKにいる。
 
-いま振り返ると渡英時にはほかの選択肢もあった。
-
-- [High Potential Individualビザ](https://www.gov.uk/high-potential-individual-visa): 対象大学の卒業生が使えるビザ[^hpi]
-- [Youth Mobility Scheme](https://www.gov.uk/youth-mobility): いわゆるワーホリ[^yms]
-- [Global TalentのExceptional Promise](#exceptional-talentとexceptional-promise): キャリア初期の人を将来性で評価する区分
-- 妻のdependant: 就労制限がほぼなく、雇用でも自営でも働ける
-
 当時は日本の会社のリモートワークで食べていて、UKで働く予定もなかった。一番簡単で自由度の高いdependant visaを深く考えずに選んだ。
 
 生活に問題はなかったが、UKにいられるのは妻のビザのおかげだった。Global Talentなら、妻や勤務先ではなく自分の実績を基に滞在できる。
@@ -156,25 +149,13 @@ OCは次の4つだ[^oc-promise]。
 
 ## どのくらい難しいのか
 
-| endorsing body | 分野 | 直近の承認率 | 2020/21年度[^rates-2021] |
-|---|---|---:|---:|
-| Tech Nation | Digital technology | **約14%**（2025-26）[^tn-rate-recent] | 50% |
-| UKRI | 研究全般 | —[^no-perbody] | 98% |
-| Royal Society | 自然科学 | — | 84% |
-| British Academy | 人文・社会科学 | — | 82% |
-| Royal Academy of Engineering | 工学 | — | 71% |
-| （学術系4bodyの合算） | | 約87%（2024-25）[^rate-caveat] | 約84% |
-| Arts Council England | Arts and culture | 約76%（〜2023・累計）[^ace-rate] | 89% |
-
-*承認率はいずれもTalentとPromiseの合算。区分別の内訳は開示されていない。*
-
-Tech Nationの直近値は約14%で、1年前の約27%からほぼ半減した（954/3,590 → 587/4,087）[^foi-gap]。7人に1人しか通っていない。なお表のほかのbodyとは対象期間が違うので単純比較はできない。
+Tech Nationの直近の承認率は約14%（2025-26）で、1年前の約27%からほぼ半減した（954/3,590 → 587/4,087）[^tn-rate-recent][^foi-gap]。7人に1人しか通っていない。2020/21年度は50%だった[^rates-2021]。
 
 自分が提出したのは、開示された中で最も承認率の低い年度が終わった直後の2026年4月だった。
 
 Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
 
-難しいビザではある。ただし従業員としての実績も職務外のOSSも使える。
+難しいビザではある。ただし従業員としての実績も職務外のOSSも使える。他分野のendorsing bodyとの比較は[追記](#他分野の承認率)に置いた。
 
 # なぜ取ったのか
 
@@ -287,6 +268,31 @@ Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^s
 # 追記
 
 ここからは調べた数字もまとめておく。自分が申請したときに近いケースが見つからず、結局かなり調べることになった。次の人が同じ調査をするのも無駄なので全部置いておく。
+
+## 渡英時の選択肢
+
+いま振り返ると渡英時にはほかの選択肢もあった。
+
+- [High Potential Individualビザ](https://www.gov.uk/high-potential-individual-visa): 対象大学の卒業生が使えるビザ[^hpi]
+- [Youth Mobility Scheme](https://www.gov.uk/youth-mobility): いわゆるワーホリ[^yms]
+- [Global TalentのExceptional Promise](#exceptional-talentとexceptional-promise): キャリア初期の人を将来性で評価する区分
+- 妻のdependant: 就労制限がほぼなく、雇用でも自営でも働ける
+
+本文のとおり、当時は一番簡単で自由度の高いdependantを選んだ。
+
+## 他分野の承認率
+
+*承認率はいずれもTalentとPromiseの合算。区分別の内訳は開示されていない。Tech Nation以外は対象期間が違うので単純比較はできない。*
+
+| endorsing body | 分野 | 直近の承認率 | 2020/21年度[^rates-2021] |
+|---|---|---:|---:|
+| Tech Nation | Digital technology | **約14%**（2025-26）[^tn-rate-recent] | 50% |
+| UKRI | 研究全般 | —[^no-perbody] | 98% |
+| Royal Society | 自然科学 | — | 84% |
+| British Academy | 人文・社会科学 | — | 82% |
+| Royal Academy of Engineering | 工学 | — | 71% |
+| （学術系4bodyの合算） | | 約87%（2024-25）[^rate-caveat] | 約84% |
+| Arts Council England | Arts and culture | 約76%（〜2023・累計）[^ace-rate] | 89% |
 
 ## どのくらい珍しいのか
 
