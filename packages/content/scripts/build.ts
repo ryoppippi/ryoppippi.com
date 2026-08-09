@@ -32,6 +32,8 @@ const server = await createServer({
 	publicDir: false,
 	root,
 	server: { middlewareMode: true },
+	// @tanstack/svelte-charts ships an uncompiled Chart.svelte.
+	ssr: { noExternal: ['@tanstack/svelte-charts'] },
 });
 
 const start = performance.now();

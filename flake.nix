@@ -26,6 +26,11 @@
         in
         {
           default = pkgs.mkShellNoCC {
+            # The driver's browser revision must match the repo's `playwright`,
+            # so bump the nixpkgs input alongside it.
+            PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+
             buildInputs = [
               pkgs.nodejs_24
               nix-vite-plus.packages.${system}.vp
@@ -33,20 +38,18 @@
               gitleaks
               typos
               typos-lsp
-              svelte-language-server # Svelte
-              yaml-language-server # YAML
+              svelte-language-server
+              yaml-language-server
               gh
               wrangler
             ]);
 
             shellHook = ''
-              # Install dependencies only if node_modules/.pnpm/lock.yaml is older than pnpm-lock.yaml
               if [ ! -f node_modules/.pnpm/lock.yaml ] || [ pnpm-lock.yaml -nt node_modules/.pnpm/lock.yaml ]; then
                 echo "📦 Installing dependencies..."
                 vp install --frozen-lockfile
               fi
 
-              # Generate .env from .env.example if needed
               if [ -f .env.example ]; then
                 if [ ! -f .env ]; then
                   echo "📝 Generating .env from .env.example..."

@@ -7,6 +7,7 @@ import {
 	needsInitialPageStyle,
 	obsoletePageStyles,
 } from './page-styles.ts';
+import { hashTargetId } from './navigation.ts';
 import './style.css';
 
 const tweetCleanups = new Set<() => Promise<void>>();
@@ -353,6 +354,17 @@ function syncInlineStyles(next: Document): void {
 	}
 }
 
+function scrollAfterNavigation(url: URL): void {
+	const targetId = hashTargetId(url);
+	const target = targetId == null ? null : document.getElementById(targetId);
+	if (target != null) {
+		target.scrollIntoView();
+		return;
+	}
+
+	window.scrollTo({ top: 0 });
+}
+
 async function navigate(url: URL, push: boolean): Promise<void> {
 	navigation?.abort();
 	navigation = new AbortController();
@@ -380,7 +392,7 @@ async function navigate(url: URL, push: boolean): Promise<void> {
 			history.pushState({}, '', url);
 		}
 		initialisePage();
-		window.scrollTo({ top: 0 });
+		scrollAfterNavigation(url);
 	};
 
 	if (document.startViewTransition != null) {

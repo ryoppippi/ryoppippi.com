@@ -2,6 +2,7 @@ import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { playwright } from '@vitest/browser-playwright';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
 import { defineConfig } from 'vite-plus';
@@ -40,6 +41,10 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 	],
+	ssr: {
+		// @tanstack/svelte-charts ships an uncompiled Chart.svelte.
+		noExternal: ['@tanstack/svelte-charts'],
+	},
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
@@ -112,13 +117,39 @@ export default defineConfig({
 		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
 	},
 	test: {
-		globals: true,
-		environment: 'node',
-		includeSource: [
-			'src/lib/**/*.ts',
-			'src/site/{assets,content-assets,dev-routes,dev-server,page-styles}.ts',
-			'packages/content/src/{artifact,blog,island-renderer,islands,ogp-snapshots,paths,tweet-snapshots}.ts',
-			'packages/content/src/markdown/**/*.ts',
+		projects: [
+			{
+				extends: true,
+				test: {
+					name: 'node',
+					globals: true,
+					environment: 'node',
+					includeSource: [
+						'src/lib/**/*.ts',
+						'src/site/{assets,content-assets,dev-routes,dev-server,page-styles}.ts',
+						'packages/content/src/{artifact,blog,island-renderer,islands,ogp-snapshots,paths,tweet-snapshots}.ts',
+						'packages/content/src/markdown/**/*.ts',
+					],
+				},
+			},
+			{
+				// Runes helpers that drive real layout and observers, so they need a
+				// real browser rather than a DOM shim.
+				extends: true,
+				test: {
+					name: 'browser',
+					globals: true,
+					dir: 'packages/content/src/lib',
+					include: [],
+					includeSource: ['**/*.svelte.ts'],
+					browser: {
+						enabled: true,
+						provider: playwright(),
+						headless: true,
+						instances: [{ browser: 'chromium' }],
+					},
+				},
+			},
 		],
 	},
 });

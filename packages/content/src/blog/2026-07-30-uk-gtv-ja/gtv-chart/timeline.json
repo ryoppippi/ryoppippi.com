@@ -1,0 +1,237 @@
+[
+  {
+    "date": "2023-10-01",
+    "label": "'23/10",
+    "milestone": "経験5年超",
+    "low": 5,
+    "mid": 12,
+    "high": 22,
+    "evidence": "最初のスタートアップ（〜'23/6）+ 受託期。5年超なので、区分の目安ではTalent側になる"
+  },
+  {
+    "date": "2024-04-01",
+    "label": "'24/4",
+    "milestone": "転換期",
+    "low": 4,
+    "mid": 11,
+    "high": 20,
+    "evidence": "RA契約終了。雇用面では不安定だが、OSS蓄積期に入る"
+  },
+  {
+    "date": "2024-11-23",
+    "label": "'24/11/23",
+    "milestone": "OSS蓄積・英語登壇",
+    "low": 6,
+    "mid": 15,
+    "high": 26,
+    "evidence": "新規16本・typia・英語登壇 → 面接に変換",
+    "links": [
+      {
+        "text": "typia",
+        "href": "https://github.com/samchon/typia"
+      },
+      {
+        "text": "英語登壇",
+        "href": "https://neovimconf.live/"
+      }
+    ]
+  },
+  {
+    "date": "2025-03-01",
+    "label": "'25/3",
+    "milestone": "WRTN",
+    "low": 8,
+    "mid": 17,
+    "high": 28,
+    "evidence": "typia貢献の就職変換",
+    "milestoneHref": "https://wrtn.io/"
+  },
+  {
+    "date": "2025-05-29",
+    "label": "'25/5/29",
+    "milestone": "ccusage公開",
+    "low": 9,
+    "mid": 17,
+    "high": 28,
+    "evidence": "OSS誕生。StackOneのオファーから入社までの約1か月で作った。ただし公開時点では採用実績なし。同日にZennで紹介記事を公開",
+    "links": [
+      {
+        "text": "Zennで紹介記事",
+        "href": "/blog/2025-05-29-zenn-6c9a8fe6629cd6-ja"
+      }
+    ],
+    "milestoneHref": "https://github.com/ccusage/ccusage"
+  },
+  {
+    "date": "2025-06-18",
+    "label": "'25/6/18",
+    "milestone": "ccusage 1K",
+    "low": 18,
+    "mid": 29,
+    "high": 41,
+    "evidence": "20日で1K stars、24K downloads、44 releases。海外contributorやGUI/Raycast派生が生まれ、単なる公開からコミュニティ採用へ移行。前職を退職して次の入社を待つ間だった",
+    "links": [
+      {
+        "text": "20日で1K stars",
+        "href": "/blog/2025-06-18-zenn-aad087994f26a7-ja"
+      }
+    ],
+    "milestoneHref": "https://github.com/ccusage/ccusage"
+  },
+  {
+    "date": "2025-06-23",
+    "label": "'25/6/23",
+    "milestone": "StackOne入社",
+    "low": 22,
+    "mid": 34,
+    "high": 46,
+    "evidence": "英国企業に現地就職。UKのproduct-led technology companyに評価されたこと自体が市場検証で、後の実務がそのまま申請の証拠を支える。ただし入社直後で本人のimpactはまだ限定的",
+    "milestoneHref": "https://www.stackone.com/",
+    "links": [
+      {
+        "text": "英国企業に現地就職",
+        "href": "/blog/2025-07-06-how-to-get-job-in-the-uk-ja"
+      },
+      {
+        "text": "UKのproduct-led technology company",
+        "href": "/blog/2026-01-07-recap-2025-ja"
+      }
+    ]
+  },
+  {
+    "date": "2025-07-26",
+    "label": "'25/7末",
+    "milestone": "ccusage 4.9K",
+    "low": 30,
+    "mid": 43,
+    "high": 55,
+    "evidence": "約4.9K stars。「ccusageの人」として明確になる"
+  },
+  {
+    "date": "2025-10-16",
+    "label": "'25/10/16",
+    "milestone": "TOYOKUMO",
+    "low": 36,
+    "mid": 50,
+    "high": 62,
+    "evidence": "Thanks OSS Award 2025年度下半期（7〜12月）に選出。企業がプレスリリースで受賞者を公表しており、自己申告ではない実績",
+    "links": [
+      {
+        "text": "Thanks OSS Award",
+        "href": "https://www.toyokumo.co.jp/2025/10/16/oss-award-2025-lasthalf"
+      }
+    ]
+  },
+  {
+    "date": "2025-11-02",
+    "label": "'25/10/17-11/2",
+    "milestone": "日本イベント",
+    "low": 47,
+    "mid": 63,
+    "high": 74,
+    "evidence": "登壇5本。開発者コミュニティの中で認知が広がった",
+    "links": [
+      {
+        "text": "登壇5本",
+        "href": "/blog/2025-11-06-japan-trip-ja"
+      }
+    ]
+  },
+  {
+    "date": "2025-12-01",
+    "label": "'25/12",
+    "milestone": "YouTube公開",
+    "low": 54,
+    "mid": 69,
+    "high": 79,
+    "evidence": "証拠に出したのはTECH WORLD×2本、他媒体を含めて計5本。コミュニティの外にも届き、後から誰でも見られる形で残る",
+    "links": [
+      {
+        "text": "TECH WORLD",
+        "href": "https://www.youtube.com/@TECHWORLD111"
+      },
+      {
+        "text": "計5本",
+        "href": "/blog/2025-11-06-japan-trip-ja"
+      }
+    ]
+  },
+  {
+    "date": "2026-01-10",
+    "label": "'26/1",
+    "milestone": "Rorkオファー",
+    "low": 65,
+    "mid": 78,
+    "high": 87,
+    "evidence": "Founding Engineerのオファー。いまの市場が本人をいくらで採るかという、最も直接的な評価",
+    "milestoneHref": "https://rork.com"
+  },
+  {
+    "date": "2026-01-17",
+    "label": "'26/1/17",
+    "milestone": "Software Design 2月号",
+    "low": 68,
+    "mid": 80,
+    "high": 89,
+    "evidence": "商業誌の第1特集に寄稿。出版社が執筆を依頼した、第三者による専門性の評価",
+    "links": [
+      {
+        "text": "商業誌の第1特集に寄稿",
+        "href": "https://gihyo.jp/magazine/SD/archive/2026/202602"
+      }
+    ]
+  },
+  {
+    "date": "2026-02-01",
+    "label": "'26/2",
+    "milestone": "Rork Max",
+    "low": 72,
+    "mid": 83,
+    "high": 91,
+    "evidence": "Rork Maxローンチ。3日でARR $1.5M",
+    "links": [
+      {
+        "text": "3日でARR $1.5M",
+        "href": "https://rorklab.net/en/articles/rork-business/rork-15m-seed-paperline-acquisition-what-changes"
+      }
+    ],
+    "milestoneHref": "https://rork.com"
+  },
+  {
+    "date": "2026-03-01",
+    "label": "'26/3",
+    "milestone": "推薦状3通",
+    "low": 77,
+    "mid": 87,
+    "high": 93,
+    "evidence": "新しい実績ではなく、それまでの実績の意味を別の立場の第三者が説明する"
+  },
+  {
+    "date": "2026-04-20",
+    "label": "'26/4/20",
+    "milestone": "提出",
+    "low": 79,
+    "mid": 88,
+    "high": 94,
+    "evidence": "書類が揃って提出。ここで確率は凍結し、以降のstarは審査対象外"
+  },
+  {
+    "date": "2026-05-29",
+    "label": "'26/5/29",
+    "milestone": "15K突破",
+    "low": null,
+    "mid": null,
+    "high": null,
+    "evidence": "公開からちょうど1年",
+    "milestoneHref": "https://github.com/ccusage/ccusage"
+  },
+  {
+    "date": "2026-08-09",
+    "label": "'26/8/9",
+    "milestone": "現在",
+    "low": null,
+    "mid": null,
+    "high": null,
+    "evidence": "提出時の約12.9Kから+4.9K。増加分は審査対象外"
+  }
+]
