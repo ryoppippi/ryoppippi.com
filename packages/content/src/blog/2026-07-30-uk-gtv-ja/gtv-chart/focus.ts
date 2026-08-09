@@ -53,8 +53,8 @@ function rowPointsNearestX(
  */
 export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
 	// maxDistance is ignored on purpose: the whole plot tracks the timeline.
-	resolve: (points, x) => rowPointsNearestX(points, x),
-	group: (points, focused) => [
+	resolve: (points, { x }) => rowPointsNearestX(points, x),
+	group: (points, { point: focused }) => [
 		focused,
 		...points.filter(
 			(point) =>
