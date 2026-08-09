@@ -156,6 +156,31 @@ function replaceMagicLinksOutsideProtectedHtml(html: string) {
 	return output + replaceMagicLinks(html.slice(offset));
 }
 
+function wrapScrollableTables(html: string) {
+	const commentPattern = /<!--[\s\S]*?-->/g;
+	const wrap = (part: string) =>
+		part.replace(
+			/<table\b[^>]*>[\s\S]*?<\/table>/g,
+			'<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><span class="table-scroll-hint" aria-hidden="true">← scroll →</span>$&</div>',
+		);
+	let output = '';
+	let offset = 0;
+
+	// Comments survive rendering, so a table quoted inside one would otherwise
+	// have wrapper markup spliced into the comment text.
+	for (const match of html.matchAll(commentPattern)) {
+		if (match.index == null) {
+			continue;
+		}
+
+		output += wrap(html.slice(offset, match.index));
+		output += match[0];
+		offset = match.index + match[0].length;
+	}
+
+	return output + wrap(html.slice(offset));
+}
+
 function postprocessRenderedHtml(html: string) {
 	const blockEmbeds = html
 		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
@@ -168,7 +193,9 @@ function postprocessRenderedHtml(html: string) {
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 
-	return addExternalLinkAttributes(addHeadingAnchors(withoutTrailingAttributes));
+	return addExternalLinkAttributes(
+		addHeadingAnchors(wrapScrollableTables(withoutTrailingAttributes)),
+	);
 }
 
 async function replaceAsync(
@@ -368,6 +395,33 @@ if (import.meta.vitest != null) {
 	});
 
 	describe('renderMarkdown', () => {
+		it('wraps markdown tables in a keyboard-scrollable region', async () => {
+			const html = await renderMarkdown('| Name | Value |\n|---|---:|\n| Example | 42 |');
+
+			expect(html).toContain(
+				'<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><span class="table-scroll-hint" aria-hidden="true">← scroll →</span><table>',
+			);
+			expect(html).toContain('</table></div>');
+		});
+
+		it('leaves a table quoted inside an HTML comment unwrapped', async () => {
+			const html = await renderMarkdown('<!--\n<table><tr><td>a</td></tr></table>\n-->');
+
+			expect(html).toContain('<!--\n<table><tr><td>a</td></tr></table>\n-->');
+			expect(html).not.toContain('table-scroll');
+		});
+
+		it('preserves multiline HTML comments without transforming their contents', async () => {
+			const html = await renderMarkdown(
+				'before\n\n<!--\nhttps://x.com/example/status/1234567890\n-->\n\nafter',
+			);
+
+			expect(html).toContain('before');
+			expect(html).toContain('after');
+			expect(html).toContain('<!--\nhttps://x.com/example/status/1234567890\n-->');
+			expect(html).not.toContain('[https://x.com/example/status/1234567890]');
+		});
+
 		it('renders configured and GitHub magic links', async () => {
 			const html = await renderMarkdown('{@ryoppippi} {vim-jp} {Svelte Japan}');
 
