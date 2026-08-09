@@ -1,5 +1,5 @@
 name: Setup Nix
-description: Install Nix and restore the Nix store from the GitHub Actions cache
+description: Install Nix and load the development environment
 runs:
   using: composite
   steps:
@@ -7,17 +7,6 @@ runs:
       uses: nixbuild/nix-quick-install-action@2c9db80fb984ceb1bcaa77cdda3fdf8cfba92035 # v34
       with:
         github_access_token: ${{ github.token }}
-
-    - name: Cache Nix store
-      uses: nix-community/cache-nix-action@7df957e333c1e5da7721f60227dbba6d06080569 # v7.0.2
-      with:
-        primary-key: nix-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('flake.lock', 'flake.nix') }}
-        restore-prefixes-first-match: nix-${{ runner.os }}-${{ runner.arch }}-
-        gc-max-store-size-linux: 3500000000
-        purge: true
-        purge-prefixes: nix-${{ runner.os }}-${{ runner.arch }}-
-        purge-created: 172800
-        purge-primary-key: never
 
     - name: Load Nix development environment
       shell: bash
