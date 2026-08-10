@@ -35,6 +35,7 @@
 	<meta name='theme-color' content='#121212' media='(prefers-color-scheme: dark)' />
 	<meta data-page-head name='robots' content='index,follow,nosnippet,max-snippet:-1,max-image-preview:none,noarchive,noimageindex,max-video-preview:-1,notranslate' />
 	<meta data-page-head name='Hatena::Bookmark' content='nocomment' />
+  <link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/" />
 	<meta data-page-head property='og:type' content={article ? 'article' : 'website'} />
 	<meta data-page-head property='og:title' content={fullTitle} />
 	<meta data-page-head property='og:description' content={description} />
