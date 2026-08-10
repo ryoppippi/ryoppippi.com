@@ -51,31 +51,20 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 
 UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、医学、デジタルテクノロジー、芸術などの分野でleaderまたはpotential leaderとしてendorseされた人向けのビザだ。
 
-申請は2段階に分かれる。
+## ビザとしての自由度
 
-1. **Stage 1: endorsement** — 分野のendorsing bodyに「リーダーとして認識されているか」を審査してもらう。決定の公式目安は5〜8週間[^stage1-weeks]
-2. **Stage 2: ビザ申請** — endorsementを得てからHome Officeに申請する。ここで見られるのは通常のビザ要件で、才能の審査はStage 1で終わっている
+[GOV.UK](https://www.gov.uk/global-talent-digital-technology)の説明だけ見ても、自由度はかなり高い。
 
-このブログで「審査」と書くのは、ほぼすべてStage 1の話だ。担当するendorsing bodyは分野ごとに異なる（[一覧](https://www.gov.uk/government/publications/global-talent-endorsing-bodies)）。
+- job offerもスポンサー企業も要らない
+- employee / self-employed / company directorとして働ける(なんなら起業もできる)
+- 仕事を変えても辞めても、Home Office(内務省)に知らせなくていい
+- 家族を帯同できる
+- 最長5年まで期間を選べて、延長もできる
+- 最低給与要件も英語要件もない
+- 3~5年でILR（永住）を申請できる
 
-+++ 対象分野
+働くためのビザは雇用主やスポンサーに紐づくのが普通だ。どこにも紐づかず、自分の実績だけで申請して住める。この形はかなり珍しい。
 
-| 分野 | endorsing body |
-|---|---|
-| Academia or research | science / engineering / humanities / social science / medicineの各endorsing body |
-| Digital technology | [Tech Nation](https://technation.io/) |
-| Arts and culture | Arts Council England |
-| └ Film and television | PACT |
-| └ Fashion design | British Fashion Council |
-| └ Architecture | RIBA |
-| └ Design industry | Design Business Association |
-| [prestigious prize](https://www.gov.uk/government/publications/global-talent-eligible-prize-list)の受賞者 | endorsement不要 |
-
-制度は変わり続けている。たとえばgraphic design、brand design、product design（工業デザイン）には、[Design industryの専用ルート](https://www.gov.uk/global-talent-arts-culture/design-industry)ができた（2026年7月1日開始）[^design-uxui]。
-
-+++
-
-自分が申請したのは[Digital Technology route](https://www.gov.uk/global-talent-digital-technology)で、[Tech Nation](https://technation.io/)からendorsementを受けた。区分はExceptional Promiseではなく、Exceptional Talentだった。
 
 ## Exceptional TalentとExceptional Promise
 
@@ -100,28 +89,31 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 
 自分もpeople managerではないしfounderでもない。OSSを作っている一人のエンジニアだ。それでもOSS、登壇、メディア、実務、推薦状を通じて分野のleading talentとして認められた。
 
-## ビザとしての自由度
 
-[GOV.UK](https://www.gov.uk/global-talent-digital-technology)の説明だけ見ても、自由度はかなり高い。
+## 申請フロー
 
-- job offerもスポンサー企業も要らない
-- employee / self-employed / company directorとして働ける
-- 仕事を変えても辞めても、Home Officeに知らせなくていい
-- 最長5年まで期間を選べて、延長もできる
-- 家族を帯同できる
-- 最低給与要件も英語要件もない
+申請は2段階に分かれる。
 
-働くためのビザは雇用主やスポンサーに紐づくのが普通だ。どこにも紐づかず、自分の実績だけで申請して住める。この形はかなり珍しい。
+1. **Stage 1: endorsement** — 分野のendorsing bodyに「リーダーとして認識されているか」を審査してもらう。決定の公式目安は5〜8週間[^stage1-weeks]
+2. **Stage 2: ビザ申請** — endorsementを得てからHome Officeに申請する。ここで見られるのは通常のビザ要件で、才能の審査はStage 1で終わっている
 
-## ILR
+このブログで「審査」と書くのは、ほぼすべてStage 1の話だ。担当するendorsing bodyは分野ごとに異なる（[一覧](https://www.gov.uk/government/publications/global-talent-endorsing-bodies)）。
 
-このビザはILR（indefinite leave to remain、永住）までの期間も短い。Tech NationのExceptional Talentなら3年、Promiseでも5年で申請できる[^ilr-clock]。
+| 分野 | endorsing body |
+|---|---|
+| Academia or research | science / engineering / humanities / social science / medicineの各endorsing body |
+| Digital technology | [Tech Nation](https://technation.io/) |
+| Arts and culture | Arts Council England |
+| └ Film and television | PACT |
+| └ Fashion design | British Fashion Council |
+| └ Architecture | RIBA |
+| └ Design industry | Design Business Association |
+| [prestigious prize](https://www.gov.uk/government/publications/global-talent-eligible-prize-list)の受賞者 | endorsement不要 |
 
-ILRを取ると何が嬉しいのか。ビザの期限と更新から解放されるのが本体だが金銭面で最も大きいのはimmigration health surcharge（IHS）だ。UKのビザはNHSを使うための料金として年£1,035をビザの年数分まとめて前払いする（5年なら£5,175、家族は人数分）[^ihs]。ILRにIHSはなく以後この支払いそのものがなくなる。
+制度は変わり続けている。たとえばgraphic design、brand design、product design（工業デザイン）には、[Design industryの専用ルート](https://www.gov.uk/global-talent-arts-culture/design-industry)ができた（2026年7月1日開始）[^design-uxui]。
 
-日数の管理からも解放される。ILRまでは原則として12か月あたり180日までしかUKの外にいられず、渡航のたびに日数を数えることになる。うちでは妻が几帳面にカウントしてくれていた。ILRの後はこの計算が要らなくなる[^ilr-absence]。
 
-しかも標準ルートのILRは、5年から10年へ延ばす方向で改革が進んでいる（まだ施行前）[^earned-settlement]。5年でも長いのに10年はさすがに長い。その案でも、Global Talentは3年のfast-track側に置かれている。UKで働く定番の[Skilled Worker](https://www.gov.uk/skilled-worker-visa)（雇用主スポンサー型。差は[追記](#skilled-workerとの差)にまとめた）とも違う。
+自分が申請したのは[Digital Technology route](https://www.gov.uk/global-talent-digital-technology)で、[Tech Nation](https://technation.io/)からendorsementを受けた。
 
 ## 何を満たせばいいのか
 
@@ -145,6 +137,17 @@ Tech Nationの直近の承認率は約14%（2025-26）で、1年前の約27%か�
 Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
 
 難しいビザではある。ただし従業員としての実績も職務外のOSSも使える。他分野のendorsing bodyとの比較は[追記](#他分野の承認率)に置いた。
+
+## ILR
+
+このビザはILR（indefinite leave to remain、永住）までの期間も短い。Tech NationのExceptional Talentなら3年、Promiseでも5年で申請できる[^ilr-clock]。
+
+ILRを取ると何が嬉しいのか。ビザの期限と更新から解放されるのが本体だが金銭面で最も大きいのはimmigration health surcharge（IHS）だ。UKのビザはNHSを使うための料金として年£1,035をビザの年数分まとめて前払いする（5年なら£5,175、家族は人数分）[^ihs]。ILRにIHSはなく以後この支払いそのものがなくなる。
+
+日数の管理からも解放される。ILRまでは原則として12か月あたり180日までしかUKの外にいられず、渡航のたびに日数を数えることになる。うちでは妻が几帳面にカウントしてくれていた。ILRの後はこの計算が要らなくなる[^ilr-absence]。
+
+しかも標準ルートのILRは、5年から10年へ延ばす方向で改革が進んでいる（まだ施行前）[^earned-settlement]。5年でも長いのに10年はさすがに長い。その案でも、Global Talentは3年のfast-track側に置かれている。UKで働く定番の[Skilled Worker](https://www.gov.uk/skilled-worker-visa)（雇用主スポンサー型。差は[追記](#skilled-workerとの差)にまとめた）とも違う。
+
 
 # なぜ取ったのか
 
