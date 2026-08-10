@@ -1,6 +1,6 @@
 [
   {
-    "date": "2023-10-01",
+    "date": "2023-10-01T23:59:59Z",
     "label": "'23/10",
     "milestone": "経験5年超",
     "low": 5,
@@ -9,7 +9,7 @@
     "evidence": "最初のスタートアップ（〜'23/6）+ 受託期。5年超なので、区分の目安ではTalent側になる"
   },
   {
-    "date": "2024-04-01",
+    "date": "2024-04-01T23:59:59Z",
     "label": "'24/4",
     "milestone": "転換期",
     "low": 4,
@@ -18,7 +18,7 @@
     "evidence": "RA契約終了。雇用面では不安定だが、OSS蓄積期に入る"
   },
   {
-    "date": "2024-11-23",
+    "date": "2024-11-23T23:59:59Z",
     "label": "'24/11/23",
     "milestone": "OSS蓄積・英語登壇",
     "low": 6,
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "date": "2025-03-01",
+    "date": "2025-03-01T23:59:59Z",
     "label": "'25/3",
     "milestone": "WRTN",
     "low": 8,
@@ -47,7 +47,7 @@
     "milestoneHref": "https://wrtn.io/"
   },
   {
-    "date": "2025-05-29",
+    "date": "2025-05-29T23:59:59Z",
     "label": "'25/5/29",
     "milestone": "ccusage公開",
     "low": 9,
@@ -63,7 +63,7 @@
     "milestoneHref": "https://github.com/ccusage/ccusage"
   },
   {
-    "date": "2025-06-18",
+    "date": "2025-06-18T23:59:59Z",
     "label": "'25/6/18",
     "milestone": "ccusage 1K",
     "low": 18,
@@ -79,7 +79,7 @@
     "milestoneHref": "https://github.com/ccusage/ccusage"
   },
   {
-    "date": "2025-06-23",
+    "date": "2025-06-23T23:59:59Z",
     "label": "'25/6/23",
     "milestone": "StackOne入社",
     "low": 22,
@@ -99,16 +99,16 @@
     ]
   },
   {
-    "date": "2025-07-26",
+    "date": "2025-07-26T23:59:59Z",
     "label": "'25/7末",
-    "milestone": "ccusage 4.9K",
+    "milestone": "ccusage 5K",
     "low": 30,
     "mid": 43,
     "high": 55,
-    "evidence": "約4.9K stars。「ccusageの人」として明確になる"
+    "evidence": "約5K stars。「ccusageの人」として明確になる"
   },
   {
-    "date": "2025-10-16",
+    "date": "2025-10-16T23:59:59Z",
     "label": "'25/10/16",
     "milestone": "TOYOKUMO",
     "low": 36,
@@ -123,7 +123,7 @@
     ]
   },
   {
-    "date": "2025-11-02",
+    "date": "2025-11-02T23:59:59Z",
     "label": "'25/10/17-11/2",
     "milestone": "日本イベント",
     "low": 47,
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "date": "2025-12-01",
+    "date": "2025-12-01T23:59:59Z",
     "label": "'25/12",
     "milestone": "YouTube公開",
     "low": 54,
@@ -157,7 +157,7 @@
     ]
   },
   {
-    "date": "2026-01-10",
+    "date": "2026-01-10T23:59:59Z",
     "label": "'26/1",
     "milestone": "Rorkオファー",
     "low": 65,
@@ -167,7 +167,7 @@
     "milestoneHref": "https://rork.com"
   },
   {
-    "date": "2026-01-17",
+    "date": "2026-01-17T23:59:59Z",
     "label": "'26/1/17",
     "milestone": "Software Design 2月号",
     "low": 68,
@@ -182,7 +182,7 @@
     ]
   },
   {
-    "date": "2026-02-01",
+    "date": "2026-02-01T23:59:59Z",
     "label": "'26/2",
     "milestone": "Rork Max",
     "low": 72,
@@ -198,7 +198,7 @@
     "milestoneHref": "https://rork.com"
   },
   {
-    "date": "2026-03-01",
+    "date": "2026-03-01T23:59:59Z",
     "label": "'26/3",
     "milestone": "推薦状3通",
     "low": 77,
@@ -207,7 +207,7 @@
     "evidence": "新しい実績ではなく、それまでの実績の意味を別の立場の第三者が説明する"
   },
   {
-    "date": "2026-04-20",
+    "date": "2026-04-20T23:59:59Z",
     "label": "'26/4/20",
     "milestone": "提出",
     "low": 79,
@@ -216,7 +216,7 @@
     "evidence": "書類が揃って提出。ここで確率は凍結し、以降のstarは審査対象外"
   },
   {
-    "date": "2026-05-29",
+    "date": "2026-05-29T23:59:59Z",
     "label": "'26/5/29",
     "milestone": "15K突破",
     "low": null,
@@ -226,7 +226,7 @@
     "milestoneHref": "https://github.com/ccusage/ccusage"
   },
   {
-    "date": "2026-08-09",
+    "date": "2026-08-09T23:59:59Z",
     "label": "'26/8/9",
     "milestone": "現在",
     "low": null,

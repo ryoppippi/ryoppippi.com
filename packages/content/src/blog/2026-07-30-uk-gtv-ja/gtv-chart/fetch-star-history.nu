@@ -12,9 +12,18 @@
 # Usage:
 #   ./fetch-star-history.nu                    # every 500 stars
 #   ./fetch-star-history.nu --every 200        # denser sampling, more requests
+#   ./fetch-star-history.nu --extra [15000]    # also sample exactly 15000
 #   ./fetch-star-history.nu --repo owner/name
 
 const PER_PAGE = 100
+
+# The chart and the timeline table both work in whole days, and the minute a
+# star landed is noise at that scale, so a reading counts for the day it
+# happened. Without this, a row dated 5/29 reads the count as of some arbitrary
+# hour and can land below a milestone the day had already passed.
+def end-of-day [at: string]: nothing -> string {
+    $"($at | str substring 0..<10)T23:59:59Z"
+}
 
 def script-dir []: nothing -> string {
     $env.CURRENT_FILE | path dirname
@@ -34,7 +43,7 @@ def starred-at [repo: string, page: int]: nothing -> string {
     ^gh api -H 'Accept: application/vnd.github.star+json' $path --jq '.[-1].starred_at' | str trim
 }
 
-def sample [repo: string, total: int, every: int]: nothing -> table {
+def sample [repo: string, total: int, every: int, extra: list<int>]: nothing -> table {
     if ($every mod $PER_PAGE) != 0 {
         error make {msg: $"--every must be a multiple of ($PER_PAGE)"}
     }
@@ -48,14 +57,28 @@ def sample [repo: string, total: int, every: int]: nothing -> table {
     } else {
         $periodic
     }
+    # A count a milestone row quotes needs its own page. The periodic grid steps
+    # in `every`-sized offsets from 100, so a round number like 15000 otherwise
+    # falls between two samples and is only ever interpolated.
+    let requested = $extra
+    | each {|stars|
+        if ($stars mod $PER_PAGE) != 0 {
+            error make {msg: $"extra star counts must be multiples of ($PER_PAGE), got ($stars)"}
+        }
+        $stars // $PER_PAGE
+    }
+    | where {|page| $page <= $last_page }
 
     $pages
+    | append $requested
+    | uniq
+    | sort
     | each {|page|
         let at = starred-at $repo $page
         if ($at | is-empty) or $at == 'null' {
             null
         } else {
-            {stars: ($page * $PER_PAGE), date: $at}
+            {stars: ($page * $PER_PAGE), date: (end-of-day $at)}
         }
     }
     | compact
@@ -65,6 +88,7 @@ def sample [repo: string, total: int, every: int]: nothing -> table {
 def main [
     --repo: string = 'ccusage/ccusage' # repository to sample
     --every: int = 500 # sample interval in stars
+    --extra: list<int> = [] # star counts to sample exactly, merged with those already in the output
     --submitted: string = '2026-04-20' # submission date, kept in the output
     --out: string = '' # output path, defaults to star-history.json beside this script
 ]: nothing -> nothing {
@@ -77,15 +101,18 @@ def main [
         $out
     }
 
+    let previous = if ($target | path exists) { open $target } else { {} }
+    # Kept in the output so a plain re-run kicks out the same milestone samples.
+    let extras = ($previous.extraStars? | default [] | append $extra | uniq | sort)
+
     let total = repo-total $repo
     print $"($repo): ($total) stars, sampling every ($every)"
 
-    let samples = sample $repo $total $every
-    let previous = if ($target | path exists) { open $target } else { {} }
+    let samples = sample $repo $total $every $extras
 
     {
         createdAt: (repo-created $repo)
-        submittedAt: $submitted
+        submittedAt: (end-of-day $submitted)
         axisMaxK: ($previous.axisMaxK? | default 18)
         axisTicksK: ($previous.axisTicksK? | default [
             0
@@ -99,6 +126,7 @@ def main [
             16
             18
         ])
+        extraStars: $extras
         samples: $samples
     }
     | to json --indent 2
