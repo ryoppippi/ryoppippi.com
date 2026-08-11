@@ -68,7 +68,7 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 
 ## Exceptional TalentとExceptional Promise
 
-申請の形式はよく似ている。どちらも推薦状3通とCV、基準を満たす証拠を最大10点提出する。ビザを取った後にできることも変わらない[^talent-promise-format]。ただし、難易度は同じではない。
+Global Talent Visaには2つの区分がある。Exceptional Talentはすでに分野のリーダーとして認識されている人向け、Exceptional Promiseは将来リーダーになりうる人向けだ。
 
 | | Exceptional Talent | Exceptional Promise |
 |---|---|---|
@@ -80,6 +80,8 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 | 通った人に占める割合[^promise-share] | 37% | 44% |
 
 *割合は全分野の調査回答者ベースで、残り19%は区分不明。*
+
+申請の形式はよく似ている。どちらも推薦状3通とCV、基準を満たす証拠を最大10点提出する。ビザを取った後にできることも変わらない[^talent-promise-format]。ただし、難易度は同じではない。
 
 自分はtechnology分野で5年を超えていたのでTalentで申請した[^talent-to-promise]。
 
