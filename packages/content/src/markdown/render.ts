@@ -592,6 +592,17 @@ if (import.meta.vitest != null) {
 			expect(html).not.toContain('<Chart');
 		});
 
+		it('passes island props through the HTML pipeline', async () => {
+			const renderIsland = vi.fn(async () => '<p>chart</p>');
+			const html = await renderMarkdown('<Chart lang="en" />', {
+				islands: { Chart: 'post/Chart.svelte' },
+				renderIsland,
+			});
+
+			expect(renderIsland).toHaveBeenCalledWith('post/Chart.svelte', { lang: 'en' });
+			expect(html).toContain('data-ox-island-root');
+		});
+
 		it('leaves component tags alone when the post has no such component', async () => {
 			const html = await renderMarkdown('<Chart />');
 
