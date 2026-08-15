@@ -1,13 +1,18 @@
 <script lang='ts'>
+	import { localisePoint, resolveChartLang, uiCopy, type ChartLang } from './copy.ts';
 	import { segments } from './evidence-links.ts';
 	import { rows } from './rows.ts';
 
-	let { focused = $bindable() }: { focused: number | null } = $props();
+	let { focused = $bindable(), lang = 'ja' }: { focused: number | null; lang?: ChartLang } =
+		$props();
+
+	const resolvedLang = $derived(resolveChartLang(lang));
+	const copy = $derived(uiCopy[resolvedLang].table);
 
 	const percent = (value: number | null) => (value == null ? '—' : `${value}%`);
 
 	const starLabel = (value: number | null) =>
-		value == null ? '—' : value === 0 ? 'ほぼ0' : `~${value}K`;
+		value == null ? '—' : value === 0 ? copy.almostZero : `~${value}K`;
 
 	function scrollHorizontally(event: KeyboardEvent) {
 		const direction = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
@@ -23,7 +28,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex, a11y_no_noninteractive_element_interactions (horizontal overflow must be keyboard-scrollable) -->
 <div
-	aria-label='グラフの数値データ'
+	aria-label={copy.regionLabel}
 	class='scroll'
 	onkeydown={scrollHorizontally}
 	role='region'
@@ -31,19 +36,20 @@
 >
 	<span aria-hidden='true' class='table-scroll-hint'>← scroll →</span>
 	<table>
-		<caption class='sr-only'>申請時点ごとの通過見込みとccusageのstar数</caption>
+		<caption class='sr-only'>{copy.caption}</caption>
 		<thead>
 			<tr>
-				<th scope='col'>時点（年/月）</th>
-				<th class='num' scope='col'>低め</th>
-				<th class='num' scope='col'>中央</th>
-				<th class='num' scope='col'>高め</th>
-				<th class='num' scope='col'>ccusage stars</th>
-				<th scope='col'>備考</th>
+				<th scope='col'>{copy.date}</th>
+				<th class='num' scope='col'>{copy.low}</th>
+				<th class='num' scope='col'>{copy.mid}</th>
+				<th class='num' scope='col'>{copy.high}</th>
+				<th class='num' scope='col'>{copy.stars}</th>
+				<th scope='col'>{copy.notes}</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each rows as row, index (row.date)}
+				{@const localised = localisePoint(row, resolvedLang)}
 				<tr
 					class:focused={focused === index}
 					data-testid='gtv-row'
@@ -53,17 +59,17 @@
 					onmouseleave={() => (focused = null)}
 				>
 					<th scope='row'>
-						{row.label}（{#if row.milestoneHref == null}{row.milestone}{:else}<a
-								href={row.milestoneHref}
+						{localised.label}{copy.headingOpen}{#if localised.milestoneHref == null}{localised.milestone}{:else}<a
+								href={localised.milestoneHref}
 								rel='noopener noreferrer'
-								target='_blank'>{row.milestone}</a>{/if}）
+								target='_blank'>{localised.milestone}</a>{/if}{copy.headingClose}
 					</th>
-					<td class='num'>{percent(row.low)}</td>
-					<td class='num'>{row.mid == null ? '凍結' : `${row.mid}%`}</td>
-					<td class='num'>{percent(row.high)}</td>
-					<td class='num'>{starLabel(row.stars)}</td>
+					<td class='num'>{percent(localised.low)}</td>
+					<td class='num'>{localised.mid == null ? copy.frozen : `${localised.mid}%`}</td>
+					<td class='num'>{percent(localised.high)}</td>
+					<td class='num'>{starLabel(localised.stars)}</td>
 					<td>
-						{#each segments(row) as part (part.text)}
+						{#each segments(localised) as part (part.text)}
 							{#if part.href == null}
 								{part.text}
 							{:else if part.href.startsWith('http')}

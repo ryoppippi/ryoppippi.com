@@ -79,6 +79,17 @@ if (import.meta.vitest != null) {
 			]);
 		});
 
+		it('reads a component from a sibling post directory', () => {
+			expect(
+				parseIslandImports("import Chart from '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte'"),
+			).toEqual([
+				{
+					name: 'Chart',
+					specifier: '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte',
+				},
+			]);
+		});
+
 		it('reads several imports in order', () => {
 			const content = "import B from './B.svelte'\nimport A from './A.svelte'";
 

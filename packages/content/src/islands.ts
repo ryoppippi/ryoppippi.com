@@ -85,6 +85,21 @@ if (import.meta.vitest != null) {
 			expect(islands).toEqual({ Chart: 'post/Chart.svelte' });
 		});
 
+		it('resolves a component from a sibling post directory', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'en/index.md': '# Post',
+				'ja/chart/GtvChart.svelte': '<p>chart</p>',
+			});
+			const islands = await resolvePostIslands(
+				"import GtvChart from '../ja/chart/GtvChart.svelte'",
+				fixture.getPath('en/index.md'),
+				fixture.getPath(),
+			);
+
+			expect(islands).toEqual({ GtvChart: 'ja/chart/GtvChart.svelte' });
+		});
+
 		it('resolves a component from a subdirectory', async () => {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({

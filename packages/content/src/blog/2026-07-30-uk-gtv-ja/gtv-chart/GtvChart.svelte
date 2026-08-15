@@ -1,26 +1,33 @@
 <script lang='ts'>
 	import { createScrollReveal } from '../../../lib/scroll-reveal.svelte.ts';
+	import { localisePoint, resolveChartLang, uiCopy, type ChartLang } from './copy.ts';
 	import EvidenceTable from './EvidenceTable.svelte';
 	import Legend from './Legend.svelte';
 	import { describeRow, rows } from './rows.ts';
 	import Timeline from './Timeline.svelte';
 
+	let { lang = 'ja' }: { lang?: ChartLang } = $props();
+
+	const resolvedLang = $derived(resolveChartLang(lang));
+	const copy = $derived(uiCopy[resolvedLang]);
 	const scrollReveal = createScrollReveal();
 
 	let focused = $state<number | null>(null);
 
-	const readout = $derived(focused == null ? '' : describeRow(rows[focused]));
+	const readout = $derived(
+		focused == null ? '' : describeRow(localisePoint(rows[focused], resolvedLang), resolvedLang),
+	);
 </script>
 
 <figure class='gtv-chart' data-testid='gtv-chart' {@attach scrollReveal.attach}>
-	<Legend />
+	<Legend lang={resolvedLang} />
 	<p aria-atomic='true' aria-live='polite' class='readout'>{readout || '\u00a0'}</p>
 	<div class='wipe' class:revealed={scrollReveal.revealed}>
-		<Timeline bind:focused />
+		<Timeline bind:focused lang={resolvedLang} />
 	</div>
-	<EvidenceTable bind:focused />
+	<EvidenceTable bind:focused lang={resolvedLang} />
 	<figcaption>
-		通過見込みはLLMに推定させた値で、実測値ではない。提出書類の構成や審査戦略を示すものでもない。推定方法は冒頭のdetailsを参照。
+		{copy.figcaption}
 	</figcaption>
 </figure>
 
