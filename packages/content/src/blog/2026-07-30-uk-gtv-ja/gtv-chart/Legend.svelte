@@ -1,9 +1,17 @@
+<script lang='ts'>
+	import { resolveChartLang, uiCopy, type ChartLang } from './copy.ts';
+
+	let { lang = 'ja' }: { lang?: ChartLang } = $props();
+
+	const copy = $derived(uiCopy[resolveChartLang(lang)].legend);
+</script>
+
 <ul class='legend'>
-	<li><span aria-hidden='true' class='swatch swatch--mid'></span>中央推定（左軸）</li>
-	<li><span aria-hidden='true' class='swatch swatch--high'></span>高め</li>
-	<li><span aria-hidden='true' class='swatch swatch--low'></span>低め</li>
-	<li><span aria-hidden='true' class='swatch swatch--stars'></span>ccusage stars（右軸）</li>
-	<li><span aria-hidden='true' class='swatch swatch--after'></span>提出後（審査対象外）</li>
+	<li><span aria-hidden='true' class='swatch swatch--mid'></span>{copy.mid}</li>
+	<li><span aria-hidden='true' class='swatch swatch--high'></span>{copy.high}</li>
+	<li><span aria-hidden='true' class='swatch swatch--low'></span>{copy.low}</li>
+	<li><span aria-hidden='true' class='swatch swatch--stars'></span>{copy.stars}</li>
+	<li><span aria-hidden='true' class='swatch swatch--after'></span>{copy.after}</li>
 </ul>
 
 <style>

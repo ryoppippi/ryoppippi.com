@@ -1,18 +1,22 @@
 <script lang='ts'>
 	import { Chart } from '@tanstack/svelte-charts';
+	import { resolveChartLang, uiCopy, type ChartLang } from './copy.ts';
 	import { buildChartDefinition } from './definition.ts';
 	import { isRowMark } from './focus.ts';
 
-	let { focused = $bindable() }: { focused: number | null } = $props();
+	let { focused = $bindable(), lang = 'ja' }: { focused: number | null; lang?: ChartLang } =
+		$props();
 
-	const definition = $derived(buildChartDefinition(focused));
+	const resolvedLang = $derived(resolveChartLang(lang));
+	const copy = $derived(uiCopy[resolvedLang].chart);
+	const definition = $derived(buildChartDefinition(focused, resolvedLang));
 </script>
 
-<!-- focusByX never returns nothing, so the pointer leaving is what clears it. -->
+<!-- svelte-ignore a11y_no_static_element_interactions (pointer leave only clears chart focus) -->
 <div onpointerleave={() => (focused = null)}>
 	<Chart
-		ariaLabel='申請時点までの通過見込みの推定とccusageのstar数の推移'
-		ariaDescription='矢印キーで時点を移動できる。詳しい値は直後の表にも掲載している。'
+		ariaLabel={copy.ariaLabel}
+		ariaDescription={copy.ariaDescription}
 		aspectRatio={2.2}
 		class='canvas'
 		{definition}

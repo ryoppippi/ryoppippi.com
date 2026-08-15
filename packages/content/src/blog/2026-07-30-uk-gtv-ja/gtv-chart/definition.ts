@@ -1,6 +1,8 @@
 import { areaY, d3Curve, defineChart, dot, lineY, rect, ruleX, text } from '@tanstack/charts';
 import { scaleLinear, scaleUtc } from 'd3-scale';
 import { curveMonotoneX, curveStepAfter } from 'd3-shape';
+import type { ChartLang } from './copy.ts';
+import { uiCopy } from './copy.ts';
 import { focusByX } from './focus.ts';
 import {
 	firstAt,
@@ -11,12 +13,6 @@ import {
 	starTicks,
 } from './rows.ts';
 
-const axisDate = new Intl.DateTimeFormat('ja-JP', {
-	year: '2-digit',
-	month: 'numeric',
-	timeZone: 'UTC',
-});
-
 /**
  * Builds the timeline chart definition for a given focus state.
  *
@@ -24,10 +20,16 @@ const axisDate = new Intl.DateTimeFormat('ja-JP', {
  * handed a fresh definition whenever the focus changes.
  *
  * @param focused - Index of the row under the cursor, or null.
+ * @param lang - Language for axis date labels.
  * @returns The chart definition for that focus state.
  */
-export function buildChartDefinition(focused: number | null) {
+export function buildChartDefinition(focused: number | null, lang: ChartLang = 'ja') {
 	const focusedAt = focused == null ? null : rows[focused].at;
+	const axisDate = new Intl.DateTimeFormat(uiCopy[lang].chart.dateLocale, {
+		year: '2-digit',
+		month: 'numeric',
+		timeZone: 'UTC',
+	});
 
 	return defineChart({
 		marks: [
