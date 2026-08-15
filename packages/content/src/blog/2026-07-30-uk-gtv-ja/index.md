@@ -7,6 +7,8 @@ lang: ja
 
 import GtvChart from './gtv-chart/GtvChart.svelte'
 
+> [English](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en)
+
 # TL;DR
 
 このブログは長いので興味のあるところから読んでほしい。
@@ -213,7 +215,7 @@ UKでの就職活動については、以前のブログにまとめている。
 
 2025年にccusageを公開すると急速に伸びて状況が変わった。ここで初めて「自分は何の人なのか」を外部から説明しやすくなった。
 
-2025年5月末から7月末にかけてstarはほぼ0から約5Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。
+公開から約3週間で1K、約2ヶ月で約5Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。
 
 [@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
 
@@ -335,7 +337,7 @@ Digital Technology routeは著名なソフトウェアエンジニアだけを�
 3. **Exceptional Talentの30〜50%**: [Home OfficeのWave 2調査](https://www.gov.uk/government/publications/global-talent-visa-evaluation-wave-2-report/global-talent-visa-evaluation-wave-2-report)では、取得者の調査回答者4,025人のうちExceptional Talentは37%（Promise 44%、区分不明19%）だった。ただしこれはTech Nation単独の公式内訳ではなく、全endorsing bodyを含む回答者構成であり、software engineering層に限定した比率でもない。そのため37%そのものではなく30〜50%の幅で試算している。
 4. **OSS / developer toolingの5%・10%・20%**: 該当割合の統計は存在しない。5%・10%・20%はそれぞれ低位・中位・高位シナリオで、特定の数字を正しいと主張するものではなく、仮定を変えた場合に結果がどの程度動くかを見るためのものである。
 5. **20代の10〜25%**: 実測値ではない。同じWave 2調査では18〜24歳が1%、25〜34歳が51%だが、後者には30〜34歳とExceptional Promiseが含まれるため、Exceptional Talentでは低くなると仮定している。
-6. **日本人の約0.8%**: [Home Officeの公式データ](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables)を集計すると、2020〜2025年のGlobal Talent発給のうち、main applicant 17,420件に対して日本国籍は139件で0.80%だった。ただしこれはDigital Technology以外の分野もExceptional Promiseも含む比率であり、UK外からの発給のみで、UK内から切り替えた人は含まれない。今回と同条件のユニーク人数を直接示すものではない。なお[2026年7月開示の国籍別FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf)（Tech Nation、申請の多い上位国のみ掲載）に日本は登場せず、日本からの申請は、年間で上位20か国には入らない規模だ。
+6. **日本国籍の約0.8%**: [Home Officeの公式データ](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables)を集計すると、2020〜2025年のGlobal Talent発給のうち、main applicant 17,420件に対して日本国籍は139件で0.80%だった。ただしこれはDigital Technology以外の分野もExceptional Promiseも含む比率であり、UK外からの発給のみで、UK内から切り替えた人は含まれない。今回と同条件のユニーク人数を直接示すものではない。なお[2026年7月開示の国籍別FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf)（Tech Nation、申請の多い上位国のみ掲載）に日本は登場せず、日本からの申請は、年間で上位20か国には入らない規模だ。
 7. **最終行の「少なくとも1人」**: 補足6の比率を前行に単純適用すると期待値は1人未満になるが、そこまでの絞り込み条件でも、少なくとも自分という実例はある。だから下限は1人で、実態も1人〜数人の規模だと見ている。なお、公式統計から「日本人初」と断定することはできない。日本人によるDigital Technology routeのExceptional Talent取得例自体は確認できる。
 
 +++
