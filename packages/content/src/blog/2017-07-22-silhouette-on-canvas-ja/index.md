@@ -65,3 +65,5 @@ lang: ja
 最後にご来場された皆様、インスピレーションを与えてくれた後輩、そしてこういった機会をくださった岡村教授に感謝をして、この記事を終えようと思う。
 
 ![](./canvas.jpg)
+
+[@preview](https://github.com/ryoppippi/SilhouetteOnCanvas)
