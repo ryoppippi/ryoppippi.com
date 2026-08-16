@@ -1,0 +1,265 @@
+{
+	"888045891658973185": {
+		"__typename": "Tweet",
+		"favorite_count": 4,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"created_at": "2017-07-20T14:40:14.000Z",
+		"display_text_range": [
+			0,
+			141
+		],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/wrYleRmwNr",
+					"expanded_url": "https://x.com/icu_science/status/888045891658973185/photo/1",
+					"indices": [
+						140,
+						163
+					],
+					"url": "https://t.co/wrYleRmwNr"
+				}
+			]
+		},
+		"id_str": "888045891658973185",
+		"text": "本日2回目の投稿です！\rキッズカレッジで大好評だった「影のキャンバス」の紹介をします😊\r人がキャンバスに近づくとキャンバス上に人のシルエットとカラフルなドットが出てきて、ランダムに写真が撮れちゃいます📸\r(このTwitterの中の人も子供に紛れて楽しんでいたのは内緒です(笑)) https://t.co/wrYleRmwNr",
+		"user": {
+			"id_str": "715007716775735296",
+			"name": "ICUサイエンスクラブ",
+			"screen_name": "icu_science",
+			"is_blue_verified": false,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/717927111718113280/DBMVoklI_normal.jpg"
+		},
+		"edit_control": {
+			"edit_tweet_ids": [
+				"888045891658973185"
+			],
+			"editable_until_msecs": "1500563414323",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/wrYleRmwNr",
+				"expanded_url": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					140,
+					163
+				],
+				"media_url_https": "https://pbs.twimg.com/media/DFL5BqtVwAALgXi.jpg",
+				"original_info": {
+					"focus_rects": [],
+					"height": 3000,
+					"width": 4000
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/wrYleRmwNr"
+			},
+			{
+				"display_url": "pic.x.com/wrYleRmwNr",
+				"expanded_url": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					140,
+					163
+				],
+				"media_url_https": "https://pbs.twimg.com/media/DFL5BPQUAAAO3v6.jpg",
+				"original_info": {
+					"focus_rects": [],
+					"height": 3000,
+					"width": 4000
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/wrYleRmwNr"
+			},
+			{
+				"display_url": "pic.x.com/wrYleRmwNr",
+				"expanded_url": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					140,
+					163
+				],
+				"media_url_https": "https://pbs.twimg.com/media/DFL4_0zUMAAHR_l.jpg",
+				"original_info": {
+					"focus_rects": [],
+					"height": 1272,
+					"width": 1286
+				},
+				"sizes": {
+					"large": {
+						"h": 1272,
+						"resize": "fit",
+						"w": 1286
+					},
+					"medium": {
+						"h": 1187,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 673,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/wrYleRmwNr"
+			},
+			{
+				"display_url": "pic.x.com/wrYleRmwNr",
+				"expanded_url": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [
+					140,
+					163
+				],
+				"media_url_https": "https://pbs.twimg.com/media/DFL5Bv1UIAAGi5I.jpg",
+				"original_info": {
+					"focus_rects": [],
+					"height": 3000,
+					"width": 4000
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/wrYleRmwNr"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [],
+				"expandedUrl": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"url": "https://pbs.twimg.com/media/DFL5BqtVwAALgXi.jpg",
+				"width": 4000,
+				"height": 3000
+			},
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [],
+				"expandedUrl": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"url": "https://pbs.twimg.com/media/DFL5BPQUAAAO3v6.jpg",
+				"width": 4000,
+				"height": 3000
+			},
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [],
+				"expandedUrl": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"url": "https://pbs.twimg.com/media/DFL4_0zUMAAHR_l.jpg",
+				"width": 1286,
+				"height": 1272
+			},
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [],
+				"expandedUrl": "https://x.com/icu_science/status/888045891658973185/photo/1",
+				"url": "https://pbs.twimg.com/media/DFL5Bv1UIAAGi5I.jpg",
+				"width": 4000,
+				"height": 3000
+			}
+		],
+		"conversation_count": 0,
+		"news_action_type": "conversation",
+		"isEdited": false,
+		"isStaleEdit": false
+	}
+}
