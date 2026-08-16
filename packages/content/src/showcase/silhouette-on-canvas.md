@@ -26,3 +26,4 @@ Interactive art installation with projection mapping.
 Displayed at Science Summer School for Kids at ICU, July 2017.
 
 [YouTube](https://youtu.be/MngEJwk5KPU)
+[Blog](/blog/2017-07-22-silhouette-on-canvas-ja/)
