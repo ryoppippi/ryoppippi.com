@@ -1,4 +1,5 @@
 import type { TweetData } from '@ryoppippi/content';
+import type { JSX } from 'solid-js';
 import type { Component } from 'svelte';
 import '../styles/fonts.css';
 import {
@@ -224,15 +225,55 @@ function initialiseTweets(): void {
 	}
 }
 
+type SvelteIslandModule = { default: Component<Record<string, unknown>> };
+type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
+
 // Every component colocated with a post is a potential island, so the loaders
 // are collected by glob rather than listed by hand. Vite keeps each one in its
-// own chunk, so a post only downloads the islands it actually uses.
-const islandLoaders = import.meta.glob('../../packages/content/src/blog/**/*.svelte') as Record<
-	string,
-	() => Promise<{ default: Component<Record<string, unknown>> }>
->;
+// own chunk, so a post only downloads the islands it actually uses. The globs
+// are split per framework because the file extension decides how a module is
+// mounted.
+const svelteIslandLoaders = import.meta.glob<SvelteIslandModule>(
+	'../../packages/content/src/blog/**/*.svelte',
+);
+const solidIslandLoaders = import.meta.glob<SolidIslandModule>(
+	'../../packages/content/src/blog/**/*.tsx',
+);
 
 const islandCleanups = new Set<() => void>();
+
+async function mountSvelteIsland(
+	element: HTMLElement,
+	load: () => Promise<SvelteIslandModule>,
+	props: Record<string, unknown>,
+): Promise<void> {
+	const [{ hydrate, mount, unmount }, { default: Island }] = await Promise.all([
+		import('svelte'),
+		load(),
+	]);
+	// Server-rendered islands carry a root element to adopt. Without one the
+	// component was never rendered on the server, so mount it fresh.
+	const root = element.querySelector<HTMLElement>('[data-ox-island-root]');
+	const instance =
+		root == null
+			? mount(Island, { target: element, props })
+			: hydrate(Island, { target: root, props });
+	islandCleanups.add(() => unmount(instance));
+}
+
+async function mountSolidIsland(
+	element: HTMLElement,
+	load: () => Promise<SolidIslandModule>,
+	props: Record<string, unknown>,
+): Promise<void> {
+	const [{ render }, { default: Island }] = await Promise.all([import('solid-js/web'), load()]);
+	// Solid islands are not compiled hydratable, so the server markup is
+	// replaced by a fresh client render instead of being adopted.
+	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;
+	target.replaceChildren();
+	const dispose = render(() => Island(props), target);
+	islandCleanups.add(dispose);
+}
 
 async function mountIsland(element: HTMLElement): Promise<void> {
 	const moduleId = element.dataset.oxIsland;
@@ -242,26 +283,24 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 
 	element.dataset.oxMounted = 'true';
 	try {
-		const load = islandLoaders[`../../packages/content/src/blog/${moduleId}`];
-		if (load == null) {
-			element.dataset.oxMounted = 'false';
-			return;
-		}
-
-		const [{ hydrate, mount, unmount }, { default: Component }] = await Promise.all([
-			import('svelte'),
-			load(),
-		]);
+		const modulePath = `../../packages/content/src/blog/${moduleId}`;
 		const serialised = element.dataset.oxProps;
 		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
-		// Server-rendered islands carry a root element to adopt. Without one the
-		// component was never rendered on the server, so mount it fresh.
-		const root = element.querySelector<HTMLElement>('[data-ox-island-root]');
-		const instance =
-			root == null
-				? mount(Component, { target: element, props })
-				: hydrate(Component, { target: root, props });
-		islandCleanups.add(() => unmount(instance));
+		if (moduleId.endsWith('.tsx')) {
+			const load = solidIslandLoaders[modulePath];
+			if (load == null) {
+				element.dataset.oxMounted = 'false';
+				return;
+			}
+			await mountSolidIsland(element, load, props);
+		} else {
+			const load = svelteIslandLoaders[modulePath];
+			if (load == null) {
+				element.dataset.oxMounted = 'false';
+				return;
+			}
+			await mountSvelteIsland(element, load, props);
+		}
 	} catch {
 		element.dataset.oxMounted = 'false';
 	}

@@ -124,7 +124,11 @@ export function resolveSiteAssets(
 
 	const islands = Object.fromEntries(
 		Object.keys(manifest)
-			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.svelte'))
+			.filter(
+				(source) =>
+					source.startsWith(ISLAND_SOURCE_PREFIX) &&
+					(source.endsWith('.svelte') || source.endsWith('.tsx')),
+			)
 			.map((source) => [
 				source.slice(ISLAND_SOURCE_PREFIX.length),
 				[...new Set(chunkStyles(manifest, source))],
