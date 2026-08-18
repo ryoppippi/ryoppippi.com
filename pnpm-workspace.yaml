@@ -1,6 +1,9 @@
 packages:
   - packages/*
 
+catalog:
+  '@ox-content/napi': 2.72.0
+
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - gray-matter-es
