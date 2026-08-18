@@ -272,6 +272,10 @@ export const timelineEn = {
 	},
 } as const satisfies Record<string, TimelineText>;
 
+// String-keyed view of `timelineEn`, because lookups use arbitrary point dates
+// while the literal type only accepts its own keys.
+const timelineTextByDate: Record<string, TimelineText | undefined> = timelineEn;
+
 /**
  * Narrows an unknown island prop to a chart language.
  *
@@ -307,7 +311,7 @@ export function localisePoint<T extends GtvPoint>(point: T, lang: ChartLang): T 
 		return point;
 	}
 
-	const text = timelineEn[point.date];
+	const text = timelineTextByDate[point.date];
 	if (text == null) {
 		return point;
 	}
@@ -335,7 +339,7 @@ if (import.meta.vitest != null) {
 	describe(localisePoint, () => {
 		it('has English copy for every timeline point', () => {
 			for (const point of GTV_POINTS) {
-				expect(timelineEn[point.date], point.date).toBeDefined();
+				expect(timelineTextByDate[point.date], point.date).toBeDefined();
 			}
 		});
 

@@ -5,7 +5,7 @@ isPublished: true
 lang: ja
 ---
 
-import GtvChart from './gtv-chart/GtvChart.svelte'
+import GtvChart from './gtv-chart/GtvChart.tsx'
 
 > [English](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en)
 

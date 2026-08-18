@@ -174,6 +174,9 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 		if (file.endsWith('.svelte') && (await hasStyleBlock(file))) {
 			const specifier = path.relative(server.config.root, file).replaceAll(path.sep, '/');
 			hrefs.push(`${specifier}?svelte&type=style&lang.css`);
+		} else if (file.endsWith('.css')) {
+			// Solid islands import plain stylesheets, which Vite serves directly.
+			hrefs.push(path.relative(server.config.root, file).replaceAll(path.sep, '/'));
 		}
 		for (const imported of node.importedModules) {
 			await visit(imported);
