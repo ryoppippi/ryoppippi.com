@@ -3,11 +3,16 @@ title: I wrote OSS for fun. They called it Exceptional Talent.
 date: "2026-08-15"
 isPublished: true
 lang: en
+description: How I used open-source work, recommendation letters, and evidence of impact to earn the UK's Global Talent Visa as an Exceptional Talent.
+alternates:
+  ja: https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/
+  en: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
+  x-default: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
 ---
 
 import GtvChart from '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx'
 
-> [日本語版](https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja)
+> [日本語版](https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/)
 
 # TL;DR
 

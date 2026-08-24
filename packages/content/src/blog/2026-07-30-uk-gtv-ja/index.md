@@ -3,11 +3,16 @@ title: OSS開発者としてUK Global Talent Visa（Exceptional Talent）を取�
 date: "2026-08-09"
 isPublished: true
 lang: ja
+description: イギリスのGlobal Talent VisaにExceptional Talentとして承認された体験記。Tech Nationの推薦状、審査基準、申請の流れとOSS実績の示し方をまとめます。
+alternates:
+  ja: https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/
+  en: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
+  x-default: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
 ---
 
 import GtvChart from './gtv-chart/GtvChart.tsx'
 
-> [English](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en)
+> [English](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/)
 
 # TL;DR
 
