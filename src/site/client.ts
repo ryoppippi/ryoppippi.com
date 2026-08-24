@@ -335,6 +335,7 @@ function destroyPage(): void {
 
 function syncHead(next: Document): void {
 	document.title = next.title;
+	document.documentElement.lang = next.documentElement.lang;
 	for (const element of document.head.querySelectorAll('[data-page-head]')) {
 		element.remove();
 	}
