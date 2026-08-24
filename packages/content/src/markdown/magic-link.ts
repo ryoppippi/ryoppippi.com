@@ -116,8 +116,12 @@ function renderLink(
 	kind: 'github-at' | 'link',
 	options: MagicLinkOptions,
 ) {
+	if (!isSafeHref(href)) {
+		return null;
+	}
+
 	const resolvedImageUrl = getImageUrl(href, imageUrl, options);
-	if (!isSafeHref(href) || !isSafeHref(resolvedImageUrl)) {
+	if (!isSafeHref(resolvedImageUrl)) {
 		return null;
 	}
 
@@ -188,6 +192,14 @@ export function replaceMagicLinks(
 
 if (import.meta.vitest != null) {
 	describe('renderMagicLink', () => {
+		it('ignores HTML that was already rendered as a link', () => {
+			expect(
+				renderMagicLink(
+					'<a href="https://x.com/kei_english_ca" target="_blank" rel="noopener noreferrer">https://x.com/kei_english_ca</a>',
+				),
+			).toBeNull();
+		});
+
 		it('renders a GitHub user shorthand with an avatar', () => {
 			expect(renderMagicLink('@ryoppippi')).toBe(
 				'<a href="https://github.com/ryoppippi" class="markdown-magic-link markdown-magic-link-github-at"><span class="markdown-magic-link-image" style="background-image: url(\'https://github.com/ryoppippi.png\');"></span>RYOPPIPPI</a>',

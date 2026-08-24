@@ -4,7 +4,7 @@ import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
-import { defineConfig } from 'vite-plus';
+import { defineConfig, type PluginOption } from 'vite-plus';
 import solid from 'vite-plugin-solid';
 import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
@@ -41,7 +41,7 @@ export default defineConfig({
 			resolvePath: (id) => new URL(import.meta.resolve(id)),
 		}),
 		tailwindcss(),
-	],
+	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
