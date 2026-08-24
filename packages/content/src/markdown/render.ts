@@ -17,6 +17,7 @@ import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
+import { replaceLegacyYouTubeEmbeds } from './youtube.ts';
 
 const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
 
@@ -61,13 +62,12 @@ function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) 
 	return transformOutsideFences(body, (line) => {
 		const embeds = replaceComponentIslands(
 			replaceNotByAIEmbeds(
-				line
-					.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
-					.replace(
-						/<YouTube\s+youTubeId=(['"])([^'"]+)\1(?:\s+skipTo=\{\{[^}]+\}\})?\s*\/>/g,
-						'<youtube id="$2" />',
-					)
-					.replace(/<Divider\s*\/>/g, '<hr>'),
+				replaceLegacyYouTubeEmbeds(
+					line.replace(
+						/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g,
+						'<span data-tweet-placeholder="$2"></span>',
+					),
+				).replace(/<Divider\s*\/>/g, '<hr>'),
 			),
 			islands,
 		);
