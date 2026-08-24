@@ -10,32 +10,6 @@ import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
 
-const plugins: PluginOption[] = [
-	svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
-	solid({ ssr: true, solid: { hydratable: false } }),
-	cloudflareRedirect({
-		mode: 'generate',
-		entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
-	}),
-	...oxContentSvelte({
-		components: { Tweet: './packages/content/src/Tweet.svelte' },
-		srcDir: 'packages/content/src/blog',
-		ssg: false,
-	}),
-	staticSiteBuild(),
-	staticSiteDevServer(),
-	FontaineTransform.vite({
-		fallbacks: {
-			'DM Mono': ['Courier New'],
-			Inter: ['Arial'],
-			'JetBrains Mono': ['Courier New'],
-			'Roboto Condensed': ['Arial'],
-		},
-		resolvePath: (id) => new URL(import.meta.resolve(id)),
-	}),
-	tailwindcss(),
-];
-
 export default defineConfig({
 	publicDir: 'static',
 	server: {
@@ -43,7 +17,31 @@ export default defineConfig({
 			ignored: ['**/.direnv/**'],
 		},
 	},
-	plugins,
+	plugins: [
+		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
+		solid({ ssr: true, solid: { hydratable: false } }),
+		cloudflareRedirect({
+			mode: 'generate',
+			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
+		}),
+		...oxContentSvelte({
+			components: { Tweet: './packages/content/src/Tweet.svelte' },
+			srcDir: 'packages/content/src/blog',
+			ssg: false,
+		}),
+		staticSiteBuild(),
+		staticSiteDevServer(),
+		FontaineTransform.vite({
+			fallbacks: {
+				'DM Mono': ['Courier New'],
+				Inter: ['Arial'],
+				'JetBrains Mono': ['Courier New'],
+				'Roboto Condensed': ['Arial'],
+			},
+			resolvePath: (id) => new URL(import.meta.resolve(id)),
+		}),
+		tailwindcss(),
+	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
