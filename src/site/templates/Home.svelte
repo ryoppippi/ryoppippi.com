@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import { SITE_ORIGIN } from '../consts.ts';
+
 	const socials = [
 		['icon-[line-md--github-loop]', 'GitHub profile', '/github'],
 		['icon-[ph--git-pull-request-duotone]', 'Recent pull requests', '/pr'],
@@ -35,7 +37,7 @@
 	<article class='gcc animate-[root-fade-in_3s_both] grid-cols-3 gap-3 sm:grid-cols-[repeat(6,minmax(0,1fr))]'>
 		{#each socials as [icon, label, href] (href)}
 			<div class='op-card transition-base hover:z-10 hover:scale-110 hover:bg-[#88888811] hover:opacity-100 hover:shadow-xl'>
-				<a aria-label={label} href={`https://ryoppippi.com${href}`} rel='noopener noreferrer' target='_blank'>
+				<a aria-label={label} href={`${SITE_ORIGIN}${href}`} rel='noopener noreferrer' target='_blank'>
 					<span class={`${icon} text-[length:4.5vh]`} aria-hidden='true'></span>
 				</a>
 			</div>

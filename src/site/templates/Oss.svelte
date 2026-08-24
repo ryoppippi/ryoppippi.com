@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import type { OssProject } from '../sections.ts';
+	import { SITE_ORIGIN } from '../consts.ts';
 	import WorksNav from './WorksNav.svelte';
 
 	let { projects }: { projects: Record<string, OssProject[]> } = $props();
@@ -9,13 +10,13 @@
 
 <div class='prose mx-auto mt-10 pb-5 text-center dark:prose-invert'>
 	<div class='fxc gap-2'>
-		<a class='btn-green fcol-md-row fyc gap-1' href='https://ryoppippi.com/pr' rel='noopener noreferrer' target='_blank'>
+		<a class='btn-green fcol-md-row fyc gap-1' href={`${SITE_ORIGIN}/pr`} rel='noopener noreferrer' target='_blank'>
 			<span class='icon-[ph--git-pull-request-duotone]' aria-hidden='true'></span>My Recent PRs
 		</a>
-		<a class='btn-blue fcol-md-row fyc gap-1' href='https://ryoppippi.com/gh' rel='noopener noreferrer' target='_blank'>
+		<a class='btn-blue fcol-md-row fyc gap-1' href={`${SITE_ORIGIN}/gh`} rel='noopener noreferrer' target='_blank'>
 			<span class='icon-[ph--github-logo-duotone]' aria-hidden='true'></span>GitHub
 		</a>
-		<a class='btn-pink fcol-md-row fyc gap-1' href='https://ryoppippi.com/gh-by-stars' rel='noopener noreferrer' target='_blank'>
+		<a class='btn-pink fcol-md-row fyc gap-1' href={`${SITE_ORIGIN}/gh-by-stars`} rel='noopener noreferrer' target='_blank'>
 			<span class='icon-[ph--star]' aria-hidden='true'></span>Sort by Stars
 		</a>
 	</div>

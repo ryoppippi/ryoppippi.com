@@ -1,35 +1,14 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
-	import { siteOrigin } from '../site-origin.ts';
 
 	let {
-		article = false,
 		content,
-		description,
-		lang = 'en',
-		alternates,
 		pathname,
-		title,
 	}: {
-		article?: boolean;
-		alternates?: Readonly<Record<string, string>>;
 		content: string;
-		description: string;
-		lang?: string;
 		pathname: string;
-		title: string;
 	} = $props();
 
-	const fullTitle = $derived(title === 'home' ? 'ryoppippi.com' : `${title} | ryoppippi.com`);
-	const url = $derived(`${siteOrigin}${pathname}`);
-	const alternateLinks = $derived(
-		alternates == null
-			? []
-			: Object.entries({ ...alternates, [lang]: url }).map(([alternateLang, alternateUrl]) => ({
-				lang: alternateLang,
-				url: alternateUrl,
-			})),
-	);
 	const pageContent = $derived(createRawSnippet(() => ({ render: () => content })));
 	const isHome = $derived(pathname === '/');
 	const links = [
@@ -38,39 +17,6 @@
 		{ href: '/sponsors/', label: 'sponsors' },
 	] as const;
 </script>
-
-<svelte:head>
-	<meta charset='utf-8' />
-	<meta name='viewport' content='width=device-width, initial-scale=1' />
-	<meta data-page-head name='description' content={description} />
-	<meta name='theme-color' content='#ffffff' media='(prefers-color-scheme: light)' />
-	<meta name='theme-color' content='#121212' media='(prefers-color-scheme: dark)' />
-	<meta data-page-head name='robots' content='index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1' />
-	<meta data-page-head name='Hatena::Bookmark' content='nocomment' />
-	<link data-page-head rel='canonical' href={url} />
-	{#each alternateLinks as alternate (alternate.lang)}
-		<link data-page-head rel='alternate' hreflang={alternate.lang} href={alternate.url} />
-	{/each}
-  <link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/" />
-	<meta data-page-head property='og:type' content={article ? 'article' : 'website'} />
-	<meta data-page-head property='og:title' content={fullTitle} />
-	<meta data-page-head property='og:description' content={description} />
-	<meta data-page-head property='og:url' content={url} />
-	<meta data-page-head property='og:image' content={`${siteOrigin}/ryoppippi.jpg`} />
-	<meta data-page-head property='og:image:alt' content="ryoppippi's icon" />
-	<meta data-page-head name='twitter:card' content='summary' />
-	<meta data-page-head name='twitter:site' content='@ryoppippi' />
-	<meta data-page-head name='twitter:title' content={fullTitle} />
-	<meta data-page-head name='twitter:description' content={description} />
-	<meta data-page-head name='twitter:image' content={`${siteOrigin}/ryoppippi.jpg`} />
-	<meta data-page-head name='twitter:image:alt' content="ryoppippi's icon" />
-	<title>{fullTitle}</title>
-	<link rel='icon' type='image/x-icon' href='/favicons/favicon.ico' />
-	<link rel='icon' type='image/png' sizes='16x16' href='/favicons/favicon-16x16.png' />
-	<link rel='icon' type='image/png' sizes='32x32' href='/favicons/favicon-32x32.png' />
-	<link rel='icon' type='image/png' sizes='48x48' href='/favicons/favicon-48x48.png' />
-	<link rel='alternate' title={description} type='application/rss+xml' href='/feed.xml' />
-</svelte:head>
 
 <a class='skip-link' href='#main-content'>Skip to content</a>
 <div class='mx-auto my-3 max-w-4xl px-8'>

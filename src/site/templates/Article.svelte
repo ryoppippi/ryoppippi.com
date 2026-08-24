@@ -1,11 +1,12 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
 	import type { BlogPost } from '@ryoppippi/content';
+	import { SITE_ORIGIN } from '../consts.ts';
 
 	let { date, pathname, post }: { date: string; pathname: string; post: BlogPost } = $props();
 	const markdownPath = $derived(`${pathname.slice(0, -1)}.md`);
 	const content = $derived(createRawSnippet(() => ({ render: () => post.html })));
-	const url = $derived(`https://ryoppippi.com${pathname}`);
+	const url = $derived(`${SITE_ORIGIN}${pathname}`);
 	const blueskyUrl = $derived(`https://bsky.app/intent/compose?text=${encodeURIComponent(`Reading @ryoppippi.com's ${url}\n\nI think...`)}`);
 	const tweetUrl = $derived(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading @ryoppippi's ${url}\n\nI think...`)}`);
 </script>
