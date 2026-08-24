@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
 	import type { BlogPost } from '@ryoppippi/content';
-	import { SITE_ORIGIN } from '../consts.ts';
+	import { SITE_COPYRIGHT, SITE_ORIGIN } from '../consts.ts';
 
 	let { date, pathname, post }: { date: string; pathname: string; post: BlogPost } = $props();
 	const markdownPath = $derived(`${pathname.slice(0, -1)}.md`);
@@ -44,7 +44,6 @@
 	</div>
 
 	<div class='pb-8 opacity-50'>
-		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='noopener noreferrer' target='_blank'>CC BY-NC-SA 4.0</a>
-		2022-PRESENT © ryoppippi
+		<a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' rel='noopener noreferrer' target='_blank'>{SITE_COPYRIGHT}</a>
 	</div>
 </div>

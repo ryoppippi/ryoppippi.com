@@ -1,14 +1,9 @@
-import type { BlogPosting, WithContext } from 'schema-dts';
-import { ValidatePlugin } from 'unhead/plugins';
+import type { Thing, WithContext } from 'schema-dts';
+import { CanonicalPlugin, TemplateParamsPlugin, ValidatePlugin } from 'unhead/plugins';
 import { createHead } from 'unhead/server';
 import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 
 const pageHeadMarker = { 'data-page-head': '' } as const;
-
-/**
- * Schema.org JSON-LD data emitted for blog articles.
- */
-export type BlogPostingJsonLd = WithContext<BlogPosting>;
 
 /**
  * Renders Unhead metadata into static HTML head tags.
@@ -19,7 +14,9 @@ export type BlogPostingJsonLd = WithContext<BlogPosting>;
 export function renderPageHead({
 	article = false,
 	alternates,
+	datePublished,
 	description,
+	indexable = true,
 	lang,
 	pathname,
 	structuredData,
@@ -27,26 +24,34 @@ export function renderPageHead({
 }: {
 	article?: boolean;
 	alternates?: Readonly<Record<string, string>>;
+	datePublished?: string;
 	description: string;
+	indexable?: boolean;
 	lang: string;
 	pathname: string;
-	structuredData?: BlogPostingJsonLd;
+	structuredData?: WithContext<Thing>;
 	title: string;
 }): string {
-	const fullTitle = title === 'home' ? SITE_NAME : `${title} | ${SITE_NAME}`;
-	const url = `${SITE_ORIGIN}${pathname}`;
 	const alternateLinks =
-		alternates == null
+		!indexable || alternates == null
 			? []
-			: Object.entries({ ...alternates, [lang]: url }).map(([alternateLang, alternateUrl]) => ({
-					...pageHeadMarker,
-					hreflang: alternateLang,
-					href: alternateUrl,
-					rel: 'alternate' as const,
-				}));
+			: Object.entries({ ...alternates, [lang]: pathname }).map(
+					([alternateLang, alternateUrl]) => ({
+						...pageHeadMarker,
+						hreflang: alternateLang,
+						href: alternateUrl,
+						rel: 'alternate' as const,
+					}),
+				);
 	const head = createHead({
 		init: [
 			{
+				title,
+				titleTemplate: '%s %separator %siteName',
+				templateParams: {
+					separator: '|',
+					siteName: SITE_NAME,
+				},
 				meta: [
 					{ charset: 'utf-8' },
 					{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -56,27 +61,72 @@ export function renderPageHead({
 					{
 						...pageHeadMarker,
 						name: 'robots',
-						content: 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1',
+						content: indexable
+							? 'index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1'
+							: 'noindex,follow',
 					},
-					{ ...pageHeadMarker, name: 'Hatena::Bookmark', content: 'nocomment' },
-					{ ...pageHeadMarker, property: 'og:type', content: article ? 'article' : 'website' },
-					{ ...pageHeadMarker, property: 'og:title', content: fullTitle },
-					{ ...pageHeadMarker, property: 'og:description', content: description },
-					{ ...pageHeadMarker, property: 'og:url', content: url },
-					{ ...pageHeadMarker, property: 'og:image', content: SITE_SOCIAL_IMAGE_URL },
-					{ ...pageHeadMarker, property: 'og:image:type', content: 'image/jpeg' },
-					{ ...pageHeadMarker, property: 'og:image:width', content: '400' },
-					{ ...pageHeadMarker, property: 'og:image:height', content: '400' },
-					{ ...pageHeadMarker, property: 'og:image:alt', content: "ryoppippi's icon" },
-					{ ...pageHeadMarker, name: 'twitter:card', content: 'summary' },
-					{ ...pageHeadMarker, name: 'twitter:site', content: '@ryoppippi' },
-					{ ...pageHeadMarker, name: 'twitter:title', content: fullTitle },
-					{ ...pageHeadMarker, name: 'twitter:description', content: description },
-					{ ...pageHeadMarker, name: 'twitter:image', content: SITE_SOCIAL_IMAGE_URL },
-					{ ...pageHeadMarker, name: 'twitter:image:alt', content: "ryoppippi's icon" },
+					...(indexable
+						? [
+								{ ...pageHeadMarker, name: 'Hatena::Bookmark', content: 'nocomment' },
+								{
+									...pageHeadMarker,
+									property: 'og:type',
+									content: article ? 'article' : 'website',
+								},
+								{ ...pageHeadMarker, property: 'og:site_name', content: SITE_NAME },
+								{
+									...pageHeadMarker,
+									property: 'og:title',
+									content: '%s %separator %siteName',
+								},
+								{ ...pageHeadMarker, property: 'og:description', content: description },
+								{ ...pageHeadMarker, property: 'og:url', content: pathname },
+								{ ...pageHeadMarker, property: 'og:image', content: SITE_SOCIAL_IMAGE_URL },
+								{ ...pageHeadMarker, property: 'og:image:type', content: 'image/jpeg' },
+								{ ...pageHeadMarker, property: 'og:image:width', content: '400' },
+								{ ...pageHeadMarker, property: 'og:image:height', content: '400' },
+								{
+									...pageHeadMarker,
+									property: 'og:image:alt',
+									content: "ryoppippi's icon",
+								},
+								...(article && datePublished != null
+									? [
+											{
+												...pageHeadMarker,
+												property: 'article:published_time',
+												content: datePublished,
+											},
+										]
+									: []),
+								...(article
+									? [
+											{
+												...pageHeadMarker,
+												property: 'article:author',
+												content: SITE_ORIGIN,
+											},
+										]
+									: []),
+								{ ...pageHeadMarker, name: 'twitter:card', content: 'summary' },
+								{ ...pageHeadMarker, name: 'twitter:site', content: '@ryoppippi' },
+								{
+									...pageHeadMarker,
+									name: 'twitter:title',
+									content: '%s %separator %siteName',
+								},
+								{ ...pageHeadMarker, name: 'twitter:description', content: description },
+								{ ...pageHeadMarker, name: 'twitter:image', content: SITE_SOCIAL_IMAGE_URL },
+								{
+									...pageHeadMarker,
+									name: 'twitter:image:alt',
+									content: "ryoppippi's icon",
+								},
+							]
+						: []),
 				],
 				link: [
-					{ ...pageHeadMarker, rel: 'canonical', href: url },
+					...(indexable ? [{ ...pageHeadMarker, rel: 'canonical' as const, href: pathname }] : []),
 					...alternateLinks,
 					{ rel: 'author', href: 'https://www.hatena.ne.jp/ryoppippi-2/' },
 					{ rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
@@ -100,10 +150,11 @@ export function renderPageHead({
 									textContent: JSON.stringify(structuredData),
 								},
 							],
-				title: fullTitle,
 			},
 		],
 		plugins: [
+			TemplateParamsPlugin,
+			CanonicalPlugin({ canonicalHost: SITE_ORIGIN, trailingSlash: true }),
 			ValidatePlugin({
 				rules: {
 					'deprecated-twitter-meta': 'off',

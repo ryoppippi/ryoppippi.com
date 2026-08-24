@@ -1,8 +1,8 @@
 import type { Component } from 'svelte';
+import type { Thing, WithContext } from 'schema-dts';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import { render } from 'svelte/server';
 import { renderAssetTags } from './assets.ts';
-import type { BlogPostingJsonLd } from './head.ts';
 import { renderPageHead } from './head.ts';
 import Shell from './templates/Shell.svelte';
 
@@ -11,14 +11,16 @@ type PageOptions = {
 	alternates?: Readonly<Record<string, string>>;
 	assets: SiteAssets;
 	content: string;
+	datePublished?: string;
 	description?: string;
+	indexable?: boolean;
 	lang?: string;
 	islands?: string[];
 	pathname: string;
 	style: PageStyle;
 	title: string;
 	tweet?: boolean;
-	structuredData?: BlogPostingJsonLd;
+	structuredData?: WithContext<Thing>;
 };
 
 function normalizedLanguage(value: string | undefined): string {
@@ -58,6 +60,8 @@ export function page({
 	pathname,
 	content,
 	description = 'Portfolio of @ryoppippi',
+	datePublished,
+	indexable = true,
 	lang = 'en',
 	alternates,
 	article = false,
@@ -77,7 +81,9 @@ export function page({
 	const head = renderPageHead({
 		article,
 		alternates,
+		datePublished,
 		description,
+		indexable,
 		lang: documentLanguage,
 		pathname,
 		structuredData,

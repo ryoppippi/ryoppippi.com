@@ -16,9 +16,11 @@ export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAsse
 	return {
 		path: 'works/oss/index.html',
 		content: page({
-			title: 'oss',
+			title: 'Open-source projects',
 			pathname: '/works/oss/',
 			content: renderComponent(Oss, { projects }),
+			description:
+				'Open-source projects by @ryoppippi across developer tooling, TypeScript, Svelte, CLI, Vim, Zig, and Nix.',
 			assets,
 			style: 'works',
 		}),
@@ -29,9 +31,11 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 	return {
 		path: 'works/showcase/index.html',
 		content: page({
-			title: 'showcase',
+			title: 'Project showcase',
 			pathname: '/works/showcase/',
 			content: renderComponent(Showcase, { projects }),
+			description:
+				'Selected projects and experiments by @ryoppippi, with demos, source links, and implementation notes.',
 			assets,
 			style: 'works',
 		}),
@@ -45,9 +49,11 @@ export function publicationsPage(
 	return {
 		path: 'works/publications/index.html',
 		content: page({
-			title: 'publications',
+			title: 'Publications',
 			pathname: '/works/publications/',
 			content: renderComponent(Publications, { publications }),
+			description:
+				'Research papers and technical publications authored or co-authored by @ryoppippi.',
 			assets,
 			style: 'works',
 		}),
@@ -58,9 +64,11 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
 		content: page({
-			title: 'talks',
+			title: 'Talks',
 			pathname: '/works/talks/',
 			content: renderComponent(Talks, { talks }),
+			description:
+				'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 			assets,
 			style: 'works',
 		}),
@@ -71,9 +79,11 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
 		content: page({
-			title: 'sponsors',
+			title: 'Sponsors',
 			pathname: '/sponsors/',
 			content: renderComponent(Sponsors, {}),
+			description:
+				"Support @ryoppippi's open-source projects, technical writing, and talks through GitHub Sponsors.",
 			assets,
 			style: 'sponsors',
 		}),
@@ -84,11 +94,30 @@ export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
 		content: page({
-			title: 'Not found',
+			title: 'Page not found',
 			pathname: '/404',
 			content: renderComponent(ErrorPage, {}),
+			description: 'The requested page could not be found.',
+			indexable: false,
 			assets,
 			style: 'error',
 		}),
 	};
+}
+
+if (import.meta.vitest != null) {
+	const assets = {
+		base: '',
+		client: '',
+		islands: {},
+		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		tweet: '',
+	} as const satisfies SiteAssets;
+
+	test('keeps the generated 404 page out of search and social metadata', () => {
+		const html = errorPage(assets).content;
+		expect(html).toContain('<meta data-page-head="" name="robots" content="noindex,follow">');
+		expect(html).not.toContain('property="og:');
+		expect(html).not.toContain('rel="canonical"');
+	});
 }
