@@ -3,6 +3,7 @@ import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
+import { aboutPage } from './about.ts';
 import { postListItems } from './content.ts';
 import { articlePages, blogListPage, feed, homePage } from './pages.ts';
 import {
@@ -114,6 +115,9 @@ export async function renderDevRoute(
 	if (pathname === '/') {
 		return response(homePage(dependencies.assets).content);
 	}
+	if (pathname === '/about/') {
+		return response(aboutPage(dependencies.assets).content);
+	}
 	if (pathname.startsWith('/blog/')) {
 		return renderBlogRoute(pathname, dependencies);
 	}
@@ -174,7 +178,15 @@ if (import.meta.vitest != null) {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
-				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+				pages: {
+					about: '',
+					article: '',
+					blog: '',
+					error: '',
+					home: '',
+					sponsors: '',
+					works: '',
+				},
 				tweet: '',
 			},
 			loadBlogPost: vi.fn(async () => post),
@@ -239,6 +251,16 @@ if (import.meta.vitest != null) {
 			expect(loaders.loadBlogPostSource).toHaveBeenCalledWith('lazy-article');
 			expect(loaders.loadBlogPost).not.toHaveBeenCalled();
 		});
+	});
+
+	test('renders the About page without loading dynamic content', async () => {
+		const loaders = dependencies();
+
+		const result = await renderDevRoute('/about/', loaders);
+
+		expect(result?.body).toContain('木村亮太朗');
+		expect(loaders.loadBlogPost).not.toHaveBeenCalled();
+		expect(loaders.loadBlogPostMetadata).not.toHaveBeenCalled();
 	});
 
 	it('renders the site error page with a 404 status', () => {

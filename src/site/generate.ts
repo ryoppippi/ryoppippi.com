@@ -16,6 +16,7 @@ import {
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
 import { loadExternalPosts } from './content.ts';
+import { aboutPage } from './about.ts';
 import { corePages } from './pages.ts';
 import {
 	errorPage,
@@ -84,6 +85,7 @@ export async function generateSite({
 	}));
 
 	const pages = [
+		aboutPage(assets),
 		...corePages(posts, externalPosts, assets),
 		ossPage(ossProjects, assets),
 		showcasePage(showcase, assets),
@@ -130,6 +132,7 @@ export async function generateSite({
 	await Promise.all(
 		[
 			'index.html',
+			'about/index.html',
 			'works/index.html',
 			'works/oss/index.html',
 			'works/showcase/index.html',

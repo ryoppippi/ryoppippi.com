@@ -1,4 +1,6 @@
 <script lang='ts'>
+	import { author } from '../author.ts';
+
 	const socials = [
 		['icon-[line-md--github-loop]', 'GitHub profile', '/github'],
 		['icon-[ph--git-pull-request-duotone]', 'Recent pull requests', '/pr'],
@@ -11,23 +13,28 @@
 
 <article class='gcc container mx-auto mt-8'>
 	<div class='w-full animate-[root-flip-in-x_1s_both]'>
-		<img
-			class='mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64'
-			alt='ryoppippi'
-			fetchpriority='high'
-			height='400'
-			loading='eager'
-			src='/ryoppippi.avif'
-			srcset='/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w'
-			sizes='(min-width: 48rem) 256px, calc(50vw - 2rem)'
-			width='400'
-		/>
+		<a class='block' aria-label={`About ${author.japaneseName} / ${author.name}`} href='/about/'>
+			<img
+				class='mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64'
+				alt="{author.name}'s profile icon"
+				fetchpriority='high'
+				height='400'
+				loading='eager'
+				src='/ryoppippi.avif'
+				srcset='/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w'
+				sizes='(min-width: 48rem) 256px, calc(50vw - 2rem)'
+				width='400'
+			/>
+		</a>
 	</div>
 	<div class='mt-8'>
 		<h1 class='mb-6 text-center text-4xl font-bold' style='view-transition-name:title-ryoppippi'>
 			<span class='block sm:inline'>@ryoppippi</span>
 			<span class='animate-pulse text-center text-xl font-medium text-text-700 dark:text-text-200'>Engineer</span>
 		</h1>
+		<p class='text-center text-lg font-medium text-text-500 dark:text-text-300'>
+			<a href='/about/'><span lang='ja'>{author.japaneseName}</span> / <span lang='en'>{author.name}</span></a>
+		</p>
 	</div>
 </article>
 

@@ -28,3 +28,14 @@
 .dark::view-transition-new(root) {
 	z-index: 1;
 }
+
+::view-transition-group(name---profile) {
+	animation-duration: 600ms;
+	animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(name---profile) {
+		animation-duration: 0.01ms;
+	}
+}

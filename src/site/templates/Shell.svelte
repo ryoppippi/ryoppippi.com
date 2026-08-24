@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
+	import { author } from '../author.ts';
 	import { siteOrigin } from '../site-origin.ts';
 
 	let {
@@ -33,6 +34,7 @@
 	const pageContent = $derived(createRawSnippet(() => ({ render: () => content })));
 	const isHome = $derived(pathname === '/');
 	const links = [
+		{ href: '/about/', label: 'about' },
 		{ href: '/works/oss/', label: 'works', activePrefix: '/works/' },
 		{ href: '/blog/', label: 'blog' },
 		{ href: '/sponsors/', label: 'sponsors' },
@@ -51,7 +53,8 @@
 	{#each alternateLinks as alternate (alternate.lang)}
 		<link data-page-head rel='alternate' hreflang={alternate.lang} href={alternate.url} />
 	{/each}
-  <link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/" />
+	<meta data-page-head name='author' content={author.name} />
+	<link data-page-head rel='author' href={author.pageUrl} />
 	<meta data-page-head property='og:type' content={article ? 'article' : 'website'} />
 	<meta data-page-head property='og:title' content={fullTitle} />
 	<meta data-page-head property='og:description' content={description} />

@@ -9,6 +9,7 @@ import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
 import Home from './templates/Home.svelte';
+import { authorStructuredData } from './author.ts';
 import { siteOrigin } from './site-origin.ts';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
@@ -53,6 +54,15 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 			content: renderComponent(Home, {}),
 			assets,
 			style: 'home',
+			structuredData: {
+				'@context': 'https://schema.org',
+				'@type': 'WebSite',
+				'@id': `${siteOrigin}/#website`,
+				url: `${siteOrigin}/`,
+				name: 'ryoppippi.com',
+				alternateName: '@ryoppippi',
+				author: authorStructuredData,
+			},
 		}),
 	};
 }
@@ -109,7 +119,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 					description: metadata.description,
 					url,
 					mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-					author: { '@type': 'Person', name: 'ryoppippi', url: siteOrigin },
+					author: authorStructuredData,
 					datePublished: post.pubDate,
 					inLanguage: post.lang,
 				},
@@ -160,7 +170,7 @@ if (import.meta.vitest != null) {
 		base: '',
 		client: '',
 		islands: {},
-		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 		tweet: '',
 	} as const satisfies SiteAssets;
 

@@ -4,6 +4,7 @@ type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;
 
 const pageStyleLoaders = {
+	about: () => import('./styles/about.css'),
 	article: () => import('./styles/article.css'),
 	blog: () => import('./styles/blog.css'),
 	error: () => import('./styles/error.css'),
@@ -78,6 +79,7 @@ if (import.meta.vitest != null) {
 			const article = vi.fn(async () => undefined);
 			const other = vi.fn(async () => undefined);
 			const loaders = {
+				about: other,
 				article,
 				blog: other,
 				error: other,
@@ -95,6 +97,7 @@ if (import.meta.vitest != null) {
 		it('ignores an unknown page style', async () => {
 			const loader = vi.fn(async () => undefined);
 			const loaders = {
+				about: loader,
 				article: loader,
 				blog: loader,
 				error: loader,

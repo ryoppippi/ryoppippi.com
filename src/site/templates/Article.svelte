@@ -1,11 +1,17 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
 	import type { BlogPost } from '@ryoppippi/content';
+	import { author } from '../author.ts';
 
 	let { date, pathname, post }: { date: string; pathname: string; post: BlogPost } = $props();
 	const markdownPath = $derived(`${pathname.slice(0, -1)}.md`);
 	const content = $derived(createRawSnippet(() => ({ render: () => post.html })));
 	const url = $derived(`https://ryoppippi.com${pathname}`);
+	const authorLabel = $derived(
+		post.lang === 'ja'
+			? `${author.japaneseName}（${author.handle}）`
+			: `${author.name} (${author.handle})`,
+	);
 	const blueskyUrl = $derived(`https://bsky.app/intent/compose?text=${encodeURIComponent(`Reading @ryoppippi.com's ${url}\n\nI think...`)}`);
 	const tweetUrl = $derived(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading @ryoppippi's ${url}\n\nI think...`)}`);
 </script>
@@ -24,6 +30,10 @@
 			<a class='opacity-70 hover:opacity-100' aria-label='Markdown source' href={markdownPath} rel='noopener noreferrer' target='_blank'>
 				<span class='icon-[ri--markdown-line] size-6 align-middle' aria-hidden='true'></span>
 			</a>
+		</p>
+		<p class='text-text-400'>
+			{post.lang === 'ja' ? '著者' : 'By'}
+			<a class='opacity-70 hover:opacity-100' href='/about/' rel='author'>{authorLabel}</a>
 		</p>
 	</hgroup>
 

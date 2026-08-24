@@ -1,4 +1,12 @@
-export const PAGE_STYLES = ['article', 'blog', 'error', 'home', 'sponsors', 'works'] as const;
+export const PAGE_STYLES = [
+	'about',
+	'article',
+	'blog',
+	'error',
+	'home',
+	'sponsors',
+	'works',
+] as const;
 
 export type PageStyle = (typeof PAGE_STYLES)[number];
 
@@ -31,6 +39,7 @@ export const DEV_ASSETS = {
 	base: '<link rel="stylesheet" href="/src/styles/fonts.css">\n\t<link rel="stylesheet" href="/src/site/style.css">',
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	pages: {
+		about: '<link rel="stylesheet" href="/src/site/styles/about.css">',
 		article: '<link rel="stylesheet" href="/src/site/styles/article.css">',
 		blog: '<link rel="stylesheet" href="/src/site/styles/blog.css">',
 		error: '<link rel="stylesheet" href="/src/site/styles/error.css">',
@@ -140,6 +149,7 @@ export function resolveSiteAssets(
 		client,
 		islands,
 		pages: {
+			about: stylesFor('/styles/about.css'),
 			article: stylesFor('/styles/article.css'),
 			blog: stylesFor('/styles/blog.css'),
 			error: stylesFor('/styles/error.css'),
@@ -215,6 +225,7 @@ if (import.meta.vitest != null) {
 			'post/Table.svelte': ['assets/Legend.css'],
 		},
 		pages: {
+			about: '<link href="/about.css">',
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
 			error: '<link href="/error.css">',
@@ -231,6 +242,9 @@ if (import.meta.vitest != null) {
 			const result = resolveSiteAssets(
 				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
 				{
+					'src/site/styles/about.css': {
+						file: 'assets/about.css',
+					},
 					'src/site/styles/article.css': {
 						file: 'assets/article.css',
 					},
@@ -278,6 +292,7 @@ if (import.meta.vitest != null) {
 					'post/Chart.svelte': ['assets/Chart.css', 'assets/Legend.css'],
 				},
 				pages: {
+					about: '<link rel="stylesheet" crossorigin href="/assets/about.css">',
 					article: '<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
 					error: '<link rel="stylesheet" crossorigin href="/assets/error.css">',
