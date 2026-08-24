@@ -5,7 +5,7 @@ isPublished: true
 lang: en
 ---
 
-> [日本語版](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja)
+> [日本語版](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja/)
 
 Hello, I'm ryoppippi. Nice to meet you if we haven't met before.
 
