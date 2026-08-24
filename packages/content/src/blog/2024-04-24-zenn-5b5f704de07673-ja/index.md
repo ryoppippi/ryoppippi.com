@@ -3,6 +3,7 @@ title: "Neovim + oil.nvim + Weztermで頑張って画像を表示する"
 date: '2024-04-24'
 isPublished: true
 lang: 'ja'
+description: "Neovimのoil.nvimで選んだ画像をmacOS Quick LookやWezTermの分割Paneに表示する設定を解説。wezterm cli、imgcat、ファイル種別ごとのPreview更新も紹介します。"
 ---
 
 > [!NOTE]

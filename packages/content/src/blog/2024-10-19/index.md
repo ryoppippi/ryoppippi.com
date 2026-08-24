@@ -3,6 +3,11 @@ title: karabiner.ts is Absolutely Brilliant!
 date: 2024-10-19
 isPublished: true
 lang: 'en'
+description: "See how `karabiner.ts` makes macOS Karabiner-Elements settings type-safe, with rules for input switching, held shortcuts, Discord, and trackpad-aware Vim keys."
+alternates:
+  ja: https://ryoppippi.com/blog/2024-05-23-zenn-85373aaf0c92e0-ja/
+  en: https://ryoppippi.com/blog/2024-10-19/
+  x-default: https://ryoppippi.com/blog/2024-10-19/
 ---
 
 > [日本語版](/blog/2024-05-23-zenn-85373aaf0c92e0-ja)

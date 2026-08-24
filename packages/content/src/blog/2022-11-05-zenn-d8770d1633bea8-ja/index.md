@@ -3,6 +3,7 @@ title: "Raspberry Pi PicoでLチカをZigでやってみた(そしてあまり�
 date: '2022-11-05'
 isPublished: true
 lang: 'ja'
+description: "Raspberry Pi PicoでZigとMicroZigを使うLチカを、BOOTSEL接続からUF2転送まで解説。各言語のバイナリサイズを比べ、release-smallで3.2KBになる結果を紹介。"
 ---
 
 # はじめに

@@ -3,6 +3,7 @@ title: "最近作ったBun向けの小さいツール(+alpha)たちの紹介 [�
 date: '2024-08-21'
 isPublished: true
 lang: 'ja'
+description: "Bun向けに作った小さなツールを紹介。bun-plugin-isolated-declで型定義を高速生成し、bunpareでBun.lockのgit差分設定を自動化、pkg-to-jsrでpackage.jsonからjsr.jsonを生成します。"
 ---
 
 最近いくつか Bun 向けに小さいツールをいくつか作ったので紹介します。

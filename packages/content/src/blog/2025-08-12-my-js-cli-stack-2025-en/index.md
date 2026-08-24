@@ -3,6 +3,11 @@ title: My JS CLI Stack 2025
 date: '2025-08-12'
 isPublished: true
 lang: en
+description: "A practical 2025 JavaScript CLI stack covering Bun, tsdown/Rolldown, zero-dependency bundles, gunshi, Vitest, npm, OIDC publishing, bunx, and docs."
+alternates:
+  ja: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja/
+  en: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en/
+  x-default: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en/
 ---
 
 Hello, I'm ryoppippi. Nice to meet you if we haven't met before!

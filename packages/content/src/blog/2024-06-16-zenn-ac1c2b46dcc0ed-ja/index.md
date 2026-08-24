@@ -3,6 +3,7 @@ title: "satisfies で exhaustiveness check"
 date: '2024-06-16'
 isPublished: true
 lang: 'ja'
+description: "TypeScriptのsatisfies演算子でswitch文のexhaustiveness（網羅性）チェックを実装する方法を解説。従来のnever代入との違いとswitch(true)への応用も紹介します。"
 ---
 
 # TL;DR

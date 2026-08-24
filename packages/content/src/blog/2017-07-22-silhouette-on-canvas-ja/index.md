@@ -3,6 +3,7 @@ title: 影のキャンバス- Silhouette on Canvas
 date: '2017-07-22'
 isPublished: true
 lang: ja
+description: "KinectとProcessing、プロジェクタを使い、ICUキッズカレッジで展示した作品「影のキャンバス」。スクリーンをキャンバスに見立て、デジタル・アナログ・カラフルな影から絵画を生み出す制作過程を紹介します。"
 ---
 
 > 本記事は 2017年7月22日に [Medium](https://medium.com/@ryoppippi/%E5%BD%B1%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%90%E3%82%B9-silhouette-on-canvas-52284efb38de) へ公開したものを、このブログへ移したものです。

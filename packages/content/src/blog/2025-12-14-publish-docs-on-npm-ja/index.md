@@ -3,6 +3,11 @@ title: ドキュメントをnpm packageとしてpublishしよう
 date: '2025-12-14'
 isPublished: true
 lang: ja
+description: "Coding Agentに効率よく読ませるため、ライブラリのMarkdownドキュメントをnpmや@foo/docsとしてローカル配布する方法を、RAG・Web検索・llms.txt・MCPの課題と実例から解説します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-ja/
+  en: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en/
+  x-default: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en/
 ---
 
 > [English](https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en)

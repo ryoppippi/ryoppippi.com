@@ -3,6 +3,11 @@ title: 半年強で533ポジションに応募してやっとUKでエンジニ�
 date: '2025-07-06'
 isPublished: true
 lang: ja
+description: "UKで8ヶ月に533件応募し、ATS対応のCV、OSS活動、技術発表、英語面接、リクルーターとの出会いを経てAI Engineerとして就職した過程と学びを紹介します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja/
+  en: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en/
+  x-default: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en/
 ---
 
 > [English](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en/)

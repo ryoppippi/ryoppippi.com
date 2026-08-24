@@ -3,6 +3,7 @@ title: "Fish Shellの設定ファイルを見直して起動時間を 470ms -> 1
 date: '2023-09-17'
 isPublished: true
 lang: 'ja'
+description: "Fish Shellの起動時間を470msから14.7msへ短縮した設定改善を紹介。bash_profileやStarshipをやめ、バックグラウンド処理と外部コマンド結果のキャッシュで高速化します。"
 ---
 
 # はじめに

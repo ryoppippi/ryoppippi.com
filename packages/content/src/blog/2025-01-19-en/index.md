@@ -3,6 +3,11 @@ title: "The Best Shortcut on iOS for Youtube Addicts"
 date: 2025-01-19
 isPublished: true
 lang: 'en'
+description: "This iOS Shortcut automatically disables rotation lock for YouTube or Twitch and re-enables it when you close the app—useful for frequent mobile video watching."
+alternates:
+  ja: https://ryoppippi.com/blog/2025-01-19-ja/
+  en: https://ryoppippi.com/blog/2025-01-19-en/
+  x-default: https://ryoppippi.com/blog/2025-01-19-en/
 ---
 
 I watch Youtube and Twitch on my iPhone a lot. One of my friend {@yuki-yano} introduced an amazing shortcut in {vim-jp} Slack about a year ago. Now, I can't live without it.

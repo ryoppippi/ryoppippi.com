@@ -3,6 +3,7 @@ title: "Neovim 0.8以降のビルトインLSPについて"
 date: '2023-04-26'
 isPublished: true
 lang: 'ja'
+description: "Neovim 0.8以降のLspAttach/LspDetach、vim.lsp.start、vim.lsp.buf_attach_clientを紹介。nvim-lspconfigとの違いを踏まえ、LSP設定を分割・制御する方法を解説します。"
 ---
 
 > [!NOTE]

@@ -3,6 +3,7 @@ title: "Neovimで記録したマクロを後から編集する"
 date: '2024-09-10'
 isPublished: true
 lang: 'ja'
+description: "Neovimで記録したマクロを後から編集する方法を解説。レジスタをgetreg・setregで読み書きし、vim.ui.inputの入力ダイアログとLuaキーマップで手軽に修正します。"
 ---
 
 <!-- spellchecker:off -->

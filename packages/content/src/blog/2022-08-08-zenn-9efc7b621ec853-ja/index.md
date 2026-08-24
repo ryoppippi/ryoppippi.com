@@ -3,6 +3,7 @@ title: "ZigはCMakeの代替となるか"
 date: '2022-08-08'
 isPublished: true
 lang: 'ja'
+description: "ZigをC/C++ toolchainとして使い、gcc/clangの置き換えとlibcを含むクロスコンパイルを試します。CMakeとbuild.zigで依存ライブラリを含む構成を比較し、現状の限界も整理します。"
 ---
 
 # はじめに

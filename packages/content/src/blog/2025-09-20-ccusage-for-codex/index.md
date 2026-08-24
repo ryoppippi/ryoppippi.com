@@ -3,6 +3,7 @@ title: "ccusage for Codex Cli: How Token Usage Tracking Became Possible (日本�
 date: '2025-09-20'
 isPublished: true
 lang: ja
+description: "ccusageがOpenAI Codex CLIのtoken使用量追跡に対応した背景と実装を解説。JSONLセッションログ、TokenCount、モデル情報を解析し、コスト計算する仕組みを紹介します。"
 ---
 
 > English version coming in a few days!

@@ -3,6 +3,7 @@ title: "karabiner-elements で Mac版のChatGPTアプリでReturn と Shift + Re
 date: '2024-07-05'
 isPublished: true
 lang: 'ja'
+description: "Mac版ChatGPTアプリのReturnとShift＋Returnの挙動をkarabiner-elementsで入れ替える設定を紹介。karabiner.tsでBundle Identifierを条件にキー入力を変換する方法を解説します。"
 ---
 
 # TL;DR

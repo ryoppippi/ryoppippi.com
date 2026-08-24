@@ -3,6 +3,11 @@ title: "ryoppippi的Opinionated UnoCSS Shortcuts その1"
 date: '2024-10-10'
 isPublished: true
 lang: 'ja'
+description: "UnoCSSのshortcutsとrulesを使った独自プリセットの例を紹介。flexの配置やgridの中央寄せを短いショートカットで定義し、読みやすさを保つ命名の考え方を解説します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2024-10-10-zenn-a7eebed6675d9a-ja/
+  en: https://ryoppippi.com/blog/2024-10-11/
+  x-default: https://ryoppippi.com/blog/2024-10-11/
 ---
 
 <!-- spellchecker:off -->

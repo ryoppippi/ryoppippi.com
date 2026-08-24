@@ -3,6 +3,7 @@ title: "TypiaのBundle Sizeを大幅に削減した話 (65.99 KB -> 2.53 KB)"
 date: '2024-07-11'
 isPublished: true
 lang: 'ja'
+description: "TypiaのBundle Sizeを65.99 KiBから2.53 KiBへ削減した過程を解説。ESM化、preserveModulesによるファイル分割、package.jsonのsideEffects=falseでTree-shakingを改善します。"
 ---
 
 # TL;DR

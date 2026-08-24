@@ -3,6 +3,11 @@ title: 2025年10-11月東京滞在
 date: '2025-11-06'
 isPublished: true
 lang: ja
+description: "2025年10月〜11月の東京滞在を振り返り、5件の登壇、YouTube出演、Vimconfや各種ミートアップ、OSS開発者との交流、買い物を紹介します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2025-11-06-japan-trip-ja/
+  en: https://ryoppippi.com/blog/2025-11-06-japan-trip-en/
+  x-default: https://ryoppippi.com/blog/2025-11-06-japan-trip-en/
 ---
 
 2025年10月16日から11月4日まで東京に滞在していました。

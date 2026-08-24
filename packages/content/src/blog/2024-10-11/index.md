@@ -3,6 +3,11 @@ title: My Opinionated UnoCSS Shortcuts & Rules #1
 date: 2024-10-11
 isPublished: true
 lang: 'en'
+description: "UnoCSS shortcuts for flex alignment and grid centring, using `@ryoppippi/unocss-preset` to replace repetitive utility classes with concise rules."
+alternates:
+  ja: https://ryoppippi.com/blog/2024-10-10-zenn-a7eebed6675d9a-ja/
+  en: https://ryoppippi.com/blog/2024-10-11/
+  x-default: https://ryoppippi.com/blog/2024-10-11/
 ---
 
 > [日本語版](/blog/2024-10-10-zenn-a7eebed6675d9a-ja)

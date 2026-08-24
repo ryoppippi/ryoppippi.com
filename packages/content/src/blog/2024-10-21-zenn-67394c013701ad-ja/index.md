@@ -3,6 +3,7 @@ title: "How many HHKBs is it?"
 date: '2024-10-21'
 isPublished: true
 lang: 'ja'
+description: "HHKBを長さ・重さ・面積・体積・金額の単位として身近な物や地球、銀河、老後資金を換算。HHKB Hybrid Type-SとStudioのスペックを使う簡易計算ツールの制作と結果を紹介します。"
 ---
 
 > [!NOTE]

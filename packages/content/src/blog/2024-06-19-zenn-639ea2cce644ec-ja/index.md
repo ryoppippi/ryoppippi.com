@@ -3,6 +3,7 @@ title: "Limo：using構文を用いたファイル読み書きライブラリ"
 date: '2024-06-19'
 isPublished: true
 lang: 'ja'
+description: "TypeScript 5.2のusing構文でスコープ終了時に変更を自動保存するLimoを紹介。JSON・JSONC・TOML・YAML・テキストの読み書きとバリデーション例を解説します。"
 ---
 
 # はじめに

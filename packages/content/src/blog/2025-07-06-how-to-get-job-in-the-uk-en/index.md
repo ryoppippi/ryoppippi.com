@@ -3,6 +3,11 @@ title: How I Finally Got an Engineering Job in the UK After Applying to 533 Posi
 date: '2025-08-11'
 isPublished: true
 lang: en
+description: "How I landed an AI Engineer role in the UK after 533 applications in eight months, using an ATS-friendly CV, OSS work, talks, and recruiter networking."
+alternates:
+  ja: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja/
+  en: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en/
+  x-default: https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en/
 ---
 
 > [日本語版](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja/)

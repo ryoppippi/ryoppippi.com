@@ -3,6 +3,7 @@ title: "SvelteKit, Progressive Enhancement, Form, Type Safety, そしてSuperfor
 date: '2023-04-28'
 isPublished: true
 lang: 'ja'
+description: "SvelteKitのProgressive EnhancementをFormとuse:enhanceで実装し、Zod連携のSuperformsでForm Actionの型安全も実現する方法を解説します。"
 ---
 
 <!-- spellchecker:off -->

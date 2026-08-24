@@ -3,6 +3,7 @@ title: How to read Bun.lockb in Neovim
 date: 2024-09-29
 isPublished: true
 lang: 'en'
+description: "A Neovim guide to reading Bun.lockb: use bun bun.lockb on BufReadCmd, show the text output in a read-only buffer, and install the vim-bun-lock plugin."
 ---
 
 > [日本語版](/blog/2023-09-27-zenn-c097917f163431-ja)

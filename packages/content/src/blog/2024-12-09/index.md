@@ -3,6 +3,7 @@ title: "neovimconf 2024 & vimconf 2024 狂想曲"
 date: 2024-12-09
 isPublished: true
 lang: 'ja'
+description: "neovimconf 2024とvimconf 2024でNeovimのフロントエンド開発を発表した記録。VSCodeとの違い、LSP・AI・マクロ・スニペットを活用する発表内容、準備の時系列、登壇後の反省と感想をまとめます。"
 ---
 
 > 本記事は [Vim advent calendar 2024(Adventar)](https://mikoto2000.blogspot.com/2024/12/keyinput-delayervim-vim.html) の 9 日目の記事です。

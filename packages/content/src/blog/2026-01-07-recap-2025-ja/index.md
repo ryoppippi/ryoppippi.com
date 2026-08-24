@@ -3,6 +3,7 @@ title: "Recap 2025"
 date: 2026-01-07
 isPublished: true
 lang: 'ja'
+description: "ccusageの飛躍と英国での就職、StackOneでのAI開発、仕事とOSSの両立など、2025年の活動を振り返ります。"
 ---
 
 ![2025](./2025-year-of-code.png 'https://git-wrapped.com/profiles/ryoppippi')

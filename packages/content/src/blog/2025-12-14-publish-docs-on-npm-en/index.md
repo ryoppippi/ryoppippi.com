@@ -3,6 +3,11 @@ title: Publish Your Documentation as an npm Package
 date: '2025-12-14'
 isPublished: true
 lang: en
+description: "Why JavaScript libraries should ship versioned Markdown docs in npm packages like @foo/docs, giving Coding Agents fast access to matching local documentation."
+alternates:
+  ja: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-ja/
+  en: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en/
+  x-default: https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-en/
 ---
 
 > [日本語版](https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-ja)

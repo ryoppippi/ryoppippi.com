@@ -3,6 +3,7 @@ title: "🌶️ IMHO 🌶️ - Rich Harris on frameworks, the web, and the edge.
 date: '2023-04-26'
 isPublished: true
 lang: 'ja'
+description: "Rich Harrisの講演「IMHO」を日本語訳。Svelte/SvelteKitを軸に、Progressive Enhancement、MPAとSPA、DSL、RPC、ビルドステップを論じます。"
 ---
 
 <!-- spellchecker:off -->

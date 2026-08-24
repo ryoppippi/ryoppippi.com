@@ -3,6 +3,7 @@ title: "SiteMCP: 任意のサイトを丸ごとMCPサーバー化"
 date: '2025-04-08'
 isPublished: true
 lang: 'ja'
+description: "任意のWebサイトをfetchしてMCPサーバー化するsitemcpを紹介。Claude DesktopやCursorでSvelte 5などの最新ドキュメントをLLMに参照させ、必要な情報だけ取得する方法を解説します。"
 ---
 
 ![screenshot](https://github.com/user-attachments/assets/a1ebc506-e4e3-4efd-b571-331ee94dfcaf)

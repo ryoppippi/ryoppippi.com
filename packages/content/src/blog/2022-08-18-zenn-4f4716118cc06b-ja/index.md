@@ -3,6 +3,7 @@ title: "Zig の TensorFlow Lite ライブラリでMNISTした"
 date: '2022-08-18'
 isPublished: true
 lang: 'ja'
+description: "ZigからTensorFlow Liteを呼び出してMNISTを推論する手順を紹介。Kaggleの画像データセットとモデルを使い、STBライブラリで画像を読み込み・リサイズする実例もまとめます。"
 ---
 
 ![MNIST x TFLite x Zig](./zig-tflite-mnist.png)

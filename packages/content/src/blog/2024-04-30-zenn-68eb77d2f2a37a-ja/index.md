@@ -3,6 +3,7 @@ title: "マクロ記録中にColorSchemeを変更する設定をしました"
 date: '2024-04-30'
 isPublished: true
 lang: 'ja'
+description: "Neovimのマクロ記録中にkanagawa.nvimのColorSchemeを切り替え、vim.fn.reg_recording()で状態を表示する設定を解説。nui.nvimのPopupでレジスタも確認できます。"
 ---
 
 <!-- spellchecker:off -->

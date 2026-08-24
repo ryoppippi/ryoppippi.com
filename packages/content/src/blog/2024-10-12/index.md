@@ -3,6 +3,7 @@ title: How rich this blog system is!
 date: 2024-10-12
 isPublished: true
 lang: 'en'
+description: "A feature showcase for this blog: Markdown headings, footnotes, GitHub alerts, images, code blocks, Tweet and YouTube embeds, magic links, and BudouX."
 ---
 
 > This post is a demonstration of how rich this blog system is. Continuously updated.

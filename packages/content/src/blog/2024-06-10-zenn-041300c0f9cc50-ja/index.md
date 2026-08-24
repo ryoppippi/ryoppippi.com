@@ -3,6 +3,7 @@ title: "CopilotChatとNeovimでGitの効率を上げる"
 date: '2024-06-10'
 isPublished: true
 lang: 'ja'
+description: "NeovimのCopilotChat.nvimとLazygit・Ginを組み合わせ、Gitコミットメッセージやgit diffからPull Request本文を生成する設定と操作手順を紹介します。"
 ---
 
 > [!NOTE]

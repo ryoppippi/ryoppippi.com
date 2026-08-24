@@ -3,6 +3,11 @@ title: "YouTubeヘビーユーザーのためのiOS最強のShortcut"
 date: 2025-01-19
 isPublished: true
 lang: 'ja'
+description: "iPhoneでYouTubeやTwitchを見るときだけ画面の回転ロックを自動解除し、アプリを閉じると再び有効にするiOSショートカットの設定方法を紹介します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2025-01-19-ja/
+  en: https://ryoppippi.com/blog/2025-01-19-en/
+  x-default: https://ryoppippi.com/blog/2025-01-19-en/
 ---
 
 私はiPhoneでYouTubeやTwitchをよく見ます。約1年前、友人の{@yuki-yano}さんが{vim-jp} Slackで素晴らしいショートカットを紹介してくれました。今では、このショートカットなしの生活は考えられません。

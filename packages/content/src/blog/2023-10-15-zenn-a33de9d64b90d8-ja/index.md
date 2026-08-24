@@ -3,6 +3,7 @@ title: "Vim/Neovimのプラグインマネージャーを悪用してCLIの管�
 date: '2023-10-15'
 isPublished: true
 lang: 'ja'
+description: "AquaやHomebrewで管理しにくいCLIツールを、Vim/Neovimのlazy.nvimで宣言的に管理。GitHub CLI拡張やZigのzlsを更新し、lazy-lock.jsonでバージョンを追跡します。"
 ---
 
 <!-- spellchecker:off -->

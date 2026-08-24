@@ -3,6 +3,7 @@ title: "なぜVimmerの僕はマルチカーソルを必要としないか"
 date: '2024-04-19'
 isPublished: true
 lang: 'ja'
+description: "VSCodeのマルチカーソル操作を、NeovimのVisual Block、ドットリピート、LSP rename、置換コマンド、マクロで代替する具体的な編集手順を紹介します。"
 ---
 
 > [!NOTE]
