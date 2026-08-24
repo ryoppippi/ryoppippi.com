@@ -62,9 +62,16 @@ function parseAlternates(value: unknown): Readonly<Record<string, string>> | und
 	if (typeof value !== 'object' || value == null || Array.isArray(value)) {
 		return undefined;
 	}
-	const entries = Object.entries(value).filter(
-		(entry): entry is [string, string] => typeof entry[1] === 'string',
-	);
+	const entries: Array<[string, string]> = [];
+	for (const [language, url] of Object.entries(value)) {
+		if (typeof url !== 'string') {
+			continue;
+		}
+		const trimmedUrl = url.trim();
+		if (trimmedUrl.length > 0) {
+			entries.push([language, trimmedUrl]);
+		}
+	}
 	return entries.length === 0 ? undefined : Object.fromEntries(entries);
 }
 
@@ -303,9 +310,10 @@ if (import.meta.vitest != null) {
 					'lang: en',
 					'description: A useful article summary.',
 					'alternates:',
-					'  en: https://example.com/en/',
+					'  en: " https://example.com/en/ "',
 					'  ja: https://example.com/ja/',
 					'  x-default: https://example.com/en/',
+					'  empty: "  "',
 					'---',
 					'',
 					'Article body',

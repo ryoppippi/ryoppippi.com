@@ -9,8 +9,7 @@ import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
 import Home from './templates/Home.svelte';
-
-const siteOrigin = 'https://ryoppippi.com';
+import { siteOrigin } from './site-origin.ts';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
@@ -205,7 +204,9 @@ if (import.meta.vitest != null) {
 			);
 		}
 
-		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+		const jsonLd = html.match(
+			/<script data-page-head type="application\/ld\+json">([\s\S]*?)<\/script>/,
+		)?.[1];
 		expect(jsonLd).toBeDefined();
 		expect(JSON.parse(jsonLd ?? '')).toMatchObject({
 			'@context': 'https://schema.org',
@@ -247,8 +248,9 @@ if (import.meta.vitest != null) {
 			assets,
 		);
 		const jsonLd =
-			article?.content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ??
-			'';
+			article?.content.match(
+				/<script data-page-head type="application\/ld\+json">([\s\S]*?)<\/script>/,
+			)?.[1] ?? '';
 
 		expect(jsonLd).toContain('\\u003c/script>');
 		expect(jsonLd).not.toContain('</script><script>');

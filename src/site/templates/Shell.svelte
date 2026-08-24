@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { createRawSnippet } from 'svelte';
+	import { siteOrigin } from '../site-origin.ts';
 
 	let {
 		article = false,
@@ -19,9 +20,8 @@
 		title: string;
 	} = $props();
 
-	const origin = 'https://ryoppippi.com';
 	const fullTitle = $derived(title === 'home' ? 'ryoppippi.com' : `${title} | ryoppippi.com`);
-	const url = $derived(`${origin}${pathname}`);
+	const url = $derived(`${siteOrigin}${pathname}`);
 	const alternateLinks = $derived(
 		alternates == null
 			? []
@@ -56,13 +56,13 @@
 	<meta data-page-head property='og:title' content={fullTitle} />
 	<meta data-page-head property='og:description' content={description} />
 	<meta data-page-head property='og:url' content={url} />
-	<meta data-page-head property='og:image' content={`${origin}/ryoppippi.jpg`} />
+	<meta data-page-head property='og:image' content={`${siteOrigin}/ryoppippi.jpg`} />
 	<meta data-page-head property='og:image:alt' content="ryoppippi's icon" />
 	<meta data-page-head name='twitter:card' content='summary' />
 	<meta data-page-head name='twitter:site' content='@ryoppippi' />
 	<meta data-page-head name='twitter:title' content={fullTitle} />
 	<meta data-page-head name='twitter:description' content={description} />
-	<meta data-page-head name='twitter:image' content={`${origin}/ryoppippi.jpg`} />
+	<meta data-page-head name='twitter:image' content={`${siteOrigin}/ryoppippi.jpg`} />
 	<meta data-page-head name='twitter:image:alt' content="ryoppippi's icon" />
 	<title>{fullTitle}</title>
 	<link rel='icon' type='image/x-icon' href='/favicons/favicon.ico' />

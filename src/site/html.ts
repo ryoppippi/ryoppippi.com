@@ -69,7 +69,7 @@ export function page({
 	const jsonLd =
 		structuredData == null ? undefined : JSON.stringify(structuredData).replaceAll('<', '\\u003c');
 	const structuredDataTag =
-		jsonLd == null ? '' : `<script type="application/ld+json">${jsonLd}</script>`;
+		jsonLd == null ? '' : `<script data-page-head type="application/ld+json">${jsonLd}</script>`;
 	const { body, head } = render(Shell, {
 		props: {
 			article,

@@ -1,5 +1,14 @@
 import type { GeneratedFile } from './pages.ts';
 
+function escapeXml(value: string): string {
+	return value
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;')
+		.replaceAll('"', '&quot;')
+		.replaceAll("'", '&apos;');
+}
+
 /**
  * Builds the XML sitemap for the generated HTML routes.
  *
@@ -9,19 +18,20 @@ import type { GeneratedFile } from './pages.ts';
 export function sitemap(urls: readonly string[]): GeneratedFile {
 	return {
 		path: 'sitemap.xml',
-		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`,
+		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${escapeXml(url)}</loc></url>`).join('')}</urlset>`,
 	};
 }
 
 if (import.meta.vitest != null) {
 	test('uses the sitemap protocol namespace without speculative modification dates', () => {
-		const result = sitemap(['https://ryoppippi.com/', 'https://ryoppippi.com/blog/']);
+		const result = sitemap(['https://ryoppippi.com/', 'https://example.com/search?q=seo&lang=en']);
 
 		expect(result).toEqual({
 			path: 'sitemap.xml',
 			content:
-				'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://ryoppippi.com/</loc></url><url><loc>https://ryoppippi.com/blog/</loc></url></urlset>',
+				'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://ryoppippi.com/</loc></url><url><loc>https://example.com/search?q=seo&amp;lang=en</loc></url></urlset>',
 		});
 		expect(result.content).not.toContain('<lastmod>');
+		expect(result.content).toContain('&amp;lang=en');
 	});
 }
