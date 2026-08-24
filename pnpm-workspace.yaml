@@ -1,18 +1,21 @@
 packages:
   - packages/*
 
+catalog:
+  '@ox-content/napi': 2.81.0
+
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - gray-matter-es
-  - '@ox-content/binding-darwin-arm64@2.72.0'
-  - '@ox-content/binding-darwin-x64@2.72.0'
-  - '@ox-content/binding-linux-arm64-gnu@2.72.0'
-  - '@ox-content/binding-linux-x64-gnu@2.72.0'
-  - '@ox-content/binding-win32-x64-msvc@2.72.0'
-  - '@ox-content/islands@2.72.0'
-  - '@ox-content/napi@2.72.0'
-  - '@ox-content/vite-plugin-svelte@2.72.0'
-  - '@ox-content/vite-plugin@2.72.0'
+  - '@ox-content/binding-darwin-arm64@2.81.0'
+  - '@ox-content/binding-darwin-x64@2.81.0'
+  - '@ox-content/binding-linux-arm64-gnu@2.81.0'
+  - '@ox-content/binding-linux-x64-gnu@2.81.0'
+  - '@ox-content/binding-win32-x64-msvc@2.81.0'
+  - '@ox-content/islands@2.81.0'
+  - '@ox-content/napi@2.81.0'
+  - '@ox-content/vite-plugin-svelte@2.81.0'
+  - '@ox-content/vite-plugin@2.81.0'
 
 overrides:
   sharp: ^0.35.3
@@ -47,3 +50,7 @@ trustPolicy: no-downgrade
 
 trustPolicyExclude:
   - chokidar@4.0.3
+  # semver 6.x predates npm provenance; later 7.x releases have it, which the
+  # date-based check reads as a downgrade. 6.3.1 is the long-standing Babel
+  # dependency.
+  - semver@6.3.1

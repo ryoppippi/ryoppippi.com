@@ -1,3 +1,5 @@
+import type { ChartLang } from './copy.ts';
+import { uiCopy } from './copy.ts';
 import type { GtvPoint } from './data.ts';
 import {
 	CREATED_AT,
@@ -8,9 +10,7 @@ import {
 	SUBMITTED_AT,
 } from './data.ts';
 
-export const SERIES = { low: '低め', mid: '中央', high: '高め', stars: 'ccusage stars' } as const;
-
-export type Series = keyof typeof SERIES;
+export type Series = keyof typeof uiCopy.ja.series;
 
 export type StarPoint = {
 	at: Date;
@@ -84,19 +84,33 @@ export const starTicks = STARS_AXIS_TICKS.map((stars) => ({
 /**
  * Summarises a row for the readout beside the chart.
  *
- * @param row - The focused row.
+ * @param row - The focused row, already localised if needed.
+ * @param lang - Language for the series labels.
  * @returns The milestone, the middle estimate while one exists, and the stars.
  */
-export function describeRow(row: Row): string {
+export function describeRow(row: Row, lang: ChartLang = 'ja'): string {
+	const series = uiCopy[lang].series;
 	const parts = [`${row.label} ${row.milestone}`];
 	if (row.mid != null) {
-		parts.push(`${SERIES.mid} ${row.mid}%`);
+		parts.push(`${series.mid} ${row.mid}%`);
 	}
 	if (row.stars != null) {
-		parts.push(`${SERIES.stars} ~${row.stars}K`);
+		parts.push(`${series.stars} ~${row.stars}K`);
 	}
 
 	return parts.join(' · ');
+}
+
+if (import.meta.vitest != null) {
+	describe(describeRow, () => {
+		it('uses English series labels when asked', () => {
+			const row = rows.find((entry) => entry.date === '2023-10-01T23:59:59Z');
+			assert.isDefined(row);
+
+			expect(describeRow(row, 'en')).toContain('Central');
+			expect(describeRow(row, 'en')).not.toContain('中央');
+		});
+	});
 }
 
 /**

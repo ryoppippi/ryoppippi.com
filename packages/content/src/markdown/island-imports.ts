@@ -10,9 +10,10 @@ export type IslandImport = {
 };
 
 // Deliberately narrower than JavaScript: a default import of a relative
-// `.svelte` path, bound to a capitalised name so it can be used as a tag.
+// `.svelte` or `.tsx` (Solid) path, bound to a capitalised name so it can be
+// used as a tag.
 const IMPORT_PATTERN =
-	/^import\s+([A-Z][A-Za-z0-9]*)\s+from\s+(['"])(\.{1,2}\/[^'"]*\.svelte)\2\s*;?\s*$/;
+	/^import\s+([A-Z][A-Za-z0-9]*)\s+from\s+(['"])(\.{1,2}\/[^'"]*\.(?:svelte|tsx))\2\s*;?\s*$/;
 
 /**
  * Reads the component imports a post declares.
@@ -79,10 +80,31 @@ if (import.meta.vitest != null) {
 			]);
 		});
 
+		it('reads a component from a sibling post directory', () => {
+			expect(
+				parseIslandImports("import Chart from '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte'"),
+			).toEqual([
+				{
+					name: 'Chart',
+					specifier: '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte',
+				},
+			]);
+		});
+
 		it('reads several imports in order', () => {
 			const content = "import B from './B.svelte'\nimport A from './A.svelte'";
 
 			expect(parseIslandImports(content).map((entry) => entry.name)).toEqual(['B', 'A']);
+		});
+
+		it('reads a default import of a Solid component', () => {
+			expect(parseIslandImports("import Chart from './Chart.tsx'")).toEqual([
+				{ name: 'Chart', specifier: './Chart.tsx' },
+			]);
+		});
+
+		it('ignores an import of a non-component ts module', () => {
+			expect(parseIslandImports("import Rows from './rows.ts'")).toEqual([]);
 		});
 
 		it('ignores an import inside a code fence', () => {

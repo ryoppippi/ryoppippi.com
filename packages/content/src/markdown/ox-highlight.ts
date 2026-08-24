@@ -124,7 +124,7 @@ async function transformWithTheme(transform: MarkdownTransform, content: string)
 }
 
 function classNames(element: Element): string[] {
-	const value = element.properties.className;
+	const value: unknown = element.properties.className;
 	if (Array.isArray(value)) {
 		return value.filter((entry): entry is string => typeof entry === 'string');
 	}

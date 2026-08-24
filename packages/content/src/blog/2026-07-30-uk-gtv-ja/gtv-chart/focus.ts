@@ -22,7 +22,13 @@ export function isRowMark(markId: string): boolean {
 	return ROW_MARKS.has(markId);
 }
 
-type GtvPoint = ChartPoint<Row | StarPoint>;
+/**
+ * Every datum type the chart's marks feed the scene: rows, star points, the
+ * Date-only focus marks, and the star axis ticks.
+ */
+type GtvDatum = Row | StarPoint | Date | { stars: number; percent: number };
+
+type GtvPoint = ChartPoint<GtvDatum, Date | number, number>;
 
 /**
  * Collects the row-mark points belonging to the row nearest an x position.
@@ -51,10 +57,10 @@ function rowPointsNearestX(
  * Focuses by x position alone, so moving anywhere over the plot follows the
  * timeline instead of requiring the cursor to be near a line.
  */
-export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
+export const focusByX = {
 	// maxDistance is ignored on purpose: the whole plot tracks the timeline.
-	resolve: (points, x) => rowPointsNearestX(points, x),
-	group: (points, focused) => [
+	resolve: (points, { x }) => rowPointsNearestX(points, x),
+	group: (points, { point: focused }) => [
 		focused,
 		...points.filter(
 			(point) =>
@@ -77,4 +83,4 @@ export const focusByX: ChartFocusStrategy<Row | StarPoint> = {
 				return true;
 			});
 	},
-};
+} satisfies ChartFocusStrategy<GtvDatum, Date | number, number>;

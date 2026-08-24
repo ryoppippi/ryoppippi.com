@@ -7,17 +7,25 @@ export function escapeHtml(value: string) {
 		.replace(/'/g, '&#39;');
 }
 
+function decodeNumericEntity(match: string, hex: string | undefined, decimal: string | undefined) {
+	const code = hex != null ? Number.parseInt(hex, 16) : Number.parseInt(decimal ?? '', 10);
+	return Number.isNaN(code) ? match : String.fromCodePoint(code);
+}
+
 /**
  * Reverses {@link escapeHtml} so values round-tripped through an attribute can
  * be read back.
  *
- * `&amp;` is decoded last so an escaped entity such as `&amp;quot;` survives as
- * the literal text `&quot;` instead of becoming a quote character.
+ * Markdown/HTML pipelines may rewrite `&quot;` to `&#x22;` or `&#34;`. Those
+ * numeric forms are decoded as well. `&amp;` is decoded last so an escaped
+ * entity such as `&amp;quot;` survives as the literal text `&quot;` instead of
+ * becoming a quote character.
  *
  * @param value - Text that was escaped for an HTML attribute.
  * @returns The original text.
  * @example
  * unescapeHtml('{&quot;a&quot;:1}'); // '{"a":1}'
+ * unescapeHtml('{&#x22;a&#x22;:1}'); // '{"a":1}'
  */
 export function unescapeHtml(value: string) {
 	return value
@@ -25,6 +33,12 @@ export function unescapeHtml(value: string) {
 		.replace(/&gt;/g, '>')
 		.replace(/&quot;/g, '"')
 		.replace(/&#39;/g, "'")
+		.replace(/&#x([0-9a-f]+);/gi, (match, hex: string) =>
+			decodeNumericEntity(match, hex, undefined),
+		)
+		.replace(/&#(\d+);/g, (match, decimal: string) =>
+			decodeNumericEntity(match, undefined, decimal),
+		)
 		.replace(/&amp;/g, '&');
 }
 
@@ -67,6 +81,11 @@ if (import.meta.vitest != null) {
 
 		it('does not decode an entity that was itself escaped', () => {
 			expect(unescapeHtml(escapeHtml('&quot;'))).toBe('&quot;');
+		});
+
+		it('decodes numeric quote entities used by the HTML pipeline', () => {
+			expect(unescapeHtml('{&#x22;lang&#x22;:&#x22;en&#x22;}')).toBe('{"lang":"en"}');
+			expect(unescapeHtml('{&#34;lang&#34;:&#34;en&#34;}')).toBe('{"lang":"en"}');
 		});
 	});
 

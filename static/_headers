@@ -1,5 +1,6 @@
 /blog/*.md
   Content-Type: text/plain; charset=utf-8
+  X-Robots-Tag: noindex
 
 /dotfiles.md
   Content-Type: text/plain; charset=utf-8

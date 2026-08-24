@@ -1,5 +1,15 @@
 {
 	"extends": "../../tsconfig.base.json",
-	"include": ["src/**/*.ts", "src/**/*.svelte", "scripts/**/*.ts", "vite.config.ts"],
+	"compilerOptions": {
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js"
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.svelte",
+		"scripts/**/*.ts",
+		"vite.config.ts"
+	],
 	"exclude": ["dist", "node_modules"]
 }

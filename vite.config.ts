@@ -2,13 +2,39 @@ import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { playwright } from '@vitest/browser-playwright';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
-import { defineConfig } from 'vite-plus';
+import { defineConfig, type PluginOption } from 'vite-plus';
+import solid from 'vite-plugin-solid';
 import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
+
+const plugins: PluginOption[] = [
+	svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
+	solid({ ssr: true, solid: { hydratable: false } }),
+	cloudflareRedirect({
+		mode: 'generate',
+		entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
+	}),
+	...oxContentSvelte({
+		components: { Tweet: './packages/content/src/Tweet.svelte' },
+		srcDir: 'packages/content/src/blog',
+		ssg: false,
+	}),
+	staticSiteBuild(),
+	staticSiteDevServer(),
+	FontaineTransform.vite({
+		fallbacks: {
+			'DM Mono': ['Courier New'],
+			Inter: ['Arial'],
+			'JetBrains Mono': ['Courier New'],
+			'Roboto Condensed': ['Arial'],
+		},
+		resolvePath: (id) => new URL(import.meta.resolve(id)),
+	}),
+	tailwindcss(),
+];
 
 export default defineConfig({
 	publicDir: 'static',
@@ -17,34 +43,7 @@ export default defineConfig({
 			ignored: ['**/.direnv/**'],
 		},
 	},
-	plugins: [
-		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
-		cloudflareRedirect({
-			mode: 'generate',
-			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
-		}),
-		...oxContentSvelte({
-			components: { Tweet: './packages/content/src/Tweet.svelte' },
-			srcDir: 'packages/content/src/blog',
-			ssg: false,
-		}),
-		staticSiteBuild(),
-		staticSiteDevServer(),
-		FontaineTransform.vite({
-			fallbacks: {
-				'DM Mono': ['Courier New'],
-				Inter: ['Arial'],
-				'JetBrains Mono': ['Courier New'],
-				'Roboto Condensed': ['Arial'],
-			},
-			resolvePath: (id) => new URL(import.meta.resolve(id)),
-		}),
-		tailwindcss(),
-	],
-	ssr: {
-		// @tanstack/svelte-charts ships an uncompiled Chart.svelte.
-		noExternal: ['@tanstack/svelte-charts'],
-	},
+	plugins,
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
@@ -126,28 +125,12 @@ export default defineConfig({
 					environment: 'node',
 					includeSource: [
 						'src/lib/**/*.ts',
-						'src/site/{assets,content-assets,dev-routes,dev-server,page-styles}.ts',
+						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
+						'src/site/{generate,page-styles,pages,sitemap}.ts',
 						'packages/content/src/{artifact,blog,island-renderer,islands,ogp-snapshots,paths,tweet-snapshots}.ts',
+						'packages/content/src/blog/**/*.ts',
 						'packages/content/src/markdown/**/*.ts',
 					],
-				},
-			},
-			{
-				// Runes helpers that drive real layout and observers, so they need a
-				// real browser rather than a DOM shim.
-				extends: true,
-				test: {
-					name: 'browser',
-					globals: true,
-					dir: 'packages/content/src/lib',
-					include: [],
-					includeSource: ['**/*.svelte.ts'],
-					browser: {
-						enabled: true,
-						provider: playwright(),
-						headless: true,
-						instances: [{ browser: 'chromium' }],
-					},
 				},
 			},
 		],

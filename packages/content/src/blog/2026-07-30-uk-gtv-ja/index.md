@@ -3,9 +3,16 @@ title: OSS開発者としてUK Global Talent Visa（Exceptional Talent）を取�
 date: "2026-08-09"
 isPublished: true
 lang: ja
+description: イギリスのGlobal Talent VisaにExceptional Talentとして承認された体験記。Tech Nationの推薦状、審査基準、申請の流れとOSS実績の示し方をまとめます。
+alternates:
+  ja: https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/
+  en: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
+  x-default: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
 ---
 
-import GtvChart from './gtv-chart/GtvChart.svelte'
+import GtvChart from './gtv-chart/GtvChart.tsx'
+
+> [English](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/)
 
 # TL;DR
 
@@ -43,13 +50,6 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 
 自分は2022年から妻のビザのdependantとしてUKにいる。
 
-いま振り返ると渡英時にはほかの選択肢もあった。
-
-- [High Potential Individualビザ](https://www.gov.uk/high-potential-individual-visa): 対象大学の卒業生が使えるビザ[^hpi]
-- [Youth Mobility Scheme](https://www.gov.uk/youth-mobility): いわゆるワーホリ[^yms]
-- [Global TalentのExceptional Promise](#exceptional-talentとexceptional-promise): キャリア初期の人を将来性で評価する区分
-- 妻のdependant: 就労制限がほぼなく、雇用でも自営でも働ける
-
 当時は日本の会社のリモートワークで食べていて、UKで働く予定もなかった。一番簡単で自由度の高いdependant visaを深く考えずに選んだ。
 
 生活に問題はなかったが、UKにいられるのは妻のビザのおかげだった。Global Talentなら、妻や勤務先ではなく自分の実績を基に滞在できる。
@@ -58,14 +58,55 @@ import GtvChart from './gtv-chart/GtvChart.svelte'
 
 UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、医学、デジタルテクノロジー、芸術などの分野でleaderまたはpotential leaderとしてendorseされた人向けのビザだ。
 
+## ビザとしての自由度
+
+[GOV.UK](https://www.gov.uk/global-talent-digital-technology)の説明だけ見ても、自由度はかなり高い。
+
+- job offerもスポンサー企業も要らない
+- employee / self-employed / company directorとして働ける(なんなら起業もできる)
+- 仕事を変えても辞めても、Home Office(内務省)に知らせなくていい
+- 家族を帯同できる
+- 最長5年まで期間を選べて、延長もできる
+- 最低給与要件も英語要件もない
+- 3~5年でILR（永住）を申請できる
+
+働くためのビザは雇用主やスポンサーに紐づくのが普通だ。どこにも紐づかず、自分の実績だけで申請して住める。この形はかなり珍しい。
+
+
+## Exceptional TalentとExceptional Promise
+
+Global Talent Visaには2つの区分がある。Exceptional Talentはすでに分野のリーダーとして認識されている人向け、Exceptional Promiseは将来リーダーになりうる人向けだ。
+
+| | Exceptional Talent | Exceptional Promise |
+|---|---|---|
+| 必須基準が求める認識 | 分野の**leading talent** | 分野の**potential talent** |
+| 証明すること | すでにリーダーである | 将来リーダーになりうる |
+| 想定するキャリア段階 | 5年超が目安 | 5年未満が目安 |
+| 証拠の例 | 受賞、登壇、メディア掲載、OSSへのsignificant engagement | 学業成績、innovativeなプロジェクトへの貢献 |
+| ILR（永住）まで | 3年 | 5年 |
+| 通った人に占める割合[^promise-share] | 37% | 44% |
+
+*割合は全分野の調査回答者ベースで、残り19%は区分不明。*
+
+申請の形式はよく似ている。どちらも推薦状3通とCV、基準を満たす証拠を最大10点提出する。ビザを取った後にできることも変わらない[^talent-promise-format]。ただし、難易度は同じではない。
+
+自分はtechnology分野で5年を超えていたのでTalentで申請した[^talent-to-promise]。
+
+## ここでいう「リーダー」
+
+ここでいうleaderは組織のリーダーとは限らない。部下の人数や役職ではなく、仕事がdigital technology分野に与えた影響や外部からの評価も見られる[^leader-assessment]。
+
+自分もpeople managerではないしfounderでもない。OSSを作っている一人のエンジニアだ。それでもOSS、登壇、メディア、実務、推薦状を通じて分野のleading talentとして認められた。
+
+
+## 申請フロー
+
 申請は2段階に分かれる。
 
 1. **Stage 1: endorsement** — 分野のendorsing bodyに「リーダーとして認識されているか」を審査してもらう。決定の公式目安は5〜8週間[^stage1-weeks]
 2. **Stage 2: ビザ申請** — endorsementを得てからHome Officeに申請する。ここで見られるのは通常のビザ要件で、才能の審査はStage 1で終わっている
 
 このブログで「審査」と書くのは、ほぼすべてStage 1の話だ。担当するendorsing bodyは分野ごとに異なる（[一覧](https://www.gov.uk/government/publications/global-talent-endorsing-bodies)）。
-
-+++ 対象分野
 
 | 分野 | endorsing body |
 |---|---|
@@ -80,45 +121,31 @@ UKの[Global Talent Visa](https://www.gov.uk/global-talent)は科学、工学、
 
 制度は変わり続けている。たとえばgraphic design、brand design、product design（工業デザイン）には、[Design industryの専用ルート](https://www.gov.uk/global-talent-arts-culture/design-industry)ができた（2026年7月1日開始）[^design-uxui]。
 
-+++
 
-自分が申請したのは[Digital Technology route](https://www.gov.uk/global-talent-digital-technology)で、[Tech Nation](https://technation.io/)からendorsementを受けた。区分はExceptional Promiseではなく、Exceptional Talentだった。
+自分が申請したのは[Digital Technology route](https://www.gov.uk/global-talent-digital-technology)で、[Tech Nation](https://technation.io/)からendorsementを受けた。
 
-## Exceptional TalentとExceptional Promise
+## 何を満たせばいいのか
 
-申請の形式はよく似ている。どちらも推薦状3通とCV、基準を満たす証拠を最大10点提出する。ビザを取った後にできることも変わらない[^talent-promise-format]。ただし、難易度は同じではない。
+要件は区分共通だ。自己評価ではなく、外部から確認できる証拠を出す[^evidence-split]。
 
-| | Exceptional Talent | Exceptional Promise |
-|---|---|---|
-| 必須基準が求める認識 | 分野の**leading talent** | 分野の**potential talent** |
-| 証明すること | すでにリーダーである | 将来リーダーになりうる |
-| 想定するキャリア段階 | 5年超が目安 | 5年未満が目安 |
-| 証拠の例 | 受賞、登壇、メディア掲載、OSSへのsignificant engagement | 学業成績、innovativeなプロジェクトへの貢献 |
-| ILR（永住）まで | 3年 | 5年 |
-| 通った人に占める割合[^promise-share] | 37% | 44% |
+- **MC**（mandatory criteria・必須基準）: Talentなら「leading talent」、Promiseなら「potential talent」として認識されていること
+- **OC**（optional criteria・選択基準）: 4つ（innovation / 職務外の貢献 / 企業での重要貢献 / 研究）[^oc-promise]の基準のうち2つを満たす必要がある
+- **推薦状3通**: その分野の専門家に書いてもらう[^letters]
+- **証拠は最大10点**: この証拠でMCと選んだOC2つを証明する
 
-*割合は全分野の調査回答者ベースで、残り19%は区分不明。*
+会社の売上や調達額だけでは自分の実績にならない。自分がどう貢献したかを、自分の名前に紐づく証拠で示す必要がある。社名や肩書きだけでは足りない[^company-evidence][^founder-share]。
 
-同じ形式でも、Talentはすでにリーダーであること、Promiseは将来リーダーになりうることを証明する。求められる像が違う[^talent-to-promise]。自分はtechnology分野で5年を超える経験があり、それまでに得ていた外部評価を基にTalentで申請した。
+そこでOSSが効く。個人の名前に紐づき外から確認できるからだ。Tech Nationもopen source codeを証拠の例として明記している[^open-source-evidence]。登壇、メディア、受賞も同じだ[^oc2-wording]。
 
-## ここでいう「リーダー」
+## どのくらい難しいのか
 
-ここでいうleaderは組織のリーダーとは限らない。部下の人数や役職ではなく、仕事がdigital technology分野に与えた影響や外部からの評価も見られる[^leader-assessment]。
+Tech Nationの直近の承認率は約14%（2025-26）で、1年前の約27%からほぼ半減した（954/3,590 → 587/4,087）[^tn-rate-recent][^foi-gap]。7人に1人しか通っていない。2020/21年度は50%だった[^rates-2021]。
 
-自分もpeople managerではないしfounderでもない。OSSを作っている一人のエンジニアだ。それでもOSS、登壇、メディア、実務、推薦状を通じて分野のleading talentとして認められた。
+自分が提出したのは、開示された中で最も承認率の低い年度が終わった直後の2026年4月だった。
 
-## ビザとしての自由度
+Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
 
-[GOV.UK](https://www.gov.uk/global-talent-digital-technology)の説明だけ見ても、自由度はかなり高い。
-
-- job offerもスポンサー企業も要らない
-- employee / self-employed / company directorとして働ける
-- 仕事を変えても辞めても、Home Officeに知らせなくていい
-- 最長5年まで期間を選べて、延長もできる
-- 家族を帯同できる
-- 最低給与要件も英語要件もない
-
-働くためのビザは雇用主やスポンサーに紐づくのが普通だ。どこにも紐づかず、自分の実績だけで申請して住める。この形はかなり珍しい。
+難しいビザではある。ただし従業員としての実績も職務外のOSSも使える。他分野のendorsing bodyとの比較は[追記](#他分野の承認率)に置いた。
 
 ## ILR
 
@@ -128,69 +155,18 @@ ILRを取ると何が嬉しいのか。ビザの期限と更新から解放さ�
 
 日数の管理からも解放される。ILRまでは原則として12か月あたり180日までしかUKの外にいられず、渡航のたびに日数を数えることになる。うちでは妻が几帳面にカウントしてくれていた。ILRの後はこの計算が要らなくなる[^ilr-absence]。
 
-しかも標準ルートのILRは、5年から10年へ延ばす方向で改革が進んでいる（まだ施行前）[^earned-settlement]。5年でも長いのに10年はさすがに長い。その案でも、Global Talentは3年のfast-track側に置かれている。
+しかも標準ルートのILRは、5年から10年へ延ばす方向で改革が進んでいる（まだ施行前）[^earned-settlement]。5年でも長いのに10年はさすがに長い。その案でも、Global Talentは3年のfast-track側に置かれている。UKで働く定番の[Skilled Worker](https://www.gov.uk/skilled-worker-visa)（雇用主スポンサー型。差は[追記](#skilled-workerとの差)にまとめた）とも違う。
 
-Skilled Workerとの差は年数だけではない。標準の年収要件は2024年に£26,200から£38,700へ上がり、2025年7月には£41,700になった（2026年現在も同額）[^sw-salary]。
-
-特に若手の仕事探しは厳しい。16〜24歳の失業率は16.2%（2026年第1四半期）。graduate vacancyには平均140件の応募が来る。UKの大学卒業生でfull-timeで働いていたのは56.4%（卒業15か月後）だった[^young-job-market]。仕事を見つけるのが難しい世代ほどビザを出せる仕事の条件まで厳しくなる。
-
-卒業後はGraduate routeで2年間UKに残れる（PhDは3年間）。ただしGlobal Talent / Skilled WorkerのILRにはカウントされない[^graduate-ilr]。切り替えた時点からILRまでのカウントが始まる。
-
-さらにSkilled Workerはスポンサー企業にビザが紐づく。レイオフされると通常60日以内に[^curtailment]次のスポンサーを見つけるかUKを離れることになる。そんな状態でILRまでの5年（改革案どおりなら10年）を走り切るのは怖い。Global Talentは職に紐づいていないから職を失ってもビザはそのまま残る。
-
-## 何を満たせばいいのか
-
-要件は区分共通だ。自己評価ではなく、外部から確認できる証拠を出す。
-
-- **MC**（mandatory criteria・必須基準）: Talentなら「leading talent」、Promiseなら「potential talent」として認識されていること
-- **OC**（optional criteria・選択基準）: 4つのうち2つを満たす
-- **推薦状3通**: その分野の別々の専門家3人に書いてもらう
-- **証拠は最大10点**[^evidence-split]: この証拠でMCと選んだOC2つを証明する
-
-OCは次の4つだ[^oc-promise]。
-
-1. **OC1**: product-ledなデジタル技術企業のfounder / senior executiveとして、または新しいdigital分野に取り組む従業員として、innovationを起こした実績
-2. **OC2**: 職務外でデジタル技術分野の発展に貢献し、その仕事が評価されていること
-3. **OC3**: product-ledなデジタル技術企業のfounder、senior executive、board member、または従業員として、技術・商業・起業面で重要な貢献をしたこと
-4. **OC4**: 専門家から評価された研究を通じた学術的な貢献
-
-満たすのは2つでいい。OC1とOC3は従業員でも該当する。OC2は職務外の活動で、OC4は研究なので**founderである必要はない**。過去10年にendorseされた人の4人に3人はfounder以外だ[^founder-share]。
-
-ただしfounderではない従業員は、会社の売上や調達額だけでは自分の実績にならない。自分がどう貢献したかを、自分の名前に紐づく証拠で示す必要がある。社名や肩書きだけでは足りない[^company-evidence]。
-
-そこでOSSが効く。個人の名前に紐づき外から確認できるからだ。Tech Nationもopen source codeを証拠の例として明記している[^open-source-evidence]。登壇、メディア、受賞も同じだ。OC2を選ぶなら、通常の職務を超えて分野に貢献し、その仕事が外部から評価されている必要がある[^oc2-wording]。
-
-推薦状も誰にでも頼めるわけではない。分野の専門家として認められている必要がある。さらに申請者の仕事を12か月以上詳しく知っている人が3人必要になる。身近な同僚や上司というだけでは足りない[^letters]。
-
-## どのくらい難しいのか
-
-| endorsing body | 分野 | 直近の承認率 | 2020/21年度[^rates-2021] |
-|---|---|---:|---:|
-| Tech Nation | Digital technology | **約14%**（2025-26）[^tn-rate-recent] | 50% |
-| UKRI | 研究全般 | —[^no-perbody] | 98% |
-| Royal Society | 自然科学 | — | 84% |
-| British Academy | 人文・社会科学 | — | 82% |
-| Royal Academy of Engineering | 工学 | — | 71% |
-| （学術系4bodyの合算） | | 約87%（2024-25）[^rate-caveat] | 約84% |
-| Arts Council England | Arts and culture | 約76%（〜2023・累計）[^ace-rate] | 89% |
-
-*承認率はいずれもTalentとPromiseの合算。区分別の内訳は開示されていない。*
-
-Tech Nationの直近値は約14%で、1年前の約27%からほぼ半減した（954/3,590 → 587/4,087）[^foi-gap]。7人に1人しか通っていない。なお表のほかのbodyとは対象期間が違うので単純比較はできない。
-
-自分が提出したのは、開示された中で最も承認率の低い年度が終わった直後の2026年4月だった。
-
-Tech Nationの公式ガイドにも、基準を満たせば必ず通るチェックリスト方式ではなく、審査パネルが申請全体を判断すると書かれている[^holistic-review]。
-
-難しいビザではある。ただ著名なfounderや大企業の役員だけが対象ではない。従業員としての実績も職務外のOSSも使える。
 
 # なぜ取ったのか
 
-dependantでも自由に働けたので転職のために取ったわけではない。妻のビザの期限を気にせず自分で次を選べるようにしたかった。いまは{Rork}で働きながらOSSも続けているが、ずっと同じ会社にいるとは限らないしこの先何が起こるかも分からない。
+dependantでも自由に働けたので転職のために取ったわけではない。二人で支え合って暮らしていくには自分も独立したビザを持ちたかった。そうすれば夫婦で何かがあった時もお互い助け合うことができる。
+
+いまは{Rork}で働きながらOSSも続けているが、ずっと同じ会社にいるとは限らないしこの先何が起こるかも分からない。
 
 出口が近いのも大きい。このビザは3年でILR（永住）に届く。自分の実績に基づく在留資格で、安心してUKに住み続けられる。
 
-Rorkに勧められて初めてこのビザを知った。通る自信はなかったが、やってみることにした。
+Rorkに勧められて初めてこのビザを知った。やってみることにした。
 
 # 自分の申請
 
@@ -214,7 +190,7 @@ Rorkに勧められて初めてこのビザを知った。通る自信はなか�
 
 Tech Nationからは結果しか返ってこなかった。なぜ通ったのかを自分なりにAIと分析した。
 
-ccusageはコードを公開しただけではなかった。提出時点の約12.9k starsに加え、利用者、issue、PR、派生ツールも増えていた。Tech Nationがopen source codeの目安として挙げるsignificant engagementを数字で出せた[^open-source-evidence]。
+ccusageはコードを公開しただけではなかった。利用者、issue、PR、派生ツールが増えていて、Tech Nationがopen source codeの目安として挙げるsignificant engagementを数字で出せた[^open-source-evidence]。
 
 OSSの外にも自分の名前が残っていた。登壇ページと動画、メディアの記事、受賞ページ、仕事のオファーもあった。どれもccusageの作者として外から確認できた。
 
@@ -244,7 +220,7 @@ UKでの就職活動については、以前のブログにまとめている。
 
 2025年にccusageを公開すると急速に伸びて状況が変わった。ここで初めて「自分は何の人なのか」を外部から説明しやすくなった。
 
-2025年5月末から7月末にかけてstarはほぼ0から約4.9Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。
+公開から約3週間で1K、約2ヶ月で約5Kまで伸びた。日本滞在中はstarの伸びが鈍化したが、ccusageをきっかけにいくつかのイベントに呼んでもらい、YouTubeや技術メディアにも出た。いろんな人とccusageの話ができるのがただ嬉しかった。
 
 [@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
 
@@ -294,6 +270,31 @@ Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^s
 
 ここからは調べた数字もまとめておく。自分が申請したときに近いケースが見つからず、結局かなり調べることになった。次の人が同じ調査をするのも無駄なので全部置いておく。
 
+## 渡英時の選択肢
+
+いま振り返ると渡英時にはほかの選択肢もあった。
+
+- [High Potential Individualビザ](https://www.gov.uk/high-potential-individual-visa): 対象大学の卒業生が使えるビザ[^hpi]
+- [Youth Mobility Scheme](https://www.gov.uk/youth-mobility): いわゆるワーホリ[^yms]
+- [Global TalentのExceptional Promise](#exceptional-talentとexceptional-promise): キャリア初期の人を将来性で評価する区分
+- 妻のdependant: 就労制限がほぼなく、雇用でも自営でも働ける
+
+本文のとおり、当時は一番簡単で自由度の高いdependantを選んだ。
+
+## 他分野の承認率
+
+*承認率はいずれもTalentとPromiseの合算。区分別の内訳は開示されていない。Tech Nation以外は対象期間が違うので単純比較はできない。*
+
+| endorsing body | 分野 | 直近の承認率 | 2020/21年度[^rates-2021] |
+|---|---|---:|---:|
+| Tech Nation | Digital technology | **約14%**（2025-26）[^tn-rate-recent] | 50% |
+| UKRI | 研究全般 | —[^no-perbody] | 98% |
+| Royal Society | 自然科学 | — | 84% |
+| British Academy | 人文・社会科学 | — | 82% |
+| Royal Academy of Engineering | 工学 | — | 71% |
+| （学術系4bodyの合算） | | 約87%（2024-25）[^rate-caveat] | 約84% |
+| Arts Council England | Arts and culture | 約76%（〜2023・累計）[^ace-rate] | 89% |
+
 ## どのくらい珍しいのか
 
 OSSを軸にTalentを取った人の統計はない。自分に近いケースがどのくらい珍しいのか、2025年を基準に3つの仮定でフェルミ推定した（前提は後述）。
@@ -341,7 +342,7 @@ Digital Technology routeは著名なソフトウェアエンジニアだけを�
 3. **Exceptional Talentの30〜50%**: [Home OfficeのWave 2調査](https://www.gov.uk/government/publications/global-talent-visa-evaluation-wave-2-report/global-talent-visa-evaluation-wave-2-report)では、取得者の調査回答者4,025人のうちExceptional Talentは37%（Promise 44%、区分不明19%）だった。ただしこれはTech Nation単独の公式内訳ではなく、全endorsing bodyを含む回答者構成であり、software engineering層に限定した比率でもない。そのため37%そのものではなく30〜50%の幅で試算している。
 4. **OSS / developer toolingの5%・10%・20%**: 該当割合の統計は存在しない。5%・10%・20%はそれぞれ低位・中位・高位シナリオで、特定の数字を正しいと主張するものではなく、仮定を変えた場合に結果がどの程度動くかを見るためのものである。
 5. **20代の10〜25%**: 実測値ではない。同じWave 2調査では18〜24歳が1%、25〜34歳が51%だが、後者には30〜34歳とExceptional Promiseが含まれるため、Exceptional Talentでは低くなると仮定している。
-6. **日本人の約0.8%**: [Home Officeの公式データ](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables)を集計すると、2020〜2025年のGlobal Talent発給のうち、main applicant 17,420件に対して日本国籍は139件で0.80%だった。ただしこれはDigital Technology以外の分野もExceptional Promiseも含む比率であり、UK外からの発給のみで、UK内から切り替えた人は含まれない。今回と同条件のユニーク人数を直接示すものではない。なお[2026年7月開示の国籍別FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf)（Tech Nation、申請の多い上位国のみ掲載）に日本は登場せず、日本からの申請は、年間で上位20か国には入らない規模だ。
+6. **日本国籍の約0.8%**: [Home Officeの公式データ](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables)を集計すると、2020〜2025年のGlobal Talent発給のうち、main applicant 17,420件に対して日本国籍は139件で0.80%だった。ただしこれはDigital Technology以外の分野もExceptional Promiseも含む比率であり、UK外からの発給のみで、UK内から切り替えた人は含まれない。今回と同条件のユニーク人数を直接示すものではない。なお[2026年7月開示の国籍別FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf)（Tech Nation、申請の多い上位国のみ掲載）に日本は登場せず、日本からの申請は、年間で上位20か国には入らない規模だ。
 7. **最終行の「少なくとも1人」**: 補足6の比率を前行に単純適用すると期待値は1人未満になるが、そこまでの絞り込み条件でも、少なくとも自分という実例はある。だから下限は1人で、実態も1人〜数人の規模だと見ている。なお、公式統計から「日本人初」と断定することはできない。日本人によるDigital Technology routeのExceptional Talent取得例自体は確認できる。
 
 +++
@@ -356,7 +357,19 @@ UKの移民政策は全体として厳格化に向かっている。[2025年5月
 
 加えて、ILRの10年化の予告も駆け込みを生んだと見ている（移行措置は未確定だが、2026年4月から施行される可能性があるとの噂もあったため）。米国からの流入とこの駆け込みが重なった時期に申請も混雑した。
 
-2025年の提出方法変更時、UKVIはendorsementの基準は変えないと告知した[^criteria-same]。その後も入口の宣伝と窓口の拡大が進む一方で申請は増え、承認率は下がった。入口は広がっているように見えるが、実際には通りにくくなっている。
+2025年の提出方法変更時、UKVIはendorsementの基準は変えないと告知した[^criteria-same]。入口の宣伝と窓口の拡大が進む一方で申請は増え、本文で触れたとおりTech Nationの承認率は下がった。
+
+## Skilled Workerとの差
+
+UKで働く定番ルートが[Skilled Worker](https://www.gov.uk/skilled-worker-visa)だ。雇用主のスポンサーが必要な就労ビザで、Global Talentとは別物である。
+
+ILRまでの年数以外にも差がある。標準の年収要件は2024年に£26,200から£38,700へ上がり、2025年7月には£41,700になった（2026年現在も同額）[^sw-salary]。
+
+卒業後はGraduate routeで2年間UKに残れる（PhDは3年間）。ただしGlobal Talent / Skilled WorkerのILRにはカウントされない[^graduate-ilr]。切り替えた時点からILRまでのカウントが始まる。
+
+さらにSkilled Workerはスポンサー企業にビザが紐づく。レイオフされると通常60日以内に[^curtailment]次のスポンサーを見つけるかUKを離れることになる。そんな状態でILRまでの5年（改革案どおりなら10年）を走り切るのは怖い。Global Talentは職に紐づいていないから職を失ってもビザはそのまま残る。
+
+特に若手の仕事探しは厳しい。16〜24歳の失業率は16.2%（2026年第1四半期）。graduate vacancyには平均140件の応募が来る。UKの大学卒業生でfull-timeで働いていたのは56.4%（卒業15か月後）だった[^young-job-market]。仕事を見つけるのが難しい世代ほどビザを出せる仕事の条件まで厳しくなる。
 
 ## なぜUKに残るのか
 

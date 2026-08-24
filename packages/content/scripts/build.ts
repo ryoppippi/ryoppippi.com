@@ -5,6 +5,7 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { createServer } from 'vite';
+import solid from 'vite-plugin-solid';
 import { svelteRootDir } from '../src/paths.ts';
 
 type ContentArtifactModule = {
@@ -28,12 +29,13 @@ const server = await createServer({
 	appType: 'custom',
 	configFile: false,
 	logLevel: 'error',
-	plugins: [svelte({ compilerOptions: { rootDir: svelteRootDir() } })],
+	plugins: [
+		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
+		solid({ ssr: true, solid: { hydratable: false } }),
+	],
 	publicDir: false,
 	root,
 	server: { middlewareMode: true },
-	// @tanstack/svelte-charts ships an uncompiled Chart.svelte.
-	ssr: { noExternal: ['@tanstack/svelte-charts'] },
 });
 
 const start = performance.now();
