@@ -1,5 +1,5 @@
 ---
-title: How Open Source Got Me a UK Global Talent Visa (Exceptional Talent)
+title: I wrote OSS for fun. They called it Exceptional Talent.
 date: "2026-08-15"
 isPublished: true
 lang: en
