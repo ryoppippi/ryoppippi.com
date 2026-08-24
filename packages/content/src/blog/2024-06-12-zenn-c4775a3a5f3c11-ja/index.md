@@ -3,6 +3,7 @@ title: "TypeScriptの型システムに命を吹き込む: Typia と unplugin-ty
 date: '2024-06-12'
 isPublished: true
 lang: 'ja'
+description: "TypeScriptの型からランタイムValidationを生成するTypiaと、Vite・esbuild・webpack・Next.js・Bunで導入を簡単にするunplugin-typiaを解説します。"
 ---
 
 <!-- spellchecker:off -->

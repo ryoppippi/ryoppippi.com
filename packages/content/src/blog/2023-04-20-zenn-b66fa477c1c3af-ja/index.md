@@ -3,6 +3,7 @@ title: "faster-whisperを使ってYoutubeを高速に文字起こしする方法
 date: '2023-04-20'
 isPublished: true
 lang: 'ja'
+description: "faster-whisperとPython、Google Colabを使い、yt-dlpでYouTube動画を音声化してGPU/CPUで高速文字起こしする方法を紹介。Whisper APIとの使い分けも解説します。"
 ---
 
 <!-- spellchecker:off -->

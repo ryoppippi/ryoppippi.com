@@ -3,6 +3,7 @@ title: "「commit messageを考えてる間によしなに git hooks を実行�
 date: '2023-08-16'
 isPublished: true
 lang: 'ja'
+description: "Git commit中にpre-commitを実行し、commit-msgも検証するNeovim設定を紹介。git commit -n、分割ターミナル、hook失敗時の:cquitで不正なcommitを防ぎます。"
 ---
 
 > [!NOTE]

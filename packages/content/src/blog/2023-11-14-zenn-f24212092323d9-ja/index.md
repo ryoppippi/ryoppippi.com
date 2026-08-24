@@ -3,6 +3,7 @@ title: "Masonをやめようかな、ま、そんなところです"
 date: '2023-11-14'
 isPublished: true
 lang: 'ja'
+description: "NeovimのMasonをやめ、lockfileでLSP・formatter・lintのバージョンを管理。バイナリはaqua、zlsはlazy.nvim、PythonはRye、NodeツールはBunで更新します。"
 ---
 
 <!-- spellchecker:off -->

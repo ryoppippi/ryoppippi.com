@@ -3,6 +3,7 @@ title: "俺の denols/tsserver(vtsls) 共存術 for Neovim 2024"
 date: '2024-05-10'
 isPublished: true
 lang: 'ja'
+description: "NeovimでDenoのdenolsとtsserver(vtsls)を共存させる設定を解説。ルート判定、vim.fs.root、.vscode/settings.json、single file modeを紹介します。"
 ---
 
 > [!NOTE]

@@ -3,6 +3,7 @@ title: "Claude Codeの使用料金を可視化するCLIツール「ccusage」を
 date: '2025-05-29'
 isPublished: true
 lang: 'ja'
+description: "Claude CodeのローカルJSONLログからtoken使用量とコストを集計するCLI「ccusage」を紹介。日別・セッション別・期間別レポートやJSON出力、制限を解説します。"
 ---
 
 ## 追記(2025-07-18)

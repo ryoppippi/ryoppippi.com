@@ -3,6 +3,7 @@ title: "Vim-jp ラジオ オフィシャルサイトの目に見えないアプ�
 date: '2025-05-25'
 isPublished: true
 lang: 'ja'
+description: "Vim-jpラジオ公式サイトの内部実装を題材に、Svelte 5のRune、class API、Attachmentsでアニメーションを改善したアップデート履歴を紹介します。"
 ---
 
 > [!NOTE]

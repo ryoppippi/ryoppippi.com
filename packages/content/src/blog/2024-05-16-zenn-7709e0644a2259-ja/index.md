@@ -3,6 +3,7 @@ title: "fishでNode.js/Denoのパッケージマネージャを自動で補完�
 date: '2024-05-16'
 isPublished: true
 lang: 'ja'
+description: "fishでabbrを使い、lockfileに応じてnpm・yarn・pnpm・bun・Denoを自動補完するna.fishを紹介。fisherでの導入とサブコマンド設計の考え方も解説します。"
 ---
 
 # TL;DR

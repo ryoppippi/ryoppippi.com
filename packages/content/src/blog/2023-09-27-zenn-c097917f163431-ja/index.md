@@ -3,6 +3,7 @@ title: "BunとNeovim"
 date: '2023-09-27'
 isPublished: true
 lang: 'ja'
+description: "Bunでnode_modulesなしのCLIを作り、NeovimのDeno LSPで補完する方法を紹介。Bun/Denoのimport変換や、bun.lockbをNeovimでYarn形式表示する設定も解説します。"
 ---
 
 > [!NOTE]

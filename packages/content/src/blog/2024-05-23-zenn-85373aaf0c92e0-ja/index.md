@@ -3,6 +3,11 @@ title: "karabiner.tsがとてもいいぞ"
 date: '2024-05-23'
 isPublished: true
 lang: 'ja'
+description: "Karabiner-ElementsのJSON設定をTypeScriptで記述できるkarabiner.tsを解説。型補完、Denoでのコンパイル、英かな切替やCommand+Q長押しなど実用例を紹介します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2024-05-23-zenn-85373aaf0c92e0-ja/
+  en: https://ryoppippi.com/blog/2024-10-19/
+  x-default: https://ryoppippi.com/blog/2024-10-19/
 ---
 
 # TL;DR

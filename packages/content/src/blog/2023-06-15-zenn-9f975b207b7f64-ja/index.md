@@ -3,6 +3,7 @@ title: "Hono RPCとSvelteKitの併用について"
 date: '2023-06-15'
 isPublished: true
 lang: 'ja'
+description: "SvelteKitのEndpointを型安全に呼び出すHono RPCをCloudflare Pages/Workersで使う方法を解説。app.fetchでenv・contextを渡す設定も紹介します。"
 ---
 
 <!-- spellchecker:off -->

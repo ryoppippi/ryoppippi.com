@@ -3,6 +3,7 @@ title: "ZigでRay Tracing in One Weekendをやってみた"
 date: '2022-07-20'
 isPublished: true
 lang: 'ja'
+description: "ZigでRay Tracing in One Weekendを実装し、comptime、switch、タグ付きunion、deferなど、C++と異なるZigの機能をコード例で紹介。実装の所感や実行時間もまとめます。"
 ---
 
 <!-- spellchecker:off -->

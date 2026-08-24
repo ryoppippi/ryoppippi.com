@@ -3,6 +3,7 @@ title: "ray.soをNeovim/Vimから快適に使えるプラグインを書いた"
 date: '2024-07-04'
 isPublished: true
 lang: 'ja'
+description: "ray.soでコード画像を作るNeovim/Vimプラグインray-so.vimを紹介。Denopsで選択範囲からURLを生成し、Chrome操作によるクリップボードコピーまで自動化する実装を解説します。"
 ---
 
 > [!NOTE]

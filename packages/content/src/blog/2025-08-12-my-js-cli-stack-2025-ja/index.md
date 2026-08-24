@@ -3,6 +3,11 @@ title: My JS CLI Stack 2025 (日本語)
 date: '2025-08-12'
 isPublished: true
 lang: ja
+description: "2025年のJavaScript CLI開発で使うBun、tsdown/Rolldown、依存ゼロのバンドル、gunshi、Vitest、npm、OIDC、bunxなどの選定理由と配布戦略を紹介します。"
+alternates:
+  ja: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja/
+  en: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en/
+  x-default: https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en/
 ---
 
 こんにちは、ryoppippi です。はじめましての方ははじめまして。

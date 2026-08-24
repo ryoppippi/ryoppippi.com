@@ -3,6 +3,7 @@ title: "TurborepoのCacheをGithub Actionsで使う、無料で"
 date: '2023-05-18'
 isPublished: true
 lang: 'ja'
+description: "TurborepoのRemote CachingをGitHub Actionsで使う方法を紹介。setup-github-actions-caching-for-turboでCache Serverを自動起動し、CIキャッシュを再利用します。"
 ---
 
 # TL;DR

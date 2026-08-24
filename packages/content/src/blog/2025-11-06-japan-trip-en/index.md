@@ -3,6 +3,11 @@ title: Tokyo Stay October-November 2025
 date: '2025-11-06'
 isPublished: true
 lang: en
+description: "A diary of my October–November 2025 Tokyo stay: five talks, planned YouTube appearances, Vimconf, OSS meetups, shopping, and time with the vim-jp community."
+alternates:
+  ja: https://ryoppippi.com/blog/2025-11-06-japan-trip-ja/
+  en: https://ryoppippi.com/blog/2025-11-06-japan-trip-en/
+  x-default: https://ryoppippi.com/blog/2025-11-06-japan-trip-en/
 ---
 
 I stayed in Tokyo from October 16th to November 4th, 2025.

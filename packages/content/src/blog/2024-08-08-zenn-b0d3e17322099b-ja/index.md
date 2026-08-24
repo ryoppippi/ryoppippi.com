@@ -3,6 +3,7 @@ title: "Typia で OpenAI Structured Outputを使ってみた！"
 date: '2024-08-08'
 isPublished: true
 lang: 'ja'
+description: "TypiaでOpenAI Structured Outputを使う方法を紹介。型情報とJSDocからJSON Schemaを生成し、zod helper相当のzodResponseFormat・zodFunctionを実装して構造化JSONを返します。"
 ---
 
 ![0.png](./0.png)

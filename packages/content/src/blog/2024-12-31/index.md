@@ -3,6 +3,7 @@ title: "Recap 2024"
 date: 2024-12-31
 isPublished: true
 lang: 'en'
+description: "My 2024 recap covers open-source projects, 7,802 commits, frontend sites, Svelte meetups, vimconf and neovimconf talks, podcast appearances, and goals for 2025."
 ---
 
 ![2024](./wrap.png 'https://git-wrapped.com/profiles/ryoppippi')

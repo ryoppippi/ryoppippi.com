@@ -3,6 +3,7 @@ title: "Cursor EditorでOllamaを使う"
 date: '2024-04-19'
 isPublished: true
 lang: 'ja'
+description: "Cursor EditorからOllamaのローカルLLMを使う方法を解説。OpenAI互換API、Cursor Serverの通信経路、cloudflaredとHono/Deno製Proxyの設定を紹介します。"
 ---
 
 # はじめに

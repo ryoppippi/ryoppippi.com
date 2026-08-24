@@ -3,6 +3,7 @@ title: "【祝 1K Star 達成】ccusageの３週間を振り返る"
 date: '2025-06-18'
 isPublished: true
 lang: 'ja'
+description: "ccusageが20日間で1K Star、24,000超のnpmダウンロードを達成するまでを振り返り、Claude Codeの仕様変更への対応やコミュニティの貢献を紹介します。"
 ---
 
 <NotByAI />

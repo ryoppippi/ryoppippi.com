@@ -3,6 +3,7 @@ title: "TailwindCSS/UnoCSS + Svelte でDynamicな値を使いたい！"
 date: '2024-07-07'
 isPublished: true
 lang: 'ja'
+description: "SvelteでTailwindCSS・UnoCSSの動的なclass名が生成されない問題を、CSS Variableとstyleディレクティブで解決。UnoCSSの任意値を使ってビルド時に動的な値を渡す方法を紹介します。"
 ---
 
 # TL;DR

@@ -3,6 +3,7 @@ title: "Event Types in Svelte and TypeScript"
 date: '2023-11-04'
 isPublished: true
 lang: 'ja'
+description: "SvelteとTypeScriptでHTML DOMイベントの型を取得する方法を、SvelteHTMLElementsとType Helperなど3通りで解説。svelte-html-eventのnpm利用例も紹介します。"
 ---
 
 > [!NOTE]

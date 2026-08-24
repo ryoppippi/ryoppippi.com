@@ -3,6 +3,7 @@ title: "Svelte/SvelteKit の地味に好きなところ"
 date: '2024-09-06'
 isPublished: true
 lang: 'ja'
+description: "Svelte5とSvelteKitの好きな点を、型安全なテンプレート、class:name・style:name、runes、ファイルベースのServer/Client分離などから紹介。対応ライブラリやroute型安全性などの課題も整理します。"
 ---
 
 <!-- spellchecker:off -->

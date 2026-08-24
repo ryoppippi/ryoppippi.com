@@ -3,6 +3,7 @@ title: "雑にシングルファイルのWebアプリを作る時に使ってる
 date: '2024-07-01'
 isPublished: true
 lang: 'ja'
+description: "Denoとesm.shで依存関係を解決し、ビルド不要のJavaScript製シングルファイルWebアプリを作る方法を紹介。JSDocやdeno lint・fmt・check、Vue reactivityの活用も解説します。"
 ---
 
 # TL;DR

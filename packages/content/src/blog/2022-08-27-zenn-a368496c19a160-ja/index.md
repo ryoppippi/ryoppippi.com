@@ -3,6 +3,7 @@ title: "ZigのOpenCVライブラリ「zigcv」を作っている"
 date: '2022-08-27'
 isPublished: true
 lang: 'ja'
+description: "ZigからOpenCVを使うためのライブラリzigcvを開発し、gocvのCバインディングを活用してZigバインディングを実装。Webカメラ画像の取得、顔検出とぼかし、画像処理、DNN推論までの現状を紹介します。"
 ---
 
 <!-- spellchecker:off -->

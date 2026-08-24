@@ -3,6 +3,7 @@ title: "vim-jp ラジオ オフィシャルサイト制作の舞台裏！"
 date: '2024-07-22'
 isPublished: true
 lang: 'ja'
+description: "vim-jpラジオ公式LPの制作舞台裏。Svelte5・SvelteKit2、UnoCSS、BudouX、SSG、Cloudflare Pagesを採用し、画像最適化やURL検証、リダイレクト生成で表示速度と運用性を高めた技術を紹介します。"
 ---
 
 ![0.png](./0.png)

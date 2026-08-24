@@ -3,6 +3,7 @@ title: "NeovimでのSvelte/SvelteKitの開発環境"
 date: '2023-05-22'
 isPublished: true
 lang: 'ja'
+description: "NeovimでSvelte/SvelteKitを開発する設定を紹介。LSP、typescript-svelte-plugin、Other.nvim、oil.nvimとvim-sonictemplateの使い方を解説します。"
 ---
 
 > [!NOTE]

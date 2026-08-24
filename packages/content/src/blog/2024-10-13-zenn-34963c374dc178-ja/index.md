@@ -3,6 +3,7 @@ title: "Bun の C Compile を試してみた"
 date: '2024-10-13'
 isPublished: true
 lang: 'ja'
+description: "BunのC Compilerとbun ccを使い、JavaScriptからC言語のcmigemoを呼び出すbun-cmigemoを実装。日本語ローマ字検索、Cのcallback、usingによる自動解放までサンプル付きで解説します。"
 ---
 
 # はじめに
