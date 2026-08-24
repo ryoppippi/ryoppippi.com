@@ -12,7 +12,7 @@ alternates:
 
 import GtvChart from '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx'
 
-> [日本語版](https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/)
+> [日本語版](https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja)
 
 # TL;DR
 

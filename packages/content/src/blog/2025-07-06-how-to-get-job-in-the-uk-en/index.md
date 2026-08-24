@@ -5,13 +5,11 @@ isPublished: true
 lang: en
 ---
 
-> [日本語版](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja/)
+> [日本語版](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja)
 
 Hello, I'm ryoppippi. Nice to meet you if we haven't met before.
 
 Since June 2025, I've been working as an AI Engineer at [Stackone](https://www.stackone.com/), a UK AI startup.
-
-I later wrote up how I earned the [Global Talent Visa (Exceptional Talent) through my open-source record](https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/).
 
 <Tweet id="1941072675872641440" />
 
