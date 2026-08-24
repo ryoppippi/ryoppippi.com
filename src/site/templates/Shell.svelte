@@ -5,12 +5,16 @@
 		article = false,
 		content,
 		description,
+		lang = 'en',
+		alternates,
 		pathname,
 		title,
 	}: {
 		article?: boolean;
+		alternates?: Readonly<Record<string, string>>;
 		content: string;
 		description: string;
+		lang?: string;
 		pathname: string;
 		title: string;
 	} = $props();
@@ -18,6 +22,14 @@
 	const origin = 'https://ryoppippi.com';
 	const fullTitle = $derived(title === 'home' ? 'ryoppippi.com' : `${title} | ryoppippi.com`);
 	const url = $derived(`${origin}${pathname}`);
+	const alternateLinks = $derived(
+		alternates == null
+			? []
+			: Object.entries({ ...alternates, [lang]: url }).map(([alternateLang, alternateUrl]) => ({
+				lang: alternateLang,
+				url: alternateUrl,
+			})),
+	);
 	const pageContent = $derived(createRawSnippet(() => ({ render: () => content })));
 	const isHome = $derived(pathname === '/');
 	const links = [
@@ -33,8 +45,12 @@
 	<meta data-page-head name='description' content={description} />
 	<meta name='theme-color' content='#ffffff' media='(prefers-color-scheme: light)' />
 	<meta name='theme-color' content='#121212' media='(prefers-color-scheme: dark)' />
-	<meta data-page-head name='robots' content='index,follow,nosnippet,max-snippet:-1,max-image-preview:none,noarchive,noimageindex,max-video-preview:-1,notranslate' />
+	<meta data-page-head name='robots' content='index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1' />
 	<meta data-page-head name='Hatena::Bookmark' content='nocomment' />
+	<link data-page-head rel='canonical' href={url} />
+	{#each alternateLinks as alternate (alternate.lang)}
+		<link data-page-head rel='alternate' hreflang={alternate.lang} href={alternate.url} />
+	{/each}
   <link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/" />
 	<meta data-page-head property='og:type' content={article ? 'article' : 'website'} />
 	<meta data-page-head property='og:title' content={fullTitle} />

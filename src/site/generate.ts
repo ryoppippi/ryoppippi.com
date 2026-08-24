@@ -35,6 +35,19 @@ type GenerateSiteOptions = {
 	root: string;
 };
 
+/**
+ * Builds the XML sitemap for the generated HTML routes.
+ *
+ * @param urls - Canonical URLs to include in the sitemap.
+ * @returns The generated sitemap file.
+ */
+export function sitemap(urls: readonly string[]): GeneratedFile {
+	return {
+		path: 'sitemap.xml',
+		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`,
+	};
+}
+
 async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Promise<void> {
 	for (const file of files) {
 		const destination = path.join(outDir, file.path);
@@ -123,10 +136,7 @@ export async function generateSite({
 	const urls = pages
 		.filter((file) => file.path.endsWith('.html') && file.path !== '404.html')
 		.map((file) => `https://ryoppippi.com/${file.path.replace(/(?:index)?\.html$/, '')}`);
-	plainFiles.push({
-		path: 'sitemap.xml',
-		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`,
-	});
+	plainFiles.push(sitemap(urls));
 	await writeGeneratedFiles(outDir, plainFiles);
 
 	await Promise.all(

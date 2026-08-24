@@ -1,4 +1,4 @@
-import type { BlogPost, BlogPostMetadata } from '@ryoppippi/content';
+import type { ArticleMetadata, BlogPost, BlogPostMetadata } from '@ryoppippi/content';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
@@ -9,6 +9,36 @@ import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
 import Home from './templates/Home.svelte';
+
+const siteOrigin = 'https://ryoppippi.com';
+
+type ArticleSeoMetadata = ArticleMetadata & { description: string };
+
+function markdownDescription(content: string): string | undefined {
+	const paragraph = content
+		.split(/\n\s*\n/)
+		.map((block) => block.trim())
+		.find((block) => block.length > 0 && !/^(?:#|>|import\s)/.test(block));
+	if (paragraph == null) {
+		return undefined;
+	}
+
+	const text = paragraph
+		.replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+		.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+		.replace(/<[^>]*>/g, ' ')
+		.replace(/[\\`*_~>#]/g, '')
+		.replace(/\s+/g, ' ')
+		.trim();
+	return text.length > 0 ? text.slice(0, 160) : undefined;
+}
+
+function articleSeoMetadata(post: BlogPost): ArticleSeoMetadata {
+	return {
+		description: post.description?.trim() || markdownDescription(post.content) || post.title,
+		alternates: post.alternates,
+	};
+}
 
 export type GeneratedFile = {
 	path: string;
@@ -42,8 +72,17 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 	};
 }
 
+/**
+ * Renders the HTML and Markdown-source files for one article.
+ *
+ * @param post - Rendered article and its frontmatter metadata.
+ * @param assets - Site assets used by the article template.
+ * @returns The published HTML page and its source companion file.
+ */
 export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
 	const pathname = `/blog/${post.filename}/`;
+	const url = `${siteOrigin}${pathname}`;
+	const metadata = articleSeoMetadata(post);
 	const content = renderComponent(Article, {
 		date: formatDate(new Date(post.pubDate)),
 		pathname,
@@ -56,11 +95,25 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 				title: `${post.title} | blog`,
 				pathname,
 				content,
+				description: metadata.description,
+				lang: post.lang,
+				alternates: metadata.alternates,
 				assets,
 				article: true,
 				islands: islandModuleIds(post.html),
 				style: 'article',
 				tweet: post.html.includes('data-tweet-id'),
+				structuredData: {
+					'@context': 'https://schema.org',
+					'@type': 'BlogPosting',
+					headline: post.title,
+					description: metadata.description,
+					url,
+					mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+					author: { '@type': 'Person', name: 'ryoppippi', url: siteOrigin },
+					datePublished: post.pubDate,
+					inLanguage: post.lang,
+				},
 			}),
 		},
 		{ path: `blog/${post.filename}.md`, content: post.source },

@@ -9,7 +9,27 @@ import { blogDirectory } from './paths.ts';
 import { loadOgpSnapshots } from './ogp-snapshots.ts';
 import { loadTweetSnapshots } from './tweet-snapshots.ts';
 
-export type BlogPost = {
+/**
+ * SEO metadata that can be declared in an article's frontmatter.
+ *
+ * @example
+ * ```yaml
+ * description: A short summary for search results.
+ * alternates:
+ *   en: https://example.com/en/
+ *   ja: https://example.com/ja/
+ *   x-default: https://example.com/en/
+ * ```
+ */
+export type ArticleMetadata = {
+	description?: string;
+	alternates?: Readonly<Record<string, string>>;
+};
+
+/**
+ * A rendered blog post and the metadata needed to publish it.
+ */
+export type BlogPost = ArticleMetadata & {
 	title: string;
 	filename: string;
 	filepath: string;
@@ -22,10 +42,39 @@ export type BlogPost = {
 	readingTime: ReturnType<typeof readingTime>;
 };
 
+/**
+ * The inexpensive metadata used by blog indexes and feeds.
+ */
 export type BlogPostMetadata = Pick<
 	BlogPost,
-	'title' | 'filename' | 'filepath' | 'pubDate' | 'lang' | 'isPublished' | 'readingTime'
+	| 'title'
+	| 'description'
+	| 'alternates'
+	| 'filename'
+	| 'filepath'
+	| 'pubDate'
+	| 'lang'
+	| 'isPublished'
+	| 'readingTime'
 >;
+
+function parseAlternates(value: unknown): Readonly<Record<string, string>> | undefined {
+	if (typeof value !== 'object' || value == null || Array.isArray(value)) {
+		return undefined;
+	}
+	const entries = Object.entries(value).filter(
+		(entry): entry is [string, string] => typeof entry[1] === 'string',
+	);
+	return entries.length === 0 ? undefined : Object.fromEntries(entries);
+}
+
+function parseArticleMetadata(data: Record<string, unknown>): ArticleMetadata {
+	const description =
+		typeof data.description === 'string' && data.description.trim().length > 0
+			? data.description.trim()
+			: undefined;
+	return { description, alternates: parseAlternates(data.alternates) };
+}
 
 function filenameFor(filepath: string): string {
 	return path.basename(filepath) === 'index.md'
@@ -73,6 +122,14 @@ export async function loadBlogPostSource(
 	return (await findBlogPostSource(slug, directory))?.source ?? null;
 }
 
+/**
+ * Loads and renders one article by its safe URL slug.
+ *
+ * @param slug - Article filename or directory slug.
+ * @param renderContent - Optional Markdown renderer used by tests and callers.
+ * @param directory - Blog source directory.
+ * @returns The rendered article, or `null` when the slug does not exist.
+ */
 export async function loadBlogPost(
 	slug: string,
 	renderContent?: MarkdownRenderer,
@@ -87,6 +144,7 @@ export async function loadBlogPost(
 	const { data, content } = matter(entry.source);
 	const renderOptions = await loadRenderOptions(content, entry.filepath, directory);
 	return {
+		...parseArticleMetadata(data),
 		title: String(data.title),
 		filename: filenameFor(entry.filepath),
 		filepath: entry.filepath,
@@ -100,6 +158,12 @@ export async function loadBlogPost(
 	} satisfies BlogPost;
 }
 
+/**
+ * Loads article frontmatter without rendering article HTML.
+ *
+ * @param directory - Blog source directory.
+ * @returns Metadata sorted from newest publication date to oldest.
+ */
 export async function loadBlogPostMetadata(
 	directory = blogDirectory(),
 ): Promise<BlogPostMetadata[]> {
@@ -109,6 +173,7 @@ export async function loadBlogPostMetadata(
 			const source = await readFile(filepath, 'utf8');
 			const { data, content } = matter(source);
 			return {
+				...parseArticleMetadata(data),
 				title: String(data.title),
 				filename: filenameFor(filepath),
 				filepath,
@@ -123,6 +188,12 @@ export async function loadBlogPostMetadata(
 	return posts.sort((a, b) => b.pubDate.localeCompare(a.pubDate));
 }
 
+/**
+ * Loads and renders every article in the configured blog directory.
+ *
+ * @param renderContent - Optional Markdown renderer used by tests and callers.
+ * @returns Rendered articles sorted from newest publication date to oldest.
+ */
 export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const blogDir = blogDirectory();
@@ -134,6 +205,7 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const filename = filenameFor(filepath);
 			const renderOptions = await loadRenderOptions(content, filepath, blogDir);
 			return {
+				...parseArticleMetadata(data),
 				title: String(data.title),
 				filename,
 				filepath,
@@ -218,6 +290,39 @@ if (import.meta.vitest != null) {
 				}),
 			]);
 			expect(posts[0]).not.toHaveProperty('html');
+		});
+
+		it('parses reusable SEO metadata from article frontmatter', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'article/index.md': [
+					'---',
+					'title: Article',
+					'date: 2026-06-22',
+					'isPublished: true',
+					'lang: en',
+					'description: A useful article summary.',
+					'alternates:',
+					'  en: https://example.com/en/',
+					'  ja: https://example.com/ja/',
+					'  x-default: https://example.com/en/',
+					'---',
+					'',
+					'Article body',
+				].join('\n'),
+			});
+			const renderContent = vi.fn(async (content: string) => content);
+
+			await expect(loadBlogPost('article', renderContent, fixture.getPath())).resolves.toEqual(
+				expect.objectContaining({
+					description: 'A useful article summary.',
+					alternates: {
+						en: 'https://example.com/en/',
+						ja: 'https://example.com/ja/',
+						'x-default': 'https://example.com/en/',
+					},
+				}),
+			);
 		});
 	});
 }
