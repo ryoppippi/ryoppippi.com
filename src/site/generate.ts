@@ -26,6 +26,7 @@ import {
 	talksPage,
 } from './secondary-pages.ts';
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
+import { sitemap } from './sitemap.ts';
 
 type GenerateSiteOptions = {
 	assets: SiteAssets;
@@ -34,19 +35,6 @@ type GenerateSiteOptions = {
 	renderTweet?: TweetRenderer;
 	root: string;
 };
-
-/**
- * Builds the XML sitemap for the generated HTML routes.
- *
- * @param urls - Canonical URLs to include in the sitemap.
- * @returns The generated sitemap file.
- */
-export function sitemap(urls: readonly string[]): GeneratedFile {
-	return {
-		path: 'sitemap.xml',
-		content: `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`,
-	};
-}
 
 async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Promise<void> {
 	for (const file of files) {
@@ -149,19 +137,4 @@ export async function generateSite({
 			'works/publications/index.html',
 		].map((file) => access(path.join(outDir, file))),
 	);
-}
-
-if (import.meta.vitest != null) {
-	describe(sitemap, () => {
-		it('uses the sitemap protocol namespace without speculative modification dates', () => {
-			const result = sitemap(['https://ryoppippi.com/', 'https://ryoppippi.com/blog/']);
-
-			expect(result).toEqual({
-				path: 'sitemap.xml',
-				content:
-					'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://ryoppippi.com/</loc></url><url><loc>https://ryoppippi.com/blog/</loc></url></urlset>',
-			});
-			expect(result.content).not.toContain('<lastmod>');
-		});
-	});
 }
