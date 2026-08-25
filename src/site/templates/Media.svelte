@@ -21,7 +21,7 @@
 <WorksNav active='media' />
 
 <div class='fcol mx-auto gap-1 pt-10'>
-	<p class='mx-10 text-center text-lg opacity-60'>Podcasts, interviews, and videos featuring @ryoppippi.</p>
+	<p class='mx-10 text-center text-lg opacity-30'>Podcasts, interviews, and videos featuring @ryoppippi.</p>
 </div>
 
 {#each groupedItems as group (group.kind)}

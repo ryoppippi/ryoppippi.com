@@ -14,7 +14,7 @@
 		<ul class='mx-auto px-10'>
 			{#each items as item (item.link)}
 				<li class='my-5'>
-					<a class='text-xl underline' href={item.link} rel='noopener noreferrer' target='_blank'>{item.title}</a>
+					<a class='op-card text-xl underline transition-base' href={item.link} rel='noopener noreferrer' target='_blank'>{item.title}</a>
 					<p class='opacity-50'>{item.publisher}</p>
 				</li>
 			{/each}

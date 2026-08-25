@@ -28,7 +28,7 @@
 			{#each items as talk (`${talk.date}-${talk.title}`)}
 				{@const link = talk.links.at(0)}
 				<li class='talk-item my-5' data-lang={talk.lang ?? 'en'}>
-					<h3 class='text-xl'>
+					<h3 class='op-card text-xl transition-base'>
 						{#if link == null}
 							{talk.title}
 						{:else}
