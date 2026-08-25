@@ -275,6 +275,13 @@ if (import.meta.vitest != null) {
 			);
 		});
 
+		it('preserves image alt text separately from captions', async () => {
+			const html = await renderMarkdown('![A & B](./image.png "Visible caption")');
+
+			expect(html).toContain('<img src="./image.png" alt="A &amp; B" loading="lazy">');
+			expect(html).toContain('<figcaption>Visible caption</figcaption>');
+		});
+
 		it('removes trailing markdown attributes from links and images', async () => {
 			const html = await renderMarkdown(
 				'[slides](https://example.com){.text-xl}\n\n![alt](./image.png){width=480}',
