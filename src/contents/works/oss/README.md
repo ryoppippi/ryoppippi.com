@@ -32,6 +32,13 @@ few stars.
 Removing a project from this list does not remove its repository, package, or
 blog post. This file only controls the curated OSS index.
 
+## Star counts
+
+`stars.json` is generated from GitHub repository metadata by
+`.github/update-oss-stars.nu`. The scheduled workflow refreshes it daily and
+commits only when a count changes; edit `list.json` for project selection and
+descriptions instead of editing the snapshot by hand.
+
 ## OSS and Showcase
 
 - **OSS**: reusable libraries, developer tools, plugins, configurations, and

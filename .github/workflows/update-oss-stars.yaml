@@ -1,0 +1,50 @@
+name: Update OSS Star Counts
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run daily at 00:00 UTC.
+    - cron: '0 0 * * *'
+
+concurrency:
+  group: update-oss-stars
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-stars:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nix
+        uses: ./.github/actions/setup-nix
+
+      - name: Update star snapshot
+        run: ./.github/update-oss-stars.nu
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Check for changes
+        id: diff
+        shell: bash
+        run: |
+          if git diff --quiet -- src/contents/works/oss/stars.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push snapshot
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config --local user.name 'github-actions[bot]'
+          git add src/contents/works/oss/stars.json
+          git commit -m 'chore(oss): update GitHub star counts'
+          git push

@@ -16,7 +16,8 @@
 		"new": "vp run @ryoppippi/content#new",
 		"preview": "vp preview",
 		"test": "vp test --run",
-		"typos": "typos --force-exclude src/contents packages/content/src/blog packages/content/src/showcase"
+		"typos": "typos --force-exclude src/contents packages/content/src/blog packages/content/src/showcase",
+		"update:oss-stars": "./.github/update-oss-stars.nu"
 	},
 	"devDependencies": {
 		"@fontsource/dm-mono": "^5.3.0",

@@ -2,6 +2,7 @@
 	"AI Tools": [
 		{
 			"name": "ccusage",
+			"link": "https://github.com/ccusage/ccusage",
 			"icon": "icon-[ph--chart-line-light]",
 			"description": "Analyze coding-agent token usage and costs from local data."
 		},

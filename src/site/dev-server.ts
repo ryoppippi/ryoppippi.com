@@ -114,6 +114,9 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	if (file === 'src/contents/works/oss/list.json') {
 		return ['/works/oss/'];
 	}
+	if (file === 'src/contents/works/oss/stars.json') {
+		return ['/works/oss/'];
+	}
 	if (file === 'src/contents/publication.json') {
 		return ['/works/publications/'];
 	}
@@ -373,6 +376,10 @@ if (import.meta.vitest != null) {
 		it('invalidates all rendered pages for head metadata changes', () => {
 			expect(invalidatedRoutes('src/site/head.ts')).toBe('*');
 			expect(invalidatedRoutes('src/site/consts.ts')).toBe('*');
+		});
+
+		it('invalidates the OSS page when its star snapshot changes', () => {
+			expect(invalidatedRoutes('src/contents/works/oss/stars.json')).toEqual(['/works/oss/']);
 		});
 
 		it('ignores client assets handled by Vite', () => {
