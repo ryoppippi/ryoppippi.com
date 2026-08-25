@@ -6,6 +6,7 @@ import { formatDate } from '../lib/util.ts';
 import { islandModuleIds } from './assets.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 import { postListItems } from './content.ts';
+import path from 'node:path';
 import { page, renderComponent } from './html.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
@@ -53,14 +54,19 @@ function articleImageUrl(html: string, articleUrl: string): string | undefined {
 			).href;
 }
 
+/**
+ * A file emitted by the static site generator.
+ */
 export type GeneratedFile = {
 	path: string;
 	content: string;
+	sourcePaths?: readonly string[];
 };
 
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
+		sourcePaths: ['src/site/pages.ts', 'src/site/templates/Home.svelte'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -85,6 +91,12 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return {
 		path: 'blog/index.html',
+		sourcePaths: [
+			'src/site/content.ts',
+			'src/site/templates/BlogList.svelte',
+			'packages/content/src/blog',
+			'src/contents/external-rss/rss.json',
+		],
 		content: page({
 			title: 'Blog',
 			pathname: '/blog/',
@@ -115,9 +127,12 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 		pathname,
 		post,
 	});
+	const sourcePath =
+		path.basename(post.filepath) === 'index.md' ? path.dirname(post.filepath) : post.filepath;
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
+			sourcePaths: [sourcePath],
 			content: page({
 				title: `${post.title} | blog`,
 				pathname,

@@ -15,6 +15,12 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/oss/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Oss.svelte',
+			'src/contents/works/oss/list.json',
+		],
 		content: page({
 			title: 'Open-source projects',
 			pathname: '/works/oss/',
@@ -30,6 +36,12 @@ export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAsse
 export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/showcase/index.html',
+		sourcePaths: [
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Showcase.svelte',
+			'packages/content/src/showcase.ts',
+			'packages/content/src/showcase',
+		],
 		content: page({
 			title: 'Project showcase',
 			pathname: '/works/showcase/',
@@ -48,6 +60,12 @@ export function publicationsPage(
 ): GeneratedFile {
 	return {
 		path: 'works/publications/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Publications.svelte',
+			'src/contents/publication.json',
+		],
 		content: page({
 			title: 'Publications',
 			pathname: '/works/publications/',
@@ -63,6 +81,11 @@ export function publicationsPage(
 export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Talks.svelte',
+		],
 		content: page({
 			title: 'Talks',
 			pathname: '/works/talks/',
@@ -78,6 +101,7 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
+		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Sponsors.svelte'],
 		content: page({
 			title: 'Sponsors',
 			pathname: '/sponsors/',
@@ -93,6 +117,7 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
+		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Error.svelte'],
 		content: page({
 			title: 'Page not found',
 			pathname: '/404',

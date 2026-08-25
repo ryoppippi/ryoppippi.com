@@ -17,6 +17,7 @@ import {
 } from './content-assets.ts';
 import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalPosts } from './content.ts';
+import { gitLastModified } from './git-last-modified.ts';
 import { corePages } from './pages.ts';
 import {
 	errorPage,
@@ -121,10 +122,15 @@ export async function generateSite({
 		);
 	}
 
-	const urls = pages
-		.filter((file) => file.path.endsWith('.html') && file.path !== '404.html')
-		.map((file) => `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`);
-	plainFiles.push(sitemap(urls));
+	const urls = pages.filter((file) => file.path.endsWith('.html') && file.path !== '404.html');
+	const sitemapEntries = await Promise.all(
+		urls.map(async (file) => {
+			const loc = `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`;
+			const lastmod = await gitLastModified(root, file.sourcePaths ?? []);
+			return lastmod == null ? { loc } : { loc, lastmod };
+		}),
+	);
+	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
 
 	await Promise.all(
