@@ -20,7 +20,7 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
 const ABOUT_DESCRIPTION =
-	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Rork Founding Engineer building coding agents and developer tools, and the maintainer of ccusage.';
+	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Founding Engineer at Rork building coding agents and developer tools, and maintains ccusage.';
 
 /**
  * Renders the site owner's profile page.
@@ -275,7 +275,7 @@ if (import.meta.vitest != null) {
 
 		expect(html).toContain('<title>ryoppippi (Ryotaro Kimura) | ryoppippi.com</title>');
 		expect(html).toContain(
-			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Rork Founding Engineer building coding agents and developer tools, and the maintainer of ccusage.">',
+			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Founding Engineer at Rork building coding agents and developer tools, and maintains ccusage.">',
 		);
 		expect(html).toContain(
 			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
