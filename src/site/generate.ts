@@ -16,11 +16,12 @@ import {
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
 import { SITE_ORIGIN } from './consts.ts';
-import { loadExternalPosts } from './content.ts';
+import { loadExternalMedia, loadExternalPosts } from './content.ts';
 import { gitLastModified } from './git-last-modified.ts';
-import { corePages } from './pages.ts';
+import { corePages, mediaFeed } from './pages.ts';
 import {
 	errorPage,
+	mediaPage,
 	ossPage,
 	publicationsPage,
 	showcasePage,
@@ -71,13 +72,15 @@ export async function generateSite({
 		const { buildContentArtifact } = await import('@ryoppippi/content/build');
 		localContent = await buildContentArtifact(renderTweet);
 	}
-	const [externalPosts, ossProjects, publications, talks, dotfiles] = await Promise.all([
-		loadExternalPosts(root),
-		loadOssProjects(root),
-		loadPublications(root),
-		loadTalks(),
-		fetchDotfilesReadme(fetch),
-	]);
+	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =
+		await Promise.all([
+			loadExternalPosts(root),
+			loadExternalMedia(root),
+			loadOssProjects(root),
+			loadPublications(root),
+			loadTalks(),
+			fetchDotfilesReadme(fetch),
+		]);
 	const emittedAssets = await emitDeduplicatedAssets(
 		await contentAssetSources(blogDirectory(), showcaseDirectory()),
 		outDir,
@@ -101,6 +104,8 @@ export async function generateSite({
 		showcasePage(showcase, assets),
 		publicationsPage(publications, assets),
 		talksPage(talks, assets),
+		mediaPage(externalMedia, assets),
+		mediaFeed(externalMedia),
 		sponsorsPage(assets),
 		errorPage(assets),
 	];
@@ -150,6 +155,8 @@ export async function generateSite({
 			'works/oss/index.html',
 			'works/showcase/index.html',
 			'works/talks/index.html',
+			'works/media/index.html',
+			'works/media/feed.xml',
 			'works/publications/index.html',
 		].map((file) => access(path.join(outDir, file))),
 	);

@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import type { Talk } from '../sections.ts';
+	import { formatDate } from '../../lib/util.ts';
 	import WorksNav from './WorksNav.svelte';
 
 	let { talks }: { talks: Talk[] } = $props();
@@ -27,8 +28,9 @@
 		<ul class='mx-auto px-10'>
 			{#each items as talk (`${talk.date}-${talk.title}`)}
 				{@const link = talk.links.at(0)}
+				{@const event = talk.event === 'テックワールド' ? 'TECH WORLD' : talk.event}
 				<li class='talk-item my-5' data-lang={talk.lang ?? 'en'}>
-					<h3 class='text-xl'>
+					<h3 class='op-card text-xl transition-base'>
 						{#if link == null}
 							{talk.title}
 						{:else}
@@ -37,11 +39,11 @@
 					</h3>
 					<p class='opacity-50'>
 						{#if talk.eventLink == null}
-							{talk.event}
+							{event}
 						{:else}
-							<a class='underline' href={talk.eventLink} rel='noopener noreferrer' target='_blank'>{talk.event}</a>
+							<a class='underline' href={talk.eventLink} rel='noopener noreferrer' target='_blank'>{event}</a>
 						{/if}
-						<span class='truncate pl-2 text-sm opacity-80'>{talk.date}</span>
+						<time class='truncate pl-2 text-sm opacity-80' datetime={talk.date}>{formatDate(new Date(talk.date))}</time>
 					</p>
 					{#if talk.videoLink != null}
 						<p class='text-sm opacity-50'><a class='underline' href={talk.videoLink} rel='noopener noreferrer' target='_blank'>Watch the video</a></p>

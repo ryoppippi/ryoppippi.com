@@ -11,36 +11,92 @@ export type PostListItem = {
 	pubDate: string;
 	lang: string;
 	external: boolean;
+	kind?: 'article' | 'podcast' | 'video';
+	playlist?: boolean;
 	draft?: boolean;
 };
 
+type ExternalPostInput = {
+	title?: string | null;
+	link?: string | null;
+	pubDate?: string | null;
+	guid?: string | null;
+	lang?: string | null;
+	kind?: 'article' | 'podcast' | 'video' | null;
+	playlist?: boolean | null;
+};
+
+function toExternalPost(
+	item: ExternalPostInput,
+	defaultKind: NonNullable<PostListItem['kind']> = 'article',
+): PostListItem | null {
+	if (item.title == null || item.link == null || item.pubDate == null) {
+		return null;
+	}
+
+	const pubDate = new Date(item.pubDate);
+	if (Number.isNaN(pubDate.getTime())) {
+		return null;
+	}
+
+	return {
+		title: item.title,
+		slug: item.guid ?? item.link,
+		link: item.link,
+		pubDate: pubDate.toJSON(),
+		lang: item.lang ?? 'ja',
+		external: true,
+		kind: item.kind ?? defaultKind,
+		...(item.playlist === true ? { playlist: true } : {}),
+	};
+}
+
+/**
+ * Loads external blog entries from RSS feeds and curated articles.
+ *
+ * @param root - Repository root containing the external content configuration.
+ * @returns Blog-list entries for external content.
+ */
 export async function loadExternalPosts(root = process.cwd()): Promise<PostListItem[]> {
-	const sources = JSON.parse(
-		await readFile(path.join(root, 'src/contents/external-rss/rss.json'), 'utf8'),
-	) as string[];
+	const [rssSource, postsSource] = await Promise.all([
+		readFile(path.join(root, 'src/contents/external-rss/rss.json'), 'utf8'),
+		readFile(path.join(root, 'src/contents/external-rss/posts.json'), 'utf8'),
+	]);
+	const sources = JSON.parse(rssSource) as string[];
+	const configuredPosts = JSON.parse(postsSource) as ExternalPostInput[];
 	const parser = new Parser();
 	const feeds = await Promise.allSettled(sources.map(async (source) => parser.parseURL(source)));
-	return feeds.flatMap((result) => {
+	const feedPosts = feeds.flatMap((result) => {
 		if (result.status === 'rejected') {
 			console.warn(`Skipping external RSS feed: ${String(result.reason)}`);
 			return [];
 		}
 		return result.value.items.flatMap((item) => {
-			if (item.title == null || item.link == null || item.pubDate == null) {
-				return [];
-			}
-			return [
-				{
-					title: item.title,
-					slug: item.guid ?? item.link,
-					link: item.link,
-					pubDate: new Date(item.pubDate).toJSON(),
-					lang: 'ja',
-					external: true,
-				},
-			];
+			const post = toExternalPost(item);
+			return post == null ? [] : [post];
 		});
 	});
+	const manualPosts = configuredPosts.flatMap((item) => {
+		const post = toExternalPost(item);
+		return post == null ? [] : [post];
+	});
+	return [...feedPosts, ...manualPosts];
+}
+
+/**
+ * Loads curated podcasts and videos for the media page.
+ *
+ * @param root - Repository root containing the media configuration.
+ * @returns Media entries for the media page.
+ */
+export async function loadExternalMedia(root = process.cwd()): Promise<PostListItem[]> {
+	const source = await readFile(path.join(root, 'src/contents/external-rss/media.json'), 'utf8');
+	const configuredMedia = JSON.parse(source) as ExternalPostInput[];
+	const mediaPosts = configuredMedia.flatMap((item) => {
+		const post = toExternalPost(item, 'podcast');
+		return post == null ? [] : [post];
+	});
+	return mediaPosts;
 }
 
 /**

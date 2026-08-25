@@ -1,9 +1,11 @@
 import type { ShowcaseProject } from '@ryoppippi/content';
 import type { SiteAssets } from './assets.ts';
+import type { PostListItem } from './content.ts';
 import type { GeneratedFile } from './pages.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { page, renderComponent } from './html.ts';
 import ErrorPage from './templates/Error.svelte';
+import Media from './templates/Media.svelte';
 import Oss from './templates/Oss.svelte';
 import Publications from './templates/Publications.svelte';
 import Showcase from './templates/Showcase.svelte';
@@ -113,6 +115,33 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 			content: renderComponent(Talks, { talks }),
 			description:
 				'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
+			assets,
+			style: 'works',
+		}),
+	};
+}
+
+/**
+ * Renders the podcasts and videos page.
+ *
+ * @param items - Curated external media to render.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated media page.
+ */
+export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedFile {
+	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
+	return {
+		path: 'works/media/index.html',
+		sourcePaths: [
+			'src/site/content.ts',
+			'src/site/templates/Media.svelte',
+			'src/contents/external-rss/media.json',
+		],
+		content: page({
+			title: 'Media',
+			pathname: '/works/media/',
+			content: renderComponent(Media, { items: sorted }),
+			description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 			assets,
 			style: 'works',
 		}),

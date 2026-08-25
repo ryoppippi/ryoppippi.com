@@ -1,0 +1,108 @@
+[
+	{
+		"title": "〖ccusageとRorkをメインにryoppippiさんへインタビュー〗エンジニアの楽園 vim-jp ラジオ #68",
+		"link": "https://podcasts.apple.com/jp/podcast/ccusage%E3%81%A8rork%E3%82%92%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%ABryoppippi%E3%81%95%E3%82%93%E3%81%B8%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%93%E3%83%A5%E3%83%BC-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92-vim-jp/id1755104750?i=1000762385598",
+		"pubDate": "2026-04-20",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "〖海外での就職活動と転職-ccusage作者のryoppippiさんに伺う-〗エンジニアの楽園 vim-jp ラジオ #67",
+		"link": "https://podcasts.apple.com/jp/podcast/%E6%B5%B7%E5%A4%96%E3%81%A7%E3%81%AE%E5%B0%B1%E8%81%B7%E6%B4%BB%E5%8B%95%E3%81%A8%E8%BB%A2%E8%81%B7-ccusage%E4%BD%9C%E8%80%85%E3%81%AEryoppippi%E3%81%95%E3%82%93%E3%81%AB%E4%BC%BA%E3%81%86-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92-vim-jp/id1755104750?i=1000759466469",
+		"pubDate": "2026-04-06",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "ccusage 1周年とRustへのリライトの裏側 (ryoppippi)",
+		"link": "https://oss4.fun/episode/87/",
+		"pubDate": "2026-06-05",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "趣味のOSSメンテナンス今昔 (ryoppippi)",
+		"link": "https://oss4.fun/episode/88",
+		"pubDate": "2026-06-12",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "197- 日本人エンジニアは優秀。なのに、なぜ世界で勝てないのか",
+		"link": "https://www.vancouver-engineers.com/198",
+		"pubDate": "2026-03-15",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "GitHubで1万スター！OSSでキャリアを切り拓いたロンドン在住AIエンジニアのサバイバル術（後半）#37",
+		"link": "https://kaigaicareerlog.com/episodes/7e8c554e-4828-4a62-acc3-9feb5f8e2c69/",
+		"pubDate": "2026-03-08",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "MITに憧れた純ジャパ少年が、ロンドンでAIエンジニアになるまで。GitHubコミット9000超えの逆転劇（前半）#36",
+		"link": "https://kaigaicareerlog.com/episodes/632fa85d-e2f1-427a-80f5-90d2f221599e/",
+		"pubDate": "2026-03-01",
+		"lang": "ja",
+		"kind": "podcast"
+	},
+	{
+		"title": "【外資ITエンジニア対談】日本人が知らない海外のエンジニアと日本のエンジニアの違い",
+		"link": "https://www.youtube.com/watch?v=l14NUFaS-GE",
+		"pubDate": "2026-05-19",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【Nix?何それ美味しいの?】世界でNixというものが流行っているらしいので、話を聞いてきました。",
+		"link": "https://www.youtube.com/watch?v=urpzO1r1Y1c",
+		"pubDate": "2026-04-23",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【分割キーボードあるある】エンジニア愛用のキーボード紹介",
+		"link": "https://www.youtube.com/watch?v=RPobvGLuwYg",
+		"pubDate": "2026-03-05",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【外資ITエンジニアの開発環境】VimmerによるVimmer(になりたい人)のためのVim動画",
+		"link": "https://www.youtube.com/watch?v=XsAlXYWzcv4",
+		"pubDate": "2025-11-27",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【分割キーボード入門】外資ITエンジニアが愛用する分割キーボードの魅力に迫る",
+		"link": "https://www.youtube.com/watch?v=Ls5FmNoLLws",
+		"pubDate": "2025-11-11",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【2025ベストバイ】ITエンジニアが選ぶ2025年本当に買ってよかったガジェット,ソフトウェア12選",
+		"link": "https://www.youtube.com/watch?v=AS8r7lK0OLo",
+		"pubDate": "2025-12-26",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "【外資ITエンジニア対談】世界で使われるOSSを開発して分かった楽しさと憂鬱",
+		"link": "https://www.youtube.com/watch?v=61RIvdM0xJ0",
+		"pubDate": "2025-10-31",
+		"lang": "ja",
+		"kind": "video"
+	},
+	{
+		"title": "ryoppippi on tube",
+		"link": "https://www.youtube.com/playlist?list=PLWGCczNC6JbWsgyb0q5McgpdcAWnLxeii",
+		"pubDate": "2026-05-19",
+		"lang": "ja",
+		"kind": "video",
+		"playlist": true
+	}
+]

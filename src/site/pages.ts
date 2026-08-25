@@ -140,6 +140,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 			'src/site/templates/BlogList.svelte',
 			'packages/content/src/blog',
 			'src/contents/external-rss/rss.json',
+			'src/contents/external-rss/posts.json',
 		],
 		content: page({
 			title: 'Blog',
@@ -241,6 +242,37 @@ export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 		});
 	}
 	return { path: 'feed.xml', content: output.rss2() };
+}
+
+/**
+ * Builds the RSS feed for curated media appearances.
+ *
+ * @param items - Curated podcast and video entries to include.
+ * @returns The generated media RSS feed.
+ */
+export function mediaFeed(items: PostListItem[]): GeneratedFile {
+	const pathname = '/works/media/';
+	const url = `${SITE_ORIGIN}${pathname}`;
+	const output = new Feed({
+		title: `Media | ${SITE_NAME}`,
+		description: `Media appearances by ${SITE_NAME}`,
+		id: url,
+		link: url,
+		language: 'ja',
+		image: SITE_SOCIAL_IMAGE_URL,
+		favicon: SITE_SOCIAL_IMAGE_URL,
+		copyright: SITE_COPYRIGHT,
+		feedLinks: { rss: `${url}feed.xml` },
+	});
+	for (const item of items.filter((item) => item.playlist !== true)) {
+		output.addItem({
+			title: item.title,
+			link: item.link,
+			date: new Date(item.pubDate),
+			description: `${item.kind === 'video' ? 'YouTube' : 'Podcast'} | ${item.title}`,
+		});
+	}
+	return { path: 'works/media/feed.xml', content: output.rss2() };
 }
 
 /**
