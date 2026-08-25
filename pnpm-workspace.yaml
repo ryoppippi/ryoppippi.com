@@ -2,23 +2,23 @@ packages:
   - packages/*
 
 catalog:
-  '@ox-content/napi': 3.0.0-alpha.7
+  '@ox-content/napi': 3.0.0-alpha.8
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - gray-matter-es
-  - '@ox-content/binding-darwin-arm64@3.0.0-alpha.7'
-  - '@ox-content/binding-darwin-x64@3.0.0-alpha.7'
-  - '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.7'
-  - '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.7'
-  - '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.7'
-  - '@ox-content/binding-linux-x64-musl@3.0.0-alpha.7'
-  - '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.7'
-  - '@ox-content/islands@3.0.0-alpha.7'
-  - '@ox-content/napi@3.0.0-alpha.7'
-  - '@ox-content/vite-plugin-solid@3.0.0-alpha.7'
-  - '@ox-content/vite-plugin-svelte@3.0.0-alpha.7'
-  - '@ox-content/vite-plugin@3.0.0-alpha.7'
+  - '@ox-content/binding-darwin-arm64@3.0.0-alpha.8'
+  - '@ox-content/binding-darwin-x64@3.0.0-alpha.8'
+  - '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.8'
+  - '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.8'
+  - '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.8'
+  - '@ox-content/binding-linux-x64-musl@3.0.0-alpha.8'
+  - '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.8'
+  - '@ox-content/islands@3.0.0-alpha.8'
+  - '@ox-content/napi@3.0.0-alpha.8'
+  - '@ox-content/vite-plugin-solid@3.0.0-alpha.8'
+  - '@ox-content/vite-plugin-svelte@3.0.0-alpha.8'
+  - '@ox-content/vite-plugin@3.0.0-alpha.8'
 
 overrides:
   sharp: ^0.35.3
