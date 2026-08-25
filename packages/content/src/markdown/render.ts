@@ -2,15 +2,13 @@ import oxContent from '@ox-content/napi';
 import { transformOgp } from '@ox-content/vite-plugin';
 import type { TweetData } from '../tweet-renderer.ts';
 import type { OgpSnapshots } from '../ogp-snapshots.ts';
-import { slugify } from '../lib/slugify.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { replaceComponentIslands } from './component-islands.ts';
 import { transformOutsideFences } from './fences.ts';
-import { extractFootnotes, renderFootnotes } from './footnotes.ts';
 import { stripIslandImports } from './island-imports.ts';
-import { addExternalLinkAttributes, escapeHtml, unescapeHtml } from './html.ts';
+import { addExternalLinkAttributes, unescapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
@@ -79,65 +77,6 @@ function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) 
 	});
 }
 
-function stripHtml(html: string) {
-	return html.replace(/<[^>]*>/g, '');
-}
-
-const idAttributePattern = /\sid=(["'])(.*?)\1/;
-
-function hasHeaderAnchor(innerHtml: string) {
-	for (const [anchor] of innerHtml.matchAll(/<a\b[^>]*>/g)) {
-		const className = anchor.match(/\sclass=(["'])(.*?)\1/)?.[2];
-		if (className != null && className.split(/\s+/).includes('header-anchor')) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-function resolveUniqueHeadingId(id: string, usedIds: Map<string, number>) {
-	const usageCount = usedIds.get(id) ?? 0;
-	usedIds.set(id, usageCount + 1);
-	return usageCount === 0 ? id : `${id}-${usageCount + 1}`;
-}
-
-function resolveHeadingIdBase(existingId: string | undefined, innerHtml: string) {
-	const contentId = slugify(stripHtml(innerHtml));
-	if (existingId == null || existingId === contentId || existingId.startsWith(`${contentId}-`)) {
-		return contentId;
-	}
-
-	return existingId;
-}
-
-function addHeadingAnchors(html: string) {
-	const usedIds = new Map<string, number>();
-
-	return html.replace(
-		/<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/g,
-		(match, level: string, attrs: string, innerHtml: string) => {
-			const existingId = attrs.match(idAttributePattern)?.[2];
-			const idBase = resolveHeadingIdBase(existingId, innerHtml);
-
-			if (hasHeaderAnchor(innerHtml)) {
-				if (existingId != null) {
-					resolveUniqueHeadingId(idBase, usedIds);
-				}
-				return match;
-			}
-
-			const id = resolveUniqueHeadingId(idBase, usedIds);
-			const escapedId = escapeHtml(id);
-			const resolvedAttrs =
-				existingId == null
-					? `${attrs} id="${escapedId}"`
-					: attrs.replace(idAttributePattern, ` id="${escapedId}"`);
-			return `<h${level}${resolvedAttrs}>${innerHtml}<a class="header-anchor" href="#${escapeHtml(id)}" aria-hidden="true" tabindex="-1">#</a></h${level}>`;
-		},
-	);
-}
-
 function replaceMagicLinksOutsideProtectedHtml(html: string) {
 	const protectedBlockPattern = /<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\1>/gi;
 	let output = '';
@@ -193,9 +132,7 @@ function postprocessRenderedHtml(html: string) {
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 
-	return addExternalLinkAttributes(
-		addHeadingAnchors(wrapScrollableTables(withoutTrailingAttributes)),
-	);
+	return addExternalLinkAttributes(wrapScrollableTables(withoutTrailingAttributes));
 }
 
 async function replaceAsync(
@@ -261,8 +198,7 @@ async function renderTweets(
 }
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
-	const extracted = extractFootnotes(content);
-	const prepared = prepareOxContentMarkdown(extracted.content, options.islands);
+	const prepared = prepareOxContentMarkdown(content, options.islands);
 	const highlighted = await renderHighlightedMarkdown(prepared);
 	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
 	const tweets = await renderTweets(magicLinks, options);
@@ -284,10 +220,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph))),
 		options.renderIsland,
 	);
-	const footnotes = await renderFootnotes(extracted.footnotes, (footnote) =>
-		renderMarkdown(footnote, options),
-	);
-	return body + footnotes;
+	return body;
 }
 
 if (import.meta.vitest != null) {
@@ -511,11 +444,11 @@ if (import.meta.vitest != null) {
 			expect(html).not.toContain('data-not-by-ai-placeholder');
 		});
 
-		it('adds markdown-it-anchor compatible heading anchors', async () => {
+		it('adds accessible heading permalinks', async () => {
 			const html = await renderMarkdown('# Hello World');
 
 			expect(html).toContain(
-				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-hidden="true" tabindex="-1">#</a></h1>',
+				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-label="Permalink to &quot;Hello World&quot;">#</a></h1>',
 			);
 		});
 
@@ -523,13 +456,13 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('## Examples\n\n## Examples\n\n## Examples');
 
 			expect(html).toContain(
-				'<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
 			);
 			expect(html).toContain(
-				'<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="examples-1">Examples<a class="header-anchor" href="#examples-1" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
 			);
 			expect(html).toContain(
-				'<h2 id="examples-3">Examples<a class="header-anchor" href="#examples-3" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
 			);
 		});
 
@@ -537,7 +470,7 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('# header-anchor literal');
 
 			expect(html).toContain(
-				'<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-hidden="true" tabindex="-1">#</a></h1>',
+				'<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-label="Permalink to &quot;header-anchor literal&quot;">#</a></h1>',
 			);
 		});
 
@@ -564,11 +497,9 @@ if (import.meta.vitest != null) {
 				'Footnote[^note] and again[^note].\n\n[^note]: **footnote body**',
 			);
 
-			expect(html).toContain(
-				'<sup class="footnote-ref"><a href="#fn-note" id="fnref-note">1</a></sup>',
-			);
+			expect(html).toContain('<sup><a href="#fn-note" id="fnref-note">1</a></sup>');
 			expect(html).toContain('id="fnref-note-2"');
-			expect(html).toContain('<section class="footnotes">');
+			expect(html).toContain('<section class="footnotes" aria-label="Footnotes">');
 			expect(html).toContain('<li id="fn-note">');
 			expect(html).toContain('<strong>footnote body</strong>');
 			expect(html).toContain('href="#fnref-note"');
@@ -655,7 +586,7 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary><span class="details-marker"></span>More</summary>');
 			expect(html).toContain(
-				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &quot;Hidden&quot;">#</a></h2>',
 			);
 			expect(html).toContain('</details>');
 		});
@@ -666,12 +597,12 @@ if (import.meta.vitest != null) {
 			);
 
 			expect(html).toContain(
-				'<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-label="Permalink to &quot;おまけ&quot;">#</a></h2>',
 			);
 			expect(html).toContain('<details>');
 			expect(html).toContain('<summary><span class="details-marker"></span>おまけ</summary>');
 			expect(html).toContain(
-				'<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-hidden="true" tabindex="-1">#</a></h2>',
+				'<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-label="Permalink to &quot;Bun&quot;">#</a></h2>',
 			);
 			expect(html).toContain('<code>ccusage</code>');
 			expect(html).toContain('</details>');

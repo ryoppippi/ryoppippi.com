@@ -70,19 +70,19 @@
 	}
 }
 
-.prose .footnote-ref {
+.prose sup:has(> a[href^='#fn-']) {
 	font-size: 0.75em;
 	line-height: 0;
 	margin-left: 0.125em;
 	vertical-align: super;
 }
 
-.prose .footnote-ref a {
+.prose sup > a[href^='#fn-'] {
 	color: #808080;
 	text-decoration: none;
 }
 
-.prose .footnote-ref a:hover {
+.prose sup > a[href^='#fn-']:hover {
 	color: #262626;
 	text-decoration: underline;
 }
@@ -101,7 +101,7 @@
 	margin-bottom: 0.75rem;
 }
 
-.prose .footnotes a:not(.footnote-backref) {
+.prose .footnotes a:not([href^='#fnref-']) {
 	color: inherit;
 	font-weight: inherit;
 }
@@ -115,7 +115,7 @@
 	margin-left: 0.375rem;
 }
 
-.prose .footnote-backref {
+.prose .footnotes a[href^='#fnref-'] {
 	color: #808080;
 	width: 0.9em;
 	height: 0.9em;
@@ -125,7 +125,7 @@
 	text-decoration: none;
 }
 
-.prose .footnote-backref:hover {
+.prose .footnotes a[href^='#fnref-']:hover {
 	color: #4d4d4d;
 	opacity: 1;
 }

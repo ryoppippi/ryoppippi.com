@@ -14,9 +14,11 @@ const transform = markdownTransform(
 	oxContent({
 		embeds: false,
 		frontmatter: false,
+		headingPermalinks: true,
 		highlight: true,
 		ogViewer: false,
 		search: false,
+		semanticFootnotes: true,
 		ssg: false,
 		toc: false,
 	})[0],
