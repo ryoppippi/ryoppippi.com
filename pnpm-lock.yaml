@@ -104,6 +104,9 @@ importers:
       tinyglobby:
         specifier: ^0.2.17
         version: 0.2.17
+      ufo:
+        specifier: ^1.6.4
+        version: 1.6.4
       unhead:
         specifier: 3.4.0
         version: 3.4.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@6.0.3)(yaml@2.9.0))(rolldown@1.1.2)

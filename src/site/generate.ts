@@ -2,6 +2,7 @@ import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
+import * as ufo from 'ufo';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -122,7 +123,7 @@ export async function generateSite({
 	const plainFiles: GeneratedFile[] = [
 		{
 			path: 'works/index.html',
-			content: `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="${SITE_ORIGIN}/works/oss/"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>`,
+			content: `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="${ufo.joinURL(SITE_ORIGIN, 'works/oss/')}"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>`,
 		},
 		{ path: 'dotfiles.md', content: dotfiles },
 		{ path: 'dotfiles/install', content: install },
@@ -142,7 +143,9 @@ export async function generateSite({
 	const urls = pages.filter((file) => file.path.endsWith('.html') && file.path !== '404.html');
 	const sitemapEntries = await Promise.all(
 		urls.map(async (file) => {
-			const loc = `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`;
+			const loc = ufo.withTrailingSlash(
+				ufo.joinURL(SITE_ORIGIN, file.path.replace(/(?:index)?\.html$/, '')),
+			);
 			const lastmod = await gitLastModified(root, file.sourcePaths ?? []);
 			return lastmod == null ? { loc } : { loc, lastmod };
 		}),

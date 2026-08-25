@@ -2,6 +2,7 @@ import type { ArticleMetadata, BlogPost, BlogPostMetadata } from '@ryoppippi/con
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
+import * as ufo from 'ufo';
 import { formatDate } from '../lib/util.ts';
 import { islandModuleIds } from './assets.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
@@ -89,7 +90,7 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 				'@graph': [
 					{
 						'@type': 'WebSite',
-						'@id': `${SITE_ORIGIN}/#website`,
+						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
 						name: SITE_NAME,
 						alternateName: SITE_OWNER.handle,
 						description: HOME_DESCRIPTION,
@@ -98,9 +99,11 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 					},
 					{
 						'@type': 'ProfilePage',
-						'@id': `${SITE_ORIGIN}/#profile`,
+						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
 						url: SITE_OWNER.url,
-						isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+						isPartOf: {
+							'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
+						},
 						mainEntity: { '@id': SITE_OWNER.id },
 					},
 					{
@@ -163,7 +166,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
  */
 export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
 	const pathname = `/blog/${post.filename}/`;
-	const url = `${SITE_ORIGIN}${pathname}`;
+	const url = ufo.joinURL(SITE_ORIGIN, pathname);
 	const metadata = articleSeoMetadata(post);
 	const image =
 		metadata.image == null ? articleImageUrl(post.html, url) : new URL(metadata.image, url).href;
@@ -231,12 +234,12 @@ export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 		image: SITE_SOCIAL_IMAGE_URL,
 		favicon: SITE_SOCIAL_IMAGE_URL,
 		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: `${SITE_ORIGIN}/feed.xml` },
+		feedLinks: { rss: ufo.joinURL(SITE_ORIGIN, 'feed.xml') },
 	});
 	for (const post of posts.filter((post) => post.isPublished)) {
 		output.addItem({
 			title: post.title,
-			link: `${SITE_ORIGIN}/blog/${post.filename}/`,
+			link: ufo.joinURL(SITE_ORIGIN, 'blog', `${post.filename}/`),
 			date: new Date(post.pubDate),
 			description: `${post.title} | ${post.readingTime.text}`,
 		});
@@ -252,7 +255,7 @@ export function feed(posts: BlogPostMetadata[]): GeneratedFile {
  */
 export function mediaFeed(items: PostListItem[]): GeneratedFile {
 	const pathname = '/works/media/';
-	const url = `${SITE_ORIGIN}${pathname}`;
+	const url = ufo.joinURL(SITE_ORIGIN, pathname);
 	const output = new Feed({
 		title: `Media | ${SITE_NAME}`,
 		description: `Media appearances by ${SITE_NAME}`,
@@ -262,7 +265,7 @@ export function mediaFeed(items: PostListItem[]): GeneratedFile {
 		image: SITE_SOCIAL_IMAGE_URL,
 		favicon: SITE_SOCIAL_IMAGE_URL,
 		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: `${url}feed.xml` },
+		feedLinks: { rss: ufo.joinURL(url, 'feed.xml') },
 	});
 	for (const item of items.filter((item) => item.playlist !== true)) {
 		output.addItem({
