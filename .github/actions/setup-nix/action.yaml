@@ -1,5 +1,5 @@
 name: Setup Nix
-description: Install Nix and load the development environment
+description: Install Nix and load the CI development environment
 runs:
   using: composite
   steps:
@@ -8,6 +8,6 @@ runs:
       with:
         github_access_token: ${{ github.token }}
 
-    - name: Load Nix development environment
+    - name: Install JavaScript dependencies
       shell: bash
-      run: nix develop --command true
+      run: nix develop .#ci --command vp install --frozen-lockfile

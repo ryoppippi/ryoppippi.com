@@ -49,48 +49,60 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          agentSkills = agentSkillsFor system;
         in
         {
-          default = pkgs.mkShellNoCC {
-            # The driver's browser revision must match the repo's `playwright`,
-            # so bump the nixpkgs input alongside it.
-            PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
-            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-
+          ci = pkgs.mkShellNoCC {
             buildInputs = [
               pkgs.nodejs_24
               nix-vite-plus.packages.${system}.vp
-            ] ++ (with pkgs; [
-              gitleaks
-              nushell
-              nufmt
-              typos
-              typos-lsp
-              svelte-language-server
-              yaml-language-server
-              gh
-              wrangler
-            ]);
-
-            shellHook = ''
-              if [ ! -f node_modules/.pnpm/lock.yaml ] || [ pnpm-lock.yaml -nt node_modules/.pnpm/lock.yaml ]; then
-                echo "📦 Installing dependencies..."
-                vp install --frozen-lockfile
-              fi
-
-              if [ -f .env.example ]; then
-                if [ ! -f .env ]; then
-                  echo "📝 Generating .env from .env.example..."
-                  cp .env.example .env
-                elif [ .env.example -nt .env ]; then
-                  echo "⚠️  .env.example has been updated, please review and update .env manually"
-                fi
-              fi
-
-              ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
-            '';
+              pkgs.gitleaks
+              pkgs.typos
+            ];
           };
+
+          default =
+            let
+              agentSkills = agentSkillsFor system;
+            in
+            pkgs.mkShellNoCC {
+              # The driver's browser revision must match the repo's `playwright`,
+              # so bump the nixpkgs input alongside it.
+              PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+              PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+
+              buildInputs = [
+                pkgs.nodejs_24
+                nix-vite-plus.packages.${system}.vp
+              ] ++ (with pkgs; [
+                gitleaks
+                nushell
+                nufmt
+                typos
+                typos-lsp
+                svelte-language-server
+                yaml-language-server
+                gh
+                wrangler
+              ]);
+
+              shellHook = ''
+                if [ ! -f node_modules/.pnpm/lock.yaml ] || [ pnpm-lock.yaml -nt node_modules/.pnpm/lock.yaml ]; then
+                  echo "📦 Installing dependencies..."
+                  vp install --frozen-lockfile
+                fi
+
+                if [ -f .env.example ]; then
+                  if [ ! -f .env ]; then
+                    echo "📝 Generating .env from .env.example..."
+                    cp .env.example .env
+                  elif [ .env.example -nt .env ]; then
+                    echo "⚠️  .env.example has been updated, please review and update .env manually"
+                  fi
+                fi
+
+                ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
+              '';
+            };
         }
       );
     };
