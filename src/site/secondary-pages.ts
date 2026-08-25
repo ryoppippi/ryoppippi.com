@@ -20,7 +20,7 @@ export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAsse
 			pathname: '/works/oss/',
 			content: renderComponent(Oss, { projects }),
 			description:
-				'Open-source projects by @ryoppippi across developer tooling, TypeScript, Svelte, CLI, Vim, Zig, and Nix.',
+				'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
 			assets,
 			style: 'works',
 		}),

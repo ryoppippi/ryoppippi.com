@@ -1,5 +1,5 @@
 {
-	"CLI": [
+	"AI Tools": [
 		{
 			"name": "ccusage",
 			"icon": "icon-[ph--chart-line-light]",
@@ -16,11 +16,6 @@
 			"description": "Simple proxy worker for using ollama in cursor"
 		},
 		{
-			"name": "nyancat.zig",
-			"icon": "icon-[solar--cat-broken]",
-			"description": "Nyancat in Zig"
-		},
-		{
 			"name": "zigchat",
 			"icon": "icon-[ph--chat-light]",
 			"description": "Command that sends a prompt to OpenAI and returns a reply"
@@ -31,11 +26,26 @@
 			"name": "nix-secure-enclave-key",
 			"icon": "icon-[ph--key-light]",
 			"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS."
+		}
+	],
+	"Nix Ecosystem": [
+		{
+			"name": "nixpkgs",
+			"link": "https://github.com/NixOS/nixpkgs",
+			"icon": "icon-[simple-icons--nixos]",
+			"description": "Upstream contributions for ghq tests, git-wt, gh-do, and oxlint/oxfmt packaging."
 		},
 		{
-			"name": "claude-code-overlay",
-			"icon": "icon-[simple-icons--nixos]",
-			"description": "A Nix flake overlay that provides pre-built Claude Code CLI binaries from official Anthropic releases."
+			"name": "llm-agents.nix",
+			"link": "https://github.com/numtide/llm-agents.nix",
+			"icon": "icon-[ph--robot-light]",
+			"description": "AI-agent packaging and maintenance contributions across ccusage, agent-browser, ax, pdfvision, and more."
+		},
+		{
+			"name": "agent-skills-nix",
+			"link": "https://github.com/Kyure-A/agent-skills-nix",
+			"icon": "icon-[ph--graduation-cap-light]",
+			"description": "Home Manager and skill transformation contributions for managing agent skills with Nix."
 		}
 	],
 	"Vim/Neovim": [
@@ -43,16 +53,6 @@
 			"name": "nvim-pnpm-catalog-lens",
 			"icon": "icon-[simple-icons--pnpm]",
 			"description": "Neovim plugin to show versions as diagnostics for pnpm catalog: field."
-		},
-		{
-			"name": "vim-bun-lock",
-			"icon": "icon-[simple-icons--bun]",
-			"description": " If you gaze long enough into a bun.locb, the bun.locb will gaze back into you"
-		},
-		{
-			"name": "vim-ray-so",
-			"icon": "icon-[ph--camera-light]",
-			"description": "Generate a beautiful code image with  https://ray.so on your Neovim/Vim"
 		},
 		{
 			"name": "vim-svelte-inspector",
@@ -70,7 +70,7 @@
 			"description": "Do you wanna watch \"Bad Apple!!\" on your vim/neovim?"
 		}
 	],
-	"Svelte Ecosystem": [
+	"Web Ecosystem": [
 		{
 			"name": "sveltweet",
 			"icon": "icon-[ph--twitter-logo]",
@@ -95,28 +95,18 @@
 			"name": "svelte-fancy-darkmode",
 			"icon": "icon-[ph--moon-stars-light]",
 			"description": "svelte-fancy-darkmode.pages.dev"
-		}
-	],
-	"TypeScript Ecosystem": [
-		{
-			"name": "unplugin-typia",
-			"icon": "icon-[ph--magic-wand-light]",
-			"description": "unplugin for Typia with an extra Bun plugin 🫶"
 		},
 		{
 			"name": "vite-plugin-favicons",
 			"icon": "icon-[tabler--favicon]",
 			"description": "Generate favicons for your Vite project with ease!"
-		},
+		}
+	],
+	"TypeScript Tooling": [
 		{
-			"name": "slidev-transformer-budoux",
-			"icon": "icon-[tabler--language-hiragana]",
-			"description": "Slidev transformer integrating BudouX for better text wrapping!"
-		},
-		{
-			"name": "typiautil",
-			"icon": "icon-[ph--toolbox-light]",
-			"description": "utility functions for typia"
+			"name": "unplugin-typia",
+			"icon": "icon-[ph--magic-wand-light]",
+			"description": "unplugin for Typia with an extra Bun plugin 🫶"
 		},
 		{
 			"name": "pkg-to-jsr",
@@ -132,11 +122,6 @@
 			"name": "bun-plugin-isolated-decl",
 			"icon": "icon-[ph--package]",
 			"description": "This is ultrafast dts generator powered by Bun and oxc"
-		},
-		{
-			"name": "bunpare",
-			"icon": "icon-[icon-park-outline--setting-config]",
-			"description": "A simple prepare script for bun.lockb"
 		}
 	],
 	"TypeScript Libraries": [
@@ -154,21 +139,19 @@
 			"name": "str-fns",
 			"icon": "icon-[oui--app-devtools]",
 			"description": "A collection of utilities for TS/JS string "
-		}
-	],
-	"Fish Plugins": [
-		{
-			"name": "fish-na",
-			"icon": "icon-[ph--package]",
-			"description": "@antfu/ni alternative written in fish shell using abbr feature"
 		},
 		{
-			"name": "fish-poetry",
-			"icon": "icon-[teenyicons--python-outline]",
-			"description": "🐟🐍 a fish plugin that automatically activates the poetry subshell"
+			"name": "web-push-neo",
+			"icon": "icon-[ph--bell-ringing-light]",
+			"description": "Web Push library for any JavaScript runtime."
 		}
 	],
 	"Zig Ecosystem": [
+		{
+			"name": "nyancat.zig",
+			"icon": "icon-[solar--cat-broken]",
+			"description": "Nyancat in Zig"
+		},
 		{
 			"name": "zigcv",
 			"link": "https://github.com/zigcv/zigcv",
@@ -176,23 +159,16 @@
 			"description": "zig bindings for OpenCV4"
 		}
 	],
-	"Web Apps": [
-		{
-			"name": "deepwiki-badge-maker",
-			"icon": "icon-[ph--seal-light]",
-			"description": "deepwiki.ryoppippi.com "
-		},
-		{
-			"name": "chatgpt-heatmap",
-			"icon": "icon-[ph--fire-light]",
-			"description": "Upload ChatGPT's exported data and get insights on your usage patterns."
-		}
-	],
-	"Configs": [
+	"Configs & Shell": [
 		{
 			"name": "dotfiles",
 			"icon": "icon-[ph--folder-simple]",
 			"description": "ryoppippi's dotfiles"
+		},
+		{
+			"name": "fish-na",
+			"icon": "icon-[ph--package]",
+			"description": "@antfu/ni alternative written in fish shell using abbr feature"
 		}
 	]
 }
