@@ -5,6 +5,7 @@ import type { GeneratedFile } from './pages.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { SITE_ORIGIN } from './consts.ts';
 import { SITE_OWNER } from './site-owner.ts';
+import * as ufo from 'ufo';
 import { page, renderComponent } from './html.ts';
 import About from './templates/About.svelte';
 import ErrorPage from './templates/Error.svelte';
@@ -29,7 +30,7 @@ const ABOUT_DESCRIPTION =
  * @returns The generated About page.
  */
 export function aboutPage(assets: SiteAssets): GeneratedFile {
-	const url = `${SITE_ORIGIN}${ABOUT_PATHNAME}`;
+	const url = ufo.joinURL(SITE_ORIGIN, ABOUT_PATHNAME);
 	return {
 		path: 'about/index.html',
 		sourcePaths: ['src/site/site-owner.ts', 'src/site/templates/About.svelte'],
@@ -43,7 +44,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 			structuredData: {
 				'@context': 'https://schema.org',
 				'@type': 'ProfilePage',
-				'@id': `${url}#profile`,
+				'@id': ufo.withFragment(url, 'profile'),
 				url,
 				name: ABOUT_TITLE,
 				description: ABOUT_DESCRIPTION,
@@ -65,7 +66,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 						SITE_OWNER.handle,
 					],
 					url: SITE_OWNER.url,
-					image: `${SITE_ORIGIN}/ryoppippi.avif`,
+					image: ufo.joinURL(SITE_ORIGIN, 'ryoppippi.avif'),
 					sameAs: [...SITE_OWNER.sameAs],
 				},
 			},
