@@ -17,6 +17,7 @@ import {
 } from './content-assets.ts';
 import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalPosts } from './content.ts';
+import { gitLastModified } from './git-last-modified.ts';
 import { corePages } from './pages.ts';
 import {
 	errorPage,
@@ -45,6 +46,16 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
 	}
 }
 
+/**
+ * Generates the static site and its auxiliary files.
+ *
+ * @param assets - Bundled site assets referenced by generated pages.
+ * @param content - Optional prebuilt content artifact.
+ * @param outDir - Directory that receives generated files.
+ * @param renderTweet - Tweet renderer used when content must be built locally.
+ * @param root - Repository root used for source loading and Git metadata.
+ * @returns A promise that resolves after all generated files are written.
+ */
 export async function generateSite({
 	assets,
 	content,
@@ -121,10 +132,15 @@ export async function generateSite({
 		);
 	}
 
-	const urls = pages
-		.filter((file) => file.path.endsWith('.html') && file.path !== '404.html')
-		.map((file) => `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`);
-	plainFiles.push(sitemap(urls));
+	const urls = pages.filter((file) => file.path.endsWith('.html') && file.path !== '404.html');
+	const sitemapEntries = await Promise.all(
+		urls.map(async (file) => {
+			const loc = `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`;
+			const lastmod = await gitLastModified(root, file.sourcePaths ?? []);
+			return lastmod == null ? { loc } : { loc, lastmod };
+		}),
+	);
+	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
 
 	await Promise.all(

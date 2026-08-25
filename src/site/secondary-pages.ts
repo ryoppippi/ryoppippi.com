@@ -12,9 +12,22 @@ import Talks from './templates/Talks.svelte';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
+/**
+ * Renders the open-source projects page.
+ *
+ * @param projects - Manually ordered OSS projects to render.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated open-source projects page.
+ */
 export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/oss/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Oss.svelte',
+			'src/contents/works/oss/list.json',
+		],
 		content: page({
 			title: 'Open-source projects',
 			pathname: '/works/oss/',
@@ -27,9 +40,22 @@ export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFi
 	};
 }
 
+/**
+ * Renders the project showcase page.
+ *
+ * @param projects - Showcase projects to render.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated project showcase page.
+ */
 export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/showcase/index.html',
+		sourcePaths: [
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Showcase.svelte',
+			'packages/content/src/showcase.ts',
+			'packages/content/src/showcase',
+		],
 		content: page({
 			title: 'Project showcase',
 			pathname: '/works/showcase/',
@@ -42,12 +68,25 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 	};
 }
 
+/**
+ * Renders the publications page.
+ *
+ * @param publications - Publications grouped by their year or category.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated publications page.
+ */
 export function publicationsPage(
 	publications: Record<string, Publication[]>,
 	assets: SiteAssets,
 ): GeneratedFile {
 	return {
 		path: 'works/publications/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Publications.svelte',
+			'src/contents/publication.json',
+		],
 		content: page({
 			title: 'Publications',
 			pathname: '/works/publications/',
@@ -60,9 +99,21 @@ export function publicationsPage(
 	};
 }
 
+/**
+ * Renders the talks page.
+ *
+ * @param talks - Talks loaded from the talks data source.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated talks page.
+ */
 export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
+		sourcePaths: [
+			'src/site/sections.ts',
+			'src/site/secondary-pages.ts',
+			'src/site/templates/Talks.svelte',
+		],
 		content: page({
 			title: 'Talks',
 			pathname: '/works/talks/',
@@ -75,9 +126,16 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	};
 }
 
+/**
+ * Renders the sponsors page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated sponsors page.
+ */
 export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
+		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Sponsors.svelte'],
 		content: page({
 			title: 'Sponsors',
 			pathname: '/sponsors/',
@@ -90,9 +148,16 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	};
 }
 
+/**
+ * Renders the non-indexable error page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated error page.
+ */
 export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
+		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Error.svelte'],
 		content: page({
 			title: 'Page not found',
 			pathname: '/404',
