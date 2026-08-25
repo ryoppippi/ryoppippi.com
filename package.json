@@ -5,7 +5,6 @@
 	"type": "module",
 	"scripts": {
 		"build": "vp run site-build",
-		"build:cloudflare": "if [ \"$(git rev-parse --is-shallow-repository 2>/dev/null || echo false)\" = true ]; then git fetch --unshallow origin; fi; pnpm build",
 		"check": "vp check",
 		"deploy": "wrangler deploy",
 		"deploy:non-production": "wrangler versions upload",

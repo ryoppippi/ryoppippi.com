@@ -2,9 +2,6 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ryoppippi-com",
 	"compatibility_date": "2025-06-19",
-	"build": {
-		"command": "pnpm run build:cloudflare",
-	},
 	"assets": {
 		"directory": "build",
 		"html_handling": "auto-trailing-slash",
