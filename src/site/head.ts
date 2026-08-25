@@ -1,9 +1,10 @@
-import type { Thing, WithContext } from 'schema-dts';
+import type { Graph, Thing, WithContext } from 'schema-dts';
 import { CanonicalPlugin, TemplateParamsPlugin, ValidatePlugin } from 'unhead/plugins';
 import { createHead } from 'unhead/server';
 import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 
 const pageHeadMarker = { 'data-page-head': '' } as const;
+type StructuredData = Graph | WithContext<Thing>;
 
 /**
  * Renders Unhead metadata into static HTML head tags.
@@ -29,7 +30,7 @@ export function renderPageHead({
 	indexable?: boolean;
 	lang: string;
 	pathname: string;
-	structuredData?: WithContext<Thing>;
+	structuredData?: StructuredData;
 	title: string;
 }): string {
 	const alternateLinks =
