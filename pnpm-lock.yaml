@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@ox-content/napi':
-      specifier: 3.0.0-alpha.6
-      version: 3.0.0-alpha.6
+      specifier: 3.0.0-alpha.7
+      version: 3.0.0-alpha.7
 
 overrides:
   sharp: ^0.35.3
@@ -37,13 +37,13 @@ importers:
         version: 1.2.3(tailwindcss@4.3.3)
       '@ox-content/napi':
         specifier: 'catalog:'
-        version: 3.0.0-alpha.6
+        version: 3.0.0-alpha.7
       '@ox-content/vite-plugin':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
+        specifier: 3.0.0-alpha.7
+        version: 3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
       '@ox-content/vite-plugin-svelte':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
+        specifier: 3.0.0-alpha.7
+        version: 3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
       '@ryoppippi/content':
         specifier: workspace:*
         version: link:packages/content
@@ -121,13 +121,13 @@ importers:
         version: 1.7.0
       '@ox-content/napi':
         specifier: 'catalog:'
-        version: 3.0.0-alpha.6
+        version: 3.0.0-alpha.7
       '@ox-content/vite-plugin':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
+        specifier: 3.0.0-alpha.7
+        version: 3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
       '@ox-content/vite-plugin-svelte':
-        specifier: 3.0.0-alpha.6
-        version: 3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
+        specifier: 3.0.0-alpha.7
+        version: 3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.2.0
         version: 7.3.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(svelte@5.56.10(@typescript-eslint/types@8.58.2))
@@ -386,9 +386,6 @@ packages:
 
   '@cspell/dict-en-gb-mit@3.1.24':
     resolution: {integrity: sha512-Oowb/Uzkh7OmDRdCcETzMc9imEb4IpLlHJXoYjX8A8DS2X/54gqSjI915JFB8hKtFjBko5OM0BLQ+6cZhFEMmQ==}
-
-  '@cspell/dict-en_us@4.4.35':
-    resolution: {integrity: sha512-xWpxBCc/FzzMMo/A+0qwARVaIIhR0Ql8yhhv4rvsvg+GfQF+LG9yzg2GwTM5N2rjvzmM3nKuR9zxFZq2I6fJSg==}
 
   '@cspell/dict-en_us@4.4.36':
     resolution: {integrity: sha512-2yOhI/+7d1DbfvMljGW4jw8pLqDEsVmnvUXBOCFXtLU2BWgQkrqOJDCNseYjEiEbTp0OtdrWEWWPFSP1TNugQw==}
@@ -828,59 +825,59 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@ox-content/binding-darwin-arm64@3.0.0-alpha.6':
-    resolution: {integrity: sha512-D8GlKHTrvpVFC6QvmcOl8svpw6mZhQW0Ui7/nLeVupuj8RobxnSNm9XgcCSwu1SgWwp4Z+Utoivexg10Y3bKdw==}
+  '@ox-content/binding-darwin-arm64@3.0.0-alpha.7':
+    resolution: {integrity: sha512-N8ImYeQe8SuHhXNRIsjSOhgyu4RJCU2mOMEy1k5gIVPFppCTTpiMPV6gLljvJVO799F+JEo5acqSeulWFjFhoA==}
     cpu: [arm64]
     os: [darwin]
 
-  '@ox-content/binding-darwin-x64@3.0.0-alpha.6':
-    resolution: {integrity: sha512-rADkhHdix4j/wg8ekKPH0GY6KLf7XvHXYj6fIvnSL42dOc29rTvXvwihm97XQmTMUFJiPdHPOAlpgEMKdKIlXA==}
+  '@ox-content/binding-darwin-x64@3.0.0-alpha.7':
+    resolution: {integrity: sha512-HTlKpbBWc9egRhkEdgaUBWoFNvZhZu/WB1WQ1Y2ywDOwYbwgrJH+GlndbiKRiYHjuXwuDu0hwnJzS6FDy7y9Ng==}
     cpu: [x64]
     os: [darwin]
 
-  '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.6':
-    resolution: {integrity: sha512-oMmEcLM5nWPhtUG4iocPWzAbneaxixALTA28J1xkIOcS4mRVT9d/zpsysWC6noprTnvgxZFxGp6CsJp5UQ/6VQ==}
+  '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.7':
+    resolution: {integrity: sha512-ZRetXMKyRRH3dcSRDvfMfrOwzBzBcCLQlJLOEjwQ2g6Q1ooR12A9caQ0F2JBCZ/1HmfeW9bovuCoY6vFoQiemQ==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.6':
-    resolution: {integrity: sha512-GStPnZhUlAKQzJuV7uhb5K8RK+y9vqRUH0SzZZr7TL7xLbZl5qCvGNnm5fODXueGRdgMhuVwXqo+lp2xce1ZFA==}
+  '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.7':
+    resolution: {integrity: sha512-g4px588xqEiAHu8MNazrbkfzDNwhCyP7mQJ6AUERvlJHiNv0vrSPF/cwACjrjubwB6G5X/Yqaf0vlS4FieNDmQ==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.6':
-    resolution: {integrity: sha512-5vQ3VwS7JxZyzEw4SRDjG5WOJm2sGxq6b3wQVvJ1cGOlBOUcWLb8hHE7+q3hP8jemdXMB9FfsPArF9JRh3I6pQ==}
+  '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.7':
+    resolution: {integrity: sha512-RywHnhjH50imWWN+tPbQPpjpB3JftfOMXNnVQrrq/NuJDUPEC+Qi9Qm0qofDO5M3vzm2c7RfXMg9poJi8p46+g==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@ox-content/binding-linux-x64-musl@3.0.0-alpha.6':
-    resolution: {integrity: sha512-J5iA2NlxUFdXe43NX5wKgUcuvYTOjX3g8IvW7fHgWoEPw1AjA1O7zQiBdUCDGiHvjjxVVBVRXRSofYJ9pZR3/g==}
+  '@ox-content/binding-linux-x64-musl@3.0.0-alpha.7':
+    resolution: {integrity: sha512-qt6NBS+18U6SzF1gskzaYdpCCgnnZs7NPdXYqZHlZJ8UJfApo5Or/T1Ifu34k7C4e4kqFvK9Wmyljmmuu00SeA==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.6':
-    resolution: {integrity: sha512-+VNixOdT/VFwRONSC1Y61QqGguoVtKpRYfp2bUMQDMrc3Xu0T2OLfwulFwwdGiWHo85Vg+sbPfivHSFYI1C2AA==}
+  '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.7':
+    resolution: {integrity: sha512-5yDfd3ouhMbm2TH6rwznPu6m2tQCqzFZWKbJDbRgygJ61Uc2ACyOi1xmJigGME4RYD4kfHW+LTv9bPBoz02dlA==}
     cpu: [x64]
     os: [win32]
 
-  '@ox-content/islands@3.0.0-alpha.6':
-    resolution: {integrity: sha512-5yQYJKVCg+viJRsYiCqcyb5RXLNQazNtC1ifizteUyouFklX9QX2Wpxlo5zc6lBzL2kTMHNyL4nKeSW4V9nDRA==}
+  '@ox-content/islands@3.0.0-alpha.7':
+    resolution: {integrity: sha512-Xl3Vmyk7Y+U5y3QUDfgt563ujFBk6sYg3luWIiYycseLeGpFgLoaUOZPrsDLxNRucowmnndNL1ctyCjQkYP1Uw==}
 
-  '@ox-content/napi@3.0.0-alpha.6':
-    resolution: {integrity: sha512-1z0cOXKOFztfxXjMfaOhwePvyKABm/C5fvuWshcH8naXPUjw9AllA6HUpYE8B1r1kT2QiaETbXxeN02zknVxjg==}
+  '@ox-content/napi@3.0.0-alpha.7':
+    resolution: {integrity: sha512-D54TsJLmYZRIPlhUwF1dTKsXb2N4W40Zkj++T35lb/2fKEmhqMGANgiClgQmL4r4+Pqja9l0c+CTBXgdvOe5NA==}
 
-  '@ox-content/vite-plugin-svelte@3.0.0-alpha.6':
-    resolution: {integrity: sha512-sGjWZt11mruiHQyrovaIqoTHiZZ/T7MN5TveVR8aohePzUz7VtVDduopuGbF/+dJ7/Ij0LFmH3ci+kziqRu/kQ==}
+  '@ox-content/vite-plugin-svelte@3.0.0-alpha.7':
+    resolution: {integrity: sha512-3roib18e6UYZJ8+/lYra5WqLFEIj3tmBLX+VVh0XVCdXi6thd7r93RIIQmG765zLjB6t8V1IpO7dwKb1poH65w==}
     peerDependencies:
       svelte: ^5.56.10
       vite: ^0.2.8 || ^8.0.0
 
-  '@ox-content/vite-plugin@3.0.0-alpha.6':
-    resolution: {integrity: sha512-qLJ29OlSxRQnFNsjz0Z6sCprS4bFsZ0ZSZQH76OKxsTQLnk0YHOEzk/y7mIHqvM6T09JR1awW11vB46XAY2HNw==}
+  '@ox-content/vite-plugin@3.0.0-alpha.7':
+    resolution: {integrity: sha512-ItR7sEM+ild7Cbn5+Pdoq1bvpngwKnZmQXh0vfZoee4faWH5CSMt8fxaOw6qgt4vGv1n9fUgh+v7EEKHLYjyOQ==}
     hasBin: true
     peerDependencies:
       '@vue/compiler-sfc': ^3.4.0
@@ -4205,7 +4202,7 @@ snapshots:
       '@cspell/dict-elixir': 4.0.8
       '@cspell/dict-en-common-misspellings': 2.1.12
       '@cspell/dict-en-gb-mit': 3.1.24
-      '@cspell/dict-en_us': 4.4.35
+      '@cspell/dict-en_us': 4.4.36
       '@cspell/dict-filetypes': 3.0.18
       '@cspell/dict-flutter': 1.1.1
       '@cspell/dict-fonts': 4.0.6
@@ -4297,8 +4294,6 @@ snapshots:
   '@cspell/dict-en-common-misspellings@2.1.12': {}
 
   '@cspell/dict-en-gb-mit@3.1.24': {}
-
-  '@cspell/dict-en_us@4.4.35': {}
 
   '@cspell/dict-en_us@4.4.36': {}
 
@@ -4674,43 +4669,43 @@ snapshots:
   '@oven/bun-windows-x64@1.3.14':
     optional: true
 
-  '@ox-content/binding-darwin-arm64@3.0.0-alpha.6':
+  '@ox-content/binding-darwin-arm64@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-darwin-x64@3.0.0-alpha.6':
+  '@ox-content/binding-darwin-x64@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.6':
+  '@ox-content/binding-linux-arm64-gnu@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.6':
+  '@ox-content/binding-linux-arm64-musl@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.6':
+  '@ox-content/binding-linux-x64-gnu@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-linux-x64-musl@3.0.0-alpha.6':
+  '@ox-content/binding-linux-x64-musl@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.6':
+  '@ox-content/binding-win32-x64-msvc@3.0.0-alpha.7':
     optional: true
 
-  '@ox-content/islands@3.0.0-alpha.6': {}
+  '@ox-content/islands@3.0.0-alpha.7': {}
 
-  '@ox-content/napi@3.0.0-alpha.6':
+  '@ox-content/napi@3.0.0-alpha.7':
     optionalDependencies:
-      '@ox-content/binding-darwin-arm64': 3.0.0-alpha.6
-      '@ox-content/binding-darwin-x64': 3.0.0-alpha.6
-      '@ox-content/binding-linux-arm64-gnu': 3.0.0-alpha.6
-      '@ox-content/binding-linux-arm64-musl': 3.0.0-alpha.6
-      '@ox-content/binding-linux-x64-gnu': 3.0.0-alpha.6
-      '@ox-content/binding-linux-x64-musl': 3.0.0-alpha.6
-      '@ox-content/binding-win32-x64-msvc': 3.0.0-alpha.6
+      '@ox-content/binding-darwin-arm64': 3.0.0-alpha.7
+      '@ox-content/binding-darwin-x64': 3.0.0-alpha.7
+      '@ox-content/binding-linux-arm64-gnu': 3.0.0-alpha.7
+      '@ox-content/binding-linux-arm64-musl': 3.0.0-alpha.7
+      '@ox-content/binding-linux-x64-gnu': 3.0.0-alpha.7
+      '@ox-content/binding-linux-x64-musl': 3.0.0-alpha.7
+      '@ox-content/binding-win32-x64-msvc': 3.0.0-alpha.7
 
-  '@ox-content/vite-plugin-svelte@3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)':
+  '@ox-content/vite-plugin-svelte@3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)':
     dependencies:
-      '@ox-content/islands': 3.0.0-alpha.6
-      '@ox-content/vite-plugin': 3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
+      '@ox-content/islands': 3.0.0-alpha.7
+      '@ox-content/vite-plugin': 3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)
       svelte: 5.56.10(@typescript-eslint/types@8.58.2)
       vite: '@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0)'
     transitivePeerDependencies:
@@ -4729,14 +4724,14 @@ snapshots:
       - vue
       - yauzl
 
-  '@ox-content/vite-plugin@3.0.0-alpha.6(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)':
+  '@ox-content/vite-plugin@3.0.0-alpha.7(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(@vue/compiler-sfc@3.5.30)(katex@0.16.47)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(svelte@5.56.10(@typescript-eslint/types@8.58.2))(tailwindcss@4.3.3)':
     dependencies:
       '@cspell/dict-de-de': 4.1.2
       '@cspell/dict-en_us': 4.4.36
       '@cspell/dict-fr-fr': 2.3.2
       '@cspell/dict-pl_pl': 3.0.6
       '@mermaid-js/mermaid-cli': 11.16.0(@babel/core@7.29.7)(@babel/template@7.29.7)(puppeteer@25.8.0)(tailwindcss@4.3.3)
-      '@ox-content/napi': 3.0.0-alpha.6
+      '@ox-content/napi': 3.0.0-alpha.7
       cspell-lib: 10.0.1
       glob: 13.0.6
       playwright: 1.62.1
