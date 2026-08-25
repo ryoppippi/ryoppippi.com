@@ -1,0 +1,18 @@
+{
+	"https://github.com/ryoppippi/nix-secure-enclave-key": {
+		"url": "https://github.com/ryoppippi/nix-secure-enclave-key",
+		"title": "GitHub - ryoppippi/nix-secure-enclave-key: Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS.",
+		"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS. - ryoppippi/nix-secure-enclave-key",
+		"image": "https://opengraph.githubassets.com/b72214928343df9654e8e294a44a88c1fe55ba25d7878039b9bfef3e006c816e/ryoppippi/nix-secure-enclave-key",
+		"siteName": "GitHub",
+		"favicon": "https://www.google.com/s2/favicons?domain=github.com&sz=32"
+	},
+	"https://www.mizdra.net/entry/2026/08/07/101542": {
+		"url": "https://www.mizdra.net/entry/2026/08/07/101542",
+		"title": "Secure Enclave で git commit の署名鍵を管理する - mizdra&#39;s blog",
+		"description": "id:mizdra は Git の commit 署名をしていて、その署名鍵を 1Password で管理している。commit をする度に 1Password による生体認証を求められるが、その分安全に署名鍵を扱える。 今まではそれで不満は無かったのだけど、Coding Agent を使うようになってからというもの、この仕組みが足かせになっている。具体的には、Coding Agent にタスクを投げて人間が他のことをしている際に commit が試行され、人間が時間内に生体認証できずタイムアウトする、というもの。これのせいで、「人間はこれから寝るからこれやっておいて！」と投げたタスクが途中で…",
+		"image": "https://ogimage.blog.st-hatena.com/8454420450072948107/14945776032061890942/1786099560",
+		"siteName": "mizdra&#39;s blog",
+		"favicon": "https://www.google.com/s2/favicons?domain=www.mizdra.net&sz=32"
+	}
+}
