@@ -14,9 +14,7 @@
 <article class='mx-auto mt-8 max-w-3xl px-2 pb-16'>
 	<header class='mb-12 text-center opacity-60'>
 		<div class='font-mono text-lg leading-8'>
-			<p>{SITE_OWNER.handle.slice(1)}</p>
-			<p>{SITE_OWNER.name}</p>
-			<p lang='ja'>{SITE_OWNER.japaneseDisplayName}</p>
+			<p>{SITE_OWNER.name} / <span lang='ja'>{SITE_OWNER.japaneseDisplayName}</span></p>
 			<p class='mt-4 text-lg italic opacity-50'>coder without ai</p>
 		</div>
 	</header>
