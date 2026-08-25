@@ -102,6 +102,7 @@
 		"link": "https://www.youtube.com/playlist?list=PLWGCczNC6JbWsgyb0q5McgpdcAWnLxeii",
 		"pubDate": "2026-05-19",
 		"lang": "ja",
-		"kind": "video"
+		"kind": "video",
+		"playlist": true
 	}
 ]

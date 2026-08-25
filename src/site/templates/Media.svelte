@@ -9,14 +9,26 @@
 		podcast: { label: 'Podcast', icon: 'icon-[ri--mic-line]' },
 		video: { label: 'YouTube', icon: 'icon-[ri--youtube-line]' },
 	} as const;
+	const playlist = $derived(items.find((item) => item.playlist === true));
+	const mediaItems = $derived(items.filter((item) => item.playlist !== true));
 	const byYear = $derived(
-		[...Map.groupBy(items, (item) => new Date(item.pubDate).getFullYear()).entries()].sort(
+		[...Map.groupBy(mediaItems, (item) => new Date(item.pubDate).getFullYear()).entries()].sort(
 			([a], [b]) => b - a,
 		),
 	);
 </script>
 
 <WorksNav active='media' />
+
+{#if playlist != null}
+	<div class='prose mx-auto mt-10 pb-5 text-center dark:prose-invert'>
+		<div class='fxc gap-2'>
+			<a class='btn-blue fcol-md-row fyc gap-1' href={playlist.link} rel='noopener noreferrer' target='_blank'>
+				<span class='icon-[ri--youtube-line]' aria-hidden='true'></span>{playlist.title}
+			</a>
+		</div>
+	</div>
+{/if}
 
 {#each byYear as [year, yearItems] (year)}
 	<section data-media-year>

@@ -12,6 +12,7 @@ export type PostListItem = {
 	lang: string;
 	external: boolean;
 	kind?: 'article' | 'podcast' | 'video';
+	playlist?: boolean;
 	draft?: boolean;
 };
 
@@ -22,6 +23,7 @@ type ExternalPostInput = {
 	guid?: string | null;
 	lang?: string | null;
 	kind?: 'article' | 'podcast' | 'video' | null;
+	playlist?: boolean | null;
 };
 
 function toExternalPost(
@@ -45,6 +47,7 @@ function toExternalPost(
 		lang: item.lang ?? 'ja',
 		external: true,
 		kind: item.kind ?? defaultKind,
+		...(item.playlist === true ? { playlist: true } : {}),
 	};
 }
 
