@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-08-08-zenn-b0d3e17322099b-ja
 title: "Typia で OpenAI Structured Outputを使ってみた！"
 date: '2024-08-08'
 isPublished: true

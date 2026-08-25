@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-05-22-zenn-a8d8928795c8c1-ja
 title: "NeovimでのSvelte/SvelteKitの開発環境"
 date: '2023-05-22'
 isPublished: true

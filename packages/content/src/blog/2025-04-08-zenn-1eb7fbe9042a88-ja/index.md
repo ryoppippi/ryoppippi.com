@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-04-08-zenn-1eb7fbe9042a88-ja
 title: "SiteMCP: 任意のサイトを丸ごとMCPサーバー化"
 date: '2025-04-08'
 isPublished: true

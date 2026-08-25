@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-08-12-my-js-cli-stack-2025-en
 title: My JS CLI Stack 2025
 date: '2025-08-12'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-11-06-japan-trip-ja
 title: 2025年10-11月東京滞在
 date: '2025-11-06'
 isPublished: true

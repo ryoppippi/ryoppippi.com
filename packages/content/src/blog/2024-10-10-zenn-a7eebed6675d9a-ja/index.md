@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-10-zenn-a7eebed6675d9a-ja
 title: "ryoppippi的Opinionated UnoCSS Shortcuts その1"
 date: '2024-10-10'
 isPublished: true

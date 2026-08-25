@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-11-zenn-f535fa917121cc-ja
 title: "TypiaのBundle Sizeを大幅に削減した話 (65.99 KB -> 2.53 KB)"
 date: '2024-07-11'
 isPublished: true

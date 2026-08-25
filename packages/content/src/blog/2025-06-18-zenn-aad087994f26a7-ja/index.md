@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-06-18-zenn-aad087994f26a7-ja
 title: "【祝 1K Star 達成】ccusageの３週間を振り返る"
 date: '2025-06-18'
 isPublished: true

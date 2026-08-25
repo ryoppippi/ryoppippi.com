@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-05-zenn-82936d4e44060e-ja
 title: "karabiner-elements で Mac版のChatGPTアプリでReturn と Shift + Return を入れ替える"
 date: '2024-07-05'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-05-10-zenn-10b408bc0cf077-ja
 title: "俺の denols/tsserver(vtsls) 共存術 for Neovim 2024"
 date: '2024-05-10'
 isPublished: true

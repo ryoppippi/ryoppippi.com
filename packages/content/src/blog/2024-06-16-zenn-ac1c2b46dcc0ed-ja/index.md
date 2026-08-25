@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-06-16-zenn-ac1c2b46dcc0ed-ja
 title: "satisfies で exhaustiveness check"
 date: '2024-06-16'
 isPublished: true

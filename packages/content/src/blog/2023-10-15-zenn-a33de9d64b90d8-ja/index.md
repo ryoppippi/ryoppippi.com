@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-10-15-zenn-a33de9d64b90d8-ja
 title: "Vim/Neovimのプラグインマネージャーを悪用してCLIの管理ツールとして使う"
 date: '2023-10-15'
 isPublished: true

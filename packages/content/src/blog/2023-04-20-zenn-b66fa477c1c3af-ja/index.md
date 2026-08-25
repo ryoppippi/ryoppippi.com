@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-04-20-zenn-b66fa477c1c3af-ja
 title: "faster-whisperを使ってYoutubeを高速に文字起こしする方法"
 date: '2023-04-20'
 isPublished: true

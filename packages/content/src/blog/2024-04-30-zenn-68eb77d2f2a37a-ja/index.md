@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-04-30-zenn-68eb77d2f2a37a-ja
 title: "マクロ記録中にColorSchemeを変更する設定をしました"
 date: '2024-04-30'
 isPublished: true

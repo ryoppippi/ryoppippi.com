@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-01-zenn-7403bf5f6b3dd2-ja
 title: "雑にシングルファイルのWebアプリを作る時に使ってるもの"
 date: '2024-07-01'
 isPublished: true

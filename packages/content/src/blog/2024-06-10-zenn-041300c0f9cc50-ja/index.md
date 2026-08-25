@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-06-10-zenn-041300c0f9cc50-ja
 title: "CopilotChatとNeovimでGitの効率を上げる"
 date: '2024-06-10'
 isPublished: true

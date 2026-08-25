@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-11-06-japan-trip-en
 title: Tokyo Stay October-November 2025
 date: '2025-11-06'
 isPublished: true

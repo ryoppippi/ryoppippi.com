@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-13-zenn-34963c374dc178-ja
 title: "Bun の C Compile を試してみた"
 date: '2024-10-13'
 isPublished: true

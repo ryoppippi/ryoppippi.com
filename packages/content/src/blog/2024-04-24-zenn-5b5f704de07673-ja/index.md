@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-04-24-zenn-5b5f704de07673-ja
 title: "Neovim + oil.nvim + Weztermで頑張って画像を表示する"
 date: '2024-04-24'
 isPublished: true

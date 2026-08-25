@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2022-08-27-zenn-a368496c19a160-ja
 title: "ZigのOpenCVライブラリ「zigcv」を作っている"
 date: '2022-08-27'
 isPublished: true

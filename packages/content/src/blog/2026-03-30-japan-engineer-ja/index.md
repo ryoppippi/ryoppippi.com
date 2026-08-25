@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2026-03-30-japan-engineer-ja
 title: 日本人を安売りしてる奴らへ
 date: '2026-03-30'
 isPublished: true

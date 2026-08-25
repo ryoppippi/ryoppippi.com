@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-06-15-zenn-9f975b207b7f64-ja
 title: "Hono RPCとSvelteKitの併用について"
 date: '2023-06-15'
 isPublished: true

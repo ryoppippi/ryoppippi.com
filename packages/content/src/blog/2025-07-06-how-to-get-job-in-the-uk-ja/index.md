@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-07-06-how-to-get-job-in-the-uk-ja
 title: 半年強で533ポジションに応募してやっとUKでエンジニア就職を果たした話
 date: '2025-07-06'
 isPublished: true

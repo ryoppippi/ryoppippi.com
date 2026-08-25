@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-05-25-zenn-d787bce6dae9c5-ja
 title: "Vim-jp ラジオ オフィシャルサイトの目に見えないアプデ履歴"
 date: '2025-05-25'
 isPublished: true

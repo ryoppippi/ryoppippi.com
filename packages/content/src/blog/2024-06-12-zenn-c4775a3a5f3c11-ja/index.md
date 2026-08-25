@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-06-12-zenn-c4775a3a5f3c11-ja
 title: "TypeScriptの型システムに命を吹き込む: Typia と unplugin-typia"
 date: '2024-06-12'
 isPublished: true

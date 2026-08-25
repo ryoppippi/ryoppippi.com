@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-08-21-zenn-2a8bf54c206659-ja
 title: "最近作ったBun向けの小さいツール(+alpha)たちの紹介 [自己満記事]"
 date: '2024-08-21'
 isPublished: true

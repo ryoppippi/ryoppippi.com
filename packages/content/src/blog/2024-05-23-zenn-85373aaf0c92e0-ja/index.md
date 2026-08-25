@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-05-23-zenn-85373aaf0c92e0-ja
 title: "karabiner.tsがとてもいいぞ"
 date: '2024-05-23'
 isPublished: true

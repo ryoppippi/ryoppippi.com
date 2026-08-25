@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-12
 title: How rich this blog system is!
 date: 2024-10-12
 isPublished: true

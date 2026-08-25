@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-04-19-zenn-38915175fe4648-ja
 title: "なぜVimmerの僕はマルチカーソルを必要としないか"
 date: '2024-04-19'
 isPublished: true

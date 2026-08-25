@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-22-zenn-e1192d17156a2d-ja
 title: "vim-jp ラジオ オフィシャルサイト制作の舞台裏！"
 date: '2024-07-22'
 isPublished: true

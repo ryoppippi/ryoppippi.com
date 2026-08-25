@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2022-08-08-zenn-9efc7b621ec853-ja
 title: "ZigはCMakeの代替となるか"
 date: '2022-08-08'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-09-29
 title: How to read Bun.lockb in Neovim
 date: 2024-09-29
 isPublished: true

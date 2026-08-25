@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-09-17-zenn-de6c931cc1028f-ja
 title: "Fish Shellの設定ファイルを見直して起動時間を 470ms -> 14.7ms に短縮した話"
 date: '2023-09-17'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2017-07-22-silhouette-on-canvas-ja
 title: 影のキャンバス- Silhouette on Canvas
 date: '2017-07-22'
 isPublished: true

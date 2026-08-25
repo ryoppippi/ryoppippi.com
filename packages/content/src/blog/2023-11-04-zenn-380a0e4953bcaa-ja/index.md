@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-11-04-zenn-380a0e4953bcaa-ja
 title: "Event Types in Svelte and TypeScript"
 date: '2023-11-04'
 isPublished: true

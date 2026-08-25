@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-11
 title: My Opinionated UnoCSS Shortcuts & Rules #1
 date: 2024-10-11
 isPublished: true

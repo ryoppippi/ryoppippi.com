@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-05-29-zenn-6c9a8fe6629cd6-ja
 title: "Claude Codeの使用料金を可視化するCLIツール「ccusage」を作った"
 date: '2025-05-29'
 isPublished: true

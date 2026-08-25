@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-12-14-publish-docs-on-npm-en
 title: Publish Your Documentation as an npm Package
 date: '2025-12-14'
 isPublished: true

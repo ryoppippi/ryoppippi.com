@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-05-18-zenn-624ffd78ae5d05-ja
 title: "TurborepoのCacheをGithub Actionsで使う、無料で"
 date: '2023-05-18'
 isPublished: true

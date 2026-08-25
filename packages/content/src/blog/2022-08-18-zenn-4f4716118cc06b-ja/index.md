@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2022-08-18-zenn-4f4716118cc06b-ja
 title: "Zig の TensorFlow Lite ライブラリでMNISTした"
 date: '2022-08-18'
 isPublished: true

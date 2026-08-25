@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-09-27-zenn-c097917f163431-ja
 title: "BunとNeovim"
 date: '2023-09-27'
 isPublished: true

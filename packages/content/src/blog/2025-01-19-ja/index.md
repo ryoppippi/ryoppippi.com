@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-01-19-ja
 title: "YouTubeヘビーユーザーのためのiOS最強のShortcut"
 date: 2025-01-19
 isPublished: true

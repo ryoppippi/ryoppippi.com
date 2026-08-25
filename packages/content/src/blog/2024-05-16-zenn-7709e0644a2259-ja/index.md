@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-05-16-zenn-7709e0644a2259-ja
 title: "fishでNode.js/Denoのパッケージマネージャを自動で補完するプラグインを作った"
 date: '2024-05-16'
 isPublished: true

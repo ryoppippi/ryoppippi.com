@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-06-19-zenn-639ea2cce644ec-ja
 title: "Limo：using構文を用いたファイル読み書きライブラリ"
 date: '2024-06-19'
 isPublished: true

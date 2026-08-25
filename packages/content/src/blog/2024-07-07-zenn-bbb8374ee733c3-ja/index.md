@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-07-zenn-bbb8374ee733c3-ja
 title: "TailwindCSS/UnoCSS + Svelte でDynamicな値を使いたい！"
 date: '2024-07-07'
 isPublished: true

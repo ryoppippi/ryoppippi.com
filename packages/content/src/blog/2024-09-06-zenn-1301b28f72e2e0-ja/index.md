@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-09-06-zenn-1301b28f72e2e0-ja
 title: "Svelte/SvelteKit の地味に好きなところ"
 date: '2024-09-06'
 isPublished: true

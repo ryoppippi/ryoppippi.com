@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-07-06-how-to-get-job-in-the-uk-en
 title: How I Finally Got an Engineering Job in the UK After Applying to 533 Positions Over 6+ Months
 date: '2025-08-11'
 isPublished: true

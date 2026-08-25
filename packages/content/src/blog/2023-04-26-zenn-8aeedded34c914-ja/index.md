@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-04-26-zenn-8aeedded34c914-ja
 title: "Neovim 0.8以降のビルトインLSPについて"
 date: '2023-04-26'
 isPublished: true

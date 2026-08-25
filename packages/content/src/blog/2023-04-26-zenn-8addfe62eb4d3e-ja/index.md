@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-04-26-zenn-8addfe62eb4d3e-ja
 title: "🌶️ IMHO 🌶️ - Rich Harris on frameworks, the web, and the edge."
 date: '2023-04-26'
 isPublished: true

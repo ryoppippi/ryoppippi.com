@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-09-10-zenn-e2ad1047bc950c-ja
 title: "Neovimで記録したマクロを後から編集する"
 date: '2024-09-10'
 isPublished: true

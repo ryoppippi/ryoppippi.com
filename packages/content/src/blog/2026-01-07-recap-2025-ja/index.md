@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2026-01-07-recap-2025-ja
 title: "Recap 2025"
 date: 2026-01-07
 isPublished: true

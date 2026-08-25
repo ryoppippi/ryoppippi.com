@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-07-04-zenn-527fe9cea500c5-ja
 title: "ray.soをNeovim/Vimから快適に使えるプラグインを書いた"
 date: '2024-07-04'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-11-14-zenn-f24212092323d9-ja
 title: "Masonをやめようかな、ま、そんなところです"
 date: '2023-11-14'
 isPublished: true

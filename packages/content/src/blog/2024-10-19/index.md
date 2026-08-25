@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-19
 title: karabiner.ts is Absolutely Brilliant!
 date: 2024-10-19
 isPublished: true

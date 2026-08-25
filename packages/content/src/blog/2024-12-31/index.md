@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-12-31
 title: "Recap 2024"
 date: 2024-12-31
 isPublished: true

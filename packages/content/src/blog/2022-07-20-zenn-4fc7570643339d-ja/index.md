@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2022-07-20-zenn-4fc7570643339d-ja
 title: "ZigでRay Tracing in One Weekendをやってみた"
 date: '2022-07-20'
 isPublished: true

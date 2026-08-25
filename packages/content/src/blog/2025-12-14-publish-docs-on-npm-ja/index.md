@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-12-14-publish-docs-on-npm-ja
 title: ドキュメントをnpm packageとしてpublishしよう
 date: '2025-12-14'
 isPublished: true

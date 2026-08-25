@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-12-09
 title: "neovimconf 2024 & vimconf 2024 狂想曲"
 date: 2024-12-09
 isPublished: true

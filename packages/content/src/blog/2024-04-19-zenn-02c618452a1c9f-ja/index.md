@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-04-19-zenn-02c618452a1c9f-ja
 title: "Cursor EditorでOllamaを使う"
 date: '2024-04-19'
 isPublished: true

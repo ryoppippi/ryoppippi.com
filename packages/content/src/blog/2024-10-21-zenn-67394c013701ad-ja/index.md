@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2024-10-21-zenn-67394c013701ad-ja
 title: "How many HHKBs is it?"
 date: '2024-10-21'
 isPublished: true

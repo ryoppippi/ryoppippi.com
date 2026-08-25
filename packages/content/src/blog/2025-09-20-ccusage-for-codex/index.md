@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-09-20-ccusage-for-codex
 title: "ccusage for Codex Cli: How Token Usage Tracking Became Possible (日本語)"
 date: '2025-09-20'
 isPublished: true

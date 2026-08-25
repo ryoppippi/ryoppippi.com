@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-08-16-zenn-3b5125f9e06bf9-ja
 title: "「commit messageを考えてる間によしなに git hooks を実行しておいてね！」を実現するneovimの設定をかいた"
 date: '2023-08-16'
 isPublished: true

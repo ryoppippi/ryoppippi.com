@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2022-11-05-zenn-d8770d1633bea8-ja
 title: "Raspberry Pi PicoでLチカをZigでやってみた(そしてあまりのバイナリサイズの小ささに驚きを隠せない)"
 date: '2022-11-05'
 isPublished: true

@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2023-04-28-zenn-aea8dcbc21c39e-ja
 title: "SvelteKit, Progressive Enhancement, Form, Type Safety, そしてSuperforms"
 date: '2023-04-28'
 isPublished: true

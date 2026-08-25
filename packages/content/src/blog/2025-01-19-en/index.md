@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2025-01-19-en
 title: "The Best Shortcut on iOS for Youtube Addicts"
 date: 2025-01-19
 isPublished: true
