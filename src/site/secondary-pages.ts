@@ -20,7 +20,7 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
 const ABOUT_DESCRIPTION =
-	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a software engineer at Rork and maintainer of ccusage and other open-source developer tools.';
+	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Rork Founding Engineer building coding agents and developer tools, and the maintainer of ccusage.';
 
 /**
  * Renders the site owner's profile page.
@@ -52,7 +52,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 					'@id': SITE_OWNER.id,
 					name: SITE_OWNER.name,
 					description: ABOUT_DESCRIPTION,
-					jobTitle: 'Software Engineer',
+					jobTitle: 'Founding Engineer',
 					worksFor: {
 						'@type': 'Organization',
 						name: 'Rork',
@@ -275,7 +275,7 @@ if (import.meta.vitest != null) {
 
 		expect(html).toContain('<title>ryoppippi (Ryotaro Kimura) | ryoppippi.com</title>');
 		expect(html).toContain(
-			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a software engineer at Rork and maintainer of ccusage and other open-source developer tools.">',
+			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Rork Founding Engineer building coding agents and developer tools, and the maintainer of ccusage.">',
 		);
 		expect(html).toContain(
 			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
@@ -287,10 +287,19 @@ if (import.meta.vitest != null) {
 			'<meta data-page-head="" property="og:title" content="ryoppippi (Ryotaro Kimura) | ryoppippi.com">',
 		);
 		expect(html).toContain(
+			`<meta data-page-head="" property="og:description" content="${ABOUT_DESCRIPTION}">`,
+		);
+		expect(html).toContain(
 			'<meta data-page-head="" property="og:url" content="https://ryoppippi.com/about/">',
 		);
 		expect(html).toContain(
+			'<meta data-page-head="" property="og:image" content="https://ryoppippi.com/ryoppippi.jpg">',
+		);
+		expect(html).toContain(
 			'<meta data-page-head="" name="twitter:title" content="ryoppippi (Ryotaro Kimura) | ryoppippi.com">',
+		);
+		expect(html).toContain(
+			`<meta data-page-head="" name="twitter:description" content="${ABOUT_DESCRIPTION}">`,
 		);
 		expect(html).toContain(
 			'<meta data-page-head="" name="twitter:image" content="https://ryoppippi.com/ryoppippi.jpg">',
@@ -300,7 +309,10 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('Ryotaro Kimura');
 		expect(html).toContain('木村亮太朗');
 		expect(html).toContain('coder without ai');
-		expect(html).toContain('is a software engineer at');
+		expect(html).toContain('Founding Engineer');
+		expect(html).toContain(
+			'building coding agents, developer tools, and human-centred AI products',
+		);
 		expect(html).toContain('href="https://rork.com/"');
 		expect(html).toContain('href="/works/oss/"');
 		expect(html).toContain('href="/cv"');
@@ -318,7 +330,7 @@ if (import.meta.vitest != null) {
 				'@type': 'Person',
 				name: SITE_OWNER.name,
 				description: ABOUT_DESCRIPTION,
-				jobTitle: 'Software Engineer',
+				jobTitle: 'Founding Engineer',
 				worksFor: {
 					'@type': 'Organization',
 					name: 'Rork',
