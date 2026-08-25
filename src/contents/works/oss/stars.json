@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T12:05:21Z",
+  "updatedAt": "2026-08-25T12:07:26Z",
   "projects": [
     {
       "repo": "ryoppippi/bad-apple",
@@ -88,6 +88,10 @@
     {
       "repo": "ryoppippi/web-push-neo",
       "stars": 11
+    },
+    {
+      "repo": "ryoppippi/zigcv",
+      "stars": 162
     }
   ]
 }

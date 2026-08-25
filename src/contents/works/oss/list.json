@@ -126,7 +126,7 @@
 		},
 		{
 			"name": "zigcv",
-			"link": "https://github.com/zigcv/zigcv",
+			"link": "https://github.com/ryoppippi/zigcv",
 			"icon": "icon-[file-icons--opencv]",
 			"description": "zig bindings for OpenCV4"
 		}
