@@ -7,6 +7,8 @@ runs:
       uses: nixbuild/nix-quick-install-action@2c9db80fb984ceb1bcaa77cdda3fdf8cfba92035 # v34
       with:
         github_access_token: ${{ github.token }}
+        nix_conf: |
+          max-jobs = auto
 
     - name: Load CI tools and install JavaScript dependencies
       shell: bash
