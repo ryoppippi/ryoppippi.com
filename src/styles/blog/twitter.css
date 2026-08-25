@@ -283,6 +283,17 @@
 	background: var(--ox-tweet-bg);
 }
 
+.prose .ox-tweet--full img,
+.prose .ox-tweet--full video {
+	margin: 0;
+}
+
+.prose .ox-tweet--full .ox-tweet__quote,
+.prose .ox-tweet--full .ox-tweet__quote-body {
+	font-style: normal;
+	font-weight: 400;
+}
+
 .dark .ox-tweet--full {
 	--ox-tweet-border: 1px solid rgb(66, 83, 100);
 	--ox-tweet-font-color: rgb(247, 249, 249);
@@ -573,6 +584,7 @@
 .ox-tweet--full .ox-tweet__action {
 	display: flex;
 	align-items: center;
+	min-height: 2rem;
 	margin-right: 1.25rem;
 	font-size: var(--ox-tweet-actions-font-size);
 	font-weight: 700;
