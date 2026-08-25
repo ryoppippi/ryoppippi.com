@@ -12,7 +12,7 @@
 </script>
 
 <article class='gcc container mx-auto mt-8'>
-	<div class='w-full animate-[root-flip-in-x_1s_both]'>
+	<div class='w-full animate-[root-flip-in-x_1s_both]' data-home-profile>
 		<img
 			class='mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64'
 			alt='ryoppippi'

@@ -6,6 +6,7 @@ import { extractInstallSection, extractSection, parseStepCommands } from '../lib
 import { postListItems } from './content.ts';
 import { articlePages, blogListPage, feed, homePage, mediaFeed } from './pages.ts';
 import {
+	aboutPage,
 	errorPage,
 	mediaPage,
 	ossPage,
@@ -116,6 +117,9 @@ export async function renderDevRoute(
 	if (pathname === '/') {
 		return response(homePage(dependencies.assets).content);
 	}
+	if (pathname === '/about/') {
+		return response(aboutPage(dependencies.assets).content);
+	}
 	if (pathname.startsWith('/blog/')) {
 		return renderBlogRoute(pathname, dependencies);
 	}
@@ -185,7 +189,7 @@ if (import.meta.vitest != null) {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
-				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+				pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 				tweet: '',
 			},
 			loadBlogPost: vi.fn(async () => post),

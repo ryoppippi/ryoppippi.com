@@ -3,7 +3,10 @@ import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { GeneratedFile } from './pages.ts';
 import type { OssProject, Talk } from './sections.ts';
+import { SITE_ORIGIN } from './consts.ts';
+import { SITE_OWNER } from './site-owner.ts';
 import { page, renderComponent } from './html.ts';
+import About from './templates/About.svelte';
 import ErrorPage from './templates/Error.svelte';
 import Media from './templates/Media.svelte';
 import Oss from './templates/Oss.svelte';
@@ -13,6 +16,62 @@ import Sponsors from './templates/Sponsors.svelte';
 import Talks from './templates/Talks.svelte';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
+
+const ABOUT_PATHNAME = '/about/';
+const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
+const ABOUT_DESCRIPTION =
+	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.';
+
+/**
+ * Renders the site owner's profile page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated About page.
+ */
+export function aboutPage(assets: SiteAssets): GeneratedFile {
+	const url = `${SITE_ORIGIN}${ABOUT_PATHNAME}`;
+	return {
+		path: 'about/index.html',
+		sourcePaths: ['src/site/site-owner.ts', 'src/site/templates/About.svelte'],
+		content: page({
+			title: ABOUT_TITLE,
+			pathname: ABOUT_PATHNAME,
+			content: renderComponent(About, {}),
+			description: ABOUT_DESCRIPTION,
+			assets,
+			style: 'about',
+			structuredData: {
+				'@context': 'https://schema.org',
+				'@type': 'ProfilePage',
+				'@id': `${url}#profile`,
+				url,
+				name: ABOUT_TITLE,
+				description: ABOUT_DESCRIPTION,
+				mainEntity: {
+					'@type': 'Person',
+					'@id': SITE_OWNER.id,
+					name: SITE_OWNER.name,
+					description: ABOUT_DESCRIPTION,
+					jobTitle: 'Founding Engineer',
+					worksFor: {
+						'@type': 'Organization',
+						name: 'Rork',
+						url: 'https://rork.com/',
+					},
+					alternateName: [
+						SITE_OWNER.japaneseName,
+						SITE_OWNER.formerName,
+						SITE_OWNER.formerJapaneseName,
+						SITE_OWNER.handle,
+					],
+					url: SITE_OWNER.url,
+					image: `${SITE_ORIGIN}/ryoppippi.avif`,
+					sameAs: [...SITE_OWNER.sameAs],
+				},
+			},
+		}),
+	};
+}
 
 /**
  * Renders the open-source projects page.
@@ -197,7 +256,7 @@ if (import.meta.vitest != null) {
 		base: '',
 		client: '',
 		islands: {},
-		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 		tweet: '',
 	} as const satisfies SiteAssets;
 
@@ -206,5 +265,76 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('<meta data-page-head="" name="robots" content="noindex,follow">');
 		expect(html).not.toContain('property="og:');
 		expect(html).not.toContain('rel="canonical"');
+	});
+
+	test('renders the About page with profile content and view transitions', () => {
+		const html = aboutPage(assets).content;
+		const structuredDataSource = html.match(
+			/<script data-page-head="" type="application\/ld\+json">(?<json>.*?)<\/script>/u,
+		)?.groups?.json;
+
+		expect(html).toContain('<title>ryoppippi (Ryotaro Kimura) | ryoppippi.com</title>');
+		expect(html).toContain(
+			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.">',
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
+		);
+		expect(html).toContain(
+			'<link data-page-head="" rel="canonical" href="https://ryoppippi.com/about/">',
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" property="og:title" content="ryoppippi (Ryotaro Kimura) | ryoppippi.com">',
+		);
+		expect(html).toContain(
+			`<meta data-page-head="" property="og:description" content="${ABOUT_DESCRIPTION}">`,
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" property="og:url" content="https://ryoppippi.com/about/">',
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" property="og:image" content="https://ryoppippi.com/ryoppippi.jpg">',
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" name="twitter:title" content="ryoppippi (Ryotaro Kimura) | ryoppippi.com">',
+		);
+		expect(html).toContain(
+			`<meta data-page-head="" name="twitter:description" content="${ABOUT_DESCRIPTION}">`,
+		);
+		expect(html).toContain(
+			'<meta data-page-head="" name="twitter:image" content="https://ryoppippi.com/ryoppippi.jpg">',
+		);
+		expect(html).toContain('src="/ryoppippi.avif"');
+		expect(html).toContain('src="/haichu.avif"');
+		expect(html).toContain('Ryotaro Kimura');
+		expect(html).toContain('木村亮太朗');
+		expect(html).toContain('coder without ai');
+		expect(html).toContain('Founding Engineer');
+		expect(html).toContain('builds coding agents, developer tools, and human-centred AI products');
+		expect(html).toContain('href="https://rork.com/"');
+		expect(html).toContain('href="/works/oss/"');
+		expect(html).toContain('href="/cv"');
+		expect(html).toContain('<ul');
+		expect(html).toContain('>GitHub</a>');
+		expect(html).not.toContain('>PR</a>');
+		expect(html).not.toContain('<figcaption');
+		expect(html).toContain('view-transition-name:about-haichu');
+		expect(structuredDataSource).toBeDefined();
+		expect(JSON.parse(structuredDataSource ?? '')).toMatchObject({
+			'@type': 'ProfilePage',
+			name: ABOUT_TITLE,
+			description: ABOUT_DESCRIPTION,
+			mainEntity: {
+				'@type': 'Person',
+				name: SITE_OWNER.name,
+				description: ABOUT_DESCRIPTION,
+				jobTitle: 'Founding Engineer',
+				worksFor: {
+					'@type': 'Organization',
+					name: 'Rork',
+					url: 'https://rork.com/',
+				},
+			},
+		});
 	});
 }

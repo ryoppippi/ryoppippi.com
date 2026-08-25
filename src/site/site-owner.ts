@@ -4,6 +4,7 @@ type SiteOwnerIdentity = {
 	id: string;
 	name: string;
 	japaneseName: string;
+	japaneseDisplayName: string;
 	formerName: string;
 	formerJapaneseName: string;
 	handle: string;
@@ -15,6 +16,7 @@ export const SITE_OWNER = {
 	id: new URL('/#person', SITE_ORIGIN).href,
 	name: 'Ryotaro Kimura',
 	japaneseName: '木村亮太朗',
+	japaneseDisplayName: '木村　亮太朗',
 	formerName: 'Ryotaro Miura',
 	formerJapaneseName: '三浦亮太朗',
 	handle: '@ryoppippi',

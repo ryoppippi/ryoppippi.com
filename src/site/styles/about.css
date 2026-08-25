@@ -1,0 +1,10 @@
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@reference '../../styles/tailwind.css';
+@source '../templates/About.svelte';
+
+.about-card {
+	background:
+		radial-gradient(circle at 50% 0%, rgb(255 107 107 / 8%), transparent 32rem),
+		linear-gradient(135deg, rgb(136 136 136 / 6%), transparent 50%);
+}
