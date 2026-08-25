@@ -54,7 +54,7 @@
 					builds coding agents, developer tools, and human-centred AI products. Maintains
 					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='https://ccusage.com/gh' rel='noopener noreferrer' target='_blank'>ccusage</a>
 					and
-					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='/works/oss/'>other open-source projects</a>.
+					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='/works/oss/'>multiple OSS projects</a>.
 					<span class='font-medium text-text-700 dark:text-text-200'>Founding Engineer</span> at
 					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='https://rork.com/' rel='noopener noreferrer' target='_blank'>Rork</a>.
 				</p>
