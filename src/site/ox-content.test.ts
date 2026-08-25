@@ -29,6 +29,7 @@ describe('Ox Content build outputs', () => {
 				netlify: true,
 			},
 			ssg: {
+				bare: true,
 				siteName: 'blog | ryoppippi.com',
 				siteUrl: 'https://ryoppippi.com',
 			},

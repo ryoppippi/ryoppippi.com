@@ -24,6 +24,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		netlify: true,
 	},
 	ssg: {
+		bare: true,
 		markdownSource: { alternate: true },
 		siteName: 'blog | ryoppippi.com',
 		siteUrl: 'https://ryoppippi.com',
