@@ -20,15 +20,19 @@
 
 <WorksNav active='media' />
 
-{#if playlist != null}
-	<div class='prose mx-auto mt-10 pb-5 text-center dark:prose-invert'>
-		<div class='fxc gap-2'>
-			<a class='btn-blue fcol-md-row fyc gap-1' href={playlist.link} rel='noopener noreferrer' target='_blank'>
-				<span class='icon-[ri--youtube-line]' aria-hidden='true'></span>{playlist.title}
-			</a>
-		</div>
-	</div>
-{/if}
+<div class='fcol mx-auto gap-1 pt-10'>
+	<a class='fyc my-auto gap-1 opacity-30' href='/works/media/feed.xml' rel='alternate' target='_blank' type='application/rss+xml'>
+		<span class='icon-[line-md--rss]' aria-hidden='true'></span>Feed
+	</a>
+	{#if playlist != null}
+		<a class='fyc my-auto gap-1 opacity-30' href={playlist.link} rel='noopener noreferrer' target='_blank'>
+			<span class='icon-[ri--youtube-line]' aria-hidden='true'></span>Watch all videos on YouTube
+		</a>
+	{/if}
+	<button class='fyc gap-1 text-sm opacity-30' aria-pressed='false' data-media-filter='english' type='button'>
+		<span class='icon-[carbon--checkbox]' aria-hidden='true'></span>English Only
+	</button>
+</div>
 
 {#each byYear as [year, yearItems] (year)}
 	<section data-media-year>
@@ -37,7 +41,7 @@
 			{#each yearItems as item (item.slug)}
 				{@const kind = item.kind ?? 'podcast'}
 				{@const details = kindDetails[kind]}
-				<li class='media-item my-5'>
+				<li class='media-item my-5' data-lang={item.lang ?? 'ja'}>
 					<h3 class='op-card text-xl transition-base'>
 						<a class='underline' href={item.link} rel='noopener noreferrer' target='_blank'>{item.title}</a>
 					</h3>

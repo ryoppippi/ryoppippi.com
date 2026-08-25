@@ -18,7 +18,7 @@ import {
 import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalMedia, loadExternalPosts } from './content.ts';
 import { gitLastModified } from './git-last-modified.ts';
-import { corePages } from './pages.ts';
+import { corePages, mediaFeed } from './pages.ts';
 import {
 	errorPage,
 	mediaPage,
@@ -105,6 +105,7 @@ export async function generateSite({
 		publicationsPage(publications, assets),
 		talksPage(talks, assets),
 		mediaPage(externalMedia, assets),
+		mediaFeed(externalMedia),
 		sponsorsPage(assets),
 		errorPage(assets),
 	];
@@ -155,6 +156,7 @@ export async function generateSite({
 			'works/showcase/index.html',
 			'works/talks/index.html',
 			'works/media/index.html',
+			'works/media/feed.xml',
 			'works/publications/index.html',
 		].map((file) => access(path.join(outDir, file))),
 	);

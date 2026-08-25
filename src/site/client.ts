@@ -166,6 +166,28 @@ function initialiseSponsors(): void {
 	}
 }
 
+function initialiseMediaFilter(): void {
+	const button = document.querySelector<HTMLButtonElement>('[data-media-filter="english"]');
+	if (button == null) {
+		return;
+	}
+
+	button.addEventListener('click', () => {
+		const pressed = button.ariaPressed !== 'true';
+		button.ariaPressed = String(pressed);
+		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox]', !pressed);
+		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox-checked]', pressed);
+		for (const item of document.querySelectorAll<HTMLElement>('.media-item')) {
+			item.hidden = pressed && item.dataset.lang !== 'en';
+		}
+		for (const section of document.querySelectorAll<HTMLElement>('[data-media-year]')) {
+			section.hidden = [...section.querySelectorAll<HTMLElement>('.media-item')].every(
+				(item) => item.hidden,
+			);
+		}
+	});
+}
+
 async function hydrateTweet(element: HTMLElement): Promise<void> {
 	const id = element.dataset.tweetId;
 	const root = element.querySelector<HTMLElement>('[data-tweet-root]');
@@ -316,6 +338,7 @@ function initialisePage(): void {
 	initialiseDarkMode();
 	initialiseFilters();
 	initialiseTalkFilter();
+	initialiseMediaFilter();
 	initialiseSponsors();
 	initialiseTweets();
 	initialiseIslands();

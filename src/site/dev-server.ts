@@ -116,7 +116,7 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/blog/'];
 	}
 	if (file === 'src/contents/external-rss/media.json') {
-		return ['/works/media/'];
+		return ['/works/media/', '/works/media/feed.xml'];
 	}
 	if (file === 'src/contents/works/oss/list.json') {
 		return ['/works/oss/'];
@@ -394,7 +394,10 @@ if (import.meta.vitest != null) {
 		});
 
 		it('invalidates the media page when curated media changes', () => {
-			expect(invalidatedRoutes('src/contents/external-rss/media.json')).toEqual(['/works/media/']);
+			expect(invalidatedRoutes('src/contents/external-rss/media.json')).toEqual([
+				'/works/media/',
+				'/works/media/feed.xml',
+			]);
 		});
 
 		it('ignores client assets handled by Vite', () => {

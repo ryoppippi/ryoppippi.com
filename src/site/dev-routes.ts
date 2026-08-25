@@ -4,7 +4,7 @@ import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
 import { postListItems } from './content.ts';
-import { articlePages, blogListPage, feed, homePage } from './pages.ts';
+import { articlePages, blogListPage, feed, homePage, mediaFeed } from './pages.ts';
 import {
 	errorPage,
 	mediaPage,
@@ -141,6 +141,12 @@ export async function renderDevRoute(
 	}
 	if (pathname === '/works/media/') {
 		return response(mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content);
+	}
+	if (pathname === '/works/media/feed.xml') {
+		return response(
+			mediaFeed(await dependencies.loadExternalMedia()).content,
+			'application/xml; charset=utf-8',
+		);
 	}
 	if (pathname === '/sponsors/') {
 		return response(sponsorsPage(dependencies.assets).content);
