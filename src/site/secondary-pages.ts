@@ -20,7 +20,7 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
 const ABOUT_DESCRIPTION =
-	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Founding Engineer at Rork building coding agents and developer tools, and maintains ccusage.';
+	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.';
 
 /**
  * Renders the site owner's profile page.
@@ -275,7 +275,7 @@ if (import.meta.vitest != null) {
 
 		expect(html).toContain('<title>ryoppippi (Ryotaro Kimura) | ryoppippi.com</title>');
 		expect(html).toContain(
-			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, is a Founding Engineer at Rork building coding agents and developer tools, and maintains ccusage.">',
+			'<meta data-page-head="" name="description" content="Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.">',
 		);
 		expect(html).toContain(
 			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
@@ -310,9 +310,7 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('木村亮太朗');
 		expect(html).toContain('coder without ai');
 		expect(html).toContain('Founding Engineer');
-		expect(html).toContain(
-			'building coding agents, developer tools, and human-centred AI products',
-		);
+		expect(html).toContain('builds coding agents, developer tools, and human-centred AI products');
 		expect(html).toContain('href="https://rork.com/"');
 		expect(html).toContain('href="/works/oss/"');
 		expect(html).toContain('href="/cv"');

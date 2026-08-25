@@ -51,11 +51,12 @@
 				<p class='mt-5 text-pretty text-lg leading-8 text-text-600 dark:text-text-300 sm:text-xl sm:leading-9'>
 					<span class='font-semibold text-text-800 dark:text-text-100'>{SITE_OWNER.handle.slice(1)}</span>
 					<span class='font-mono text-sm text-text-400'>({SITE_OWNER.name} / <span lang='ja'>{SITE_OWNER.japaneseName}</span>)</span>
-					is a <span class='font-medium text-text-700 dark:text-text-200'>Founding Engineer</span> at
-					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='https://rork.com/' rel='noopener noreferrer' target='_blank'>Rork</a> — building coding agents, developer tools, and human-centred AI products, while maintaining
+					builds coding agents, developer tools, and human-centred AI products. Maintains
 					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='https://github.com/ryoppippi/ccusage' rel='noopener noreferrer' target='_blank'>ccusage</a>
 					and
 					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='/works/oss/'>other open-source projects</a>.
+					<span class='font-medium text-text-700 dark:text-text-200'>Founding Engineer</span> at
+					<a class='font-medium text-inherit underline decoration-[#8886] underline-offset-4 transition-base hover:decoration-accent-100' href='https://rork.com/' rel='noopener noreferrer' target='_blank'>Rork</a>.
 				</p>
 
 				<ul class='mt-10 grid list-none gap-x-10 p-0 sm:grid-cols-2'>
