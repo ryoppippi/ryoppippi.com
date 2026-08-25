@@ -43,6 +43,11 @@
 	],
 	"Vim/Neovim": [
 		{
+			"name": "nvim-in-the-loop",
+			"icon": "icon-[simple-icons--neovim]",
+			"description": "Human-in-the-loop Neovim plugin for capturing keystrokes and exploring AI-optimised keybindings."
+		},
+		{
 			"name": "nvim-pnpm-catalog-lens",
 			"icon": "icon-[simple-icons--pnpm]",
 			"description": "Neovim plugin to show versions as diagnostics for pnpm catalog: field."
@@ -126,6 +131,11 @@
 		}
 	],
 	"Configs & Shell": [
+		{
+			"name": "gh-nippou",
+			"icon": "icon-[simple-icons--github]",
+			"description": "GitHub CLI extension for generating daily reports from GitHub activity."
+		},
 		{
 			"name": "dotfiles",
 			"icon": "icon-[ph--folder-simple]",
