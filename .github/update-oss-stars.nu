@@ -5,6 +5,11 @@
 
 const list_path = 'src/contents/works/oss/list.json'
 const stars_path = 'src/contents/works/oss/stars.json'
+const star_owner = 'ryoppippi'
+
+def is-owned-repository [repository: string]: nothing -> bool {
+    $repository | str starts-with $"($star_owner)/"
+}
 
 def github-repository [project: record]: nothing -> string {
     let link = (
@@ -39,7 +44,12 @@ def snapshot-timestamp []: nothing -> string {
 
 def main []: nothing -> nothing {
     let projects = open $list_path | values | flatten
-    let latest = $projects | par-each {|project| fetch-project $project} | sort-by repo
+    let latest = (
+        $projects
+        | where {|project| is-owned-repository (github-repository $project)}
+        | par-each {|project| fetch-project $project}
+        | sort-by repo
+    )
     let previous = if ($stars_path | path exists) {
         open $stars_path
     } else {

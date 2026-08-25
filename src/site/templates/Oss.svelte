@@ -27,7 +27,7 @@
 			<span class='icon-[ph--star]' aria-hidden='true'></span>Sort by Stars
 		</a>
 	</div>
-	<p class='mt-3 text-xs opacity-60'>GitHub star counts are refreshed daily.</p>
+	<p class='mt-3 text-xs opacity-60'>GitHub star counts for my repositories are refreshed daily.</p>
 </div>
 
 <div class='grid gap-16'>
@@ -42,8 +42,8 @@
 							<div class='fyc justify-between gap-2'>
 								<div class='truncate text-lg'>{project.name}</div>
 								{#if project.stars != null}
-									<span class='fyc shrink-0 gap-1 text-xs opacity-60' aria-label={`${project.stars.toLocaleString('en-US')} GitHub stars`} title={`${project.stars.toLocaleString('en-US')} GitHub stars`}>
-										<span class='icon-[ph--star]' aria-hidden='true'></span>
+									<span class='fyc shrink-0 gap-1 text-sm opacity-75' aria-label={`${project.stars.toLocaleString('en-US')} GitHub stars`} title={`${project.stars.toLocaleString('en-US')} GitHub stars`}>
+										<span class='icon-[ph--star] text-base' aria-hidden='true'></span>
 										{formatStars(project.stars)}
 									</span>
 								{/if}

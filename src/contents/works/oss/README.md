@@ -34,10 +34,10 @@ blog post. This file only controls the curated OSS index.
 
 ## Star counts
 
-`stars.json` is generated from GitHub repository metadata by
-`.github/update-oss-stars.nu`. The scheduled workflow refreshes it daily and
-commits only when a count changes; edit `list.json` for project selection and
-descriptions instead of editing the snapshot by hand.
+`stars.json` is generated from GitHub repository metadata for my repositories
+(`ryoppippi/*`) by `.github/update-oss-stars.nu`. The scheduled workflow
+refreshes it daily and commits only when a count changes; edit `list.json` for
+project selection and descriptions instead of editing the snapshot by hand.
 
 ## OSS and Showcase
 

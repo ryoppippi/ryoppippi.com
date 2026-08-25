@@ -1,25 +1,13 @@
 {
-  "updatedAt": "2026-08-25T11:55:13Z",
+  "updatedAt": "2026-08-25T12:05:21Z",
   "projects": [
-    {
-      "repo": "Kyure-A/agent-skills-nix",
-      "stars": 214
-    },
-    {
-      "repo": "NixOS/nixpkgs",
-      "stars": 25935
-    },
-    {
-      "repo": "ccusage/ccusage",
-      "stars": 18155
-    },
-    {
-      "repo": "numtide/llm-agents.nix",
-      "stars": 1824
-    },
     {
       "repo": "ryoppippi/bad-apple",
       "stars": 24
+    },
+    {
+      "repo": "ryoppippi/ccusage",
+      "stars": 18155
     },
     {
       "repo": "ryoppippi/curxy",
@@ -100,10 +88,6 @@
     {
       "repo": "ryoppippi/web-push-neo",
       "stars": 11
-    },
-    {
-      "repo": "zigcv/zigcv",
-      "stars": 162
     }
   ]
 }
