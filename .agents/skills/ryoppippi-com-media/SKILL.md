@@ -35,11 +35,11 @@ Media records use this shape:
 
 ```json
 {
-  "title": "The exact episode or video title",
-  "link": "https://canonical.example/item",
-  "pubDate": "2026-06-12",
-  "lang": "ja",
-  "kind": "podcast"
+	"title": "The exact episode or video title",
+	"link": "https://canonical.example/item",
+	"pubDate": "2026-06-12",
+	"lang": "ja",
+	"kind": "podcast"
 }
 ```
 
