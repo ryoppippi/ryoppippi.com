@@ -112,6 +112,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 			'src/site/templates/BlogList.svelte',
 			'packages/content/src/blog',
 			'src/contents/external-rss/rss.json',
+			'src/contents/external-rss/posts.json',
 		],
 		content: page({
 			title: 'Blog',
