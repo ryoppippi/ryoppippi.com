@@ -11,7 +11,7 @@ description: "KinectとProcessing、プロジェクタを使い、ICUキッズ�
 ７月１７日（月）、ICUキッズカレッジにて展示しました。
 
 <!-- https://www.youtube.com/watch?v=MngEJwk5KPU -->
-<YouTube youTubeId="MngEJwk5KPU" />
+<youtube id="MngEJwk5KPU" />
 
 > キャンバスの前に立つと、現れるのはラフな輪郭で描かれたデジタルな「影」
 >
@@ -42,7 +42,7 @@ description: "KinectとProcessing、プロジェクタを使い、ICUキッズ�
 行き詰まっている間、深夜にKinectの感触を確かめるためにProcessingで簡単なゲームを作って遊んでいた。
 
 <!-- https://www.youtube.com/watch?v=RVlZhsPhxIM -->
-<YouTube youTubeId="RVlZhsPhxIM" />
+<youtube id="RVlZhsPhxIM" />
 
 そして、前日のリハーサルも終わりに差し掛かった頃、一旦描画を停止してコードを見直していると、後輩からスクリーンを見てくださいとの声が。ふと顔を上げて見るとそこには、
 

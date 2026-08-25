@@ -16,10 +16,10 @@ description: "Claude CodeのローカルJSONLログからtoken使用量とコス
 そしてccusageの解説動画もあります！併せてご覧ください
 
 <!-- https://www.youtube.com/watch?v=Ak6qpQ5qdgk -->
-<YouTube youTubeId="Ak6qpQ5qdgk" />
+<youtube id="Ak6qpQ5qdgk" />
 
 <!-- https://www.youtube.com/live/APlwZrf7eUM?si=tOzHNG61GaSHYVz-&t=4190 -->
-<YouTube youTubeId="APlwZrf7eUM" skipTo={{ h: 1, m: 9, s: 50 }} />
+<youtube id="APlwZrf7eUM" start="4190" />
 
 ## はじめに
 

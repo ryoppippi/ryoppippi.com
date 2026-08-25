@@ -41,14 +41,14 @@ description: "neovimconf 2024とvimconf 2024でNeovimのフロントエンド開
 [slides](https://talks.ryoppippi.com/2024-11-23/){.text-xl}
 [video](https://www.youtube.com/watch?v=tBY3RxTrhkM){.text-xl}
 
-<YouTube youTubeId="tBY3RxTrhkM" />
+<youtube id="tBY3RxTrhkM" />
 
 ## neovimconf 24 (19th, Nov)
 
 [slides](https://talks.ryoppippi.com/2024-11-19/){.text-xl}
 [video](https://www.youtube.com/watch?v=D8qI9zkKATM){.text-xl}
 
-<YouTube youTubeId="D8qI9zkKATM" />
+<youtube id="D8qI9zkKATM" />
 
 <Divider />
 

@@ -71,8 +71,8 @@ I started GitHub Sponsorship in 2024. I have 2 sponsors now. Thank you for your 
 
 - I attended vimconf / neovimconf to give talks. These are my highlights of 2024!!
 
-<YouTube youTubeId="tBY3RxTrhkM" />
-<YouTube youTubeId="D8qI9zkKATM" />
+<youtube id="tBY3RxTrhkM" />
+<youtube id="D8qI9zkKATM" />
 
 I appeared twice in vim-jp radio as a guest!
 

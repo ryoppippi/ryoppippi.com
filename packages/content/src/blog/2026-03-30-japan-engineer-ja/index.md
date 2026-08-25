@@ -170,4 +170,4 @@ brokenな英語でも仕事できた。ぐちゃぐちゃなキャリアでも�
 イベントのアーカイブが公開された。
 
 <!-- https://www.youtube.com/watch?v=6pvTcEKpe3o -->
-<YouTube youTubeId="6pvTcEKpe3o" />
+<youtube id="6pvTcEKpe3o" />

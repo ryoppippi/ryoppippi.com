@@ -14,7 +14,6 @@ import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
-import { replaceLegacyYouTubeEmbeds } from './youtube.ts';
 
 const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
 
@@ -49,12 +48,9 @@ function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) 
 	return transformOutsideFences(body, (line) => {
 		const embeds = replaceComponentIslands(
 			replaceNotByAIEmbeds(
-				replaceLegacyYouTubeEmbeds(
-					line.replace(
-						/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g,
-						'<span data-tweet-placeholder="$2"></span>',
-					),
-				).replace(/<Divider\s*\/>/g, '<hr>'),
+				line
+					.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
+					.replace(/<Divider\s*\/>/g, '<hr>'),
 			),
 			islands,
 		);
@@ -369,13 +365,19 @@ if (import.meta.vitest != null) {
 			expect(renderTweet).toHaveBeenCalledWith('1234567890', undefined);
 		});
 
-		it('renders legacy Svelte YouTube embeds with ox-content', async () => {
-			const html = await renderMarkdown('<YouTube youTubeId="dQw4w9WgXcQ" />');
+		it('renders YouTube embeds with Ox Content', async () => {
+			const html = await renderMarkdown('<youtube id="dQw4w9WgXcQ" />');
 
 			expect(html).toContain('class="ox-youtube"');
 			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
 			expect(html).not.toContain('<p><div');
-			expect(html).not.toContain('<YouTube');
+			expect(html).not.toContain('<youtube');
+		});
+
+		it('preserves YouTube start times with Ox Content', async () => {
+			const html = await renderMarkdown('<youtube id="dQw4w9WgXcQ" start="4190" />');
+
+			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=4190"');
 		});
 
 		it('renders legacy dividers as horizontal rules', async () => {
