@@ -38,12 +38,14 @@ few stars.
 Removing a project from this list does not remove its repository, package, or
 blog post. This file only controls the curated OSS index.
 
-## Star counts
+## Repository metadata
 
 `stars.json` is generated from GitHub repository metadata for my repositories
-(`ryoppippi/*`) by `.github/update-oss-stars.nu`. The scheduled workflow
-refreshes it daily and commits only when a count changes; edit `list.json` for
-project selection and descriptions instead of editing the snapshot by hand.
+(`ryoppippi/*`) by `.github/update-oss-stars.nu`. It contains star counts and
+primary languages; the scheduled workflow refreshes it daily and commits only
+when metadata changes. Edit `list.json` for project selection and descriptions
+instead of editing the snapshot by hand. Set `useGitHubPrimaryLanguage` on an
+entry when its language tag should come from the snapshot.
 
 ## OSS and Showcase
 

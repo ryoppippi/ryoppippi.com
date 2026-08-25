@@ -25,11 +25,13 @@ export type OssProject = {
 };
 
 type OssProjectSource = Omit<OssProject, 'link' | 'slug' | 'description' | 'kind' | 'stars'> &
-	Partial<Pick<OssProject, 'link' | 'slug' | 'description' | 'kind'>>;
+	Partial<Pick<OssProject, 'link' | 'slug' | 'description' | 'kind'>> & {
+		useGitHubPrimaryLanguage?: boolean;
+	};
 
 type OssStarSnapshot = {
 	updatedAt: string;
-	projects: Array<{ repo: string; stars: number }>;
+	projects: Array<{ repo: string; stars: number; primaryLanguage?: string | null }>;
 };
 
 function githubRepository(link: string): string | null {
@@ -55,10 +57,22 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 	const projects = JSON.parse(source) as OssProjectSource[];
 	const stars = JSON.parse(starSnapshot) as OssStarSnapshot;
 	const starCounts = new Map(stars.projects.map(({ repo, stars: count }) => [repo, count]));
+	const primaryLanguages = new Map(
+		stars.projects.map(({ repo, primaryLanguage }) => [repo, primaryLanguage ?? null]),
+	);
 	return Promise.all(
 		projects.map(async (project) => {
+			const { useGitHubPrimaryLanguage = false, ...projectData } = project;
 			const link = project.link ?? `https://github.com/ryoppippi/${project.name}`;
 			const repository = githubRepository(link);
+			const primaryLanguage =
+				repository == null ? null : (primaryLanguages.get(repository) ?? null);
+			const tags =
+				useGitHubPrimaryLanguage &&
+				primaryLanguage != null &&
+				!project.tags.includes(primaryLanguage)
+					? [...project.tags, primaryLanguage]
+					: project.tags;
 			let description = project.description ?? null;
 			if (description == null) {
 				try {
@@ -74,11 +88,12 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 				}
 			}
 			return {
-				...project,
+				...projectData,
 				link,
 				slug: project.slug ?? `ryoppippi-${project.name}`,
 				description,
 				kind: project.kind ?? 'project',
+				tags,
 				stars: repository == null ? null : (starCounts.get(repository) ?? null),
 			} satisfies OssProject;
 		}),
@@ -101,4 +116,30 @@ export async function loadPublications(
 	return JSON.parse(
 		await readFile(path.join(root, 'src/contents/publication.json'), 'utf8'),
 	) as Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>;
+}
+
+if (import.meta.vitest != null) {
+	test('uses the GitHub primary language for opted-in OSS projects', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'src/contents/works/oss/list.json': JSON.stringify([
+				{
+					name: 'ccusage',
+					link: 'https://github.com/ccusage/ccusage',
+					icon: 'icon',
+					tags: ['AI', 'CLI'],
+					useGitHubPrimaryLanguage: true,
+					description: 'Token usage analyser',
+				},
+			]),
+			'src/contents/works/oss/stars.json': JSON.stringify({
+				updatedAt: '2026-08-25T00:00:00Z',
+				projects: [{ repo: 'ccusage/ccusage', stars: 1, primaryLanguage: 'Rust' }],
+			}),
+		});
+
+		expect(await loadOssProjects(fixture.getPath('.'))).toMatchObject([
+			{ tags: ['AI', 'CLI', 'Rust'], stars: 1 },
+		]);
+	});
 }

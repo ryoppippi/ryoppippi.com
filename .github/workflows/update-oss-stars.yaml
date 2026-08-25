@@ -1,4 +1,4 @@
-name: Update OSS Star Counts
+name: Update OSS Repository Metadata
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 jobs:
-  update-stars:
+  update-metadata:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
-      - name: Update star snapshot
+      - name: Update repository metadata snapshot
         run: ./.github/update-oss-stars.nu
         env:
           GH_TOKEN: ${{ github.token }}
@@ -46,5 +46,5 @@ jobs:
           git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git config --local user.name 'github-actions[bot]'
           git add src/contents/works/oss/stars.json
-          git commit -m 'chore(oss): update GitHub star counts'
+          git commit -m 'chore(oss): update GitHub repository metadata'
           git push

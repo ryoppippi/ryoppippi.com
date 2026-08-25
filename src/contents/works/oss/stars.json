@@ -1,101 +1,125 @@
 {
-  "updatedAt": "2026-08-25T12:13:27Z",
+  "updatedAt": "2026-08-25T15:51:22Z",
   "projects": [
     {
       "repo": "ryoppippi/bad-apple",
-      "stars": 24
+      "stars": 24,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/ccusage",
-      "stars": 18155
+      "stars": 18156,
+      "primaryLanguage": "Rust"
     },
     {
       "repo": "ryoppippi/curxy",
-      "stars": 417
+      "stars": 417,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/dotfiles",
-      "stars": 259
+      "stars": 259,
+      "primaryLanguage": "Nix"
     },
     {
       "repo": "ryoppippi/fish-na",
-      "stars": 7
+      "stars": 7,
+      "primaryLanguage": "Shell"
     },
     {
       "repo": "ryoppippi/gh-nippou",
-      "stars": 14
+      "stars": 14,
+      "primaryLanguage": "Go"
     },
     {
       "repo": "ryoppippi/gray-matter-es",
-      "stars": 4
+      "stars": 4,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/limo",
-      "stars": 7
+      "stars": 7,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/nix-secure-enclave-key",
-      "stars": 10
+      "stars": 10,
+      "primaryLanguage": "Nushell"
     },
     {
       "repo": "ryoppippi/nvim-in-the-loop",
-      "stars": 28
+      "stars": 28,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/nvim-pnpm-catalog-lens",
-      "stars": 11
+      "stars": 11,
+      "primaryLanguage": "Lua"
     },
     {
       "repo": "ryoppippi/nvim-reset",
-      "stars": 13
+      "stars": 13,
+      "primaryLanguage": "Lua"
     },
     {
       "repo": "ryoppippi/nyancat.zig",
-      "stars": 23
+      "stars": 23,
+      "primaryLanguage": "Zig"
     },
     {
       "repo": "ryoppippi/sitemcp",
-      "stars": 758
+      "stars": 758,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/str-fns",
-      "stars": 3
+      "stars": 3,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/svelte-fancy-darkmode",
-      "stars": 9
+      "stars": 9,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/svelte-preprocess-budoux",
-      "stars": 7
+      "stars": 7,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/svelte-preprocess-import-css",
-      "stars": 4
+      "stars": 4,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/sveltweet",
-      "stars": 8
+      "stars": 8,
+      "primaryLanguage": "Svelte"
     },
     {
       "repo": "ryoppippi/tgrab",
-      "stars": 11
+      "stars": 11,
+      "primaryLanguage": "Rust"
     },
     {
       "repo": "ryoppippi/vim-svelte-inspector",
-      "stars": 22
+      "stars": 22,
+      "primaryLanguage": "Lua"
     },
     {
       "repo": "ryoppippi/vite-plugin-favicons",
-      "stars": 3
+      "stars": 3,
+      "primaryLanguage": "HTML"
     },
     {
       "repo": "ryoppippi/web-push-neo",
-      "stars": 11
+      "stars": 11,
+      "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/zigcv",
-      "stars": 162
+      "stars": 162,
+      "primaryLanguage": "Zig"
     }
   ]
 }
