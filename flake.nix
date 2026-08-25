@@ -54,7 +54,7 @@
           ci = pkgs.mkShellNoCC {
             buildInputs = [
               pkgs.nodejs_24
-              nix-vite-plus.packages.${system}.vp
+              pkgs.pnpm
               pkgs.gitleaks
               pkgs.typos
             ];

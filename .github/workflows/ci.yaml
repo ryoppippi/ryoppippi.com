@@ -24,13 +24,13 @@ jobs:
         run: nix develop .#ci --command gitleaks detect --source . --config .gitleaks.toml
 
       - name: Run Typo Check
-        run: nix develop .#ci --command vp run typos
+        run: nix develop .#ci --command pnpm run typos
 
       - name: Run Vite+ Check
-        run: nix develop .#ci --command vp check
+        run: nix develop .#ci --command pnpm run check
 
       - name: Run Tests
-        run: nix develop .#ci --command vp test --run
+        run: nix develop .#ci --command pnpm run test
 
   action-timeline:
     needs:
