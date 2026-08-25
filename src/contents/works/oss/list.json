@@ -178,6 +178,11 @@
 	],
 	"Nix": [
 		{
+			"name": "nix-secure-enclave-key",
+			"icon": "icon-[ph--key-light]",
+			"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS."
+		},
+		{
 			"name": "claude-code-overlay",
 			"icon": "icon-[simple-icons--nixos]",
 			"description": "A Nix flake overlay that provides pre-built Claude Code CLI binaries from official Anthropic releases."
