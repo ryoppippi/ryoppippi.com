@@ -12,7 +12,6 @@ import { addExternalLinkAttributes, unescapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
-import { renderMagicLink, replaceMagicLinks } from './magic-link.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 import { replaceLegacyYouTubeEmbeds } from './youtube.ts';
@@ -44,16 +43,6 @@ export type RenderMarkdownOptions = {
 	tweets?: TweetSnapshots;
 };
 
-function escapeMagicLinkUnderscores(line: string) {
-	return line.replace(/\{([^{}\n]+)\}/g, (match, input: string) => {
-		if (renderMagicLink(input) == null) {
-			return match;
-		}
-
-		return match.replace(/_/g, String.raw`\_`);
-	});
-}
-
 function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) {
 	const body = stripIslandImports(transformCollapsibleBlocks(content), islands);
 
@@ -69,30 +58,10 @@ function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) 
 			),
 			islands,
 		);
-		const preparedLine = replaceImageFigures(
-			replaceLinkPreviews(normalizeAngleLinks(escapeMagicLinkUnderscores(embeds))),
-		);
+		const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(embeds)));
 
 		return replaceBareUrls(preparedLine);
 	});
-}
-
-function replaceMagicLinksOutsideProtectedHtml(html: string) {
-	const protectedBlockPattern = /<(pre|code|script|style)\b[^>]*>[\s\S]*?<\/\1>/gi;
-	let output = '';
-	let offset = 0;
-
-	for (const match of html.matchAll(protectedBlockPattern)) {
-		if (match.index == null) {
-			continue;
-		}
-
-		output += replaceMagicLinks(html.slice(offset, match.index));
-		output += match[0];
-		offset = match.index + match[0].length;
-	}
-
-	return output + replaceMagicLinks(html.slice(offset));
 }
 
 function wrapScrollableTables(html: string) {
@@ -200,8 +169,7 @@ async function renderTweets(
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const prepared = prepareOxContentMarkdown(content, options.islands);
 	const highlighted = await renderHighlightedMarkdown(prepared);
-	const magicLinks = replaceMagicLinksOutsideProtectedHtml(highlighted);
-	const tweets = await renderTweets(magicLinks, options);
+	const tweets = await renderTweets(highlighted, options);
 	const media = transformYoutubeEmbeds(
 		transformMediaEmbeds(tweets, {
 			twitter: true,
@@ -316,13 +284,13 @@ if (import.meta.vitest != null) {
 			expect(prepareOxContentMarkdown('[@preview](https://%)')).toBe('[@preview](https://%)');
 		});
 
-		it('escapes underscores in recognised magic links before ox-content parses emphasis', () => {
-			expect(prepareOxContentMarkdown('{tech_world18}')).toBe('{tech\\_world18}');
+		it('preserves Ox Content magic link syntax for the renderer', () => {
+			expect(prepareOxContentMarkdown('{link:tech_world18}')).toBe('{link:tech_world18}');
 		});
 
 		it('does not transform fenced code contents', () => {
-			expect(prepareOxContentMarkdown('```md\n{tech_world18}\n```')).toBe(
-				'```md\n{tech_world18}\n```',
+			expect(prepareOxContentMarkdown('```md\n{link:tech_world18}\n```')).toBe(
+				'```md\n{link:tech_world18}\n```',
 			);
 		});
 	});
@@ -356,19 +324,19 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders configured and GitHub magic links', async () => {
-			const html = await renderMarkdown('{@ryoppippi} {vim-jp} {Svelte Japan}');
+			const html = await renderMarkdown('{link:@ryoppippi} {link:vim-jp} {link:Svelte Japan}');
 
 			expect(html).toContain('href="https://github.com/ryoppippi"');
 			expect(html).toContain('href="https://vim-jp.org/"');
 			expect(html).toContain('href="https://svelte.jp"');
-			expect(html.match(/<a [^>]*class="markdown-magic-link/g)).toHaveLength(3);
+			expect(html.match(/<a [^>]*class="ox-magic-link/g)).toHaveLength(3);
 		});
 
 		it('leaves magic link syntax inside code unchanged', async () => {
-			const html = await renderMarkdown('`{@github}`\n\n```md\n{@github}\n```');
+			const html = await renderMarkdown('`{link:@github}`\n\n```md\n{link:@github}\n```');
 
-			expect(html).toContain('{@github}');
-			expect(html).not.toContain('class="markdown-magic-link');
+			expect(html).toContain('{link:@github}');
+			expect(html).not.toContain('class="ox-magic-link');
 		});
 
 		it('renders tweets as static ox-content cards', async () => {

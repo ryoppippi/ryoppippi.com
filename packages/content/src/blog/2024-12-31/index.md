@@ -35,7 +35,7 @@ description: "My 2024 recap covers open-source projects, 7,802 commits, frontend
 
 ### Contributed Projects
 
-- [`typia`](https://github.com/samchon/typia) by {@samchon} - I worked on integration with frontend, managed build tool to reduce the bundle size, and contributed to the documentation.
+- [`typia`](https://github.com/samchon/typia) by {link:@samchon} - I worked on integration with frontend, managed build tool to reduce the bundle size, and contributed to the documentation.
 
 [and more...](https://pr.ryoppippi.com/)
 
@@ -49,7 +49,7 @@ I started GitHub Sponsorship in 2024. I have 2 sponsors now. Thank you for your 
 
 ## Public Web Frontend Projects
 
-- [`vim-jp-radio.com`](https://vim-jp-radio.com/) - A podcast site for vim-jp radio, worked with {@tomoya}-san and {@staticWagomU | Wagomu}-san
+- [`vim-jp-radio.com`](https://vim-jp-radio.com/) - A podcast site for vim-jp radio, worked with {link:@tomoya}-san and {link:@staticWagomU | Wagomu}-san
 - [`ryoppippi.com`](https://ryoppippi.com/) - My personal site. All new design with new blog system
 - [`pr.ryoppippi.com`](https://pr.ryoppippi.com/) - List of my contributions to OSS projects
 - [`hhkb-equals`](https://hhkb-equals.pages.dev/) - Simple calculator to compare length, weight and price with HHKB

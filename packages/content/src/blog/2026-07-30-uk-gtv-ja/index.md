@@ -162,7 +162,7 @@ ILRを取ると何が嬉しいのか。ビザの期限と更新から解放さ�
 
 dependantでも自由に働けたので転職のために取ったわけではない。二人で支え合って暮らしていくには自分も独立したビザを持ちたかった。そうすれば夫婦で何かがあった時もお互い助け合うことができる。
 
-いまは{Rork}で働きながらOSSも続けているが、ずっと同じ会社にいるとは限らないしこの先何が起こるかも分からない。
+いまは{link:Rork}で働きながらOSSも続けているが、ずっと同じ会社にいるとは限らないしこの先何が起こるかも分からない。
 
 出口が近いのも大きい。このビザは3年でILR（永住）に届く。自分の実績に基づく在留資格で、安心してUKに住み続けられる。
 
@@ -174,16 +174,16 @@ Rorkに勧められて初めてこのビザを知った。やってみること�
 
 実績の中心にあったのは間違いなくccusageだ。
 
-{@ccusage|ccusage}は、Claude Code / Codex / Gemini CLIなどのAI coding agentの利用量やコストを可視化するOSSで、2025年に大きく伸びた。提出時は約12.9k starsだった（2026年現在は約17.8k）。
+{link:@ccusage|ccusage}は、Claude Code / Codex / Gemini CLIなどのAI coding agentの利用量やコストを可視化するOSSで、2025年に大きく伸びた。提出時は約12.9k starsだった（2026年現在は約17.8k）。
 
 ほかに出したのは次の実績だ。
 
-- {typia}など過去のOSS貢献
-- {NeovimConf} / [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/)などでの登壇
-- {TECH WORLD} / [Software Design](https://gihyo.jp/magazine/SD/archive/2026/202602)などの外部露出
+- {link:typia}など過去のOSS貢献
+- {link:NeovimConf} / [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/)などでの登壇
+- {link:TECH WORLD} / [Software Design](https://gihyo.jp/magazine/SD/archive/2026/202602)などの外部露出
 - [Thanks OSS Award](https://www.toyokumo.co.jp/2025/10/16/oss-award-2025-lasthalf)の受賞
-- {@wrtnlabs|WRTN} / {@StackOneHQ|StackOne} / {Rork}でのAI agent / developer tooling文脈の実務
-- {Rork}からのFounding Engineerオファー
+- {link:@wrtnlabs|WRTN} / {link:@StackOneHQ|StackOne} / {link:Rork}でのAI agent / developer tooling文脈の実務
+- {link:Rork}からのFounding Engineerオファー
 - 3人からの推薦状
 
 ## 何が良かったのか
@@ -210,7 +210,7 @@ OSS maintainerでも不承認になった公開例はある[^oss-vs-tn]。Tech N
 
 <div hidden>グラフを取得できない場合は元データを参照: /blog/2026-07-30-uk-gtv-ja/gtv-chart/timeline.json</div>
 
-仕事がない間もOSSは書き続けた。2024年はそれまでの人生で最もOSSのコードを書いた年だった。この時期のOSS活動、{typia}への貢献、{NeovimConf}での登壇が後のキャリアの下地になった。
+仕事がない間もOSSは書き続けた。2024年はそれまでの人生で最もOSSのコードを書いた年だった。この時期のOSS活動、{link:typia}への貢献、{link:NeovimConf}での登壇が後のキャリアの下地になった。
 
 [@preview](https://ryoppippi.com/blog/2024-12-31)
 
@@ -224,7 +224,7 @@ UKでの就職活動については、以前のブログにまとめている。
 
 [@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
 
-その後{Rork}に入社した。申請を始めたのは入社後だった。
+その後{link:Rork}に入社した。申請を始めたのは入社後だった。
 
 UK企業からやっと最初のオファーにありついたのは2025年5月末だった。ccusageが生まれたのも同じ月だ。その1年後、「分野のリーダーとして認識されているか」の審査を通った。
 
@@ -259,10 +259,10 @@ Stage 1は提出から承認まで46日だった。公式目安の5〜8週間[^s
 
 - 妻: イギリスに連れてきてくれた。結果的に自分のキャリアも大きく広がった。渡英してから4年間、妻のビザのおかげでUKに滞在できた
 - 推薦状を書いてくれた3名: それぞれ別の場所で自分の仕事を見てくれていた。3名は互いを知らないが、違う角度から自分のキャリアを評価してくれた
-- {@times-yasunori|yasunori project}の皆さん: UKでの就活を始めるきっかけをくれた。ここで切磋琢磨しなければ今の仕事もこのビザもなかった
-- {Rork}: このビザを教えてくれた。言われなければ、知らないままだった
-- {TECH WORLD}: 声をかけてくれた。動画はコミュニティの外にも届いた
-- {@ccusage|ccusage}のcontributorとユーザー: star、issue、PR、派生ツールまで、たくさんの人に使ってもらった。ありがとう
+- {link:@times-yasunori|yasunori project}の皆さん: UKでの就活を始めるきっかけをくれた。ここで切磋琢磨しなければ今の仕事もこのビザもなかった
+- {link:Rork}: このビザを教えてくれた。言われなければ、知らないままだった
+- {link:TECH WORLD}: 声をかけてくれた。動画はコミュニティの外にも届いた
+- {link:@ccusage|ccusage}のcontributorとユーザー: star、issue、PR、派生ツールまで、たくさんの人に使ってもらった。ありがとう
 
 <Divider />
 

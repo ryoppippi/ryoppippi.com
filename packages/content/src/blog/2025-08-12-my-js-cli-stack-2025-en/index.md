@@ -114,7 +114,7 @@ I've tried various JS frameworks:
 - [citty](https://github.com/unjs/citty)
 - [commander](https://github.com/tj/commander.js)
 
-Currently, I mainly use {@kazupon}'s gunshi:
+Currently, I mainly use {link:@kazupon}'s gunshi:
 
 - **Type-safe API**: [`parseArgs`](https://nodejs.org/api/util.html#utilparseargsconfig)-like API with type-safe command-line argument parsing
 - **Comprehensive features**: Includes negatable, enum, alias, type checking, and more
@@ -228,7 +228,7 @@ In-source testing is particularly valuable for CLI tools because it allows testi
 
 I upload packages to `npm` for distribution.
 
-I previously had high hopes for {@jsr-io}. JSR had attractive features like publishing TypeScript directly without building and automatic documentation generation. However, for CLI tool distribution, it had these issues:
+I previously had high hopes for {link:@jsr-io}. JSR had attractive features like publishing TypeScript directly without building and automatic documentation generation. However, for CLI tool distribution, it had these issues:
 
 - The only practical option to run tools on jsr is using [deno](https://deno.com/)
 - CLI tool users don't necessarily use deno

@@ -100,7 +100,7 @@ However, other problems remain.
 Around April 2025 when MCP started becoming widespread, debates about [whether MCP or CLI is better](https://mariozechner.at/posts/2025-08-15-mcp-vs-cli/) frequently arose. Over the past six months, as Coding Agents evolved through several generations, their accuracy in calling CLI tools improved dramatically (in contrast, [accuracy for tool calling like MCP hasn't improved much](https://gorilla.cs.berkeley.edu/leaderboard.html)).
 
 Given this, I've been hearing more frequently from those around me that keeping documentation and library source code locally is probably best.
-For example, my friend {@natsukium} [writes instructions in `CLAUDE.md` to use `ghq` to clone libraries locally for reference](https://github.com/natsukium/dotfiles/blob/b1cef897b5142462103167a1a02ed4341cf80547/modules/home/coding-agents/common/AGENTS.md?plain=1#L64-L85). Also, the CLI tool [`btca`](https://btca.dev/) provides mechanisms to actually clone specified libraries from GitHub and provide that information.
+For example, my friend {link:@natsukium} [writes instructions in `CLAUDE.md` to use `ghq` to clone libraries locally for reference](https://github.com/natsukium/dotfiles/blob/b1cef897b5142462103167a1a02ed4341cf80547/modules/home/coding-agents/common/AGENTS.md?plain=1#L64-L85). Also, the CLI tool [`btca`](https://btca.dev/) provides mechanisms to actually clone specified libraries from GitHub and provide that information.
 
 Once documentation is stored locally, Coding Agents can use tools like `fd` and `rg` to find necessary information and read only what they need.
 Since there's no need to fetch information from remote sources, this is highly efficient.
@@ -159,7 +159,7 @@ Interestingly, when you generate a project with `bun init -y`, Bun auto-generate
 
 ### [`gunshi`](https://github.com/kazupon/gunshi)
 
-[gunshi](https://github.com/kazupon/gunshi) by {@kazupon} is a library for building CLI tools in TypeScript. It's currently my favourite CLI library.
+[gunshi](https://github.com/kazupon/gunshi) by {link:@kazupon} is a library for building CLI tools in TypeScript. It's currently my favourite CLI library.
 
 [@preview](https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-en)
 
@@ -195,7 +195,7 @@ These were the observed effects.
 
 ### [`byethrow`](https://github.com/praha-inc/byethrow)
 
-[byethrow](https://github.com/praha-inc/byethrow) by {@Karibash}, another library I use frequently, is a new Result type library that similarly provides a dedicated documentation package [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs).
+[byethrow](https://github.com/praha-inc/byethrow) by {link:@Karibash}, another library I use frequently, is a new Result type library that similarly provides a dedicated documentation package [`@praha/byethrow-docs`](https://www.npmjs.com/package/@praha/byethrow-docs).
 `byethrow` previously provided an MCP server, but the docs package enables faster implementation.
 
 # Considerations

@@ -114,7 +114,7 @@ CLIツール配布時には、全ての依存パッケージをbundleして、de
 - [citty](https://github.com/unjs/citty)
 - [commander](https://github.com/tj/commander.js)
 
-その中で、現在主に使っているのは {@kazupon} さんの gunshi です。
+その中で、現在主に使っているのは {link:@kazupon} さんの gunshi です。
 
 - **型安全なAPI**: [`parseArgs`](https://nodejs.org/api/util.html#utilparseargsconfig) likeなAPIで、型安全にコマンドライン引数をパース
 - **充実した機能**: negatable、enum、alias、type checkingなどの機能が揃っている
@@ -228,7 +228,7 @@ CLIツールのテストには [Vitest](https://vitest.dev/) を使っていま�
 
 パッケージの配布は`npm`にアップロードしています。
 
-以前は {@jsr-io} に期待をしていました。JSRはビルド不要でTypeScriptをそのまま公開でき、自動的にドキュメントを生成してくれるなど魅力的な機能がありました。しかし、CLIツールの配布用途では以下の問題がありました：
+以前は {link:@jsr-io} に期待をしていました。JSRはビルド不要でTypeScriptをそのまま公開でき、自動的にドキュメントを生成してくれるなど魅力的な機能がありました。しかし、CLIツールの配布用途では以下の問題がありました：
 
 - jsr上のツールを実行するには事実上 [deno](https://deno.com/) を使う以外の選択肢がない
 - CLIツールのユーザは必ずしもdenoを使っているわけではない

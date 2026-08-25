@@ -66,7 +66,7 @@ alternates:
 ### [Vimconf 2025 Small LT](https://vimconf.org/2025/ja/)
 
 当初行く予定がなかったのですが、東京滞在を1週間延長したので参戦可能に。どうせ行くなら発表しようということになり、通常トークのプロポーザルは締め切っていたのでLTに応募したらなんと審査を通過してしまったので急遽登壇しました！
-まさかのplugin作成からすることに。結果3分ほどのLTになりましたが、労力は全然3分じゃ収まらず笑。(というか懇親会で {@mopp} さんになんで通常のトーク枠に応募しなかったんだと詰められた笑。正直もっと話したい気持ちがある)
+まさかのplugin作成からすることに。結果3分ほどのLTになりましたが、労力は全然3分じゃ収まらず笑。(というか懇親会で {link:@mopp} さんになんで通常のトーク枠に応募しなかったんだと詰められた笑。正直もっと話したい気持ちがある)
 
 [Slideはこちら](https://talks.ryoppippi.com/2025-11-02/)
 
@@ -127,7 +127,7 @@ alternates:
 - [yasunori conf big 2025](https://beargguy3.connpass.com/event/356638/)
 - [篝火 #14](https://www.start.gg/tournament/14-kagaribi-14-8/details)
 
-また、{vim-jp-radio} スタッフとして約1年ぶりに収録に参加できたのも嬉しかったです。
+また、{link:vim-jp-radio} スタッフとして約1年ぶりに収録に参加できたのも嬉しかったです。
 
 ~~Hono Conf参加したかったが、寝てる間に枠が解放されてて起きたら終わってた。~~
 
@@ -149,7 +149,7 @@ alternates:
 ## 人に会う
 
 今年はvim-jpのいつもの人々に加え、OSS開発者やTwitterで交流のある方々と多く会うことができました。
-また、毎度日本滞在の最後の夜にご飯をみんなで食べに行くのですが、今回も {@vim-jp}から10数名の方々が集まってくれたりしました。
+また、毎度日本滞在の最後の夜にご飯をみんなで食べに行くのですが、今回も {link:@vim-jp}から10数名の方々が集まってくれたりしました。
 以下はTwitterに投稿されているものの中からいくつかピックアップしています。
 
 <!-- https://x.com/ryoppippi/status/1979458237280952529 -->
@@ -210,14 +210,14 @@ alternates:
 特に以下の方々には深く感謝申し上げます。
 
 - 妻 - 朝早く起きてくれて見送りに来てくれたり、色々と裏でサポートしてくれてありがとう
-- {@tomoya|tomoya} - 日本滞在のサポートをしていただきました。ありがとうございました
-- {@takeokunn|たけてぃ} & {@conao3} - 泊めてくれたり見送りに来てくれたり一緒に遊んでくれていつもありがとう
-- {@vim-jp}の皆様 - いつもありがとうございます。Vimconfお疲れ様でした！
-- {@kazupon|kazupon} - OSS DinnerやVue Fesへのお誘い、またご飯も行かせてもらいありがたい限りでした
-- {eerm16g} - Work≠Build Meetup feat ryoppippiの開催、運営を引き受けてくださり、ありがとうございました。最高の会でした
-- {tech_world18} & {@kei95|Kei|https://x.com/kei_english_ca} - {TECH WORLD} ヘビーリスナーなのでお会いできて光栄でした。また収録呼んでね〜〜〜
-- {@hand-dot|kyohei|https://x.com/labelmake} - お会いできて嬉しかったしお茶もいっぱいできて楽しかった。無限に話してた。いい出会いに感謝です。
-- {@xantibody|r-aizawa} - 徹夜スマブラ会を筆頭に色々手配してくれてありがとう！
+- {link:@tomoya|tomoya} - 日本滞在のサポートをしていただきました。ありがとうございました
+- {link:@takeokunn|たけてぃ} & {link:@conao3} - 泊めてくれたり見送りに来てくれたり一緒に遊んでくれていつもありがとう
+- {link:@vim-jp}の皆様 - いつもありがとうございます。Vimconfお疲れ様でした！
+- {link:@kazupon|kazupon} - OSS DinnerやVue Fesへのお誘い、またご飯も行かせてもらいありがたい限りでした
+- {link:eerm16g} - Work≠Build Meetup feat ryoppippiの開催、運営を引き受けてくださり、ありがとうございました。最高の会でした
+- {link:tech_world18} & {link:@kei95|Kei|https://x.com/kei_english_ca} - {link:TECH WORLD} ヘビーリスナーなのでお会いできて光栄でした。また収録呼んでね〜〜〜
+- {link:@hand-dot|kyohei|https://x.com/labelmake} - お会いできて嬉しかったしお茶もいっぱいできて楽しかった。無限に話してた。いい出会いに感謝です。
+- {link:@xantibody|r-aizawa} - 徹夜スマブラ会を筆頭に色々手配してくれてありがとう！
 
 # おわりに
 

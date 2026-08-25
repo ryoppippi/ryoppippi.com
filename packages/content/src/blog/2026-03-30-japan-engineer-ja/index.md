@@ -157,7 +157,7 @@ brokenな英語でも仕事できた。ぐちゃぐちゃなキャリアでも�
 
 ## 宣伝
 
-3月31日（火）19:00から、{tech_world18}が主催するオンラインイベントに登壇する。
+3月31日（火）19:00から、{link:tech_world18}が主催するオンラインイベントに登壇する。
 
 [@preview](https://techworld.connpass.com/event/384040/)
 

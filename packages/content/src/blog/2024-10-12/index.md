@@ -106,7 +106,7 @@ pub fn main() void {
 
 # Magic Link
 
-{@ryoppippi} {vim-jp} {Svelte Japan}
+{link:@ryoppippi} {link:vim-jp} {link:Svelte Japan}
 
 # YouTube
 

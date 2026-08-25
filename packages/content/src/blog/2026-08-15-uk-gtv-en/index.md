@@ -163,7 +163,7 @@ And the standard ILR route is being reformed towards stretching 5 years to 10 (n
 
 I could already work freely as a dependant, so I did not apply in order to change jobs. If the two of us are going to support each other, I wanted a visa of my own. Then if something happens to either of us, we can still help each other.
 
-I work at {Rork} now and still do OSS, but I will not necessarily stay at the same company, and I do not know what comes next.
+I work at {link:Rork} now and still do OSS, but I will not necessarily stay at the same company, and I do not know what comes next.
 
 The nearby exit also matters. This visa reaches ILR (settlement) in 3 years. It is leave based on my own record, and I can stay in the UK with some peace of mind.
 
@@ -175,16 +175,16 @@ I first heard of this visa because Rork suggested it. I decided to try.
 
 The centre of the record was, without a doubt, ccusage.
 
-{@ccusage|ccusage} is OSS that visualises usage and cost for AI coding agents such as Claude Code, Codex, and Gemini CLI. It grew a lot in 2025. At submission it had about 12.9k stars (about 17.8k as of 2026).
+{link:@ccusage|ccusage} is OSS that visualises usage and cost for AI coding agents such as Claude Code, Codex, and Gemini CLI. It grew a lot in 2025. At submission it had about 12.9k stars (about 17.8k as of 2026).
 
 The rest of what I submitted:
 
-- past OSS contributions such as {typia}
-- talks at {NeovimConf} / [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/) and elsewhere
-- external coverage such as {TECH WORLD} / [Software Design](https://gihyo.jp/magazine/SD/archive/2026/202602)
+- past OSS contributions such as {link:typia}
+- talks at {link:NeovimConf} / [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/) and elsewhere
+- external coverage such as {link:TECH WORLD} / [Software Design](https://gihyo.jp/magazine/SD/archive/2026/202602)
 - a [Thanks OSS Award](https://www.toyokumo.co.jp/2025/10/16/oss-award-2025-lasthalf)
-- professional work in AI agents / developer tooling at {@wrtnlabs|WRTN} / {@StackOneHQ|StackOne} / {Rork}
-- a Founding Engineer offer from {Rork}
+- professional work in AI agents / developer tooling at {link:@wrtnlabs|WRTN} / {link:@StackOneHQ|StackOne} / {link:Rork}
+- a Founding Engineer offer from {link:Rork}
 - recommendation letters from 3 people
 
 ## What I think they could see
@@ -211,7 +211,7 @@ The pass probabilities on the chart are a later reconstruction from the record a
 
 <div hidden>If the chart cannot be loaded, see the source data: /blog/2026-07-30-uk-gtv-ja/gtv-chart/timeline.json</div>
 
-I kept writing OSS even when I had no job. 2024 was the year I wrote more OSS code than in the rest of my life. The OSS from that period, the contributions to {typia}, and the talk at {NeovimConf} became the groundwork for what came later.
+I kept writing OSS even when I had no job. 2024 was the year I wrote more OSS code than in the rest of my life. The OSS from that period, the contributions to {link:typia}, and the talk at {link:NeovimConf} became the groundwork for what came later.
 
 [@preview](https://ryoppippi.com/blog/2024-12-31)
 
@@ -225,7 +225,7 @@ Stars reached about 1K in three weeks after launch, and about 5K in two months. 
 
 [@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-en)
 
-Then I joined {Rork}. I started the application after joining.
+Then I joined {link:Rork}. I started the application after joining.
 
 I finally got my first offer from a UK company at the end of May 2025. ccusage was born in the same month. A year later, I passed a review of whether I was "recognised as a leader in the field".
 
@@ -260,10 +260,10 @@ And I hope this post is useful for people who are curious about living abroad, o
 
 - my wife: she brought me to Britain. My career opened up as a result. For four years after we moved, I stayed in the UK on her visa
 - the 3 people who wrote recommendation letters: each had seen my work in a different place. The 3 do not know each other, but they assessed my career from different angles
-- everyone in the {@times-yasunori|yasunori project}: they gave me the push to start job hunting in the UK. Without the work we did together, I would not have this job or this visa
-- {Rork}: they told me about this visa. Without that, I would never have known
-- {TECH WORLD}: they reached out. The videos travelled outside the community
-- {@ccusage|ccusage} contributors and users: stars, issues, PRs, even derivative tools. A lot of people used it. Thank you
+- everyone in the {link:@times-yasunori|yasunori project}: they gave me the push to start job hunting in the UK. Without the work we did together, I would not have this job or this visa
+- {link:Rork}: they told me about this visa. Without that, I would never have known
+- {link:TECH WORLD}: they reached out. The videos travelled outside the community
+- {link:@ccusage|ccusage} contributors and users: stars, issues, PRs, even derivative tools. A lot of people used it. Thank you
 
 <Divider />
 

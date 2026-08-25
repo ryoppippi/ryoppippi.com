@@ -1,4 +1,4 @@
-.markdown-magic-link {
+.ox-magic-link {
 	display: inline-flex;
 	align-items: center;
 	background: #8882;
@@ -14,22 +14,19 @@
 	transition-duration: 150ms;
 }
 
-.markdown-magic-link:hover {
+.ox-magic-link:hover {
 	background: #8883;
 	color: var(--fg) !important;
 }
 
-.markdown-magic-link-image {
-	display: inline-block;
+.ox-magic-link__image {
 	height: 1.1em;
 	width: 1.1em;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+	object-fit: cover;
 	border-radius: 2px;
 }
 
-.markdown-magic-link.markdown-magic-link-github-at {
+.ox-magic-link.ox-magic-link--github {
 	transform: translateY(6px);
 	gap: calc(var(--spacing) * 1.2);
 	border-radius: 9999px;
@@ -37,7 +34,7 @@
 	font-size: var(--text-sm);
 }
 
-.markdown-magic-link.markdown-magic-link-github-at .markdown-magic-link-image {
+.ox-magic-link.ox-magic-link--github .ox-magic-link__image {
 	height: 1.6em;
 	width: 1.6em;
 	border-radius: 50%;

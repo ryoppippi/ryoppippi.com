@@ -10,7 +10,7 @@ alternates:
   x-default: https://ryoppippi.com/blog/2025-01-19-en/
 ---
 
-I watch Youtube and Twitch on my iPhone a lot. One of my friend {@yuki-yano} introduced an amazing shortcut in {vim-jp} Slack about a year ago. Now, I can't live without it.
+I watch Youtube and Twitch on my iPhone a lot. One of my friend {link:@yuki-yano} introduced an amazing shortcut in {link:vim-jp} Slack about a year ago. Now, I can't live without it.
 
 When you configure this shortcut, the rotation lock is disabled when you open the Youtube app and enabled when you close it. I configure it for Twitch app as well.
 

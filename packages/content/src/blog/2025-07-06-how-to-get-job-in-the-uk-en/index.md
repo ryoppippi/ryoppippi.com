@@ -52,7 +52,7 @@ As a result, I spent lazy days at home muttering "I want to go back to Japan" ev
 
 ## The Trigger to Start (September 2024)
 
-Around this time, the [yasunori project](https://github.com/times-yasunori/) was launched in {@vim-jp}. It was a groundbreaking initiative centred around {@yasunori0418}, the heart of vim-jp discussions, to job hunt together, write books, produce output, and encourage each other. While I wasn't actively involved initially, this activity inspired me to finally escape my lazy lifestyle and decide to start job hunting in the UK.
+Around this time, the [yasunori project](https://github.com/times-yasunori/) was launched in {link:@vim-jp}. It was a groundbreaking initiative centred around {link:@yasunori0418}, the heart of vim-jp discussions, to job hunt together, write books, produce output, and encourage each other. While I wasn't actively involved initially, this activity inspired me to finally escape my lazy lifestyle and decide to start job hunting in the UK.
 
 > https://blog.tomoya.dev/posts/you-dont-know-yasunori-1/
 

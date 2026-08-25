@@ -10,7 +10,7 @@ alternates:
   x-default: https://ryoppippi.com/blog/2025-01-19-en/
 ---
 
-私はiPhoneでYouTubeやTwitchをよく見ます。約1年前、友人の{@yuki-yano}さんが{vim-jp} Slackで素晴らしいショートカットを紹介してくれました。今では、このショートカットなしの生活は考えられません。
+私はiPhoneでYouTubeやTwitchをよく見ます。約1年前、友人の{link:@yuki-yano}さんが{link:vim-jp} Slackで素晴らしいショートカットを紹介してくれました。今では、このショートカットなしの生活は考えられません。
 
 このショートカットを設定すると、YouTubeアプリを開いたときに画面の回転ロックが解除され、アプリを閉じると再び有効になります。私はTwitchアプリにも同じ設定をしています。
 

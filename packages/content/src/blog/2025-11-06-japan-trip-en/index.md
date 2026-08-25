@@ -65,7 +65,7 @@ A meetup where I gathered people I wanted to talk with and let them speak freely
 
 ### [Vimconf 2025 Small LT](https://vimconf.org/2025/ja/)
 
-I hadn't planned to attend, but I extended my Tokyo stay by a week, so it became possible. Since I was going anyway, I decided to give a talk. The regular talk proposals were already closed, so I applied for an LT slot and got accepted. I had to create a plugin from scratch. The result was about a 3-minute LT, but the effort was way more than 3 minutes lol. (At the after-party, {@mopp} asked me why I didn't apply for a regular talk slot. Honestly, I wanted to talk more.)
+I hadn't planned to attend, but I extended my Tokyo stay by a week, so it became possible. Since I was going anyway, I decided to give a talk. The regular talk proposals were already closed, so I applied for an LT slot and got accepted. I had to create a plugin from scratch. The result was about a 3-minute LT, but the effort was way more than 3 minutes lol. (At the after-party, {link:@mopp} asked me why I didn't apply for a regular talk slot. Honestly, I wanted to talk more.)
 
 [Slides available here](https://talks.ryoppippi.com/2025-11-02/)
 
@@ -129,7 +129,7 @@ I attended several events even when I wasn't speaking!
 - [yasunori conf big 2025](https://beargguy3.connpass.com/event/356638/)
 - [Kagaribi #14](https://www.start.gg/tournament/14-kagaribi-14-8/details)
 
-Also, I was happy to participate in recording as {vim-jp-radio} staff for the first time in about a year.
+Also, I was happy to participate in recording as {link:vim-jp-radio} staff for the first time in about a year.
 
 ~~I wanted to attend Hono Conf, but the tickets were released while I was sleeping and by the time I woke up, they were gone.~~
 
@@ -151,7 +151,7 @@ I was able to buy all of these despite limited stock. I was really happy.
 ## Meeting People
 
 This year, in addition to the usual vim-jp folks, I was able to meet many OSS developers and people I interact with on Twitter.
-As always, on the last night of my Japan stay, we all went out for dinner together, and this time over 10 people from {@vim-jp} gathered.
+As always, on the last night of my Japan stay, we all went out for dinner together, and this time over 10 people from {link:@vim-jp} gathered.
 Below are a few picks from what was posted on Twitter.
 
 <!-- https://x.com/ryoppippi/status/1979458237280952529 -->
@@ -212,14 +212,14 @@ I am indebted to many people during this Japan stay.
 I would like to express my deep gratitude especially to the following people:
 
 - My wife - Thank you for waking up early to see me off and for all your support behind the scenes.
-- {@tomoya|tomoya} - Thank you for supporting my Japan stay.
-- {@takeokunn|たけてぃ} & {@conao3} - Thank you always for letting me stay, seeing me off, and hanging out with me.
-- Everyone at {@vim-jp} - Thank you always. Great work on Vimconf!
-- {@kazupon|kazupon} - Thank you for inviting me to OSS Dinner and Vue Fes, and for going out to eat together.
-- {eerm16g} - Thank you for hosting and running the Work≠Build Meetup feat ryoppippi. It was the best meetup.
-- {tech_world18} & {@kei95|Kei|https://x.com/kei_english_ca} - I'm a heavy listener of {TECH WORLD}, so it was an honour to meet you. Please invite me to record again~~~
-- {@hand-dot|kyohei|https://x.com/labelmake} - I was happy to meet you and enjoyed having lots of tea together. We talked endlessly. Grateful for the good encounter.
-- {@xantibody|r-aizawa} - Thank you for arranging everything, starting with the all-night Smash Bros. session!
+- {link:@tomoya|tomoya} - Thank you for supporting my Japan stay.
+- {link:@takeokunn|たけてぃ} & {link:@conao3} - Thank you always for letting me stay, seeing me off, and hanging out with me.
+- Everyone at {link:@vim-jp} - Thank you always. Great work on Vimconf!
+- {link:@kazupon|kazupon} - Thank you for inviting me to OSS Dinner and Vue Fes, and for going out to eat together.
+- {link:eerm16g} - Thank you for hosting and running the Work≠Build Meetup feat ryoppippi. It was the best meetup.
+- {link:tech_world18} & {link:@kei95|Kei|https://x.com/kei_english_ca} - I'm a heavy listener of {link:TECH WORLD}, so it was an honour to meet you. Please invite me to record again~~~
+- {link:@hand-dot|kyohei|https://x.com/labelmake} - I was happy to meet you and enjoyed having lots of tea together. We talked endlessly. Grateful for the good encounter.
+- {link:@xantibody|r-aizawa} - Thank you for arranging everything, starting with the all-night Smash Bros. session!
 
 # Closing
 
