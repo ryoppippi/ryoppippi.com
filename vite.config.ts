@@ -12,6 +12,7 @@ import { staticSiteDevServer } from './src/site/dev-server.ts';
 
 export default defineConfig({
 	publicDir: 'static',
+	envPrefix: ['PUBLIC_', 'VITE_'],
 	server: {
 		watch: {
 			ignored: ['**/.direnv/**'],
@@ -50,8 +51,9 @@ export default defineConfig({
 	run: {
 		tasks: {
 			'site-build': {
-				command: 'vp build',
+				command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
 				dependsOn: ['@ryoppippi/content#build'],
+				env: ['PUBLIC_ORIGIN'],
 				input: [
 					'package.json',
 					'pnpm-lock.yaml',

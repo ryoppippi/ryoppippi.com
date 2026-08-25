@@ -11,7 +11,7 @@
 		"dev": "vp dev",
 		"format": "vp check --fix",
 		"preinstall": "only-allow pnpm",
-		"prepare": "sh -c 'if [ \"$WORKERS_CI\" = 1 ] && [ \"$(git rev-parse --is-shallow-repository 2>/dev/null || echo false)\" = true ]; then git fetch --unshallow origin; fi; vp config --no-agent'",
+		"prepare": "sh -c 'if [ \"$WORKERS_CI\" = 1 ] || [ \"$CI\" = true ]; then if [ \"$(git rev-parse --is-shallow-repository 2>/dev/null || echo false)\" = true ]; then git fetch --unshallow origin; fi; fi; vp config --no-agent'",
 		"lint": "vp lint",
 		"new": "vp run @ryoppippi/content#new",
 		"preview": "vp preview",

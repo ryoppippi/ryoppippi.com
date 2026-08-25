@@ -1,7 +1,9 @@
+const DEFAULT_SITE_ORIGIN = 'https://ryoppippi.com';
+
 /**
  * Canonical origin used when generating absolute site URLs.
  */
-export const SITE_ORIGIN = 'https://ryoppippi.com';
+export const SITE_ORIGIN = import.meta.env.PUBLIC_ORIGIN || DEFAULT_SITE_ORIGIN;
 
 /**
  * Site identity values shared by generated pages and templates.
