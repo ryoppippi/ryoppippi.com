@@ -46,6 +46,16 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
 	}
 }
 
+/**
+ * Generates the static site and its auxiliary files.
+ *
+ * @param assets - Bundled site assets referenced by generated pages.
+ * @param content - Optional prebuilt content artifact.
+ * @param outDir - Directory that receives generated files.
+ * @param renderTweet - Tweet renderer used when content must be built locally.
+ * @param root - Repository root used for source loading and Git metadata.
+ * @returns A promise that resolves after all generated files are written.
+ */
 export async function generateSite({
 	assets,
 	content,

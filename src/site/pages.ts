@@ -58,11 +58,20 @@ function articleImageUrl(html: string, articleUrl: string): string | undefined {
  * A file emitted by the static site generator.
  */
 export type GeneratedFile = {
+	/** Relative path below the generated site directory. */
 	path: string;
+	/** Serialized file contents. */
 	content: string;
+	/** Repository paths whose meaningful changes update the generated file. */
 	sourcePaths?: readonly string[];
 };
 
+/**
+ * Renders the site home page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated home page.
+ */
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
@@ -87,12 +96,20 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 	};
 }
 
+/**
+ * Renders the blog index page.
+ *
+ * @param items - Local and external posts to list.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated blog index page.
+ */
 export function blogListPage(items: PostListItem[], assets: SiteAssets): GeneratedFile {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return {
 		path: 'blog/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
+			'src/site/pages.ts',
 			'src/site/templates/BlogList.svelte',
 			'packages/content/src/blog',
 			'src/contents/external-rss/rss.json',
@@ -132,7 +149,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
-			sourcePaths: [sourcePath],
+			sourcePaths: ['src/site/pages.ts', sourcePath],
 			content: page({
 				title: `${post.title} | blog`,
 				pathname,
@@ -164,6 +181,12 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 	];
 }
 
+/**
+ * Builds the RSS feed for published local posts.
+ *
+ * @param posts - Blog post metadata to include.
+ * @returns The generated RSS feed.
+ */
 export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 	const output = new Feed({
 		title: `blog | ${SITE_NAME}`,
@@ -187,6 +210,14 @@ export function feed(posts: BlogPostMetadata[]): GeneratedFile {
 	return { path: 'feed.xml', content: output.rss2() };
 }
 
+/**
+ * Renders the generated core pages for the site.
+ *
+ * @param posts - Rendered local blog posts.
+ * @param externalPosts - Posts loaded from configured external feeds.
+ * @param assets - Bundled site assets referenced by the pages.
+ * @returns The generated core files.
+ */
 export function corePages(
 	posts: BlogPost[],
 	externalPosts: PostListItem[],

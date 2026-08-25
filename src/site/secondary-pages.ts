@@ -12,6 +12,13 @@ import Talks from './templates/Talks.svelte';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
+/**
+ * Renders the open-source projects page.
+ *
+ * @param projects - Projects grouped by their genre.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated open-source projects page.
+ */
 export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/oss/index.html',
@@ -33,6 +40,13 @@ export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAsse
 	};
 }
 
+/**
+ * Renders the project showcase page.
+ *
+ * @param projects - Showcase projects to render.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated project showcase page.
+ */
 export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/showcase/index.html',
@@ -54,6 +68,13 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 	};
 }
 
+/**
+ * Renders the publications page.
+ *
+ * @param publications - Publications grouped by their year or category.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated publications page.
+ */
 export function publicationsPage(
 	publications: Record<string, Publication[]>,
 	assets: SiteAssets,
@@ -78,6 +99,13 @@ export function publicationsPage(
 	};
 }
 
+/**
+ * Renders the talks page.
+ *
+ * @param talks - Talks loaded from the talks data source.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated talks page.
+ */
 export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
@@ -98,6 +126,12 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	};
 }
 
+/**
+ * Renders the sponsors page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated sponsors page.
+ */
 export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
@@ -114,6 +148,12 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	};
 }
 
+/**
+ * Renders the non-indexable error page.
+ *
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated error page.
+ */
 export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
