@@ -18,10 +18,10 @@
 	] as const;
 </script>
 
-<a class='skip-link' href='#main-content'>Skip to content</a>
+<span data-nosnippet><a class='skip-link' href='#main-content'>Skip to content</a></span>
 <div class='mx-auto my-3 max-w-4xl px-8'>
 	<header class='mx-auto grid items-center gap-y-6 py-6 text-xl opacity-70 transition-base hover:opacity-100 max-md:grid-cols-1 md:grid-cols-3'>
-		<div class={isHome ? 'max-md:hidden md:flex' : 'flex'}>
+		<div data-nosnippet class={isHome ? 'max-md:hidden md:flex' : 'flex'}>
 			{#if !isHome}
 				<a class='relative font-bold max-md:mx-auto md:mx-0' aria-label='Home' href='/'>
 					<span style='view-transition-name:title-ryoppippi'>@ryoppippi</span>
@@ -29,7 +29,7 @@
 			{/if}
 		</div>
 		<nav class='flex w-full max-w-full flex-col gap-x-4 gap-y-4 text-lg font-bold max-md:mx-auto max-md:items-center md:col-span-2 md:ml-auto md:mr-0 md:flex-row md:flex-wrap md:justify-end' aria-label='Primary navigation'>
-			<div class='flex flex-wrap justify-center gap-x-4 gap-y-4'>
+			<div data-nosnippet class='flex flex-wrap justify-center gap-x-4 gap-y-4'>
 				{#each links as link (link.href)}
 					{@const active = pathname.startsWith('activePrefix' in link ? link.activePrefix : link.href)}
 					<a class='relative block shrink-0 whitespace-nowrap' href={link.href}>
@@ -38,7 +38,7 @@
 					</a>
 				{/each}
 			</div>
-			<div class='flex flex-wrap items-center justify-center gap-x-4 gap-y-4'>
+			<div data-nosnippet class='flex flex-wrap items-center justify-center gap-x-4 gap-y-4'>
 				<a class='relative block w-10 shrink-0 whitespace-nowrap px-0' href='/cv' rel='noopener noreferrer' target='_blank'>
 					<span class='fyc'>cv <span class='icon-[line-md--download-outline] size-[1em] shrink-0' aria-hidden='true'></span></span>
 				</a>

@@ -64,7 +64,7 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 		content: page({
 			title: '',
 			pathname: '/',
-			content: renderComponent(Home, {}),
+			content: renderComponent(Home, { description: HOME_DESCRIPTION }),
 			description: HOME_DESCRIPTION,
 			assets,
 			style: 'home',
@@ -219,6 +219,9 @@ if (import.meta.vitest != null) {
 		expect(html).toContain(
 			`<meta data-page-head="" name="description" content="${HOME_DESCRIPTION}">`,
 		);
+		expect(html.match(/<p data-home-description[^>]*>([^<]*)<\/p>/)?.[1]).toBe(HOME_DESCRIPTION);
+		expect(html).toMatch(/<span data-nosnippet(?:="")?><a class="skip-link"/);
+		expect(html).toMatch(/<div data-nosnippet(?:="")? class="flex flex-wrap justify-center/);
 		expect(html).toContain('<meta data-page-head="" property="og:title" content="ryoppippi.com">');
 		expect(html).toContain('"@type":"WebSite"');
 	});
