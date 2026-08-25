@@ -308,6 +308,17 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('href="https://example.com/post"');
 		});
 
+		it('renders consecutive preview links as separate cards', async () => {
+			const html = await renderMarkdown(
+				'[@preview](https://example.com/first)\n\n[@preview](https://example.com/second)',
+				{ openGraph: {} },
+			);
+
+			expect(html.match(/class="ox-ogp-simple"/g)).toHaveLength(2);
+			expect(html).toContain('href="https://example.com/first"');
+			expect(html).toContain('href="https://example.com/second"');
+		});
+
 		it('separates a preview card from preceding prose', async () => {
 			const url = 'https://example.com/post';
 			const html = await renderMarkdown(`説明文\n[@preview](${url})`, {
@@ -345,7 +356,7 @@ if (import.meta.vitest != null) {
 
 		it('converts preview links to link card html', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
-				'<OgCard url="https://github.com/junkawa/figma_jp" />',
+				'<OgCard url="https://github.com/junkawa/figma_jp"></OgCard>',
 			);
 		});
 
