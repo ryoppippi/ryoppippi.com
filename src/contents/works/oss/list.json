@@ -154,7 +154,7 @@
 	},
 	{
 		"name": "gh-nippou",
-		"icon": "icon-[simple-icons--github]",
+		"icon": "icon-[material-symbols--edit-document-outline]",
 		"tags": ["GitHub", "CLI"],
 		"description": "GitHub CLI extension for generating daily reports from GitHub activity."
 	},
