@@ -1,1 +1,1 @@
-vp staged
+exec nix develop --command vp staged
