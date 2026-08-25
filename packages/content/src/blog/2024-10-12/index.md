@@ -69,7 +69,7 @@ You can also attach them to a longer sentence when you want to keep the main flo
 
 # Image
 
-!<OgCard url="https://ryoppippi.com/ryoppippi.jpg" />
+![](https://ryoppippi.com/ryoppippi.jpg)
 
 ## Image with a caption
 
