@@ -8,6 +8,10 @@ runs:
       with:
         github_access_token: ${{ github.token }}
 
-    - name: Install JavaScript dependencies
+    - name: Load CI tools and install JavaScript dependencies
       shell: bash
-      run: nix develop .#ci --command pnpm install --frozen-lockfile
+      run: |
+        nix develop .#ci --command bash -c '
+          pnpm install --frozen-lockfile
+          printf "%s\\n" "$PATH" | tr ":" "\\n" >> "$GITHUB_PATH"
+        '
