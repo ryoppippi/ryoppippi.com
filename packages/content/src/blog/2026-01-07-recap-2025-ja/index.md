@@ -77,7 +77,7 @@ OSS以外のことにも時間を割いているのが原因である。
 2025年の1月の前半は日本にいたのだが、この時にはどうにかして頑張ってUKで就職するぞということを言っていた。
 これは2024年末の配信のvim-jpラジオでも話した通りである。
 
-[@preview](https://podcasts.apple.com/jp/podcast/ryoppippi%E3%81%95%E3%82%93%E3%81%A8dr-tani%E3%81%95%E3%82%93%E3%81%AB%E8%81%9E%E3%81%8F-oss%E6%B4%BB%E5%8B%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E3%81%A8-%E8%8B%A5%E3%81%95%E3%81%AE%E4%BE%A1%E5%80%A4-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000681358605)
+<OgCard url="https://podcasts.apple.com/jp/podcast/ryoppippi%E3%81%95%E3%82%93%E3%81%A8dr-tani%E3%81%95%E3%82%93%E3%81%AB%E8%81%9E%E3%81%8F-oss%E6%B4%BB%E5%8B%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6-%E3%81%A8-%E8%8B%A5%E3%81%95%E3%81%AE%E4%BE%A1%E5%80%A4-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000681358605" />
 
 この時もいろんなところに面接を出たり、Londonまでちょこちょこ行ったりなどして、面接をするもあまりいい手応えはなかった。
 (日本からLondonに飛んで一泊してそのまま面接してLeedsに帰るとか、バスでLondon-Leesdsを往復したりとか、いろいろ大変だった)
@@ -85,7 +85,7 @@ OSS以外のことにも時間を割いているのが原因である。
 2月は紹介してもらった日本の会社で業務委託としてリモートで働かせていただいた。本当にありがたかった。
 
 この時の大変だった就職活動については、こちらのブログに書いてある。
-[@preview](https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja)
+<OgCard url="https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-ja" />
 
 ## Wrtnlabs
 
@@ -148,7 +148,7 @@ Stackoneは最近までビザスポンサーをする資格を持っていなか
 (ホテルからオフィスに向かう途中にリクルーターから他の日本人が来てると言われた。絶対sosukesuzukiだと思ったがやっぱりそうだった)
 彼はオファーをもらい、そのままBunに入社することになった。本当におめでたい。
 
-[@preview](https://sosukesuzuki.dev/posts/joining-bun/)
+<OgCard url="https://sosukesuzuki.dev/posts/joining-bun/" />
 
 彼が日本に帰国する日の朝、ホテルで一緒に朝食を食べながらいろいろお話をしたのはとても懐かしい。あの時間は本当に楽しかった。
 
@@ -202,7 +202,7 @@ UK就職のタイミングと`ccusage`のリリースのタイミングがほぼ
 
 詳しくは日本滞在時のブログを参照してほしい。
 
-[@preview](https://ryoppippi.com/blog/2025-11-06-japan-trip-ja)
+<OgCard url="https://ryoppippi.com/blog/2025-11-06-japan-trip-ja" />
 
 (サポートしていただいた{link:@tomoya}さんいつもありがとうございます)
 
@@ -241,7 +241,7 @@ https://www.youtube.com/playlist?list=PLWGCczNC6JbWsgyb0q5McgpdcAWnLxeii
 
 ({link:TECH WORLD}のベストバイ動画でNix紹介すればよかったw)
 
-[@preview](https://ryoppippi.com/dotfiles)
+<OgCard url="https://ryoppippi.com/dotfiles" />
 
 ## Switch2
 
@@ -294,4 +294,4 @@ iPhone XSもデザインがお気に入りだったが、個人的にはそれ�
 
 是非とも書店でお買い求めください!!
 
-[@preview](https://gihyo.jp/magazine/SD/archive/2026/202602)
+<OgCard url="https://gihyo.jp/magazine/SD/archive/2026/202602" />

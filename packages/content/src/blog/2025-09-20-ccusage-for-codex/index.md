@@ -34,7 +34,7 @@ Claude Code が5月下旬から大流行し、5月末に ccusage がリリース
 
 当然、ccusage のユーザーからも Codex サポートの要望が寄せられました。
 
-[@preview](https://github.com/ryoppippi/ccusage/issues/626)
+<OgCard url="https://github.com/ryoppippi/ccusage/issues/626" />
 
 しかしまあ無理でしょうというのが当時の私の見解でした。
 
@@ -76,7 +76,7 @@ TokenCountEvent {
 
 この変更は「コンテキスト情報をメインループに移動して、ループの中断や自動圧縮の開始に使えるようにする」という目的で実装されたものでしたが、結果的に ccusage にとって必要不可欠な情報提供につながりました。
 
-[@preview](https://github.com/openai/codex/pull/3135)
+<OgCard url="https://github.com/openai/codex/pull/3135" />
 
 ### 変更2：JSONL 形式でのセッション永続化（9月9日）
 
@@ -178,4 +178,4 @@ bunx @ccusage/mcp@latest --help
 （いただいたスポンサーのうち、一部は ccusage の contributor に再分配しています）
 
 ![sponsor](https://sponsors.ryoppippi.com/sponsors.circles.svg)
-[@preview](https://ccusage.com/sponsor)
+<OgCard url="https://ccusage.com/sponsor" />

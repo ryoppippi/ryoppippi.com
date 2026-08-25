@@ -50,7 +50,7 @@ description: "neovimconf 2024とvimconf 2024でNeovimのフロントエンド開
 
 <youtube id="D8qI9zkKATM" />
 
-<Divider />
+---
 
 # 本記事の読者、vimconf/neovimconf 参加者へ伝えたいこと
 
@@ -103,7 +103,7 @@ vimconf での発表が想像以上に盛り上がったこと、講演中のた
 
 <Tweet id="1860201973087371265" />
 
-<Divider />
+---
 
 # 発表までの時系列
 
@@ -352,7 +352,7 @@ AirBnB をチェックアウト。マンスリーマンションへと移動。
 
 (時差ぼけと興奮でここまで１週間くらい毎日3時間しか眠れてなかった。お祭りすぎる)
 
-<Divider />
+---
 
 # 反省点
 
@@ -384,7 +384,7 @@ Christian 先生や TJ の Keynote 、他の登壇者の方々の発表もとて
 
 # P.S.
 
-[@preview](https://podcasts.apple.com/jp/podcast/ujihisa%E3%81%95%E3%82%93%E3%81%A8mopp%E3%81%95%E3%82%93%E3%82%92%E3%81%8A%E8%BF%8E%E3%81%88%E3%81%97%E3%81%A6-vimconf-2024-%E3%82%92%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8A-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000678854019)
+<OgCard url="https://podcasts.apple.com/jp/podcast/ujihisa%E3%81%95%E3%82%93%E3%81%A8mopp%E3%81%95%E3%82%93%E3%82%92%E3%81%8A%E8%BF%8E%E3%81%88%E3%81%97%E3%81%A6-vimconf-2024-%E3%82%92%E6%8C%AF%E3%82%8A%E8%BF%94%E3%82%8A-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E6%A5%BD%E5%9C%92/id1755104750?i=1000678854019" />
 
 先日公開された [vim-jpラジオ](https://vim-jp-radio.com/)のエピソードでも、{link:@lambdalisue}さんに「りょっぴっぴは無謀」と言われてしまった。実際無謀だった。
 

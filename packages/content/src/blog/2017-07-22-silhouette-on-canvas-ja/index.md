@@ -67,4 +67,4 @@ description: "KinectとProcessing、プロジェクタを使い、ICUキッズ�
 
 ![](./canvas.jpg)
 
-[@preview](https://github.com/ryoppippi/SilhouetteOnCanvas)
+<OgCard url="https://github.com/ryoppippi/SilhouetteOnCanvas" />

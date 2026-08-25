@@ -69,7 +69,7 @@ You can also attach them to a longer sentence when you want to keep the main flo
 
 # Image
 
-![](https://ryoppippi.com/ryoppippi.jpg)
+!<OgCard url="https://ryoppippi.com/ryoppippi.jpg" />
 
 ## Image with a caption
 
@@ -102,7 +102,7 @@ pub fn main() void {
 
 # Link Card
 
-[@preview](https://ryoppippi.com/blog/2024-09-29)
+<OgCard url="https://ryoppippi.com/blog/2024-09-29" />
 
 # Magic Link
 

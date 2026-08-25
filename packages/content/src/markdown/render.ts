@@ -6,7 +6,6 @@ import type { IslandModules } from '../islands.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformOutsideFences } from './fences.ts';
 import { escapeHtml } from './html.ts';
-import { replaceLinkPreviews } from './link-preview.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
@@ -37,14 +36,11 @@ export type RenderMarkdownOptions = {
 };
 
 function prepareOxContentMarkdown(content: string) {
-	return transformOutsideFences(content, (line) => {
-		const embeds = replaceNotByAIEmbeds(
-			line
-				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
-				.replace(/<Divider\s*\/>/g, '<hr>'),
-		);
-		return replaceLinkPreviews(embeds);
-	});
+	return transformOutsideFences(content, (line) =>
+		replaceNotByAIEmbeds(
+			line.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>'),
+		),
+	);
 }
 
 function wrapScrollableTables(html: string) {
@@ -80,8 +76,7 @@ function postprocessRenderedHtml(html: string) {
 			(_match, attrs: string, text: string, card: string) =>
 				text.trim().length === 0 ? card : `<p${attrs}>${text.trimEnd()}</p>${card}`,
 		)
-		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1')
-		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
+		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 
 	return wrapScrollableTables(withoutTrailingAttributes);
@@ -168,11 +163,15 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 
 if (import.meta.vitest != null) {
 	describe('prepareOxContentMarkdown', () => {
-		it('renders preview links through the Ox Content open graph embed', async () => {
-			const html = await renderMarkdown('[@preview](http://localhost/post)');
+		it('renders native Ox Content open graph embeds', async () => {
+			const html = await renderMarkdown('<OgCard url="http://localhost/post" />');
+			const mdxHtml = await renderMarkdown('<ogcard url="http://localhost/post"></ogcard>', {
+				mdx: true,
+			});
 
 			expect(html).toContain('class="ox-ogp-simple"');
 			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
+			expect(mdxHtml).toContain('class="ox-ogp-simple"');
 		});
 
 		it('renders angle links that contain parentheses', async () => {
@@ -189,12 +188,6 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('>https://example.com/a(1)</a>');
 		});
 
-		it('converts preview links to link card html', () => {
-			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
-				'<ogcard url="https://github.com/junkawa/figma_jp" />',
-			);
-		});
-
 		it('renders bare URLs without swallowing trailing punctuation', async () => {
 			const html = await renderMarkdown('> https://example.com/a(1).');
 
@@ -207,10 +200,6 @@ if (import.meta.vitest != null) {
 
 			expect(html.match(/<a\b/g)).toHaveLength(1);
 			expect(html).toContain('>site</a>');
-		});
-
-		it('leaves malformed preview links untouched', () => {
-			expect(prepareOxContentMarkdown('[@preview](https://%)')).toBe('[@preview](https://%)');
 		});
 
 		it('preserves Ox Content magic link syntax for the renderer', () => {
@@ -322,11 +311,10 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=4190"');
 		});
 
-		it('renders legacy dividers as horizontal rules', async () => {
-			const html = await renderMarkdown('<Divider />');
+		it('renders thematic breaks as horizontal rules', async () => {
+			const html = await renderMarkdown('---');
 
 			expect(html).toContain('<hr>');
-			expect(html).not.toContain('<Divider');
 		});
 
 		it('renders the NotByAI badge as an external link with both colour variants', async () => {

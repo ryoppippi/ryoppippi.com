@@ -159,7 +159,7 @@ brokenな英語でも仕事できた。ぐちゃぐちゃなキャリアでも�
 
 3月31日（火）19:00から、{link:tech_world18}が主催するオンラインイベントに登壇する。
 
-[@preview](https://techworld.connpass.com/event/384040/)
+<OgCard url="https://techworld.connpass.com/event/384040/" />
 
 一緒に登壇するのは、この記事でも紹介した[Kei](https://x.com/kei_english_ca)さん、そしてDenoでソフトウェアエンジニアとして働く[maguro](https://x.com/yusuktan)さん。
 

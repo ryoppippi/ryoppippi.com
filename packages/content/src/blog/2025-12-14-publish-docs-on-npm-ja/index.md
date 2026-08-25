@@ -161,7 +161,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 [gunshi](https://github.com/kazupon/gunshi) by {link:@kazupon} はTypeScriptでCLIツールを作成するためのlibraryです。筆者が今もっとも愛用しているCLI libraryです。
 
-[@preview](https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja)
+<OgCard url="https://ryoppippi.com/blog/2025-08-12-my-js-cli-stack-2025-ja" />
 
 このlibraryは`gunshi` packageとは別に[`@gunshi/docs`](https://www.npmjs.com/package/@gunshi/docs)というドキュメント専用packageを提供しています。Coding Agentは`bun-types`と同様にこのドキュメントを参照することで、`gunshi`の使い方を学習することができます。
 また、[`bunx @gunshi/docs`コマンドを叩くと、`CLAUDE.md`や`Cursor Rule`を自動生成してくれる仕組み](https://gunshi.dev/guide/introduction/setup#llm-assisted-development)も提供しています([注](https://s.tgstc.com/ogp3/b8d2f83c6b1bbdb7a544fe45527925b7-1200x675.jpeg))。
@@ -174,7 +174,7 @@ Coding Agentは、使用しているlibraryのバージョンに対応するド�
 
 などの効果がありました。
 
-[@preview](https://github.com/ryoppippi/gunshi-docs-skills-benchmark/)
+<OgCard url="https://github.com/ryoppippi/gunshi-docs-skills-benchmark/" />
 
 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
   <div style="flex: 1; min-width: 300px;">

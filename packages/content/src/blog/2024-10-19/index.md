@@ -16,7 +16,7 @@ alternates:
 
 If you're a macOS user, you're likely familiar with Karabiner-Elements, the famous keyboard customisation tool.
 
-[@preview](https://karabiner-elements.pqrs.org/)
+<OgCard url="https://karabiner-elements.pqrs.org/" />
 
 [Karabiner-Elements](https://karabiner-elements.pqrs.org/docs/manual/configuration/configure-complex-modifications) is a tool that hooks into macOS keyboard events, allowing you to customise key inputs.
 
@@ -89,7 +89,7 @@ When compiled, this generates the following JSON:
 
 I write my settings using `karabiner.ts` and compile them with deno to generate karabiner.json.
 
-[@preview](https://github.com/ryoppippi/dotfiles/tree/65dc955a4187c9c375793a99271b8af4c2014d3e/karabiner)
+<OgCard url="https://github.com/ryoppippi/dotfiles/tree/65dc955a4187c9c375793a99271b8af4c2014d3e/karabiner" />
 
 Using `deno task watch` to monitor files and generate karabiner.json when files change provides a very nice experience.
 

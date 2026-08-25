@@ -26,7 +26,7 @@ READMEに従って、上のレポジトリをCloneし、TensorFlow Liteのイン
 一応今回推論に使用するモデルもCommitしてあるが、自分で学習することももちろんできる。
 学習に用いたNotebookはこちら↓
 
-[@preview](https://github.com/ryoppippi/zig-tflite-mnist/blob/main/notebook/MNIST_TFLite.ipynb)
+<OgCard url="https://github.com/ryoppippi/zig-tflite-mnist/blob/main/notebook/MNIST_TFLite.ipynb" />
 
 # 画像の読み込みについて
 
