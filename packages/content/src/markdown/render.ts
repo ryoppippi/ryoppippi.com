@@ -7,7 +7,6 @@ import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { transformOutsideFences } from './fences.ts';
 import { addExternalLinkAttributes, escapeHtml } from './html.ts';
-import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
@@ -48,7 +47,7 @@ function prepareOxContentMarkdown(content: string) {
 				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
 				.replace(/<Divider\s*\/>/g, '<hr>'),
 		);
-		const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(embeds)));
+		const preparedLine = replaceLinkPreviews(normalizeAngleLinks(embeds));
 
 		return replaceBareUrls(preparedLine);
 	});
@@ -194,12 +193,6 @@ if (import.meta.vitest != null) {
 			);
 		});
 
-		it('converts markdown images with title attributes to image figures', () => {
-			expect(prepareOxContentMarkdown('![alt](./image.png "caption"){width=480}')).toBe(
-				'<figure><img src="./image.png" alt="alt" title="caption" loading="lazy" decoding="async"><figcaption>caption</figcaption></figure>',
-			);
-		});
-
 		it('converts preview links to link card html', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
 				'<ogcard url="https://github.com/junkawa/figma_jp" />',
@@ -252,6 +245,15 @@ if (import.meta.vitest != null) {
 	});
 
 	describe('renderMarkdown', () => {
+		it('renders image captions and dimensions with Ox Content', async () => {
+			const html = await renderMarkdown('![alt](./image.png "caption"){width=480}');
+
+			expect(html).toContain('<figure class="ox-figure">');
+			expect(html).toContain('loading="lazy"');
+			expect(html).toContain('width="480"');
+			expect(html).toContain('<figcaption>caption</figcaption>');
+		});
+
 		it('wraps markdown tables in a keyboard-scrollable region', async () => {
 			const html = await renderMarkdown('| Name | Value |\n|---|---:|\n| Example | 42 |');
 

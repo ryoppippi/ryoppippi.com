@@ -61,6 +61,7 @@ function createMarkdownTransform(mdx: boolean) {
 			frontmatter: false,
 			headingPermalinks: true,
 			highlight: true,
+			images: true,
 			magicLinks: {
 				aliases: magicLinkAliases,
 				favicon: { template: 'https://favicon.yandex.net/favicon/{host}' },
