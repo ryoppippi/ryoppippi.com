@@ -17,8 +17,8 @@
 	"devDependencies": {
 		"@clack/prompts": "^1.7.0",
 		"@ox-content/napi": "catalog:",
-		"@ox-content/vite-plugin": "3.0.0-alpha.8",
-		"@ox-content/vite-plugin-svelte": "3.0.0-alpha.8",
+		"@ox-content/vite-plugin": "3.0.0-alpha.9",
+		"@ox-content/vite-plugin-svelte": "3.0.0-alpha.9",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
 		"@tanstack/charts": "0.14.0",
 		"@types/d3-scale": "^4.0.9",
