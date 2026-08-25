@@ -327,13 +327,11 @@ if (import.meta.vitest != null) {
 		const home = homePage(assets);
 		expect(home.sourcePaths).toContain(SITE_OWNER_SOURCE_PATH);
 		const html = home.content;
-		expect(html).toContain(
-			`<meta data-page-head="" name="description" content="${HOME_DESCRIPTION}">`,
-		);
+		expect(html).toContain(`<meta name="description" content="${HOME_DESCRIPTION}">`);
 		expect(html).not.toContain('data-home-description');
 		expect(html).toMatch(/<span data-nosnippet(?:="")?><a class="skip-link"/);
 		expect(html).toMatch(/<div data-nosnippet(?:="")? class="flex flex-wrap justify-center/);
-		expect(html).toContain('<meta data-page-head="" property="og:title" content="ryoppippi.com">');
+		expect(html).toContain('<meta property="og:title" content="ryoppippi.com">');
 		expect(html).toContain('"@type":"WebSite"');
 	});
 
@@ -350,9 +348,7 @@ if (import.meta.vitest != null) {
 
 	test('identifies the home page owner with profile structured data', () => {
 		const html = homePage(assets).content;
-		const jsonLd = html.match(
-			/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-		)?.[1];
+		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 		assert.isDefined(jsonLd, 'expected home page structured data');
 
 		expect(JSON.parse(jsonLd)).toMatchObject({
@@ -389,32 +385,28 @@ if (import.meta.vitest != null) {
 
 		expect(html).toContain('<html lang="en">');
 		expect(html).toContain(
-			'<meta data-page-head="" name="description" content="A concise description for an example article.">',
+			'<meta name="description" content="A concise description for an example article.">',
 		);
 		expect(html).toContain(
-			'<meta data-page-head="" property="og:title" content="Example article | blog | ryoppippi.com">',
+			'<meta property="og:title" content="Example article | blog | ryoppippi.com">',
 		);
 		expect(html).toContain(
-			'<meta data-page-head="" property="og:description" content="A concise description for an example article.">',
+			'<meta property="og:description" content="A concise description for an example article.">',
 		);
 		expect(html).toContain(
-			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
+			'<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
 		);
 		expect(html).toContain(
-			'<link data-page-head="" rel="canonical" href="https://ryoppippi.com/blog/example-article/">',
+			'<link rel="canonical" href="https://ryoppippi.com/blog/example-article/">',
 		);
 		expect(html).toContain(
-			'<meta data-page-head="" property="article:published_time" content="2026-01-01T00:00:00.000Z">',
+			'<meta property="article:published_time" content="2026-01-01T00:00:00.000Z">',
 		);
 		for (const [language, url] of Object.entries(examplePost.alternates)) {
-			expect(html).toContain(
-				`<link data-page-head="" hreflang="${language}" href="${url}" rel="alternate">`,
-			);
+			expect(html).toContain(`<link rel="alternate" hreflang="${language}" href="${url}">`);
 		}
 
-		const jsonLd = html.match(
-			/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-		)?.[1];
+		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 		expect(jsonLd).toBeDefined();
 		expect(JSON.parse(jsonLd ?? '')).toMatchObject({
 			'@context': 'https://schema.org',
@@ -450,7 +442,7 @@ if (import.meta.vitest != null) {
 		);
 
 		expect(article?.content).toContain(
-			'<meta data-page-head="" name="description" content="A useful fallback paragraph with a link.">',
+			'<meta name="description" content="A useful fallback paragraph with a link.">',
 		);
 	});
 
@@ -479,11 +471,10 @@ if (import.meta.vitest != null) {
 			assets,
 		);
 		const jsonLd =
-			article?.content.match(
-				/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-			)?.[1] ?? '';
+			article?.content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ??
+			'';
 
-		expect(jsonLd).toContain('\\u003C/script>');
+		expect(jsonLd).toContain('\\u003c/script\\u003e');
 		expect(jsonLd).not.toContain('</script><script>');
 		expect(JSON.parse(jsonLd)).toMatchObject({
 			headline: '</script><script>alert(1)</script>',

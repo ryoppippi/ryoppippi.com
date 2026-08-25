@@ -202,7 +202,7 @@ if (import.meta.vitest != null) {
 
 	test('keeps the generated 404 page out of search and social metadata', () => {
 		const html = errorPage(assets).content;
-		expect(html).toContain('<meta data-page-head="" name="robots" content="noindex,follow">');
+		expect(html).toContain('<meta name="robots" content="noindex,follow">');
 		expect(html).not.toContain('property="og:');
 		expect(html).not.toContain('rel="canonical"');
 	});

@@ -289,12 +289,24 @@ function destroyPage(): void {
 	islandCleanups.clear();
 }
 
+const pageHeadSelector = [
+	'meta[name="description"]',
+	'meta[name="robots"]',
+	'meta[name="Hatena::Bookmark"]',
+	'meta[name^="twitter:"]',
+	'meta[property^="og:"]',
+	'meta[property^="article:"]',
+	'link[rel="canonical"]',
+	'link[rel="alternate"][hreflang]',
+	'script[type="application/ld+json"]',
+].join(',');
+
 function syncHead(next: Document): void {
 	document.title = next.title;
-	for (const element of document.head.querySelectorAll('[data-page-head]')) {
+	for (const element of document.head.querySelectorAll(pageHeadSelector)) {
 		element.remove();
 	}
-	for (const element of next.head.querySelectorAll('[data-page-head]')) {
+	for (const element of next.head.querySelectorAll(pageHeadSelector)) {
 		document.head.append(element.cloneNode(true));
 	}
 }
