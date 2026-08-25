@@ -20,7 +20,7 @@ https://www.switch-science.com/catalog/6900/
 すると、ストレージとして認識されます。
 ここにuf2ファイルをコピーすることで、プログラムを実行することができます。
 
-![](./rspipicozig_finder.png)
+![RPI-RP2ボリュームとしてマウントされたRaspberry Pi Pico](./rspipicozig_finder.png)
 
 # MicroZigを使う
 
@@ -73,10 +73,10 @@ pub fn main() void {
 上のリポジトリをクローンしてbuildすると、`zig-out/bin`ディレクトリにuf2ファイルが生成されます。
 これを先ほど紹介したマウントされたラズパイのディレクトリにコピーすると動きます。
 
-![](./rspipicozig-finder-copy.png)
+![生成したblink.uf2をRaspberry Pi PicoのRPI-RP2ボリュームへコピーしているFinder](./rspipicozig-finder-copy.png)
 _uf2ファイルをコピーする_
 
-![](./rspipicozig.gif)
+![ZigプログラムでLEDを点滅させるRaspberry Pi Pico](./rspipicozig.gif)
 _チカチカ_
 
 # バイナリサイズ

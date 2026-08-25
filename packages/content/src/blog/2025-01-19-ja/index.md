@@ -17,14 +17,14 @@ alternates:
 
 <div class='grid grid-cols-3 gap-2'>
 
-![](./IMG_0941.png)
+![YouTubeの起動と終了を条件にしたiOSショートカットのオートメーション一覧](./IMG_0941.png)
 
-![](./IMG_0942.png)
+![YouTubeを開いたとき即時実行するiOSショートカットの設定](./IMG_0942.png)
 
-![](./IMG_0943.png)
+![画面の向きのロックをオフにするiOSショートカットのアクション](./IMG_0943.png)
 
 </div>
 
-![](./ss.avif 'ショートカットのスクリーンショット'){.w-1/2 .mx-auto .block .my-4}
+![画面の向きのロックボタンを表示したiPhoneのコントロールセンター](./ss.avif 'ショートカットのスクリーンショット'){.w-1/2 .mx-auto .block .my-4}
 
 ぜひ試してみてください！

@@ -17,14 +17,14 @@ When you configure this shortcut, the rotation lock is disabled when you open th
 
 <div class='grid grid-cols-3 gap-2'>
 
-![](./IMG_0941.png)
+![iOS Shortcuts automation list for opening and closing YouTube](./IMG_0941.png)
 
-![](./IMG_0942.png)
+![iOS Shortcuts automation set to run immediately when YouTube opens](./IMG_0942.png)
 
-![](./IMG_0943.png)
+![iOS Shortcuts action that turns orientation lock off](./IMG_0943.png)
 
 </div>
 
-![](./ss.avif 'Screenshot of the shortcut'){.w-1/2 .mx-auto .block .my-4}
+![iPhone Control Centre showing the orientation lock control](./ss.avif 'Screenshot of the shortcut'){.w-1/2 .mx-auto .block .my-4}
 
 Enjoy!
