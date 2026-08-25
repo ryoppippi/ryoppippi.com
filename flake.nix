@@ -36,6 +36,8 @@
               nix-vite-plus.packages.${system}.vp
             ] ++ (with pkgs; [
               gitleaks
+              nushell
+              nufmt
               typos
               typos-lsp
               svelte-language-server

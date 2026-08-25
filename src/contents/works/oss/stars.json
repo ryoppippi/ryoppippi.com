@@ -1,0 +1,101 @@
+{
+  "updatedAt": "2026-08-25T12:13:27Z",
+  "projects": [
+    {
+      "repo": "ryoppippi/bad-apple",
+      "stars": 24
+    },
+    {
+      "repo": "ryoppippi/ccusage",
+      "stars": 18155
+    },
+    {
+      "repo": "ryoppippi/curxy",
+      "stars": 417
+    },
+    {
+      "repo": "ryoppippi/dotfiles",
+      "stars": 259
+    },
+    {
+      "repo": "ryoppippi/fish-na",
+      "stars": 7
+    },
+    {
+      "repo": "ryoppippi/gh-nippou",
+      "stars": 14
+    },
+    {
+      "repo": "ryoppippi/gray-matter-es",
+      "stars": 4
+    },
+    {
+      "repo": "ryoppippi/limo",
+      "stars": 7
+    },
+    {
+      "repo": "ryoppippi/nix-secure-enclave-key",
+      "stars": 10
+    },
+    {
+      "repo": "ryoppippi/nvim-in-the-loop",
+      "stars": 28
+    },
+    {
+      "repo": "ryoppippi/nvim-pnpm-catalog-lens",
+      "stars": 11
+    },
+    {
+      "repo": "ryoppippi/nvim-reset",
+      "stars": 13
+    },
+    {
+      "repo": "ryoppippi/nyancat.zig",
+      "stars": 23
+    },
+    {
+      "repo": "ryoppippi/sitemcp",
+      "stars": 758
+    },
+    {
+      "repo": "ryoppippi/str-fns",
+      "stars": 3
+    },
+    {
+      "repo": "ryoppippi/svelte-fancy-darkmode",
+      "stars": 9
+    },
+    {
+      "repo": "ryoppippi/svelte-preprocess-budoux",
+      "stars": 7
+    },
+    {
+      "repo": "ryoppippi/svelte-preprocess-import-css",
+      "stars": 4
+    },
+    {
+      "repo": "ryoppippi/sveltweet",
+      "stars": 8
+    },
+    {
+      "repo": "ryoppippi/tgrab",
+      "stars": 11
+    },
+    {
+      "repo": "ryoppippi/vim-svelte-inspector",
+      "stars": 22
+    },
+    {
+      "repo": "ryoppippi/vite-plugin-favicons",
+      "stars": 3
+    },
+    {
+      "repo": "ryoppippi/web-push-neo",
+      "stars": 11
+    },
+    {
+      "repo": "ryoppippi/zigcv",
+      "stars": 162
+    }
+  ]
+}

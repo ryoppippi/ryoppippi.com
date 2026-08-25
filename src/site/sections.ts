@@ -11,55 +11,78 @@ export type Talk = {
 	links: string[];
 };
 
+export type OssProjectKind = 'project' | 'contribution';
+
 export type OssProject = {
 	name: string;
 	link: string;
 	slug: string;
 	description: string | null;
 	icon: string;
+	kind: OssProjectKind;
+	tags: string[];
+	stars: number | null;
 };
 
-type OssProjectSource = Omit<OssProject, 'link' | 'slug' | 'description'> &
-	Partial<Pick<OssProject, 'link' | 'slug' | 'description'>>;
+type OssProjectSource = Omit<OssProject, 'link' | 'slug' | 'description' | 'kind' | 'stars'> &
+	Partial<Pick<OssProject, 'link' | 'slug' | 'description' | 'kind'>>;
 
-export async function loadOssProjects(root: string): Promise<Record<string, OssProject[]>> {
-	const source = JSON.parse(
-		await readFile(path.join(root, 'src/contents/works/oss/list.json'), 'utf8'),
-	) as Record<string, OssProjectSource[]>;
-	const entries = await Promise.all(
-		Object.entries(source).map(
-			async ([genre, projects]) =>
-				[
-					genre,
-					await Promise.all(
-						projects.map(async (project) => {
-							const link = project.link ?? `https://github.com/ryoppippi/${project.name}`;
-							let description = project.description ?? null;
-							if (description == null) {
-								try {
-									const response = await fetch(`https://ungh.cc/repos/ryoppippi/${project.name}`);
-									if (response.ok) {
-										const data = (await response.json()) as {
-											repo?: { description?: string | null };
-										};
-										description = data.repo?.description ?? null;
-									}
-								} catch {
-									description = null;
-								}
-							}
-							return {
-								...project,
-								link,
-								slug: project.slug ?? `ryoppippi-${project.name}`,
-								description,
-							} satisfies OssProject;
-						}),
-					),
-				] as const,
-		),
+type OssStarSnapshot = {
+	updatedAt: string;
+	projects: Array<{ repo: string; stars: number }>;
+};
+
+function githubRepository(link: string): string | null {
+	try {
+		const url = new URL(link);
+		if (url.hostname !== 'github.com' && url.hostname !== 'www.github.com') {
+			return null;
+		}
+		const [owner, repository] = url.pathname.split('/').filter(Boolean);
+		return owner == null || repository == null
+			? null
+			: `${owner}/${repository.replace(/\.git$/, '')}`;
+	} catch {
+		return null;
+	}
+}
+
+export async function loadOssProjects(root: string): Promise<OssProject[]> {
+	const [source, starSnapshot] = await Promise.all([
+		readFile(path.join(root, 'src/contents/works/oss/list.json'), 'utf8'),
+		readFile(path.join(root, 'src/contents/works/oss/stars.json'), 'utf8'),
+	]);
+	const projects = JSON.parse(source) as OssProjectSource[];
+	const stars = JSON.parse(starSnapshot) as OssStarSnapshot;
+	const starCounts = new Map(stars.projects.map(({ repo, stars: count }) => [repo, count]));
+	return Promise.all(
+		projects.map(async (project) => {
+			const link = project.link ?? `https://github.com/ryoppippi/${project.name}`;
+			const repository = githubRepository(link);
+			let description = project.description ?? null;
+			if (description == null) {
+				try {
+					const response = await fetch(`https://ungh.cc/repos/ryoppippi/${project.name}`);
+					if (response.ok) {
+						const data = (await response.json()) as {
+							repo?: { description?: string | null };
+						};
+						description = data.repo?.description ?? null;
+					}
+				} catch {
+					description = null;
+				}
+			}
+			return {
+				...project,
+				link,
+				slug: project.slug ?? `ryoppippi-${project.name}`,
+				description,
+				kind: project.kind ?? 'project',
+				stars: repository == null ? null : (starCounts.get(repository) ?? null),
+			} satisfies OssProject;
+		}),
 	);
-	return Object.fromEntries(entries);
 }
 
 export async function loadTalks(): Promise<Talk[]> {

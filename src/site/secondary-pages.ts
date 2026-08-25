@@ -15,11 +15,11 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 /**
  * Renders the open-source projects page.
  *
- * @param projects - Projects grouped by their genre.
+ * @param projects - Manually ordered OSS projects to render.
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated open-source projects page.
  */
-export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAssets): GeneratedFile {
+export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/oss/index.html',
 		sourcePaths: [
@@ -33,7 +33,7 @@ export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAsse
 			pathname: '/works/oss/',
 			content: renderComponent(Oss, { projects }),
 			description:
-				'Open-source projects by @ryoppippi across developer tooling, TypeScript, Svelte, CLI, Vim, Zig, and Nix.',
+				'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
 			assets,
 			style: 'works',
 		}),
