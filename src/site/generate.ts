@@ -15,6 +15,7 @@ import {
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
+import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalPosts } from './content.ts';
 import { corePages } from './pages.ts';
 import {
@@ -103,8 +104,7 @@ export async function generateSite({
 	const plainFiles: GeneratedFile[] = [
 		{
 			path: 'works/index.html',
-			content:
-				'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="https://ryoppippi.com/works/oss/"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>',
+			content: `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="${SITE_ORIGIN}/works/oss/"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>`,
 		},
 		{ path: 'dotfiles.md', content: dotfiles },
 		{ path: 'dotfiles/install', content: install },
@@ -123,7 +123,7 @@ export async function generateSite({
 
 	const urls = pages
 		.filter((file) => file.path.endsWith('.html') && file.path !== '404.html')
-		.map((file) => `https://ryoppippi.com/${file.path.replace(/(?:index)?\.html$/, '')}`);
+		.map((file) => `${SITE_ORIGIN}/${file.path.replace(/(?:index)?\.html$/, '')}`);
 	plainFiles.push(sitemap(urls));
 	await writeGeneratedFiles(outDir, plainFiles);
 

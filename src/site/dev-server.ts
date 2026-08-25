@@ -124,7 +124,7 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		file === 'routes.ts' ||
 		file.startsWith('packages/content/src/markdown/') ||
 		file.startsWith('src/site/templates/') ||
-		/^src\/site\/(client|content|dev-routes|html|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
+		/^src\/site\/(client|consts|content|dev-routes|head|html|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
 			file,
 		)
 	) {
@@ -368,6 +368,11 @@ if (import.meta.vitest != null) {
 
 		it('invalidates all rendered pages for Markdown pipeline changes', () => {
 			expect(invalidatedRoutes('packages/content/src/markdown/render.ts')).toBe('*');
+		});
+
+		it('invalidates all rendered pages for head metadata changes', () => {
+			expect(invalidatedRoutes('src/site/head.ts')).toBe('*');
+			expect(invalidatedRoutes('src/site/consts.ts')).toBe('*');
 		});
 
 		it('ignores client assets handled by Vite', () => {

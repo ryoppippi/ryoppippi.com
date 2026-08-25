@@ -1,22 +1,26 @@
 import type { Component } from 'svelte';
+import type { Thing, WithContext } from 'schema-dts';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import { render } from 'svelte/server';
 import { renderAssetTags } from './assets.ts';
+import { renderPageHead } from './head.ts';
 import Shell from './templates/Shell.svelte';
 
 type PageOptions = {
 	article?: boolean;
+	alternates?: Readonly<Record<string, string>>;
 	assets: SiteAssets;
 	content: string;
+	datePublished?: string;
 	description?: string;
+	indexable?: boolean;
 	lang?: string;
-	alternates?: Readonly<Record<string, string>>;
 	islands?: string[];
 	pathname: string;
 	style: PageStyle;
 	title: string;
 	tweet?: boolean;
-	structuredData?: Readonly<Record<string, unknown>>;
+	structuredData?: WithContext<Thing>;
 };
 
 function normalizedLanguage(value: string | undefined): string {
@@ -56,6 +60,8 @@ export function page({
 	pathname,
 	content,
 	description = 'Portfolio of @ryoppippi',
+	datePublished,
+	indexable = true,
 	lang = 'en',
 	alternates,
 	article = false,
@@ -66,22 +72,24 @@ export function page({
 	structuredData,
 }: PageOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
-	const jsonLd =
-		structuredData == null ? undefined : JSON.stringify(structuredData).replaceAll('<', '\\u003c');
-	const structuredDataTag =
-		jsonLd == null ? '' : `<script data-page-head type="application/ld+json">${jsonLd}</script>`;
-	const { body, head } = render(Shell, {
+	const body = render(Shell, {
 		props: {
-			article,
 			content,
-			description,
-			lang: documentLanguage,
-			alternates,
 			pathname,
-			title,
 		},
+	}).body;
+	const head = renderPageHead({
+		article,
+		alternates,
+		datePublished,
+		description,
+		indexable,
+		lang: documentLanguage,
+		pathname,
+		structuredData,
+		title,
 	});
 	const theme =
 		"document.documentElement.classList.add('js');try{const theme=localStorage.theme;document.documentElement.classList.toggle('dark',theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{document.documentElement.classList.toggle('dark',matchMedia('(prefers-color-scheme: dark)').matches)}";
-	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}${structuredDataTag}<script>${theme}</script>${renderAssetTags(assets, style, tweet, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
+	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, tweet, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
 }

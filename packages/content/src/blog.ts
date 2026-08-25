@@ -15,6 +15,7 @@ import { loadTweetSnapshots } from './tweet-snapshots.ts';
  * @example
  * ```yaml
  * description: A short summary for search results.
+ * image: /images/article-cover.jpg
  * alternates:
  *   en: https://example.com/en/
  *   ja: https://example.com/ja/
@@ -23,6 +24,7 @@ import { loadTweetSnapshots } from './tweet-snapshots.ts';
  */
 export type ArticleMetadata = {
 	description?: string;
+	image?: string;
 	alternates?: Readonly<Record<string, string>>;
 };
 
@@ -49,6 +51,7 @@ export type BlogPostMetadata = Pick<
 	BlogPost,
 	| 'title'
 	| 'description'
+	| 'image'
 	| 'alternates'
 	| 'filename'
 	| 'filepath'
@@ -80,7 +83,9 @@ function parseArticleMetadata(data: Record<string, unknown>): ArticleMetadata {
 		typeof data.description === 'string' && data.description.trim().length > 0
 			? data.description.trim()
 			: undefined;
-	return { description, alternates: parseAlternates(data.alternates) };
+	const image =
+		typeof data.image === 'string' && data.image.trim().length > 0 ? data.image.trim() : undefined;
+	return { description, image, alternates: parseAlternates(data.alternates) };
 }
 
 function filenameFor(filepath: string): string {
@@ -309,6 +314,7 @@ if (import.meta.vitest != null) {
 					'isPublished: true',
 					'lang: en',
 					'description: A useful article summary.',
+					'image: /images/article-cover.jpg',
 					'alternates:',
 					'  en: " https://example.com/en/ "',
 					'  ja: https://example.com/ja/',
@@ -324,6 +330,7 @@ if (import.meta.vitest != null) {
 			await expect(loadBlogPost('article', renderContent, fixture.getPath())).resolves.toEqual(
 				expect.objectContaining({
 					description: 'A useful article summary.',
+					image: '/images/article-cover.jpg',
 					alternates: {
 						en: 'https://example.com/en/',
 						ja: 'https://example.com/ja/',
