@@ -266,14 +266,15 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('src="/ryoppippi.avif"');
 		expect(html).toContain('src="/haichu.avif"');
 		expect(html).toContain('Ryotaro Kimura');
-		expect(html).toContain('木村　亮太朗');
+		expect(html).toContain('木村亮太朗');
 		expect(html).toContain('coder without ai');
-		expect(html).toContain('I work at');
+		expect(html).toContain('is a software engineer at');
 		expect(html).toContain('href="https://rork.com/"');
 		expect(html).toContain('href="/works/oss/"');
 		expect(html).toContain('href="/cv"');
 		expect(html).toContain('<ul');
 		expect(html).toContain('>GitHub</a>');
+		expect(html).not.toContain('>PR</a>');
 		expect(html).not.toContain('<figcaption');
 		expect(html).toContain('view-transition-name:about-haichu');
 		expect(html).toContain('"@type":"ProfilePage"');
