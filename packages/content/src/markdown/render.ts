@@ -1,5 +1,9 @@
-import oxContent from '@ox-content/napi';
-import { applyIslandSsrHtml, transformAllPlugins, transformOgp } from '@ox-content/vite-plugin';
+import {
+	applyIslandSsrHtml,
+	transformAllPlugins,
+	transformOgp,
+	transformYouTube,
+} from '@ox-content/vite-plugin';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
@@ -9,7 +13,6 @@ import { escapeHtml } from './html.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
-const { transformYoutubeEmbeds } = oxContent;
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../../..');
 const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../../..', '.cache/ox-content/ogp');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
@@ -142,7 +145,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		},
 		youtube: false,
 	});
-	const media = transformYoutubeEmbeds(social);
+	const media = await transformYouTube(social);
 	const openGraph = /<ogcard\b/i.test(media)
 		? await transformOgp(media, undefined, {
 				cacheDir: ogpCacheDirectory,
