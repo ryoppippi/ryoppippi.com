@@ -10,4 +10,4 @@ runs:
 
     - name: Install JavaScript dependencies
       shell: bash
-      run: nix develop .#ci --command vp install --frozen-lockfile
+      run: nix develop .#ci --command pnpm install --frozen-lockfile
