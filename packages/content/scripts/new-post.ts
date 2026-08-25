@@ -33,7 +33,7 @@ if (p.isCancel(lang)) {
 p.log.message('Creating post...');
 
 const blogDir = blogDirectory();
-const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}`;
+const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}-${lang}`;
 const postDir = join(blogDir, slug);
 const md = join(postDir, 'index.md');
 const frontMatter = stringify('', {
