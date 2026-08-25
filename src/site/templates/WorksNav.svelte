@@ -21,7 +21,7 @@
 				href={`/works/${item}/`}
 				style={`view-transition-name:works-nav-${item}`}
 			>
-				{item === 'oss' ? 'Oss' : item[0].toUpperCase() + item.slice(1)}
+				{item === 'oss' ? 'OSS' : item[0].toUpperCase() + item.slice(1)}
 			</a>
 		{/each}
 	</nav>
