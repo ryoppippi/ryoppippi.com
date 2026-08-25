@@ -4,24 +4,19 @@ import type { PostListItem } from './content.ts';
 import { Feed } from 'feed';
 import { formatDate } from '../lib/util.ts';
 import { islandModuleIds } from './assets.ts';
-import {
-	SITE_COPYRIGHT,
-	SITE_NAME,
-	SITE_ORIGIN,
-	SITE_OWNER,
-	SITE_SOCIAL_IMAGE_URL,
-} from './consts.ts';
+import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 import { postListItems } from './content.ts';
 import path from 'node:path';
 import { page, renderComponent } from './html.ts';
+import { SITE_OWNER } from './site-owner.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
 import Home from './templates/Home.svelte';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
-const HOME_DESCRIPTION =
-	'Portfolio and technical blog of Ryotaro Kimura (木村亮太朗), known as @ryoppippi, featuring open-source projects, talks, publications, and software engineering articles.';
+const SITE_OWNER_SOURCE_PATH = 'src/site/site-owner.ts';
+const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle}, featuring open-source projects, talks, publications, and software engineering articles.`;
 
 function markdownDescription(content: string): string | undefined {
 	const paragraph = content
@@ -81,7 +76,7 @@ export type GeneratedFile = {
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		sourcePaths: ['src/site/templates/Home.svelte'],
+		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.svelte'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -181,7 +176,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
-			sourcePaths: [sourcePath],
+			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
 			content: page({
 				title: `${post.title} | blog`,
 				pathname,
@@ -299,7 +294,9 @@ if (import.meta.vitest != null) {
 	} satisfies BlogPost;
 
 	test('renders site identity metadata on the home page', () => {
-		const html = homePage(assets).content;
+		const home = homePage(assets);
+		expect(home.sourcePaths).toContain(SITE_OWNER_SOURCE_PATH);
+		const html = home.content;
 		expect(html).toContain(
 			`<meta data-page-head="" name="description" content="${HOME_DESCRIPTION}">`,
 		);
@@ -357,7 +354,7 @@ if (import.meta.vitest != null) {
 	test('renders article SEO metadata and reciprocal language links', () => {
 		const [article] = articlePages(examplePost, assets);
 		expect(article).toBeDefined();
-		expect(article?.sourcePaths).toEqual(['/content/example-article']);
+		expect(article?.sourcePaths).toEqual([SITE_OWNER_SOURCE_PATH, '/content/example-article']);
 		const html = article?.content ?? '';
 
 		expect(html).toContain('<html lang="en">');
