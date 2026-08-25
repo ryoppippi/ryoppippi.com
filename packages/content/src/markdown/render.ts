@@ -6,9 +6,8 @@ import type { IslandModules } from '../islands.ts';
 import { applyBudouxHtml } from './budoux.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
 import { transformOutsideFences } from './fences.ts';
-import { addExternalLinkAttributes, escapeHtml } from './html.ts';
+import { escapeHtml } from './html.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
-import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
@@ -47,9 +46,7 @@ function prepareOxContentMarkdown(content: string) {
 				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
 				.replace(/<Divider\s*\/>/g, '<hr>'),
 		);
-		const preparedLine = replaceLinkPreviews(normalizeAngleLinks(embeds));
-
-		return replaceBareUrls(preparedLine);
+		return replaceLinkPreviews(embeds);
 	});
 }
 
@@ -90,7 +87,7 @@ function postprocessRenderedHtml(html: string) {
 		.replace(/<p>(\s*<hr>\s*)<\/p>/g, '$1');
 	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
 
-	return addExternalLinkAttributes(wrapScrollableTables(withoutTrailingAttributes));
+	return wrapScrollableTables(withoutTrailingAttributes);
 }
 
 async function renderIslands(
@@ -181,16 +178,18 @@ if (import.meta.vitest != null) {
 			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
 		});
 
-		it('normalises angle links that contain parentheses', () => {
-			expect(prepareOxContentMarkdown('[release](<https://example.com/a(1)>)')).toBe(
-				'[release](https://example.com/a%281%29)',
-			);
+		it('renders angle links that contain parentheses', async () => {
+			const html = await renderMarkdown('[release](<https://example.com/a(1)>)');
+
+			expect(html).toContain('href="https://example.com/a(1)"');
+			expect(html).toContain('>release</a>');
 		});
 
-		it('normalises bare angle links that contain parentheses', () => {
-			expect(prepareOxContentMarkdown('<https://example.com/a(1)>')).toBe(
-				'[https://example.com/a(1)](https://example.com/a%281%29)',
-			);
+		it('renders bare angle links that contain parentheses', async () => {
+			const html = await renderMarkdown('<https://example.com/a(1)>');
+
+			expect(html).toContain('href="https://example.com/a(1)"');
+			expect(html).toContain('>https://example.com/a(1)</a>');
 		});
 
 		it('converts preview links to link card html', () => {
@@ -217,16 +216,18 @@ if (import.meta.vitest != null) {
 			);
 		});
 
-		it('converts bare URLs to markdown links', () => {
-			expect(prepareOxContentMarkdown('> https://example.com/a(1).')).toBe(
-				'> [https://example.com/a(1)](https://example.com/a%281%29).',
-			);
+		it('renders bare URLs without swallowing trailing punctuation', async () => {
+			const html = await renderMarkdown('> https://example.com/a(1).');
+
+			expect(html).toContain('href="https://example.com/a(1)"');
+			expect(html).toContain('>https://example.com/a(1)</a>.');
 		});
 
-		it('leaves existing markdown links untouched when converting bare URLs', () => {
-			expect(prepareOxContentMarkdown('[site](https://example.com)')).toBe(
-				'[site](https://example.com)',
-			);
+		it('renders existing Markdown links once', async () => {
+			const html = await renderMarkdown('[site](https://example.com)');
+
+			expect(html.match(/<a\b/g)).toHaveLength(1);
+			expect(html).toContain('>site</a>');
 		});
 
 		it('leaves malformed preview links untouched', () => {
@@ -353,7 +354,7 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('<NotByAI />');
 
 			expect(html).toContain(
-				'<a href="https://notbyai.fyi" class="not-by-ai" aria-label="Written by human, not by AI" target="_blank" rel="noopener">',
+				'<a href="https://notbyai.fyi" class="not-by-ai" aria-label="Written by human, not by AI" target="_blank" rel="noopener noreferrer">',
 			);
 			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--light"');
 			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--dark"');

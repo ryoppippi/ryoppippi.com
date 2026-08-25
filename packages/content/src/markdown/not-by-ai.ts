@@ -23,9 +23,7 @@ function inlineSvg(source: string, variant: 'dark' | 'light'): string {
 	);
 }
 
-// href must be the first attribute so addExternalLinkAttributes recognises the
-// anchor and appends target/rel during post-processing.
-const badgeHtml = `<a href="https://notbyai.fyi" class="not-by-ai" aria-label="${BADGE_LABEL}">${inlineSvg(badgeLightSource, 'light')}${inlineSvg(badgeDarkSource, 'dark')}</a>`;
+const badgeHtml = `<a href="https://notbyai.fyi" class="not-by-ai" aria-label="${BADGE_LABEL}" target="_blank" rel="noopener noreferrer">${inlineSvg(badgeLightSource, 'light')}${inlineSvg(badgeDarkSource, 'dark')}</a>`;
 
 /**
  * Replaces `<NotByAI />` component tags in a markdown line with an inert

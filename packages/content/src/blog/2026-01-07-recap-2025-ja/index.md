@@ -35,7 +35,7 @@ description: "ccusageの飛躍と英国での就職、StackOneでのAI開発、�
 そのため今後は基本的にはメンテナンスモードになり、アクティビティは減っていくものだと考えている。
 
 <!-- spellchecker:off -->
-<a href="https://www.star-history.com/#ryoppippi/ccusage&Date">
+<a href="https://www.star-history.com/#ryoppippi/ccusage&Date" target="_blank" rel="noopener noreferrer">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ryoppippi/ccusage&type=Date&theme=dark" />
         <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ryoppippi/ccusage&type=Date" />
