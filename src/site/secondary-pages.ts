@@ -267,6 +267,10 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('src="/haichu.avif"');
 		expect(html).toContain('Ryotaro Kimura');
 		expect(html).toContain('木村　亮太朗');
+		expect(html).toContain('I work at Rork.');
+		expect(html).toContain('href="/works/oss/"');
+		expect(html).toContain('href="/cv"');
+		expect(html).not.toContain('<figcaption');
 		expect(html).toContain('view-transition-name:about-haichu');
 		expect(html).toContain('"@type":"ProfilePage"');
 	});

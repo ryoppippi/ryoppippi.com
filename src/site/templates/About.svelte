@@ -12,7 +12,7 @@
 		</div>
 	</header>
 
-	<div class='grid items-end gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]'>
+	<div class='mx-auto grid max-w-xs gap-8'>
 		<figure class='m-0'>
 			<img
 				class='mx-auto aspect-square w-full max-w-xs rounded-full object-contain view-transition-name---profile'
@@ -25,7 +25,6 @@
 				sizes='(min-width: 40rem) 256px, calc(100vw - 4rem)'
 				width='400'
 			/>
-			<figcaption class='mt-3 text-center font-mono text-sm opacity-50'>ryoppippi</figcaption>
 		</figure>
 
 		<figure class='m-0'>
@@ -39,16 +38,18 @@
 				style='view-transition-name:about-haichu'
 				width='1011'
 			/>
-			<figcaption class='mt-3 text-center font-mono text-sm opacity-50'>haichu</figcaption>
 		</figure>
+
 	</div>
 
-	<div class='mx-auto mt-14 max-w-2xl text-base leading-8 text-text-500 opacity-70 dark:text-text-300'>
+	<div class='mx-auto mt-10 max-w-2xl text-base leading-8 text-text-500 opacity-70 dark:text-text-300'>
 		<p>
-			I am a software engineer based in the UK. I work on AI products and open-source developer
-			tools, and I am the creator of
-			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='https://github.com/ryoppippi/ccusage' rel='noopener noreferrer' target='_blank'>ccusage</a>.
-			My interests include TypeScript, Rust, Svelte, Vim, and Nix.
+			I work at Rork. I maintain
+			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='https://github.com/ryoppippi/ccusage' rel='noopener noreferrer' target='_blank'>ccusage</a>
+			and
+			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='/works/oss/'>other open-source projects</a>.
+			You can find my CV
+			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='/cv' rel='noopener noreferrer' target='_blank'>here</a>.
 		</p>
 	</div>
 </article>

@@ -449,6 +449,9 @@ async function navigate(url: URL, push: boolean): Promise<void> {
 		removeObsoletePageStyles(next);
 		syncInlineStyles(next);
 		syncHead(next);
+		if (next.body.dataset.pageStyle === 'home') {
+			next.body.dataset.spaNavigation = 'true';
+		}
 		document.body.replaceWith(next.body);
 		if (push) {
 			history.pushState({}, '', url);

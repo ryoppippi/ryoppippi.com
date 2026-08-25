@@ -22,6 +22,10 @@ body[data-page-style='home'] {
 	font-family: 'Inter Home', 'Inter fallback', sans-serif;
 }
 
+body[data-spa-navigation] [data-home-profile] {
+	animation: none;
+}
+
 @keyframes root-fade-in {
 	from {
 		opacity: 0;
