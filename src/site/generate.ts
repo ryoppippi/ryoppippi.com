@@ -2,8 +2,9 @@ import type { ContentArtifact } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
-import { access, mkdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { Route } from '../../routes.ts';
 import {
 	extractInstallSection,
 	extractSection,
@@ -143,6 +144,11 @@ export async function generateSite({
 	);
 	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
+	await Promise.all(
+		Route.filter(({ from }) => from.includes('*')).map(({ from }) =>
+			rm(path.join(outDir, from.slice(1)), { force: true, recursive: true }),
+		),
+	);
 
 	await Promise.all(
 		[
