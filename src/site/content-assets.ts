@@ -140,7 +140,6 @@ if (import.meta.vitest != null) {
 				'blog/post/index.md': '# Post',
 				'blog/post/image one.png': 'image',
 				'blog/post/tweets.generated.json': '{}',
-				'blog/post/ogp.generated.json': '{}',
 				'showcase/project.md': '# Project',
 				'showcase/project cover.jpg': 'cover',
 				'showcase/index.ts': 'export {}',

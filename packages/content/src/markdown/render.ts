@@ -1,7 +1,7 @@
 import oxContent from '@ox-content/napi';
 import { transformOgp } from '@ox-content/vite-plugin';
 import type { TweetData } from '../tweet-renderer.ts';
-import type { OgpSnapshots } from '../ogp-snapshots.ts';
+import path from 'node:path';
 import { applyBudouxHtml } from './budoux.ts';
 import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
@@ -16,6 +16,7 @@ import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
 const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
+const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../../..', '.cache/ox-content/ogp');
 
 export type TweetSnapshots = Record<string, TweetData>;
 
@@ -37,7 +38,6 @@ export type RenderMarkdownOptions = {
 	/** Component names available to this document, mapped to their module ids. */
 	islands?: IslandModules;
 	renderIsland?: IslandRenderer;
-	openGraph?: OgpSnapshots;
 	renderTweet?: TweetRenderer;
 	tweets?: TweetSnapshots;
 };
@@ -172,10 +172,12 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 			bluesky: true,
 		}),
 	);
-	const openGraphData =
-		options.openGraph == null ? undefined : new Map(Object.entries(options.openGraph));
 	const openGraph = /<ogcard\b/i.test(media)
-		? await transformOgp(media, openGraphData, { timeout: 8_000 })
+		? await transformOgp(media, undefined, {
+				cacheDir: ogpCacheDirectory,
+				persistCache: true,
+				timeout: 8_000,
+			})
 		: media;
 
 	// Islands are rendered after every HTML transform so BudouX and the link
@@ -194,32 +196,6 @@ if (import.meta.vitest != null) {
 
 			expect(html).toContain('class="ox-ogp-simple"');
 			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
-		});
-
-		it('renders a fallback preview without fetching when metadata is unavailable', async () => {
-			const html = await renderMarkdown('[@preview](https://example.com/post)', {
-				openGraph: {},
-			});
-
-			expect(html).toContain('class="ox-ogp-simple"');
-			expect(html).toContain('href="https://example.com/post"');
-		});
-
-		it('separates a preview card from preceding prose', async () => {
-			const url = 'https://example.com/post';
-			const html = await renderMarkdown(`説明文\n[@preview](${url})`, {
-				openGraph: {
-					[url]: {
-						url,
-						title: 'Example post',
-						description: 'Example description',
-						siteName: 'Example',
-					},
-				},
-			});
-
-			expect(html).toMatch(/<\/p>\s*<a class="ox-ogp-card"/);
-			expect(html).not.toMatch(/<p\b[^>]*>[^<]*<a class="ox-ogp-card"/);
 		});
 
 		it('normalises angle links that contain parentheses', () => {

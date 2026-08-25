@@ -6,7 +6,6 @@ import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
 import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
-import { loadOgpSnapshots } from './ogp-snapshots.ts';
 import { loadTweetSnapshots } from './tweet-snapshots.ts';
 
 /**
@@ -95,15 +94,12 @@ function filenameFor(filepath: string): string {
 }
 
 async function loadRenderOptions(content: string, filepath: string, directory: string) {
-	const [openGraph, tweets, islands] = await Promise.all([
-		loadOgpSnapshots(content, filepath),
+	const [tweets, islands] = await Promise.all([
 		loadTweetSnapshots(content, filepath),
 		resolvePostIslands(content, filepath, directory),
 	]);
 	const hasIslands = Object.keys(islands).length > 0;
-	return openGraph == null && tweets == null && !hasIslands
-		? undefined
-		: { openGraph, tweets, islands };
+	return tweets == null && !hasIslands ? undefined : { tweets, islands };
 }
 
 async function findBlogPostSource(slug: string, directory: string) {

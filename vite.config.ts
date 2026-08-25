@@ -112,10 +112,7 @@ export default defineConfig({
 		},
 	},
 	staged: {
-		'packages/content/src/blog/**/*.md': [
-			'packages/content/scripts/snapshot-tweets.ts',
-			'packages/content/scripts/snapshot-ogp.ts',
-		],
+		'packages/content/src/blog/**/*.md': 'packages/content/scripts/snapshot-tweets.ts',
 		'*.{css,js,json,svelte,ts,yaml,yml}': 'vp check --fix',
 		// gitleaks scans the whole staged diff itself, so no file arguments
 		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
@@ -132,7 +129,7 @@ export default defineConfig({
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
 						'src/site/{generate,page-styles,pages,sitemap}.ts',
-						'packages/content/src/{artifact,blog,island-renderer,islands,ogp-snapshots,paths,tweet-snapshots}.ts',
+						'packages/content/src/{artifact,blog,island-renderer,islands,paths,tweet-snapshots}.ts',
 						'packages/content/src/blog/**/*.ts',
 						'packages/content/src/markdown/**/*.ts',
 					],
