@@ -5,10 +5,14 @@
       url = "github:ryoppippi/nix-vite-plus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills = {
+      url = "github:Kyure-A/agent-skills-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { nixpkgs, nix-vite-plus, ... }:
+    { nixpkgs, nix-vite-plus, agent-skills, ... }:
     let
       systems = [
         "x86_64-linux"
@@ -17,12 +21,35 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      agentSkillsFor = system:
+        import ./nix/agent-skills.nix {
+          inherit nixpkgs agent-skills;
+          root = ./.;
+        }
+          system;
     in
     {
+      packages = forAllSystems (system: {
+        agent-skills-bundle = (agentSkillsFor system).bundle;
+        sync-agent-skills = (agentSkillsFor system).syncAgentSkills;
+      });
+
+      apps = forAllSystems (system: {
+        sync-agent-skills = {
+          type = "app";
+          program = nixpkgs.lib.getExe (agentSkillsFor system).syncAgentSkills;
+        };
+      });
+
+      checks = forAllSystems (system: {
+        agent-skills = (agentSkillsFor system).bundle;
+      });
+
       devShells = forAllSystems (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          agentSkills = agentSkillsFor system;
         in
         {
           default = pkgs.mkShellNoCC {
@@ -60,6 +87,8 @@
                   echo "⚠️  .env.example has been updated, please review and update .env manually"
                 fi
               fi
+
+              ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
             '';
           };
         }

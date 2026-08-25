@@ -15,6 +15,9 @@ vite.config.ts.timestamp-*
 /.vite-inspect
 /.eslintrc-components.json
 
+# Generated local agent skills
+.claude/skills
+
 /_redirects
 /.cloudflare
 /.wrangler
