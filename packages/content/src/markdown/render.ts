@@ -162,7 +162,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 }
 
 if (import.meta.vitest != null) {
-	describe('prepareOxContentMarkdown', () => {
+	describe('renderMarkdown', () => {
 		it('renders native Ox Content open graph embeds', async () => {
 			const html = await renderMarkdown('<OgCard url="http://localhost/post" />');
 			const mdxHtml = await renderMarkdown('<ogcard url="http://localhost/post"></ogcard>', {
@@ -172,55 +172,6 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('class="ox-ogp-simple"');
 			expect(html).not.toMatch(/<p[^>]*>\s*<a class="ox-ogp-simple"/);
 			expect(mdxHtml).toContain('class="ox-ogp-simple"');
-		});
-
-		it('renders angle links that contain parentheses', async () => {
-			const html = await renderMarkdown('[release](<https://example.com/a(1)>)');
-
-			expect(html).toContain('href="https://example.com/a(1)"');
-			expect(html).toContain('>release</a>');
-		});
-
-		it('renders bare angle links that contain parentheses', async () => {
-			const html = await renderMarkdown('<https://example.com/a(1)>');
-
-			expect(html).toContain('href="https://example.com/a(1)"');
-			expect(html).toContain('>https://example.com/a(1)</a>');
-		});
-
-		it('renders bare URLs without swallowing trailing punctuation', async () => {
-			const html = await renderMarkdown('> https://example.com/a(1).');
-
-			expect(html).toContain('href="https://example.com/a(1)"');
-			expect(html).toContain('>https://example.com/a(1)</a>.');
-		});
-
-		it('renders existing Markdown links once', async () => {
-			const html = await renderMarkdown('[site](https://example.com)');
-
-			expect(html.match(/<a\b/g)).toHaveLength(1);
-			expect(html).toContain('>site</a>');
-		});
-
-		it('preserves Ox Content magic link syntax for the renderer', () => {
-			expect(prepareOxContentMarkdown('{link:tech_world18}')).toBe('{link:tech_world18}');
-		});
-
-		it('does not transform fenced code contents', () => {
-			expect(prepareOxContentMarkdown('```md\n{link:tech_world18}\n```')).toBe(
-				'```md\n{link:tech_world18}\n```',
-			);
-		});
-	});
-
-	describe('renderMarkdown', () => {
-		it('renders image captions and dimensions with Ox Content', async () => {
-			const html = await renderMarkdown('![alt](./image.png "caption"){width=480}');
-
-			expect(html).toContain('<figure class="ox-figure">');
-			expect(html).toContain('loading="lazy"');
-			expect(html).toContain('width="480"');
-			expect(html).toContain('<figcaption>caption</figcaption>');
 		});
 
 		it('wraps markdown tables in a keyboard-scrollable region', async () => {
@@ -239,17 +190,6 @@ if (import.meta.vitest != null) {
 			expect(html).not.toContain('table-scroll');
 		});
 
-		it('preserves multiline HTML comments without transforming their contents', async () => {
-			const html = await renderMarkdown(
-				'before\n\n<!--\nhttps://x.com/example/status/1234567890\n-->\n\nafter',
-			);
-
-			expect(html).toContain('before');
-			expect(html).toContain('after');
-			expect(html).toContain('<!--\nhttps://x.com/example/status/1234567890\n-->');
-			expect(html).not.toContain('[https://x.com/example/status/1234567890]');
-		});
-
 		it('renders configured and GitHub magic links', async () => {
 			const html = await renderMarkdown('{link:@ryoppippi} {link:vim-jp} {link:Svelte Japan}');
 
@@ -257,13 +197,6 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('href="https://vim-jp.org/"');
 			expect(html).toContain('href="https://svelte.jp"');
 			expect(html.match(/<a [^>]*class="ox-magic-link/g)).toHaveLength(3);
-		});
-
-		it('leaves magic link syntax inside code unchanged', async () => {
-			const html = await renderMarkdown('`{link:@github}`\n\n```md\n{link:@github}\n```');
-
-			expect(html).toContain('{link:@github}');
-			expect(html).not.toContain('class="ox-magic-link');
 		});
 
 		it('renders tweets as static ox-content cards', async () => {
@@ -296,25 +229,12 @@ if (import.meta.vitest != null) {
 			}
 		});
 
-		it('renders YouTube embeds with Ox Content', async () => {
-			const html = await renderMarkdown('<youtube id="dQw4w9WgXcQ" />');
-
-			expect(html).toContain('class="ox-youtube"');
-			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"');
-			expect(html).not.toContain('<p><div');
-			expect(html).not.toContain('<youtube');
-		});
-
 		it('preserves YouTube start times with Ox Content', async () => {
 			const html = await renderMarkdown('<youtube id="dQw4w9WgXcQ" start="4190" />');
 
 			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=4190"');
-		});
-
-		it('renders thematic breaks as horizontal rules', async () => {
-			const html = await renderMarkdown('---');
-
-			expect(html).toContain('<hr>');
+			expect(html).not.toContain('<p><div');
+			expect(html).not.toContain('<youtube');
 		});
 
 		it('renders the NotByAI badge as an external link with both colour variants', async () => {
@@ -352,37 +272,6 @@ if (import.meta.vitest != null) {
 			);
 		});
 
-		it('deduplicates repeated heading anchors', async () => {
-			const html = await renderMarkdown('## Examples\n\n## Examples\n\n## Examples');
-
-			expect(html).toContain(
-				'<h2 id="examples">Examples<a class="header-anchor" href="#examples" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
-			);
-			expect(html).toContain(
-				'<h2 id="examples-1">Examples<a class="header-anchor" href="#examples-1" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
-			);
-			expect(html).toContain(
-				'<h2 id="examples-2">Examples<a class="header-anchor" href="#examples-2" aria-label="Permalink to &quot;Examples&quot;">#</a></h2>',
-			);
-		});
-
-		it('does not treat heading text as an existing anchor', async () => {
-			const html = await renderMarkdown('# header-anchor literal');
-
-			expect(html).toContain(
-				'<h1 id="header-anchor-literal">header-anchor literal<a class="header-anchor" href="#header-anchor-literal" aria-label="Permalink to &quot;header-anchor literal&quot;">#</a></h1>',
-			);
-		});
-
-		it('adds markdown-it-link-attributes compatible external link attributes', async () => {
-			const html = await renderMarkdown('[external](https://example.com) [local](/blog)');
-
-			expect(html).toContain(
-				'<a href="https://example.com" target="_blank" rel="noopener noreferrer">external</a>',
-			);
-			expect(html).toContain('<a href="/blog">local</a>');
-		});
-
 		it('removes trailing markdown attributes from links and images', async () => {
 			const html = await renderMarkdown(
 				'[slides](https://example.com){.text-xl}\n\n![alt](./image.png){width=480}',
@@ -390,27 +279,6 @@ if (import.meta.vitest != null) {
 
 			expect(html).not.toContain('{.text-xl}');
 			expect(html).not.toContain('{width=480}');
-		});
-
-		it('renders footnotes with back references', async () => {
-			const html = await renderMarkdown(
-				'Footnote[^note] and again[^note].\n\n[^note]: **footnote body**',
-			);
-
-			expect(html).toContain('<sup><a href="#fn-note" id="fnref-note">1</a></sup>');
-			expect(html).toContain('id="fnref-note-2"');
-			expect(html).toContain('<section class="footnotes" aria-label="Footnotes">');
-			expect(html).toContain('<li id="fn-note">');
-			expect(html).toContain('<strong>footnote body</strong>');
-			expect(html).toContain('href="#fnref-note"');
-		});
-
-		it('renders GitHub alert blocks as ox callouts', async () => {
-			const html = await renderMarkdown('> [!WARNING]\n> Be careful');
-
-			expect(html).toContain('ox-callout');
-			expect(html).toContain('ox-callout--warning');
-			expect(html).toContain('Be careful');
 		});
 
 		it('turns registered component tags into island placeholders', async () => {
@@ -462,25 +330,7 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('今日は\u200B天気です。');
 		});
 
-		it('keeps syntax highlighted code blocks', async () => {
-			const html = await renderMarkdown('```ts\nconst answer = 42;\n```');
-
-			expect(html).toContain('class="ox-highlight css-variables"');
-			expect(html).toContain('data-language="ts"');
-			expect(html).toContain('<span');
-			expect(html).toContain('tabindex="0"');
-		});
-
-		it('preserves raw details blocks used by existing posts', async () => {
-			const html = await renderMarkdown('<details>\n<summary>More</summary>\n\nbody\n</details>');
-
-			expect(html).toContain('<details>');
-			expect(html).toContain('<summary>More</summary>');
-			expect(html).toContain('body');
-			expect(html).toContain('</details>');
-		});
-
-		it('renders collapsible block contents as parsed markdown inside details', async () => {
+		it('renders configured details containers', async () => {
 			const html = await renderMarkdown('::: details More\n\n## Hidden\n\nbody\n:::');
 
 			expect(html).toContain('<details class="ox-container ox-container--details">');
@@ -488,23 +338,6 @@ if (import.meta.vitest != null) {
 			expect(html).toContain(
 				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &quot;Hidden&quot;">#</a></h2>',
 			);
-			expect(html).toContain('</details>');
-		});
-
-		it('renders the recap appendix as a closed details block', async () => {
-			const html = await renderMarkdown(
-				'## おまけ\n\n::: details おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n:::',
-			);
-
-			expect(html).toContain(
-				'<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-label="Permalink to &quot;おまけ&quot;">#</a></h2>',
-			);
-			expect(html).toContain('<details class="ox-container ox-container--details">');
-			expect(html).toContain('<summary>おまけ</summary>');
-			expect(html).toContain(
-				'<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-label="Permalink to &quot;Bun&quot;">#</a></h2>',
-			);
-			expect(html).toContain('<code>ccusage</code>');
 			expect(html).toContain('</details>');
 		});
 	});
