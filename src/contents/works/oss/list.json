@@ -14,11 +14,6 @@
 			"name": "curxy",
 			"icon": "icon-[solar--cursor-square-broken]",
 			"description": "Simple proxy worker for using ollama in cursor"
-		},
-		{
-			"name": "zigchat",
-			"icon": "icon-[ph--chat-light]",
-			"description": "Command that sends a prompt to OpenAI and returns a reply"
 		}
 	],
 	"Nix": [
@@ -63,7 +58,7 @@
 			"description": "Neovim plugin to disable all default keymaps with a single command"
 		},
 		{
-			"name": "vim-bad-apple",
+			"name": "bad-apple",
 			"icon": "icon-[hugeicons--apple-01]",
 			"description": "Do you wanna watch \"Bad Apple!!\" on your vim/neovim?"
 		}
@@ -78,11 +73,6 @@
 			"name": "svelte-preprocess-budoux",
 			"icon": "icon-[tabler--language-hiragana]",
 			"description": "svelte-preprocess plugin for Budoux"
-		},
-		{
-			"name": "svelte-html-event",
-			"icon": "icon-[ph--ticket-light]",
-			"description": "A simple type function to extract the event types of a built-in HTML element in Svelte"
 		},
 		{
 			"name": "svelte-preprocess-import-css",
