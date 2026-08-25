@@ -30,7 +30,6 @@
 		"@ox-content/vite-plugin": "3.0.0-alpha.9",
 		"@ox-content/vite-plugin-svelte": "3.0.0-alpha.9",
 		"@ryoppippi/content": "workspace:*",
-		"@ryoppippi/vite-plugin-cloudflare-redirect": "^1.1.3",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
 		"@tailwindcss/typography": "^0.5.20",
 		"@tailwindcss/vite": "^4.3.3",

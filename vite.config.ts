@@ -1,16 +1,15 @@
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
-import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
 import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import solid from 'vite-plugin-solid';
-import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
+import { oxContentBuildPlugins } from './src/site/ox-content.ts';
 
-export default defineConfig({
+export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
 	envPrefix: ['PUBLIC_', 'VITE_'],
 	server: {
@@ -21,14 +20,10 @@ export default defineConfig({
 	plugins: [
 		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		solid({ ssr: true, solid: { hydratable: false } }),
-		cloudflareRedirect({
-			mode: 'generate',
-			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
-		}),
 		...oxContentSvelte({
 			srcDir: 'packages/content/src/blog',
-			ssg: false,
 		}),
+		...(command === 'build' && mode !== 'test' ? oxContentBuildPlugins() : []),
 		staticSiteBuild(),
 		staticSiteDevServer(),
 		FontaineTransform.vite({
@@ -136,4 +131,4 @@ export default defineConfig({
 			},
 		],
 	},
-});
+}));

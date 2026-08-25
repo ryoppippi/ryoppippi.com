@@ -292,7 +292,6 @@ export function corePages(
 		homePage(assets),
 		blogListPage([...externalPosts, ...postListItems(posts)], assets),
 		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
-		feed(posts),
 	];
 }
 
