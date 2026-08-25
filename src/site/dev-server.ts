@@ -32,7 +32,7 @@ type SiteContentModule = {
 };
 
 type SectionsModule = {
-	loadOssProjects: (root: string) => Promise<Record<string, OssProject[]>>;
+	loadOssProjects: (root: string) => Promise<OssProject[]>;
 	loadPublications: (root: string) => ReturnType<DevRouteDependencies['loadPublications']>;
 	loadTalks: () => Promise<Talk[]>;
 };

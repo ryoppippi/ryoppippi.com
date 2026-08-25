@@ -1,151 +1,169 @@
-{
-	"AI Tools": [
-		{
-			"name": "ccusage",
-			"link": "https://github.com/ryoppippi/ccusage",
-			"icon": "icon-[ph--chart-line-light]",
-			"description": "Analyze coding-agent token usage and costs from local data."
-		},
-		{
-			"name": "sitemcp",
-			"icon": "icon-[solar--cloud-download-line-duotone]",
-			"description": "Fetch an entire site and use it as an MCP Server"
-		},
-		{
-			"name": "curxy",
-			"icon": "icon-[solar--cursor-square-broken]",
-			"description": "Simple proxy worker for using ollama in cursor"
-		}
-	],
-	"Nix": [
-		{
-			"name": "nix-secure-enclave-key",
-			"icon": "icon-[ph--key-light]",
-			"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS."
-		},
-		{
-			"name": "nixpkgs",
-			"link": "https://github.com/NixOS/nixpkgs",
-			"icon": "icon-[simple-icons--nixos]",
-			"description": "Contributions to upstream packaging and tests for ghq, git-wt, gh-do, and oxlint/oxfmt."
-		},
-		{
-			"name": "llm-agents.nix",
-			"link": "https://github.com/numtide/llm-agents.nix",
-			"icon": "icon-[ph--robot-light]",
-			"description": "Contributions to AI-agent packaging and maintenance across ccusage, agent-browser, ax, pdfvision, and more."
-		},
-		{
-			"name": "agent-skills-nix",
-			"link": "https://github.com/Kyure-A/agent-skills-nix",
-			"icon": "icon-[ph--graduation-cap-light]",
-			"description": "Contributions to Home Manager and skill transformation support for managing agent skills with Nix."
-		}
-	],
-	"Vim/Neovim": [
-		{
-			"name": "nvim-in-the-loop",
-			"icon": "icon-[simple-icons--neovim]",
-			"description": "Human-in-the-loop Neovim plugin for capturing keystrokes and exploring AI-optimised keybindings."
-		},
-		{
-			"name": "nvim-pnpm-catalog-lens",
-			"icon": "icon-[simple-icons--pnpm]",
-			"description": "Neovim plugin to show versions as diagnostics for pnpm catalog: field."
-		},
-		{
-			"name": "vim-svelte-inspector",
-			"icon": "icon-[material-symbols-light--frame-inspect-rounded]",
-			"description": "Use Svelte Inspector in Vim/Neovim! (Actually you can use this with React, Vue and so on..."
-		},
-		{
-			"name": "nvim-reset",
-			"icon": "icon-[system-uicons--reset-alt]",
-			"description": "Neovim plugin to disable all default keymaps with a single command"
-		},
-		{
-			"name": "bad-apple",
-			"icon": "icon-[hugeicons--apple-01]",
-			"description": "Do you wanna watch \"Bad Apple!!\" on your vim/neovim?"
-		}
-	],
-	"Web Ecosystem": [
-		{
-			"name": "sveltweet",
-			"icon": "icon-[ph--twitter-logo]",
-			"description": "Svelte/SvelteKit version of react-tweet"
-		},
-		{
-			"name": "svelte-preprocess-budoux",
-			"icon": "icon-[tabler--language-hiragana]",
-			"description": "svelte-preprocess plugin for Budoux"
-		},
-		{
-			"name": "svelte-preprocess-import-css",
-			"icon": "icon-[ph--palette-light]",
-			"description": "Svelte preprocessor to import scoped CSS files into Component"
-		},
-		{
-			"name": "svelte-fancy-darkmode",
-			"icon": "icon-[ph--moon-stars-light]",
-			"description": "svelte-fancy-darkmode.pages.dev"
-		},
-		{
-			"name": "vite-plugin-favicons",
-			"icon": "icon-[tabler--favicon]",
-			"description": "Generate favicons for your Vite project with ease!"
-		}
-	],
-	"TypeScript Libraries": [
-		{
-			"name": "gray-matter-es",
-			"icon": "icon-[ph--file-text-light]",
-			"description": "ESM-only gray-matter implementation."
-		},
-		{
-			"name": "limo",
-			"icon": "icon-[material-symbols--edit-document-outline]",
-			"description": "limo (Lire + Memo): auto load and save files"
-		},
-		{
-			"name": "str-fns",
-			"icon": "icon-[oui--app-devtools]",
-			"description": "A collection of utilities for TS/JS string "
-		},
-		{
-			"name": "web-push-neo",
-			"icon": "icon-[ph--bell-ringing-light]",
-			"description": "Web Push library for any JavaScript runtime."
-		}
-	],
-	"Zig Ecosystem": [
-		{
-			"name": "nyancat.zig",
-			"icon": "icon-[solar--cat-broken]",
-			"description": "Nyancat in Zig"
-		},
-		{
-			"name": "zigcv",
-			"link": "https://github.com/ryoppippi/zigcv",
-			"icon": "icon-[file-icons--opencv]",
-			"description": "zig bindings for OpenCV4"
-		}
-	],
-	"Configs & Shell": [
-		{
-			"name": "gh-nippou",
-			"icon": "icon-[simple-icons--github]",
-			"description": "GitHub CLI extension for generating daily reports from GitHub activity."
-		},
-		{
-			"name": "dotfiles",
-			"icon": "icon-[ph--folder-simple]",
-			"description": "ryoppippi's dotfiles"
-		},
-		{
-			"name": "fish-na",
-			"icon": "icon-[ph--package]",
-			"description": "@antfu/ni alternative written in fish shell using abbr feature"
-		}
-	]
-}
+[
+	{
+		"name": "ccusage",
+		"link": "https://github.com/ryoppippi/ccusage",
+		"icon": "icon-[ph--chart-line-light]",
+		"tags": ["AI", "CLI", "TypeScript"],
+		"description": "Analyze coding-agent token usage and costs from local data."
+	},
+	{
+		"name": "tgrab",
+		"icon": "icon-[ph--globe-hemisphere-west-light]",
+		"tags": ["AI", "CLI", "Web"],
+		"description": "Fetch text from browser-gated services such as YouTube, Twitter/X, and Bluesky."
+	},
+	{
+		"name": "sitemcp",
+		"icon": "icon-[solar--cloud-download-line-duotone]",
+		"tags": ["AI", "MCP", "TypeScript"],
+		"description": "Fetch an entire site and use it as an MCP Server"
+	},
+	{
+		"name": "curxy",
+		"icon": "icon-[solar--cursor-square-broken]",
+		"tags": ["AI", "Cloudflare"],
+		"description": "Simple proxy worker for using ollama in cursor"
+	},
+	{
+		"name": "nix-secure-enclave-key",
+		"icon": "icon-[ph--key-light]",
+		"tags": ["Nix", "macOS", "Security"],
+		"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS."
+	},
+	{
+		"name": "nixpkgs",
+		"link": "https://github.com/NixOS/nixpkgs",
+		"icon": "icon-[simple-icons--nixos]",
+		"tags": ["Nix", "Upstream"],
+		"description": "Contributions to upstream packaging and tests for ghq, git-wt, gh-do, and oxlint/oxfmt."
+	},
+	{
+		"name": "llm-agents.nix",
+		"link": "https://github.com/numtide/llm-agents.nix",
+		"icon": "icon-[ph--robot-light]",
+		"tags": ["Nix", "AI", "Upstream"],
+		"description": "Contributions to AI-agent packaging and maintenance across ccusage, agent-browser, ax, pdfvision, and more."
+	},
+	{
+		"name": "agent-skills-nix",
+		"link": "https://github.com/Kyure-A/agent-skills-nix",
+		"icon": "icon-[ph--graduation-cap-light]",
+		"tags": ["Nix", "AI", "Upstream"],
+		"description": "Contributions to Home Manager and skill transformation support for managing agent skills with Nix."
+	},
+	{
+		"name": "nvim-in-the-loop",
+		"icon": "icon-[simple-icons--neovim]",
+		"tags": ["Neovim", "AI"],
+		"description": "Human-in-the-loop Neovim plugin for capturing keystrokes and exploring AI-optimised keybindings."
+	},
+	{
+		"name": "nvim-pnpm-catalog-lens",
+		"icon": "icon-[simple-icons--pnpm]",
+		"tags": ["Neovim", "pnpm"],
+		"description": "Neovim plugin to show versions as diagnostics for pnpm catalog: field."
+	},
+	{
+		"name": "vim-svelte-inspector",
+		"icon": "icon-[material-symbols-light--frame-inspect-rounded]",
+		"tags": ["Vim", "Svelte"],
+		"description": "Use Svelte Inspector in Vim/Neovim! (Actually you can use this with React, Vue and so on..."
+	},
+	{
+		"name": "nvim-reset",
+		"icon": "icon-[system-uicons--reset-alt]",
+		"tags": ["Neovim"],
+		"description": "Neovim plugin to disable all default keymaps with a single command"
+	},
+	{
+		"name": "bad-apple",
+		"icon": "icon-[hugeicons--apple-01]",
+		"tags": ["Neovim", "Fun"],
+		"description": "Do you wanna watch \"Bad Apple!!\" on your vim/neovim?"
+	},
+	{
+		"name": "sveltweet",
+		"icon": "icon-[ph--twitter-logo]",
+		"tags": ["Svelte", "TypeScript"],
+		"description": "Svelte/SvelteKit version of react-tweet"
+	},
+	{
+		"name": "svelte-preprocess-budoux",
+		"icon": "icon-[tabler--language-hiragana]",
+		"tags": ["Svelte", "Japanese"],
+		"description": "svelte-preprocess plugin for Budoux"
+	},
+	{
+		"name": "svelte-preprocess-import-css",
+		"icon": "icon-[ph--palette-light]",
+		"tags": ["Svelte", "CSS"],
+		"description": "Svelte preprocessor to import scoped CSS files into Component"
+	},
+	{
+		"name": "svelte-fancy-darkmode",
+		"icon": "icon-[ph--moon-stars-light]",
+		"tags": ["Svelte", "UI"],
+		"description": "svelte-fancy-darkmode.pages.dev"
+	},
+	{
+		"name": "vite-plugin-favicons",
+		"icon": "icon-[tabler--favicon]",
+		"tags": ["Vite", "TypeScript"],
+		"description": "Generate favicons for your Vite project with ease!"
+	},
+	{
+		"name": "gray-matter-es",
+		"icon": "icon-[ph--file-text-light]",
+		"tags": ["TypeScript", "Library"],
+		"description": "ESM-only gray-matter implementation."
+	},
+	{
+		"name": "limo",
+		"icon": "icon-[material-symbols--edit-document-outline]",
+		"tags": ["TypeScript", "Library"],
+		"description": "limo (Lire + Memo): auto load and save files"
+	},
+	{
+		"name": "str-fns",
+		"icon": "icon-[oui--app-devtools]",
+		"tags": ["TypeScript", "Library"],
+		"description": "A collection of utilities for TS/JS string"
+	},
+	{
+		"name": "web-push-neo",
+		"icon": "icon-[ph--bell-ringing-light]",
+		"tags": ["TypeScript", "Web"],
+		"description": "Web Push library for any JavaScript runtime."
+	},
+	{
+		"name": "nyancat.zig",
+		"icon": "icon-[solar--cat-broken]",
+		"tags": ["Zig", "Fun"],
+		"description": "Nyancat in Zig"
+	},
+	{
+		"name": "zigcv",
+		"link": "https://github.com/ryoppippi/zigcv",
+		"icon": "icon-[file-icons--opencv]",
+		"tags": ["Zig", "OpenCV"],
+		"description": "zig bindings for OpenCV4"
+	},
+	{
+		"name": "gh-nippou",
+		"icon": "icon-[simple-icons--github]",
+		"tags": ["GitHub", "CLI"],
+		"description": "GitHub CLI extension for generating daily reports from GitHub activity."
+	},
+	{
+		"name": "dotfiles",
+		"icon": "icon-[ph--folder-simple]",
+		"tags": ["Nix", "Shell", "macOS"],
+		"description": "ryoppippi's dotfiles"
+	},
+	{
+		"name": "fish-na",
+		"icon": "icon-[ph--package]",
+		"tags": ["Fish", "Shell"],
+		"description": "@antfu/ni alternative written in fish shell using abbr feature"
+	}
+]

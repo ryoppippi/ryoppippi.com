@@ -12,7 +12,7 @@ import Talks from './templates/Talks.svelte';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
-export function ossPage(projects: Record<string, OssProject[]>, assets: SiteAssets): GeneratedFile {
+export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/oss/index.html',
 		content: page({

@@ -43,7 +43,7 @@ def snapshot-timestamp []: nothing -> string {
 }
 
 def main []: nothing -> nothing {
-    let projects = open $list_path | values | flatten
+    let projects = open $list_path
     let latest = (
         $projects
         | where {|project| is-owned-repository (github-repository $project)}

@@ -1,7 +1,9 @@
 # OSS project curation
 
-`list.json` is a curated portfolio, not a mirror of every public repository.
-The page should make the projects that best represent the work easy to find.
+`list.json` is a curated, manually ordered portfolio, not a mirror of every
+public repository. The page should make the projects that best represent the
+work easy to find. Each entry uses `tags` for cross-cutting areas instead of
+putting a project in only one category.
 
 ## Selection criteria
 
@@ -60,7 +62,7 @@ Before adding or retaining an entry:
 3. Prefer a concise description that says what the project does. Describe the
    project's value or purpose directly rather than using an installation
    command as the description.
-4. Keep the category order intentional: current focus areas come first, and
-   categories should not be created for a single low-signal entry.
+4. Keep the array order intentional: current focus areas and representative
+   projects come first; use tags when a project spans multiple areas.
 5. Revisit stale entries when the OSS index changes; do not let the list become
    an uncurated archive.
