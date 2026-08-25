@@ -50,6 +50,18 @@ To create a production version of your app:
 pnpm build
 ```
 
+### Cloudflare Workers Builds
+
+Set the Cloudflare Workers Builds **Build command** to the following so the
+Git-backed sitemap timestamps can inspect the complete repository history:
+
+```sh
+shallow=$(git rev-parse --is-shallow-repository 2>/dev/null || echo false); if [ "$shallow" = true ]; then git fetch --unshallow origin; fi; PUBLIC_ORIGIN=https://ryoppippi.com pnpm run build
+```
+
+This is configured in the Cloudflare dashboard under **Settings → Builds**;
+Workers Builds does not use custom build settings from `wrangler.jsonc`.
+
 ## Licence
 
 Code is under [MIT](./LICENSE).
