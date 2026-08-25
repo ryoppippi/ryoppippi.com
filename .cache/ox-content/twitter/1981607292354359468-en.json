@@ -1,6 +1,8 @@
 {
 	"__typename": "Tweet",
-	"conversation_control": { "policy": "Subscribers" },
+	"conversation_control": {
+		"policy": "Subscribers"
+	},
 	"favorite_count": 27,
 	"lang": "ja",
 	"possibly_sensitive": false,
@@ -45,25 +47,68 @@
 		{
 			"display_url": "pic.x.com/hil3rBpyYW",
 			"expanded_url": "https://x.com/schroneko/status/1981607292354359468/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [37, 60],
 			"media_url_https": "https://pbs.twimg.com/media/G4AVSW1WwAErU9t.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 2294, "w": 4096, "x": 0, "y": 798 },
-					{ "h": 4096, "w": 4096, "x": 0, "y": 0 },
-					{ "h": 4096, "w": 3593, "x": 503, "y": 0 },
-					{ "h": 4096, "w": 2048, "x": 1740, "y": 0 },
-					{ "h": 4096, "w": 4096, "x": 0, "y": 0 }
+					{
+						"h": 2294,
+						"w": 4096,
+						"x": 0,
+						"y": 798
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 3593,
+						"x": 503,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 2048,
+						"x": 1740,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 4096,
 				"width": 4096
 			},
 			"sizes": {
-				"large": { "h": 2048, "resize": "fit", "w": 2048 },
-				"medium": { "h": 1200, "resize": "fit", "w": 1200 },
-				"small": { "h": 680, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/hil3rBpyYW"
@@ -71,13 +116,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 2294, "w": 4096, "x": 0, "y": 798 },
-				{ "h": 4096, "w": 4096, "x": 0, "y": 0 },
-				{ "h": 4096, "w": 3593, "x": 503, "y": 0 },
-				{ "h": 4096, "w": 2048, "x": 1740, "y": 0 },
-				{ "h": 4096, "w": 4096, "x": 0, "y": 0 }
+				{
+					"h": 2294,
+					"w": 4096,
+					"x": 0,
+					"y": 798
+				},
+				{
+					"h": 4096,
+					"w": 4096,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 3593,
+					"x": 503,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 2048,
+					"x": 1740,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 4096,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/schroneko/status/1981607292354359468/photo/1",
 			"url": "https://pbs.twimg.com/media/G4AVSW1WwAErU9t.jpg",
@@ -88,7 +162,9 @@
 	"conversation_count": 0,
 	"news_action_type": "conversation",
 	"quoted_tweet": {
-		"conversation_control": { "policy": "Subscribers" },
+		"conversation_control": {
+			"policy": "Subscribers"
+		},
 		"favorite_count": 10,
 		"lang": "ja",
 		"possibly_sensitive": false,
@@ -135,25 +211,68 @@
 			{
 				"display_url": "pic.x.com/5nISc536el",
 				"expanded_url": "https://x.com/schroneko/status/1981604758042644928/photo/1",
-				"ext_media_availability": { "status": "Available" },
+				"ext_media_availability": {
+					"status": "Available"
+				},
 				"indices": [37, 60],
 				"media_url_https": "https://pbs.twimg.com/media/G4ATAwuWkAABJdS.jpg",
 				"original_info": {
 					"focus_rects": [
-						{ "h": 2294, "w": 4096, "x": 0, "y": 0 },
-						{ "h": 4096, "w": 4096, "x": 0, "y": 0 },
-						{ "h": 4096, "w": 3593, "x": 503, "y": 0 },
-						{ "h": 4096, "w": 2048, "x": 2048, "y": 0 },
-						{ "h": 4096, "w": 4096, "x": 0, "y": 0 }
+						{
+							"h": 2294,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 3593,
+							"x": 503,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 2048,
+							"x": 2048,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						}
 					],
 					"height": 4096,
 					"width": 4096
 				},
 				"sizes": {
-					"large": { "h": 2048, "resize": "fit", "w": 2048 },
-					"medium": { "h": 1200, "resize": "fit", "w": 1200 },
-					"small": { "h": 680, "resize": "fit", "w": 680 },
-					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+					"large": {
+						"h": 2048,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 1200,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 680,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
 				},
 				"type": "photo",
 				"url": "https://t.co/5nISc536el"
@@ -161,13 +280,42 @@
 		],
 		"photos": [
 			{
-				"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
 				"cropCandidates": [
-					{ "h": 2294, "w": 4096, "x": 0, "y": 0 },
-					{ "h": 4096, "w": 4096, "x": 0, "y": 0 },
-					{ "h": 4096, "w": 3593, "x": 503, "y": 0 },
-					{ "h": 4096, "w": 2048, "x": 2048, "y": 0 },
-					{ "h": 4096, "w": 4096, "x": 0, "y": 0 }
+					{
+						"h": 2294,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 3593,
+						"x": 503,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 2048,
+						"x": 2048,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"expandedUrl": "https://x.com/schroneko/status/1981604758042644928/photo/1",
 				"url": "https://pbs.twimg.com/media/G4ATAwuWkAABJdS.jpg",

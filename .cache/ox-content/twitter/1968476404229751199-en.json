@@ -18,7 +18,12 @@
 			}
 		],
 		"user_mentions": [
-			{ "id_str": "113598297", "indices": [0, 10], "name": "ryoppippi", "screen_name": "ryoppippi" }
+			{
+				"id_str": "113598297",
+				"indices": [0, 10],
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi"
+			}
 		]
 	},
 	"id_str": "1968476404229751199",
@@ -42,25 +47,68 @@
 		{
 			"display_url": "pic.x.com/5yFjfl1YQl",
 			"expanded_url": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [89, 112],
 			"media_url_https": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1049, "w": 1874, "x": 0, "y": 145 },
-					{ "h": 1194, "w": 1194, "x": 105, "y": 0 },
-					{ "h": 1194, "w": 1047, "x": 179, "y": 0 },
-					{ "h": 1194, "w": 597, "x": 404, "y": 0 },
-					{ "h": 1194, "w": 1874, "x": 0, "y": 0 }
+					{
+						"h": 1049,
+						"w": 1874,
+						"x": 0,
+						"y": 145
+					},
+					{
+						"h": 1194,
+						"w": 1194,
+						"x": 105,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 1047,
+						"x": 179,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 597,
+						"x": 404,
+						"y": 0
+					},
+					{
+						"h": 1194,
+						"w": 1874,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1194,
 				"width": 1874
 			},
 			"sizes": {
-				"large": { "h": 1194, "resize": "fit", "w": 1874 },
-				"medium": { "h": 765, "resize": "fit", "w": 1200 },
-				"small": { "h": 433, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1194,
+					"resize": "fit",
+					"w": 1874
+				},
+				"medium": {
+					"h": 765,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 433,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/5yFjfl1YQl"
@@ -68,13 +116,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1049, "w": 1874, "x": 0, "y": 145 },
-				{ "h": 1194, "w": 1194, "x": 105, "y": 0 },
-				{ "h": 1194, "w": 1047, "x": 179, "y": 0 },
-				{ "h": 1194, "w": 597, "x": 404, "y": 0 },
-				{ "h": 1194, "w": 1874, "x": 0, "y": 0 }
+				{
+					"h": 1049,
+					"w": 1874,
+					"x": 0,
+					"y": 145
+				},
+				{
+					"h": 1194,
+					"w": 1194,
+					"x": 105,
+					"y": 0
+				},
+				{
+					"h": 1194,
+					"w": 1047,
+					"x": 179,
+					"y": 0
+				},
+				{
+					"h": 1194,
+					"w": 597,
+					"x": 404,
+					"y": 0
+				},
+				{
+					"h": 1194,
+					"w": 1874,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
 			"url": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
@@ -96,7 +173,12 @@
 		"display_text_range": [11, 169],
 		"entities": {
 			"user_mentions": [
-				{ "id_str": "89291422", "indices": [0, 10], "name": "", "screen_name": "benvargas" }
+				{
+					"id_str": "89291422",
+					"indices": [0, 10],
+					"name": "",
+					"screen_name": "benvargas"
+				}
 			]
 		},
 		"id_str": "1968462931282002427",
@@ -114,7 +196,10 @@
 					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 				},
 				"description": "Rork",
-				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
 				"user_label_display_type": "Badge",
 				"user_label_type": "BusinessLabel"
 			}

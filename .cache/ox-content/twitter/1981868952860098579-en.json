@@ -6,7 +6,12 @@
 	"created_at": "2025-10-24T23:42:34.000Z",
 	"display_text_range": [0, 68],
 	"entities": {
-		"hashtags": [{ "indices": [56, 68], "text": "sveltejapan" }],
+		"hashtags": [
+			{
+				"indices": [56, 68],
+				"text": "sveltejapan"
+			}
+		],
 		"media": [
 			{
 				"display_url": "pic.x.com/FlgiyFBxUI",
@@ -37,25 +42,68 @@
 		{
 			"display_url": "pic.x.com/FlgiyFBxUI",
 			"expanded_url": "https://x.com/Yuki_Ishii_Dev/status/1981868952860098579/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [69, 92],
 			"media_url_https": "https://pbs.twimg.com/media/G4EDTyhXQAAt7az.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1147, "w": 2048, "x": 0, "y": 194 },
-					{ "h": 1542, "w": 1542, "x": 506, "y": 0 },
-					{ "h": 1542, "w": 1353, "x": 695, "y": 0 },
-					{ "h": 1542, "w": 771, "x": 997, "y": 0 },
-					{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+					{
+						"h": 1147,
+						"w": 2048,
+						"x": 0,
+						"y": 194
+					},
+					{
+						"h": 1542,
+						"w": 1542,
+						"x": 506,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 1353,
+						"x": 695,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 771,
+						"x": 997,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 2048,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1542,
 				"width": 2048
 			},
 			"sizes": {
-				"large": { "h": 1542, "resize": "fit", "w": 2048 },
-				"medium": { "h": 904, "resize": "fit", "w": 1200 },
-				"small": { "h": 512, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1542,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 904,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 512,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/FlgiyFBxUI"
@@ -63,13 +111,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1147, "w": 2048, "x": 0, "y": 194 },
-				{ "h": 1542, "w": 1542, "x": 506, "y": 0 },
-				{ "h": 1542, "w": 1353, "x": 695, "y": 0 },
-				{ "h": 1542, "w": 771, "x": 997, "y": 0 },
-				{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+				{
+					"h": 1147,
+					"w": 2048,
+					"x": 0,
+					"y": 194
+				},
+				{
+					"h": 1542,
+					"w": 1542,
+					"x": 506,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 1353,
+					"x": 695,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 771,
+					"x": 997,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 2048,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/Yuki_Ishii_Dev/status/1981868952860098579/photo/1",
 			"url": "https://pbs.twimg.com/media/G4EDTyhXQAAt7az.jpg",

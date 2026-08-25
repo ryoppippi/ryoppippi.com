@@ -6,7 +6,12 @@
 	"created_at": "2025-11-03T10:04:00.000Z",
 	"display_text_range": [0, 13],
 	"entities": {
-		"hashtags": [{ "indices": [6, 13], "text": "篝火スマブラ" }],
+		"hashtags": [
+			{
+				"indices": [6, 13],
+				"text": "篝火スマブラ"
+			}
+		],
 		"media": [
 			{
 				"display_url": "pic.x.com/1ZWAAfHles",
@@ -31,7 +36,10 @@
 				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 			},
 			"description": "Rork",
-			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -46,25 +54,68 @@
 		{
 			"display_url": "pic.x.com/1ZWAAfHles",
 			"expanded_url": "https://x.com/ryoppippi/status/1985286831580279271/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [14, 37],
 			"media_url_https": "https://pbs.twimg.com/media/G40n2L3bQAAEwAK.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1297, "w": 2316, "x": 0, "y": 1127 },
-					{ "h": 2316, "w": 2316, "x": 0, "y": 617 },
-					{ "h": 2640, "w": 2316, "x": 0, "y": 448 },
-					{ "h": 3088, "w": 1544, "x": 231, "y": 0 },
-					{ "h": 3088, "w": 2316, "x": 0, "y": 0 }
+					{
+						"h": 1297,
+						"w": 2316,
+						"x": 0,
+						"y": 1127
+					},
+					{
+						"h": 2316,
+						"w": 2316,
+						"x": 0,
+						"y": 617
+					},
+					{
+						"h": 2640,
+						"w": 2316,
+						"x": 0,
+						"y": 448
+					},
+					{
+						"h": 3088,
+						"w": 1544,
+						"x": 231,
+						"y": 0
+					},
+					{
+						"h": 3088,
+						"w": 2316,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 3088,
 				"width": 2316
 			},
 			"sizes": {
-				"large": { "h": 2048, "resize": "fit", "w": 1536 },
-				"medium": { "h": 1200, "resize": "fit", "w": 900 },
-				"small": { "h": 680, "resize": "fit", "w": 510 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 1536
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 900
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 510
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/1ZWAAfHles"
@@ -72,25 +123,68 @@
 		{
 			"display_url": "pic.x.com/1ZWAAfHles",
 			"expanded_url": "https://x.com/ryoppippi/status/1985286831580279271/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [14, 37],
 			"media_url_https": "https://pbs.twimg.com/media/G40n2Lra0AAEVtb.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1729, "w": 3088, "x": 0, "y": 139 },
-					{ "h": 2316, "w": 2316, "x": 772, "y": 0 },
-					{ "h": 2316, "w": 2032, "x": 1056, "y": 0 },
-					{ "h": 2316, "w": 1158, "x": 1930, "y": 0 },
-					{ "h": 2316, "w": 3088, "x": 0, "y": 0 }
+					{
+						"h": 1729,
+						"w": 3088,
+						"x": 0,
+						"y": 139
+					},
+					{
+						"h": 2316,
+						"w": 2316,
+						"x": 772,
+						"y": 0
+					},
+					{
+						"h": 2316,
+						"w": 2032,
+						"x": 1056,
+						"y": 0
+					},
+					{
+						"h": 2316,
+						"w": 1158,
+						"x": 1930,
+						"y": 0
+					},
+					{
+						"h": 2316,
+						"w": 3088,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 2316,
 				"width": 3088
 			},
 			"sizes": {
-				"large": { "h": 1536, "resize": "fit", "w": 2048 },
-				"medium": { "h": 900, "resize": "fit", "w": 1200 },
-				"small": { "h": 510, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1536,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 510,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/1ZWAAfHles"
@@ -98,13 +192,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1297, "w": 2316, "x": 0, "y": 1127 },
-				{ "h": 2316, "w": 2316, "x": 0, "y": 617 },
-				{ "h": 2640, "w": 2316, "x": 0, "y": 448 },
-				{ "h": 3088, "w": 1544, "x": 231, "y": 0 },
-				{ "h": 3088, "w": 2316, "x": 0, "y": 0 }
+				{
+					"h": 1297,
+					"w": 2316,
+					"x": 0,
+					"y": 1127
+				},
+				{
+					"h": 2316,
+					"w": 2316,
+					"x": 0,
+					"y": 617
+				},
+				{
+					"h": 2640,
+					"w": 2316,
+					"x": 0,
+					"y": 448
+				},
+				{
+					"h": 3088,
+					"w": 1544,
+					"x": 231,
+					"y": 0
+				},
+				{
+					"h": 3088,
+					"w": 2316,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ryoppippi/status/1985286831580279271/photo/1",
 			"url": "https://pbs.twimg.com/media/G40n2L3bQAAEwAK.jpg",
@@ -112,13 +235,42 @@
 			"height": 3088
 		},
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1729, "w": 3088, "x": 0, "y": 139 },
-				{ "h": 2316, "w": 2316, "x": 772, "y": 0 },
-				{ "h": 2316, "w": 2032, "x": 1056, "y": 0 },
-				{ "h": 2316, "w": 1158, "x": 1930, "y": 0 },
-				{ "h": 2316, "w": 3088, "x": 0, "y": 0 }
+				{
+					"h": 1729,
+					"w": 3088,
+					"x": 0,
+					"y": 139
+				},
+				{
+					"h": 2316,
+					"w": 2316,
+					"x": 772,
+					"y": 0
+				},
+				{
+					"h": 2316,
+					"w": 2032,
+					"x": 1056,
+					"y": 0
+				},
+				{
+					"h": 2316,
+					"w": 1158,
+					"x": 1930,
+					"y": 0
+				},
+				{
+					"h": 2316,
+					"w": 3088,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ryoppippi/status/1985286831580279271/photo/1",
 			"url": "https://pbs.twimg.com/media/G40n2Lra0AAEVtb.jpg",

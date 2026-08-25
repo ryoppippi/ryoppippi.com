@@ -38,7 +38,10 @@
 				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 			},
 			"description": "Rork",
-			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -53,25 +56,68 @@
 		{
 			"display_url": "pic.x.com/AofDXmBGi6",
 			"expanded_url": "https://x.com/ryoppippi/status/1911049580936143281/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [83, 106],
 			"media_url_https": "https://pbs.twimg.com/media/GoVpR1gWMAAq6bm.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 820, "w": 1464, "x": 0, "y": 284 },
-					{ "h": 1380, "w": 1380, "x": 0, "y": 0 },
-					{ "h": 1380, "w": 1211, "x": 0, "y": 0 },
-					{ "h": 1380, "w": 690, "x": 0, "y": 0 },
-					{ "h": 1380, "w": 1464, "x": 0, "y": 0 }
+					{
+						"h": 820,
+						"w": 1464,
+						"x": 0,
+						"y": 284
+					},
+					{
+						"h": 1380,
+						"w": 1380,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1380,
+						"w": 1211,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1380,
+						"w": 690,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1380,
+						"w": 1464,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1380,
 				"width": 1464
 			},
 			"sizes": {
-				"large": { "h": 1380, "resize": "fit", "w": 1464 },
-				"medium": { "h": 1131, "resize": "fit", "w": 1200 },
-				"small": { "h": 641, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1380,
+					"resize": "fit",
+					"w": 1464
+				},
+				"medium": {
+					"h": 1131,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 641,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/AofDXmBGi6"
@@ -79,13 +125,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 820, "w": 1464, "x": 0, "y": 284 },
-				{ "h": 1380, "w": 1380, "x": 0, "y": 0 },
-				{ "h": 1380, "w": 1211, "x": 0, "y": 0 },
-				{ "h": 1380, "w": 690, "x": 0, "y": 0 },
-				{ "h": 1380, "w": 1464, "x": 0, "y": 0 }
+				{
+					"h": 820,
+					"w": 1464,
+					"x": 0,
+					"y": 284
+				},
+				{
+					"h": 1380,
+					"w": 1380,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 1380,
+					"w": 1211,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 1380,
+					"w": 690,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 1380,
+					"w": 1464,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ryoppippi/status/1911049580936143281/photo/1",
 			"url": "https://pbs.twimg.com/media/GoVpR1gWMAAq6bm.jpg",
@@ -136,7 +211,10 @@
 					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 				},
 				"description": "Rork",
-				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
 				"user_label_display_type": "Badge",
 				"user_label_type": "BusinessLabel"
 			}
@@ -151,25 +229,68 @@
 			{
 				"display_url": "pic.x.com/hr0GgeZSRP",
 				"expanded_url": "https://x.com/ryoppippi/status/1911041370157883834/photo/1",
-				"ext_media_availability": { "status": "Available" },
+				"ext_media_availability": {
+					"status": "Available"
+				},
 				"indices": [121, 144],
 				"media_url_https": "https://pbs.twimg.com/media/GoVhm08WsAAn-n1.png",
 				"original_info": {
 					"focus_rects": [
-						{ "h": 330, "w": 589, "x": 0, "y": 0 },
-						{ "h": 330, "w": 330, "x": 0, "y": 0 },
-						{ "h": 330, "w": 289, "x": 0, "y": 0 },
-						{ "h": 330, "w": 165, "x": 10, "y": 0 },
-						{ "h": 330, "w": 744, "x": 0, "y": 0 }
+						{
+							"h": 330,
+							"w": 589,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 330,
+							"w": 330,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 330,
+							"w": 289,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 330,
+							"w": 165,
+							"x": 10,
+							"y": 0
+						},
+						{
+							"h": 330,
+							"w": 744,
+							"x": 0,
+							"y": 0
+						}
 					],
 					"height": 330,
 					"width": 744
 				},
 				"sizes": {
-					"large": { "h": 330, "resize": "fit", "w": 744 },
-					"medium": { "h": 330, "resize": "fit", "w": 744 },
-					"small": { "h": 302, "resize": "fit", "w": 680 },
-					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+					"large": {
+						"h": 330,
+						"resize": "fit",
+						"w": 744
+					},
+					"medium": {
+						"h": 330,
+						"resize": "fit",
+						"w": 744
+					},
+					"small": {
+						"h": 302,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
 				},
 				"type": "photo",
 				"url": "https://t.co/hr0GgeZSRP"
@@ -177,25 +298,68 @@
 			{
 				"display_url": "pic.x.com/hr0GgeZSRP",
 				"expanded_url": "https://x.com/ryoppippi/status/1911041370157883834/photo/1",
-				"ext_media_availability": { "status": "Available" },
+				"ext_media_availability": {
+					"status": "Available"
+				},
 				"indices": [121, 144],
 				"media_url_https": "https://pbs.twimg.com/media/GoVhpC6XwAAreem.png",
 				"original_info": {
 					"focus_rects": [
-						{ "h": 281, "w": 502, "x": 0, "y": 0 },
-						{ "h": 281, "w": 281, "x": 0, "y": 0 },
-						{ "h": 281, "w": 246, "x": 0, "y": 0 },
-						{ "h": 281, "w": 141, "x": 19, "y": 0 },
-						{ "h": 281, "w": 717, "x": 0, "y": 0 }
+						{
+							"h": 281,
+							"w": 502,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 281,
+							"w": 281,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 281,
+							"w": 246,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 281,
+							"w": 141,
+							"x": 19,
+							"y": 0
+						},
+						{
+							"h": 281,
+							"w": 717,
+							"x": 0,
+							"y": 0
+						}
 					],
 					"height": 281,
 					"width": 717
 				},
 				"sizes": {
-					"large": { "h": 281, "resize": "fit", "w": 717 },
-					"medium": { "h": 281, "resize": "fit", "w": 717 },
-					"small": { "h": 266, "resize": "fit", "w": 680 },
-					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+					"large": {
+						"h": 281,
+						"resize": "fit",
+						"w": 717
+					},
+					"medium": {
+						"h": 281,
+						"resize": "fit",
+						"w": 717
+					},
+					"small": {
+						"h": 266,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
 				},
 				"type": "photo",
 				"url": "https://t.co/hr0GgeZSRP"
@@ -203,13 +367,42 @@
 		],
 		"photos": [
 			{
-				"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
 				"cropCandidates": [
-					{ "h": 330, "w": 589, "x": 0, "y": 0 },
-					{ "h": 330, "w": 330, "x": 0, "y": 0 },
-					{ "h": 330, "w": 289, "x": 0, "y": 0 },
-					{ "h": 330, "w": 165, "x": 10, "y": 0 },
-					{ "h": 330, "w": 744, "x": 0, "y": 0 }
+					{
+						"h": 330,
+						"w": 589,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 330,
+						"w": 330,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 330,
+						"w": 289,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 330,
+						"w": 165,
+						"x": 10,
+						"y": 0
+					},
+					{
+						"h": 330,
+						"w": 744,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"expandedUrl": "https://x.com/ryoppippi/status/1911041370157883834/photo/1",
 				"url": "https://pbs.twimg.com/media/GoVhm08WsAAn-n1.png",
@@ -217,13 +410,42 @@
 				"height": 330
 			},
 			{
-				"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
 				"cropCandidates": [
-					{ "h": 281, "w": 502, "x": 0, "y": 0 },
-					{ "h": 281, "w": 281, "x": 0, "y": 0 },
-					{ "h": 281, "w": 246, "x": 0, "y": 0 },
-					{ "h": 281, "w": 141, "x": 19, "y": 0 },
-					{ "h": 281, "w": 717, "x": 0, "y": 0 }
+					{
+						"h": 281,
+						"w": 502,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 281,
+						"w": 281,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 281,
+						"w": 246,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 281,
+						"w": 141,
+						"x": 19,
+						"y": 0
+					},
+					{
+						"h": 281,
+						"w": 717,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"expandedUrl": "https://x.com/ryoppippi/status/1911041370157883834/photo/1",
 				"url": "https://pbs.twimg.com/media/GoVhpC6XwAAreem.png",

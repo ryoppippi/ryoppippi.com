@@ -10,6 +10,7 @@ export default defineConfig({
 					'vite.config.ts',
 					'scripts/**',
 					'src/**',
+					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					{ pattern: 'pnpm-lock.yaml', base: 'workspace' },
 				],
 				output: ['dist/**'],

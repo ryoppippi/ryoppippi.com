@@ -58,7 +58,10 @@
 					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 				},
 				"description": "Rork",
-				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
 				"user_label_display_type": "Badge",
 				"user_label_type": "BusinessLabel"
 			}
@@ -74,5 +77,10 @@
 	},
 	"isEdited": true,
 	"isStaleEdit": false,
-	"previous_counts": { "favorite_count": 2, "quote_count": 0, "reply_count": 0, "retweet_count": 1 }
+	"previous_counts": {
+		"favorite_count": 2,
+		"quote_count": 0,
+		"reply_count": 0,
+		"retweet_count": 1
+	}
 }

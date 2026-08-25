@@ -6,7 +6,12 @@
 	"created_at": "2024-11-23T06:01:25.000Z",
 	"display_text_range": [0, 8],
 	"entities": {
-		"hashtags": [{ "indices": [0, 8], "text": "VimConf" }],
+		"hashtags": [
+			{
+				"indices": [0, 8],
+				"text": "VimConf"
+			}
+		],
 		"media": [
 			{
 				"display_url": "pic.x.com/Bnv4ymg5Of",
@@ -37,25 +42,68 @@
 		{
 			"display_url": "pic.x.com/Bnv4ymg5Of",
 			"expanded_url": "https://x.com/ysaito8015/status/1860201973087371265/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [9, 32],
 			"media_url_https": "https://pbs.twimg.com/media/GdDD1i4agAAgk0e.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 101, "w": 180, "x": 0, "y": 6 },
-					{ "h": 180, "w": 180, "x": 0, "y": 0 },
-					{ "h": 205, "w": 180, "x": 0, "y": 0 },
-					{ "h": 326, "w": 163, "x": 8, "y": 0 },
-					{ "h": 326, "w": 180, "x": 0, "y": 0 }
+					{
+						"h": 101,
+						"w": 180,
+						"x": 0,
+						"y": 6
+					},
+					{
+						"h": 180,
+						"w": 180,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 205,
+						"w": 180,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 326,
+						"w": 163,
+						"x": 8,
+						"y": 0
+					},
+					{
+						"h": 326,
+						"w": 180,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 326,
 				"width": 180
 			},
 			"sizes": {
-				"large": { "h": 326, "resize": "fit", "w": 180 },
-				"medium": { "h": 326, "resize": "fit", "w": 180 },
-				"small": { "h": 326, "resize": "fit", "w": 180 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 326,
+					"resize": "fit",
+					"w": 180
+				},
+				"medium": {
+					"h": 326,
+					"resize": "fit",
+					"w": 180
+				},
+				"small": {
+					"h": 326,
+					"resize": "fit",
+					"w": 180
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/Bnv4ymg5Of"
@@ -63,13 +111,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 101, "w": 180, "x": 0, "y": 6 },
-				{ "h": 180, "w": 180, "x": 0, "y": 0 },
-				{ "h": 205, "w": 180, "x": 0, "y": 0 },
-				{ "h": 326, "w": 163, "x": 8, "y": 0 },
-				{ "h": 326, "w": 180, "x": 0, "y": 0 }
+				{
+					"h": 101,
+					"w": 180,
+					"x": 0,
+					"y": 6
+				},
+				{
+					"h": 180,
+					"w": 180,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 205,
+					"w": 180,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 326,
+					"w": 163,
+					"x": 8,
+					"y": 0
+				},
+				{
+					"h": 326,
+					"w": 180,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ysaito8015/status/1860201973087371265/photo/1",
 			"url": "https://pbs.twimg.com/media/GdDD1i4agAAgk0e.jpg",

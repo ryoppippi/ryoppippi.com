@@ -1,7 +1,9 @@
 {
 	"__typename": "Tweet",
-	"conversation_control": { "policy": "Community" },
-	"favorite_count": 3096,
+	"conversation_control": {
+		"policy": "Community"
+	},
+	"favorite_count": 3111,
 	"lang": "ja",
 	"created_at": "2026-03-28T11:34:22.000Z",
 	"display_text_range": [0, 125],
@@ -21,7 +23,10 @@
 				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 			},
 			"description": "Rork",
-			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -37,5 +42,10 @@
 	"news_action_type": "conversation",
 	"isEdited": true,
 	"isStaleEdit": false,
-	"previous_counts": { "favorite_count": 1, "quote_count": 0, "reply_count": 0, "retweet_count": 0 }
+	"previous_counts": {
+		"favorite_count": 1,
+		"quote_count": 0,
+		"reply_count": 0,
+		"retweet_count": 0
+	}
 }

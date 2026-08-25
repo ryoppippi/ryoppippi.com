@@ -1,6 +1,6 @@
 {
 	"__typename": "Tweet",
-	"favorite_count": 1109,
+	"favorite_count": 1118,
 	"lang": "en",
 	"possibly_sensitive": false,
 	"created_at": "2025-07-02T11:54:02.000Z",
@@ -30,7 +30,10 @@
 				"url": "https://pbs.twimg.com/profile_images/1809959835884216320/MDn6rbnJ_bigger.jpg"
 			},
 			"description": "Bun",
-			"url": { "url": "https://twitter.com/bunjavascript", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/bunjavascript",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -45,25 +48,68 @@
 		{
 			"display_url": "pic.x.com/ZAQG9TLkbF",
 			"expanded_url": "https://x.com/jarredsumner/status/1940378429154832881/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [89, 112],
 			"media_url_https": "https://pbs.twimg.com/media/Gu2b5QzXMAAvKfm.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1035, "w": 1848, "x": 0, "y": 0 },
-					{ "h": 1848, "w": 1848, "x": 0, "y": 0 },
-					{ "h": 2100, "w": 1842, "x": 3, "y": 0 },
-					{ "h": 2100, "w": 1050, "x": 399, "y": 0 },
-					{ "h": 2100, "w": 1848, "x": 0, "y": 0 }
+					{
+						"h": 1035,
+						"w": 1848,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1848,
+						"w": 1848,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 2100,
+						"w": 1842,
+						"x": 3,
+						"y": 0
+					},
+					{
+						"h": 2100,
+						"w": 1050,
+						"x": 399,
+						"y": 0
+					},
+					{
+						"h": 2100,
+						"w": 1848,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 2100,
 				"width": 1848
 			},
 			"sizes": {
-				"large": { "h": 2048, "resize": "fit", "w": 1802 },
-				"medium": { "h": 1200, "resize": "fit", "w": 1056 },
-				"small": { "h": 680, "resize": "fit", "w": 598 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 1802
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 1056
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 598
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/ZAQG9TLkbF"
@@ -71,13 +117,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1035, "w": 1848, "x": 0, "y": 0 },
-				{ "h": 1848, "w": 1848, "x": 0, "y": 0 },
-				{ "h": 2100, "w": 1842, "x": 3, "y": 0 },
-				{ "h": 2100, "w": 1050, "x": 399, "y": 0 },
-				{ "h": 2100, "w": 1848, "x": 0, "y": 0 }
+				{
+					"h": 1035,
+					"w": 1848,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 1848,
+					"w": 1848,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 2100,
+					"w": 1842,
+					"x": 3,
+					"y": 0
+				},
+				{
+					"h": 2100,
+					"w": 1050,
+					"x": 399,
+					"y": 0
+				},
+				{
+					"h": 2100,
+					"w": 1848,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/jarredsumner/status/1940378429154832881/photo/1",
 			"url": "https://pbs.twimg.com/media/Gu2b5QzXMAAvKfm.jpg",

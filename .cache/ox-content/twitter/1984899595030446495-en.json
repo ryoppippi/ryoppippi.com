@@ -9,7 +9,12 @@
 	"created_at": "2025-11-02T08:25:15.000Z",
 	"display_text_range": [0, 19],
 	"entities": {
-		"hashtags": [{ "indices": [0, 8], "text": "vimconf" }],
+		"hashtags": [
+			{
+				"indices": [0, 8],
+				"text": "vimconf"
+			}
+		],
 		"media": [
 			{
 				"display_url": "pic.x.com/jONndBRLVG",
@@ -34,7 +39,10 @@
 				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 			},
 			"description": "Rork",
-			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -49,25 +57,68 @@
 		{
 			"display_url": "pic.x.com/jONndBRLVG",
 			"expanded_url": "https://x.com/ryoppippi/status/1984899595030446495/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [20, 43],
 			"media_url_https": "https://pbs.twimg.com/media/G4vHodFaQAAYPiG.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1345, "w": 2402, "x": 0, "y": 39 },
-					{ "h": 1384, "w": 1384, "x": 689, "y": 0 },
-					{ "h": 1384, "w": 1214, "x": 774, "y": 0 },
-					{ "h": 1384, "w": 692, "x": 1035, "y": 0 },
-					{ "h": 1384, "w": 2402, "x": 0, "y": 0 }
+					{
+						"h": 1345,
+						"w": 2402,
+						"x": 0,
+						"y": 39
+					},
+					{
+						"h": 1384,
+						"w": 1384,
+						"x": 689,
+						"y": 0
+					},
+					{
+						"h": 1384,
+						"w": 1214,
+						"x": 774,
+						"y": 0
+					},
+					{
+						"h": 1384,
+						"w": 692,
+						"x": 1035,
+						"y": 0
+					},
+					{
+						"h": 1384,
+						"w": 2402,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1384,
 				"width": 2402
 			},
 			"sizes": {
-				"large": { "h": 1180, "resize": "fit", "w": 2048 },
-				"medium": { "h": 691, "resize": "fit", "w": 1200 },
-				"small": { "h": 392, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1180,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 691,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 392,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/jONndBRLVG"
@@ -75,13 +126,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1345, "w": 2402, "x": 0, "y": 39 },
-				{ "h": 1384, "w": 1384, "x": 689, "y": 0 },
-				{ "h": 1384, "w": 1214, "x": 774, "y": 0 },
-				{ "h": 1384, "w": 692, "x": 1035, "y": 0 },
-				{ "h": 1384, "w": 2402, "x": 0, "y": 0 }
+				{
+					"h": 1345,
+					"w": 2402,
+					"x": 0,
+					"y": 39
+				},
+				{
+					"h": 1384,
+					"w": 1384,
+					"x": 689,
+					"y": 0
+				},
+				{
+					"h": 1384,
+					"w": 1214,
+					"x": 774,
+					"y": 0
+				},
+				{
+					"h": 1384,
+					"w": 692,
+					"x": 1035,
+					"y": 0
+				},
+				{
+					"h": 1384,
+					"w": 2402,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/ryoppippi/status/1984899595030446495/photo/1",
 			"url": "https://pbs.twimg.com/media/G4vHodFaQAAYPiG.jpg",
@@ -100,7 +180,12 @@
 		"created_at": "2025-11-02T08:23:47.000Z",
 		"display_text_range": [0, 41],
 		"entities": {
-			"hashtags": [{ "indices": [33, 41], "text": "vimconf" }],
+			"hashtags": [
+				{
+					"indices": [33, 41],
+					"text": "vimconf"
+				}
+			],
 			"media": [
 				{
 					"display_url": "pic.x.com/X9tmitJinc",
@@ -133,7 +218,10 @@
 					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 				},
 				"description": "Rork",
-				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
 				"user_label_display_type": "Badge",
 				"user_label_type": "BusinessLabel"
 			}
@@ -149,25 +237,68 @@
 			{
 				"display_url": "pic.x.com/X9tmitJinc",
 				"expanded_url": "https://x.com/ryoppippi/status/1984899225952665612/photo/1",
-				"ext_media_availability": { "status": "Available" },
+				"ext_media_availability": {
+					"status": "Available"
+				},
 				"indices": [42, 65],
 				"media_url_https": "https://pbs.twimg.com/media/G4vG91NbQAEXDcg.jpg",
 				"original_info": {
 					"focus_rects": [
-						{ "h": 1668, "w": 2978, "x": 0, "y": 0 },
-						{ "h": 1694, "w": 1694, "x": 0, "y": 0 },
-						{ "h": 1694, "w": 1486, "x": 0, "y": 0 },
-						{ "h": 1694, "w": 847, "x": 98, "y": 0 },
-						{ "h": 1694, "w": 2978, "x": 0, "y": 0 }
+						{
+							"h": 1668,
+							"w": 2978,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1694,
+							"w": 1694,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1694,
+							"w": 1486,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 1694,
+							"w": 847,
+							"x": 98,
+							"y": 0
+						},
+						{
+							"h": 1694,
+							"w": 2978,
+							"x": 0,
+							"y": 0
+						}
 					],
 					"height": 1694,
 					"width": 2978
 				},
 				"sizes": {
-					"large": { "h": 1165, "resize": "fit", "w": 2048 },
-					"medium": { "h": 683, "resize": "fit", "w": 1200 },
-					"small": { "h": 387, "resize": "fit", "w": 680 },
-					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+					"large": {
+						"h": 1165,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 683,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 387,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
 				},
 				"type": "photo",
 				"url": "https://t.co/X9tmitJinc"
@@ -175,13 +306,42 @@
 		],
 		"photos": [
 			{
-				"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
 				"cropCandidates": [
-					{ "h": 1668, "w": 2978, "x": 0, "y": 0 },
-					{ "h": 1694, "w": 1694, "x": 0, "y": 0 },
-					{ "h": 1694, "w": 1486, "x": 0, "y": 0 },
-					{ "h": 1694, "w": 847, "x": 98, "y": 0 },
-					{ "h": 1694, "w": 2978, "x": 0, "y": 0 }
+					{
+						"h": 1668,
+						"w": 2978,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1694,
+						"w": 1694,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1694,
+						"w": 1486,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1694,
+						"w": 847,
+						"x": 98,
+						"y": 0
+					},
+					{
+						"h": 1694,
+						"w": 2978,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"expandedUrl": "https://x.com/ryoppippi/status/1984899225952665612/photo/1",
 				"url": "https://pbs.twimg.com/media/G4vG91NbQAEXDcg.jpg",
@@ -199,7 +359,12 @@
 			"created_at": "2025-11-02T07:59:02.000Z",
 			"display_text_range": [0, 50],
 			"entities": {
-				"hashtags": [{ "indices": [42, 50], "text": "vimconf" }],
+				"hashtags": [
+					{
+						"indices": [42, 50],
+						"text": "vimconf"
+					}
+				],
 				"urls": [
 					{
 						"display_url": "github.com/ryoppippi/nvim…",
@@ -224,7 +389,10 @@
 						"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 					},
 					"description": "Rork",
-					"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+					"url": {
+						"url": "https://twitter.com/rork",
+						"url_type": "DeepLink"
+					},
 					"user_label_display_type": "Badge",
 					"user_label_type": "BusinessLabel"
 				}

@@ -20,7 +20,7 @@
 	"user": {
 		"id_str": "1955952925496233986",
 		"name": "ccusage",
-		"screen_name": "ccusage_",
+		"screen_name": "cc_usage",
 		"is_blue_verified": false,
 		"profile_image_shape": "Circle",
 		"verified": false,
@@ -36,25 +36,68 @@
 		{
 			"display_url": "pic.x.com/A1gc3BnFG6",
 			"expanded_url": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [12, 35],
 			"media_url_https": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 655, "w": 1170, "x": 0, "y": 517 },
-					{ "h": 1170, "w": 1170, "x": 0, "y": 259 },
-					{ "h": 1334, "w": 1170, "x": 0, "y": 136 },
-					{ "h": 1470, "w": 735, "x": 0, "y": 0 },
-					{ "h": 1470, "w": 1170, "x": 0, "y": 0 }
+					{
+						"h": 655,
+						"w": 1170,
+						"x": 0,
+						"y": 517
+					},
+					{
+						"h": 1170,
+						"w": 1170,
+						"x": 0,
+						"y": 259
+					},
+					{
+						"h": 1334,
+						"w": 1170,
+						"x": 0,
+						"y": 136
+					},
+					{
+						"h": 1470,
+						"w": 735,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 1470,
+						"w": 1170,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1470,
 				"width": 1170
 			},
 			"sizes": {
-				"large": { "h": 1470, "resize": "fit", "w": 1170 },
-				"medium": { "h": 1200, "resize": "fit", "w": 955 },
-				"small": { "h": 680, "resize": "fit", "w": 541 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1470,
+					"resize": "fit",
+					"w": 1170
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 955
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 541
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/A1gc3BnFG6"
@@ -62,13 +105,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 655, "w": 1170, "x": 0, "y": 517 },
-				{ "h": 1170, "w": 1170, "x": 0, "y": 259 },
-				{ "h": 1334, "w": 1170, "x": 0, "y": 136 },
-				{ "h": 1470, "w": 735, "x": 0, "y": 0 },
-				{ "h": 1470, "w": 1170, "x": 0, "y": 0 }
+				{
+					"h": 655,
+					"w": 1170,
+					"x": 0,
+					"y": 517
+				},
+				{
+					"h": 1170,
+					"w": 1170,
+					"x": 0,
+					"y": 259
+				},
+				{
+					"h": 1334,
+					"w": 1170,
+					"x": 0,
+					"y": 136
+				},
+				{
+					"h": 1470,
+					"w": 735,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 1470,
+					"w": 1170,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
 			"url": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",

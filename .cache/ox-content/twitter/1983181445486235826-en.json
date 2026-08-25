@@ -35,12 +35,12 @@
 	"text": "本日はみんながお世話になっている「CCUSAGE」の開発者@ryoppippi さんをお招きして、クローズドなイベントを開催しました！💪\n\n外ではあまり話せないぶっちゃけ話をたくさん聞けて、大変勉強になりました！☺️\n\nご参加いただい皆さんも、ありがとうございました！✨️\nhttps://t.co/OoRjmWmOHl https://t.co/NKAqBlmdpy",
 	"user": {
 		"id_str": "255405607",
-		"name": "しんちゃん | ログラス 社長室 AIOps 🐋",
-		"screen_name": "shin_chan_ai",
+		"name": "しんちゃん | ログラス 社長室 AIOps",
+		"screen_name": "shim_surprise",
 		"is_blue_verified": true,
 		"profile_image_shape": "Circle",
 		"verified": false,
-		"profile_image_url_https": "https://pbs.twimg.com/profile_images/2071619763298770944/7XRAk5bm_normal.jpg"
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/2056947755176873984/K8ebSmGJ_normal.jpg"
 	},
 	"edit_control": {
 		"edit_tweet_ids": ["1983181445486235826"],
@@ -52,25 +52,68 @@
 		{
 			"display_url": "pic.x.com/NKAqBlmdpy",
 			"expanded_url": "https://x.com/shim_surprise/status/1983181445486235826/photo/1",
-			"ext_media_availability": { "status": "Available" },
+			"ext_media_availability": {
+				"status": "Available"
+			},
 			"indices": [161, 184],
 			"media_url_https": "https://pbs.twimg.com/media/G4WtA0_a8AAiolS.jpg",
 			"original_info": {
 				"focus_rects": [
-					{ "h": 1147, "w": 2048, "x": 0, "y": 389 },
-					{ "h": 1536, "w": 1536, "x": 512, "y": 0 },
-					{ "h": 1536, "w": 1347, "x": 607, "y": 0 },
-					{ "h": 1536, "w": 768, "x": 896, "y": 0 },
-					{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+					{
+						"h": 1147,
+						"w": 2048,
+						"x": 0,
+						"y": 389
+					},
+					{
+						"h": 1536,
+						"w": 1536,
+						"x": 512,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 1347,
+						"x": 607,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 768,
+						"x": 896,
+						"y": 0
+					},
+					{
+						"h": 1536,
+						"w": 2048,
+						"x": 0,
+						"y": 0
+					}
 				],
 				"height": 1536,
 				"width": 2048
 			},
 			"sizes": {
-				"large": { "h": 1536, "resize": "fit", "w": 2048 },
-				"medium": { "h": 900, "resize": "fit", "w": 1200 },
-				"small": { "h": 510, "resize": "fit", "w": 680 },
-				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				"large": {
+					"h": 1536,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 510,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
 			},
 			"type": "photo",
 			"url": "https://t.co/NKAqBlmdpy"
@@ -78,13 +121,42 @@
 	],
 	"photos": [
 		{
-			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
 			"cropCandidates": [
-				{ "h": 1147, "w": 2048, "x": 0, "y": 389 },
-				{ "h": 1536, "w": 1536, "x": 512, "y": 0 },
-				{ "h": 1536, "w": 1347, "x": 607, "y": 0 },
-				{ "h": 1536, "w": 768, "x": 896, "y": 0 },
-				{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+				{
+					"h": 1147,
+					"w": 2048,
+					"x": 0,
+					"y": 389
+				},
+				{
+					"h": 1536,
+					"w": 1536,
+					"x": 512,
+					"y": 0
+				},
+				{
+					"h": 1536,
+					"w": 1347,
+					"x": 607,
+					"y": 0
+				},
+				{
+					"h": 1536,
+					"w": 768,
+					"x": 896,
+					"y": 0
+				},
+				{
+					"h": 1536,
+					"w": 2048,
+					"x": 0,
+					"y": 0
+				}
 			],
 			"expandedUrl": "https://x.com/shim_surprise/status/1983181445486235826/photo/1",
 			"url": "https://pbs.twimg.com/media/G4WtA0_a8AAiolS.jpg",

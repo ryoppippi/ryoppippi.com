@@ -6,8 +6,14 @@
 	"display_text_range": [0, 136],
 	"entities": {
 		"hashtags": [
-			{ "indices": [0, 8], "text": "ccusage" },
-			{ "indices": [48, 56], "text": "ccusage" }
+			{
+				"indices": [0, 8],
+				"text": "ccusage"
+			},
+			{
+				"indices": [48, 56],
+				"text": "ccusage"
+			}
 		]
 	},
 	"id_str": "1986740701854335020",
@@ -25,7 +31,10 @@
 				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
 			},
 			"description": "Rork",
-			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
 			"user_label_display_type": "Badge",
 			"user_label_type": "BusinessLabel"
 		}
@@ -47,5 +56,7 @@
 		"reply_count": 0,
 		"retweet_count": 0
 	},
-	"note_tweet": { "id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTg2NzQwNzAxNzMyNjY3Mzky" }
+	"note_tweet": {
+		"id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTg2NzQwNzAxNzMyNjY3Mzky"
+	}
 }
