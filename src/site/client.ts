@@ -241,11 +241,16 @@ function islandProps(element: HTMLElement): Record<string, unknown> {
 		return {};
 	}
 
-	const parsed = JSON.parse(serialised) as Record<string, unknown>;
-	const props = parsed.props;
+	const parsed: unknown = JSON.parse(serialised);
+	if (parsed == null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+		return {};
+	}
+
+	const payload = parsed as Record<string, unknown>;
+	const props = payload.props;
 	return props != null && typeof props === 'object' && !Array.isArray(props)
 		? (props as Record<string, unknown>)
-		: parsed;
+		: payload;
 }
 
 async function mountIsland(element: HTMLElement): Promise<void> {

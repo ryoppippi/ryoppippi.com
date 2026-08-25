@@ -206,7 +206,6 @@
 
 /*
  * Opt-in full-card chrome for Twitter/X embeds.
- * Loaded only when a page has .ox-tweet--full.
  *
  * Visual tokens and control icons follow the theme contract of:
  *
