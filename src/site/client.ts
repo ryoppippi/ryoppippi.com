@@ -235,6 +235,19 @@ async function mountSolidIsland(
 	islandCleanups.add(dispose);
 }
 
+function islandProps(element: HTMLElement): Record<string, unknown> {
+	const serialised = element.dataset.oxProps;
+	if (serialised == null) {
+		return {};
+	}
+
+	const parsed = JSON.parse(serialised) as Record<string, unknown>;
+	const props = parsed.props;
+	return props != null && typeof props === 'object' && !Array.isArray(props)
+		? (props as Record<string, unknown>)
+		: parsed;
+}
+
 async function mountIsland(element: HTMLElement): Promise<void> {
 	const moduleId = element.dataset.oxIsland;
 	if (moduleId == null || element.dataset.oxMounted === 'true') {
@@ -244,8 +257,7 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 	element.dataset.oxMounted = 'true';
 	try {
 		const modulePath = `../../packages/content/src/blog/${moduleId}`;
-		const serialised = element.dataset.oxProps;
-		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
+		const props = islandProps(element);
 		if (moduleId.endsWith('.tsx')) {
 			const load = solidIslandLoaders[modulePath];
 			if (load == null) {

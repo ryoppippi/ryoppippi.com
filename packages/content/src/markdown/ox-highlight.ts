@@ -54,34 +54,42 @@ function markdownTransform(plugin: Plugin): MarkdownTransform {
 	return plugin.transform as MarkdownTransform;
 }
 
-const transform = markdownTransform(
-	oxContent({
-		embeds: false,
-		frontmatter: false,
-		headingPermalinks: true,
-		highlight: true,
-		magicLinks: {
-			aliases: magicLinkAliases,
-			favicon: { template: 'https://favicon.yandex.net/favicon/{host}' },
-		},
-		ogViewer: false,
-		search: false,
-		semanticFootnotes: true,
-		ssg: false,
-		toc: false,
-	})[0],
-);
+function createMarkdownTransform(mdx: boolean) {
+	return markdownTransform(
+		oxContent({
+			embeds: false,
+			frontmatter: false,
+			headingPermalinks: true,
+			highlight: true,
+			magicLinks: {
+				aliases: magicLinkAliases,
+				favicon: { template: 'https://favicon.yandex.net/favicon/{host}' },
+			},
+			ogViewer: false,
+			search: false,
+			semanticFootnotes: true,
+			ssg: false,
+			mdx,
+			toc: false,
+		})[0],
+	);
+}
+
+const markdownTransformOnly = createMarkdownTransform(false);
+const mdxTransform = createMarkdownTransform(true);
 
 /**
  * Renders Markdown with Ox Content's native tree-sitter syntax highlighting.
  *
  * @param content - Markdown source to render.
+ * @param mdx - Whether to parse document-local imports and component islands.
  * @returns Rendered HTML with supported fenced languages highlighted.
  * @example
  * await renderHighlightedMarkdown('```ts\nconst answer = 42;\n```');
  */
-export async function renderHighlightedMarkdown(content: string): Promise<string> {
-	const result = await transform(content, '/virtual/article.md');
+export async function renderHighlightedMarkdown(content: string, mdx = false): Promise<string> {
+	const transform = mdx ? mdxTransform : markdownTransformOnly;
+	const result = await transform(content, `/virtual/article.${mdx ? 'mdx' : 'md'}`);
 	if (result == null) {
 		throw new Error('Ox Content did not transform Markdown');
 	}
@@ -107,6 +115,17 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('data-language="ts"');
 			expect(html).toContain('--octc-syntax-');
 			expect(html).toContain('tabindex="0"');
+		});
+
+		it('uses native MDX imports and island payloads when requested', async () => {
+			const html = await renderHighlightedMarkdown(
+				"import Chart from './Chart.tsx'\n\n<Chart bars={3} />",
+				true,
+			);
+
+			expect(html).toContain('data-ox-island="Chart"');
+			expect(html).toContain('&quot;bars&quot;:3');
+			expect(html).not.toContain('import Chart');
 		});
 	});
 }

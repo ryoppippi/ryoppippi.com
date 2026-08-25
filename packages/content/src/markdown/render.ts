@@ -1,14 +1,12 @@
 import oxContent from '@ox-content/napi';
-import { transformAllPlugins, transformOgp } from '@ox-content/vite-plugin';
+import { applyIslandSsrHtml, transformAllPlugins, transformOgp } from '@ox-content/vite-plugin';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
+import type { IslandModules } from '../islands.ts';
 import { applyBudouxHtml } from './budoux.ts';
-import type { IslandModules } from './component-islands.ts';
 import { transformCollapsibleBlocks } from './collapsible.ts';
-import { replaceComponentIslands } from './component-islands.ts';
 import { transformOutsideFences } from './fences.ts';
-import { stripIslandImports } from './island-imports.ts';
-import { addExternalLinkAttributes, unescapeHtml } from './html.ts';
+import { addExternalLinkAttributes, escapeHtml } from './html.ts';
 import { replaceImageFigures } from './image-figures.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
 import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
@@ -39,17 +37,14 @@ export type RenderMarkdownOptions = {
 	renderIsland?: IslandRenderer;
 };
 
-function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) {
-	const body = stripIslandImports(transformCollapsibleBlocks(content), islands);
+function prepareOxContentMarkdown(content: string) {
+	const body = transformCollapsibleBlocks(content);
 
 	return transformOutsideFences(body, (line) => {
-		const embeds = replaceComponentIslands(
-			replaceNotByAIEmbeds(
-				line
-					.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
-					.replace(/<Divider\s*\/>/g, '<hr>'),
-			),
-			islands,
+		const embeds = replaceNotByAIEmbeds(
+			line
+				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
+				.replace(/<Divider\s*\/>/g, '<hr>'),
 		);
 		const preparedLine = replaceImageFigures(replaceLinkPreviews(normalizeAngleLinks(embeds)));
 
@@ -97,49 +92,33 @@ function postprocessRenderedHtml(html: string) {
 	return addExternalLinkAttributes(wrapScrollableTables(withoutTrailingAttributes));
 }
 
-async function replaceAsync(
-	value: string,
-	pattern: RegExp,
-	replacer: (match: RegExpExecArray) => Promise<string>,
+async function renderIslands(
+	html: string,
+	islands: IslandModules,
+	renderIsland: IslandRenderer | undefined,
 ) {
-	const matches = [...value.matchAll(pattern)];
-	if (matches.length === 0) {
-		return value;
-	}
+	const names = Object.keys(islands);
+	const rendered =
+		renderIsland == null
+			? html
+			: await applyIslandSsrHtml(
+					html,
+					async (name, props) => {
+						const body = await renderIsland(islands[name], props);
+						return body == null ? '' : `<div data-ox-island-root>${body}</div>`;
+					},
+					'/virtual/article.mdx',
+					names,
+				);
 
-	const replacements = await Promise.all(matches.map(replacer));
-	let output = '';
-	let offset = 0;
-	for (const [index, match] of matches.entries()) {
-		output += value.slice(offset, match.index) + replacements[index];
-		offset = match.index + match[0].length;
-	}
-	return output + value.slice(offset);
-}
-
-// Matches the placeholder emitted by replaceComponentIslands.
-const islandPlaceholderPattern =
-	/<div data-ox-island="([^"]*)"(?: data-ox-props="([^"]*)")?><\/div>/g;
-
-async function renderIslands(html: string, renderIsland: IslandRenderer | undefined) {
-	if (renderIsland == null) {
-		return html;
-	}
-
-	return replaceAsync(html, islandPlaceholderPattern, async (match) => {
-		const moduleId = unescapeHtml(match[1]);
-		const props =
-			match[2] == null ? {} : (JSON.parse(unescapeHtml(match[2])) as Record<string, unknown>);
-		const rendered = await renderIsland(moduleId, props);
-
-		// A component that fails to render leaves its placeholder in place so the
-		// client can still mount it.
-		if (rendered == null) {
-			return match[0];
-		}
-
-		return match[0].replace('></div>', `><div data-ox-island-root>${rendered}</div></div>`);
-	});
+	return names.reduce(
+		(output, name) =>
+			output.replaceAll(
+				`data-ox-island="${escapeHtml(name)}"`,
+				`data-ox-island="${escapeHtml(islands[name])}"`,
+			),
+		rendered,
+	);
 }
 
 function restoreTweetEmbeds(html: string) {
@@ -151,8 +130,9 @@ function restoreTweetEmbeds(html: string) {
 }
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
-	const prepared = prepareOxContentMarkdown(content, options.islands);
-	const highlighted = await renderHighlightedMarkdown(prepared);
+	const islands = options.islands ?? {};
+	const prepared = prepareOxContentMarkdown(content);
+	const highlighted = await renderHighlightedMarkdown(prepared, Object.keys(islands).length > 0);
 	const social = await transformAllPlugins(restoreTweetEmbeds(highlighted), {
 		bluesky: true,
 		github: false,
@@ -182,6 +162,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 	// rewrites cannot alter component markup that the client then hydrates.
 	const body = await renderIslands(
 		applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph))),
+		islands,
 		options.renderIsland,
 	);
 	return body;
@@ -216,7 +197,7 @@ if (import.meta.vitest != null) {
 
 		it('converts preview links to link card html', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
-				'<OgCard url="https://github.com/junkawa/figma_jp" />',
+				'<ogcard url="https://github.com/junkawa/figma_jp" />',
 			);
 		});
 
