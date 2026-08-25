@@ -28,6 +28,7 @@ type ShowcaseModule = {
 };
 
 type SiteContentModule = {
+	loadExternalMedia: (root: string) => Promise<PostListItem[]>;
 	loadExternalPosts: (root: string) => Promise<PostListItem[]>;
 };
 
@@ -110,10 +111,12 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	}
 	if (
 		file === 'src/contents/external-rss/rss.json' ||
-		file === 'src/contents/external-rss/posts.json' ||
-		file === 'src/contents/external-rss/media.json'
+		file === 'src/contents/external-rss/posts.json'
 	) {
 		return ['/blog/'];
+	}
+	if (file === 'src/contents/external-rss/media.json') {
+		return ['/works/media/'];
 	}
 	if (file === 'src/contents/works/oss/list.json') {
 		return ['/works/oss/'];
@@ -260,6 +263,10 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 			const content = (await server.ssrLoadModule('/src/site/content.ts')) as SiteContentModule;
 			return content.loadExternalPosts(root);
 		},
+		loadExternalMedia: async () => {
+			const content = (await server.ssrLoadModule('/src/site/content.ts')) as SiteContentModule;
+			return content.loadExternalMedia(root);
+		},
 		loadOssProjects: async () => {
 			const sections = (await server.ssrLoadModule('/src/site/sections.ts')) as SectionsModule;
 			return sections.loadOssProjects(root);
@@ -384,6 +391,10 @@ if (import.meta.vitest != null) {
 
 		it('invalidates the OSS page when its star snapshot changes', () => {
 			expect(invalidatedRoutes('src/contents/works/oss/stars.json')).toEqual(['/works/oss/']);
+		});
+
+		it('invalidates the media page when curated media changes', () => {
+			expect(invalidatedRoutes('src/contents/external-rss/media.json')).toEqual(['/works/media/']);
 		});
 
 		it('ignores client assets handled by Vite', () => {

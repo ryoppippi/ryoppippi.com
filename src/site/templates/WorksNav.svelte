@@ -1,10 +1,10 @@
 <script lang='ts'>
 	let { active }: { active: string } = $props();
-	const sections = ['oss', 'showcase', 'talks', 'publications'] as const;
+	const sections = ['oss', 'showcase', 'talks', 'media', 'publications'] as const;
 </script>
 
 <div class='text-center font-mono'>
-	<h1 class='pb-4 text-5xl font-bold opacity-70'>Projects</h1>
+	<h1 class='pb-4 text-5xl font-bold opacity-70'>Works</h1>
 	<p class='mb-5 text-lg italic opacity-50'>
 		<span class='text-nowrap'>... that</span>
 		<span class='text-nowrap'>I</span>

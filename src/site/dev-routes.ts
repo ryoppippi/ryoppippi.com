@@ -7,6 +7,7 @@ import { postListItems } from './content.ts';
 import { articlePages, blogListPage, feed, homePage } from './pages.ts';
 import {
 	errorPage,
+	mediaPage,
 	ossPage,
 	publicationsPage,
 	showcasePage,
@@ -26,6 +27,7 @@ export type DevRouteDependencies = {
 	loadBlogPostSource: (slug: string) => Promise<string | null>;
 	loadDotfiles: () => Promise<string>;
 	loadExternalPosts: () => Promise<PostListItem[]>;
+	loadExternalMedia: () => Promise<PostListItem[]>;
 	loadOssProjects: () => Promise<OssProject[]>;
 	loadPublications: () => Promise<Publications>;
 	loadShowcase: () => Promise<ShowcaseProject[]>;
@@ -137,6 +139,9 @@ export async function renderDevRoute(
 	if (pathname === '/works/talks/') {
 		return response(talksPage(await dependencies.loadTalks(), dependencies.assets).content);
 	}
+	if (pathname === '/works/media/') {
+		return response(mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content);
+	}
 	if (pathname === '/sponsors/') {
 		return response(sponsorsPage(dependencies.assets).content);
 	}
@@ -182,6 +187,7 @@ if (import.meta.vitest != null) {
 			loadBlogPostSource: vi.fn(async () => post.source),
 			loadDotfiles: vi.fn(async () => '# Dotfiles'),
 			loadExternalPosts: vi.fn(async () => []),
+			loadExternalMedia: vi.fn(async () => []),
 			loadOssProjects: vi.fn(async () => []),
 			loadPublications: vi.fn(async () => ({})),
 			loadShowcase: vi.fn(async () => []),
@@ -238,6 +244,15 @@ if (import.meta.vitest != null) {
 			expect(result).toMatchObject({ body: post.source, contentType: markdownContentType });
 			expect(loaders.loadBlogPostSource).toHaveBeenCalledWith('lazy-article');
 			expect(loaders.loadBlogPost).not.toHaveBeenCalled();
+		});
+
+		it('renders the media page from curated media', async () => {
+			const loaders = dependencies();
+
+			const result = await renderDevRoute('/works/media/', loaders);
+
+			expect(result?.body).toContain('Podcasts, interviews, and videos featuring @ryoppippi.');
+			expect(loaders.loadExternalMedia).toHaveBeenCalledOnce();
 		});
 	});
 
