@@ -7,6 +7,8 @@ import type { MarkdownRenderer } from './markdown-cache.ts';
 import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 
+const BLOG_SOURCE_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
+
 /**
  * SEO metadata that can be declared in an article's frontmatter.
  *
@@ -87,15 +89,18 @@ function parseArticleMetadata(data: Record<string, unknown>): ArticleMetadata {
 }
 
 function filenameFor(filepath: string): string {
-	return path.basename(filepath) === 'index.md'
+	return /^index\.mdx?$/.test(path.basename(filepath))
 		? path.basename(path.dirname(filepath))
-		: path.basename(filepath, '.md');
+		: path.basename(filepath, path.extname(filepath));
 }
 
 async function loadRenderOptions(content: string, filepath: string, directory: string) {
+	if (path.extname(filepath).toLowerCase() !== '.mdx') {
+		return undefined;
+	}
 	const islands = await resolvePostIslands(content, filepath, directory);
 	const hasIslands = Object.keys(islands).length > 0;
-	return hasIslands ? { islands } : undefined;
+	return hasIslands ? { islands, mdx: true } : { mdx: true };
 }
 
 async function findBlogPostSource(slug: string, directory: string) {
@@ -105,7 +110,9 @@ async function findBlogPostSource(slug: string, directory: string) {
 
 	for (const filepath of [
 		path.join(directory, `${slug}.md`),
+		path.join(directory, `${slug}.mdx`),
 		path.join(directory, slug, 'index.md'),
+		path.join(directory, slug, 'index.mdx'),
 	]) {
 		try {
 			return { filepath, source: await readFile(filepath, 'utf8') };
@@ -171,7 +178,7 @@ export async function loadBlogPost(
 export async function loadBlogPostMetadata(
 	directory = blogDirectory(),
 ): Promise<BlogPostMetadata[]> {
-	const files = await glob(['*.md', '*/index.md'], { cwd: directory, absolute: true });
+	const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
 	const posts = await Promise.all(
 		files.map(async (filepath) => {
 			const source = await readFile(filepath, 'utf8');
@@ -201,7 +208,7 @@ export async function loadBlogPostMetadata(
 export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const blogDir = blogDirectory();
-	const files = await glob(['*.md', '*/index.md'], { cwd: blogDir, absolute: true });
+	const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: blogDir, absolute: true });
 	const posts = await Promise.all(
 		files.map(async (filepath) => {
 			const source = await readFile(filepath, 'utf8');
@@ -257,6 +264,38 @@ if (import.meta.vitest != null) {
 			expect(renderContent).toHaveBeenCalledOnce();
 			expect(renderContent).toHaveBeenCalledWith('Second body');
 			expect(post).toEqual(expect.objectContaining({ filename: 'second', title: 'Second' }));
+		});
+
+		it('loads an MDX post with its document-local islands enabled', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'component/index.mdx': [
+					'---',
+					'title: Component post',
+					'date: 2026-06-23',
+					'isPublished: true',
+					'---',
+					'',
+					"import Chart from './Chart.tsx'",
+					'',
+					'<Chart />',
+				].join('\n'),
+				'component/Chart.tsx': 'export default () => null',
+			});
+			const renderContent = vi.fn(async (content: string) => content);
+
+			const post = await loadBlogPost('component', renderContent, fixture.getPath());
+
+			expect(post).toEqual(
+				expect.objectContaining({ filename: 'component', title: 'Component post' }),
+			);
+			expect(renderContent).toHaveBeenCalledWith(
+				expect.stringContaining("import Chart from './Chart.tsx'\n\n<Chart />"),
+				{
+					mdx: true,
+					islands: { Chart: 'component/Chart.tsx' },
+				},
+			);
 		});
 
 		it('loads raw source without rendering Markdown', async () => {

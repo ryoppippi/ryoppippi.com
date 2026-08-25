@@ -98,7 +98,9 @@ async function readContentAsset(pathname: string): Promise<{ body: Buffer; type:
 
 export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	const file = relativeFile.replaceAll('\\', '/');
-	const blogMatch = /^packages\/content\/src\/blog\/([^/]+)(?:\/index\.md|\.md|\/.*)$/.exec(file);
+	const blogMatch = /^packages\/content\/src\/blog\/([^/]+)(?:\/index\.mdx?|\.mdx?|\/.*)$/.exec(
+		file,
+	);
 	if (blogMatch != null) {
 		return ['/blog/', '/feed.xml', `/blog/${blogMatch[1]}/`, `/blog/${blogMatch[1]}.md`];
 	}
@@ -343,6 +345,15 @@ if (import.meta.vitest != null) {
 				'/feed.xml',
 				'/blog/2026-06-22/',
 				'/blog/2026-06-22.md',
+			]);
+		});
+
+		it('invalidates an edited MDX article and its indexes', () => {
+			expect(invalidatedRoutes('packages/content/src/blog/2026-06-23/index.mdx')).toEqual([
+				'/blog/',
+				'/feed.xml',
+				'/blog/2026-06-23/',
+				'/blog/2026-06-23.md',
 			]);
 		});
 

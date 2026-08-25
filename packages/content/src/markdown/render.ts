@@ -34,6 +34,8 @@ export type IslandRenderer = (
 export type RenderMarkdownOptions = {
 	/** Component names available to this document, mapped to their module ids. */
 	islands?: IslandModules;
+	/** Whether Ox Content should parse MDX syntax for this document. */
+	mdx?: boolean;
 	renderIsland?: IslandRenderer;
 };
 
@@ -132,7 +134,10 @@ function restoreTweetEmbeds(html: string) {
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const islands = options.islands ?? {};
 	const prepared = prepareOxContentMarkdown(content);
-	const highlighted = await renderHighlightedMarkdown(prepared, Object.keys(islands).length > 0);
+	const highlighted = await renderHighlightedMarkdown(
+		prepared,
+		options.mdx ?? Object.keys(islands).length > 0,
+	);
 	const social = await transformAllPlugins(restoreTweetEmbeds(highlighted), {
 		bluesky: true,
 		github: false,

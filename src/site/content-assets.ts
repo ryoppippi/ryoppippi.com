@@ -19,8 +19,14 @@ export async function contentAssetSources(
 	showcaseDir: string,
 ): Promise<ContentAssetSource[]> {
 	const [blogAssets, showcaseAssets] = await Promise.all([
-		glob(['**/*', '!**/*.md', '!**/*.generated.json'], { cwd: blogDir, onlyFiles: true }),
-		glob(['**/*', '!**/*.md', '!**/index.ts'], { cwd: showcaseDir, onlyFiles: true }),
+		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json'], {
+			cwd: blogDir,
+			onlyFiles: true,
+		}),
+		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/index.ts'], {
+			cwd: showcaseDir,
+			onlyFiles: true,
+		}),
 	]);
 	const publicUrl = (...parts: string[]) =>
 		`/${parts
@@ -138,6 +144,7 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
+				'blog/post/component.mdx': '<Component />',
 				'blog/post/image one.png': 'image',
 				'showcase/project.md': '# Project',
 				'showcase/project cover.jpg': 'cover',

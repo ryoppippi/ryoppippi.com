@@ -172,8 +172,9 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 		pathname,
 		post,
 	});
-	const sourcePath =
-		path.basename(post.filepath) === 'index.md' ? path.dirname(post.filepath) : post.filepath;
+	const sourcePath = /^index\.mdx?$/.test(path.basename(post.filepath))
+		? path.dirname(post.filepath)
+		: post.filepath;
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
@@ -333,6 +334,16 @@ if (import.meta.vitest != null) {
 		expect(html).toMatch(/<div data-nosnippet(?:="")? class="flex flex-wrap justify-center/);
 		expect(html).toContain('<meta property="og:title" content="ryoppippi.com">');
 		expect(html).toContain('"@type":"WebSite"');
+	});
+
+	test('tracks the whole source directory for an index MDX article', () => {
+		const [article] = articlePages(
+			{ ...examplePost, filepath: '/content/example-article/index.mdx' },
+			assets,
+		);
+
+		expect(article.sourcePaths).toContain('/content/example-article');
+		expect(article.sourcePaths).not.toContain('/content/example-article/index.mdx');
 	});
 
 	test('keeps profile identity metadata out of the visible home page', () => {
