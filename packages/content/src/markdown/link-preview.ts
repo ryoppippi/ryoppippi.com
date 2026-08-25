@@ -6,7 +6,7 @@ export function replaceLinkPreviews(line: string) {
 	return line.replace(linkPreviewPattern, (match, url: string) => {
 		try {
 			new URL(url);
-			return `<OgCard url="${escapeHtml(url)}" />`;
+			return `<OgCard url="${escapeHtml(url)}"></OgCard>`;
 		} catch {
 			return match;
 		}
@@ -17,7 +17,7 @@ if (import.meta.vitest != null) {
 	describe('replaceLinkPreviews', () => {
 		it('converts preview links to open graph embeds', () => {
 			expect(replaceLinkPreviews('[@preview](https://example.com/post)')).toBe(
-				'<OgCard url="https://example.com/post" />',
+				'<OgCard url="https://example.com/post"></OgCard>',
 			);
 		});
 
