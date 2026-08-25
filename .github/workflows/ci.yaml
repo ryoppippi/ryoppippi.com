@@ -20,17 +20,15 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
-      - name: Run Gitleaks
-        run: gitleaks detect --source . --config .gitleaks.toml
-
-      - name: Run Typo Check
-        run: pnpm run typos
-
-      - name: Run Vite+ Check
-        run: pnpm run check
-
-      - name: Run Tests
-        run: pnpm run test
+      - parallel:
+          - name: Run Gitleaks
+            run: gitleaks detect --source . --config .gitleaks.toml
+          - name: Run Typo Check
+            run: pnpm run typos
+          - name: Run Vite+ Check
+            run: pnpm run check
+          - name: Run Tests
+            run: pnpm run test
 
   action-timeline:
     needs:
