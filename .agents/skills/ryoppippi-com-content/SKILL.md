@@ -5,6 +5,8 @@ description: Guides content changes in the ryoppippi.com repository, including b
 
 Use this skill for `ryoppippi/ryoppippi.com`. Treat the implementation and tests as the source of truth.
 
+For discovering and updating external articles, podcasts, or YouTube appearances, use `ryoppippi-com-media` first.
+
 ## Blog posts
 
 - Blog posts live under `packages/content/src/blog/<slug>/index.md`.
