@@ -33,14 +33,14 @@ import GtvChart from './gtv-chart/GtvChart.tsx'
 > [!CAUTION]
 > このブログは法的アドバイスではない。制度の情報は2026年8月時点のもので、条件も金額も処理時間も変わる。実際に申請するときは[GOV.UK](https://www.gov.uk/global-talent)で最新の情報を確認してほしい。
 
-+++ AIの利用について
+::: details AIの利用について
 
 - 構成の整理と文章の推敲にChatGPT、Claude、Grokを使った。公開情報の検索にはExaも使った。最終的な内容と表現は自分で確認した。
 - 申請時点の通過見込みはGPT-5.5とClaude Fable 5（7月以降のnerfされたバージョン）に独立して推定させ、近い値を採用した。グラフもFableと作った。
 - 珍しさのフェルミ推定はGPT-5.6 Sol（max reasoning）で行い、Claude Fable 5にレビューを依頼した。
 - 本文の数値と制度上の説明は一次資料で確認し、出典を付けた。
 
-+++
+:::
 
 # 海外生活とビザ
 
@@ -310,11 +310,11 @@ OSSを軸にTalentを取った人の統計はない。自分に近いケース�
 
 年間の発給数は2020年の1,036件から2023年の7,360件まで伸び、そこからは横ばいになっている（2024年6,689件、2025年6,655件）。
 
-+++ 年平均500人の前提
+::: details 年平均500人の前提
 
 2020年2月までの前身であるTier 1 (Exceptional Talent)には年間の上限があった。[Home Officeのimpact assessment](https://www.legislation.gov.uk/ukia/2020/8/pdfs/ukia_20200008_en.pdf)によると撤廃直前で年2,000人（Tech Nationへの初期割当は200人）。実際の発給はさらに少ない。同じHome Officeのデータでは2014年に120件、2019年でも1,172件（5つのendorsing body合計）。累計5,000人以上は明らかに後半の年に偏っている。
 
-+++
+:::
 
 Digital Technology routeは著名なソフトウェアエンジニアだけを対象にした制度ではない。[Tech Nationのレポート](https://technation.io/global-talent-visa-report-2024/)によると過去10年間にendorseされた人の4人に1人がfounderで3人に1人がsoftware engineering skillsを持つ。founder / CTOとしての事業実績を軸に評価された人も相当数いる。
 
@@ -335,7 +335,7 @@ Digital Technology routeは著名なソフトウェアエンジニアだけを�
 
 日本語のGlobal Talent体験記はいくつかある。ただその多くはILRまで「5年」と書いている。5年ならPromiseの可能性はあるが、記事の記述だけでは区分は分からない。founderとしてExceptional Talentを取った日本人の例はメディア記事で確認できる[^jp-founder-talent]。founderではなくOSS中心の実績でTalentを取り、背景を日本語で詳しく公開した事例は見つからなかった。
 
-+++ 推定の前提と出典
+::: details 推定の前提と出典
 
 1. **1つ目の表の数字**: 年単位にそろえているが、数える対象が異なるため同じ母集団を順に絞ったファネルではない。81.3万人は12か月以上UKへ移動した人の推計。6,655件と3,904件は詳細データセットVis_D02のGlobal Talent発給数を集計したもので、Digital Technology以外の分野も含みUK内での切替・延長は含まない（2025年以降は暫定値）。500人以上はTech Nationの10年累計5,000人以上を単純に10で割った年平均で、本文のとおり実際は後半の年に偏っている。
 2. **5,000人以上 / 3人に1人**: どちらも[Tech Nationの2024年レポート](https://technation.io/global-talent-visa-report-2024/)による「過去10年」の累計。レポートの公開が2024年なので、おおむね2014〜2024年にあたる。2つ目の表もこの10年の累計で、年あたりではない。
@@ -345,7 +345,7 @@ Digital Technology routeは著名なソフトウェアエンジニアだけを�
 6. **日本国籍の約0.8%**: [Home Officeの公式データ](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables)を集計すると、2020〜2025年のGlobal Talent発給のうち、main applicant 17,420件に対して日本国籍は139件で0.80%だった。ただしこれはDigital Technology以外の分野もExceptional Promiseも含む比率であり、UK外からの発給のみで、UK内から切り替えた人は含まれない。今回と同条件のユニーク人数を直接示すものではない。なお[2026年7月開示の国籍別FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf)（Tech Nation、申請の多い上位国のみ掲載）に日本は登場せず、日本からの申請は、年間で上位20か国には入らない規模だ。
 7. **最終行の「少なくとも1人」**: 補足6の比率を前行に単純適用すると期待値は1人未満になるが、そこまでの絞り込み条件でも、少なくとも自分という実例はある。だから下限は1人で、実態も1人〜数人の規模だと見ている。なお、公式統計から「日本人初」と断定することはできない。日本人によるDigital Technology routeのExceptional Talent取得例自体は確認できる。
 
-+++
+:::
 
 ## UKの移民政策とGlobal Talent
 

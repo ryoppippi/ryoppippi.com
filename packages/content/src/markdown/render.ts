@@ -4,7 +4,6 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { applyBudouxHtml } from './budoux.ts';
-import { transformCollapsibleBlocks } from './collapsible.ts';
 import { transformOutsideFences } from './fences.ts';
 import { escapeHtml } from './html.ts';
 import { replaceLinkPreviews } from './link-preview.ts';
@@ -38,9 +37,7 @@ export type RenderMarkdownOptions = {
 };
 
 function prepareOxContentMarkdown(content: string) {
-	const body = transformCollapsibleBlocks(content);
-
-	return transformOutsideFences(body, (line) => {
+	return transformOutsideFences(content, (line) => {
 		const embeds = replaceNotByAIEmbeds(
 			line
 				.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>')
@@ -195,24 +192,6 @@ if (import.meta.vitest != null) {
 		it('converts preview links to link card html', () => {
 			expect(prepareOxContentMarkdown('[@preview](https://github.com/junkawa/figma_jp)')).toBe(
 				'<ogcard url="https://github.com/junkawa/figma_jp" />',
-			);
-		});
-
-		it('converts collapsible blocks to details html', () => {
-			expect(prepareOxContentMarkdown('+++ More\nbody\n+++')).toBe(
-				'<details><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
-			);
-		});
-
-		it('converts open collapsible blocks to open details html', () => {
-			expect(prepareOxContentMarkdown('++> More\nbody\n++>')).toBe(
-				'<details open><summary><span class="details-marker"></span>More</summary>\nbody\n</details>',
-			);
-		});
-
-		it('leaves collapsible markers inside fenced code untouched', () => {
-			expect(prepareOxContentMarkdown('```md\n+++ More\n```\n+++ Real\nbody\n+++')).toBe(
-				'```md\n+++ More\n```\n<details><summary><span class="details-marker"></span>Real</summary>\nbody\n</details>',
 			);
 		});
 
@@ -514,10 +493,10 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders collapsible block contents as parsed markdown inside details', async () => {
-			const html = await renderMarkdown('+++ More\n\n## Hidden\n\nbody\n+++');
+			const html = await renderMarkdown('::: details More\n\n## Hidden\n\nbody\n:::');
 
-			expect(html).toContain('<details>');
-			expect(html).toContain('<summary><span class="details-marker"></span>More</summary>');
+			expect(html).toContain('<details class="ox-container ox-container--details">');
+			expect(html).toContain('<summary>More</summary>');
 			expect(html).toContain(
 				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &quot;Hidden&quot;">#</a></h2>',
 			);
@@ -526,14 +505,14 @@ if (import.meta.vitest != null) {
 
 		it('renders the recap appendix as a closed details block', async () => {
 			const html = await renderMarkdown(
-				'## おまけ\n\n+++ おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n+++',
+				'## おまけ\n\n::: details おまけ\n\n## Bun\n\n`ccusage`は偉大。\n\n:::',
 			);
 
 			expect(html).toContain(
 				'<h2 id="おまけ">おまけ<a class="header-anchor" href="#おまけ" aria-label="Permalink to &quot;おまけ&quot;">#</a></h2>',
 			);
-			expect(html).toContain('<details>');
-			expect(html).toContain('<summary><span class="details-marker"></span>おまけ</summary>');
+			expect(html).toContain('<details class="ox-container ox-container--details">');
+			expect(html).toContain('<summary>おまけ</summary>');
 			expect(html).toContain(
 				'<h2 id="bun">Bun<a class="header-anchor" href="#bun" aria-label="Permalink to &quot;Bun&quot;">#</a></h2>',
 			);

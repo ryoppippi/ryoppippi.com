@@ -124,7 +124,7 @@ Currently, I mainly use {link:@kazupon}'s gunshi:
 
 I originally used `cleye`, but migrated to `gunshi` as it maintains a similar interface while being lighter and more feature-rich.
 
-+++ Example of using gunshi in curxy
+::: details Example of using gunshi in curxy
 
 https://github.com/ryoppippi/curxy/blob/7073bf01ce6c5b87f068d36bf3d9bb247af8f998/main.ts#L15C1-L90C4
 
@@ -198,7 +198,7 @@ const command = define({
 });
 ```
 
-+++
+:::
 
 ## Logging
 

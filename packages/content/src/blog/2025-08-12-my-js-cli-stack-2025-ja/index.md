@@ -124,7 +124,7 @@ CLIツール配布時には、全ての依存パッケージをbundleして、de
 
 元々は `cleye` を使っていましたが、`gunshi`は似たインターフェースを保ちつつ、より軽量で高機能であることから移行しました。
 
-+++ gunshiをcurxyで使用している例
+::: details gunshiをcurxyで使用している例
 
 https://github.com/ryoppippi/curxy/blob/7073bf01ce6c5b87f068d36bf3d9bb247af8f998/main.ts#L15C1-L90C4
 
@@ -198,7 +198,7 @@ const command = define({
 });
 ```
 
-+++
+:::
 
 ## Log
 

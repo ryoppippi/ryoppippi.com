@@ -123,7 +123,7 @@ vimconf での発表が想像以上に盛り上がったこと、講演中のた
 考え抜いた結果、自分の普段の Web Frontend 開発の workflow について話すことにしました。
 自分があえて Neovim を使う理由、VSCode との違い、Neovim での開発フローに焦点を当てたプロポーザルを提出しました。
 
-+++提出したプロポーザル
+::: details 提出したプロポーザル
 
 ## Title
 
@@ -191,9 +191,9 @@ This lecture will cover the following topics in detail:
 
 Through this lecture, participants will learn how to achieve a development experience surpassing VSCode using Neovim, gaining skills and knowledge to significantly improve productivity in frontend development. We will present concrete methods to maximise Neovim's potential and meet the demands of modern frontend development.
 
-+++
+:::
 
-+++ Pitch for Reviewers
+::: details Pitch for Reviewers
 
 ## 登壇者について
 
@@ -218,7 +218,7 @@ Through this lecture, participants will learn how to achieve a development exper
 そのため、利便性では一見劣るように見えるNeovimですが、個人的にはVSCode以上の開発体験を得られています。
 vimconfでの発表であるため、聴衆の方々はVim/Neovimをメインで使っている方が多いと思われます。そのため、Neovimでもフロントエンドの開発は十分に行えることを知ってもらい、安心してこれからもVim/Neovimを使い続けてもらいたいという思いから発表を行いたいと考えています。
 
-+++
+:::
 
 確度を上げるためには複数プロポーザルを提出することが望ましいことはわかった上で、今回は1つだけで応募しました。
 採択されるのは運だろうと思う一方、Workflow を demonstrate する形式は過去の発表をみてもほぼないため、新規性があるだろうという考えもあり、謎の自信だけはありました。
