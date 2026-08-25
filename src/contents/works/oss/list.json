@@ -26,26 +26,24 @@
 			"name": "nix-secure-enclave-key",
 			"icon": "icon-[ph--key-light]",
 			"description": "Nix-packaged Secure Enclave-backed SSH authentication and Git SSH signing for macOS."
-		}
-	],
-	"Nix Ecosystem": [
+		},
 		{
 			"name": "nixpkgs",
 			"link": "https://github.com/NixOS/nixpkgs",
 			"icon": "icon-[simple-icons--nixos]",
-			"description": "Upstream contributions for ghq tests, git-wt, gh-do, and oxlint/oxfmt packaging."
+			"description": "Contributions to upstream packaging and tests for ghq, git-wt, gh-do, and oxlint/oxfmt."
 		},
 		{
 			"name": "llm-agents.nix",
 			"link": "https://github.com/numtide/llm-agents.nix",
 			"icon": "icon-[ph--robot-light]",
-			"description": "AI-agent packaging and maintenance contributions across ccusage, agent-browser, ax, pdfvision, and more."
+			"description": "Contributions to AI-agent packaging and maintenance across ccusage, agent-browser, ax, pdfvision, and more."
 		},
 		{
 			"name": "agent-skills-nix",
 			"link": "https://github.com/Kyure-A/agent-skills-nix",
 			"icon": "icon-[ph--graduation-cap-light]",
-			"description": "Home Manager and skill transformation contributions for managing agent skills with Nix."
+			"description": "Contributions to Home Manager and skill transformation support for managing agent skills with Nix."
 		}
 	],
 	"Vim/Neovim": [
@@ -100,28 +98,6 @@
 			"name": "vite-plugin-favicons",
 			"icon": "icon-[tabler--favicon]",
 			"description": "Generate favicons for your Vite project with ease!"
-		}
-	],
-	"TypeScript Tooling": [
-		{
-			"name": "unplugin-typia",
-			"icon": "icon-[ph--magic-wand-light]",
-			"description": "unplugin for Typia with an extra Bun plugin 🫶"
-		},
-		{
-			"name": "pkg-to-jsr",
-			"icon": "icon-[ph--selection-foreground-light]",
-			"description": "Zero-config tool that generates jsr.json from package.json"
-		},
-		{
-			"name": "mirror-jsr-to-npm",
-			"icon": "icon-[octicon--mirror]",
-			"description": "a tool designed to mirror packages from JSR to NPM"
-		},
-		{
-			"name": "bun-plugin-isolated-decl",
-			"icon": "icon-[ph--package]",
-			"description": "This is ultrafast dts generator powered by Bun and oxc"
 		}
 	],
 	"TypeScript Libraries": [
