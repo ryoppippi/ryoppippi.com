@@ -301,7 +301,7 @@ if (import.meta.vitest != null) {
 		base: '',
 		client: '',
 		islands: {},
-		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 		tweet: '',
 	} as const satisfies SiteAssets;
 

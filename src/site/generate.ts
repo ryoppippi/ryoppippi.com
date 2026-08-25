@@ -20,6 +20,7 @@ import { loadExternalMedia, loadExternalPosts } from './content.ts';
 import { gitLastModified } from './git-last-modified.ts';
 import { corePages, mediaFeed } from './pages.ts';
 import {
+	aboutPage,
 	errorPage,
 	mediaPage,
 	ossPage,
@@ -100,6 +101,7 @@ export async function generateSite({
 
 	const pages = [
 		...corePages(posts, externalPosts, assets),
+		aboutPage(assets),
 		ossPage(ossProjects, assets),
 		showcasePage(showcase, assets),
 		publicationsPage(publications, assets),
@@ -151,6 +153,7 @@ export async function generateSite({
 	await Promise.all(
 		[
 			'index.html',
+			'about/index.html',
 			'works/index.html',
 			'works/oss/index.html',
 			'works/showcase/index.html',

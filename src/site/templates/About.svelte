@@ -1,0 +1,54 @@
+<script lang='ts'>
+	import { SITE_OWNER } from '../site-owner.ts';
+</script>
+
+<article class='mx-auto mt-8 max-w-3xl px-2 pb-16'>
+	<header class='mb-12 text-center opacity-60'>
+		<h1 class='text-4xl font-bold' style='view-transition-name:title-about'>About</h1>
+		<div class='mt-6 font-mono text-lg leading-8'>
+			<p>{SITE_OWNER.handle.slice(1)}</p>
+			<p>{SITE_OWNER.name}</p>
+			<p lang='ja'>{SITE_OWNER.japaneseDisplayName}</p>
+		</div>
+	</header>
+
+	<div class='grid items-end gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)]'>
+		<figure class='m-0'>
+			<img
+				class='mx-auto aspect-square w-full max-w-xs rounded-full object-contain view-transition-name---profile'
+				alt='ryoppippi'
+				decoding='async'
+				height='400'
+				loading='eager'
+				src='/ryoppippi.avif'
+				srcset='/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w'
+				sizes='(min-width: 40rem) 256px, calc(100vw - 4rem)'
+				width='400'
+			/>
+			<figcaption class='mt-3 text-center font-mono text-sm opacity-50'>ryoppippi</figcaption>
+		</figure>
+
+		<figure class='m-0'>
+			<img
+				class='mx-auto h-auto w-full rounded-2xl object-contain opacity-80 transition-base hover:opacity-100'
+				alt='haichu'
+				decoding='async'
+				height='529'
+				loading='eager'
+				src='/haichu.avif'
+				style='view-transition-name:about-haichu'
+				width='1011'
+			/>
+			<figcaption class='mt-3 text-center font-mono text-sm opacity-50'>haichu</figcaption>
+		</figure>
+	</div>
+
+	<div class='mx-auto mt-14 max-w-2xl text-base leading-8 text-text-500 opacity-70 dark:text-text-300'>
+		<p>
+			I am a software engineer based in the UK. I work on AI products and open-source developer
+			tools, and I am the creator of
+			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='https://github.com/ryoppippi/ccusage' rel='noopener noreferrer' target='_blank'>ccusage</a>.
+			My interests include TypeScript, Rust, Svelte, Vim, and Nix.
+		</p>
+	</div>
+</article>
