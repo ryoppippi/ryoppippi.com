@@ -4,39 +4,35 @@
 	import WorksNav from './WorksNav.svelte';
 
 	let { items }: { items: PostListItem[] } = $props();
-	const groups = [
-		{ kind: 'podcast', label: 'Podcasts', icon: 'icon-[ri--mic-line]' },
-		{ kind: 'video', label: 'YouTube', icon: 'icon-[ri--youtube-line]' },
-	] as const;
-	const groupedItems = $derived(
-		groups
-			.map((group) => ({
-				...group,
-				items: items.filter((item) => item.kind === group.kind),
-			}))
-			.filter((group) => group.items.length > 0),
+	const kindDetails = {
+		article: { label: 'Article', icon: 'icon-[quill--link-out]' },
+		podcast: { label: 'Podcast', icon: 'icon-[ri--mic-line]' },
+		video: { label: 'YouTube', icon: 'icon-[ri--youtube-line]' },
+	} as const;
+	const byYear = $derived(
+		[...Map.groupBy(items, (item) => new Date(item.pubDate).getFullYear()).entries()].sort(
+			([a], [b]) => b - a,
+		),
 	);
 </script>
 
 <WorksNav active='media' />
 
-<div class='fcol mx-auto gap-1 pt-10'>
-	<p class='mx-10 text-center text-lg opacity-30'>Podcasts, interviews, and videos featuring @ryoppippi.</p>
-</div>
-
-{#each groupedItems as group (group.kind)}
-	<section data-media-kind={group.kind}>
-		<h2 class='f-text-32-64 my-8 font-mono font-bold leading-none text-stroke-aaa text-transparent opacity-35 dark:opacity-20'>{group.label}</h2>
+{#each byYear as [year, yearItems] (year)}
+	<section data-media-year>
+		<h2 class='f-text-32-64 my-8 font-mono font-bold leading-none text-stroke-aaa text-transparent opacity-35 dark:opacity-20'>{year}</h2>
 		<ul class='mx-auto px-10'>
-			{#each group.items as item (item.slug)}
-				<li class='my-5'>
-					<a class='group fyc gap-3 op-card transition-base hover:no-underline' href={item.link} rel='noopener noreferrer' target='_blank'>
-						<span class={`${group.icon} shrink-0`} aria-hidden='true'></span>
-						<span class='min-w-0'>
-							<span class='block text-xl'>{item.title}</span>
-							<time class='text-sm opacity-50' datetime={item.pubDate}>{formatDate(new Date(item.pubDate))}</time>
-						</span>
-					</a>
+			{#each yearItems as item (item.slug)}
+				{@const kind = item.kind ?? 'podcast'}
+				{@const details = kindDetails[kind]}
+				<li class='media-item my-5'>
+					<h3 class='op-card text-xl transition-base'>
+						<a class='underline' href={item.link} rel='noopener noreferrer' target='_blank'>{item.title}</a>
+					</h3>
+					<p class='opacity-50'>
+						<span class={`${details.icon} mr-1`} aria-hidden='true'></span>{details.label}
+						<time class='truncate pl-2 text-sm opacity-80' datetime={item.pubDate}>{formatDate(new Date(item.pubDate))}</time>
+					</p>
 				</li>
 			{/each}
 		</ul>
