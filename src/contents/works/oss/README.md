@@ -50,9 +50,9 @@ Before adding or retaining an entry:
    stars on GitHub.
 2. Check whether the project is used by this site, dotfiles, or another current
    project.
-3. Prefer a concise description that says what the project does. A command such
-   as `npx ccusage` may remain as a marketing hook, but follow it with the
-   project's value or purpose.
+3. Prefer a concise description that says what the project does. Describe the
+   project's value or purpose directly rather than using an installation
+   command as the description.
 4. Keep the category order intentional: current focus areas come first, and
    categories should not be created for a single low-signal entry.
 5. Revisit stale entries when the OSS index changes; do not let the list become

@@ -3,7 +3,7 @@
 		{
 			"name": "ccusage",
 			"icon": "icon-[ph--chart-line-light]",
-			"description": "npx ccusage — analyze coding-agent token usage and costs from local data."
+			"description": "Analyze coding-agent token usage and costs from local data."
 		},
 		{
 			"name": "sitemcp",
