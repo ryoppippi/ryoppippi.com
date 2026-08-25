@@ -9,42 +9,6 @@
 	--un-prose-borders: #7d7d7d4d !important;
 }
 
-.shiki {
-	color-scheme: light;
-	background-color: #fafafa !important;
-
-	@variant dark {
-		color-scheme: dark;
-		background-color: #181616 !important;
-	}
-}
-
-@media (prefers-contrast: more) {
-	@variant dark {
-		.shiki span[style*='#737C73'] {
-			color: #94a094 !important;
-		}
-	}
-
-	@variant light {
-		.shiki span[style*='#6F894E'] {
-			color: #3f6728 !important;
-		}
-
-		.shiki span[style*='#716E61'] {
-			color: #5f5a4e !important;
-		}
-
-		.shiki span[style*='#6693BF'] {
-			color: #2f668f !important;
-		}
-
-		.shiki span[style*='#B35B79'] {
-			color: #8a3156 !important;
-		}
-	}
-}
-
 .prose pre code {
 	font-family: var(--font-code);
 }

@@ -632,12 +632,12 @@ if (import.meta.vitest != null) {
 		});
 
 		it('keeps syntax highlighted code blocks', async () => {
-			const html = await renderMarkdown('```zig\nconst answer = 42;\n```');
+			const html = await renderMarkdown('```ts\nconst answer = 42;\n```');
 
-			expect(html).toContain('class="shiki shiki-themes');
-			expect(html).toContain('data-language="zig"');
+			expect(html).toContain('class="ox-highlight css-variables"');
+			expect(html).toContain('data-language="ts"');
 			expect(html).toContain('<span');
-			expect(html).not.toContain('tabindex="0"');
+			expect(html).toContain('tabindex="0"');
 		});
 
 		it('preserves raw details blocks used by existing posts', async () => {
