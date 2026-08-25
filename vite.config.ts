@@ -12,6 +12,7 @@ import { staticSiteDevServer } from './src/site/dev-server.ts';
 
 export default defineConfig({
 	publicDir: 'static',
+	envPrefix: ['PUBLIC_', 'VITE_'],
 	server: {
 		watch: {
 			ignored: ['**/.direnv/**'],
@@ -49,9 +50,15 @@ export default defineConfig({
 	},
 	run: {
 		tasks: {
+			'git-history': {
+				command:
+					'sh -c \'if [ "$CI" = true ] && [ "$(git rev-parse --is-shallow-repository 2>/dev/null || echo false)" = true ]; then git fetch --unshallow origin; fi\'',
+				cache: false,
+			},
 			'site-build': {
-				command: 'vp build',
-				dependsOn: ['@ryoppippi/content#build'],
+				command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
+				dependsOn: ['git-history', '@ryoppippi/content#build'],
+				env: ['PUBLIC_ORIGIN', 'CI'],
 				input: [
 					'package.json',
 					'pnpm-lock.yaml',

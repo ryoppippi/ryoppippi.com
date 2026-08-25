@@ -1,8 +1,6 @@
 <script lang='ts'>
 	import { SITE_ORIGIN } from '../consts.ts';
 
-	let { description }: { description: string } = $props();
-
 	const socials = [
 		['icon-[line-md--github-loop]', 'GitHub profile', '/github'],
 		['icon-[ph--git-pull-request-duotone]', 'Recent pull requests', '/pr'],
@@ -32,7 +30,6 @@
 			<span class='block sm:inline'>@ryoppippi</span>
 			<span class='animate-pulse text-center text-xl font-medium text-text-700 dark:text-text-200'>Engineer</span>
 		</h1>
-		<p data-home-description class='mx-auto max-w-2xl text-center text-base leading-relaxed text-text-700 dark:text-text-200'>{description}</p>
 	</div>
 </article>
 
