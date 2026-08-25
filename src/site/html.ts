@@ -1,10 +1,12 @@
 import type { Component } from 'svelte';
-import type { Thing, WithContext } from 'schema-dts';
+import type { Graph, Thing, WithContext } from 'schema-dts';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import { render } from 'svelte/server';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
 import Shell from './templates/Shell.svelte';
+
+type StructuredData = Graph | WithContext<Thing>;
 
 type PageOptions = {
 	article?: boolean;
@@ -20,7 +22,7 @@ type PageOptions = {
 	style: PageStyle;
 	title: string;
 	tweet?: boolean;
-	structuredData?: WithContext<Thing>;
+	structuredData?: StructuredData;
 };
 
 function normalizedLanguage(value: string | undefined): string {

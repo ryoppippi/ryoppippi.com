@@ -8,14 +8,15 @@ import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '.
 import { postListItems } from './content.ts';
 import path from 'node:path';
 import { page, renderComponent } from './html.ts';
+import { SITE_OWNER } from './site-owner.ts';
 import Article from './templates/Article.svelte';
 import BlogList from './templates/BlogList.svelte';
 import Home from './templates/Home.svelte';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
-const HOME_DESCRIPTION =
-	'Portfolio and technical blog of @ryoppippi, featuring open-source projects, talks, publications, and software engineering articles.';
+const SITE_OWNER_SOURCE_PATH = 'src/site/site-owner.ts';
+const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle}, featuring open-source projects, talks, publications, and software engineering articles.`;
 
 function markdownDescription(content: string): string | undefined {
 	const paragraph = content
@@ -75,7 +76,7 @@ export type GeneratedFile = {
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		sourcePaths: ['src/site/templates/Home.svelte'],
+		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.svelte'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -85,12 +86,39 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 			style: 'home',
 			structuredData: {
 				'@context': 'https://schema.org',
-				'@type': 'WebSite',
-				'@id': `${SITE_ORIGIN}/#website`,
-				name: SITE_NAME,
-				alternateName: '@ryoppippi',
-				description: HOME_DESCRIPTION,
-				url: SITE_ORIGIN,
+				'@graph': [
+					{
+						'@type': 'WebSite',
+						'@id': `${SITE_ORIGIN}/#website`,
+						name: SITE_NAME,
+						alternateName: SITE_OWNER.handle,
+						description: HOME_DESCRIPTION,
+						url: SITE_OWNER.url,
+						creator: { '@id': SITE_OWNER.id },
+					},
+					{
+						'@type': 'ProfilePage',
+						'@id': `${SITE_ORIGIN}/#profile`,
+						url: SITE_OWNER.url,
+						isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+						mainEntity: { '@id': SITE_OWNER.id },
+					},
+					{
+						'@type': 'Person',
+						'@id': SITE_OWNER.id,
+						name: SITE_OWNER.name,
+						alternateName: [
+							SITE_OWNER.japaneseName,
+							SITE_OWNER.formerName,
+							SITE_OWNER.formerJapaneseName,
+							SITE_OWNER.handle,
+							'ryoppippi',
+						],
+						url: SITE_OWNER.url,
+						image: SITE_SOCIAL_IMAGE_URL,
+						sameAs: [...SITE_OWNER.sameAs],
+					},
+				],
 			},
 		}),
 	};
@@ -149,7 +177,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
-			sourcePaths: [sourcePath],
+			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
 			content: page({
 				title: `${post.title} | blog`,
 				pathname,
@@ -170,7 +198,13 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 					description: metadata.description,
 					url,
 					mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-					author: { '@type': 'Person', name: 'ryoppippi', url: SITE_ORIGIN },
+					author: {
+						'@type': 'Person',
+						'@id': SITE_OWNER.id,
+						name: SITE_OWNER.name,
+						alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle],
+						url: SITE_OWNER.url,
+					},
 					datePublished: post.pubDate,
 					...(image == null ? {} : { image }),
 					inLanguage: post.lang,
@@ -292,7 +326,9 @@ if (import.meta.vitest != null) {
 	} satisfies BlogPost;
 
 	test('renders site identity metadata on the home page', () => {
-		const html = homePage(assets).content;
+		const home = homePage(assets);
+		expect(home.sourcePaths).toContain(SITE_OWNER_SOURCE_PATH);
+		const html = home.content;
 		expect(html).toContain(
 			`<meta data-page-head="" name="description" content="${HOME_DESCRIPTION}">`,
 		);
@@ -303,10 +339,54 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('"@type":"WebSite"');
 	});
 
+	test('keeps profile identity metadata out of the visible home page', () => {
+		const html = homePage(assets).content;
+		const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1];
+		assert.isDefined(body, 'expected a rendered document body');
+
+		expect(body).not.toContain('Ryotaro Kimura');
+		expect(body).not.toContain('木村亮太朗');
+		expect(body).not.toContain('Ryotaro Miura');
+		expect(body).not.toContain('三浦亮太朗');
+	});
+
+	test('identifies the home page owner with profile structured data', () => {
+		const html = homePage(assets).content;
+		const jsonLd = html.match(
+			/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
+		)?.[1];
+		assert.isDefined(jsonLd, 'expected home page structured data');
+
+		expect(JSON.parse(jsonLd)).toMatchObject({
+			'@context': 'https://schema.org',
+			'@graph': expect.arrayContaining([
+				expect.objectContaining({
+					'@type': 'ProfilePage',
+					mainEntity: { '@id': 'https://ryoppippi.com/#person' },
+				}),
+				expect.objectContaining({
+					'@type': 'Person',
+					'@id': 'https://ryoppippi.com/#person',
+					name: 'Ryotaro Kimura',
+					alternateName: expect.arrayContaining([
+						'木村亮太朗',
+						'Ryotaro Miura',
+						'三浦亮太朗',
+						'@ryoppippi',
+					]),
+					sameAs: expect.arrayContaining([
+						'https://github.com/ryoppippi',
+						'https://cv.ryoppippi.com/',
+					]),
+				}),
+			]),
+		});
+	});
+
 	test('renders article SEO metadata and reciprocal language links', () => {
 		const [article] = articlePages(examplePost, assets);
 		expect(article).toBeDefined();
-		expect(article?.sourcePaths).toEqual(['/content/example-article']);
+		expect(article?.sourcePaths).toEqual([SITE_OWNER_SOURCE_PATH, '/content/example-article']);
 		const html = article?.content ?? '';
 
 		expect(html).toContain('<html lang="en">');
@@ -351,6 +431,13 @@ if (import.meta.vitest != null) {
 			datePublished: examplePost.pubDate,
 			image: 'https://ryoppippi.com/assets/content/article-cover.avif',
 			inLanguage: 'en',
+			author: {
+				'@type': 'Person',
+				'@id': 'https://ryoppippi.com/#person',
+				name: 'Ryotaro Kimura',
+				alternateName: expect.arrayContaining(['木村亮太朗', '@ryoppippi']),
+				url: 'https://ryoppippi.com/',
+			},
 		});
 	});
 
