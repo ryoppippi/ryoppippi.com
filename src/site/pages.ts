@@ -75,7 +75,7 @@ export type GeneratedFile = {
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		sourcePaths: ['src/site/pages.ts', 'src/site/templates/Home.svelte'],
+		sourcePaths: ['src/site/templates/Home.svelte'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -109,7 +109,6 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 		path: 'blog/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
-			'src/site/pages.ts',
 			'src/site/templates/BlogList.svelte',
 			'packages/content/src/blog',
 			'src/contents/external-rss/rss.json',
@@ -149,7 +148,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
-			sourcePaths: ['src/site/pages.ts', sourcePath],
+			sourcePaths: [sourcePath],
 			content: page({
 				title: `${post.title} | blog`,
 				pathname,
@@ -275,6 +274,7 @@ if (import.meta.vitest != null) {
 	test('renders article SEO metadata and reciprocal language links', () => {
 		const [article] = articlePages(examplePost, assets);
 		expect(article).toBeDefined();
+		expect(article?.sourcePaths).toEqual(['/content/example-article']);
 		const html = article?.content ?? '';
 
 		expect(html).toContain('<html lang="en">');
