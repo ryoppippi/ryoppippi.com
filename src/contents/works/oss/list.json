@@ -3,7 +3,8 @@
 		"name": "ccusage",
 		"link": "https://github.com/ryoppippi/ccusage",
 		"icon": "icon-[ph--chart-line-light]",
-		"tags": ["AI", "CLI", "TypeScript"],
+		"tags": ["AI", "CLI"],
+		"useGitHubPrimaryLanguage": true,
 		"description": "Analyze coding-agent token usage and costs from local data."
 	},
 	{

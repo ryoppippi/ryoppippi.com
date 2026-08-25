@@ -1,7 +1,7 @@
 #!/usr/bin/env nix
 #! nix shell --inputs-from . nixpkgs#nushell nixpkgs#gh --command nu
 
-# Refresh the GitHub star snapshot consumed by the static OSS page.
+# Refresh the GitHub repository metadata snapshot consumed by the static OSS page.
 
 const list_path = 'src/contents/works/oss/list.json'
 const stars_path = 'src/contents/works/oss/stars.json'
@@ -25,17 +25,19 @@ def github-repository [project: record]: nothing -> string {
     $"($matches.0.owner)/($repository)"
 }
 
-def fetch-star-count [repository: string]: nothing -> int {
-    ^gh api $"repos/($repository)" --jq '.stargazers_count'
-    | str trim
-    | into int
-}
-
-def fetch-project [project: record]: nothing -> record<repo: string, stars: int> {
+def fetch-project [project: record]: nothing -> record {
     let repo = github-repository $project
-    let stars = fetch-star-count $repo
-    print $"($repo): ($stars) stars"
-    {repo: $repo, stars: $stars}
+    let metadata = (
+        ^gh api $"repos/($repo)"
+        --jq '{stars: .stargazers_count, primaryLanguage: .language}'
+        | from json
+    )
+    print $"($repo): ($metadata.stars) stars, ($metadata.primaryLanguage | default 'unknown')"
+    {
+        repo: $repo
+        stars: $metadata.stars
+        primaryLanguage: $metadata.primaryLanguage
+    }
 }
 
 def snapshot-timestamp []: nothing -> string {
