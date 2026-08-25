@@ -49,15 +49,17 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          baseBuildInputs = with pkgs; [
+            nodejs_24
+            gitleaks
+            typos
+          ];
         in
         {
           ci = pkgs.mkShellNoCC {
-            buildInputs = [
-              pkgs.nodejs_24
-              pkgs.pnpm
-              pkgs.gitleaks
-              pkgs.typos
-            ];
+            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+
+            buildInputs = baseBuildInputs ++ [ pkgs.pnpm ];
           };
 
           default =
@@ -70,14 +72,9 @@
               PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
               PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
 
-              buildInputs = [
-                pkgs.nodejs_24
-                nix-vite-plus.packages.${system}.vp
-              ] ++ (with pkgs; [
-                gitleaks
+              buildInputs = baseBuildInputs ++ [ nix-vite-plus.packages.${system}.vp ] ++ (with pkgs; [
                 nushell
                 nufmt
-                typos
                 typos-lsp
                 svelte-language-server
                 yaml-language-server
