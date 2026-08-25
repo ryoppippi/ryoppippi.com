@@ -6,23 +6,9 @@
 @import '../../styles/blog/magic-link.css';
 @import '../../styles/blog/not-by-ai.css';
 @import '../../styles/blog/prose.css';
+@import '../../styles/blog/twitter.css';
 
 @source '../templates/Article.svelte';
-
-.ox-tweet {
-	display: block;
-	margin-block: 1rem;
-}
-
-.ox-tweet > a {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-	padding: 1rem;
-	border: 1px solid #8884;
-	border-radius: 0.5rem;
-	text-decoration: none;
-}
 
 .ox-youtube {
 	width: 100%;

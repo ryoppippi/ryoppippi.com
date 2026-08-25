@@ -1,0 +1,78 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 4,
+	"lang": "ja",
+	"created_at": "2025-12-14T23:10:50.000Z",
+	"display_text_range": [0, 132],
+	"entities": {},
+	"id_str": "2000342747459485933",
+	"text": "面白い。DaaP(Documents as a Package)と言うのかな？これ普及すればContext7のMCPが不要になるかもしれませんね。デフォルトはこれになって欲しいですし、Context7ではなくDeepWikiみたいなものでMCPを消費したいですね。",
+	"user": {
+		"id_str": "1136603416057094144",
+		"name": "Kyutaro@Web x AI x DX",
+		"screen_name": "kyutaro15",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1195945546604695553/rmPDNsUt_normal.jpg"
+	},
+	"edit_control": {
+		"initial_tweet_id": "2000339503786176780",
+		"edit_tweet_ids": ["2000339503786176780", "2000342747459485933"],
+		"editable_until_msecs": "1765756676000",
+		"edits_remaining": "4",
+		"is_edit_eligible": true
+	},
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"favorite_count": 100,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"reply_count": 4,
+		"retweet_count": 21,
+		"created_at": "2025-12-14T20:08:11.000Z",
+		"display_text_range": [0, 82],
+		"entities": {
+			"urls": [
+				{
+					"display_url": "ryoppippi.com/blog/2025-12-1…",
+					"expanded_url": "https://ryoppippi.com/blog/2025-12-14-publish-docs-on-npm-ja",
+					"indices": [59, 82],
+					"url": "https://t.co/XGh38fiGCN"
+				}
+			]
+		},
+		"id_str": "2000296784304992720",
+		"text": "新しい記事！\nドキュメントをnpm packageとしてpublishしよう | blog | ryoppippi\n\nhttps://t.co/XGh38fiGCN",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["2000296784304992720"],
+			"editable_until_msecs": "1765746491000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": true,
+	"isStaleEdit": false,
+	"previous_counts": { "favorite_count": 2, "quote_count": 0, "reply_count": 0, "retweet_count": 1 }
+}

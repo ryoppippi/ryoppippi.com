@@ -1,0 +1,41 @@
+{
+	"__typename": "Tweet",
+	"conversation_control": { "policy": "Community" },
+	"favorite_count": 3096,
+	"lang": "ja",
+	"created_at": "2026-03-28T11:34:22.000Z",
+	"display_text_range": [0, 125],
+	"entities": {},
+	"id_str": "2037855816988893497",
+	"text": "フルスタックとかなんとかエンジニアになるにはこの技術わかってないといけないみたいな投稿めっちゃ流れてくるけど、お前らいつまで受験生の思考回路なんだよ\n\n目の前の！課題を！解くの！スキルセットとかじゃないの！解くの！\n\n一生準備運動だけして人生終わるぞ",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"initial_tweet_id": "2037855534389301724",
+		"edit_tweet_ids": ["2037855534389301724", "2037855816988893497"],
+		"editable_until_msecs": "1774701195000",
+		"edits_remaining": "4",
+		"is_edit_eligible": false
+	},
+	"conversation_count": 5,
+	"news_action_type": "conversation",
+	"isEdited": true,
+	"isStaleEdit": false,
+	"previous_counts": { "favorite_count": 1, "quote_count": 0, "reply_count": 0, "retweet_count": 0 }
+}

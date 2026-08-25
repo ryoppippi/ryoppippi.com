@@ -186,7 +186,6 @@ if (import.meta.vitest != null) {
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
 				pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
-				tweet: '',
 			},
 			loadBlogPost: vi.fn(async () => post),
 			loadBlogPostMetadata: vi.fn(async (): Promise<BlogPostMetadata[]> => [metadata]),

@@ -1,0 +1,111 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 17,
+	"lang": "ja",
+	"created_at": "2025-10-22T14:24:53.000Z",
+	"display_text_range": [0, 66],
+	"entities": {},
+	"id_str": "1981003830566564128",
+	"text": "たけてぃさん素敵な方だった。\n風格がすごく後方彼氏面が似合いすぎていた。\nそれほどりょっぴっぴさんと付き合い長いんだなと、謎の感動。",
+	"user": {
+		"id_str": "1592109607555846144",
+		"name": "りさ",
+		"screen_name": "eerm16g",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/2080940283433472000/X38N5pkq_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1981003830566564128"],
+		"editable_until_msecs": "1761146693000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"favorite_count": 13,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"reply_count": 0,
+		"retweet_count": 1,
+		"created_at": "2025-10-22T11:45:30.000Z",
+		"display_text_range": [0, 5],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/UKQgC3UBK3",
+					"expanded_url": "https://x.com/takeokunn/status/1980963721049751854/photo/1",
+					"indices": [6, 29],
+					"url": "https://t.co/UKQgC3UBK3"
+				}
+			]
+		},
+		"id_str": "1980963721049751854",
+		"text": "後方彼氏面 https://t.co/UKQgC3UBK3",
+		"user": {
+			"id_str": "2549157690",
+			"name": "たけてぃ𓁈𓈷",
+			"screen_name": "takeokunn",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1778349203187765248/wC2KLTyq_normal.png"
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1980963721049751854"],
+			"editable_until_msecs": "1761137130000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/UKQgC3UBK3",
+				"expanded_url": "https://x.com/takeokunn/status/1980963721049751854/photo/1",
+				"ext_media_availability": { "status": "Available" },
+				"indices": [6, 29],
+				"media_url_https": "https://pbs.twimg.com/media/G33L_yRWUAAVnP9.jpg",
+				"original_info": {
+					"focus_rects": [
+						{ "h": 1147, "w": 2048, "x": 0, "y": 5 },
+						{ "h": 1152, "w": 1152, "x": 806, "y": 0 },
+						{ "h": 1152, "w": 1011, "x": 877, "y": 0 },
+						{ "h": 1152, "w": 576, "x": 1094, "y": 0 },
+						{ "h": 1152, "w": 2048, "x": 0, "y": 0 }
+					],
+					"height": 1152,
+					"width": 2048
+				},
+				"sizes": {
+					"large": { "h": 1152, "resize": "fit", "w": 2048 },
+					"medium": { "h": 675, "resize": "fit", "w": 1200 },
+					"small": { "h": 383, "resize": "fit", "w": 680 },
+					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				},
+				"type": "photo",
+				"url": "https://t.co/UKQgC3UBK3"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+				"cropCandidates": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 5 },
+					{ "h": 1152, "w": 1152, "x": 806, "y": 0 },
+					{ "h": 1152, "w": 1011, "x": 877, "y": 0 },
+					{ "h": 1152, "w": 576, "x": 1094, "y": 0 },
+					{ "h": 1152, "w": 2048, "x": 0, "y": 0 }
+				],
+				"expandedUrl": "https://x.com/takeokunn/status/1980963721049751854/photo/1",
+				"url": "https://pbs.twimg.com/media/G33L_yRWUAAVnP9.jpg",
+				"width": 2048,
+				"height": 1152
+			}
+		],
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

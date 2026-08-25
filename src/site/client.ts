@@ -1,4 +1,3 @@
-import type { TweetData } from '@ryoppippi/content';
 import type { JSX } from 'solid-js';
 import type { Component } from 'svelte';
 import '../styles/fonts.css';
@@ -10,8 +9,6 @@ import {
 } from './page-styles.ts';
 import { hashTargetId } from './navigation.ts';
 import './style.css';
-
-const tweetCleanups = new Set<() => Promise<void>>();
 
 /**
  * Runs an action with all CSS transitions disabled so colour-scheme changes
@@ -188,65 +185,6 @@ function initialiseMediaFilter(): void {
 	});
 }
 
-async function hydrateTweet(element: HTMLElement): Promise<void> {
-	const id = element.dataset.tweetId;
-	const root = element.querySelector<HTMLElement>('[data-tweet-root]');
-	const data = element.querySelector<HTMLScriptElement>('[data-tweet-props]')?.textContent;
-	if (id == null || root == null || data == null) {
-		return;
-	}
-
-	try {
-		const tweet = JSON.parse(data) as TweetData;
-		const [{ hydrate, unmount }, { default: Tweet }] = await Promise.all([
-			import('svelte'),
-			import('@ryoppippi/content/Tweet.svelte'),
-		]);
-		const instance = hydrate(Tweet, { target: root, props: { id, tweet } });
-		element.dataset.hydrated = 'true';
-		tweetCleanups.add(() => unmount(instance));
-	} catch {
-		element.dataset.hydrated = 'false';
-	}
-}
-
-function initialiseTweets(): void {
-	const tweets = [...document.querySelectorAll<HTMLElement>('[data-tweet-id]')];
-	if (tweets.length === 0) {
-		return;
-	}
-
-	const start = () => {
-		if (!('IntersectionObserver' in window)) {
-			for (const tweet of tweets) {
-				void hydrateTweet(tweet);
-			}
-			return;
-		}
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						observer.unobserve(entry.target);
-						void hydrateTweet(entry.target as HTMLElement);
-					}
-				}
-			},
-			{ rootMargin: '400px' },
-		);
-		for (const tweet of tweets) {
-			observer.observe(tweet);
-		}
-	};
-
-	if ('requestIdleCallback' in window) {
-		window.requestIdleCallback(start);
-	} else {
-		setTimeout(start, 1);
-	}
-}
-
 type SvelteIslandModule = { default: Component<Record<string, unknown>> };
 type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
 
@@ -340,15 +278,10 @@ function initialisePage(): void {
 	initialiseTalkFilter();
 	initialiseMediaFilter();
 	initialiseSponsors();
-	initialiseTweets();
 	initialiseIslands();
 }
 
 function destroyPage(): void {
-	for (const cleanup of tweetCleanups) {
-		void cleanup();
-	}
-	tweetCleanups.clear();
 	for (const cleanup of islandCleanups) {
 		cleanup();
 	}

@@ -1,6 +1,6 @@
 import oxContent from '@ox-content/napi';
-import { transformOgp } from '@ox-content/vite-plugin';
-import type { TweetData } from '../tweet-renderer.ts';
+import { transformAllPlugins, transformOgp } from '@ox-content/vite-plugin';
+import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { applyBudouxHtml } from './budoux.ts';
 import type { IslandModules } from './component-islands.ts';
@@ -15,12 +15,11 @@ import { normalizeAngleLinks, replaceBareUrls } from './linkify.ts';
 import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
 import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
-const { transformMediaEmbeds, transformYoutubeEmbeds } = oxContent;
+const { transformYoutubeEmbeds } = oxContent;
+const workspaceDirectory = path.resolve(import.meta.dirname, '../../../..');
 const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../../..', '.cache/ox-content/ogp');
-
-export type TweetSnapshots = Record<string, TweetData>;
-
-export type TweetRenderer = (id: string, tweet?: TweetData) => Promise<string>;
+const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
+const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
 
 /**
  * Renders a post-colocated component to HTML so its island is present before
@@ -38,8 +37,6 @@ export type RenderMarkdownOptions = {
 	/** Component names available to this document, mapped to their module ids. */
 	islands?: IslandModules;
 	renderIsland?: IslandRenderer;
-	renderTweet?: TweetRenderer;
-	tweets?: TweetSnapshots;
 };
 
 function prepareOxContentMarkdown(content: string, islands: IslandModules = {}) {
@@ -87,7 +84,7 @@ function wrapScrollableTables(html: string) {
 
 function postprocessRenderedHtml(html: string) {
 	const blockEmbeds = html
-		.replace(/<article class="ox-tweet">([\s\S]*?)<\/article>/g, '<span class="ox-tweet">$1</span>')
+		.replace(/<p>\s*(<figure class="ox-tweet[\s\S]*?<\/figure>)\s*<\/p>/g, '$1')
 		.replace(
 			/<p\b([^>]*)>([\s\S]*?)(\s*<a class="ox-ogp-(?:card|simple)"[\s\S]*?<\/a>)\s*<\/p>/g,
 			(_match, attrs: string, text: string, card: string) =>
@@ -145,33 +142,34 @@ async function renderIslands(html: string, renderIsland: IslandRenderer | undefi
 	});
 }
 
-async function renderTweets(
-	html: string,
-	{ renderTweet, tweets }: Pick<RenderMarkdownOptions, 'renderTweet' | 'tweets'>,
-) {
-	const replacement = (match: RegExpExecArray) => {
-		if (renderTweet == null) {
-			return Promise.resolve(`<Tweet id="${match[1]}" />`);
-		}
-
-		return renderTweet(match[1], tweets?.[match[1]]);
-	};
+function restoreTweetEmbeds(html: string) {
+	const replacement = (_match: string, id: string) => `<Tweet id="${id}" />`;
 	const blockPattern = /<p>\s*<span data-tweet-placeholder="(\d+)"><\/span>\s*<\/p>/g;
-	const blocks = await replaceAsync(html, blockPattern, replacement);
+	const blocks = html.replace(blockPattern, replacement);
 	const inlinePattern = /<span data-tweet-placeholder="(\d+)"><\/span>/g;
-	return replaceAsync(blocks, inlinePattern, replacement);
+	return blocks.replace(inlinePattern, replacement);
 }
 
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const prepared = prepareOxContentMarkdown(content, options.islands);
 	const highlighted = await renderHighlightedMarkdown(prepared);
-	const tweets = await renderTweets(highlighted, options);
-	const media = transformYoutubeEmbeds(
-		transformMediaEmbeds(tweets, {
-			twitter: true,
-			bluesky: true,
-		}),
-	);
+	const social = await transformAllPlugins(restoreTweetEmbeds(highlighted), {
+		bluesky: true,
+		github: false,
+		mermaid: false,
+		ogp: false,
+		tabs: false,
+		twitter: {
+			appearance: 'full',
+			cacheDir: twitterCacheDirectory,
+			downloadVideo: true,
+			fetch: true,
+			mediaOutputDir: twitterMediaDirectory,
+			mediaPublicPath: '/ox-content/twitter',
+		},
+		youtube: false,
+	});
+	const media = transformYoutubeEmbeds(social);
 	const openGraph = /<ogcard\b/i.test(media)
 		? await transformOgp(media, undefined, {
 				cacheDir: ogpCacheDirectory,
@@ -312,33 +310,33 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders tweets as static ox-content cards', async () => {
-			const html = await renderMarkdown('<Tweet id="1234567890" />');
-
-			expect(html).toContain('class="ox-tweet"');
-			expect(html).toContain('href="https://x.com/i/web/status/1234567890"');
-			expect(html).not.toContain('<p><article');
-			expect(html).not.toContain('<Tweet');
-		});
-
-		it('uses the SSG tweet renderer when provided', async () => {
-			const html = await renderMarkdown('<Tweet id="1234567890" />', {
-				renderTweet: async (id) =>
-					`<article class="sveltweet-ssg" data-tweet-id="${id}">Tweet body</article>`,
-			});
-
-			expect(html).toContain('class="sveltweet-ssg"');
-			expect(html).toContain('data-tweet-id="1234567890"');
-			expect(html).not.toContain('class="ox-tweet"');
-		});
-
-		it('passes no data to the renderer when a tweet snapshot is unavailable', async () => {
-			const renderTweet = vi.fn(
-				async (id: string) => `<a href="https://x.com/i/web/status/${id}">Tweet</a>`,
+			const id = '9876543210987654321';
+			vi.stubGlobal(
+				'fetch',
+				vi.fn(async () =>
+					Response.json({
+						conversation_count: 2,
+						favorite_count: 3,
+						id_str: id,
+						text: 'Static Tweet body',
+						user: { name: 'Ox Content', screen_name: 'ox_content' },
+					}),
+				),
 			);
 
-			await renderMarkdown('<Tweet id="1234567890" />', { renderTweet, tweets: {} });
+			try {
+				const html = await renderMarkdown(`<Tweet id="${id}" />`);
 
-			expect(renderTweet).toHaveBeenCalledWith('1234567890', undefined);
+				expect(html).toContain('class="ox-tweet ox-tweet--fetched ox-tweet--full"');
+				expect(html).toContain('Static Tweet body');
+				expect(html).toContain('class="ox-tweet__actions"');
+				expect(html).not.toContain('<p><figure');
+				expect(html).not.toContain('<Tweet');
+				expect(html).not.toContain('<script');
+			} finally {
+				vi.unstubAllGlobals();
+				await rm(path.join(twitterCacheDirectory, `${id}-en.json`), { force: true });
+			}
 		});
 
 		it('renders YouTube embeds with Ox Content', async () => {

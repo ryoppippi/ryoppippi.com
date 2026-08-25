@@ -1,0 +1,140 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 180,
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2026-01-19T20:14:12.000Z",
+	"display_text_range": [0, 94],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/0iiQ4QRTSD",
+				"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+				"indices": [95, 118],
+				"url": "https://t.co/0iiQ4QRTSD"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "113598297",
+				"indices": [50, 60],
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi"
+			}
+		]
+	},
+	"id_str": "2013344262562123779",
+	"text": "“I built ccusage and because of that I got a job” @ryoppippi at Claude Code Anonymous @ London https://t.co/0iiQ4QRTSD",
+	"user": {
+		"id_str": "25401953",
+		"name": "Peter Steinberger 🦞",
+		"screen_name": "steipete",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1131851609774985216/OcsssQ9J_normal.png",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2017100664984186880/orbYx-3U_bigger.jpg"
+			},
+			"description": "OpenClaw🦞",
+			"url": { "url": "https://twitter.com/openclaw", "url_type": "DeepLink" },
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["2013344262562123779"],
+		"editable_until_msecs": "1768857252000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/0iiQ4QRTSD",
+			"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [95, 118],
+			"media_url_https": "https://pbs.twimg.com/media/G_DV7xQXAAA_sP0.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+					{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 1347, "x": 95, "y": 0 },
+					{ "h": 1536, "w": 768, "x": 384, "y": 0 },
+					{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1536,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1536, "resize": "fit", "w": 2048 },
+				"medium": { "h": 900, "resize": "fit", "w": 1200 },
+				"small": { "h": 510, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/0iiQ4QRTSD"
+		},
+		{
+			"display_url": "pic.x.com/0iiQ4QRTSD",
+			"expanded_url": "https://x.com/steipete/status/2013344262562123779/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [95, 118],
+			"media_url_https": "https://pbs.twimg.com/media/G_DV7xPXcAAgCas.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+					{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 1347, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 768, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1536,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1536, "resize": "fit", "w": 2048 },
+				"medium": { "h": 900, "resize": "fit", "w": 1200 },
+				"small": { "h": 510, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/0iiQ4QRTSD"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+				{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 1347, "x": 95, "y": 0 },
+				{ "h": 1536, "w": 768, "x": 384, "y": 0 },
+				{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/steipete/status/2013344262562123779/photo/1",
+			"url": "https://pbs.twimg.com/media/G_DV7xQXAAA_sP0.jpg",
+			"width": 2048,
+			"height": 1536
+		},
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+				{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 1347, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 768, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/steipete/status/2013344262562123779/photo/1",
+			"url": "https://pbs.twimg.com/media/G_DV7xPXcAAgCas.jpg",
+			"width": 2048,
+			"height": 1536
+		}
+	],
+	"conversation_count": 10,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

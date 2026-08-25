@@ -198,7 +198,6 @@ if (import.meta.vitest != null) {
 		client: '',
 		islands: {},
 		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
-		tweet: '',
 	} as const satisfies SiteAssets;
 
 	test('keeps the generated 404 page out of search and social metadata', () => {

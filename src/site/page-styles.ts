@@ -49,9 +49,9 @@ if (import.meta.vitest != null) {
 			expect(
 				missingPageStyles(
 					['/assets/base.css', '/assets/article.css'],
-					['/assets/base.css', '/assets/article.css', '/assets/Tweet.css'],
+					['/assets/base.css', '/assets/article.css', '/assets/Chart.css'],
 				),
-			).toEqual(['/assets/Tweet.css']);
+			).toEqual(['/assets/Chart.css']);
 		});
 	});
 

@@ -1,0 +1,140 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 10,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-11-07T03:44:06.000Z",
+	"display_text_range": [0, 43],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/FEoZ3XVXtf",
+				"expanded_url": "https://x.com/ryoppippi/status/1986640780883075473/photo/1",
+				"indices": [44, 67],
+				"url": "https://t.co/FEoZ3XVXtf"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "1198977449620434945",
+				"indices": [24, 32],
+				"name": "Oikon | Claude Code実践入門",
+				"screen_name": "oikon48"
+			}
+		]
+	},
+	"id_str": "1986640780883075473",
+	"text": "Claude Code meetup の写真が @oikon48 さんから送られてきた https://t.co/FEoZ3XVXtf",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1986640780883075473"],
+		"editable_until_msecs": "1762490646000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/FEoZ3XVXtf",
+			"expanded_url": "https://x.com/ryoppippi/status/1986640780883075473/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [44, 67],
+			"media_url_https": "https://pbs.twimg.com/media/G5H3Qk1WgAABHKw.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 860, "w": 1536, "x": 0, "y": 30 },
+					{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+					{ "h": 1751, "w": 1536, "x": 0, "y": 0 },
+					{ "h": 2048, "w": 1024, "x": 256, "y": 0 },
+					{ "h": 2048, "w": 1536, "x": 0, "y": 0 }
+				],
+				"height": 2048,
+				"width": 1536
+			},
+			"sizes": {
+				"large": { "h": 2048, "resize": "fit", "w": 1536 },
+				"medium": { "h": 1200, "resize": "fit", "w": 900 },
+				"small": { "h": 680, "resize": "fit", "w": 510 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/FEoZ3XVXtf"
+		},
+		{
+			"display_url": "pic.x.com/FEoZ3XVXtf",
+			"expanded_url": "https://x.com/ryoppippi/status/1986640780883075473/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [44, 67],
+			"media_url_https": "https://pbs.twimg.com/media/G5H3Qk2X0AApE-2.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 195 },
+					{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 1347, "x": 0, "y": 0 },
+					{ "h": 1536, "w": 768, "x": 179, "y": 0 },
+					{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1536,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1536, "resize": "fit", "w": 2048 },
+				"medium": { "h": 900, "resize": "fit", "w": 1200 },
+				"small": { "h": 510, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/FEoZ3XVXtf"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 860, "w": 1536, "x": 0, "y": 30 },
+				{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+				{ "h": 1751, "w": 1536, "x": 0, "y": 0 },
+				{ "h": 2048, "w": 1024, "x": 256, "y": 0 },
+				{ "h": 2048, "w": 1536, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1986640780883075473/photo/1",
+			"url": "https://pbs.twimg.com/media/G5H3Qk1WgAABHKw.jpg",
+			"width": 1536,
+			"height": 2048
+		},
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 195 },
+				{ "h": 1536, "w": 1536, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 1347, "x": 0, "y": 0 },
+				{ "h": 1536, "w": 768, "x": 179, "y": 0 },
+				{ "h": 1536, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1986640780883075473/photo/1",
+			"url": "https://pbs.twimg.com/media/G5H3Qk2X0AApE-2.jpg",
+			"width": 2048,
+			"height": 1536
+		}
+	],
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

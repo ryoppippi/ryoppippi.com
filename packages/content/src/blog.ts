@@ -6,7 +6,6 @@ import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown-cache.ts';
 import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
-import { loadTweetSnapshots } from './tweet-snapshots.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.
@@ -94,12 +93,9 @@ function filenameFor(filepath: string): string {
 }
 
 async function loadRenderOptions(content: string, filepath: string, directory: string) {
-	const [tweets, islands] = await Promise.all([
-		loadTweetSnapshots(content, filepath),
-		resolvePostIslands(content, filepath, directory),
-	]);
+	const islands = await resolvePostIslands(content, filepath, directory);
 	const hasIslands = Object.keys(islands).length > 0;
-	return tweets == null && !hasIslands ? undefined : { tweets, islands };
+	return hasIslands ? { islands } : undefined;
 }
 
 async function findBlogPostSource(slug: string, directory: string) {

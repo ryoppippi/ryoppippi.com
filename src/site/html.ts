@@ -21,7 +21,6 @@ type PageOptions = {
 	pathname: string;
 	style: PageStyle;
 	title: string;
-	tweet?: boolean;
 	structuredData?: StructuredData;
 };
 
@@ -70,7 +69,6 @@ export function page({
 	assets,
 	islands = [],
 	style,
-	tweet = false,
 	structuredData,
 }: PageOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
@@ -93,5 +91,5 @@ export function page({
 	});
 	const theme =
 		"document.documentElement.classList.add('js');try{const theme=localStorage.theme;document.documentElement.classList.toggle('dark',theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{document.documentElement.classList.toggle('dark',matchMedia('(prefers-color-scheme: dark)').matches)}";
-	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, tweet, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
+	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
 }

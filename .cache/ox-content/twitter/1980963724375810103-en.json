@@ -1,0 +1,127 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 12,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-22T11:45:31.000Z",
+	"display_text_range": [0, 20],
+	"entities": {
+		"hashtags": [{ "indices": [16, 20], "text": "WnB" }],
+		"media": [
+			{
+				"display_url": "pic.x.com/QpADq5s3Ng",
+				"expanded_url": "https://x.com/YKirin0418/status/1980963724375810103/photo/1",
+				"indices": [21, 44],
+				"url": "https://t.co/QpADq5s3Ng"
+			}
+		],
+		"user_mentions": [
+			{ "id_str": "113598297", "indices": [5, 15], "name": "ryoppippi", "screen_name": "ryoppippi" }
+		]
+	},
+	"id_str": "1980963724375810103",
+	"text": "キャー♡\n@ryoppippi\n#WnB https://t.co/QpADq5s3Ng",
+	"user": {
+		"id_str": "1384847875176210436",
+		"name": "yasunori🫖@loglass🐳",
+		"screen_name": "YKirin0418",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1611991127309324290/ED4Pk7GB_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1980963724375810103"],
+		"editable_until_msecs": "1761137131000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/QpADq5s3Ng",
+			"expanded_url": "https://x.com/YKirin0418/status/1980963724375810103/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [21, 44],
+			"media_url_https": "https://pbs.twimg.com/media/G33MAiHXAAACBLP.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+					{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+					{ "h": 1542, "w": 1353, "x": 0, "y": 0 },
+					{ "h": 1542, "w": 771, "x": 75, "y": 0 },
+					{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1542,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1542, "resize": "fit", "w": 2048 },
+				"medium": { "h": 904, "resize": "fit", "w": 1200 },
+				"small": { "h": 512, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/QpADq5s3Ng"
+		},
+		{
+			"display_url": "pic.x.com/QpADq5s3Ng",
+			"expanded_url": "https://x.com/YKirin0418/status/1980963724375810103/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [21, 44],
+			"media_url_https": "https://pbs.twimg.com/media/G33MAjpXEAAbjhi.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 194 },
+					{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+					{ "h": 1542, "w": 1353, "x": 0, "y": 0 },
+					{ "h": 1542, "w": 771, "x": 178, "y": 0 },
+					{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1542,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1542, "resize": "fit", "w": 2048 },
+				"medium": { "h": 904, "resize": "fit", "w": 1200 },
+				"small": { "h": 512, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/QpADq5s3Ng"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+				{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+				{ "h": 1542, "w": 1353, "x": 0, "y": 0 },
+				{ "h": 1542, "w": 771, "x": 75, "y": 0 },
+				{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/YKirin0418/status/1980963724375810103/photo/1",
+			"url": "https://pbs.twimg.com/media/G33MAiHXAAACBLP.jpg",
+			"width": 2048,
+			"height": 1542
+		},
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 194 },
+				{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+				{ "h": 1542, "w": 1353, "x": 0, "y": 0 },
+				{ "h": 1542, "w": 771, "x": 178, "y": 0 },
+				{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/YKirin0418/status/1980963724375810103/photo/1",
+			"url": "https://pbs.twimg.com/media/G33MAjpXEAAbjhi.jpg",
+			"width": 2048,
+			"height": 1542
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

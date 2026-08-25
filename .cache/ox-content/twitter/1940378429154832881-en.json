@@ -1,0 +1,92 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 1109,
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2025-07-02T11:54:02.000Z",
+	"display_text_range": [0, 88],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/ZAQG9TLkbF",
+				"expanded_url": "https://x.com/jarredsumner/status/1940378429154832881/photo/1",
+				"indices": [89, 112],
+				"url": "https://t.co/ZAQG9TLkbF"
+			}
+		]
+	},
+	"id_str": "1940378429154832881",
+	"text": "got claude code max subscriptions for all the engineers at bun after looking at my usage https://t.co/ZAQG9TLkbF",
+	"user": {
+		"id_str": "2489440172",
+		"name": "Jarred Sumner",
+		"screen_name": "jarredsumner",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1342417825483300864/Vz4ChOFG_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/1809959835884216320/MDn6rbnJ_bigger.jpg"
+			},
+			"description": "Bun",
+			"url": { "url": "https://twitter.com/bunjavascript", "url_type": "DeepLink" },
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1940378429154832881"],
+		"editable_until_msecs": "1751460842000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/ZAQG9TLkbF",
+			"expanded_url": "https://x.com/jarredsumner/status/1940378429154832881/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [89, 112],
+			"media_url_https": "https://pbs.twimg.com/media/Gu2b5QzXMAAvKfm.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1035, "w": 1848, "x": 0, "y": 0 },
+					{ "h": 1848, "w": 1848, "x": 0, "y": 0 },
+					{ "h": 2100, "w": 1842, "x": 3, "y": 0 },
+					{ "h": 2100, "w": 1050, "x": 399, "y": 0 },
+					{ "h": 2100, "w": 1848, "x": 0, "y": 0 }
+				],
+				"height": 2100,
+				"width": 1848
+			},
+			"sizes": {
+				"large": { "h": 2048, "resize": "fit", "w": 1802 },
+				"medium": { "h": 1200, "resize": "fit", "w": 1056 },
+				"small": { "h": 680, "resize": "fit", "w": 598 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/ZAQG9TLkbF"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1035, "w": 1848, "x": 0, "y": 0 },
+				{ "h": 1848, "w": 1848, "x": 0, "y": 0 },
+				{ "h": 2100, "w": 1842, "x": 3, "y": 0 },
+				{ "h": 2100, "w": 1050, "x": 399, "y": 0 },
+				{ "h": 2100, "w": 1848, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/jarredsumner/status/1940378429154832881/photo/1",
+			"url": "https://pbs.twimg.com/media/Gu2b5QzXMAAvKfm.jpg",
+			"width": 1848,
+			"height": 2100
+		}
+	],
+	"conversation_count": 46,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

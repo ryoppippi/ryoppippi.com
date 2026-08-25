@@ -139,7 +139,6 @@ if (import.meta.vitest != null) {
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
 				'blog/post/image one.png': 'image',
-				'blog/post/tweets.generated.json': '{}',
 				'showcase/project.md': '# Project',
 				'showcase/project cover.jpg': 'cover',
 				'showcase/index.ts': 'export {}',

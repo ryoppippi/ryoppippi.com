@@ -1,4 +1,4 @@
-import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
+import type { ContentArtifact } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
@@ -35,7 +35,6 @@ type GenerateSiteOptions = {
 	assets: SiteAssets;
 	content?: ContentArtifact;
 	outDir: string;
-	renderTweet?: TweetRenderer;
 	root: string;
 };
 
@@ -53,7 +52,6 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
  * @param assets - Bundled site assets referenced by generated pages.
  * @param content - Optional prebuilt content artifact.
  * @param outDir - Directory that receives generated files.
- * @param renderTweet - Tweet renderer used when content must be built locally.
  * @param root - Repository root used for source loading and Git metadata.
  * @returns A promise that resolves after all generated files are written.
  */
@@ -61,16 +59,12 @@ export async function generateSite({
 	assets,
 	content,
 	outDir,
-	renderTweet,
 	root,
 }: GenerateSiteOptions): Promise<void> {
 	let localContent = content;
 	if (localContent == null) {
-		if (renderTweet == null) {
-			throw new Error('renderTweet is required when no content artifact is provided');
-		}
 		const { buildContentArtifact } = await import('@ryoppippi/content/build');
-		localContent = await buildContentArtifact(renderTweet);
+		localContent = await buildContentArtifact();
 	}
 	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =
 		await Promise.all([

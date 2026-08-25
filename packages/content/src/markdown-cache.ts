@@ -1,19 +1,13 @@
-import type { IslandRenderer, RenderMarkdownOptions, TweetRenderer } from './markdown/render.ts';
+import type { IslandRenderer, RenderMarkdownOptions } from './markdown/render.ts';
 import { renderMarkdown } from './markdown/render.ts';
 
 export type MarkdownRenderer = (
 	content: string,
-	options?: Omit<RenderMarkdownOptions, 'renderIsland' | 'renderTweet'>,
+	options?: Omit<RenderMarkdownOptions, 'renderIsland'>,
 ) => Promise<string>;
 
-const rendererCaches = new WeakMap<TweetRenderer, Map<string, Promise<string>>>();
-
-export function createMarkdownRenderer(
-	renderTweet: TweetRenderer,
-	renderIsland?: IslandRenderer,
-): MarkdownRenderer {
-	const memoryCache = rendererCaches.get(renderTweet) ?? new Map<string, Promise<string>>();
-	rendererCaches.set(renderTweet, memoryCache);
+export function createMarkdownRenderer(renderIsland?: IslandRenderer): MarkdownRenderer {
+	const memoryCache = new Map<string, Promise<string>>();
 
 	return async (content, options) => {
 		const cached = memoryCache.get(content);
@@ -21,7 +15,7 @@ export function createMarkdownRenderer(
 			return cached;
 		}
 
-		const pending = renderMarkdown(content, { ...options, renderIsland, renderTweet });
+		const pending = renderMarkdown(content, { ...options, renderIsland });
 		memoryCache.set(content, pending);
 		return pending;
 	};

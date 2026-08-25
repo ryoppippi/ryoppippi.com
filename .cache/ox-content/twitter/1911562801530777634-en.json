@@ -1,0 +1,94 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 4,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-04-13T23:31:01.000Z",
+	"display_text_range": [0, 83],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/o551BpWTSP",
+				"expanded_url": "https://x.com/ryoppippi/status/1911562801530777634/photo/1",
+				"indices": [82, 105],
+				"url": "https://t.co/o551BpWTSP"
+			}
+		]
+	},
+	"id_str": "1911562801530777634",
+	"text": "仕事としてのOSS、バンドルサイズ編\n👈before(インストールサイズ10.4MB+６個の依存)\nafter👉 (インストールサイズ187KB + 0個の依存) https://t.co/o551BpWTSP",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1911562801530777634"],
+		"editable_until_msecs": "1744590661000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/o551BpWTSP",
+			"expanded_url": "https://x.com/ryoppippi/status/1911562801530777634/photo/1",
+			"ext_alt_text": "Left 10.4 MB with some dependencies\nRight 187.0 KB with zero dependency",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [82, 105],
+			"media_url_https": "https://pbs.twimg.com/media/Goc7h8LWEAAgLDd.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 884, "w": 1579, "x": 0, "y": 0 },
+					{ "h": 940, "w": 940, "x": 0, "y": 0 },
+					{ "h": 940, "w": 825, "x": 0, "y": 0 },
+					{ "h": 940, "w": 470, "x": 0, "y": 0 },
+					{ "h": 940, "w": 1579, "x": 0, "y": 0 }
+				],
+				"height": 940,
+				"width": 1579
+			},
+			"sizes": {
+				"large": { "h": 940, "resize": "fit", "w": 1579 },
+				"medium": { "h": 714, "resize": "fit", "w": 1200 },
+				"small": { "h": 405, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/o551BpWTSP"
+		}
+	],
+	"photos": [
+		{
+			"accessibilityLabel": "Left 10.4 MB with some dependencies\nRight 187.0 KB with zero dependency",
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 884, "w": 1579, "x": 0, "y": 0 },
+				{ "h": 940, "w": 940, "x": 0, "y": 0 },
+				{ "h": 940, "w": 825, "x": 0, "y": 0 },
+				{ "h": 940, "w": 470, "x": 0, "y": 0 },
+				{ "h": 940, "w": 1579, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1911562801530777634/photo/1",
+			"url": "https://pbs.twimg.com/media/Goc7h8LWEAAgLDd.jpg",
+			"width": 1579,
+			"height": 940
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

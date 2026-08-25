@@ -1,0 +1,133 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 1,
+	"in_reply_to_screen_name": "ryoppippi",
+	"in_reply_to_status_id_str": "1968462931282002427",
+	"in_reply_to_user_id_str": "113598297",
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2025-09-18T00:45:21.000Z",
+	"display_text_range": [11, 88],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/5yFjfl1YQl",
+				"expanded_url": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+				"indices": [89, 112],
+				"url": "https://t.co/5yFjfl1YQl"
+			}
+		],
+		"user_mentions": [
+			{ "id_str": "113598297", "indices": [0, 10], "name": "ryoppippi", "screen_name": "ryoppippi" }
+		]
+	},
+	"id_str": "1968476404229751199",
+	"text": "@ryoppippi Looking good - I need to step up my use... it's so much cheaper than Claude!! https://t.co/5yFjfl1YQl",
+	"user": {
+		"id_str": "89291422",
+		"name": "Ben Vargas",
+		"screen_name": "benvargas",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1460668143072780288/bO9r23tT_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1968476404229751199"],
+		"editable_until_msecs": "1758159921000",
+		"edits_remaining": "5",
+		"is_edit_eligible": false
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/5yFjfl1YQl",
+			"expanded_url": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [89, 112],
+			"media_url_https": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1049, "w": 1874, "x": 0, "y": 145 },
+					{ "h": 1194, "w": 1194, "x": 105, "y": 0 },
+					{ "h": 1194, "w": 1047, "x": 179, "y": 0 },
+					{ "h": 1194, "w": 597, "x": 404, "y": 0 },
+					{ "h": 1194, "w": 1874, "x": 0, "y": 0 }
+				],
+				"height": 1194,
+				"width": 1874
+			},
+			"sizes": {
+				"large": { "h": 1194, "resize": "fit", "w": 1874 },
+				"medium": { "h": 765, "resize": "fit", "w": 1200 },
+				"small": { "h": 433, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/5yFjfl1YQl"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1049, "w": 1874, "x": 0, "y": 145 },
+				{ "h": 1194, "w": 1194, "x": 105, "y": 0 },
+				{ "h": 1194, "w": 1047, "x": 179, "y": 0 },
+				{ "h": 1194, "w": 597, "x": 404, "y": 0 },
+				{ "h": 1194, "w": 1874, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/ben_vargas/status/1968476404229751199/photo/1",
+			"url": "https://pbs.twimg.com/media/G1Fu18WacAAVLiS.jpg",
+			"width": 1874,
+			"height": 1194
+		}
+	],
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"parent": {
+		"favorite_count": 0,
+		"in_reply_to_screen_name": "ryoppippi",
+		"in_reply_to_status_id_str": "1968458369187868712",
+		"in_reply_to_user_id_str": "113598297",
+		"lang": "en",
+		"reply_count": 2,
+		"retweet_count": 0,
+		"created_at": "2025-09-17T23:51:49.000Z",
+		"display_text_range": [11, 169],
+		"entities": {
+			"user_mentions": [
+				{ "id_str": "89291422", "indices": [0, 10], "name": "", "screen_name": "benvargas" }
+			]
+		},
+		"id_str": "1968462931282002427",
+		"text": "@benvargas if you are fine, I'll release it tomorrow.\n\nit gonna be really big  release\n\nI gonna go sleep, so if you find some bug, create a PR towards this codex branch!",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1968462931282002427"],
+			"editable_until_msecs": "1758156709000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

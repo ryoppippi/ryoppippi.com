@@ -19,7 +19,6 @@ export type SiteAssets = {
 	islands: Record<string, string[]>;
 	pages: Record<PageStyle, string>;
 	preloads?: Partial<Record<PageStyle, string>>;
-	tweet: string;
 };
 
 // In development the client entry also imports these stylesheets as JS
@@ -40,7 +39,6 @@ export const DEV_ASSETS = {
 	},
 	islands: {},
 	preloads: {},
-	tweet: '',
 } as const satisfies SiteAssets;
 
 export type ManifestChunk = {
@@ -150,7 +148,6 @@ export function resolveSiteAssets(
 		preloads: {
 			works: preloadFonts(['dm-mono-latin-400-normal.woff2', 'dm-mono-latin-500-normal.woff2']),
 		},
-		tweet: stylesFor('/Tweet.svelte'),
 	};
 }
 
@@ -190,7 +187,6 @@ function renderIslandStyles(assets: SiteAssets, islands: string[]): string {
 export function renderAssetTags(
 	assets: SiteAssets,
 	style: PageStyle,
-	tweet: boolean,
 	islands: string[] = [],
 ): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
@@ -198,7 +194,6 @@ export function renderAssetTags(
 		assets.preloads?.[style] ?? '',
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pages[style],
-		tweet ? assets.tweet : '',
 		renderIslandStyles(assets, islands),
 		assets.client,
 	]
@@ -223,11 +218,10 @@ if (import.meta.vitest != null) {
 			works: '<link href="/works.css">',
 		},
 		preloads: {},
-		tweet: '<link href="/tweet.css">',
 	} as const satisfies SiteAssets;
 
 	describe(resolveSiteAssets, () => {
-		it('separates base, page and tweet assets from the Vite manifest', () => {
+		it('separates base and page assets from the Vite manifest', () => {
 			const result = resolveSiteAssets(
 				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
 				{
@@ -248,10 +242,6 @@ if (import.meta.vitest != null) {
 					},
 					'src/site/styles/works.css': {
 						file: 'assets/works.css',
-					},
-					'packages/content/src/Tweet.svelte': {
-						file: 'assets/Tweet.js',
-						css: ['assets/Tweet.css'],
 					},
 					'packages/content/src/blog/post/Chart.svelte': {
 						file: 'assets/Chart.js',
@@ -289,7 +279,6 @@ if (import.meta.vitest != null) {
 					works:
 						'<link rel="preload" href="/assets/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>\n\t<link rel="preload" href="/assets/dm-mono-500.woff2" as="font" type="font/woff2" crossorigin>',
 				},
-				tweet: '<link rel="stylesheet" crossorigin href="/assets/Tweet.css">',
 			});
 		});
 	});
@@ -301,27 +290,19 @@ if (import.meta.vitest != null) {
 				preloads: { works: '<link rel="preload" href="/dm-mono.woff2">' },
 			};
 
-			expect(renderAssetTags(withPreloads, 'works', false)).toContain('/dm-mono.woff2');
-			expect(renderAssetTags(withPreloads, 'home', false)).not.toContain('/dm-mono.woff2');
-		});
-
-		it('includes Tweet styles only when the page embeds a Tweet', () => {
-			expect(renderAssetTags(assets, 'article', false)).not.toContain('/tweet.css');
-			expect(renderAssetTags(assets, 'article', true)).toContain('/tweet.css');
+			expect(renderAssetTags(withPreloads, 'works')).toContain('/dm-mono.woff2');
+			expect(renderAssetTags(withPreloads, 'home')).not.toContain('/dm-mono.woff2');
 		});
 
 		it('links the styles of the islands the page mounts', () => {
-			const tags = renderAssetTags(assets, 'article', false, ['post/Chart.svelte']);
+			const tags = renderAssetTags(assets, 'article', ['post/Chart.svelte']);
 
 			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Chart.css">');
 			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Legend.css">');
 		});
 
 		it('links a shared island stylesheet once', () => {
-			const tags = renderAssetTags(assets, 'article', false, [
-				'post/Chart.svelte',
-				'post/Table.svelte',
-			]);
+			const tags = renderAssetTags(assets, 'article', ['post/Chart.svelte', 'post/Table.svelte']);
 
 			expect(tags.match(/assets\/Legend\.css/g)).toHaveLength(1);
 		});
@@ -332,19 +313,17 @@ if (import.meta.vitest != null) {
 				islands: { 'post/Chart.svelte': ['post/Chart.svelte?svelte&lang.css'] },
 			};
 
-			expect(renderAssetTags(dev, 'article', false, ['post/Chart.svelte'])).toContain(
+			expect(renderAssetTags(dev, 'article', ['post/Chart.svelte'])).toContain(
 				'href="/post/Chart.svelte?svelte&amp;lang.css"',
 			);
 		});
 
 		it('omits island styles for a page without islands', () => {
-			expect(renderAssetTags(assets, 'article', false)).not.toContain('/assets/Chart.css');
+			expect(renderAssetTags(assets, 'article')).not.toContain('/assets/Chart.css');
 		});
 
 		it('ignores an island with no styles of its own', () => {
-			expect(renderAssetTags(assets, 'article', false, ['post/Unknown.svelte'])).not.toContain(
-				'/assets/',
-			);
+			expect(renderAssetTags(assets, 'article', ['post/Unknown.svelte'])).not.toContain('/assets/');
 		});
 	});
 
@@ -376,13 +355,13 @@ if (import.meta.vitest != null) {
 				'.home::after { content: "</style>" }',
 			);
 
-			expect(renderAssetTags(inlined, 'home', false)).toContain(
+			expect(renderAssetTags(inlined, 'home')).toContain(
 				'<style data-inline-base-style>body { color: red }</style>',
 			);
-			expect(renderAssetTags(inlined, 'home', false)).toContain('<\\/style>');
-			expect(renderAssetTags(inlined, 'home', false)).not.toContain('/home.css');
-			expect(renderAssetTags(inlined, 'blog', false)).toContain('/base.css');
-			expect(renderAssetTags(inlined, 'blog', false)).toContain('/blog.css');
+			expect(renderAssetTags(inlined, 'home')).toContain('<\\/style>');
+			expect(renderAssetTags(inlined, 'home')).not.toContain('/home.css');
+			expect(renderAssetTags(inlined, 'blog')).toContain('/base.css');
+			expect(renderAssetTags(inlined, 'blog')).toContain('/blog.css');
 		});
 	});
 }

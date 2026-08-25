@@ -1,0 +1,154 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 19,
+	"lang": "ja",
+	"created_at": "2025-08-10T14:08:10.000Z",
+	"display_text_range": [0, 57],
+	"entities": {},
+	"id_str": "1954545309339574496",
+	"text": "本日のなるほどスレすぎた…。ツール配布用にbunxを選定したくなる理由、説明してもらったら納得感がかなりありました",
+	"user": {
+		"id_str": "1702801320",
+		"name": "syumai",
+		"screen_name": "__syumai",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1543769323877302273/uWPSMOfn_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1954545309339574496"],
+		"editable_until_msecs": "1754838490000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"favorite_count": 13,
+		"in_reply_to_screen_name": "__syumai",
+		"in_reply_to_status_id_str": "1954540130519405006",
+		"in_reply_to_user_id_str": "1702801320",
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"reply_count": 1,
+		"retweet_count": 1,
+		"created_at": "2025-08-10T13:55:37.000Z",
+		"display_text_range": [10, 206],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/6Xl8gFNgPF",
+					"expanded_url": "https://x.com/ryoppippi/status/1954542152731549902/video/1",
+					"indices": [207, 230],
+					"url": "https://t.co/6Xl8gFNgPF"
+				}
+			],
+			"user_mentions": [
+				{ "id_str": "1702801320", "indices": [0, 9], "name": "syumai", "screen_name": "__syumai" }
+			]
+		},
+		"id_str": "1954542152731549902",
+		"text": "@__syumai ccusageは依存パッケージが0なのでおそらく速度は変わらないんですが、依存が多い系が遅いんですよね。ダウンロードとpackage resolutionで速度差がある印象\n\nbunx @modelcontextprotocol/inspector\ndeno -A npm:@modelcontextprotocol/inspector\nで比較してます（なぜかdeno版は起動失敗してますが) https://t.co/6Xl8gFNgPF",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": { "url": "https://twitter.com/rork", "url_type": "DeepLink" },
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1954542152731549902"],
+			"editable_until_msecs": "1754837737000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"mediaDetails": [
+			{
+				"additional_media_info": {},
+				"display_url": "pic.x.com/6Xl8gFNgPF",
+				"expanded_url": "https://x.com/ryoppippi/status/1954542152731549902/video/1",
+				"ext_media_availability": { "status": "Available" },
+				"indices": [207, 230],
+				"media_url_https": "https://pbs.twimg.com/amplify_video_thumb/1954541676724187136/img/cfMypA6Q0nVgBIuo.jpg",
+				"original_info": { "focus_rects": [], "height": 1356, "width": 1668 },
+				"sizes": {
+					"large": { "h": 1356, "resize": "fit", "w": 1668 },
+					"medium": { "h": 976, "resize": "fit", "w": 1200 },
+					"small": { "h": 553, "resize": "fit", "w": 680 },
+					"thumb": { "h": 150, "resize": "crop", "w": 150 }
+				},
+				"type": "video",
+				"url": "https://t.co/6Xl8gFNgPF",
+				"video_info": {
+					"aspect_ratio": [139, 113],
+					"duration_millis": 27383,
+					"variants": [
+						{
+							"content_type": "application/x-mpegURL",
+							"url": "https://video.twimg.com/amplify_video/1954541676724187136/pl/9a42SR4KY14K4UcY.m3u8?tag=14"
+						},
+						{
+							"bitrate": 288000,
+							"content_type": "video/mp4",
+							"url": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/332x270/GpwfJGek13uxi3uk.mp4?tag=14"
+						},
+						{
+							"bitrate": 832000,
+							"content_type": "video/mp4",
+							"url": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/442x360/YsGbyyVAK3RUQEtz.mp4?tag=14"
+						},
+						{
+							"bitrate": 2176000,
+							"content_type": "video/mp4",
+							"url": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/884x720/bfVuk2R_xR_3og37.mp4?tag=14"
+						}
+					]
+				}
+			}
+		],
+		"photos": [],
+		"video": {
+			"aspectRatio": [139, 113],
+			"contentType": "media_entity",
+			"durationMs": 27383,
+			"mediaAvailability": { "status": "available" },
+			"poster": "https://pbs.twimg.com/amplify_video_thumb/1954541676724187136/img/cfMypA6Q0nVgBIuo.jpg",
+			"variants": [
+				{
+					"type": "application/x-mpegURL",
+					"src": "https://video.twimg.com/amplify_video/1954541676724187136/pl/9a42SR4KY14K4UcY.m3u8?tag=14"
+				},
+				{
+					"type": "video/mp4",
+					"src": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/332x270/GpwfJGek13uxi3uk.mp4?tag=14"
+				},
+				{
+					"type": "video/mp4",
+					"src": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/442x360/YsGbyyVAK3RUQEtz.mp4?tag=14"
+				},
+				{
+					"type": "video/mp4",
+					"src": "https://video.twimg.com/amplify_video/1954541676724187136/vid/avc1/884x720/bfVuk2R_xR_3og37.mp4?tag=14"
+				}
+			],
+			"videoId": { "type": "tweet", "id": "1954542152731549902" },
+			"viewCount": 0
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

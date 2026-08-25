@@ -1,0 +1,155 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 43,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-23T01:56:47.000Z",
+	"display_text_range": [0, 131],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/lgskPeZWET",
+				"expanded_url": "https://x.com/WorkNeqBuild/status/1981177952961515958/photo/1",
+				"indices": [131, 154],
+				"url": "https://t.co/lgskPeZWET"
+			}
+		]
+	},
+	"id_str": "1981177952961515958",
+	"text": "昨日開催された【Work≠Build Meetup Tokyo feat ryoppippi】は大盛況でした！\n参加していただいたみなさまありがとうございました。\n\n今後もこのようなオフラインイベントを実施しますので\nぜひ奮ってご参加いただけますと嬉しいです🌟 https://t.co/lgskPeZWET",
+	"user": {
+		"id_str": "1767769710387675137",
+		"name": "Work≠Build",
+		"screen_name": "wnb_community",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1950161137670246403/KR4E5VEP_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1981177952961515958"],
+		"editable_until_msecs": "1761188207000",
+		"edits_remaining": "5",
+		"is_edit_eligible": false
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/lgskPeZWET",
+			"expanded_url": "https://x.com/WorkNeqBuild/status/1981177952961515958/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [131, 154],
+			"media_url_https": "https://pbs.twimg.com/media/G36Nm5ZWwAA34-l.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 1680,
+						"w": 3000,
+						"x": 0,
+						"y": 570
+					},
+					{
+						"h": 2250,
+						"w": 2250,
+						"x": 750,
+						"y": 0
+					},
+					{
+						"h": 2250,
+						"w": 1974,
+						"x": 1026,
+						"y": 0
+					},
+					{
+						"h": 2250,
+						"w": 1125,
+						"x": 1875,
+						"y": 0
+					},
+					{
+						"h": 2250,
+						"w": 3000,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 2250,
+				"width": 3000
+			},
+			"sizes": {
+				"large": {
+					"h": 1536,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 510,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/lgskPeZWET"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 1680,
+					"w": 3000,
+					"x": 0,
+					"y": 570
+				},
+				{
+					"h": 2250,
+					"w": 2250,
+					"x": 750,
+					"y": 0
+				},
+				{
+					"h": 2250,
+					"w": 1974,
+					"x": 1026,
+					"y": 0
+				},
+				{
+					"h": 2250,
+					"w": 1125,
+					"x": 1875,
+					"y": 0
+				},
+				{
+					"h": 2250,
+					"w": 3000,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/WorkNeqBuild/status/1981177952961515958/photo/1",
+			"url": "https://pbs.twimg.com/media/G36Nm5ZWwAA34-l.jpg",
+			"width": 3000,
+			"height": 2250
+		}
+	],
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

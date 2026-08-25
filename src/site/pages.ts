@@ -190,7 +190,6 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 				article: true,
 				islands: islandModuleIds(post.html),
 				style: 'article',
-				tweet: post.html.includes('data-tweet-id'),
 				structuredData: {
 					'@context': 'https://schema.org',
 					'@type': 'BlogPosting',
@@ -302,7 +301,6 @@ if (import.meta.vitest != null) {
 		client: '',
 		islands: {},
 		pages: { article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
-		tweet: '',
 	} as const satisfies SiteAssets;
 
 	const examplePost = {

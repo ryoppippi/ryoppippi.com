@@ -1,0 +1,123 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 20,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-26T09:25:23.000Z",
+	"display_text_range": [0, 8],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/1I0feYtpRo",
+				"expanded_url": "https://x.com/takeokunn/status/1982378013166866799/photo/1",
+				"indices": [9, 32],
+				"url": "https://t.co/1I0feYtpRo"
+			}
+		]
+	},
+	"id_str": "1982378013166866799",
+	"text": "彼ピとデートなう https://t.co/1I0feYtpRo",
+	"user": {
+		"id_str": "2549157690",
+		"name": "たけてぃ𓁈𓈷",
+		"screen_name": "takeokunn",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1778349203187765248/wC2KLTyq_normal.png"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1982378013166866799"],
+		"editable_until_msecs": "1761474323000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/1I0feYtpRo",
+			"expanded_url": "https://x.com/takeokunn/status/1982378013166866799/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [9, 32],
+			"media_url_https": "https://pbs.twimg.com/media/G4LSS6hWIAAExMl.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 864, "w": 1542, "x": 0, "y": 28 },
+					{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+					{ "h": 1758, "w": 1542, "x": 0, "y": 0 },
+					{ "h": 2048, "w": 1024, "x": 255, "y": 0 },
+					{ "h": 2048, "w": 1542, "x": 0, "y": 0 }
+				],
+				"height": 2048,
+				"width": 1542
+			},
+			"sizes": {
+				"large": { "h": 2048, "resize": "fit", "w": 1542 },
+				"medium": { "h": 1200, "resize": "fit", "w": 904 },
+				"small": { "h": 680, "resize": "fit", "w": 512 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/1I0feYtpRo"
+		},
+		{
+			"display_url": "pic.x.com/1I0feYtpRo",
+			"expanded_url": "https://x.com/takeokunn/status/1982378013166866799/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [9, 32],
+			"media_url_https": "https://pbs.twimg.com/media/G4LSTBnXwAAByuV.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+					{ "h": 1542, "w": 1542, "x": 201, "y": 0 },
+					{ "h": 1542, "w": 1353, "x": 296, "y": 0 },
+					{ "h": 1542, "w": 771, "x": 587, "y": 0 },
+					{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+				],
+				"height": 1542,
+				"width": 2048
+			},
+			"sizes": {
+				"large": { "h": 1542, "resize": "fit", "w": 2048 },
+				"medium": { "h": 904, "resize": "fit", "w": 1200 },
+				"small": { "h": 512, "resize": "fit", "w": 680 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/1I0feYtpRo"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 864, "w": 1542, "x": 0, "y": 28 },
+				{ "h": 1542, "w": 1542, "x": 0, "y": 0 },
+				{ "h": 1758, "w": 1542, "x": 0, "y": 0 },
+				{ "h": 2048, "w": 1024, "x": 255, "y": 0 },
+				{ "h": 2048, "w": 1542, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/takeokunn/status/1982378013166866799/photo/1",
+			"url": "https://pbs.twimg.com/media/G4LSS6hWIAAExMl.jpg",
+			"width": 1542,
+			"height": 2048
+		},
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 1147, "w": 2048, "x": 0, "y": 92 },
+				{ "h": 1542, "w": 1542, "x": 201, "y": 0 },
+				{ "h": 1542, "w": 1353, "x": 296, "y": 0 },
+				{ "h": 1542, "w": 771, "x": 587, "y": 0 },
+				{ "h": 1542, "w": 2048, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/takeokunn/status/1982378013166866799/photo/1",
+			"url": "https://pbs.twimg.com/media/G4LSTBnXwAAByuV.jpg",
+			"width": 2048,
+			"height": 1542
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

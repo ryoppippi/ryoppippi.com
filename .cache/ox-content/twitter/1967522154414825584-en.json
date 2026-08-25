@@ -1,0 +1,83 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 4,
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2025-09-15T09:33:31.000Z",
+	"display_text_range": [0, 11],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/A1gc3BnFG6",
+				"expanded_url": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+				"indices": [12, 35],
+				"url": "https://t.co/A1gc3BnFG6"
+			}
+		]
+	},
+	"id_str": "1967522154414825584",
+	"text": "Thanks 8K ✨ https://t.co/A1gc3BnFG6",
+	"user": {
+		"id_str": "1955952925496233986",
+		"name": "ccusage",
+		"screen_name": "ccusage_",
+		"is_blue_verified": false,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1955953085412438018/xOfFsAbj_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1967522154414825584"],
+		"editable_until_msecs": "1757932411000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/A1gc3BnFG6",
+			"expanded_url": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+			"ext_media_availability": { "status": "Available" },
+			"indices": [12, 35],
+			"media_url_https": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",
+			"original_info": {
+				"focus_rects": [
+					{ "h": 655, "w": 1170, "x": 0, "y": 517 },
+					{ "h": 1170, "w": 1170, "x": 0, "y": 259 },
+					{ "h": 1334, "w": 1170, "x": 0, "y": 136 },
+					{ "h": 1470, "w": 735, "x": 0, "y": 0 },
+					{ "h": 1470, "w": 1170, "x": 0, "y": 0 }
+				],
+				"height": 1470,
+				"width": 1170
+			},
+			"sizes": {
+				"large": { "h": 1470, "resize": "fit", "w": 1170 },
+				"medium": { "h": 1200, "resize": "fit", "w": 955 },
+				"small": { "h": 680, "resize": "fit", "w": 541 },
+				"thumb": { "h": 150, "resize": "crop", "w": 150 }
+			},
+			"type": "photo",
+			"url": "https://t.co/A1gc3BnFG6"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": { "red": 204, "green": 214, "blue": 221 },
+			"cropCandidates": [
+				{ "h": 655, "w": 1170, "x": 0, "y": 517 },
+				{ "h": 1170, "w": 1170, "x": 0, "y": 259 },
+				{ "h": 1334, "w": 1170, "x": 0, "y": 136 },
+				{ "h": 1470, "w": 735, "x": 0, "y": 0 },
+				{ "h": 1470, "w": 1170, "x": 0, "y": 0 }
+			],
+			"expandedUrl": "https://x.com/cc_usage/status/1967522154414825584/photo/1",
+			"url": "https://pbs.twimg.com/media/G04K-BfXMAAZtrf.jpg",
+			"width": 1170,
+			"height": 1470
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}
