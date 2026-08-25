@@ -11,18 +11,21 @@ export type Talk = {
 	links: string[];
 };
 
+export type OssProjectKind = 'project' | 'contribution';
+
 export type OssProject = {
 	name: string;
 	link: string;
 	slug: string;
 	description: string | null;
 	icon: string;
+	kind: OssProjectKind;
 	tags: string[];
 	stars: number | null;
 };
 
-type OssProjectSource = Omit<OssProject, 'link' | 'slug' | 'description' | 'stars'> &
-	Partial<Pick<OssProject, 'link' | 'slug' | 'description'>>;
+type OssProjectSource = Omit<OssProject, 'link' | 'slug' | 'description' | 'kind' | 'stars'> &
+	Partial<Pick<OssProject, 'link' | 'slug' | 'description' | 'kind'>>;
 
 type OssStarSnapshot = {
 	updatedAt: string;
@@ -75,6 +78,7 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 				link,
 				slug: project.slug ?? `ryoppippi-${project.name}`,
 				description,
+				kind: project.kind ?? 'project',
 				stars: repository == null ? null : (starCounts.get(repository) ?? null),
 			} satisfies OssProject;
 		}),

@@ -5,6 +5,10 @@ public repository. The page should make the projects that best represent the
 work easy to find. Each entry uses `tags` for cross-cutting areas instead of
 putting a project in only one category.
 
+Entries default to `kind: "project"`. Set `kind: "contribution"` when an entry
+represents work contributed to an external upstream repository; the page shows
+those entries in a separate section.
+
 ## Selection criteria
 
 Keep a project when at least one of these is true:

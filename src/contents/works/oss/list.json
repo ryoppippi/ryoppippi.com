@@ -34,6 +34,7 @@
 		"name": "nixpkgs",
 		"link": "https://github.com/NixOS/nixpkgs",
 		"icon": "icon-[simple-icons--nixos]",
+		"kind": "contribution",
 		"tags": ["Nix", "Upstream"],
 		"description": "Contributions to upstream packaging and tests for ghq, git-wt, gh-do, and oxlint/oxfmt."
 	},
@@ -41,6 +42,7 @@
 		"name": "llm-agents.nix",
 		"link": "https://github.com/numtide/llm-agents.nix",
 		"icon": "icon-[ph--robot-light]",
+		"kind": "contribution",
 		"tags": ["Nix", "AI", "Upstream"],
 		"description": "Contributions to AI-agent packaging and maintenance across ccusage, agent-browser, ax, pdfvision, and more."
 	},
@@ -48,6 +50,7 @@
 		"name": "agent-skills-nix",
 		"link": "https://github.com/Kyure-A/agent-skills-nix",
 		"icon": "icon-[ph--graduation-cap-light]",
+		"kind": "contribution",
 		"tags": ["Nix", "AI", "Upstream"],
 		"description": "Contributions to Home Manager and skill transformation support for managing agent skills with Nix."
 	},
