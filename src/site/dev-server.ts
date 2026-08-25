@@ -110,7 +110,8 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	}
 	if (
 		file === 'src/contents/external-rss/rss.json' ||
-		file === 'src/contents/external-rss/posts.json'
+		file === 'src/contents/external-rss/posts.json' ||
+		file === 'src/contents/external-rss/media.json'
 	) {
 		return ['/blog/'];
 	}

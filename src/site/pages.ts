@@ -113,6 +113,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 			'packages/content/src/blog',
 			'src/contents/external-rss/rss.json',
 			'src/contents/external-rss/posts.json',
+			'src/contents/external-rss/media.json',
 		],
 		content: page({
 			title: 'Blog',

@@ -11,6 +11,7 @@ export type PostListItem = {
 	pubDate: string;
 	lang: string;
 	external: boolean;
+	kind?: 'article' | 'podcast' | 'video';
 	draft?: boolean;
 };
 
@@ -20,9 +21,13 @@ type ExternalPostInput = {
 	pubDate?: string | null;
 	guid?: string | null;
 	lang?: string | null;
+	kind?: 'article' | 'podcast' | 'video' | null;
 };
 
-function toExternalPost(item: ExternalPostInput): PostListItem | null {
+function toExternalPost(
+	item: ExternalPostInput,
+	defaultKind: NonNullable<PostListItem['kind']> = 'article',
+): PostListItem | null {
 	if (item.title == null || item.link == null || item.pubDate == null) {
 		return null;
 	}
@@ -39,22 +44,25 @@ function toExternalPost(item: ExternalPostInput): PostListItem | null {
 		pubDate: pubDate.toJSON(),
 		lang: item.lang ?? 'ja',
 		external: true,
+		kind: item.kind ?? defaultKind,
 	};
 }
 
 /**
- * Loads external blog entries from RSS feeds and individually curated posts.
+ * Loads external blog entries from RSS feeds, curated posts, and media.
  *
  * @param root - Repository root containing the external content configuration.
  * @returns Blog-list entries for external content.
  */
 export async function loadExternalPosts(root = process.cwd()): Promise<PostListItem[]> {
-	const [rssSource, postsSource] = await Promise.all([
+	const [rssSource, postsSource, mediaSource] = await Promise.all([
 		readFile(path.join(root, 'src/contents/external-rss/rss.json'), 'utf8'),
 		readFile(path.join(root, 'src/contents/external-rss/posts.json'), 'utf8'),
+		readFile(path.join(root, 'src/contents/external-rss/media.json'), 'utf8'),
 	]);
 	const sources = JSON.parse(rssSource) as string[];
 	const configuredPosts = JSON.parse(postsSource) as ExternalPostInput[];
+	const configuredMedia = JSON.parse(mediaSource) as ExternalPostInput[];
 	const parser = new Parser();
 	const feeds = await Promise.allSettled(sources.map(async (source) => parser.parseURL(source)));
 	const feedPosts = feeds.flatMap((result) => {
@@ -71,7 +79,11 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
 		const post = toExternalPost(item);
 		return post == null ? [] : [post];
 	});
-	return [...feedPosts, ...manualPosts];
+	const mediaPosts = configuredMedia.flatMap((item) => {
+		const post = toExternalPost(item, 'podcast');
+		return post == null ? [] : [post];
+	});
+	return [...feedPosts, ...manualPosts, ...mediaPosts];
 }
 
 /**
