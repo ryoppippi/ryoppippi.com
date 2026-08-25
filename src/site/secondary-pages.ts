@@ -270,6 +270,8 @@ if (import.meta.vitest != null) {
 		expect(html).toContain('I work at Rork.');
 		expect(html).toContain('href="/works/oss/"');
 		expect(html).toContain('href="/cv"');
+		expect(html).toContain('<ul');
+		expect(html).toContain('GitHub profile');
 		expect(html).not.toContain('<figcaption');
 		expect(html).toContain('view-transition-name:about-haichu');
 		expect(html).toContain('"@type":"ProfilePage"');

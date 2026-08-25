@@ -14,8 +14,8 @@
 	const links = [
 		{ href: '/about/', label: 'about' },
 		{ href: '/works/oss/', label: 'works', activePrefix: '/works/' },
-		{ href: '/blog/', label: 'blog' },
 		{ href: '/sponsors/', label: 'sponsors' },
+		{ href: '/blog/', label: 'blog' },
 	] as const;
 </script>
 

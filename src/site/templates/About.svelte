@@ -1,5 +1,15 @@
 <script lang='ts'>
+	import { SITE_ORIGIN } from '../consts.ts';
 	import { SITE_OWNER } from '../site-owner.ts';
+
+	const links = [
+		['GitHub profile', '/github'],
+		['Recent pull requests', '/pr'],
+		['LinkedIn profile', '/linkedin'],
+		['Twitter profile', '/twitter'],
+		['Bluesky profile', '/bsky'],
+		['YouTube channel', '/youtube'],
+	] as const;
 </script>
 
 <article class='mx-auto mt-8 max-w-3xl px-2 pb-16'>
@@ -48,8 +58,16 @@
 			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='https://github.com/ryoppippi/ccusage' rel='noopener noreferrer' target='_blank'>ccusage</a>
 			and
 			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='/works/oss/'>other open-source projects</a>.
-			You can find my CV
-			<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='/cv' rel='noopener noreferrer' target='_blank'>here</a>.
 		</p>
+		<ul class='mt-6 list-disc space-y-2 pl-5'>
+			{#each links as [label, href] (href)}
+				<li>
+					<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href={`${SITE_ORIGIN}${href}`} rel='noopener noreferrer' target='_blank'>{label}</a>
+				</li>
+			{/each}
+			<li>
+				<a class='underline decoration-text-300 underline-offset-4 transition-opacity hover:opacity-100' href='/cv' rel='noopener noreferrer' target='_blank'>CV</a>
+			</li>
+		</ul>
 	</div>
 </article>
