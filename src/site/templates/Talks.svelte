@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import type { Talk } from '../sections.ts';
+	import { formatDate } from '../../lib/util.ts';
 	import WorksNav from './WorksNav.svelte';
 
 	let { talks }: { talks: Talk[] } = $props();
@@ -42,7 +43,7 @@
 						{:else}
 							<a class='underline' href={talk.eventLink} rel='noopener noreferrer' target='_blank'>{event}</a>
 						{/if}
-						<span class='truncate pl-2 text-sm opacity-80'>{talk.date}</span>
+						<time class='truncate pl-2 text-sm opacity-80' datetime={talk.date}>{formatDate(new Date(talk.date))}</time>
 					</p>
 					{#if talk.videoLink != null}
 						<p class='text-sm opacity-50'><a class='underline' href={talk.videoLink} rel='noopener noreferrer' target='_blank'>Watch the video</a></p>
