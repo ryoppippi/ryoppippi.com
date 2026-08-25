@@ -127,7 +127,7 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		file === 'routes.ts' ||
 		file.startsWith('packages/content/src/markdown/') ||
 		file.startsWith('src/site/templates/') ||
-		/^src\/site\/(client|consts|content|dev-routes|head|html|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
+		/^src\/site\/(assets|client|consts|content|dev-routes|head|html|page-styles|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
 			file,
 		)
 	) {
