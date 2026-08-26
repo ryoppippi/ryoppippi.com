@@ -1,4 +1,5 @@
 ---
+permalink: /blog/2026-08-25-nix-secure-enclave-key-ja
 title: nix-secure-enclave-keyを作った
 date: "2026-08-25"
 isPublished: true
@@ -12,7 +13,7 @@ lang: ja
 
 久しぶりにwrapperでもなくただただ自分のためにめちゃくちゃ便利な物を作ったので紹介。
 
-[@preview](https://github.com/ryoppippi/nix-secure-enclave-key)
+<OgCard url="https://github.com/ryoppippi/nix-secure-enclave-key" />
 
 # Secretiveは最高だが辛い
 
@@ -44,7 +45,7 @@ Secretive appに表示されるpublic keyをGitHubやremote serverに登録す�
 
 8月頭に {@mizdra} さんが書かれていた記事の中で、Secure Enclave 内に鍵を生成するCLIがあることが紹介されていた。
 
-[@preview](https://www.mizdra.net/entry/2026/08/07/101542)
+<OgCard url="https://www.mizdra.net/entry/2026/08/07/101542" />
 
 詳しくは記事に譲るとして、
 
