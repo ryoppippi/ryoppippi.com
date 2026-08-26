@@ -177,6 +177,14 @@ if (import.meta.vitest != null) {
 			expect(mdxHtml).toContain('class="ox-ogp-simple"');
 		});
 
+		it('renders consecutive native open graph embeds as separate cards', async () => {
+			const html = await renderMarkdown(
+				'<OgCard url="http://localhost/first" />\n\n<OgCard url="http://localhost/second" />',
+			);
+
+			expect(html.match(/class="ox-ogp-simple"/g)).toHaveLength(2);
+		});
+
 		it('wraps markdown tables in a keyboard-scrollable region', async () => {
 			const html = await renderMarkdown('| Name | Value |\n|---|---:|\n| Example | 42 |');
 
