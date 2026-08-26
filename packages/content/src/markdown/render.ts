@@ -1,22 +1,87 @@
 import {
 	applyIslandSsrHtml,
+	renderMarkdown as renderOxMarkdown,
 	transformAllPlugins,
-	transformOgp,
-	transformYouTube,
+	type OxContentOptions,
 } from '@ox-content/vite-plugin';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { applyBudouxHtml } from './budoux.ts';
-import { transformOutsideFences } from './fences.ts';
 import { escapeHtml } from './html.ts';
-import { renderNotByAIBadges, replaceNotByAIEmbeds } from './not-by-ai.ts';
-import { renderHighlightedMarkdown } from './ox-highlight.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../../..');
 const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../../..', '.cache/ox-content/ogp');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
 const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
+
+const magicLinkAliases = {
+	'vim-jp': {
+		href: 'https://vim-jp.org/',
+		image: 'https://vim-jp.org/assets/images/vim2-128.png',
+	},
+	'vim-jp-radio': {
+		href: 'https://vim-jp-radio.com/',
+		image:
+			'https://cdn.jsdelivr.net/gh/vim-jp-radio/LP@main/src/assets/vimjp-radio-cover-art/800x800-fs8.png',
+	},
+	'Svelte Japan': {
+		href: 'https://svelte.jp',
+		image: 'https://cdn.jsdelivr.net/gh/sveltejs/branding/svelte-logo-square.png',
+	},
+	'ryoppippi.com': {
+		href: 'https://ryoppippi.com',
+		image: 'https://ryoppippi.com/ryoppippi.jpg',
+	},
+	tech_world18: {
+		href: 'https://x.com/tech_world18',
+		image: 'https://pbs.twimg.com/profile_images/1717677089154088960/tDuRN0aB_400x400.jpg',
+	},
+	'TECH WORLD': {
+		href: 'https://www.youtube.com/channel/UCISDrqLMNq3w9AZ4otdoRuA',
+		image: 'https://pbs.twimg.com/profile_images/1920681519682908160/0sY6R8FJ_400x400.jpg',
+	},
+	Rork: {
+		href: 'https://rork.com/',
+		image: 'https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg',
+	},
+	typia: {
+		href: 'https://github.com/samchon/typia',
+		image: 'https://github.com/samchon.png',
+	},
+	NeovimConf: {
+		href: 'https://neovimconf.live/',
+		image: 'https://github.com/neovim.png',
+	},
+	eerm16g: {
+		href: 'https://x.com/eerm16g',
+		image: 'https://pbs.twimg.com/profile_images/1959591256381927424/ULcgBpZx_400x400.jpg',
+	},
+} as const;
+
+const OX_MARKDOWN_OPTIONS = {
+	attrs: true,
+	embeds: false,
+	frontmatter: false,
+	headingPermalinks: true,
+	highlight: true,
+	images: true,
+	containers: {
+		types: {
+			details: { tag: 'details' },
+		},
+	},
+	magicLinks: {
+		aliases: magicLinkAliases,
+		favicon: { template: 'https://favicon.yandex.net/favicon/{host}' },
+	},
+	notByAi: true,
+	ogViewer: false,
+	search: false,
+	semanticFootnotes: true,
+	ssg: false,
+	toc: false,
+} as const satisfies OxContentOptions;
 
 /**
  * Renders a post-colocated component to HTML so its island is present before
@@ -30,6 +95,7 @@ export type IslandRenderer = (
 	props: Record<string, unknown>,
 ) => Promise<string | null>;
 
+/** Options for rendering a Markdown or MDX document into the site article body. */
 export type RenderMarkdownOptions = {
 	/** Component names available to this document, mapped to their module ids. */
 	islands?: IslandModules;
@@ -37,14 +103,6 @@ export type RenderMarkdownOptions = {
 	mdx?: boolean;
 	renderIsland?: IslandRenderer;
 };
-
-function prepareOxContentMarkdown(content: string) {
-	return transformOutsideFences(content, (line) =>
-		replaceNotByAIEmbeds(
-			line.replace(/<Tweet\s+id=(['"])(\d+)\1\s*\/>/g, '<span data-tweet-placeholder="$2"></span>'),
-		),
-	);
-}
 
 function wrapScrollableTables(html: string) {
 	const commentPattern = /<!--[\s\S]*?-->/g;
@@ -69,20 +127,6 @@ function wrapScrollableTables(html: string) {
 	}
 
 	return output + wrap(html.slice(offset));
-}
-
-function postprocessRenderedHtml(html: string) {
-	const blockEmbeds = html
-		.replace(/<p>\s*(<figure class="ox-tweet[\s\S]*?<\/figure>)\s*<\/p>/g, '$1')
-		.replace(
-			/<p\b([^>]*)>([\s\S]*?)(\s*<a class="ox-ogp-(?:card|simple)"[\s\S]*?<\/a>)\s*<\/p>/g,
-			(_match, attrs: string, text: string, card: string) =>
-				text.trim().length === 0 ? card : `<p${attrs}>${text.trimEnd()}</p>${card}`,
-		)
-		.replace(/<p>(\s*<div class="ox-youtube"[\s\S]*?<\/div>\s*)<\/p>/g, '$1');
-	const withoutTrailingAttributes = blockEmbeds.replace(/(<\/a>|<img\b[^>]*>)\{[^}\n]+\}/g, '$1');
-
-	return wrapScrollableTables(withoutTrailingAttributes);
 }
 
 async function renderIslands(
@@ -114,26 +158,30 @@ async function renderIslands(
 	);
 }
 
-function restoreTweetEmbeds(html: string) {
-	const replacement = (_match: string, id: string) => `<Tweet id="${id}" />`;
-	const blockPattern = /<p>\s*<span data-tweet-placeholder="(\d+)"><\/span>\s*<\/p>/g;
-	const blocks = html.replace(blockPattern, replacement);
-	const inlinePattern = /<span data-tweet-placeholder="(\d+)"><\/span>/g;
-	return blocks.replace(inlinePattern, replacement);
-}
-
+/**
+ * Renders Markdown with Ox Content and the site's post-render transforms.
+ *
+ * @param content - Markdown or MDX source text.
+ * @param options - Document-specific island and parser options.
+ * @returns The rendered article HTML and referenced island module ids.
+ */
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const islands = options.islands ?? {};
-	const prepared = prepareOxContentMarkdown(content);
-	const highlighted = await renderHighlightedMarkdown(
-		prepared,
-		options.mdx ?? Object.keys(islands).length > 0,
+	const mdx = options.mdx ?? Object.keys(islands).length > 0;
+	const transformed = await renderOxMarkdown(
+		content,
+		`/virtual/article.${mdx ? 'mdx' : 'md'}`,
+		OX_MARKDOWN_OPTIONS,
 	);
-	const social = await transformAllPlugins(restoreTweetEmbeds(highlighted), {
+	const media = await transformAllPlugins(transformed.html, {
 		bluesky: true,
 		github: false,
 		mermaid: false,
-		ogp: false,
+		openGraph: {
+			cacheDir: ogpCacheDirectory,
+			persistCache: true,
+			timeout: 8_000,
+		},
 		tabs: false,
 		twitter: {
 			appearance: 'full',
@@ -142,22 +190,15 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 			fetch: true,
 			mediaOutputDir: twitterMediaDirectory,
 			mediaPublicPath: '/ox-content/twitter',
+			timeZone: 'Europe/London',
 		},
-		youtube: false,
+		youtube: true,
 	});
-	const media = await transformYouTube(social);
-	const openGraph = /<ogcard\b/i.test(media)
-		? await transformOgp(media, undefined, {
-				cacheDir: ogpCacheDirectory,
-				persistCache: true,
-				timeout: 8_000,
-			})
-		: media;
 
 	// Islands are rendered after every HTML transform so BudouX and the link
 	// rewrites cannot alter component markup that the client then hydrates.
 	const body = await renderIslands(
-		applyBudouxHtml(postprocessRenderedHtml(renderNotByAIBadges(openGraph))),
+		applyBudouxHtml(wrapScrollableTables(media)),
 		islands,
 		options.renderIsland,
 	);
@@ -219,6 +260,7 @@ if (import.meta.vitest != null) {
 						conversation_count: 2,
 						favorite_count: 3,
 						id_str: id,
+						created_at: 'Fri Jul 04 08:52:00 +0000 2025',
 						text: 'Static Tweet body',
 						user: { name: 'Ox Content', screen_name: 'ox_content' },
 					}),
@@ -231,6 +273,9 @@ if (import.meta.vitest != null) {
 				expect(html).toContain('class="ox-tweet ox-tweet--fetched ox-tweet--full"');
 				expect(html).toContain('Static Tweet body');
 				expect(html).toContain('class="ox-tweet__actions"');
+				expect(html).toContain('data-ox-tweet-copy');
+				expect(html).toContain('>Copy link</span>');
+				expect(html).toContain('9:52 AM · Jul 4, 2025');
 				expect(html).not.toContain('<p><figure');
 				expect(html).not.toContain('<Tweet');
 				expect(html).not.toContain('<script');
@@ -251,52 +296,52 @@ if (import.meta.vitest != null) {
 		it('renders the NotByAI badge as an external link with both colour variants', async () => {
 			const html = await renderMarkdown('<NotByAI />');
 
-			expect(html).toContain(
-				'<a href="https://notbyai.fyi" class="not-by-ai" aria-label="Written by human, not by AI" target="_blank" rel="noopener noreferrer">',
-			);
-			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--light"');
-			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--dark"');
+			expect(html).toContain('<a class="ox-not-by-ai" href="https://notbyai.fyi"');
+			expect(html).toContain('aria-label="Written by human, not by AI"');
+			expect(html).toContain('target="_blank" rel="noopener noreferrer"');
+			expect(html).toContain('class="ox-not-by-ai__badge ox-not-by-ai__badge--light"');
+			expect(html).toContain('class="ox-not-by-ai__badge ox-not-by-ai__badge--dark"');
 			expect(html).not.toContain('<NotByAI');
-			expect(html).not.toContain('data-not-by-ai-placeholder');
 		});
 
 		it('renders the NotByAI badge inside callout blocks', async () => {
 			const html = await renderMarkdown('> [!NOTE]\n> <NotByAI />');
 
 			expect(html).toContain('ox-callout--note');
-			expect(html).toContain('class="not-by-ai-badge not-by-ai-badge--light"');
+			expect(html).toContain('class="ox-not-by-ai__badge ox-not-by-ai__badge--light"');
 		});
 
 		it('leaves NotByAI syntax inside code fences unchanged', async () => {
 			const html = await renderMarkdown('```md\n<NotByAI />\n```');
 
 			expect(html).toContain('NotByAI');
-			expect(html).not.toContain('not-by-ai-badge');
-			expect(html).not.toContain('data-not-by-ai-placeholder');
+			expect(html).not.toContain('ox-not-by-ai__badge');
 		});
 
 		it('adds accessible heading permalinks', async () => {
 			const html = await renderMarkdown('# Hello World');
 
 			expect(html).toContain(
-				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-label="Permalink to &quot;Hello World&quot;">#</a></h1>',
+				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-label="Permalink to &#x22;Hello World&#x22;">#</a></h1>',
 			);
 		});
 
 		it('preserves image alt text separately from captions', async () => {
 			const html = await renderMarkdown('![A & B](./image.png "Visible caption")');
 
-			expect(html).toContain('<img src="./image.png" alt="A &amp; B" loading="lazy">');
+			expect(html).toContain('<img src="./image.png" alt="A &#x26; B" loading="lazy">');
 			expect(html).toContain('<figcaption>Visible caption</figcaption>');
 		});
 
-		it('removes trailing markdown attributes from links and images', async () => {
+		it('renders markdown attributes on links and images', async () => {
 			const html = await renderMarkdown(
 				'[slides](https://example.com){.text-xl}\n\n![alt](./image.png){width=480}',
 			);
 
-			expect(html).not.toContain('{.text-xl}');
-			expect(html).not.toContain('{width=480}');
+			expect(html).toContain(
+				'<a href="https://example.com" target="_blank" rel="noopener noreferrer" class="text-xl">slides</a>',
+			);
+			expect(html).toContain('<img src="./image.png" alt="alt" loading="lazy" width="480">');
 		});
 
 		it('turns registered component tags into island placeholders', async () => {
@@ -354,7 +399,7 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<details class="ox-container ox-container--details">');
 			expect(html).toContain('<summary>More</summary>');
 			expect(html).toContain(
-				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &quot;Hidden&quot;">#</a></h2>',
+				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &#x22;Hidden&#x22;">#</a></h2>',
 			);
 			expect(html).toContain('</details>');
 		});
