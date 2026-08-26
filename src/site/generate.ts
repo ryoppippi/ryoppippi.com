@@ -2,7 +2,6 @@ import type { ContentArtifact } from '@ryoppippi/content';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
-import * as ufo from 'ufo';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -16,10 +15,9 @@ import {
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
-import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalMedia, loadExternalPosts } from './content.ts';
-import { gitLastModified } from './git-last-modified.ts';
-import { corePages, mediaFeed } from './pages.ts';
+import { writeOxContentOutputFiles } from './ox-content-output.ts';
+import { corePages } from './pages.ts';
 import {
 	aboutPage,
 	errorPage,
@@ -31,7 +29,6 @@ import {
 	talksPage,
 } from './secondary-pages.ts';
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
-import { sitemap } from './sitemap.ts';
 
 type GenerateSiteOptions = {
 	assets: SiteAssets;
@@ -102,12 +99,12 @@ export async function generateSite({
 		publicationsPage(publications, assets),
 		talksPage(talks, assets),
 		mediaPage(externalMedia, assets),
-		mediaFeed(externalMedia),
 		sponsorsPage(assets),
 		errorPage(assets),
 	];
 
 	await writeGeneratedFiles(outDir, pages);
+	await writeOxContentOutputFiles({ media: externalMedia, outDir, pages, root });
 
 	const install = extractSection(dotfiles, 'Initial Setup');
 	const osSections = [
@@ -130,17 +127,6 @@ export async function generateSite({
 		);
 	}
 
-	const urls = pages.filter((file) => file.path.endsWith('.html') && file.path !== '404.html');
-	const sitemapEntries = await Promise.all(
-		urls.map(async (file) => {
-			const loc = ufo.withTrailingSlash(
-				ufo.joinURL(SITE_ORIGIN, file.path.replace(/(?:index)?\.html$/, '')),
-			);
-			const lastmod = await gitLastModified(root, file.sourcePaths ?? []);
-			return lastmod == null ? { loc } : { loc, lastmod };
-		}),
-	);
-	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
 
 	await Promise.all(
