@@ -32,7 +32,7 @@
 		<hr class='m-auto w-full max-w-100 opacity-25' />
 	</div>
 
-	<article class='prose mx-auto max-w-none pb-8 text-text-700 dark:prose-invert dark:text-text-200'>
+	<article class='content prose mx-auto max-w-none pb-8 text-text-700 dark:prose-invert dark:text-text-200'>
 		{@render content()}
 	</article>
 
