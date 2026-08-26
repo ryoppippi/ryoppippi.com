@@ -3,9 +3,8 @@ import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
 import * as ufo from 'ufo';
-import { access, mkdir, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Route } from '../../routes.ts';
 import {
 	extractInstallSection,
 	extractSection,
@@ -116,10 +115,6 @@ export async function generateSite({
 		['linux', 'Linux'],
 	] as const;
 	const plainFiles: GeneratedFile[] = [
-		{
-			path: 'works/index.html',
-			content: `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="${ufo.joinURL(SITE_ORIGIN, 'works/oss/')}"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>`,
-		},
 		{ path: 'dotfiles.md', content: dotfiles },
 		{ path: 'dotfiles/install', content: install },
 	];
@@ -147,11 +142,6 @@ export async function generateSite({
 	);
 	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
-	await Promise.all(
-		Route.filter(({ from }) => from.includes('*')).map(({ from }) =>
-			rm(path.join(outDir, from.slice(1)), { force: true, recursive: true }),
-		),
-	);
 
 	await Promise.all(
 		[
