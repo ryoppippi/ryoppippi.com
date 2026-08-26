@@ -3,11 +3,12 @@ import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
+import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import solid from 'vite-plugin-solid';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
-import { oxContentBuildPlugins } from './src/site/ox-content.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
@@ -21,9 +22,9 @@ export default defineConfig(({ command, mode }) => ({
 		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		solid({ ssr: true, solid: { hydratable: false } }),
 		...oxContentSvelte({
-			srcDir: 'packages/content/src/blog',
+			...OX_CONTENT_BUILD_OPTIONS,
+			ssg: command === 'build' && mode !== 'test' ? OX_CONTENT_BUILD_OPTIONS.ssg : false,
 		}),
-		...(command === 'build' && mode !== 'test' ? oxContentBuildPlugins() : []),
 		staticSiteBuild(),
 		staticSiteDevServer(),
 		FontaineTransform.vite({
@@ -75,6 +76,7 @@ export default defineConfig(({ command, mode }) => ({
 	},
 	fmt: {
 		ignorePatterns: [
+			'.cache/**',
 			'.claude/**',
 			'.codex/**',
 			'.direnv/**',
@@ -91,6 +93,7 @@ export default defineConfig(({ command, mode }) => ({
 	},
 	lint: {
 		ignorePatterns: [
+			'.cache/**',
 			'.claude/**',
 			'.codex/**',
 			'.direnv/**',
@@ -119,6 +122,7 @@ export default defineConfig(({ command, mode }) => ({
 					name: 'node',
 					globals: true,
 					environment: 'node',
+					exclude: [...configDefaults.exclude, '**/.direnv/**'],
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',

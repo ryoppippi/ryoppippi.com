@@ -1,5 +1,4 @@
-import { oxContent, type OxContentOptions } from '@ox-content/vite-plugin';
-import type { Plugin } from 'vite';
+import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { Route } from '../../routes.ts';
 
 export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
@@ -8,9 +7,11 @@ const redirects = [...Route, { from: '/works', to: '/works/oss', status: 301 }] 
 const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to]));
 
 export const OX_CONTENT_BUILD_OPTIONS = {
+	attrs: true,
 	srcDir: 'packages/content/src/blog',
 	outDir: 'build',
 	collections: { blog: BLOG_COLLECTION_PATTERNS },
+	docs: false,
 	feeds: {
 		collection: 'blog',
 		formats: ['rss'],
@@ -18,10 +19,11 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		path: '/',
 	},
 	permalinks: true,
+	notByAi: true,
 	redirects: {
 		allowExternal: true,
 		map: redirectMap,
-		netlify: true,
+		provider: 'cloudflare',
 	},
 	ssg: {
 		bare: true,
@@ -29,19 +31,5 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		siteName: 'blog | ryoppippi.com',
 		siteUrl: 'https://ryoppippi.com',
 	},
+	search: false,
 } as const satisfies OxContentOptions;
-
-/**
- * Returns the core build plugin omitted by the Svelte adapter.
- *
- * @returns The Ox Content SSG plugin that writes HTML and auxiliary output files.
- */
-export function oxContentBuildPlugins(): Plugin[] {
-	const plugins = oxContent(OX_CONTENT_BUILD_OPTIONS).filter(
-		(plugin) => plugin.name === 'ox-content:ssg',
-	);
-	if (plugins.length !== 1) {
-		throw new Error('Expected exactly one Ox Content SSG plugin');
-	}
-	return plugins;
-}

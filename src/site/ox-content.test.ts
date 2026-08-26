@@ -2,11 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import {
-	BLOG_COLLECTION_PATTERNS,
-	OX_CONTENT_BUILD_OPTIONS,
-	oxContentBuildPlugins,
-} from './ox-content.ts';
+import { BLOG_COLLECTION_PATTERNS, OX_CONTENT_BUILD_OPTIONS } from './ox-content.ts';
 
 describe('Ox Content build outputs', () => {
 	it('configures the blog RSS feed and Cloudflare redirects', () => {
@@ -26,7 +22,7 @@ describe('Ox Content build outputs', () => {
 					'/projects*': '/works',
 					'/works': '/works/oss',
 				}),
-				netlify: true,
+				provider: 'cloudflare',
 			},
 			ssg: {
 				bare: true,
@@ -34,10 +30,6 @@ describe('Ox Content build outputs', () => {
 				siteUrl: 'https://ryoppippi.com',
 			},
 		});
-	});
-
-	it('isolates the temporary Svelte adapter workaround to the core SSG plugin', () => {
-		expect(oxContentBuildPlugins().map((plugin) => plugin.name)).toEqual(['ox-content:ssg']);
 	});
 
 	it('mounts every blog source below the public blog route', async () => {
