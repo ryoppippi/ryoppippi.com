@@ -95,6 +95,7 @@ function initialiseDarkMode(): void {
 	button.addEventListener('click', (event) => {
 		animateThemeChange(event.clientX, event.clientY, () => {
 			const dark = document.documentElement.classList.toggle('dark');
+			document.documentElement.dataset.theme = dark ? 'dark' : 'light';
 			localStorage.theme = dark ? 'dark' : 'light';
 			render();
 		});

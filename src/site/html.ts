@@ -88,6 +88,6 @@ export function page({
 		title,
 	});
 	const theme =
-		"document.documentElement.classList.add('js');try{const theme=localStorage.theme;document.documentElement.classList.toggle('dark',theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{document.documentElement.classList.toggle('dark',matchMedia('(prefers-color-scheme: dark)').matches)}";
+		"document.documentElement.classList.add('js');const applyTheme=dark=>{document.documentElement.classList.toggle('dark',dark);document.documentElement.dataset.theme=dark?'dark':'light'};try{const theme=localStorage.theme;applyTheme(theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{applyTheme(matchMedia('(prefers-color-scheme: dark)').matches)}";
 	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
 }

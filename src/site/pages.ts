@@ -397,6 +397,7 @@ if (import.meta.vitest != null) {
 		const html = article?.content ?? '';
 
 		expect(html).toContain('<html lang="en">');
+		expect(html).toContain("document.documentElement.dataset.theme=dark?'dark':'light'");
 		expect(html).toContain(
 			'<meta name="description" content="A concise description for an example article.">',
 		);
