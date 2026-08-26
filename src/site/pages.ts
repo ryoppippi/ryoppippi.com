@@ -445,6 +445,19 @@ if (import.meta.vitest != null) {
 		});
 	});
 
+	test('applies BudouX only to the visible article title', () => {
+		const title = '今日は天気です。';
+		const [article] = articlePages({ ...examplePost, title }, assets);
+		const html = article?.content ?? '';
+		const visibleTitle = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1];
+		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+
+		expect(visibleTitle).toBe(`今日は\u200B天気です。`);
+		expect(html).toContain(`<title>${title} | blog | ryoppippi.com</title>`);
+		expect(html).toContain(`<meta property="og:title" content="${title} | blog | ryoppippi.com">`);
+		expect(JSON.parse(jsonLd ?? '')).toMatchObject({ headline: title });
+	});
+
 	test('uses the first prose paragraph when description frontmatter is absent', () => {
 		const [article] = articlePages(
 			{
@@ -487,9 +500,12 @@ if (import.meta.vitest != null) {
 		const jsonLd =
 			article?.content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ??
 			'';
+		const visibleTitle = article?.content.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
 
 		expect(jsonLd).toContain('\\u003c/script\\u003e');
 		expect(jsonLd).not.toContain('</script><script>');
+		expect(visibleTitle).toContain('&lt;');
+		expect(visibleTitle).not.toContain('</script><script>');
 		expect(JSON.parse(jsonLd)).toMatchObject({
 			headline: '</script><script>alert(1)</script>',
 			description: 'A </script> description',

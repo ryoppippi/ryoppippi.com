@@ -22,7 +22,15 @@ function applyParagraphStyle(tag: string) {
 	});
 }
 
-function segmentText(text: string) {
+/**
+ * Inserts BudouX break opportunities into a plain-text value.
+ *
+ * @param text - Text to segment without interpreting it as HTML.
+ * @returns The original text with zero-width spaces at natural break points.
+ * @example
+ * applyBudouxText('今日は天気です。');
+ */
+export function applyBudouxText(text: string) {
 	if (text.trim().length === 0) {
 		return text;
 	}
@@ -35,6 +43,12 @@ function segmentText(text: string) {
 		.join('');
 }
 
+/**
+ * Applies build-time BudouX segmentation to visible text in rendered HTML.
+ *
+ * @param html - Rendered HTML whose prose text should receive break opportunities.
+ * @returns HTML with segmented prose and paragraph line-breaking styles.
+ */
 export function applyBudouxHtml(html: string) {
 	const chunks: string[] = [];
 	const tagPattern = /<!--[\s\S]*?-->|<\/?([a-z][\w:-]*)\b[^>]*>/gi;
@@ -45,7 +59,7 @@ export function applyBudouxHtml(html: string) {
 		const [tag, tagName] = match;
 		const index = match.index;
 		const text = html.slice(lastIndex, index);
-		chunks.push(skipStack.length > 0 ? text : segmentText(text));
+		chunks.push(skipStack.length > 0 ? text : applyBudouxText(text));
 
 		const normalizedTagName = tagName?.toLowerCase();
 		if (normalizedTagName === 'p' && /^<p(?:\s|>)/i.test(tag)) {
@@ -69,12 +83,17 @@ export function applyBudouxHtml(html: string) {
 	}
 
 	const tail = html.slice(lastIndex);
-	chunks.push(skipStack.length > 0 ? tail : segmentText(tail));
+	chunks.push(skipStack.length > 0 ? tail : applyBudouxText(tail));
 	return chunks.join('');
 }
 
 if (import.meta.vitest != null) {
 	describe('applyBudouxHtml', () => {
+		it('segments plain-text titles without interpreting markup', () => {
+			expect(applyBudouxText('今日は天気です。')).toBe(`今日は${zeroWidthSpace}天気です。`);
+			expect(applyBudouxText('<script>alert(1)</script>')).toContain('<script>');
+		});
+
 		it('adds paragraph line-break style and zero-width spaces to Japanese text', () => {
 			expect(applyBudouxHtml('<p>今日は天気です。</p>')).toBe(
 				`<p style="${paragraphWordBreakStyle}">今日は${zeroWidthSpace}天気です。</p>`,
