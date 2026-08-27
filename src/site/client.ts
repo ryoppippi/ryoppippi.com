@@ -8,6 +8,7 @@ import {
 	obsoletePageStyles,
 } from './page-styles.ts';
 import { hashTargetId } from './navigation.ts';
+import { enhanceMarkdownTables } from './markdown-tables.ts';
 import './style.css';
 
 /**
@@ -297,6 +298,7 @@ function initialisePage(): void {
 	initialiseMediaFilter();
 	initialiseSponsors();
 	initialiseIslands();
+	enhanceMarkdownTables(document);
 }
 
 function destroyPage(): void {
@@ -461,6 +463,18 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener('popstate', () => void navigate(new URL(location.href), false));
+let markdownTableResizePending = false;
+window.addEventListener('resize', () => {
+	if (markdownTableResizePending) {
+		return;
+	}
+
+	markdownTableResizePending = true;
+	requestAnimationFrame(() => {
+		markdownTableResizePending = false;
+		enhanceMarkdownTables(document);
+	});
+});
 const initialStyle = document.body.dataset.pageStyle;
 const inlineStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')?.dataset
 	.inlinePageStyle;

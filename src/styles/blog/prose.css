@@ -13,22 +13,25 @@
 	font-family: var(--font-code);
 }
 
-.prose .table-scroll {
-	max-width: 100%;
-	overflow-x: auto;
-}
-
-.prose .table-scroll:focus-visible {
-	outline: 2px solid currentcolor;
-	outline-offset: 2px;
-}
-
 .prose .table-scroll-hint {
 	display: none;
 }
 
+.prose table {
+	display: block;
+	width: max-content;
+	max-width: 100%;
+	box-sizing: border-box;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.prose table[data-ox-table-scrollable='true']:focus-visible {
+	outline: 2px solid currentcolor;
+	outline-offset: 2px;
+}
+
 @media (max-width: 47.999rem) {
-	.prose .table-scroll:has(table tr > :nth-child(3)) > .table-scroll-hint,
 	.prose [data-testid='gtv-chart'] .scroll > .table-scroll-hint {
 		position: sticky;
 		left: 0;
@@ -41,11 +44,11 @@
 	}
 }
 
-.prose .table-scroll table:has(tr > :nth-child(3)) {
-	min-width: 42rem;
+.prose table:has(tr > :nth-child(3)) {
+	min-width: min(42rem, 100%);
 }
 
-.prose .table-scroll table :is(th, td) {
+.prose table :is(th, td) {
 	overflow-wrap: normal;
 }
 
@@ -132,7 +135,7 @@
 
 /* A paragraph holding nothing but italics right after a table reads as the
    table's caption, matching the chart's figcaption. */
-.prose :is(table, .table-scroll) + p:has(> em:only-child) {
+.prose table + p:has(> em:only-child) {
 	margin-top: -0.5rem;
 	font-size: 0.75rem;
 	line-height: 1.6;
