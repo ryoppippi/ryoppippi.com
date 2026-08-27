@@ -1,6 +1,6 @@
 import type { DefaultTreeAdapterMap } from 'parse5';
 import { createHash } from 'node:crypto';
-import { link, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { link, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseFragment, serialize } from 'parse5';
 import { glob } from 'tinyglobby';
@@ -13,6 +13,20 @@ export type ContentAssetSource = {
 export type EmittedContentAssets = {
 	urls: ReadonlyMap<string, string>;
 };
+
+async function ensureHardLink(source: string, destination: string): Promise<void> {
+	try {
+		await link(source, destination);
+	} catch (error) {
+		if (!(error instanceof Error && 'code' in error && error.code === 'EEXIST')) {
+			throw error;
+		}
+		const [sourceStat, destinationStat] = await Promise.all([stat(source), stat(destination)]);
+		if (sourceStat.dev !== destinationStat.dev || sourceStat.ino !== destinationStat.ino) {
+			throw error;
+		}
+	}
+}
 
 export async function contentAssetSources(
 	blogDir: string,
@@ -95,7 +109,7 @@ export async function emitDeduplicatedAssets(
 				...asset.url.split('/').filter(Boolean).map(decodeURIComponent),
 			);
 			await mkdir(path.dirname(alias), { recursive: true });
-			await link(path.join(outDir, target.slice(1)), alias);
+			await ensureHardLink(path.join(outDir, target.slice(1)), alias);
 		}),
 	);
 
@@ -170,6 +184,21 @@ if (import.meta.vitest != null) {
 	});
 
 	describe(emitDeduplicatedAssets, () => {
+		it('reuses aliases emitted by an earlier SSG pass', async () => {
+			const [{ createFixture }, { stat }] = await Promise.all([
+				import('fs-fixture'),
+				import('node:fs/promises'),
+			]);
+			await using fixture = await createFixture({ 'input/image.png': 'same image' });
+			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
+
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+
+			const asset = await stat(fixture.getPath('output/blog/post/image.png'));
+			expect(asset.nlink).toBe(2);
+		});
+
 		it('emits identical asset contents once', async () => {
 			const [{ createFixture }, { readdir }] = await Promise.all([
 				import('fs-fixture'),
