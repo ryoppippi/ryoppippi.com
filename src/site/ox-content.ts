@@ -19,6 +19,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	notByAi: true,
 	redirects: {
 		allowExternal: true,
+		html: false,
 		map: redirectMap,
 		provider: 'cloudflare',
 	},

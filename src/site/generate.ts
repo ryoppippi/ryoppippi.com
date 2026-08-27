@@ -133,7 +133,6 @@ export async function generateSite({
 		[
 			'index.html',
 			'about/index.html',
-			'works/index.html',
 			'works/oss/index.html',
 			'works/showcase/index.html',
 			'works/talks/index.html',

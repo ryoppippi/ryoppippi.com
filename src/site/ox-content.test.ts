@@ -15,6 +15,7 @@ describe('Ox Content build outputs', () => {
 			},
 			redirects: {
 				allowExternal: true,
+				html: false,
 				map: expect.objectContaining({
 					'/cv': 'https://cv.ryoppippi.com',
 					'/reddit': 'https://www.reddit.com/user/ryoppippi',
