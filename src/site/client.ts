@@ -1,5 +1,6 @@
 import type { JSX } from 'solid-js';
 import type { Component } from 'svelte';
+import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import '../styles/fonts.css';
 import {
 	loadPageStyle,
@@ -8,7 +9,6 @@ import {
 	obsoletePageStyles,
 } from './page-styles.ts';
 import { hashTargetId } from './navigation.ts';
-import { enhanceMarkdownTables } from './markdown-tables.ts';
 import './style.css';
 
 /**

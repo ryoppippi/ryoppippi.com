@@ -17,20 +17,6 @@
 	display: none;
 }
 
-.prose table {
-	display: block;
-	width: max-content;
-	max-width: 100%;
-	box-sizing: border-box;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-}
-
-.prose table[data-ox-table-scrollable='true']:focus-visible {
-	outline: 2px solid currentcolor;
-	outline-offset: 2px;
-}
-
 @media (max-width: 47.999rem) {
 	.prose [data-testid='gtv-chart'] .scroll > .table-scroll-hint {
 		position: sticky;
