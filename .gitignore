@@ -6,6 +6,7 @@ node_modules
 !/.cache/ox-content
 /.cache/ox-content/*
 !/.cache/ox-content/twitter
+/.cache/ox-content/twitter/*
 !/.cache/ox-content/twitter/*.json
 /packages/content/dist
 /.svelte-kit
