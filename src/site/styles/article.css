@@ -21,8 +21,6 @@
 	--octc-color-text-muted: #808080;
 	--octc-focus-offset: 2px;
 	--octc-focus-ring: 2px solid currentColor;
-}
-
-.content .ox-magic-link__image {
-	margin: 0;
+	word-break: keep-all;
+	overflow-wrap: anywhere;
 }

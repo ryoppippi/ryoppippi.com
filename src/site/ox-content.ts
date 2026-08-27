@@ -9,6 +9,7 @@ const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to
 
 export const OX_CONTENT_BUILD_OPTIONS = {
 	attrs: true,
+	budoux: true,
 	srcDir: 'packages/content/src/blog',
 	outDir: 'build',
 	collections: { blog: BLOG_COLLECTION_PATTERNS },

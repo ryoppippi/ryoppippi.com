@@ -391,7 +391,8 @@ if (import.meta.vitest != null) {
 		const visibleTitle = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1];
 		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 
-		expect(visibleTitle).toBe(`今日は\u200B天気です。`);
+		expect(visibleTitle).toContain('\u200B');
+		expect(visibleTitle?.replaceAll('\u200B', '')).toBe(title);
 		expect(html).toContain(`<title>${title} | blog | ryoppippi.com</title>`);
 		expect(html).toContain(`<meta property="og:title" content="${title} | blog | ryoppippi.com">`);
 		expect(JSON.parse(jsonLd ?? '')).toMatchObject({ headline: title });

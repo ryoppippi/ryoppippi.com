@@ -8,7 +8,6 @@
 		"./artifact": "./src/artifact.ts",
 		"./article.css": "./article.css",
 		"./blog": "./src/blog.ts",
-		"./budoux": "./src/markdown/budoux.ts",
 		"./build": "./src/build.ts",
 		"./paths": "./src/paths.ts"
 	},

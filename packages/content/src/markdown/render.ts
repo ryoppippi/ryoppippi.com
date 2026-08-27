@@ -7,7 +7,6 @@ import {
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
-import { applyBudouxHtml } from './budoux.ts';
 import { escapeHtml } from './html.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../../..');
@@ -61,6 +60,7 @@ const magicLinkAliases = {
 
 const OX_MARKDOWN_OPTIONS = {
 	attrs: true,
+	budoux: true,
 	embeds: false,
 	frontmatter: false,
 	headingPermalinks: true,
@@ -103,31 +103,6 @@ export type RenderMarkdownOptions = {
 	mdx?: boolean;
 	renderIsland?: IslandRenderer;
 };
-
-function wrapScrollableTables(html: string) {
-	const commentPattern = /<!--[\s\S]*?-->/g;
-	const wrap = (part: string) =>
-		part.replace(
-			/<table\b[^>]*>[\s\S]*?<\/table>/g,
-			'<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><span class="table-scroll-hint" aria-hidden="true">← scroll →</span>$&</div>',
-		);
-	let output = '';
-	let offset = 0;
-
-	// Comments survive rendering, so a table quoted inside one would otherwise
-	// have wrapper markup spliced into the comment text.
-	for (const match of html.matchAll(commentPattern)) {
-		if (match.index == null) {
-			continue;
-		}
-
-		output += wrap(html.slice(offset, match.index));
-		output += match[0];
-		offset = match.index + match[0].length;
-	}
-
-	return output + wrap(html.slice(offset));
-}
 
 async function renderIslands(
 	html: string,
@@ -195,13 +170,9 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		youtube: true,
 	});
 
-	// Islands are rendered after every HTML transform so BudouX and the link
-	// rewrites cannot alter component markup that the client then hydrates.
-	const body = await renderIslands(
-		applyBudouxHtml(wrapScrollableTables(media)),
-		islands,
-		options.renderIsland,
-	);
+	// Islands are rendered after every HTML transform so the link rewrites
+	// cannot alter component markup that the client then hydrates.
+	const body = await renderIslands(media, islands, options.renderIsland);
 	return body;
 }
 
@@ -226,19 +197,11 @@ if (import.meta.vitest != null) {
 			expect(html.match(/class="ox-ogp-simple"/g)).toHaveLength(2);
 		});
 
-		it('wraps markdown tables in a keyboard-scrollable region', async () => {
+		it('leaves markdown table semantics intact for the Ox Content table enhancer', async () => {
 			const html = await renderMarkdown('| Name | Value |\n|---|---:|\n| Example | 42 |');
 
-			expect(html).toContain(
-				'<div class="table-scroll" role="region" aria-label="Scrollable table" tabindex="0"><span class="table-scroll-hint" aria-hidden="true">← scroll →</span><table>',
-			);
-			expect(html).toContain('</table></div>');
-		});
-
-		it('leaves a table quoted inside an HTML comment unwrapped', async () => {
-			const html = await renderMarkdown('<!--\n<table><tr><td>a</td></tr></table>\n-->');
-
-			expect(html).toContain('<!--\n<table><tr><td>a</td></tr></table>\n-->');
+			expect(html).toContain('<table>');
+			expect(html).toContain('</table>');
 			expect(html).not.toContain('table-scroll');
 		});
 
@@ -386,11 +349,12 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('import Chart');
 		});
 
-		it('applies markdown-it-budoux compatible paragraph rendering', async () => {
+		it('applies native Ox Content BudouX segmentation', async () => {
 			const html = await renderMarkdown('今日は天気です。');
 
-			expect(html).toContain('<p style="word-break:keep-all;overflow-wrap:anywhere;">');
+			expect(html).toContain('<p>');
 			expect(html).toContain('今日は\u200B天気です。');
+			expect(html).not.toContain('style="word-break:keep-all;overflow-wrap:anywhere;"');
 		});
 
 		it('renders configured details containers', async () => {
