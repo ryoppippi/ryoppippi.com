@@ -25,7 +25,7 @@ async function generateStaticSite(): Promise<void> {
 }
 
 /**
- * Runs the custom site generator once after every Vite build environment closes.
+ * Runs the custom site generator once after the Vite client build closes.
  *
  * @returns The Vite plugin that owns the final static output pass.
  */
@@ -35,6 +35,7 @@ export function staticSiteBuild(): Plugin {
 	return {
 		name: 'ryoppippi-static-site-build',
 		apply: (_config, { command, mode }) => command === 'build' && mode !== 'test',
+		applyToEnvironment: (environment) => environment.name === 'client',
 		async closeBundle() {
 			generation ??= generateStaticSite();
 			await generation;
