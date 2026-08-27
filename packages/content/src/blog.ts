@@ -236,6 +236,30 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 
 if (import.meta.vitest != null) {
 	describe('blog loaders', () => {
+		it('keeps one central Tweet snapshot for every embedded post', async () => {
+			const directory = blogDirectory();
+			const cacheDirectory = path.resolve(
+				import.meta.dirname,
+				'../../..',
+				'.cache/ox-content/twitter',
+			);
+			const [files, cacheFiles] = await Promise.all([
+				glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true }),
+				glob('*-en.json', { cwd: cacheDirectory }),
+			]);
+			const referencedIds = new Set<string>();
+			for (const file of files) {
+				const source = await readFile(file, 'utf8');
+				for (const match of source.matchAll(/<Tweet\b[^>]*\bid="([0-9]+)"/g)) {
+					referencedIds.add(match[1]);
+				}
+			}
+
+			expect([...referencedIds].sort()).toEqual(
+				cacheFiles.map((file) => file.replace(/-en\.json$/, '')).sort(),
+			);
+		});
+
 		it('returns null for an unknown blog slug', async () => {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
