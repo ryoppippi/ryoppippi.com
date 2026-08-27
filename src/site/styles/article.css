@@ -25,3 +25,8 @@
 	word-break: keep-all;
 	overflow-wrap: anywhere;
 }
+
+.content table[data-ox-table-scrollable]:focus-visible {
+	outline: var(--octc-focus-ring, 2px solid Highlight);
+	outline-offset: var(--octc-focus-offset, 2px);
+}
