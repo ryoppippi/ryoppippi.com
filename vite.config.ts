@@ -1,3 +1,4 @@
+import kanagawa from '@ox-content/theme-color-kanagawa';
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
@@ -9,6 +10,7 @@ import solid from 'vite-plugin-solid';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
 import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
+import { syntaxThemeStylesheet } from './src/site/syntax-theme.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
@@ -19,6 +21,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
+		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawa),
 		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		solid({ ssr: true, solid: { hydratable: false } }),
 		...oxContentSvelte({
@@ -126,7 +129,7 @@ export default defineConfig(({ command, mode }) => ({
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
-						'src/site/{generate,page-styles,pages}.ts',
+						'src/site/{generate,page-styles,pages,syntax-theme}.ts',
 						'packages/content/src/{artifact,blog,island-renderer,islands,markdown-cache,paths}.ts',
 						'packages/content/src/blog/**/*.ts',
 						'packages/content/src/markdown/**/*.ts',
