@@ -1,11 +1,10 @@
-import type { ArticleMetadata, BlogPost, BlogPostMetadata } from '@ryoppippi/content';
+import type { ArticleMetadata, BlogPost } from '@ryoppippi/content';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
-import { Feed } from 'feed';
 import * as ufo from 'ufo';
 import { formatDate } from '../lib/util.ts';
 import { islandModuleIds } from './assets.ts';
-import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
+import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 import { postListItems } from './content.ts';
 import path from 'node:path';
 import { page, renderComponent } from './html.ts';
@@ -216,66 +215,6 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 		},
 		{ path: `blog/${post.filename}.md`, content: post.source },
 	];
-}
-
-/**
- * Builds the RSS feed for published local posts.
- *
- * @param posts - Blog post metadata to include.
- * @returns The generated RSS feed.
- */
-export function feed(posts: BlogPostMetadata[]): GeneratedFile {
-	const output = new Feed({
-		title: `blog | ${SITE_NAME}`,
-		description: `blog | ${SITE_NAME}`,
-		id: SITE_ORIGIN,
-		link: SITE_ORIGIN,
-		language: 'en',
-		image: SITE_SOCIAL_IMAGE_URL,
-		favicon: SITE_SOCIAL_IMAGE_URL,
-		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: ufo.joinURL(SITE_ORIGIN, 'feed.xml') },
-	});
-	for (const post of posts.filter((post) => post.isPublished)) {
-		output.addItem({
-			title: post.title,
-			link: ufo.joinURL(SITE_ORIGIN, 'blog', `${post.filename}/`),
-			date: new Date(post.pubDate),
-			description: `${post.title} | ${post.readingTime.text}`,
-		});
-	}
-	return { path: 'feed.xml', content: output.rss2() };
-}
-
-/**
- * Builds the RSS feed for curated media appearances.
- *
- * @param items - Curated podcast and video entries to include.
- * @returns The generated media RSS feed.
- */
-export function mediaFeed(items: PostListItem[]): GeneratedFile {
-	const pathname = '/works/media/';
-	const url = ufo.joinURL(SITE_ORIGIN, pathname);
-	const output = new Feed({
-		title: `Media | ${SITE_NAME}`,
-		description: `Media appearances by ${SITE_NAME}`,
-		id: url,
-		link: url,
-		language: 'ja',
-		image: SITE_SOCIAL_IMAGE_URL,
-		favicon: SITE_SOCIAL_IMAGE_URL,
-		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: ufo.joinURL(url, 'feed.xml') },
-	});
-	for (const item of items.filter((item) => item.playlist !== true)) {
-		output.addItem({
-			title: item.title,
-			link: item.link,
-			date: new Date(item.pubDate),
-			description: `${item.kind === 'video' ? 'YouTube' : 'Podcast'} | ${item.title}`,
-		});
-	}
-	return { path: 'works/media/feed.xml', content: output.rss2() };
 }
 
 /**

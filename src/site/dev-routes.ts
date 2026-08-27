@@ -4,7 +4,8 @@ import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
 import { postListItems } from './content.ts';
-import { articlePages, blogListPage, feed, homePage, mediaFeed } from './pages.ts';
+import { renderBlogFeed, renderMediaFeed } from './feeds.ts';
+import { articlePages, blogListPage, homePage } from './pages.ts';
 import {
 	aboutPage,
 	errorPage,
@@ -124,10 +125,8 @@ export async function renderDevRoute(
 		return renderBlogRoute(pathname, dependencies);
 	}
 	if (pathname === '/feed.xml') {
-		return response(
-			feed(await dependencies.loadBlogPostMetadata()).content,
-			'application/xml; charset=utf-8',
-		);
+		const feed = await renderBlogFeed(await dependencies.loadBlogPostMetadata());
+		return response(feed.content, feed.contentType);
 	}
 	if (pathname === '/works/oss/') {
 		return response(ossPage(await dependencies.loadOssProjects(), dependencies.assets).content);
@@ -147,10 +146,8 @@ export async function renderDevRoute(
 		return response(mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content);
 	}
 	if (pathname === '/works/media/feed.xml') {
-		return response(
-			mediaFeed(await dependencies.loadExternalMedia()).content,
-			'application/xml; charset=utf-8',
-		);
+		const feed = await renderMediaFeed(await dependencies.loadExternalMedia());
+		return response(feed.content, feed.contentType);
 	}
 	if (pathname === '/sponsors/') {
 		return response(sponsorsPage(dependencies.assets).content);
@@ -196,7 +193,7 @@ if (import.meta.vitest != null) {
 			loadBlogPostSource: vi.fn(async () => post.source),
 			loadDotfiles: vi.fn(async () => '# Dotfiles'),
 			loadExternalPosts: vi.fn(async () => []),
-			loadExternalMedia: vi.fn(async () => []),
+			loadExternalMedia: vi.fn(async (): Promise<PostListItem[]> => []),
 			loadOssProjects: vi.fn(async () => []),
 			loadPublications: vi.fn(async () => ({})),
 			loadShowcase: vi.fn(async () => []),
@@ -262,6 +259,41 @@ if (import.meta.vitest != null) {
 
 			expect(result?.body).toContain('Podcasts, interviews, and videos featuring @ryoppippi.');
 			expect(loaders.loadExternalMedia).toHaveBeenCalledOnce();
+		});
+
+		it('renders the blog RSS route with Ox Content', async () => {
+			const result = await renderDevRoute('/feed.xml', dependencies());
+
+			expect(result).toMatchObject({
+				contentType: 'application/rss+xml; charset=utf-8',
+				status: 200,
+			});
+			expect(result?.body).toContain('<title>Lazy article</title>');
+			expect(result?.body).toContain('<link>https://ryoppippi.com/blog/lazy-article/</link>');
+		});
+
+		it('renders the curated media RSS route with Ox Content', async () => {
+			const loaders = dependencies();
+			loaders.loadExternalMedia.mockResolvedValue([
+				{
+					title: 'Interview',
+					slug: 'interview',
+					link: 'https://example.com/interview',
+					pubDate: '2026-08-20T12:34:56.000Z',
+					lang: 'ja',
+					external: true,
+					kind: 'podcast',
+				},
+			]);
+
+			const result = await renderDevRoute('/works/media/feed.xml', loaders);
+
+			expect(result).toMatchObject({
+				contentType: 'application/rss+xml; charset=utf-8',
+				status: 200,
+			});
+			expect(result?.body).toContain('<title>Interview</title>');
+			expect(result?.body).toContain('<link>https://example.com/interview</link>');
 		});
 	});
 

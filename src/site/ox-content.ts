@@ -1,5 +1,6 @@
 import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { Route } from '../../routes.ts';
+import { BLOG_FEED_OPTIONS } from './feeds.ts';
 
 export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
 
@@ -12,12 +13,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	outDir: 'build',
 	collections: { blog: BLOG_COLLECTION_PATTERNS },
 	docs: false,
-	feeds: {
-		collection: 'blog',
-		formats: ['rss'],
-		limit: 1_000,
-		path: '/',
-	},
+	feeds: BLOG_FEED_OPTIONS,
 	permalinks: true,
 	notByAi: true,
 	redirects: {

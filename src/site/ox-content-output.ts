@@ -1,13 +1,9 @@
 import type { PostListItem } from './content.ts';
 import type { GeneratedFile } from './pages.ts';
-import {
-	planSsgOutputs,
-	resolveGitLastmod,
-	writeFeedFiles,
-	writeSiteMapFiles,
-} from '@ox-content/vite-plugin';
+import { planSsgOutputs, resolveGitLastmod, writeSiteMapFiles } from '@ox-content/vite-plugin';
 import path from 'node:path';
-import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
+import { SITE_NAME, SITE_ORIGIN } from './consts.ts';
+import { writeMediaFeed } from './feeds.ts';
 
 type GitLastmodResolver = (filePath: string, root?: string) => number | undefined;
 
@@ -65,26 +61,7 @@ export async function writeOxContentOutputFiles({
 		outDir,
 		root,
 		pages: sitePages,
-		items: media
-			.filter((item) => item.playlist !== true)
-			.map((item) => ({
-				title: item.title,
-				loc: item.link,
-				date: item.pubDate,
-				description: `${item.kind === 'video' ? 'YouTube' : 'Podcast'} | ${item.title}`,
-			})),
 		options: {
-			feeds: {
-				formats: ['rss'],
-				limit: 1_000,
-				path: '/works/media',
-				title: `Media | ${SITE_NAME}`,
-				description: `Media appearances by ${SITE_NAME}`,
-				language: 'ja',
-				image: SITE_SOCIAL_IMAGE_URL,
-				favicon: SITE_SOCIAL_IMAGE_URL,
-				copyright: SITE_COPYRIGHT,
-			},
 			siteMaps: { robots: false, llms: false },
 			ssg: {
 				enabled: false,
@@ -94,13 +71,11 @@ export async function writeOxContentOutputFiles({
 		},
 	});
 
-	const [feeds, siteMaps] = await Promise.all([
-		writeFeedFiles(plan.feeds),
+	const [, siteMaps] = await Promise.all([
+		writeMediaFeed(media, outDir),
 		writeSiteMapFiles(plan.siteMaps),
 	]);
-	const warnings = [feeds.warning, siteMaps.warning].filter(
-		(warning): warning is string => warning != null,
-	);
+	const warnings = [siteMaps.warning].filter((warning): warning is string => warning != null);
 	if (warnings.length > 0) {
 		throw new Error(warnings.join('\n'));
 	}
