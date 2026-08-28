@@ -34,19 +34,3 @@
 .content .ox-ogp-card .ox-ogp-image {
 	object-fit: contain;
 }
-
-.content .ox-tweet--full .ox-tweet__avatar,
-.content .ox-tweet--full .ox-tweet__media-item {
-	margin: 0;
-}
-
-.content .ox-tweet--full .ox-tweet__quote {
-	font-style: normal;
-	font-weight: 400;
-	quotes: none;
-}
-
-.content .ox-tweet--full .ox-tweet__quote p::before,
-.content .ox-tweet--full .ox-tweet__quote p::after {
-	content: none;
-}
