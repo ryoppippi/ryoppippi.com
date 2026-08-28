@@ -179,7 +179,7 @@ https://github.com/haya14busa/vim-asterisk
 
 Neovimの組み込みのLanguage Server Protocol(LSP)クライアントを用いることで、変数名の一括変更を行うことができます。
 
-```
+```vimscript
 :lua vim.lsp.buf.rename()
 ```
 
@@ -257,7 +257,7 @@ _マクロを使って複雑な操作を行う_
 
 例えば、`g`コマンドを使うことで、特定のパターンにマッチする行に対してマクロを適用することができます。
 
-```
+```vimscript
 :g/foo/normal @q
 ```
 
@@ -269,7 +269,7 @@ _マクロを使って複雑な操作を行う_
 
 また行単位に限らず、Visualモードに入って
 
-```
+```vimscript
 :'<,'>normal @q
 ```
 

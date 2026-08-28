@@ -61,7 +61,7 @@ gh pr create --title "PR Title"
 
 ここで
 
-```
+```vimscript
 :GinDiff main
 ```
 
@@ -69,7 +69,7 @@ gh pr create --title "PR Title"
 
 これを全て選択して
 
-```
+```vimscript
 :'<,'>CopilotChat generate PR desc from this diff to the main
 ```
 
@@ -82,7 +82,7 @@ gh pr create --title "PR Title"
 
 もし`Gin`を使わない場合は
 
-```
+```vimscript
 :new
 :r! git diff main
 ```
