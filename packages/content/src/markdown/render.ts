@@ -1,5 +1,6 @@
 import {
 	applyIslandSsrHtml,
+	applyReaderChromeHtml,
 	renderMarkdown as renderOxMarkdown,
 	transformAllPlugins,
 	type OxContentOptions,
@@ -171,7 +172,15 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 
 	// Islands are rendered after every HTML transform so the link rewrites
 	// cannot alter component markup that the client then hydrates.
-	const body = await renderIslands(media, islands, options.renderIsland);
+	const body = await renderIslands(
+		applyReaderChromeHtml(media, {
+			backToTop: false,
+			copy: true,
+			externalLinks: false,
+		}),
+		islands,
+		options.renderIsland,
+	);
 	return body;
 }
 
@@ -346,5 +355,16 @@ if (import.meta.vitest != null) {
 			);
 			expect(html).toContain('</details>');
 		});
+	});
+
+	it('adds Ox Content copy controls to fenced code blocks', async () => {
+		const html = await renderMarkdown('```ts\nconst answer = 42;\n```');
+
+		expect(html).toContain('class="ox-code"');
+		expect(html).toContain('class="ox-copy"');
+		expect(html).toContain('data-ox-copy');
+		expect(html).toContain('aria-label="Copy code"');
+		expect(html).toContain('>const</span>');
+		expect(html).toContain('>answer</span>');
 	});
 }

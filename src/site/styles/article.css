@@ -9,6 +9,7 @@
 @import '@ox-content/vite-plugin/styles/ogp.css';
 @import '@ox-content/vite-plugin/styles/youtube.css';
 @import '@ox-content/vite-plugin/styles/not-by-ai.css';
+@import '@ox-content/vite-plugin/styles/reader-chrome.css';
 @import '@ox-content/vite-plugin/styles/markdown-tables.css';
 
 @source '../templates/Article.svelte';

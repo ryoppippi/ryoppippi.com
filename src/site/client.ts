@@ -1,6 +1,7 @@
 import type { JSX } from 'solid-js';
 import type { Component } from 'svelte';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
+import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import '../styles/fonts.css';
 import {
 	loadPageStyle,
@@ -298,6 +299,7 @@ function initialisePage(): void {
 	initialiseMediaFilter();
 	initialiseSponsors();
 	initialiseIslands();
+	initReaderChrome(document);
 	enhanceMarkdownTables(document);
 }
 
