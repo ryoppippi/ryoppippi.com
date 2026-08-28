@@ -26,6 +26,15 @@
 	overflow-wrap: anywhere;
 }
 
+.content .ox-ogp-card .ox-ogp-favicon,
+.content .ox-ogp-card .ox-ogp-image {
+	margin: 0;
+}
+
+.content .ox-ogp-card .ox-ogp-image {
+	object-fit: contain;
+}
+
 .content .ox-tweet--full .ox-tweet__avatar,
 .content .ox-tweet--full .ox-tweet__media-item {
 	margin: 0;
