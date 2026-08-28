@@ -78,7 +78,7 @@ ccusagge daily
 
 実行結果の例：
 
-```
+```text
 ╭──────────────────────────────────────────╮
 │                                          │
 │  Claude Code Token Usage Report - Daily  │

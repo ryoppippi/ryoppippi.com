@@ -139,6 +139,6 @@ Secretive Appを使っていた時のようにたまにhangしたり、logoutで
 
 ryoppippi調査によれば、この辺りは SeKey → Secretive → sc_auth → mizdraさんの記事 → nix-secure-enclave-key という系譜になっている。詳しく気になる人は以下のpromptをAIに投げて調べてもらうとよい。
 
-```
+```text
 SeKey → Secretive → sc_auth → mizdraさんの記事 → nix-secure-enclave-key の流れを説明してください。加えて、nix-secure-enclave-keyの新規性がどこにあるのかも教えてください。
 ```

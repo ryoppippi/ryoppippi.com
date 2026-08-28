@@ -69,7 +69,7 @@ _Cursor EditorでDeveloper Toolを開いてみる_
 
 結論から言うと、CursorでLLMを呼び出す時は以下の経路でリクエストが送られます。
 
-```
+```text
 Cursor Editor
 ↓
 Cursor Server

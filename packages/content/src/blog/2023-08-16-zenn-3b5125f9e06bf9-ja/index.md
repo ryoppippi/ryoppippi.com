@@ -46,7 +46,7 @@ hooks にはいくつか種類がありますが、commit前後に実行され�
 
 例えば、`git commit`を実行した時
 
-```
+```text
 pre-commitが実行される
 ↓
 editor (vim など) が立ち上がるので、commit message を記入する
@@ -60,7 +60,7 @@ commitが実行される
 
 また、 `git commit -m 'hoge'` というように `-m` オプションをつけてcommit messageを指定した場合は、
 
-```
+```text
 commit-msgが実行される
 ↓
 pre-commitが実行される
@@ -154,7 +154,7 @@ https://github.com/ryoppippi/dotfiles/blob/fba410346e51e128a590d17d22bb1d439110c
 
 # おまけ
 
-```
+```sh
 git config --global commit.verbose true
 ```
 

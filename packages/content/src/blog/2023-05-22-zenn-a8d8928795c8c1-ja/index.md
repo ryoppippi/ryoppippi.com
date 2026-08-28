@@ -83,7 +83,7 @@ https://github.com/rgroli/other.nvim
 
 SvelteKit では、`src/routes`以下がこのようなファイル構成になっています。
 
-```
+```text
 src
 ├── app.d.ts
 ├── app.html
