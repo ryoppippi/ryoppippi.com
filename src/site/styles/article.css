@@ -25,12 +25,3 @@
 	word-break: keep-all;
 	overflow-wrap: anywhere;
 }
-
-.content .ox-ogp-card .ox-ogp-favicon,
-.content .ox-ogp-card .ox-ogp-image {
-	margin: 0;
-}
-
-.content .ox-ogp-card .ox-ogp-image {
-	object-fit: contain;
-}
