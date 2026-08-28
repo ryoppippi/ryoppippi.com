@@ -1,4 +1,4 @@
-import kanagawa from '@ox-content/theme-color-kanagawa';
+import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
 import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
-		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawa),
+		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawaDragon),
 		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		solid({ ssr: true, solid: { hydratable: false } }),
 		...oxContentSvelte({
