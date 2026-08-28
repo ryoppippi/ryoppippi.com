@@ -4,7 +4,6 @@ import {
 	transformAllPlugins,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
-import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { escapeHtml } from './html.ts';
@@ -214,38 +213,18 @@ if (import.meta.vitest != null) {
 			expect(html.match(/<a [^>]*class="ox-magic-link/g)).toHaveLength(3);
 		});
 
-		it('renders tweets as static ox-content cards', async () => {
-			const id = '9876543210987654321';
-			vi.stubGlobal(
-				'fetch',
-				vi.fn(async () =>
-					Response.json({
-						conversation_count: 2,
-						favorite_count: 3,
-						id_str: id,
-						created_at: 'Fri Jul 04 08:52:00 +0000 2025',
-						text: 'Static Tweet body',
-						user: { name: 'Ox Content', screen_name: 'ox_content' },
-					}),
-				),
-			);
+		it('renders committed tweet snapshots as static ox-content cards', async () => {
+			const html = await renderMarkdown('<Tweet id="1997459320091332729" />');
 
-			try {
-				const html = await renderMarkdown(`<Tweet id="${id}" />`);
-
-				expect(html).toContain('class="ox-tweet ox-tweet--fetched ox-tweet--full"');
-				expect(html).toContain('Static Tweet body');
-				expect(html).toContain('class="ox-tweet__actions"');
-				expect(html).toContain('data-ox-tweet-copy');
-				expect(html).toContain('>Copy link</span>');
-				expect(html).toContain('9:52 AM · Jul 4, 2025');
-				expect(html).not.toContain('<p><figure');
-				expect(html).not.toContain('<Tweet');
-				expect(html).not.toContain('<script');
-			} finally {
-				vi.unstubAllGlobals();
-				await rm(path.join(twitterCacheDirectory, `${id}-en.json`), { force: true });
-			}
+			expect(html).toContain('class="ox-tweet ox-tweet--fetched ox-tweet--full"');
+			expect(html).toContain('僕はgunshiというtypescript製のcli');
+			expect(html).toContain('class="ox-tweet__actions"');
+			expect(html).toContain('data-ox-tweet-copy');
+			expect(html).toContain('>Copy link</span>');
+			expect(html).toContain('12:13 AM · Dec 7, 2025');
+			expect(html).not.toContain('<p><figure');
+			expect(html).not.toContain('<Tweet');
+			expect(html).not.toContain('<script');
 		});
 
 		it('preserves YouTube start times with Ox Content', async () => {
