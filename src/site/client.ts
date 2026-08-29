@@ -2,6 +2,8 @@ import type { JSX } from 'solid-js';
 import type { Component } from 'svelte';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
+import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
+import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
 import '../styles/fonts.css';
 import {
 	loadPageStyle,
@@ -11,69 +13,6 @@ import {
 } from './page-styles.ts';
 import { hashTargetId } from './navigation.ts';
 import './style.css';
-
-/**
- * Runs an action with all CSS transitions disabled so colour-scheme changes
- * apply instantly instead of tweening element by element.
- *
- * @see https://reemus.dev/article/disable-css-transition-color-scheme-change
- */
-function withoutTransition(action: () => void): void {
-	const style = document.createElement('style');
-	style.textContent = '* { transition: none !important; }';
-	document.head.append(style);
-	action();
-	// Reading a computed style forces a repaint while transitions are still disabled
-	void window.getComputedStyle(style).opacity;
-	style.remove();
-}
-
-/**
- * Applies a theme change with a circular reveal that expands from the given
- * point, ported from svelte-fancy-darkmode.
- *
- * Credit to [@hooray](https://github.com/hooray)
- * @see https://github.com/vuejs/vitepress/pull/2347
- * @see https://github.com/ryoppippi/svelte-fancy-darkmode
- */
-function animateThemeChange(x: number, y: number, apply: () => void): void {
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (document.startViewTransition == null || prefersReducedMotion) {
-		apply();
-		return;
-	}
-
-	// The reveal circle grows from the given point to the furthest viewport corner
-	const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-	const transition = document.startViewTransition(apply);
-	void transition.ready.then(() =>
-		withoutTransition(() => {
-			const dark = document.documentElement.classList.contains('dark');
-			const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
-			// Switching to dark shrinks the old light view into the click point;
-			// switching to light grows the new light view out of it. The z-index
-			// rules in style.css keep the animated snapshot on top in both cases.
-			// fill: 'forwards' holds the final clip-path after the animation ends,
-			// otherwise the unclipped old snapshot flashes for one frame before the
-			// view transition is torn down.
-			const animation = document.documentElement.animate(
-				{ clipPath: dark ? [...clipPath].reverse() : clipPath },
-				{
-					duration: 400,
-					easing: 'ease-out',
-					fill: 'forwards',
-					pseudoElement: dark ? '::view-transition-old(root)' : '::view-transition-new(root)',
-				},
-			);
-			// Remove the finished animation so a later transition cannot reuse its final clip-path.
-			void Promise.all([transition.finished, animation.finished]).then(
-				() => animation.cancel(),
-				() => undefined,
-			);
-		}),
-	);
-}
 
 function initialiseDarkMode(): void {
 	const target = document.querySelector<HTMLElement>('[data-dark-mode]');
@@ -95,11 +34,16 @@ function initialiseDarkMode(): void {
 			: 'icon-[line-md--moon-filled-to-sunny-filled-loop-transition]';
 	};
 	button.addEventListener('click', (event) => {
-		animateThemeChange(event.clientX, event.clientY, () => {
-			const dark = document.documentElement.classList.toggle('dark');
-			document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-			localStorage.theme = dark ? 'dark' : 'light';
-			render();
+		const dark = !document.documentElement.classList.contains('dark');
+		void applyThemeTransition({
+			event,
+			nextTheme: dark ? 'dark' : 'light',
+			apply: () => {
+				document.documentElement.classList.toggle('dark', dark);
+				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+				localStorage.theme = dark ? 'dark' : 'light';
+				render();
+			},
 		});
 	});
 	render();
@@ -300,6 +244,7 @@ function initialisePage(): void {
 	initialiseSponsors();
 	initialiseIslands();
 	initReaderChrome(document);
+	initTweetCards(document);
 	enhanceMarkdownTables(document);
 }
 

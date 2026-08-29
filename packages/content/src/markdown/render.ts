@@ -1,10 +1,10 @@
 import {
 	applyIslandSsrHtml,
-	applyReaderChromeHtml,
 	renderMarkdown as renderOxMarkdown,
 	transformAllPlugins,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
+import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { escapeHtml } from './html.ts';
