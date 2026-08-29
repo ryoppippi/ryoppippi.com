@@ -125,7 +125,7 @@ export default defineConfig(({ command, mode }) => ({
 					name: 'node',
 					globals: true,
 					environment: 'node',
-					exclude: [...configDefaults.exclude, '**/.direnv/**'],
+					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
