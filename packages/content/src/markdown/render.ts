@@ -237,11 +237,11 @@ if (import.meta.vitest != null) {
 		});
 
 		it('preserves YouTube start times with Ox Content', async () => {
-			const html = await renderMarkdown('<youtube id="dQw4w9WgXcQ" start="4190" />');
+			const html = await renderMarkdown('<YouTube id="dQw4w9WgXcQ" start="4190" />');
 
 			expect(html).toContain('src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?start=4190"');
 			expect(html).not.toContain('<p><div');
-			expect(html).not.toContain('<youtube');
+			expect(html).not.toContain('<YouTube');
 		});
 
 		it('renders the NotByAI badge as an external link with both colour variants', async () => {

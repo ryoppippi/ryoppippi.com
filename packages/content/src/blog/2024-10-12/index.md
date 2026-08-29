@@ -113,7 +113,7 @@ pub fn main() void {
 
 [youtube](https://www.youtube.com/watch?v=XezoLvr1dX0)
 
-<youtube id="XezoLvr1dX0" />
+<YouTube id="XezoLvr1dX0" />
 
 # Not By AI Badge
 

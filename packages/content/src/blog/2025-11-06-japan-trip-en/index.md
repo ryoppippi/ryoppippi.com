@@ -27,7 +27,7 @@ I decided to come to Japan for this event. I was happy to meet so many people.
 
 <!-- https://www.youtube.com/live/u8I_LujFXeU?t=2296s -->
 
-<youtube id="u8I_LujFXeU" start="2296" />
+<YouTube id="u8I_LujFXeU" start="2296" />
 
 <!-- https://x.com/ryoppippi/status/1979149319237439870 -->
 <Tweet id="1979149319237439870" />
@@ -54,7 +54,7 @@ A meetup where I gathered people I wanted to talk with and let them speak freely
 
 <!-- https://youtu.be/8ZdcsNLbDpQ?si=mn-p8WaFHnPq7O0x&t=5616 -->
 
-<youtube id="8ZdcsNLbDpQ" start="5616" />
+<YouTube id="8ZdcsNLbDpQ" start="5616" />
 
 <!-- https://x.com/Yuki_Ishii_Dev/status/1981868952860098579 -->
 <Tweet id="1981868952860098579" />
@@ -74,7 +74,7 @@ I hadn't planned to attend, but I extended my Tokyo stay by a week, so it became
 
 <!-- https://www.youtube.com/live/9MQpu0nxl5E?si=0NneqV0WyJYwD6X8&t=26926 -->
 
-<youtube id="9MQpu0nxl5E" start="26926" />
+<YouTube id="9MQpu0nxl5E" start="26926" />
 
 <!-- https://x.com/tomoyaton/status/1984893370674921592 -->
 <Tweet id="1984893370674921592" />
@@ -94,31 +94,31 @@ Not all of them are uploaded yet, so I'll update this as they come out.
 
 ### Vibe Loading - #026 [In-depth Discussion] What are the limits of AI coding? What domains can AI absolutely not handle? A conversation with ccusage developer ryoppippi
 
-<youtube id="7xVfgh2aUkM" />
+<YouTube id="7xVfgh2aUkM" />
 
 <!-- https://www.youtube.com/watch?v=662PR8z7xDM -->
 
 ### TECH WORLD - [OSS Development While Working as an Engineer in the UK] Applied to 533 positions in half a year, got a job in the UK / Developed AI-related OSS and became famous overnight
 
-<youtube id="662PR8z7xDM" />
+<YouTube id="662PR8z7xDM" />
 
 <!-- https://www.youtube.com/watch?v=61RIvdM0xJ0 -->
 
 ### TECH WORLD - [Foreign IT Engineer Conversation] The joy and melancholy I discovered by developing OSS used around the world
 
-<youtube id="61RIvdM0xJ0" />
+<YouTube id="61RIvdM0xJ0" />
 
 <!-- https://youtu.be/Ls5FmNoLLws -->
 
 ### [Introduction to Split Keyboards] Exploring the charm of split keyboards beloved by foreign IT engineers
 
-<youtube id="Ls5FmNoLLws" />
+<YouTube id="Ls5FmNoLLws" />
 
 <!-- https://youtu.be/XsAlXYWzcv4 -->
 
 ### [Foreign IT Engineer's Dev Environment] A Vim video by a Vimmer for Vimmers (and aspiring Vimmers)
 
-<youtube id="XsAlXYWzcv4" />
+<YouTube id="XsAlXYWzcv4" />
 
 ~~Will update as they come out~~
 

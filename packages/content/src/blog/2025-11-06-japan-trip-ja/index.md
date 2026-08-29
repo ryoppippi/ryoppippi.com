@@ -27,7 +27,7 @@ alternates:
 
 <!-- https://www.youtube.com/live/u8I_LujFXeU?t=2296s -->
 
-<youtube id="u8I_LujFXeU" start="2296" />
+<YouTube id="u8I_LujFXeU" start="2296" />
 
 <!-- https://x.com/ryoppippi/status/1979149319237439870 -->
 <Tweet id="1979149319237439870" />
@@ -54,7 +54,7 @@ alternates:
 
 <!-- https://youtu.be/8ZdcsNLbDpQ?si=mn-p8WaFHnPq7O0x&t=5616 -->
 
-<youtube id="8ZdcsNLbDpQ" start="5616" />
+<YouTube id="8ZdcsNLbDpQ" start="5616" />
 
 <!-- https://x.com/Yuki_Ishii_Dev/status/1981868952860098579 -->
 <Tweet id="1981868952860098579" />
@@ -75,7 +75,7 @@ alternates:
 
 <!-- https://www.youtube.com/live/9MQpu0nxl5E?si=0NneqV0WyJYwD6X8&t=26926 -->
 
-<youtube id="9MQpu0nxl5E" start="26926" />
+<YouTube id="9MQpu0nxl5E" start="26926" />
 
 <!-- https://x.com/tomoyaton/status/1984893370674921592 -->
 <Tweet id="1984893370674921592" />
@@ -92,31 +92,31 @@ alternates:
 
 ### Vibe Loading - #026 [徹底討論] AIコーディングの限界値はどこ？絶対にAIに任せられない領域とは ccusage開発者ryoppippiさんと対談
 
-<youtube id="7xVfgh2aUkM" />
+<YouTube id="7xVfgh2aUkM" />
 
 <!-- https://www.youtube.com/watch?v=662PR8z7xDM -->
 
 ### TECH WORLD - 【OSS開発しながらイギリスでエンジニア】半年で533ポジションに応募し、イギリス就職 / AI関連OSS開発し、一躍有名人へ。
 
-<youtube id="662PR8z7xDM" />
+<YouTube id="662PR8z7xDM" />
 
 <!-- https://www.youtube.com/watch?v=61RIvdM0xJ0 -->
 
 ### TECH WORLD -【外資ITエンジニア対談】世界で使われるOSSを開発して分かった楽しさと憂鬱
 
-<youtube id="61RIvdM0xJ0" />
+<YouTube id="61RIvdM0xJ0" />
 
 <!-- https://youtu.be/Ls5FmNoLLws -->
 
 ### 【分割キーボード入門】外資ITエンジニアが愛用する分割キーボードの魅力に迫る
 
-<youtube id="Ls5FmNoLLws" />
+<YouTube id="Ls5FmNoLLws" />
 
 <!-- https://youtu.be/XsAlXYWzcv4 -->
 
 ### 【外資ITエンジニアの開発環境】VimmerによるVimmer(になりたい人)のためのVim動画
 
-<youtube id="XsAlXYWzcv4" />
+<YouTube id="XsAlXYWzcv4" />
 
 ~~順次更新予定~~
 

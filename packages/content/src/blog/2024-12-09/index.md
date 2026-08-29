@@ -42,14 +42,14 @@ description: "neovimconf 2024とvimconf 2024でNeovimのフロントエンド開
 [slides](https://talks.ryoppippi.com/2024-11-23/){.text-xl}
 [video](https://www.youtube.com/watch?v=tBY3RxTrhkM){.text-xl}
 
-<youtube id="tBY3RxTrhkM" />
+<YouTube id="tBY3RxTrhkM" />
 
 ## neovimconf 24 (19th, Nov)
 
 [slides](https://talks.ryoppippi.com/2024-11-19/){.text-xl}
 [video](https://www.youtube.com/watch?v=D8qI9zkKATM){.text-xl}
 
-<youtube id="D8qI9zkKATM" />
+<YouTube id="D8qI9zkKATM" />
 
 ---
 
