@@ -32,8 +32,6 @@ jobs:
             run: pnpm run check
           - name: Run Tests
             run: pnpm run test
-          - name: Run Browser Tests
-            run: pnpm run test:browser:run
 
   action-timeline:
     needs:

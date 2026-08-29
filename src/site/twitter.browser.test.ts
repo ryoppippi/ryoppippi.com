@@ -23,10 +23,7 @@ describe('Tweet copy action', () => {
 
 		initTweetCards(document);
 		const copyLink = document.querySelector<HTMLAnchorElement>('[data-ox-tweet-copy]');
-		expect(copyLink).not.toBeNull();
-		if (copyLink == null) {
-			return;
-		}
+		assert.isNotNull(copyLink, 'expected a Tweet Copy link');
 		await userEvent.click(copyLink);
 
 		await expect.poll(() => copyLink.ariaLabel).toBe('Copied!');

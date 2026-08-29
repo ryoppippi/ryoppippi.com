@@ -16,8 +16,8 @@
 		"new": "vp run @ryoppippi/content#new",
 		"preview": "vp preview",
 		"test": "vp test --run",
-		"test:browser": "vitest --config vitest.browser.config.ts",
-		"test:browser:run": "vitest run --config vitest.browser.config.ts",
+		"test:browser": "vp test --project browser",
+		"test:browser:run": "vp test --run --project browser",
 		"typos": "typos --force-exclude src/contents packages/content/src/blog packages/content/src/showcase",
 		"update:oss-stars": "./.github/update-oss-stars.nu"
 	},

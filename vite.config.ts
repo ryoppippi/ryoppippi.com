@@ -4,6 +4,7 @@ import { svelteRootDir } from '@ryoppippi/content/paths';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
+import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import solid from 'vite-plugin-solid';
@@ -134,6 +135,24 @@ export default defineConfig(({ command, mode }) => ({
 						'packages/content/src/blog/**/*.ts',
 						'packages/content/src/markdown/**/*.ts',
 					],
+				},
+			},
+			{
+				extends: true,
+				test: {
+					name: 'browser',
+					globals: true,
+					include: ['src/**/*.browser.test.ts'],
+					browser: {
+						enabled: true,
+						headless: true,
+						provider: playwright({
+							contextOptions: {
+								permissions: ['clipboard-read', 'clipboard-write'],
+							},
+						}),
+						instances: [{ browser: 'chromium' }],
+					},
 				},
 			},
 		],
