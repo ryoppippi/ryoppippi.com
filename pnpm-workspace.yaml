@@ -2,7 +2,7 @@ packages:
   - packages/*
 
 catalog:
-  '@ox-content/napi': 3.0.0-alpha.17
+  '@ox-content/napi': 3.0.0-alpha.18
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
