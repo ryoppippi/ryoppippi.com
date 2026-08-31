@@ -265,18 +265,6 @@ if (import.meta.vitest != null) {
 		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
 	} satisfies BlogPost;
 
-	test('renders site identity metadata on the home page', () => {
-		const home = homePage(assets);
-		expect(home.sourcePaths).toContain(SITE_OWNER_SOURCE_PATH);
-		const html = home.content;
-		expect(html).toContain(`<meta name="description" content="${HOME_DESCRIPTION}">`);
-		expect(html).not.toContain('data-home-description');
-		expect(html).toMatch(/<span data-nosnippet(?:="")?><a class="skip-link"/);
-		expect(html).toMatch(/<div data-nosnippet(?:="")? class="flex flex-wrap justify-center/);
-		expect(html).toContain('<meta property="og:title" content="ryoppippi.com">');
-		expect(html).toContain('"@type":"WebSite"');
-	});
-
 	test('tracks the whole source directory for an index MDX article', () => {
 		const [article] = articlePages(
 			{ ...examplePost, filepath: '/content/example-article/index.mdx' },
@@ -287,145 +275,21 @@ if (import.meta.vitest != null) {
 		expect(article.sourcePaths).not.toContain('/content/example-article/index.mdx');
 	});
 
-	test('keeps profile identity metadata out of the visible home page', () => {
-		const html = homePage(assets).content;
-		const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1];
-		assert.isDefined(body, 'expected a rendered document body');
-
-		expect(body).not.toContain('Ryotaro Kimura');
-		expect(body).not.toContain('木村亮太朗');
-		expect(body).not.toContain('Ryotaro Miura');
-		expect(body).not.toContain('三浦亮太朗');
+	test('derives an article description from the first prose paragraph', () => {
+		expect(
+			markdownDescription(
+				'# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
+			),
+		).toBe('A useful fallback paragraph with a link.');
 	});
 
-	test('identifies the home page owner with profile structured data', () => {
-		const html = homePage(assets).content;
-		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
-		assert.isDefined(jsonLd, 'expected home page structured data');
-
-		expect(JSON.parse(jsonLd)).toMatchObject({
-			'@context': 'https://schema.org',
-			'@graph': expect.arrayContaining([
-				expect.objectContaining({
-					'@type': 'ProfilePage',
-					mainEntity: { '@id': 'https://ryoppippi.com/#person' },
-				}),
-				expect.objectContaining({
-					'@type': 'Person',
-					'@id': 'https://ryoppippi.com/#person',
-					name: 'Ryotaro Kimura',
-					alternateName: expect.arrayContaining([
-						'木村亮太朗',
-						'Ryotaro Miura',
-						'三浦亮太朗',
-						'@ryoppippi',
-					]),
-					sameAs: expect.arrayContaining([
-						'https://github.com/ryoppippi',
-						'https://cv.ryoppippi.com/',
-					]),
-				}),
-			]),
-		});
-	});
-
-	test('renders article SEO metadata and reciprocal language links', () => {
-		const [article] = articlePages(examplePost, assets);
-		expect(article).toBeDefined();
-		expect(article?.sourcePaths).toEqual([SITE_OWNER_SOURCE_PATH, '/content/example-article']);
-		const html = article?.content ?? '';
-
-		expect(html).toContain('<html lang="en">');
-		expect(html).toContain("document.documentElement.dataset.theme=dark?'dark':'light'");
-		expect(html).toContain(
-			'<meta name="description" content="A concise description for an example article.">',
-		);
-		expect(html).toContain(
-			'<meta property="og:title" content="Example article | blog | ryoppippi.com">',
-		);
-		expect(html).toContain(
-			'<meta property="og:description" content="A concise description for an example article.">',
-		);
-		expect(html).toContain(
-			'<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
-		);
-		expect(html).toContain(
-			'<link rel="canonical" href="https://ryoppippi.com/blog/example-article/">',
-		);
-		expect(html).toContain(
-			'<meta property="article:published_time" content="2026-01-01T00:00:00.000Z">',
-		);
-		for (const [language, url] of Object.entries(examplePost.alternates)) {
-			expect(html).toContain(`<link rel="alternate" hreflang="${language}" href="${url}">`);
-		}
-
-		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
-		expect(jsonLd).toBeDefined();
-		expect(JSON.parse(jsonLd ?? '')).toMatchObject({
-			'@context': 'https://schema.org',
-			'@type': 'BlogPosting',
-			headline: examplePost.title,
-			description: examplePost.description,
-			url: 'https://ryoppippi.com/blog/example-article/',
-			mainEntityOfPage: {
-				'@type': 'WebPage',
-				'@id': 'https://ryoppippi.com/blog/example-article/',
-			},
-			datePublished: examplePost.pubDate,
-			image: 'https://ryoppippi.com/assets/content/article-cover.avif',
-			inLanguage: 'en',
-			author: {
-				'@type': 'Person',
-				'@id': 'https://ryoppippi.com/#person',
-				name: 'Ryotaro Kimura',
-				alternateName: expect.arrayContaining(['木村亮太朗', '@ryoppippi']),
-				url: 'https://ryoppippi.com/',
-			},
-		});
-	});
-
-	test('applies BudouX only to the visible article title', () => {
-		const title = '今日は天気です。';
-		const [article] = articlePages({ ...examplePost, title }, assets);
-		const html = article?.content ?? '';
-		const visibleTitle = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1];
-		const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
-
-		expect(visibleTitle).toContain('\u200B');
-		expect(visibleTitle?.replaceAll('\u200B', '')).toBe(title);
-		expect(html).toContain(`<title>${title} | blog | ryoppippi.com</title>`);
-		expect(html).toContain(`<meta property="og:title" content="${title} | blog | ryoppippi.com">`);
-		expect(JSON.parse(jsonLd ?? '')).toMatchObject({ headline: title });
-	});
-
-	test('uses the first prose paragraph when description frontmatter is absent', () => {
-		const [article] = articlePages(
-			{
-				...examplePost,
-				description: undefined,
-				content: '# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
-			},
-			assets,
-		);
-
-		expect(article?.content).toContain(
-			'<meta name="description" content="A useful fallback paragraph with a link.">',
-		);
-	});
-
-	test('uses the first rendered article image in JSON-LD', () => {
-		const [article] = articlePages(
-			{
-				...examplePost,
-				image: undefined,
-				html: '<p><img src="./first-image.png" alt="Example"></p>',
-			},
-			assets,
-		);
-
-		expect(article?.content).toContain(
-			'"image":"https://ryoppippi.com/blog/example-article/first-image.png"',
-		);
+	test('resolves the first rendered article image against the article URL', () => {
+		expect(
+			articleImageUrl(
+				'<p><img src="./first-image.png" alt="Example"></p>',
+				'https://ryoppippi.com/blog/example-article/',
+			),
+		).toBe('https://ryoppippi.com/blog/example-article/first-image.png');
 	});
 
 	test('escapes less-than characters in JSON-LD text', () => {

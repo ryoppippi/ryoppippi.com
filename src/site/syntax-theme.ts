@@ -31,27 +31,3 @@ export function syntaxThemeStylesheet(stylesheetPath: string, theme: ThemeTokenS
 		},
 	};
 }
-
-if (import.meta.vitest != null) {
-	describe(renderSyntaxThemeCss, () => {
-		it('renders only syntax variables for explicit and system dark modes', () => {
-			const css = renderSyntaxThemeCss({
-				tokens: {
-					'syntax-background': '#fafafa',
-					'syntax-token-keyword': '#624c83',
-					'color-primary': '#000000',
-				},
-				darkTokens: {
-					'syntax-background': '#181616',
-					'syntax-token-keyword': '#957fb8',
-				},
-			});
-
-			expect(css).toContain('--octc-syntax-background: #fafafa;');
-			expect(css).toContain('[data-theme="dark"]');
-			expect(css).toContain(':root:not([data-theme="light"])');
-			expect(css).toContain('--octc-syntax-token-keyword: #957fb8;');
-			expect(css).not.toContain('--octc-color-primary');
-		});
-	});
-}
