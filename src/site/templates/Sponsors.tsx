@@ -24,11 +24,15 @@ export default function Sponsors() {
 			<button
 				class="mx-auto cursor-pointer border-none bg-transparent p-0 text-2xl text-text-100 opacity-70 transition-base hover:opacity-100"
 				aria-controls="sponsor-image"
+				aria-describedby="sponsor-view-status"
 				data-sponsor-view="circles"
 				type="button"
 			>
 				Show Sponsor Tiers
 			</button>
+			<span id="sponsor-view-status" class="sr-only" aria-live="polite">
+				Showing Sponsor Circles
+			</span>
 			<div class="fyc">
 				<img
 					id="sponsor-image"

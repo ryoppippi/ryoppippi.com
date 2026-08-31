@@ -94,7 +94,8 @@ function initialiseTalkFilter(): void {
 function initialiseSponsors(): void {
 	const sponsorImage = document.querySelector<HTMLImageElement>('[data-sponsor-image]');
 	const button = document.querySelector<HTMLButtonElement>('[data-sponsor-view]');
-	if (sponsorImage == null || button == null) {
+	const status = document.querySelector<HTMLElement>('#sponsor-view-status');
+	if (sponsorImage == null || button == null || status == null) {
 		return;
 	}
 
@@ -104,6 +105,7 @@ function initialiseSponsors(): void {
 		button.textContent = circles ? 'Show Sponsor Tiers' : 'Show Sponsor Circles';
 		sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
 		sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
+		status.textContent = circles ? 'Showing Sponsor Circles' : 'Showing Sponsor Tiers';
 	});
 }
 
