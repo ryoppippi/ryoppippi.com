@@ -8,9 +8,9 @@ import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { escapeHtml } from './html.ts';
+import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
-const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../..', '.cache/ox-content/ogp');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
 const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
 
@@ -152,11 +152,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		bluesky: true,
 		github: false,
 		mermaid: false,
-		openGraph: {
-			cacheDir: ogpCacheDirectory,
-			persistCache: true,
-			timeout: 8_000,
-		},
+		openGraph: OPEN_GRAPH_OPTIONS,
 		tabs: false,
 		twitter: {
 			appearance: 'full',

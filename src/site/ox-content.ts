@@ -1,5 +1,6 @@
 import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { Route } from '../../routes.ts';
+import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
 import { BLOG_FEED_OPTIONS } from './feeds.ts';
 
 export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
@@ -14,6 +15,9 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	outDir: 'build',
 	collections: { blog: BLOG_COLLECTION_PATTERNS },
 	docs: false,
+	embeds: {
+		openGraph: OPEN_GRAPH_OPTIONS,
+	},
 	feeds: BLOG_FEED_OPTIONS,
 	permalinks: true,
 	notByAi: true,
