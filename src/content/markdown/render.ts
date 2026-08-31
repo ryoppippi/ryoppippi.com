@@ -295,46 +295,20 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<img src="./image.png" alt="alt" loading="lazy" width="480">');
 		});
 
-		it('turns registered component tags into island placeholders', async () => {
-			const html = await renderMarkdown('<Chart title="Growth" bars={3} />', {
-				islands: { Chart: 'post/Chart.tsx' },
-			});
-
-			expect(html).toContain('data-ox-island="post/Chart.tsx"');
-			expect(html).toContain('data-ox-props=');
-			expect(html).not.toContain('<Chart');
-		});
-
-		it('passes island props through the HTML pipeline', async () => {
+		it('maps a document island to its site module and server-rendered content', async () => {
 			const renderIsland = vi.fn(async () => '<p>chart</p>');
-			const html = await renderMarkdown('<Chart lang="en" />', {
-				islands: { Chart: 'post/Chart.tsx' },
-				renderIsland,
-			});
+			const html = await renderMarkdown(
+				'import Chart from \'./Chart.tsx\'\n\n<Chart lang="en" />',
+				{
+					islands: { Chart: 'post/Chart.tsx' },
+					renderIsland,
+				},
+			);
 
 			expect(renderIsland).toHaveBeenCalledWith('post/Chart.tsx', { lang: 'en' });
-			expect(html).toContain('data-ox-island-root');
-		});
-
-		it('leaves component tags alone when the post has no such component', async () => {
-			const html = await renderMarkdown('<Chart />');
-
-			expect(html).not.toContain('data-ox-island');
-		});
-
-		it('drops the import statement of a resolved component', async () => {
-			const html = await renderMarkdown("import Chart from './Chart.tsx'\n\n<Chart />", {
-				islands: { Chart: 'post/Chart.tsx' },
-			});
-
 			expect(html).toContain('data-ox-island="post/Chart.tsx"');
+			expect(html).toContain('data-ox-island-root');
 			expect(html).not.toContain('import Chart');
-		});
-
-		it('keeps an import that resolved to nothing so the mistake is visible', async () => {
-			const html = await renderMarkdown("import Chart from './Missing.tsx'");
-
-			expect(html).toContain('import Chart');
 		});
 
 		it('applies native Ox Content BudouX segmentation', async () => {

@@ -1,4 +1,5 @@
 import type { JSX } from 'solid-js';
+import { initIslands, type IslandController } from '@ox-content/islands';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
@@ -138,65 +139,52 @@ type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Elem
 // own chunk, so a post only downloads the islands it actually uses. The globs
 const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
 
-const islandCleanups = new Set<() => void>();
+let islandController: IslandController | undefined;
 
 async function mountSolidIsland(
 	element: HTMLElement,
 	load: () => Promise<SolidIslandModule>,
 	props: Record<string, unknown>,
-): Promise<void> {
+): Promise<() => void> {
 	const [{ render }, { default: Island }] = await Promise.all([import('solid-js/web'), load()]);
 	// Solid islands are not compiled hydratable, so the server markup is
 	// replaced by a fresh client render instead of being adopted.
 	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;
 	target.replaceChildren();
-	const dispose = render(() => Island(props), target);
-	islandCleanups.add(dispose);
-}
-
-function islandProps(element: HTMLElement): Record<string, unknown> {
-	const serialised = element.dataset.oxProps;
-	if (serialised == null) {
-		return {};
-	}
-
-	const parsed: unknown = JSON.parse(serialised);
-	if (parsed == null || typeof parsed !== 'object' || Array.isArray(parsed)) {
-		return {};
-	}
-
-	const payload = parsed as Record<string, unknown>;
-	const props = payload.props;
-	return props != null && typeof props === 'object' && !Array.isArray(props)
-		? (props as Record<string, unknown>)
-		: payload;
-}
-
-async function mountIsland(element: HTMLElement): Promise<void> {
-	const moduleId = element.dataset.oxIsland;
-	if (moduleId == null || element.dataset.oxMounted === 'true') {
-		return;
-	}
-
-	element.dataset.oxMounted = 'true';
-	try {
-		const modulePath = `../content/blog/${moduleId}`;
-		const props = islandProps(element);
-		const load = solidIslandLoaders[modulePath];
-		if (load == null) {
-			element.dataset.oxMounted = 'false';
-			return;
-		}
-		await mountSolidIsland(element, load, props);
-	} catch {
-		element.dataset.oxMounted = 'false';
-	}
+	return render(() => Island(props), target);
 }
 
 function initialiseIslands(): void {
-	for (const element of document.querySelectorAll<HTMLElement>('[data-ox-island]')) {
-		void mountIsland(element);
-	}
+	islandController = initIslands((element, props) => {
+		const moduleId = element.dataset.oxIsland;
+		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
+		if (load == null) {
+			throw new Error(`Unknown island module: ${moduleId ?? ''}`);
+		}
+
+		let dispose: (() => void) | undefined;
+		let destroyed = false;
+		void mountSolidIsland(element, load, props)
+			.then((mountedDispose) => {
+				if (destroyed) {
+					mountedDispose();
+				} else {
+					dispose = mountedDispose;
+				}
+			})
+			.catch((error: unknown) => {
+				element.classList.add('ox-island-error');
+				element.dataset.oxError = error instanceof Error ? error.message : String(error);
+			});
+
+		// Loading stays asynchronous so unrelated pages do not download every
+		// post-colocated component. Cleanup still has to be synchronously
+		// registered with the Ox Content island controller.
+		return () => {
+			destroyed = true;
+			dispose?.();
+		};
+	});
 }
 
 function initialisePage(): void {
@@ -212,11 +200,8 @@ function initialisePage(): void {
 }
 
 function destroyPage(): void {
-	for (const cleanup of islandCleanups) {
-		cleanup();
-	}
-
-	islandCleanups.clear();
+	islandController?.destroy();
+	islandController = undefined;
 }
 
 const pageHeadSelector = [

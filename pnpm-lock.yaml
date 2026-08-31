@@ -38,6 +38,9 @@ importers:
       '@iconify/tailwind4':
         specifier: ^1.2.3
         version: 1.2.3(tailwindcss@4.3.3)
+      '@ox-content/islands':
+        specifier: 3.0.0-beta.1
+        version: 3.0.0-beta.1
       '@ox-content/napi':
         specifier: 'catalog:'
         version: 3.0.0-beta.1
@@ -818,6 +821,9 @@ packages:
     resolution: {integrity: sha512-eoBsB6siolmwrYU60JzcBvxqaxwjkVDCph6pBmMi809w/rwqntiTp6lRgmLs+7PSP5IvvKqzQjeAV5PyXBWUBw==}
     cpu: [x64]
     os: [win32]
+
+  '@ox-content/islands@3.0.0-beta.1':
+    resolution: {integrity: sha512-0Sr9ruFZshZeY+Vlb6pL51moIMLaOkhqnOiBOsdjXSDrsIdS0T2t1vjrDPpJnH/5D00ZJy9Jffs1AjP2C2vu/w==}
 
   '@ox-content/napi@3.0.0-beta.1':
     resolution: {integrity: sha512-C8pRs2iB7pEwEyPTXpaurZZ24Q1nDamSlHxsD+RH61MfkYttqQN4+SfgPJT9zLXC7I/fT14RRnCM9dv7EVhfBA==}
@@ -4877,6 +4883,8 @@ snapshots:
 
   '@ox-content/binding-win32-x64-msvc@3.0.0-beta.1':
     optional: true
+
+  '@ox-content/islands@3.0.0-beta.1': {}
 
   '@ox-content/napi@3.0.0-beta.1':
     optionalDependencies:

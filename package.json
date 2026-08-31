@@ -29,6 +29,7 @@
 		"@fontsource/roboto-condensed": "^5.3.0",
 		"@iconify/json": "^2.2.510",
 		"@iconify/tailwind4": "^1.2.3",
+		"@ox-content/islands": "3.0.0-beta.1",
 		"@ox-content/napi": "catalog:",
 		"@ox-content/theme-color-kanagawa": "3.0.0-beta.1",
 		"@ox-content/vite-plugin": "3.0.0-beta.1",
