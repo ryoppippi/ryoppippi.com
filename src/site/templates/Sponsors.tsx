@@ -22,7 +22,7 @@ export default function Sponsors() {
 				</a>
 			</p>
 			<button
-				class="mx-auto cursor-pointer border-none bg-transparent p-0 text-2xl text-text-100 opacity-70 transition-base hover:opacity-100"
+				class="mx-auto cursor-pointer border-none bg-transparent p-0 text-2xl text-text-800 opacity-70 transition-base hover:opacity-100 dark:text-text-100"
 				aria-controls="sponsor-image"
 				aria-describedby="sponsor-view-status"
 				data-sponsor-view="circles"
