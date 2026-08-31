@@ -9,9 +9,9 @@ import { postListItems } from './content.ts';
 import path from 'node:path';
 import { page, renderComponent } from './html.ts';
 import { SITE_OWNER } from './site-owner.ts';
-import Article from './templates/Article.svelte';
-import BlogList from './templates/BlogList.svelte';
-import Home from './templates/Home.svelte';
+import Article from './templates/Article.tsx';
+import BlogList from './templates/BlogList.tsx';
+import Home from './templates/Home.tsx';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
@@ -76,7 +76,7 @@ export type GeneratedFile = {
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.svelte'],
+		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.tsx'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -139,7 +139,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 		path: 'blog/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
-			'src/site/templates/BlogList.svelte',
+			'src/site/templates/BlogList.tsx',
 			'src/content/blog',
 			'src/contents/external-rss/rss.json',
 			'src/contents/external-rss/posts.json',

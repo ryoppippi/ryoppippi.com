@@ -137,21 +137,6 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 }
 
 /**
- * Whether a component carries styles of its own.
- *
- * Vite answers the style request for a component without a `<style>` block with
- * a 500, so linking one unconditionally would put a broken stylesheet in every
- * page that uses an island.
- */
-async function hasStyleBlock(file: string): Promise<boolean> {
-	try {
-		return /<style[\s>]/.test(await readFile(file, 'utf8'));
-	} catch {
-		return false;
-	}
-}
-
-/**
  * Collects the dev URLs of the stylesheets an island needs, its own and those
  * of the components it pulls in.
  *
@@ -174,11 +159,7 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 		}
 
 		seen.add(file);
-		if (file.endsWith('.svelte') && (await hasStyleBlock(file))) {
-			const specifier = path.relative(server.config.root, file).replaceAll(path.sep, '/');
-			hrefs.push(`${specifier}?svelte&type=style&lang.css`);
-		} else if (file.endsWith('.css')) {
-			// Solid islands import plain stylesheets, which Vite serves directly.
+		if (file.endsWith('.css')) {
 			hrefs.push(path.relative(server.config.root, file).replaceAll(path.sep, '/'));
 		}
 		for (const imported of node.importedModules) {
@@ -204,11 +185,10 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 		]);
 		const { createIslandRenderer } = islands;
 		const renderIsland = createIslandRenderer(async (modulePath) => {
-			const url = `/src/content${modulePath}`;
-			const module = await server.ssrLoadModule(url);
+			const module = await server.ssrLoadModule(modulePath);
 			assets.islands[modulePath.replace('/src/content/blog/', '')] = await islandStyleHrefs(
 				server,
-				url,
+				modulePath,
 			);
 			return module;
 		});

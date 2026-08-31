@@ -87,8 +87,8 @@ const OX_MARKDOWN_OPTIONS = {
  * Renders a post-colocated component to HTML so its island is present before
  * any JavaScript runs.
  *
- * Implemented by the callers that have a Vite SSR loader to hand, because a
- * `.svelte` file has to be compiled before it can be rendered.
+ * Implemented by callers that have a Vite SSR loader because a Solid `.tsx`
+ * file has to be compiled before it can be rendered.
  */
 export type IslandRenderer = (
 	moduleId: string,
@@ -297,10 +297,10 @@ if (import.meta.vitest != null) {
 
 		it('turns registered component tags into island placeholders', async () => {
 			const html = await renderMarkdown('<Chart title="Growth" bars={3} />', {
-				islands: { Chart: 'post/Chart.svelte' },
+				islands: { Chart: 'post/Chart.tsx' },
 			});
 
-			expect(html).toContain('data-ox-island="post/Chart.svelte"');
+			expect(html).toContain('data-ox-island="post/Chart.tsx"');
 			expect(html).toContain('data-ox-props=');
 			expect(html).not.toContain('<Chart');
 		});
@@ -308,11 +308,11 @@ if (import.meta.vitest != null) {
 		it('passes island props through the HTML pipeline', async () => {
 			const renderIsland = vi.fn(async () => '<p>chart</p>');
 			const html = await renderMarkdown('<Chart lang="en" />', {
-				islands: { Chart: 'post/Chart.svelte' },
+				islands: { Chart: 'post/Chart.tsx' },
 				renderIsland,
 			});
 
-			expect(renderIsland).toHaveBeenCalledWith('post/Chart.svelte', { lang: 'en' });
+			expect(renderIsland).toHaveBeenCalledWith('post/Chart.tsx', { lang: 'en' });
 			expect(html).toContain('data-ox-island-root');
 		});
 
@@ -323,16 +323,16 @@ if (import.meta.vitest != null) {
 		});
 
 		it('drops the import statement of a resolved component', async () => {
-			const html = await renderMarkdown("import Chart from './Chart.svelte'\n\n<Chart />", {
-				islands: { Chart: 'post/Chart.svelte' },
+			const html = await renderMarkdown("import Chart from './Chart.tsx'\n\n<Chart />", {
+				islands: { Chart: 'post/Chart.tsx' },
 			});
 
-			expect(html).toContain('data-ox-island="post/Chart.svelte"');
+			expect(html).toContain('data-ox-island="post/Chart.tsx"');
 			expect(html).not.toContain('import Chart');
 		});
 
 		it('keeps an import that resolved to nothing so the mistake is visible', async () => {
-			const html = await renderMarkdown("import Chart from './Missing.svelte'");
+			const html = await renderMarkdown("import Chart from './Missing.tsx'");
 
 			expect(html).toContain('import Chart');
 		});

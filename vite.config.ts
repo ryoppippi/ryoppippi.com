@@ -1,7 +1,5 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
-import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
-import { svelteRootDir } from './src/content/paths.ts';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { oxContent } from '@ox-content/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
 import { playwright } from '@vitest/browser-playwright';
@@ -23,9 +21,8 @@ export default defineConfig(({ command, mode }) => ({
 	},
 	plugins: [
 		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawaDragon),
-		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
 		solid({ ssr: true, solid: { hydratable: false } }),
-		...oxContentSvelte({
+		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
 			ssg: command === 'build' && mode !== 'test' ? OX_CONTENT_BUILD_OPTIONS.ssg : false,
 		}),
@@ -109,7 +106,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	staged: {
-		'*.{css,js,json,svelte,ts,yaml,yml}': 'vp check --fix',
+		'*.{css,js,json,ts,tsx,yaml,yml}': 'vp check --fix',
 		// gitleaks scans the whole staged diff itself, so no file arguments
 		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
 	},

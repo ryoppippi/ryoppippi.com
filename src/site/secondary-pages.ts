@@ -7,14 +7,14 @@ import { SITE_ORIGIN } from './consts.ts';
 import { SITE_OWNER } from './site-owner.ts';
 import * as ufo from 'ufo';
 import { page, renderComponent } from './html.ts';
-import About from './templates/About.svelte';
-import ErrorPage from './templates/Error.svelte';
-import Media from './templates/Media.svelte';
-import Oss from './templates/Oss.svelte';
-import Publications from './templates/Publications.svelte';
-import Showcase from './templates/Showcase.svelte';
-import Sponsors from './templates/Sponsors.svelte';
-import Talks from './templates/Talks.svelte';
+import About from './templates/About.tsx';
+import ErrorPage from './templates/Error.tsx';
+import Media from './templates/Media.tsx';
+import Oss from './templates/Oss.tsx';
+import Publications from './templates/Publications.tsx';
+import Showcase from './templates/Showcase.tsx';
+import Sponsors from './templates/Sponsors.tsx';
+import Talks from './templates/Talks.tsx';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
@@ -33,7 +33,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 	const url = ufo.joinURL(SITE_ORIGIN, ABOUT_PATHNAME);
 	return {
 		path: 'about/index.html',
-		sourcePaths: ['src/site/site-owner.ts', 'src/site/templates/About.svelte'],
+		sourcePaths: ['src/site/site-owner.ts', 'src/site/templates/About.tsx'],
 		content: page({
 			title: ABOUT_TITLE,
 			pathname: ABOUT_PATHNAME,
@@ -86,7 +86,7 @@ export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFi
 		path: 'works/oss/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
-			'src/site/templates/Oss.svelte',
+			'src/site/templates/Oss.tsx',
 			'src/contents/works/oss/list.json',
 		],
 		content: page({
@@ -112,7 +112,7 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 	return {
 		path: 'works/showcase/index.html',
 		sourcePaths: [
-			'src/site/templates/Showcase.svelte',
+			'src/site/templates/Showcase.tsx',
 			'src/content/showcase.ts',
 			'src/content/showcase',
 		],
@@ -143,7 +143,7 @@ export function publicationsPage(
 		path: 'works/publications/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
-			'src/site/templates/Publications.svelte',
+			'src/site/templates/Publications.tsx',
 			'src/contents/publication.json',
 		],
 		content: page({
@@ -168,7 +168,7 @@ export function publicationsPage(
 export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
-		sourcePaths: ['src/site/sections.ts', 'src/site/templates/Talks.svelte'],
+		sourcePaths: ['src/site/sections.ts', 'src/site/templates/Talks.tsx'],
 		content: page({
 			title: 'Talks',
 			pathname: '/works/talks/',
@@ -194,7 +194,7 @@ export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedF
 		path: 'works/media/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
-			'src/site/templates/Media.svelte',
+			'src/site/templates/Media.tsx',
 			'src/contents/external-rss/media.json',
 		],
 		content: page({
@@ -217,7 +217,7 @@ export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedF
 export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
-		sourcePaths: ['src/site/templates/Sponsors.svelte'],
+		sourcePaths: ['src/site/templates/Sponsors.tsx'],
 		content: page({
 			title: 'Sponsors',
 			pathname: '/sponsors/',
@@ -239,7 +239,7 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
-		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Error.svelte'],
+		sourcePaths: ['src/site/secondary-pages.ts', 'src/site/templates/Error.tsx'],
 		content: page({
 			title: 'Page not found',
 			pathname: '/404',

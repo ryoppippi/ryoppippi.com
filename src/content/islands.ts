@@ -12,7 +12,7 @@ export type IslandModules = Record<string, string>;
  * @param content - Markdown body, frontmatter already removed.
  * @param filepath - Absolute path of the post's markdown file.
  * @param directory - Blog source directory used as the import boundary.
- * @returns Used default Svelte and Solid imports keyed by their local names.
+ * @returns Used default Solid imports keyed by their local names.
  * @example
  * await resolvePostIslands(source, '/blog/2026-07-23-post/index.md');
  * // { GtvChart: '2026-07-23-post/gtv-chart/GtvChart.tsx' }
@@ -37,7 +37,7 @@ export async function resolvePostIslands(
 				(binding) =>
 					used.has(binding.localName) &&
 					binding.kind === 'default' &&
-					/\.(?:svelte|tsx)$/.test(binding.resolvedPath),
+					binding.resolvedPath.endsWith('.tsx'),
 			)
 			.map((binding) => [
 				binding.localName,
@@ -51,17 +51,17 @@ if (import.meta.vitest != null) {
 		it('resolves a component imported from the post directory', async () => {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
-				'post/index.md': "import Chart from './Chart.svelte'",
-				'post/Chart.svelte': '<p>chart</p>',
+				'post/index.md': "import Chart from './Chart.tsx'",
+				'post/Chart.tsx': 'export default () => null',
 			});
 
 			expect(
 				await resolvePostIslands(
-					"import Chart from './Chart.svelte'\n\n<Chart />",
+					"import Chart from './Chart.tsx'\n\n<Chart />",
 					fixture.getPath('post/index.md'),
 					fixture.getPath(),
 				),
-			).toEqual({ Chart: 'post/Chart.svelte' });
+			).toEqual({ Chart: 'post/Chart.tsx' });
 		});
 
 		it('resolves a component from a sibling post directory', async () => {
@@ -84,28 +84,28 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'post/index.md': '# Post',
-				'post/Chart.svelte': '<p>chart</p>',
+				'post/Chart.tsx': 'export default () => null',
 			});
 
 			expect(
 				await resolvePostIslands(
-					"import Renamed from './Chart.svelte'\n\n<Renamed />",
+					"import Renamed from './Chart.tsx'\n\n<Renamed />",
 					fixture.getPath('post/index.md'),
 					fixture.getPath(),
 				),
-			).toEqual({ Renamed: 'post/Chart.svelte' });
+			).toEqual({ Renamed: 'post/Chart.tsx' });
 		});
 
 		it('refuses a specifier that climbs out of the blog directory', async () => {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
-				'Outside.svelte': '<p>outside</p>',
+				'Outside.tsx': 'export default () => null',
 			});
 
 			expect(
 				await resolvePostIslands(
-					"import Outside from '../../Outside.svelte'\n\n<Outside />",
+					"import Outside from '../../Outside.tsx'\n\n<Outside />",
 					fixture.getPath('blog/post/index.md'),
 					fixture.getPath('blog'),
 				),
@@ -116,13 +116,13 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'post/index.md': '# Post',
-				'post/A.svelte': '<p>a</p>',
-				'post/B.svelte': '<p>b</p>',
+				'post/A.tsx': 'export default () => null',
+				'post/B.tsx': 'export default () => null',
 			});
 
 			expect(
 				await resolvePostIslands(
-					"import Chart from './A.svelte'\nimport Chart from './B.svelte'\n\n<Chart />",
+					"import Chart from './A.tsx'\nimport Chart from './B.tsx'\n\n<Chart />",
 					fixture.getPath('post/index.md'),
 					fixture.getPath(),
 				),
@@ -133,12 +133,12 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'post/index.md': '# Post',
-				'post/Chart.svelte': '<p>chart</p>',
+				'post/Chart.tsx': 'export default () => null',
 			});
 
 			expect(
 				await resolvePostIslands(
-					"import Chart from './Chart.svelte'\n\n# Post",
+					"import Chart from './Chart.tsx'\n\n# Post",
 					fixture.getPath('post/index.md'),
 					fixture.getPath(),
 				),

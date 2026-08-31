@@ -1,10 +1,10 @@
-import type { Component } from 'svelte';
+import type { Component } from 'solid-js';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
-import { render } from 'svelte/server';
+import { renderToString } from 'solid-js/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import Shell from './templates/Shell.svelte';
+import Shell from './templates/Shell.tsx';
 
 type PageOptions = {
 	article?: boolean;
@@ -35,17 +35,17 @@ function escapeAttribute(value: string): string {
 }
 
 /**
- * Server-renders a Svelte component and returns its body markup.
+ * Server-renders a Solid component and returns its body markup.
  *
- * @param component - The Svelte component to render.
+ * @param component - The Solid component to render.
  * @param props - Props accepted by the component.
  * @returns The rendered component body.
  */
-export function renderComponent<Props extends Record<string, unknown>>(
+export function renderComponent<Props extends object>(
 	component: Component<Props>,
 	props: Props,
 ): string {
-	return render(component, { props }).body;
+	return renderToString(() => component(props));
 }
 
 /**
@@ -70,12 +70,7 @@ export function page({
 	structuredData,
 }: PageOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
-	const body = render(Shell, {
-		props: {
-			content,
-			pathname,
-		},
-	}).body;
+	const body = renderComponent(Shell, { content, pathname });
 	const head = renderPageHead({
 		article,
 		alternates,

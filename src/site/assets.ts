@@ -93,8 +93,8 @@ function chunkStyles(
  * @param html - Rendered page or post markup.
  * @returns Module ids as they appear on the island placeholders.
  * @example
- * islandModuleIds('<div data-ox-island="post/Chart.svelte"></div>');
- * // ['post/Chart.svelte']
+ * islandModuleIds('<div data-ox-island="post/Chart.tsx"></div>');
+ * // ['post/Chart.tsx']
  */
 export function islandModuleIds(html: string): string[] {
 	return [...new Set([...html.matchAll(/data-ox-island="([^"]*)"/g)].map((match) => match[1]))];
@@ -131,11 +131,7 @@ export function resolveSiteAssets(
 
 	const islands = Object.fromEntries(
 		Object.keys(manifest)
-			.filter(
-				(source) =>
-					source.startsWith(ISLAND_SOURCE_PREFIX) &&
-					(source.endsWith('.svelte') || source.endsWith('.tsx')),
-			)
+			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.tsx'))
 			.map((source) => [
 				source.slice(ISLAND_SOURCE_PREFIX.length),
 				[...new Set(chunkStyles(manifest, source))],
@@ -216,8 +212,8 @@ if (import.meta.vitest != null) {
 		base: '<link href="/base.css"><script src="/client.js"></script>',
 		client: '<script type="module" src="/client.js"></script>',
 		islands: {
-			'post/Chart.svelte': ['assets/Chart.css', 'assets/Legend.css'],
-			'post/Table.svelte': ['assets/Legend.css'],
+			'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
+			'post/Table.tsx': ['assets/Legend.css'],
 		},
 		pages: {
 			about: '<link href="/about.css">',
@@ -257,7 +253,7 @@ if (import.meta.vitest != null) {
 					'src/site/styles/works.css': {
 						file: 'assets/works.css',
 					},
-					'src/content/blog/post/Chart.svelte': {
+					'src/content/blog/post/Chart.tsx': {
 						file: 'assets/Chart.js',
 						css: ['assets/Chart.css'],
 						imports: ['_Legend.js'],
@@ -279,7 +275,7 @@ if (import.meta.vitest != null) {
 				base: '<link rel="stylesheet" href="/base.css">',
 				client: '<script type="module" src="/client.js"></script>',
 				islands: {
-					'post/Chart.svelte': ['assets/Chart.css', 'assets/Legend.css'],
+					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 				},
 				pages: {
 					about: '<link rel="stylesheet" crossorigin href="/assets/about.css">',
@@ -310,14 +306,14 @@ if (import.meta.vitest != null) {
 		});
 
 		it('links the styles of the islands the page mounts', () => {
-			const tags = renderAssetTags(assets, 'article', ['post/Chart.svelte']);
+			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx']);
 
 			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Chart.css">');
 			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Legend.css">');
 		});
 
 		it('links a shared island stylesheet once', () => {
-			const tags = renderAssetTags(assets, 'article', ['post/Chart.svelte', 'post/Table.svelte']);
+			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx', 'post/Table.tsx']);
 
 			expect(tags.match(/assets\/Legend\.css/g)).toHaveLength(1);
 		});
@@ -325,11 +321,11 @@ if (import.meta.vitest != null) {
 		it('escapes the query string of a development island stylesheet', () => {
 			const dev = {
 				...assets,
-				islands: { 'post/Chart.svelte': ['post/Chart.svelte?svelte&lang.css'] },
+				islands: { 'post/Chart.tsx': ['post/Chart.css?direct&lang.css'] },
 			};
 
-			expect(renderAssetTags(dev, 'article', ['post/Chart.svelte'])).toContain(
-				'href="/post/Chart.svelte?svelte&amp;lang.css"',
+			expect(renderAssetTags(dev, 'article', ['post/Chart.tsx'])).toContain(
+				'href="/post/Chart.css?direct&amp;lang.css"',
 			);
 		});
 
@@ -338,23 +334,23 @@ if (import.meta.vitest != null) {
 		});
 
 		it('ignores an island with no styles of its own', () => {
-			expect(renderAssetTags(assets, 'article', ['post/Unknown.svelte'])).not.toContain('/assets/');
+			expect(renderAssetTags(assets, 'article', ['post/Unknown.tsx'])).not.toContain('/assets/');
 		});
 	});
 
 	describe(islandModuleIds, () => {
 		it('reads the module ids off island placeholders', () => {
 			const html =
-				'<div data-ox-island="post/Chart.svelte"></div><div data-ox-island="post/Table.svelte"></div>';
+				'<div data-ox-island="post/Chart.tsx"></div><div data-ox-island="post/Table.tsx"></div>';
 
-			expect(islandModuleIds(html)).toEqual(['post/Chart.svelte', 'post/Table.svelte']);
+			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx', 'post/Table.tsx']);
 		});
 
 		it('reports a repeated island once', () => {
 			const html =
-				'<div data-ox-island="post/Chart.svelte"></div><div data-ox-island="post/Chart.svelte"></div>';
+				'<div data-ox-island="post/Chart.tsx"></div><div data-ox-island="post/Chart.tsx"></div>';
 
-			expect(islandModuleIds(html)).toEqual(['post/Chart.svelte']);
+			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx']);
 		});
 
 		it('returns nothing for markup without islands', () => {

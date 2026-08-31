@@ -2,4 +2,4 @@
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
 @reference '../../styles/tailwind.css';
 
-@source '../templates/Error.svelte';
+@source '../templates/Error.tsx';
