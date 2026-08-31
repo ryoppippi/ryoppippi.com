@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import { loadDefaultJapaneseParser } from 'budoux';
 	import { createRawSnippet } from 'svelte';
-	import type { BlogPost } from '@ryoppippi/content';
+	import type { BlogPost } from '../../content/index.ts';
 	import { SITE_COPYRIGHT, SITE_ORIGIN } from '../consts.ts';
 
 	const budoux = loadDefaultJapaneseParser();

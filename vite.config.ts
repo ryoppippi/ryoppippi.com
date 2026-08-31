@@ -1,6 +1,6 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
-import { svelteRootDir } from '@ryoppippi/content/paths';
+import { svelteRootDir } from './src/content/paths.ts';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { FontaineTransform } from 'fontaine';
@@ -56,7 +56,7 @@ export default defineConfig(({ command, mode }) => ({
 			},
 			'site-build': {
 				command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
-				dependsOn: ['git-history', '@ryoppippi/content#build'],
+				dependsOn: ['git-history'],
 				env: ['PUBLIC_ORIGIN', 'CI'],
 				input: [
 					'package.json',
@@ -66,12 +66,7 @@ export default defineConfig(({ command, mode }) => ({
 					'routes.ts',
 					'scripts/**',
 					'src/**',
-					'packages/content/dist/**',
-					'packages/content/article.css',
-					'packages/content/package.json',
-					'packages/content/src/**',
-					'!packages/content/src/**/*.md',
-					'!packages/content/src/**/*.mdx',
+					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'static/**',
 				],
 				output: ['build/**'],
@@ -87,8 +82,8 @@ export default defineConfig(({ command, mode }) => ({
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
-			'packages/content/src/blog/**',
-			'packages/content/src/showcase/**',
+			'src/content/blog/**',
+			'src/content/showcase/**',
 			'static/**',
 		],
 		singleQuote: true,
@@ -104,8 +99,8 @@ export default defineConfig(({ command, mode }) => ({
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
-			'packages/content/src/blog/**',
-			'packages/content/src/showcase/**',
+			'src/content/blog/**',
+			'src/content/showcase/**',
 			'static/**',
 		],
 		options: {
@@ -131,9 +126,9 @@ export default defineConfig(({ command, mode }) => ({
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
 						'src/site/{generate,page-styles,pages,syntax-theme}.ts',
-						'packages/content/src/{artifact,blog,island-renderer,islands,markdown-cache,paths}.ts',
-						'packages/content/src/blog/**/*.ts',
-						'packages/content/src/markdown/**/*.ts',
+						'src/content/{artifact,blog,island-renderer,islands,markdown-cache,paths}.ts',
+						'src/content/blog/**/*.ts',
+						'src/content/markdown/**/*.ts',
 					],
 				},
 			},

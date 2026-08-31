@@ -140,12 +140,8 @@ type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Elem
 // own chunk, so a post only downloads the islands it actually uses. The globs
 // are split per framework because the file extension decides how a module is
 // mounted.
-const svelteIslandLoaders = import.meta.glob<SvelteIslandModule>(
-	'../../packages/content/src/blog/**/*.svelte',
-);
-const solidIslandLoaders = import.meta.glob<SolidIslandModule>(
-	'../../packages/content/src/blog/**/*.tsx',
-);
+const svelteIslandLoaders = import.meta.glob<SvelteIslandModule>('../content/blog/**/*.svelte');
+const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
 
 const islandCleanups = new Set<() => void>();
 
@@ -208,7 +204,7 @@ async function mountIsland(element: HTMLElement): Promise<void> {
 
 	element.dataset.oxMounted = 'true';
 	try {
-		const modulePath = `../../packages/content/src/blog/${moduleId}`;
+		const modulePath = `../content/blog/${moduleId}`;
 		const props = islandProps(element);
 		if (moduleId.endsWith('.tsx')) {
 			const load = solidIslandLoaders[modulePath];

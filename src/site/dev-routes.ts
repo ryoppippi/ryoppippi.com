@@ -1,4 +1,4 @@
-import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '@ryoppippi/content';
+import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '../content/index.ts';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';

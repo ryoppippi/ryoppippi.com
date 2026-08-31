@@ -9,8 +9,8 @@ import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
 import { escapeHtml } from './html.ts';
 
-const workspaceDirectory = path.resolve(import.meta.dirname, '../../../..');
-const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../../..', '.cache/ox-content/ogp');
+const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
+const ogpCacheDirectory = path.resolve(import.meta.dirname, '../../..', '.cache/ox-content/ogp');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
 const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
 

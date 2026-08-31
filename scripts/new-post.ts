@@ -7,7 +7,7 @@ import * as d from 'date-fns';
 import fs from 'fs-extra';
 import { stringify } from 'gray-matter-es';
 import openEditor from 'open-editor';
-import { blogDirectory } from '../src/paths.ts';
+import { blogDirectory } from '../src/content/paths.ts';
 
 p.intro('Create a new blog post');
 

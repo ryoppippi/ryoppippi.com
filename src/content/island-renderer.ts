@@ -7,8 +7,8 @@ type SvelteIslandModule = { default: Component<Record<string, unknown>> };
 type SolidIslandModule = { default: (props: Record<string, unknown>) => unknown };
 
 /**
- * Loads a module by a path relative to the content package root, such as
- * `/src/blog/2026-07-23-post/Chart.svelte`.
+ * Loads a module by a path relative to the site source root, such as
+ * `/src/content/blog/2026-07-23-post/Chart.svelte`.
  *
  * A `.svelte` or Solid `.tsx` file has to be compiled before it can be
  * rendered, so callers supply a Vite SSR loader rather than a plain dynamic
@@ -23,7 +23,7 @@ export type IslandModuleLoader = (path: string) => Promise<unknown>;
  * The component framework is picked by extension: `.svelte` renders through
  * `svelte/server`, `.tsx` through Solid's `renderToString`.
  *
- * @param load - Vite SSR loader for paths relative to the content package.
+ * @param load - Vite SSR loader for paths relative to the site source root.
  * @returns A renderer that returns the component's HTML, or null when the
  * module cannot be loaded or does not export a component.
  * @example
@@ -43,7 +43,7 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 		const pending = (async () => {
 			try {
 				if (moduleId.endsWith('.tsx')) {
-					const module = (await load(`/src/blog/${moduleId}`)) as SolidIslandModule;
+					const module = (await load(`/src/content/blog/${moduleId}`)) as SolidIslandModule;
 					if (typeof module?.default !== 'function') {
 						return null;
 					}
@@ -53,7 +53,7 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 					return renderToString(() => module.default(props));
 				}
 
-				const module = (await load(`/src/blog/${moduleId}`)) as SvelteIslandModule;
+				const module = (await load(`/src/content/blog/${moduleId}`)) as SvelteIslandModule;
 				if (typeof module?.default !== 'function') {
 					return null;
 				}
@@ -86,12 +86,12 @@ if (import.meta.vitest != null) {
 			expect(await renderIsland('post/Chart.svelte', {})).toBeNull();
 		});
 
-		it('loads the module from the blog directory', async () => {
+		it('loads the module from the content blog directory', async () => {
 			const load = vi.fn(async () => ({ default: 'not a component' }));
 			const renderIsland = createIslandRenderer(load);
 			await renderIsland('2026-07-23-post/Chart.svelte', {});
 
-			expect(load).toHaveBeenCalledWith('/src/blog/2026-07-23-post/Chart.svelte');
+			expect(load).toHaveBeenCalledWith('/src/content/blog/2026-07-23-post/Chart.svelte');
 		});
 
 		it('renders a Solid component through renderToString', async () => {

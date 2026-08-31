@@ -1,4 +1,4 @@
-import type { BlogPostMetadata } from '@ryoppippi/content';
+import type { BlogPostMetadata } from '../content/index.ts';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 import Parser from 'rss-parser';

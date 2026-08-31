@@ -57,7 +57,7 @@ export type ManifestChunk = {
 };
 
 /** Prefix every island module id carries in the Vite manifest. */
-const ISLAND_SOURCE_PREFIX = 'packages/content/src/blog/';
+const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
 
 /**
  * Collects the stylesheets a chunk needs, including those of the chunks it
@@ -257,7 +257,7 @@ if (import.meta.vitest != null) {
 					'src/site/styles/works.css': {
 						file: 'assets/works.css',
 					},
-					'packages/content/src/blog/post/Chart.svelte': {
+					'src/content/blog/post/Chart.svelte': {
 						file: 'assets/Chart.js',
 						css: ['assets/Chart.css'],
 						imports: ['_Legend.js'],

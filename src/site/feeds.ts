@@ -1,4 +1,4 @@
-import type { BlogPostMetadata } from '@ryoppippi/content';
+import type { BlogPostMetadata } from '../content/index.ts';
 import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
 import type { PostListItem } from './content.ts';
 import { renderFeedFiles, resolveFeedsOptions, writeFeedFiles } from '@ox-content/vite-plugin';

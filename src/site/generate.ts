@@ -1,7 +1,7 @@
-import type { ContentArtifact } from '@ryoppippi/content';
+import type { ContentArtifact } from '../content/artifact.ts';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
-import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
+import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -62,7 +62,7 @@ export async function generateSite({
 }: GenerateSiteOptions): Promise<void> {
 	let localContent = content;
 	if (localContent == null) {
-		const { buildContentArtifact } = await import('@ryoppippi/content/build');
+		const { buildContentArtifact } = await import('../content/build.ts');
 		localContent = await buildContentArtifact();
 	}
 	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =

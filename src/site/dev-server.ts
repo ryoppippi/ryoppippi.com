@@ -4,13 +4,13 @@ import type {
 	IslandRenderer,
 	MarkdownRenderer,
 	ShowcaseProject,
-} from '@ryoppippi/content';
+} from '../content/index.ts';
 import type { DevRouteDependencies, DevRouteResponse } from './dev-routes.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import type { SiteAssets } from './assets.ts';
 import type { Plugin, ViteDevServer } from 'vite';
-import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
+import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { DEV_ASSETS } from './assets.ts';
@@ -98,9 +98,7 @@ async function readContentAsset(pathname: string): Promise<{ body: Buffer; type:
 
 export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	const file = relativeFile.replaceAll('\\', '/');
-	const blogMatch = /^packages\/content\/src\/blog\/([^/]+)(?:\/index\.mdx?|\.mdx?|\/.*)$/.exec(
-		file,
-	);
+	const blogMatch = /^src\/content\/blog\/([^/]+)(?:\/index\.mdx?|\.mdx?|\/.*)$/.exec(file);
 	if (blogMatch != null) {
 		return ['/blog/', '/feed.xml', `/blog/${blogMatch[1]}/`, `/blog/${blogMatch[1]}.md`];
 	}
@@ -122,12 +120,12 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	if (file === 'src/contents/publication.json') {
 		return ['/works/publications/'];
 	}
-	if (file.startsWith('packages/content/src/showcase/')) {
+	if (file.startsWith('src/content/showcase/')) {
 		return ['/works/showcase/'];
 	}
 	if (
 		file === 'routes.ts' ||
-		file.startsWith('packages/content/src/markdown/') ||
+		file.startsWith('src/content/markdown/') ||
 		file.startsWith('src/site/templates/') ||
 		/^src\/site\/(assets|client|consts|content|dev-routes|head|html|page-styles|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
 			file,
@@ -199,22 +197,24 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 	const assets: SiteAssets = { ...DEV_ASSETS, islands: {} };
 	const renderContent: MarkdownRenderer = async (content, options) => {
 		const [markdown, islands] = await Promise.all([
-			server.ssrLoadModule('/packages/content/src/markdown/render.ts') as Promise<MarkdownModule>,
-			server.ssrLoadModule('/packages/content/src/island-renderer.ts') as Promise<{
+			server.ssrLoadModule('/src/content/markdown/render.ts') as Promise<MarkdownModule>,
+			server.ssrLoadModule('/src/content/island-renderer.ts') as Promise<{
 				createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
 			}>,
 		]);
 		const { createIslandRenderer } = islands;
 		const renderIsland = createIslandRenderer(async (modulePath) => {
-			const url = `/packages/content${modulePath}`;
+			const url = `/src/content${modulePath}`;
 			const module = await server.ssrLoadModule(url);
-			assets.islands[modulePath.replace('/src/blog/', '')] = await islandStyleHrefs(server, url);
+			assets.islands[modulePath.replace('/src/content/blog/', '')] = await islandStyleHrefs(
+				server,
+				url,
+			);
 			return module;
 		});
 		return markdown.renderMarkdown(content, { ...options, renderIsland });
 	};
-	const loadBlogModule = () =>
-		server.ssrLoadModule('/packages/content/src/blog.ts') as Promise<BlogModule>;
+	const loadBlogModule = () => server.ssrLoadModule('/src/content/blog.ts') as Promise<BlogModule>;
 
 	return {
 		assets,
@@ -244,9 +244,7 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 			return sections.loadPublications(root);
 		},
 		loadShowcase: async () => {
-			const showcase = (await server.ssrLoadModule(
-				'/packages/content/src/showcase.ts',
-			)) as ShowcaseModule;
+			const showcase = (await server.ssrLoadModule('/src/content/showcase.ts')) as ShowcaseModule;
 			return showcase.loadShowcase(renderContent);
 		},
 		loadTalks: async () => {
@@ -340,7 +338,7 @@ export function staticSiteDevServer(): Plugin {
 if (import.meta.vitest != null) {
 	describe(invalidatedRoutes, () => {
 		it('invalidates only an edited article and its indexes', () => {
-			expect(invalidatedRoutes('packages/content/src/blog/2026-06-22/index.md')).toEqual([
+			expect(invalidatedRoutes('src/content/blog/2026-06-22/index.md')).toEqual([
 				'/blog/',
 				'/feed.xml',
 				'/blog/2026-06-22/',
@@ -349,7 +347,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('invalidates an edited MDX article and its indexes', () => {
-			expect(invalidatedRoutes('packages/content/src/blog/2026-06-23/index.mdx')).toEqual([
+			expect(invalidatedRoutes('src/content/blog/2026-06-23/index.mdx')).toEqual([
 				'/blog/',
 				'/feed.xml',
 				'/blog/2026-06-23/',
@@ -358,7 +356,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('invalidates all rendered pages for Markdown pipeline changes', () => {
-			expect(invalidatedRoutes('packages/content/src/markdown/render.ts')).toBe('*');
+			expect(invalidatedRoutes('src/content/markdown/render.ts')).toBe('*');
 		});
 
 		it('invalidates all rendered pages for head metadata changes', () => {

@@ -1,5 +1,4 @@
-packages:
-  - packages/*
+packages: []
 
 catalog:
   '@ox-content/napi': 3.0.0-beta.1

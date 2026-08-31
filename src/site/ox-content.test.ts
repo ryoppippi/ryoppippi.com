@@ -34,7 +34,7 @@ describe('Ox Content build outputs', () => {
 	});
 
 	it('mounts every blog source below the public blog route', async () => {
-		const root = path.join(process.cwd(), 'packages/content/src/blog');
+		const root = path.join(process.cwd(), 'src/content/blog');
 		const files = await glob(BLOG_COLLECTION_PATTERNS, { cwd: root });
 
 		for (const file of files) {

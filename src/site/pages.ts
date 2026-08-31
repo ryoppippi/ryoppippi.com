@@ -1,4 +1,4 @@
-import type { ArticleMetadata, BlogPost } from '@ryoppippi/content';
+import type { ArticleMetadata, BlogPost } from '../content/index.ts';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import * as ufo from 'ufo';
@@ -140,7 +140,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 		sourcePaths: [
 			'src/site/content.ts',
 			'src/site/templates/BlogList.svelte',
-			'packages/content/src/blog',
+			'src/content/blog',
 			'src/contents/external-rss/rss.json',
 			'src/contents/external-rss/posts.json',
 		],

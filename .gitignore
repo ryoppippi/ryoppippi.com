@@ -8,7 +8,6 @@ node_modules
 !/.cache/ox-content/twitter
 /.cache/ox-content/twitter/*
 !/.cache/ox-content/twitter/*.json
-/packages/content/dist
 /.svelte-kit
 /package
 .env

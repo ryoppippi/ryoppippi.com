@@ -240,7 +240,7 @@ if (import.meta.vitest != null) {
 			const directory = blogDirectory();
 			const cacheDirectory = path.resolve(
 				import.meta.dirname,
-				'../../..',
+				'../..',
 				'.cache/ox-content/twitter',
 			);
 			const [files, cacheFiles] = await Promise.all([

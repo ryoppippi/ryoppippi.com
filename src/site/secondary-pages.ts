@@ -1,4 +1,4 @@
-import type { ShowcaseProject } from '@ryoppippi/content';
+import type { ShowcaseProject } from '../content/index.ts';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { GeneratedFile } from './pages.ts';
@@ -113,8 +113,8 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 		path: 'works/showcase/index.html',
 		sourcePaths: [
 			'src/site/templates/Showcase.svelte',
-			'packages/content/src/showcase.ts',
-			'packages/content/src/showcase',
+			'src/content/showcase.ts',
+			'src/content/showcase',
 		],
 		content: page({
 			title: 'Project showcase',
