@@ -21,26 +21,17 @@ export default function Sponsors() {
 					GitHub Sponsors
 				</a>
 			</p>
-			<div class="fcol-sm-row fw gap-1 text-2xl sm:gap-3">
-				<button
-					class="cursor-pointer border-none bg-transparent p-0 opacity-70 text-text-100"
-					aria-pressed="true"
-					data-sponsor-view="circles"
-					type="button"
-				>
-					Sponsor Circles
-				</button>
-				<button
-					class="cursor-pointer border-none bg-transparent p-0 opacity-20"
-					aria-pressed="false"
-					data-sponsor-view="tiers"
-					type="button"
-				>
-					Sponsor Tiers
-				</button>
-			</div>
+			<button
+				class="mx-auto cursor-pointer border-none bg-transparent p-0 text-2xl text-text-100 opacity-70 transition-base hover:opacity-100"
+				aria-controls="sponsor-image"
+				data-sponsor-view="circles"
+				type="button"
+			>
+				Show Sponsor Tiers
+			</button>
 			<div class="fyc">
 				<img
+					id="sponsor-image"
 					class="mx-auto h-auto w-full max-w-5xl"
 					alt="GitHub Sponsors"
 					data-sponsor-image

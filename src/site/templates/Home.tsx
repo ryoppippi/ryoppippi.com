@@ -1,4 +1,5 @@
 import { SITE_ORIGIN } from '../consts.ts';
+import ProfileImage from './ProfileImage.tsx';
 
 const socials = [
 	['icon-[line-md--github-loop]', 'GitHub profile', '/github'],
@@ -19,16 +20,9 @@ export default function Home() {
 		<>
 			<article class="gcc container mx-auto mt-8">
 				<div class="w-full animate-[root-flip-in-x_1s_both]" data-home-profile>
-					<img
+					<ProfileImage
 						class="mx-auto aspect-square w-1/2 rounded-full object-contain view-transition-name---profile md:size-64"
-						alt="ryoppippi"
 						fetchpriority="high"
-						height="400"
-						loading="eager"
-						src="/ryoppippi.avif"
-						srcset="/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w"
-						sizes="(min-width: 48rem) 256px, calc(50vw - 2rem)"
-						width="400"
 					/>
 				</div>
 				<div class="mt-8">

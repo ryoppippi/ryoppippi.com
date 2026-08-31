@@ -1,5 +1,6 @@
 import { SITE_ORIGIN } from '../consts.ts';
 import { SITE_OWNER } from '../site-owner.ts';
+import ProfileImage from './ProfileImage.tsx';
 
 const links = [
 	['GitHub', `${SITE_ORIGIN}/github`],
@@ -26,17 +27,7 @@ export default function About() {
 				<div class="relative">
 					<div class="mx-auto grid max-w-xs gap-4">
 						<figure class="m-0">
-							<img
-								class="mx-auto aspect-square w-1/2 rounded-full object-contain shadow-[0_1.5rem_4rem_#0004] ring-1 ring-[#8885] view-transition-name---profile md:size-64"
-								alt="ryoppippi"
-								decoding="async"
-								height="400"
-								loading="eager"
-								src="/ryoppippi.avif"
-								srcset="/ryoppippi-174.avif 174w, /ryoppippi-348.avif 348w, /ryoppippi.avif 400w"
-								sizes="(min-width: 48rem) 256px, calc(50vw - 2rem)"
-								width="400"
-							/>
+							<ProfileImage class="mx-auto aspect-square w-1/2 rounded-full object-contain shadow-[0_1.5rem_4rem_#0004] ring-1 ring-[#8885] view-transition-name---profile md:size-64" />
 						</figure>
 						<figure class="m-0">
 							<img

@@ -45,7 +45,11 @@ export default function Shell({ content, pathname }: ShellProps) {
 									'activePrefix' in link ? link.activePrefix : link.href,
 								);
 								return (
-									<a class="relative block shrink-0 whitespace-nowrap" href={link.href}>
+									<a
+										class="relative block shrink-0 whitespace-nowrap"
+										aria-current={active ? 'page' : undefined}
+										href={link.href}
+									>
 										<span>{link.label}</span>
 										<span
 											class={`absolute left-0 top-full h-0.5 w-full ${active ? 'bg-accent-100' : 'bg-transparent'}`}

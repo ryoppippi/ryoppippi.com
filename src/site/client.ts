@@ -93,21 +93,18 @@ function initialiseTalkFilter(): void {
 
 function initialiseSponsors(): void {
 	const sponsorImage = document.querySelector<HTMLImageElement>('[data-sponsor-image]');
-	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-sponsor-view]')) {
-		button.addEventListener('click', () => {
-			if (sponsorImage == null) {
-				return;
-			}
-			const circles = button.dataset.sponsorView === 'circles';
-			sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
-			sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
-			for (const candidate of document.querySelectorAll<HTMLElement>('[data-sponsor-view]')) {
-				candidate.classList.toggle('opacity-70', candidate === button);
-				candidate.classList.toggle('opacity-20', candidate !== button);
-				candidate.ariaPressed = String(candidate === button);
-			}
-		});
+	const button = document.querySelector<HTMLButtonElement>('[data-sponsor-view]');
+	if (sponsorImage == null || button == null) {
+		return;
 	}
+
+	button.addEventListener('click', () => {
+		const circles = button.dataset.sponsorView !== 'circles';
+		button.dataset.sponsorView = circles ? 'circles' : 'tiers';
+		button.textContent = circles ? 'Show Sponsor Tiers' : 'Show Sponsor Circles';
+		sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
+		sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
+	});
 }
 
 function initialiseMediaFilter(): void {
