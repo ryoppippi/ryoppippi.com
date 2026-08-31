@@ -273,14 +273,14 @@ if (import.meta.vitest != null) {
 			const html = await renderMarkdown('# Hello World');
 
 			expect(html).toContain(
-				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-label="Permalink to &#x22;Hello World&#x22;">#</a></h1>',
+				'<h1 id="hello-world">Hello World<a class="header-anchor" href="#hello-world" aria-label="Permalink to &quot;Hello World&quot;">#</a></h1>',
 			);
 		});
 
 		it('preserves image alt text separately from captions', async () => {
 			const html = await renderMarkdown('![A & B](./image.png "Visible caption")');
 
-			expect(html).toContain('<img src="./image.png" alt="A &#x26; B" loading="lazy">');
+			expect(html).toContain('<img src="./image.png" alt="A &amp; B" loading="lazy">');
 			expect(html).toContain('<figcaption>Visible caption</figcaption>');
 		});
 
@@ -351,7 +351,7 @@ if (import.meta.vitest != null) {
 			expect(html).toContain('<details class="ox-container ox-container--details">');
 			expect(html).toContain('<summary>More</summary>');
 			expect(html).toContain(
-				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &#x22;Hidden&#x22;">#</a></h2>',
+				'<h2 id="hidden">Hidden<a class="header-anchor" href="#hidden" aria-label="Permalink to &quot;Hidden&quot;">#</a></h2>',
 			);
 			expect(html).toContain('</details>');
 		});
