@@ -55,6 +55,73 @@ function articleImageUrl(html: string, articleUrl: string): string | undefined {
 			).href;
 }
 
+function homeStructuredData() {
+	return {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'WebSite',
+				'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
+				name: SITE_NAME,
+				alternateName: SITE_OWNER.handle,
+				description: HOME_DESCRIPTION,
+				url: SITE_OWNER.url,
+				creator: { '@id': SITE_OWNER.id },
+			},
+			{
+				'@type': 'ProfilePage',
+				'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
+				url: SITE_OWNER.url,
+				isPartOf: {
+					'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
+				},
+				mainEntity: { '@id': SITE_OWNER.id },
+			},
+			{
+				'@type': 'Person',
+				'@id': SITE_OWNER.id,
+				name: SITE_OWNER.name,
+				alternateName: [
+					SITE_OWNER.japaneseName,
+					SITE_OWNER.formerName,
+					SITE_OWNER.formerJapaneseName,
+					SITE_OWNER.handle,
+					'ryoppippi',
+				],
+				url: SITE_OWNER.url,
+				image: SITE_SOCIAL_IMAGE_URL,
+				sameAs: [...SITE_OWNER.sameAs],
+			},
+		],
+	};
+}
+
+function articleStructuredData(
+	post: BlogPost,
+	description: string,
+	url: string,
+	image: string | undefined,
+) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: post.title,
+		description,
+		url,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+		author: {
+			'@type': 'Person',
+			'@id': SITE_OWNER.id,
+			name: SITE_OWNER.name,
+			alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle],
+			url: SITE_OWNER.url,
+		},
+		datePublished: post.pubDate,
+		...(image == null ? {} : { image }),
+		inLanguage: post.lang,
+	};
+}
+
 /**
  * A file emitted by the static site generator.
  */
@@ -84,44 +151,7 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 			description: HOME_DESCRIPTION,
 			assets,
 			style: 'home',
-			structuredData: {
-				'@context': 'https://schema.org',
-				'@graph': [
-					{
-						'@type': 'WebSite',
-						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
-						name: SITE_NAME,
-						alternateName: SITE_OWNER.handle,
-						description: HOME_DESCRIPTION,
-						url: SITE_OWNER.url,
-						creator: { '@id': SITE_OWNER.id },
-					},
-					{
-						'@type': 'ProfilePage',
-						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
-						url: SITE_OWNER.url,
-						isPartOf: {
-							'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
-						},
-						mainEntity: { '@id': SITE_OWNER.id },
-					},
-					{
-						'@type': 'Person',
-						'@id': SITE_OWNER.id,
-						name: SITE_OWNER.name,
-						alternateName: [
-							SITE_OWNER.japaneseName,
-							SITE_OWNER.formerName,
-							SITE_OWNER.formerJapaneseName,
-							SITE_OWNER.handle,
-							'ryoppippi',
-						],
-						url: SITE_OWNER.url,
-						image: SITE_SOCIAL_IMAGE_URL,
-						sameAs: [...SITE_OWNER.sameAs],
-					},
-				],
-			},
+			structuredData: homeStructuredData(),
 		}),
 	};
 }
@@ -193,24 +223,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 				article: true,
 				islands: islandModuleIds(post.html),
 				style: 'article',
-				structuredData: {
-					'@context': 'https://schema.org',
-					'@type': 'BlogPosting',
-					headline: post.title,
-					description: metadata.description,
-					url,
-					mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-					author: {
-						'@type': 'Person',
-						'@id': SITE_OWNER.id,
-						name: SITE_OWNER.name,
-						alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle],
-						url: SITE_OWNER.url,
-					},
-					datePublished: post.pubDate,
-					...(image == null ? {} : { image }),
-					inLanguage: post.lang,
-				},
+				structuredData: articleStructuredData(post, metadata.description, url, image),
 			}),
 		},
 		{ path: `blog/${post.filename}.md`, content: post.source },
@@ -290,6 +303,42 @@ if (import.meta.vitest != null) {
 				'https://ryoppippi.com/blog/example-article/',
 			),
 		).toBe('https://ryoppippi.com/blog/example-article/first-image.png');
+	});
+
+	test('builds the owner relationship graph', () => {
+		expect(homeStructuredData()).toMatchObject({
+			'@graph': expect.arrayContaining([
+				expect.objectContaining({
+					'@type': 'ProfilePage',
+					mainEntity: { '@id': SITE_OWNER.id },
+				}),
+				expect.objectContaining({
+					'@type': 'Person',
+					'@id': SITE_OWNER.id,
+					name: SITE_OWNER.name,
+					sameAs: SITE_OWNER.sameAs,
+				}),
+			]),
+		});
+	});
+
+	test('builds article schema from the resolved metadata', () => {
+		expect(
+			articleStructuredData(
+				examplePost,
+				examplePost.description,
+				'https://ryoppippi.com/blog/example-article/',
+				'https://ryoppippi.com/assets/content/article-cover.avif',
+			),
+		).toMatchObject({
+			'@type': 'BlogPosting',
+			headline: examplePost.title,
+			description: examplePost.description,
+			datePublished: examplePost.pubDate,
+			image: 'https://ryoppippi.com/assets/content/article-cover.avif',
+			inLanguage: examplePost.lang,
+			author: { '@id': SITE_OWNER.id },
+		});
 	});
 
 	test('escapes less-than characters in JSON-LD text', () => {
