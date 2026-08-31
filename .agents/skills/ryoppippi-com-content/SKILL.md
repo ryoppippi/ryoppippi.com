@@ -1,6 +1,6 @@
 ---
 name: ryoppippi-com-content
-description: Guides content changes in the ryoppippi.com repository, including blog Markdown, post-local Svelte or Solid islands, Tweet embeds, and curated OSS metadata.
+description: Guides content changes in the ryoppippi.com repository, including blog Markdown, post-local Solid islands, Tweet embeds, and curated OSS metadata.
 ---
 
 Use this skill for `ryoppippi/ryoppippi.com`. Treat the implementation and tests as the source of truth.
@@ -16,7 +16,7 @@ For discovering and updating external articles, podcasts, or YouTube appearances
 
 ## Post-local islands
 
-- Put components beside the post inside the blog tree. A supported island import is a capitalised default import from a relative `.svelte` or `.tsx` path, such as `import Chart from './Chart.svelte'`, outside fenced code.
+- Put components beside the post inside the blog tree. A supported island import is a capitalised default import from a relative `.tsx` path, such as `import Chart from './Chart.tsx'`, outside fenced code.
 - Use the import binding as the component tag, such as `<Chart />`. Props use Ox Content syntax: quoted strings, JSON in braces, or bare boolean attributes.
 - Resolved imports are removed from rendered Markdown; missing imports and unknown tags remain visible, so fix the path instead of hiding the error.
 - Read `src/content/islands.ts`, `src/content/island-renderer.ts`, and `src/content/markdown/render.ts` when the accepted syntax, path resolution, or SSR boundary is unclear.
