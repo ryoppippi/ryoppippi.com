@@ -1,6 +1,6 @@
 import type { DefaultTreeAdapterMap } from 'parse5';
 import { createHash } from 'node:crypto';
-import { link, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { link, mkdir, readFile, stat, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseFragment, serialize } from 'parse5';
 import { glob } from 'tinyglobby';
@@ -23,7 +23,8 @@ async function ensureHardLink(source: string, destination: string): Promise<void
 		}
 		const [sourceStat, destinationStat] = await Promise.all([stat(source), stat(destination)]);
 		if (sourceStat.dev !== destinationStat.dev || sourceStat.ino !== destinationStat.ino) {
-			throw error;
+			await unlink(destination);
+			await link(source, destination);
 		}
 	}
 }
@@ -197,6 +198,23 @@ if (import.meta.vitest != null) {
 
 			const asset = await stat(fixture.getPath('output/blog/post/image.png'));
 			expect(asset.nlink).toBe(2);
+		});
+
+		it('updates an alias when its source content changes', async () => {
+			const [{ createFixture }, { readFile, writeFile }] = await Promise.all([
+				import('fs-fixture'),
+				import('node:fs/promises'),
+			]);
+			await using fixture = await createFixture({ 'input/image.png': 'old image' });
+			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
+
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+			await writeFile(fixture.getPath('input/image.png'), 'new image');
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+
+			expect(await readFile(fixture.getPath('output/blog/post/image.png'), 'utf8')).toBe(
+				'new image',
+			);
 		});
 
 		it('emits identical asset contents once', async () => {
