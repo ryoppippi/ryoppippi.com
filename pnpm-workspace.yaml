@@ -1,7 +1,7 @@
 packages: []
 
 catalog:
-  '@ox-content/napi': 3.0.0-beta.4
+  '@ox-content/napi': 3.0.0-beta.5
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
