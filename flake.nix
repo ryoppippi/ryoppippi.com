@@ -76,7 +76,6 @@
                 nushell
                 nufmt
                 typos-lsp
-                svelte-language-server
                 yaml-language-server
                 gh
                 wrangler

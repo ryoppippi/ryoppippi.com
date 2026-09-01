@@ -1,18 +1,12 @@
-export const PAGE_STYLES = [
-	'about',
-	'article',
-	'blog',
-	'error',
-	'home',
-	'sponsors',
-	'works',
-] as const;
+import { OX_CONTENT_ASSET_MANIFEST } from './ox-content.ts';
+import { type PageStyle } from './page-style.ts';
 
-export type PageStyle = (typeof PAGE_STYLES)[number];
+export type { PageStyle } from './page-style.ts';
 
 export type SiteAssets = {
 	base: string;
 	client: string;
+	oxContent: string;
 	homeInline?: {
 		base: string;
 		page: string;
@@ -26,17 +20,17 @@ export type SiteAssets = {
 	 */
 	islands: Record<string, string[]>;
 	pages: Record<PageStyle, string>;
-	preloads?: Partial<Record<PageStyle, string>>;
 };
 
-// In development the client entry also imports these stylesheets as JS
+// In development the client entry also imports the site stylesheets as JS
 // modules, but that injection happens after first paint and causes a flash of
 // unstyled (light) content on every reload. Blocking <link> tags make the dev
 // server paint styled pages immediately, matching production; Vite serves the
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
 export const DEV_ASSETS = {
-	base: '<link rel="stylesheet" href="/src/styles/fonts.css">\n\t<link rel="stylesheet" href="/src/site/style.css">',
+	base: '<link rel="stylesheet" href="/src/site/style.css">',
 	client: '<script type="module" src="/src/site/client.ts"></script>',
+	oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 	pages: {
 		about: '<link rel="stylesheet" href="/src/site/styles/about.css">',
 		article: '<link rel="stylesheet" href="/src/site/styles/article.css">',
@@ -47,7 +41,6 @@ export const DEV_ASSETS = {
 		works: '<link rel="stylesheet" href="/src/site/styles/works.css">',
 	},
 	islands: {},
-	preloads: {},
 } as const satisfies SiteAssets;
 
 export type ManifestChunk = {
@@ -118,17 +111,6 @@ export function resolveSiteAssets(
 		}
 		return styles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`).join('\n\t');
 	};
-	const preloadFonts = (suffixes: string[]): string =>
-		suffixes
-			.map((suffix) => {
-				const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
-				if (chunk == null) {
-					throw new Error(`Missing font asset for ${suffix}`);
-				}
-				return `<link rel="preload" href="/${chunk.file}" as="font" type="font/woff2" crossorigin>`;
-			})
-			.join('\n\t');
-
 	const islands = Object.fromEntries(
 		Object.keys(manifest)
 			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.tsx'))
@@ -141,6 +123,7 @@ export function resolveSiteAssets(
 	return {
 		base,
 		client,
+		oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 		islands,
 		pages: {
 			about: stylesFor('/styles/about.css'),
@@ -150,9 +133,6 @@ export function resolveSiteAssets(
 			home: stylesFor('/styles/home.css'),
 			sponsors: stylesFor('/styles/sponsors.css'),
 			works: stylesFor('/styles/works.css'),
-		},
-		preloads: {
-			works: preloadFonts(['dm-mono-latin-400-normal.woff2', 'dm-mono-latin-500-normal.woff2']),
 		},
 	};
 }
@@ -197,7 +177,7 @@ export function renderAssetTags(
 ): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
 	return [
-		assets.preloads?.[style] ?? '',
+		assets.oxContent,
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pages[style],
 		renderIslandStyles(assets, islands),
@@ -211,6 +191,8 @@ if (import.meta.vitest != null) {
 	const assets = {
 		base: '<link href="/base.css"><script src="/client.js"></script>',
 		client: '<script type="module" src="/client.js"></script>',
+		oxContent:
+			'<link rel="stylesheet" href="/__ox_icons__/icons.css">\n<link rel="stylesheet" href="/__ox_fonts__/fonts.css">',
 		islands: {
 			'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 			'post/Table.tsx': ['assets/Legend.css'],
@@ -224,7 +206,6 @@ if (import.meta.vitest != null) {
 			sponsors: '<link href="/sponsors.css">',
 			works: '<link href="/works.css">',
 		},
-		preloads: {},
 	} as const satisfies SiteAssets;
 
 	describe(resolveSiteAssets, () => {
@@ -262,18 +243,13 @@ if (import.meta.vitest != null) {
 						file: 'assets/Legend.js',
 						css: ['assets/Legend.css'],
 					},
-					'node_modules/@fontsource/dm-mono/files/dm-mono-latin-400-normal.woff2': {
-						file: 'assets/dm-mono-400.woff2',
-					},
-					'node_modules/@fontsource/dm-mono/files/dm-mono-latin-500-normal.woff2': {
-						file: 'assets/dm-mono-500.woff2',
-					},
 				},
 			);
 
 			expect(result).toEqual({
 				base: '<link rel="stylesheet" href="/base.css">',
 				client: '<script type="module" src="/client.js"></script>',
+				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
 					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 				},
@@ -286,25 +262,11 @@ if (import.meta.vitest != null) {
 					sponsors: '<link rel="stylesheet" crossorigin href="/assets/sponsors.css">',
 					works: '<link rel="stylesheet" crossorigin href="/assets/works.css">',
 				},
-				preloads: {
-					works:
-						'<link rel="preload" href="/assets/dm-mono-400.woff2" as="font" type="font/woff2" crossorigin>\n\t<link rel="preload" href="/assets/dm-mono-500.woff2" as="font" type="font/woff2" crossorigin>',
-				},
 			});
 		});
 	});
 
 	describe(renderAssetTags, () => {
-		it('includes preloads only for the current page style', () => {
-			const withPreloads = {
-				...assets,
-				preloads: { works: '<link rel="preload" href="/dm-mono.woff2">' },
-			};
-
-			expect(renderAssetTags(withPreloads, 'works')).toContain('/dm-mono.woff2');
-			expect(renderAssetTags(withPreloads, 'home')).not.toContain('/dm-mono.woff2');
-		});
-
 		it('links the styles of the islands the page mounts', () => {
 			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx']);
 

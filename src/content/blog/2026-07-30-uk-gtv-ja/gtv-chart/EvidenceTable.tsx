@@ -73,7 +73,7 @@ export default function EvidenceTable(props: EvidenceTableProps) {
 							const localised = () => localisePoint(row, lang());
 							return (
 								<tr
-									classList={{ focused: props.focused === index() }}
+									class={{ focused: props.focused === index() }}
 									data-testid='gtv-row'
 									onFocusIn={() => props.onFocusedChange(index())}
 									onFocusOut={() => props.onFocusedChange(null)}

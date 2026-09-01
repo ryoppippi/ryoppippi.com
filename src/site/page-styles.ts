@@ -1,4 +1,4 @@
-import { PAGE_STYLES, type PageStyle } from './assets.ts';
+import { PAGE_STYLES, type PageStyle } from './page-style.ts';
 
 type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;

@@ -186,6 +186,7 @@ if (import.meta.vitest != null) {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
+				oxContent: '',
 				pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 			},
 			loadBlogPost: vi.fn(async () => post),

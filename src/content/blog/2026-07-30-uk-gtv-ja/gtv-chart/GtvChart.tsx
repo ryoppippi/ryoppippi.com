@@ -1,5 +1,5 @@
 import type { ChartLang } from './copy.ts';
-import { createSignal, onCleanup, onMount } from 'solid-js';
+import { createSignal, onSettled } from 'solid-js';
 import { localisePoint, resolveChartLang, uiCopy } from './copy.ts';
 import EvidenceTable from './EvidenceTable.tsx';
 import Legend from './Legend.tsx';
@@ -27,12 +27,7 @@ export default function GtvChart(props: { lang?: ChartLang }) {
 	};
 
 	let figure!: HTMLElement;
-	onMount(() => {
-		const cleanup = scrollReveal.attach(figure);
-		if (cleanup != null) {
-			onCleanup(cleanup);
-		}
-	});
+	onSettled(() => scrollReveal.attach(figure));
 
 	return (
 		<figure class='gtv-chart' data-testid='gtv-chart' ref={figure}>
@@ -40,7 +35,7 @@ export default function GtvChart(props: { lang?: ChartLang }) {
 			<p aria-atomic='true' aria-live='polite' class='readout'>
 				{readout() || '\u00a0'}
 			</p>
-			<div classList={{ wipe: true, revealed: scrollReveal.revealed() }}>
+			<div class={{ wipe: true, revealed: scrollReveal.revealed() }}>
 				<Timeline focused={focused()} lang={lang()} onFocusedChange={setFocused} />
 			</div>
 			<EvidenceTable focused={focused()} lang={lang()} onFocusedChange={setFocused} />

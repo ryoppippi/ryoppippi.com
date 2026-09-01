@@ -1,5 +1,5 @@
 import type { IslandRenderer } from './markdown/render.ts';
-import { renderToString } from 'solid-js/web';
+import { renderToString } from '@solidjs/web';
 
 type SolidIslandModule = { default: (props: Record<string, unknown>) => unknown };
 
@@ -75,7 +75,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders a Solid component through renderToString', async () => {
-			const { ssr } = await import('solid-js/web');
+			const { ssr } = await import('@solidjs/web');
 			const renderIsland = createIslandRenderer(async () => ({
 				default: () => ssr('<p>solid</p>'),
 			}));

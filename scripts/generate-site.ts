@@ -40,6 +40,7 @@ const outDir = path.join(root, 'build');
 const server = await createServer({
 	appType: 'custom',
 	configFile: path.join(root, 'vite.config.ts'),
+	optimizeDeps: { noDiscovery: true },
 	server: { middlewareMode: true },
 });
 

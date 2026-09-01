@@ -1,11 +1,10 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContent } from '@ox-content/vite-plugin';
+import solid from '@solidjs/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
-import { FontaineTransform } from 'fontaine';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import solid from 'vite-plugin-solid';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
 import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
@@ -21,22 +20,19 @@ export default defineConfig(({ command, mode }) => ({
 	},
 	plugins: [
 		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawaDragon),
-		solid({ ssr: true, solid: { hydratable: false } }),
+		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
-			ssg: command === 'build' && mode !== 'test' ? OX_CONTENT_BUILD_OPTIONS.ssg : false,
+			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
+			ssg:
+				mode === 'test'
+					? false
+					: command === 'build'
+						? OX_CONTENT_BUILD_OPTIONS.ssg
+						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
 		staticSiteBuild(),
 		staticSiteDevServer(),
-		FontaineTransform.vite({
-			fallbacks: {
-				'DM Mono': ['Courier New'],
-				Inter: ['Arial'],
-				'JetBrains Mono': ['Courier New'],
-				'Roboto Condensed': ['Arial'],
-			},
-			resolvePath: (id) => new URL(import.meta.resolve(id)),
-		}),
 		tailwindcss(),
 	] satisfies PluginOption[],
 	build: {
@@ -111,6 +107,7 @@ export default defineConfig(({ command, mode }) => ({
 		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
 	},
 	test: {
+		environment: 'node',
 		projects: [
 			{
 				extends: true,

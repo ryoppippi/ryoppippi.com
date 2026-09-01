@@ -255,6 +255,7 @@ if (import.meta.vitest != null) {
 		base: '',
 		client: '',
 		islands: {},
+		oxContent: '',
 		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 	} as const satisfies SiteAssets;
 

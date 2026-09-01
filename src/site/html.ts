@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
-import { renderToString } from 'solid-js/web';
+import { renderToString } from '@solidjs/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
 import Shell from './templates/Shell.tsx';

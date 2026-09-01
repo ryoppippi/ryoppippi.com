@@ -1,10 +1,9 @@
-import type { JSX } from 'solid-js';
+import type { JSX } from '@solidjs/web';
 import { initIslands, type IslandController } from '@ox-content/islands';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
-import '../styles/fonts.css';
 import {
 	loadPageStyle,
 	missingPageStyles,
@@ -145,7 +144,7 @@ async function mountSolidIsland(
 	load: () => Promise<SolidIslandModule>,
 	props: Record<string, unknown>,
 ): Promise<() => void> {
-	const [{ render }, { default: Island }] = await Promise.all([import('solid-js/web'), load()]);
+	const [{ render }, { default: Island }] = await Promise.all([import('@solidjs/web'), load()]);
 	// Solid islands are not compiled hydratable, so the server markup is
 	// replaced by a fresh client render instead of being adopted.
 	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;

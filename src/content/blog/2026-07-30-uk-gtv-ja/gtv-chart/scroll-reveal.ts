@@ -14,7 +14,7 @@ export type ScrollReveal = {
 	/** Whether the element has been revealed. */
 	readonly revealed: Accessor<boolean>;
 	/**
-	 * Attaches the reveal to the element, from `onMount` so the element has its
+	 * Attaches the reveal after the first reactive settle so the element has its
 	 * real geometry. Returns the observer cleanup when one was started.
 	 */
 	readonly attach: (node: HTMLElement) => (() => void) | undefined;
@@ -35,13 +35,8 @@ export type ScrollReveal = {
  * ```tsx
  * const reveal = createScrollReveal();
  * let node!: HTMLElement;
- * onMount(() => {
- * 	const cleanup = reveal.attach(node);
- * 	if (cleanup != null) {
- * 		onCleanup(cleanup);
- * 	}
- * });
- * <figure ref={node} classList={{ revealed: reveal.revealed() }}>...</figure>
+ * onSettled(() => reveal.attach(node));
+ * <figure ref={node} class={{ revealed: reveal.revealed() }}>...</figure>
  * ```
  */
 export function createScrollReveal(options: ScrollRevealOptions = {}): ScrollReveal {

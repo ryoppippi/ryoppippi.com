@@ -1,10 +1,8 @@
-import type { ChartPoint } from '@tanstack/charts';
-import type { ChartProps } from '@tanstack/charts/solid';
-import type { Component } from 'solid-js';
+import type { ChartHostOptions } from '@tanstack/charts';
 import type { ChartLang } from './copy.ts';
-import { createChartAdapter } from '@tanstack/charts/adapter';
-import { createSignal, Show } from 'solid-js';
-import { isServer } from 'solid-js/web';
+import { createChartAdapter } from '@tanstack/charts';
+import { createEffect, onSettled } from 'solid-js';
+import { isServer } from '@solidjs/web';
 import { resolveChartLang, uiCopy } from './copy.ts';
 import { buildChartDefinition } from './definition.ts';
 import { isRowMark } from './focus.ts';
@@ -27,59 +25,43 @@ export default function Timeline(props: TimelineProps) {
 	const copy = () => uiCopy[lang()].chart;
 	const definition = () => buildChartDefinition(props.focused, lang());
 
-	// `@tanstack/charts/solid` is compiled for the DOM and throws when merely
-	// imported on the server, so the server (and the client until the adapter
-	// chunk arrives) paints the same SVG through the framework-agnostic
-	// adapter, and the interactive chart takes over once loaded.
-	const prerendered = () =>
-		createChartAdapter({
-			definition: definition(),
-			ariaLabel: copy().ariaLabel,
-			ariaDescription: copy().ariaDescription,
-			aspectRatio: ASPECT_RATIO,
-			idPrefix: 'gtv-timeline',
-		}).prerender();
-
-	const [chart, setChart] = createSignal<Component<ChartProps> | null>(null);
+	const options = (): ChartHostOptions => ({
+		definition: definition(),
+		ariaLabel: copy().ariaLabel,
+		ariaDescription: copy().ariaDescription,
+		aspectRatio: ASPECT_RATIO,
+		idPrefix: 'gtv-timeline',
+		onFocusChange: (point) => {
+			// Only some marks are drawn from `rows`; the rest have their own datasets.
+			props.onFocusedChange(point != null && isRowMark(point.markId) ? point.datumIndex : null);
+		},
+	});
+	const adapter = createChartAdapter(options());
+	let surface!: HTMLDivElement;
 	if (!isServer) {
-		void import('@tanstack/charts/solid').then((module) => setChart(() => module.Chart));
+		createEffect(options, (next) => adapter.update(next));
+		onSettled(() => {
+			adapter.mount(surface);
+			return () => adapter.destroy();
+		});
 	}
+
+	const prerendered = adapter.prerender();
 
 	// Pointer leave only clears chart focus.
 	return (
 		<div onPointerLeave={() => props.onFocusedChange(null)}>
-			<Show
-				when={chart()}
-				keyed
-				fallback={
-					<div
-						class='ts-chart-host canvas'
-						style={{ position: 'relative', width: '100%', 'aspect-ratio': String(ASPECT_RATIO) }}
-					>
-						<div
-							class='ts-chart-surface'
-							style={{ width: '100%', height: '100%' }}
-							innerHTML={prerendered()}
-						/>
-					</div>
-				}
+			<div
+				class='ts-chart-host canvas'
+				style={{ position: 'relative', width: '100%', 'aspect-ratio': String(ASPECT_RATIO) }}
 			>
-				{(Chart) => (
-					<Chart
-						ariaLabel={copy().ariaLabel}
-						ariaDescription={copy().ariaDescription}
-						aspectRatio={ASPECT_RATIO}
-						class='canvas'
-						definition={definition()}
-						onFocusChange={(point: ChartPoint | null) => {
-							// Only some marks are drawn from `rows`; the rest have their own datasets.
-							props.onFocusedChange(
-								point != null && isRowMark(point.markId) ? point.datumIndex : null,
-							);
-						}}
-					/>
-				)}
-			</Show>
+				<div
+					ref={surface}
+					class='ts-chart-surface'
+					style={{ width: '100%', height: '100%' }}
+					innerHTML={prerendered}
+				/>
+			</div>
 		</div>
 	);
 }
