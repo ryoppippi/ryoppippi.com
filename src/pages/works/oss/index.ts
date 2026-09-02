@@ -1,15 +1,9 @@
+import type { GeneratedFile } from '../../index.ts';
+import type { SiteAssets } from '../../../site/assets.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-
-export type Talk = {
-	title: string;
-	date: string;
-	lang?: string;
-	event: string;
-	eventLink?: string;
-	videoLink?: string;
-	links: string[];
-};
+import { page, renderComponent } from '../../../site/html.ts';
+import Oss from '../../../site/templates/Oss.tsx';
 
 export type OssProjectKind = 'project' | 'contribution';
 
@@ -43,16 +37,17 @@ function githubRepository(link: string): string | null {
 		const [owner, repository] = url.pathname.split('/').filter(Boolean);
 		return owner == null || repository == null
 			? null
-			: `${owner}/${repository.replace(/\.git$/, '')}`;
+			: owner + '/' + repository.replace(/\.git$/, '');
 	} catch {
 		return null;
 	}
 }
 
+/** Loads the manually ordered open-source projects and their star snapshot. */
 export async function loadOssProjects(root: string): Promise<OssProject[]> {
 	const [source, starSnapshot] = await Promise.all([
-		readFile(path.join(root, 'src/contents/works/oss/list.json'), 'utf8'),
-		readFile(path.join(root, 'src/contents/works/oss/stars.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/works/oss/list.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/works/oss/stars.json'), 'utf8'),
 	]);
 	const projects = JSON.parse(source) as OssProjectSource[];
 	const stars = JSON.parse(starSnapshot) as OssStarSnapshot;
@@ -63,7 +58,7 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 	return Promise.all(
 		projects.map(async (project) => {
 			const { useGitHubPrimaryLanguage = false, ...projectData } = project;
-			const link = project.link ?? `https://github.com/ryoppippi/${project.name}`;
+			const link = project.link ?? 'https://github.com/ryoppippi/' + project.name;
 			const repository = githubRepository(link);
 			const primaryLanguage =
 				repository == null ? null : (primaryLanguages.get(repository) ?? null);
@@ -76,7 +71,7 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 			let description = project.description ?? null;
 			if (description == null) {
 				try {
-					const response = await fetch(`https://ungh.cc/repos/ryoppippi/${project.name}`);
+					const response = await fetch('https://ungh.cc/repos/ryoppippi/' + project.name);
 					if (response.ok) {
 						const data = (await response.json()) as {
 							repo?: { description?: string | null };
@@ -90,7 +85,7 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 			return {
 				...projectData,
 				link,
-				slug: project.slug ?? `ryoppippi-${project.name}`,
+				slug: project.slug ?? 'ryoppippi-' + project.name,
 				description,
 				kind: project.kind ?? 'project',
 				tags,
@@ -100,29 +95,38 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 	);
 }
 
-export async function loadTalks(): Promise<Talk[]> {
-	const response = await fetch('https://talks.ryoppippi.com/talks.json');
-	if (!response.ok) {
-		throw new Error(`Failed to fetch talks: ${response.status} ${response.statusText}`);
-	}
-	return (await response.json()) as Talk[];
-}
-
-export async function loadPublications(
-	root: string,
-): Promise<
-	Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>
-> {
-	return JSON.parse(
-		await readFile(path.join(root, 'src/contents/publication.json'), 'utf8'),
-	) as Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>;
+/**
+ * Renders the open-source projects page.
+ *
+ * @param projects - Manually ordered OSS projects to render.
+ * @param assets - Bundled site assets referenced by the page.
+ * @returns The generated open-source projects page.
+ */
+export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFile {
+	return {
+		path: 'works/oss/index.html',
+		sourcePaths: [
+			'src/pages/works/oss/index.ts',
+			'src/site/templates/Oss.tsx',
+			'src/content/works/oss/list.json',
+		],
+		content: page({
+			title: 'Open-source projects',
+			pathname: '/works/oss/',
+			content: renderComponent(Oss, { projects }),
+			description:
+				'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
+			assets,
+			style: 'works',
+		}),
+	};
 }
 
 if (import.meta.vitest != null) {
 	test('uses the GitHub primary language for opted-in OSS projects', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
-			'src/contents/works/oss/list.json': JSON.stringify([
+			'src/content/works/oss/list.json': JSON.stringify([
 				{
 					name: 'ccusage',
 					link: 'https://github.com/ccusage/ccusage',
@@ -132,7 +136,7 @@ if (import.meta.vitest != null) {
 					description: 'Token usage analyser',
 				},
 			]),
-			'src/contents/works/oss/stars.json': JSON.stringify({
+			'src/content/works/oss/stars.json': JSON.stringify({
 				updatedAt: '2026-08-25T00:00:00Z',
 				projects: [{ repo: 'ccusage/ccusage', stars: 1, primaryLanguage: 'Rust' }],
 			}),

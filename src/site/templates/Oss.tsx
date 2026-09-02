@@ -1,4 +1,4 @@
-import type { OssProject, OssProjectKind } from '../sections.ts';
+import type { OssProject, OssProjectKind } from '../../pages/works/oss/index.ts';
 import { SITE_ORIGIN } from '../consts.ts';
 import WorksNav from './WorksNav.tsx';
 

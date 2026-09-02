@@ -1,26 +1,24 @@
-import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '../content/index.ts';
+import type { BlogPost, BlogPostMetadata, PostListItem } from '../pages/blog/index.ts';
+import type { OssProject } from '../pages/works/oss/index.ts';
+import type { Publication } from '../pages/works/publications/index.ts';
+import type { ShowcaseProject } from '../pages/works/showcase/index.ts';
+import type { Talk } from '../pages/works/talks/index.ts';
 import type { SiteAssets } from './assets.ts';
-import type { PostListItem } from './content.ts';
-import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
-import { postListItems } from './content.ts';
+import { postListItems } from '../pages/blog/index.ts';
 import { renderBlogFeed, renderMediaFeed } from './feeds.ts';
-import { articlePages, blogListPage, homePage } from './pages.ts';
-import {
-	aboutPage,
-	errorPage,
-	mediaPage,
-	ossPage,
-	publicationsPage,
-	showcasePage,
-	sponsorsPage,
-	talksPage,
-} from './secondary-pages.ts';
+import { errorPage } from '../pages/404.ts';
+import { aboutPage } from '../pages/about/index.ts';
+import { articlePages, blogListPage } from '../pages/blog/index.ts';
+import { homePage } from '../pages/index.ts';
+import { sponsorsPage } from '../pages/sponsors/index.ts';
+import { mediaPage } from '../pages/works/media/index.ts';
+import { ossPage } from '../pages/works/oss/index.ts';
+import { publicationsPage } from '../pages/works/publications/index.ts';
+import { showcasePage } from '../pages/works/showcase/index.ts';
+import { talksPage } from '../pages/works/talks/index.ts';
 
-type Publications = Record<
-	string,
-	Array<{ title: string; link: string; authors: string; publisher: string }>
->;
+type Publications = Record<string, Publication[]>;
 
 export type DevRouteDependencies = {
 	assets: SiteAssets;

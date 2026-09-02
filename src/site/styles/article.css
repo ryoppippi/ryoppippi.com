@@ -1,4 +1,8 @@
-@import '../../styles/blog/article.css';
+@layer theme, base, components, utilities;
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import '../../styles/prose-theme.css';
+@reference '../../styles/tailwind.css';
+
 @import '../../styles/blog/anchor.css';
 @import '../../styles/blog/callout.css';
 @import '../../styles/blog/collapse.css';
@@ -13,6 +17,8 @@
 @import '@ox-content/vite-plugin/styles/markdown-tables.css';
 
 @source '../templates/Article.tsx';
+@source '../../content/blog/**/*.md';
+@source '../../content/blog/**/*.mdx';
 
 .content {
 	--octc-color-bg: transparent;

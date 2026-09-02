@@ -1,5 +1,5 @@
-import type { ContentArtifact } from '../src/content/artifact.ts';
-import type { IslandRenderer } from '../src/content/markdown/render.ts';
+import type { BlogIslandModuleLoader, BlogIslandSsrRenderer } from '../src/pages/blog/index.ts';
+import type { PageContent } from '../src/site/generate.ts';
 import type { ManifestChunk, SiteAssets } from '../src/site/assets.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -8,7 +8,7 @@ import { createServer } from 'vite';
 
 type GenerateSite = (options: {
 	assets: SiteAssets;
-	content: ContentArtifact;
+	content: PageContent;
 	outDir: string;
 	root: string;
 }) => Promise<void>;
@@ -45,19 +45,19 @@ const server = await createServer({
 });
 
 try {
-	const { generateSite } = (await server.ssrLoadModule('/src/site/generate.ts')) as {
+	const { buildPageContent, generateSite } = (await server.ssrLoadModule(
+		'/src/site/generate.ts',
+	)) as {
+		buildPageContent: (islandSsr?: BlogIslandSsrRenderer) => Promise<PageContent>;
 		generateSite: GenerateSite;
 	};
-	const { buildContentArtifact } = (await server.ssrLoadModule('/src/content/build.ts')) as {
-		buildContentArtifact: (renderIsland?: IslandRenderer) => Promise<ContentArtifact>;
-	};
-	const { createIslandRenderer } = (await server.ssrLoadModule(
-		'/src/content/island-renderer.ts',
+	const { createBlogIslandSsrRenderer } = (await server.ssrLoadModule(
+		'/src/pages/blog/index.ts',
 	)) as {
-		createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
+		createBlogIslandSsrRenderer: (load: BlogIslandModuleLoader) => BlogIslandSsrRenderer;
 	};
-	const content = await buildContentArtifact(
-		createIslandRenderer((modulePath) => server.ssrLoadModule(modulePath)),
+	const content = await buildPageContent(
+		createBlogIslandSsrRenderer((modulePath) => server.ssrLoadModule(modulePath)),
 	);
 	await generateSite({
 		assets: await readSiteAssets(outDir),

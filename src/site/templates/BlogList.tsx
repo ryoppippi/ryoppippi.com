@@ -1,4 +1,4 @@
-import type { PostListItem } from '../content.ts';
+import type { PostListItem } from '../../pages/blog/index.ts';
 import { formatDate } from '../../lib/util.ts';
 
 type BlogListProps = {

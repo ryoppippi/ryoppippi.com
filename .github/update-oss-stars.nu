@@ -3,8 +3,8 @@
 
 # Refresh the GitHub repository metadata snapshot consumed by the static OSS page.
 
-const list_path = 'src/contents/works/oss/list.json'
-const stars_path = 'src/contents/works/oss/stars.json'
+const list_path = 'src/content/works/oss/list.json'
+const stars_path = 'src/content/works/oss/stars.json'
 const star_owner = 'ryoppippi'
 
 def is-owned-repository [repository: string]: nothing -> bool {

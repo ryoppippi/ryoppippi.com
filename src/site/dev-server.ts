@@ -1,46 +1,61 @@
 import type {
 	BlogPost,
 	BlogPostMetadata,
-	IslandRenderer,
-	MarkdownRenderer,
-	ShowcaseProject,
-} from '../content/index.ts';
+	BlogIslandModuleLoader,
+	BlogIslandSsrRenderer,
+	PostListItem,
+} from '../pages/blog/index.ts';
+import type {
+	ContentMarkdownRenderOptions,
+	ContentMarkdownRenderer,
+} from '../pages/blog/markdown.ts';
+import type { OssProject } from '../pages/works/oss/index.ts';
+import type { Publication } from '../pages/works/publications/index.ts';
+import type { ShowcaseProject } from '../pages/works/showcase/index.ts';
+import type { Talk } from '../pages/works/talks/index.ts';
 import type { DevRouteDependencies, DevRouteResponse } from './dev-routes.ts';
-import type { PostListItem } from './content.ts';
-import type { OssProject, Talk } from './sections.ts';
 import type { SiteAssets } from './assets.ts';
 import type { Plugin, ViteDevServer } from 'vite';
-import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { DEV_ASSETS } from './assets.ts';
 
+const contentDirectory = path.resolve(import.meta.dirname, '../content');
+const blogDirectory = path.join(contentDirectory, 'blog');
+const showcaseDirectory = path.join(contentDirectory, 'showcase');
+
 type BlogModule = {
-	loadBlogPost: (slug: string, renderContent?: MarkdownRenderer) => Promise<BlogPost | null>;
+	loadBlogPost: (slug: string, renderContent?: ContentMarkdownRenderer) => Promise<BlogPost | null>;
 	loadBlogPostMetadata: () => Promise<BlogPostMetadata[]>;
 	loadBlogPostSource: (slug: string) => Promise<string | null>;
-};
-
-type ShowcaseModule = {
-	loadShowcase: (renderContent?: MarkdownRenderer) => Promise<ShowcaseProject[]>;
-};
-
-type SiteContentModule = {
-	loadExternalMedia: (root: string) => Promise<PostListItem[]>;
 	loadExternalPosts: (root: string) => Promise<PostListItem[]>;
 };
 
-type SectionsModule = {
+type MediaModule = {
+	loadExternalMedia: (root: string) => Promise<PostListItem[]>;
+};
+
+type OssModule = {
 	loadOssProjects: (root: string) => Promise<OssProject[]>;
-	loadPublications: (root: string) => ReturnType<DevRouteDependencies['loadPublications']>;
+};
+
+type PublicationsModule = {
+	loadPublications: (root: string) => Promise<Record<string, Publication[]>>;
+};
+
+type ShowcaseModule = {
+	loadShowcase: (renderContent?: ContentMarkdownRenderer) => Promise<ShowcaseProject[]>;
+};
+
+type TalksModule = {
 	loadTalks: () => Promise<Talk[]>;
 };
 
 type MarkdownModule = {
-	renderMarkdown: (
+	renderContentMarkdown: (
 		content: string,
-		options: NonNullable<Parameters<MarkdownRenderer>[1]> & {
-			renderIsland: IslandRenderer;
+		options: Omit<ContentMarkdownRenderOptions, 'islandSsr'> & {
+			islandSsr: BlogIslandSsrRenderer;
 		},
 	) => Promise<string>;
 };
@@ -80,8 +95,8 @@ async function readContentAsset(pathname: string): Promise<{ body: Buffer; type:
 		blogMatch == null
 			? showcaseMatch == null
 				? null
-				: path.join(showcaseDirectory(), showcaseMatch[1])
-			: path.join(blogDirectory(), blogMatch[1], blogMatch[2]);
+				: path.join(showcaseDirectory, showcaseMatch[1])
+			: path.join(blogDirectory, blogMatch[1], blogMatch[2]);
 	if (file == null || path.extname(file).length === 0) {
 		return null;
 	}
@@ -103,21 +118,21 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/blog/', '/feed.xml', `/blog/${blogMatch[1]}/`, `/blog/${blogMatch[1]}.md`];
 	}
 	if (
-		file === 'src/contents/external-rss/rss.json' ||
-		file === 'src/contents/external-rss/posts.json'
+		file === 'src/content/external-rss/rss.json' ||
+		file === 'src/content/external-rss/posts.json'
 	) {
 		return ['/blog/'];
 	}
-	if (file === 'src/contents/external-rss/media.json') {
+	if (file === 'src/content/external-rss/media.json') {
 		return ['/works/media/', '/works/media/feed.xml'];
 	}
-	if (file === 'src/contents/works/oss/list.json') {
+	if (file === 'src/content/works/oss/list.json') {
 		return ['/works/oss/'];
 	}
-	if (file === 'src/contents/works/oss/stars.json') {
+	if (file === 'src/content/works/oss/stars.json') {
 		return ['/works/oss/'];
 	}
-	if (file === 'src/contents/publication.json') {
+	if (file === 'src/content/publication.json') {
 		return ['/works/publications/'];
 	}
 	if (file.startsWith('src/content/showcase/')) {
@@ -125,9 +140,9 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	}
 	if (
 		file === 'routes.ts' ||
-		file.startsWith('src/content/markdown/') ||
+		file.startsWith('src/pages/') ||
 		file.startsWith('src/site/templates/') ||
-		/^src\/site\/(assets|client|consts|content|dev-routes|head|html|page-styles|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
+		/^src\/site\/(assets|client|consts|dev-routes|head|html|page-styles|style)\.(?:css|ts)$/.test(
 			file,
 		)
 	) {
@@ -176,15 +191,14 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 	// Rebuilt as islands render so a page links the styles of the islands it
 	// actually mounts, the way the built site does from the manifest.
 	const assets: SiteAssets = { ...DEV_ASSETS, islands: {} };
-	const renderContent: MarkdownRenderer = async (content, options) => {
-		const [markdown, islands] = await Promise.all([
-			server.ssrLoadModule('/src/content/markdown/render.ts') as Promise<MarkdownModule>,
-			server.ssrLoadModule('/src/content/island-renderer.ts') as Promise<{
-				createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
+	const renderContent: ContentMarkdownRenderer = async (content, options) => {
+		const [markdown, blogSsr] = await Promise.all([
+			server.ssrLoadModule('/src/pages/blog/markdown.ts') as Promise<MarkdownModule>,
+			server.ssrLoadModule('/src/pages/blog/index.ts') as Promise<{
+				createBlogIslandSsrRenderer: (load: BlogIslandModuleLoader) => BlogIslandSsrRenderer;
 			}>,
 		]);
-		const { createIslandRenderer } = islands;
-		const renderIsland = createIslandRenderer(async (modulePath) => {
+		const islandSsr = blogSsr.createBlogIslandSsrRenderer(async (modulePath) => {
 			const module = await server.ssrLoadModule(modulePath);
 			assets.islands[modulePath.replace('/src/content/blog/', '')] = await islandStyleHrefs(
 				server,
@@ -192,9 +206,20 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 			);
 			return module;
 		});
-		return markdown.renderMarkdown(content, { ...options, renderIsland });
+		return markdown.renderContentMarkdown(content, { ...options, islandSsr });
 	};
-	const loadBlogModule = () => server.ssrLoadModule('/src/content/blog.ts') as Promise<BlogModule>;
+	const loadBlogModule = () =>
+		server.ssrLoadModule('/src/pages/blog/index.ts') as Promise<BlogModule>;
+	const loadMediaModule = () =>
+		server.ssrLoadModule('/src/pages/works/media/index.ts') as Promise<MediaModule>;
+	const loadOssModule = () =>
+		server.ssrLoadModule('/src/pages/works/oss/index.ts') as Promise<OssModule>;
+	const loadPublicationsModule = () =>
+		server.ssrLoadModule('/src/pages/works/publications/index.ts') as Promise<PublicationsModule>;
+	const loadShowcaseModule = () =>
+		server.ssrLoadModule('/src/pages/works/showcase/index.ts') as Promise<ShowcaseModule>;
+	const loadTalksModule = () =>
+		server.ssrLoadModule('/src/pages/works/talks/index.ts') as Promise<TalksModule>;
 
 	return {
 		assets,
@@ -208,28 +233,22 @@ function createDependencies(server: ViteDevServer): DevRouteDependencies {
 			return dotfiles.fetchDotfilesReadme(fetch);
 		},
 		loadExternalPosts: async () => {
-			const content = (await server.ssrLoadModule('/src/site/content.ts')) as SiteContentModule;
-			return content.loadExternalPosts(root);
+			return (await loadBlogModule()).loadExternalPosts(root);
 		},
 		loadExternalMedia: async () => {
-			const content = (await server.ssrLoadModule('/src/site/content.ts')) as SiteContentModule;
-			return content.loadExternalMedia(root);
+			return (await loadMediaModule()).loadExternalMedia(root);
 		},
 		loadOssProjects: async () => {
-			const sections = (await server.ssrLoadModule('/src/site/sections.ts')) as SectionsModule;
-			return sections.loadOssProjects(root);
+			return (await loadOssModule()).loadOssProjects(root);
 		},
 		loadPublications: async () => {
-			const sections = (await server.ssrLoadModule('/src/site/sections.ts')) as SectionsModule;
-			return sections.loadPublications(root);
+			return (await loadPublicationsModule()).loadPublications(root);
 		},
 		loadShowcase: async () => {
-			const showcase = (await server.ssrLoadModule('/src/content/showcase.ts')) as ShowcaseModule;
-			return showcase.loadShowcase(renderContent);
+			return (await loadShowcaseModule()).loadShowcase(renderContent);
 		},
 		loadTalks: async () => {
-			const sections = (await server.ssrLoadModule('/src/site/sections.ts')) as SectionsModule;
-			return sections.loadTalks();
+			return (await loadTalksModule()).loadTalks();
 		},
 	};
 }
@@ -336,7 +355,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('invalidates all rendered pages for Markdown pipeline changes', () => {
-			expect(invalidatedRoutes('src/content/markdown/render.ts')).toBe('*');
+			expect(invalidatedRoutes('src/pages/blog/markdown.ts')).toBe('*');
 		});
 
 		it('invalidates all rendered pages for head metadata changes', () => {
@@ -345,11 +364,11 @@ if (import.meta.vitest != null) {
 		});
 
 		it('invalidates the OSS page when its star snapshot changes', () => {
-			expect(invalidatedRoutes('src/contents/works/oss/stars.json')).toEqual(['/works/oss/']);
+			expect(invalidatedRoutes('src/content/works/oss/stars.json')).toEqual(['/works/oss/']);
 		});
 
 		it('invalidates the media page when curated media changes', () => {
-			expect(invalidatedRoutes('src/contents/external-rss/media.json')).toEqual([
+			expect(invalidatedRoutes('src/content/external-rss/media.json')).toEqual([
 				'/works/media/',
 				'/works/media/feed.xml',
 			]);

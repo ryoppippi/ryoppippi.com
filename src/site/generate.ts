@@ -1,7 +1,17 @@
-import type { ContentArtifact } from '../content/artifact.ts';
-import type { GeneratedFile } from './pages.ts';
+import type { BlogIslandSsrRenderer, BlogPost } from '../pages/blog/index.ts';
+import type { ContentMarkdownRenderer } from '../pages/blog/markdown.ts';
+import type { GeneratedFile } from '../pages/index.ts';
+import type { ShowcaseProject } from '../pages/works/showcase/index.ts';
 import type { SiteAssets } from './assets.ts';
-import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
+import {
+	articlePages,
+	blogDirectory,
+	blogListPage,
+	loadBlogPosts,
+	loadExternalPosts,
+	postListItems,
+} from '../pages/blog/index.ts';
+import { renderContentMarkdown } from '../pages/blog/markdown.ts';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -15,24 +25,36 @@ import {
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
-import { loadExternalMedia, loadExternalPosts } from './content.ts';
+import { loadExternalMedia, mediaPage } from '../pages/works/media/index.ts';
+import { loadOssProjects, ossPage } from '../pages/works/oss/index.ts';
+import { loadPublications, publicationsPage } from '../pages/works/publications/index.ts';
+import { loadShowcase, showcaseDirectory, showcasePage } from '../pages/works/showcase/index.ts';
+import { loadTalks, talksPage } from '../pages/works/talks/index.ts';
 import { writeOxContentOutputFiles } from './ox-content-output.ts';
-import { corePages } from './pages.ts';
-import {
-	aboutPage,
-	errorPage,
-	mediaPage,
-	ossPage,
-	publicationsPage,
-	showcasePage,
-	sponsorsPage,
-	talksPage,
-} from './secondary-pages.ts';
-import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
+import { errorPage } from '../pages/404.ts';
+import { aboutPage } from '../pages/about/index.ts';
+import { homePage } from '../pages/index.ts';
+import { sponsorsPage } from '../pages/sponsors/index.ts';
+
+export type PageContent = {
+	posts: BlogPost[];
+	showcase: ShowcaseProject[];
+};
+
+/** Builds the rendered content consumed by the static page generator. */
+export async function buildPageContent(islandSsr?: BlogIslandSsrRenderer): Promise<PageContent> {
+	const renderContent: ContentMarkdownRenderer = (content, options) =>
+		renderContentMarkdown(content, { ...options, islandSsr });
+	const [posts, showcase] = await Promise.all([
+		loadBlogPosts(renderContent),
+		loadShowcase(renderContent),
+	]);
+	return { posts, showcase };
+}
 
 type GenerateSiteOptions = {
 	assets: SiteAssets;
-	content?: ContentArtifact;
+	content?: PageContent;
 	outDir: string;
 	root: string;
 };
@@ -49,7 +71,7 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
  * Generates the static site and its auxiliary files.
  *
  * @param assets - Bundled site assets referenced by generated pages.
- * @param content - Optional prebuilt content artifact.
+ * @param content - Optional prebuilt content.
  * @param outDir - Directory that receives generated files.
  * @param root - Repository root used for source loading and Git metadata.
  * @returns A promise that resolves after all generated files are written.
@@ -62,8 +84,7 @@ export async function generateSite({
 }: GenerateSiteOptions): Promise<void> {
 	let localContent = content;
 	if (localContent == null) {
-		const { buildContentArtifact } = await import('../content/build.ts');
-		localContent = await buildContentArtifact();
+		localContent = await buildPageContent();
 	}
 	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =
 		await Promise.all([
@@ -75,7 +96,7 @@ export async function generateSite({
 			fetchDotfilesReadme(fetch),
 		]);
 	const emittedAssets = await emitDeduplicatedAssets(
-		await contentAssetSources(blogDirectory(), showcaseDirectory()),
+		await contentAssetSources(blogDirectory, showcaseDirectory),
 		outDir,
 	);
 	const posts = localContent.posts.map((post) => ({
@@ -92,7 +113,9 @@ export async function generateSite({
 	}));
 
 	const pages = [
-		...corePages(posts, externalPosts, assets),
+		homePage(assets),
+		blogListPage([...externalPosts, ...postListItems(posts)], assets),
+		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
 		aboutPage(assets),
 		ossPage(ossProjects, assets),
 		showcasePage(showcase, assets),

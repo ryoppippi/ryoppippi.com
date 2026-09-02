@@ -1,4 +1,4 @@
-import type { Talk } from '../sections.ts';
+import type { Talk } from '../../pages/works/talks/index.ts';
 import { formatDate } from '../../lib/util.ts';
 import WorksNav from './WorksNav.tsx';
 

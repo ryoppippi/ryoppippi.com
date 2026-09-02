@@ -1,5 +1,5 @@
-import type { PostListItem } from './content.ts';
-import type { GeneratedFile } from './pages.ts';
+import type { PostListItem } from '../pages/blog/index.ts';
+import type { GeneratedFile } from '../pages/index.ts';
 import { planSsgOutputs, resolveGitLastmod, writeSiteMapFiles } from '@ox-content/vite-plugin';
 import path from 'node:path';
 import { SITE_NAME, SITE_ORIGIN } from './consts.ts';

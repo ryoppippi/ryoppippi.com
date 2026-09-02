@@ -7,13 +7,7 @@ Use this skill for external-source discovery and curation in `ryoppippi/ryoppipp
 
 ## Source of truth
 
-Read the current data and rendering code before searching:
-
-- `src/contents/external-rss/posts.json` — manually curated external articles shown on Blog.
-- `src/contents/external-rss/rss.json` — RSS feed sources used for external articles.
-- `src/contents/external-rss/media.json` — curated podcasts, videos, and the YouTube playlist.
-- `src/site/content.ts` — separation between Blog articles and Media entries.
-- `src/site/templates/Media.tsx` and `src/site/templates/Talks.tsx` — visible grouping, metadata, filters, and links.
+Read the current content data, page loaders, and templates before searching. Locate them from the repository's content and pages trees instead of relying on a fixed internal path list.
 
 Use `ryoppippi-com-content` for blog-content implementation details after the source has been selected.
 

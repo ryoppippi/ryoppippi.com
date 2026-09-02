@@ -1,4 +1,4 @@
-import type { ShowcaseProject } from '../../content/index.ts';
+import type { ShowcaseProject } from '../../pages/works/showcase/index.ts';
 import { formatDate } from '../../lib/util.ts';
 import WorksNav from './WorksNav.tsx';
 

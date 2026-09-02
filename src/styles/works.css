@@ -3,4 +3,4 @@
 @import './prose-theme.css';
 @reference './tailwind.css';
 
-@source '../contents/works/oss/list.json';
+@source '../content/works/oss/list.json';

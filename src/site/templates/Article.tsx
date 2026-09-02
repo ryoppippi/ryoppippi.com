@@ -1,4 +1,4 @@
-import type { BlogPost } from '../../content/index.ts';
+import type { BlogPost } from '../../pages/blog/index.ts';
 import { loadDefaultJapaneseParser } from 'budoux';
 import { SITE_COPYRIGHT, SITE_ORIGIN } from '../consts.ts';
 

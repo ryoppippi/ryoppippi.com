@@ -3,16 +3,21 @@ import {
 	renderMarkdown as renderOxMarkdown,
 	transformAllPlugins,
 	type OxContentOptions,
+	type OgpOptions,
 } from '@ox-content/vite-plugin';
 import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
-import type { IslandModules } from '../islands.ts';
-import { escapeHtml } from './html.ts';
-import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
+import type { BlogIslandSsrRenderer } from './index.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
 const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
+
+export const OPEN_GRAPH_OPTIONS = {
+	cacheDir: path.join(workspaceDirectory, '.cache/ox-content/ogp'),
+	persistCache: true,
+	timeout: 8_000,
+} as const satisfies OgpOptions;
 
 const magicLinkAliases = {
 	'vim-jp': {
@@ -83,46 +88,44 @@ const OX_MARKDOWN_OPTIONS = {
 	toc: false,
 } as const satisfies OxContentOptions;
 
-/**
- * Renders a post-colocated component to HTML so its island is present before
- * any JavaScript runs.
- *
- * Implemented by callers that have a Vite SSR loader because a Solid `.tsx`
- * file has to be compiled before it can be rendered.
- */
-export type IslandRenderer = (
-	moduleId: string,
-	props: Record<string, unknown>,
-) => Promise<string | null>;
-
 /** Options for rendering a Markdown or MDX document into the site article body. */
-export type RenderMarkdownOptions = {
+export type ContentMarkdownRenderOptions = {
 	/** Component names available to this document, mapped to their module ids. */
-	islands?: IslandModules;
+	islands?: Record<string, string>;
 	/** Whether Ox Content should parse MDX syntax for this document. */
 	mdx?: boolean;
-	renderIsland?: IslandRenderer;
+	/** Optional site adapter for server-rendering document-local Solid islands. */
+	islandSsr?: BlogIslandSsrRenderer;
 };
 
 /** A Markdown renderer whose island loader is supplied by the host. */
-export type MarkdownRenderer = (
+export type ContentMarkdownRenderer = (
 	content: string,
-	options?: Omit<RenderMarkdownOptions, 'renderIsland'>,
+	options?: Omit<ContentMarkdownRenderOptions, 'islandSsr'>,
 ) => Promise<string>;
 
-async function renderIslands(
+function escapeHtmlAttribute(value: string): string {
+	return value
+		.replaceAll('&', '&amp;')
+		.replaceAll('<', '&lt;')
+		.replaceAll('>', '&gt;')
+		.replaceAll('"', '&quot;')
+		.replaceAll("'", '&#39;');
+}
+
+async function renderBlogIslands(
 	html: string,
-	islands: IslandModules,
-	renderIsland: IslandRenderer | undefined,
+	islands: Record<string, string>,
+	islandSsr: BlogIslandSsrRenderer | undefined,
 ) {
 	const names = Object.keys(islands);
 	const rendered =
-		renderIsland == null
+		islandSsr == null
 			? html
 			: await applyIslandSsrHtml(
 					html,
 					async (name, props) => {
-						const body = await renderIsland(islands[name], props);
+						const body = await islandSsr(islands[name], props);
 						return body == null ? '' : `<div data-ox-island-root>${body}</div>`;
 					},
 					'/virtual/article.mdx',
@@ -132,8 +135,8 @@ async function renderIslands(
 	return names.reduce(
 		(output, name) =>
 			output.replaceAll(
-				`data-ox-island="${escapeHtml(name)}"`,
-				`data-ox-island="${escapeHtml(islands[name])}"`,
+				`data-ox-island="${escapeHtmlAttribute(name)}"`,
+				`data-ox-island="${escapeHtmlAttribute(islands[name])}"`,
 			),
 		rendered,
 	);
@@ -146,7 +149,10 @@ async function renderIslands(
  * @param options - Document-specific island and parser options.
  * @returns The rendered article HTML and referenced island module ids.
  */
-export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
+export async function renderContentMarkdown(
+	content: string,
+	options: ContentMarkdownRenderOptions = {},
+) {
 	const islands = options.islands ?? {};
 	const mdx = options.mdx ?? Object.keys(islands).length > 0;
 	const transformed = await renderOxMarkdown(
@@ -174,14 +180,14 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 
 	// Islands are rendered after every HTML transform so the link rewrites
 	// cannot alter component markup that the client then hydrates.
-	const body = await renderIslands(
+	const body = await renderBlogIslands(
 		applyReaderChromeHtml(media, {
 			backToTop: false,
 			copy: true,
 			externalLinks: false,
 		}),
 		islands,
-		options.renderIsland,
+		options.islandSsr,
 	);
 	return body;
 }

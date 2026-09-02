@@ -18,7 +18,7 @@
 		"test": "vp test --run --project=node --project=browser",
 		"test:browser": "vp test --project browser",
 		"test:browser:run": "vp test --run --project browser",
-		"typos": "typos --force-exclude src/contents src/content/blog src/content/showcase",
+		"typos": "typos --force-exclude src/content/external-rss src/content/works src/content/publication.json src/content/blog src/content/showcase",
 		"update:oss-stars": "./.github/update-oss-stars.nu"
 	},
 	"devDependencies": {

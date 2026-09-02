@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import process from 'node:process';
 import * as p from '@clack/prompts';
 import * as d from 'date-fns';
 import fs from 'fs-extra';
 import { stringify } from 'gray-matter-es';
 import openEditor from 'open-editor';
-import { blogDirectory } from '../src/content/paths.ts';
 
 p.intro('Create a new blog post');
 
@@ -32,7 +31,7 @@ if (p.isCancel(lang)) {
 
 p.log.message('Creating post...');
 
-const blogDir = blogDirectory();
+const blogDir = resolve(import.meta.dirname, '../src/content/blog');
 const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}-${lang}`;
 const postDir = join(blogDir, slug);
 const md = join(postDir, 'index.md');
