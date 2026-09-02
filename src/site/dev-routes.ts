@@ -119,7 +119,7 @@ export async function renderDevRoute(
 		return response(homePage(dependencies.assets).content);
 	}
 	if (pathname === '/about/') {
-		return response(aboutPage(dependencies.assets).content);
+		return response((await aboutPage(dependencies.assets)).content);
 	}
 	if (pathname.startsWith('/blog/')) {
 		return renderBlogRoute(pathname, dependencies);

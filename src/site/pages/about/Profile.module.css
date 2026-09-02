@@ -1,4 +1,4 @@
-.aboutCard {
+.profileCard {
 	position: relative;
 	isolation: isolate;
 	overflow: hidden;
@@ -11,13 +11,13 @@
 	box-shadow: 0 2rem 6rem #00000012;
 }
 
-.aboutPage {
+.page {
 	max-width: 56rem;
 	margin: 2rem auto 0;
 	padding: 0 0.5rem 5rem;
 }
 
-.aboutCardRule {
+.cardRule {
 	position: absolute;
 	top: 0;
 	right: 3rem;
@@ -28,23 +28,23 @@
 	opacity: 0.5;
 }
 
-.aboutCardContent {
+.cardContent {
 	position: relative;
 }
 
-.aboutVisuals {
+.visuals {
 	display: grid;
 	max-width: 20rem;
 	gap: 1rem;
 	margin-inline: auto;
 }
 
-.aboutPortrait,
-.aboutMascot {
+.portrait,
+.mascot {
 	margin: 0;
 }
 
-.aboutProfileImage {
+.profileImage {
 	display: block;
 	width: 50%;
 	max-width: 100%;
@@ -58,7 +58,7 @@
 	view-transition-name: name---profile;
 }
 
-.aboutMascotImage {
+.mascotImage {
 	display: block;
 	width: 80%;
 	max-width: 16rem;
@@ -72,19 +72,19 @@
 		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.aboutMascotImage:hover {
+.mascotImage:hover {
 	opacity: 1;
 	transform: scale(1.02);
 }
 
-.aboutCopy {
+.copy {
 	max-width: 42rem;
 	margin: 2.5rem auto 0;
 	border-top: 1px solid #8884;
 	padding-top: 2rem;
 }
 
-.aboutKicker {
+.copy > div > p:first-child {
 	font-family: var(--font-mono);
 	font-size: 1.125rem;
 	font-style: italic;
@@ -92,7 +92,7 @@
 	opacity: 0.6;
 }
 
-.aboutDescription {
+.copy > div > p:nth-child(2) {
 	margin-top: 1.25rem;
 	text-wrap: pretty;
 	font-size: 1.125rem;
@@ -100,18 +100,18 @@
 	color: var(--color-text-600);
 }
 
-.aboutName {
+.copy > div > p:nth-child(2) > strong {
 	font-weight: 600;
 	color: var(--color-text-800);
 }
 
-.aboutNameAlias {
+.copy [data-about-alias] {
 	font-family: var(--font-mono);
 	font-size: 0.875rem;
 	color: var(--color-text-400);
 }
 
-.aboutInlineLink {
+.copy > div > p:nth-child(2) > a {
 	font-weight: 500;
 	color: inherit;
 	text-decoration: underline;
@@ -122,26 +122,28 @@
 		text-decoration-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.aboutInlineLink:hover {
+.copy > div > p:nth-child(2) > a:hover {
 	text-decoration-color: var(--color-accent-100);
 }
 
-.aboutRole {
+.copy [data-about-role] {
 	font-weight: 500;
 	color: var(--color-text-700);
 }
 
-.aboutLinks {
+.links {
 	display: grid;
 	gap: 0 2.5rem;
 	margin-top: 2.5rem;
+	padding: 0;
+	list-style: none;
 }
 
-.aboutLinkItem {
+.linkItem {
 	border-bottom: 1px solid #8884;
 }
 
-.aboutLink {
+.link {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -155,81 +157,81 @@
 		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.aboutLink:hover {
+.link:hover {
 	color: var(--color-accent-100);
 }
 
-.aboutLinkArrow {
+.linkArrow {
 	opacity: 0.25;
 	transition:
 		transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
 		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.aboutLink:hover .aboutLinkArrow {
+.link:hover .linkArrow {
 	opacity: 0.8;
 	transform: translateX(0.25rem);
 }
 
-:global(html.dark) .aboutCard {
+:global(html.dark) .profileCard {
 	box-shadow: 0 2rem 6rem #00000045;
 }
 
-:global(html.dark) .aboutDescription {
+:global(html.dark) .copy > div > p:nth-child(2) {
 	color: var(--color-text-300);
 }
 
-:global(html.dark) .aboutName {
+:global(html.dark) .copy > div > p:nth-child(2) > strong {
 	color: var(--color-text-100);
 }
 
-:global(html.dark) .aboutRole {
+:global(html.dark) .copy [data-about-role] {
 	color: var(--color-text-200);
 }
 
-:global(html.dark) .aboutLink {
+:global(html.dark) .link {
 	color: var(--color-text-300);
 }
 
 @media (prefers-color-scheme: dark) {
-	:global(html:not(.js)) .aboutCard {
+	:global(html:not(.js)) .profileCard {
 		box-shadow: 0 2rem 6rem #00000045;
 	}
 
-	:global(html:not(.js)) .aboutDescription {
+	:global(html:not(.js)) .copy > div > p:nth-child(2) {
 		color: var(--color-text-300);
 	}
 
-	:global(html:not(.js)) .aboutName {
+	:global(html:not(.js)) .copy > div > p:nth-child(2) > strong {
 		color: var(--color-text-100);
 	}
 
-	:global(html:not(.js)) .aboutRole {
+	:global(html:not(.js)) .copy [data-about-role] {
 		color: var(--color-text-200);
 	}
 
-	:global(html:not(.js)) .aboutLink {
+	:global(html:not(.js)) .link {
 		color: var(--color-text-300);
 	}
 }
 
 @media (min-width: 40rem) {
-	.aboutCard {
+	.profileCard {
 		padding: 3rem 2.5rem;
 	}
 
-	.aboutDescription {
+	.copy > div > p:nth-child(2) {
 		font-size: 1.25rem;
 		line-height: 2.25rem;
 	}
 
-	.aboutLinks {
+	.links {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
 @media (min-width: 48rem) {
-	.aboutProfileImage {
+	.profileImage {
 		width: 16rem;
 		height: 16rem;
 	}

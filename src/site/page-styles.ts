@@ -4,7 +4,7 @@ type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;
 
 const pageStyleLoaders = {
-	about: () => import('./pages/about/About.module.css'),
+	about: () => import('./pages/about/Profile.module.css'),
 	article: () =>
 		Promise.all([
 			import('./pages/blog/article/page.css'),

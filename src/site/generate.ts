@@ -90,12 +90,13 @@ export async function generateSite({
 				: (emittedAssets.urls.get(new URL(project.image, 'https://content.invalid').pathname) ??
 					project.image),
 	}));
+	const about = await aboutPage(assets);
 
 	const pages = [
 		homePage(assets),
 		blogListPage([...externalPosts, ...postListItems(posts)], assets),
 		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
-		aboutPage(assets),
+		about,
 		ossPage(ossProjects, assets),
 		showcasePage(showcase, assets),
 		publicationsPage(publications, assets),

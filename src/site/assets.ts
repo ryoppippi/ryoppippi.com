@@ -35,7 +35,7 @@ export const DEV_ASSETS = {
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 	pages: {
-		about: '<link rel="stylesheet" href="/src/site/pages/about/About.module.css">',
+		about: '<link rel="stylesheet" href="/src/site/pages/about/Profile.module.css">',
 		article: [
 			'<link rel="stylesheet" href="/src/site/pages/blog/article/page.css">',
 			'<link rel="stylesheet" href="/src/site/pages/blog/article/Article.module.css">',
@@ -146,7 +146,7 @@ export function resolveSiteAssets(
 		oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 		islands,
 		pages: {
-			about: stylesFor('/pages/about/About.module.css'),
+			about: stylesFor('/pages/about/Profile.module.css'),
 			article: stylesForAll([
 				'/pages/blog/article/page.css',
 				'/pages/blog/article/Article.module.css',
@@ -248,7 +248,7 @@ if (import.meta.vitest != null) {
 					'src/site/components/Shell/Shell.module.css': {
 						file: 'assets/shell.css',
 					},
-					'src/site/pages/about/About.module.css': {
+					'src/site/pages/about/Profile.module.css': {
 						file: 'assets/about.css',
 					},
 					'src/site/pages/blog/article/page.css': {
