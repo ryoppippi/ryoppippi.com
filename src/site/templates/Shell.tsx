@@ -68,7 +68,7 @@ export default function Shell({ content, pathname }: ShellProps) {
 								<span class="fyc">
 									cv{' '}
 									<span
-										class="icon-[line-md--download-outline] size-[1em] shrink-0"
+										class="icon-[line-md--download-outline] size-[1em] shrink-0 dark:invert"
 										aria-hidden="true"
 									/>
 								</span>
@@ -76,7 +76,7 @@ export default function Shell({ content, pathname }: ShellProps) {
 							<div class="flex w-[4.375rem] justify-between [&_button]:my-auto [&_button]:flex [&_button]:cursor-pointer [&_button]:items-center [&_button]:border-0 [&_button]:bg-transparent [&_button]:p-0 [&_button]:text-inherit">
 								<span class="flex items-center" data-dark-mode />
 								<a class="fyc my-auto" aria-label="RSS feed" href="/feed.xml">
-									<span class="icon-[line-md--rss]" aria-hidden="true" />
+									<span class="icon-[line-md--rss] dark:invert" aria-hidden="true" />
 									<span class="sr-only">RSS feed</span>
 								</a>
 								<a

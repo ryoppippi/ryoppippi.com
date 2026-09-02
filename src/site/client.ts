@@ -29,8 +29,8 @@ function initialiseDarkMode(): void {
 		const dark = document.documentElement.classList.contains('dark');
 		button.ariaLabel = dark ? 'Switch to light mode' : 'Switch to dark mode';
 		icon.className = dark
-			? 'icon-[line-md--sunny-filled-loop-to-moon-filled-transition]'
-			: 'icon-[line-md--moon-filled-to-sunny-filled-loop-transition]';
+			? 'icon-[line-md--sunny-filled-loop-to-moon-filled-transition] dark:invert'
+			: 'icon-[line-md--moon-filled-to-sunny-filled-loop-transition] dark:invert';
 	};
 	button.addEventListener('click', (event) => {
 		const dark = !document.documentElement.classList.contains('dark');

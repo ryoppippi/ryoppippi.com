@@ -36,7 +36,7 @@ export default function Media({ items }: MediaProps) {
 					target="_blank"
 					type="application/rss+xml"
 				>
-					<span class="icon-[line-md--rss]" aria-hidden="true" />
+					<span class="icon-[line-md--rss] dark:invert" aria-hidden="true" />
 					Feed
 				</a>
 				{playlist != null && (
