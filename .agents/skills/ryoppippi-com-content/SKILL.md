@@ -12,7 +12,13 @@ For discovering and updating external articles, podcasts, or YouTube appearances
 - Blog posts live under `src/content/blog/<slug>/index.md`.
 - Read `src/content/blog/2024-10-12/index.md` for the supported Markdown extensions and frontmatter shape.
 - Tweet embeds are explicit: `<Tweet id="1234567890" />`. Keep the original URL in an HTML comment; a URL alone does not create an embed.
-- Ox Content stores fetched Tweet records under `.cache/ox-content/twitter/` and self-hosted media under `static/ox-content/twitter/`. Do not hand-edit them; run `pnpm build` after changing an embed and commit the generated evidence it requires.
+- Ox Content stores fetched Tweet records under `.cache/ox-content/twitter/` and self-hosted media under `static/ox-content/twitter/`. Do not hand-edit them; run `direnv exec . pnpm build` after changing an embed and commit the generated evidence it requires.
+
+## Translation and spelling
+
+- Preserve the source's meaning and voice. Keep frontmatter structure, code, links, HTML comments, and custom components intact; translate only human-facing text.
+- Write English in British English. For a bilingual pair, update `lang`, `permalink`, and `alternates` consistently; read an existing `-ja` and `-en` pair for the current shape.
+- Run `direnv exec . pnpm typos` after editing prose. Fix real errors in the source; add a term to `typos.toml` only when it is an intentional name or technical term.
 
 ## Post-local islands
 
@@ -20,7 +26,7 @@ For discovering and updating external articles, podcasts, or YouTube appearances
 - Use the import binding as the component tag, such as `<Chart />`. Props use Ox Content syntax: quoted strings, JSON in braces, or bare boolean attributes.
 - Resolved imports are removed from rendered Markdown; missing imports and unknown tags remain visible, so fix the path instead of hiding the error.
 - Read `src/content/islands.ts`, `src/content/island-renderer.ts`, and `src/content/markdown/render.ts` when the accepted syntax, path resolution, or SSR boundary is unclear.
-- Run `pnpm new` to create a post through `scripts/new-post.ts`; content rendering is part of the root Vite build.
+- Run `direnv exec . pnpm new` to create a post through `scripts/new-post.ts`; content rendering is part of the root Vite build.
 
 ## Portfolio data
 
