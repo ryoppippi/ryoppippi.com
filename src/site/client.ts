@@ -64,9 +64,22 @@ function initialiseFilters(): void {
 				'true';
 			const local =
 				document.querySelector<HTMLButtonElement>('[data-filter="local"]')?.ariaPressed === 'true';
-			for (const item of document.querySelectorAll<HTMLElement>('.blog-item')) {
+			const items = document.querySelectorAll<HTMLElement>('[data-blog-item]');
+			for (const item of items) {
 				item.hidden =
 					(english && item.dataset.lang !== 'en') || (local && item.dataset.origin !== 'local');
+			}
+			const status = document.querySelector<HTMLElement>('#blog-filter-status');
+			if (status != null) {
+				const activeFilters = [
+					english ? 'English only' : undefined,
+					local ? 'ryoppippi.com exclusive' : undefined,
+				].filter((filter): filter is string => filter != null);
+				const visible = [...items].filter((item) => !item.hidden).length;
+				status.textContent =
+					activeFilters.length === 0
+						? `Showing all ${items.length} blog posts`
+						: `Showing ${visible} of ${items.length} blog posts (${activeFilters.join(' and ')})`;
 			}
 		});
 	}
@@ -83,11 +96,11 @@ function initialiseTalkFilter(): void {
 		button.ariaPressed = String(pressed);
 		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox]', !pressed);
 		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox-checked]', pressed);
-		for (const item of document.querySelectorAll<HTMLElement>('.talk-item')) {
+		for (const item of document.querySelectorAll<HTMLElement>('[data-talk-item]')) {
 			item.hidden = pressed && item.dataset.lang !== 'en';
 		}
 		for (const section of document.querySelectorAll<HTMLElement>('[data-talk-year]')) {
-			section.hidden = [...section.querySelectorAll<HTMLElement>('.talk-item')].every(
+			section.hidden = [...section.querySelectorAll<HTMLElement>('[data-talk-item]')].every(
 				(item) => item.hidden,
 			);
 		}
@@ -123,11 +136,11 @@ function initialiseMediaFilter(): void {
 		button.ariaPressed = String(pressed);
 		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox]', !pressed);
 		button.querySelector('span')?.classList.toggle('icon-[carbon--checkbox-checked]', pressed);
-		for (const item of document.querySelectorAll<HTMLElement>('.media-item')) {
+		for (const item of document.querySelectorAll<HTMLElement>('[data-media-item]')) {
 			item.hidden = pressed && item.dataset.lang !== 'en';
 		}
 		for (const section of document.querySelectorAll<HTMLElement>('[data-media-year]')) {
-			section.hidden = [...section.querySelectorAll<HTMLElement>('.media-item')].every(
+			section.hidden = [...section.querySelectorAll<HTMLElement>('[data-media-item]')].every(
 				(item) => item.hidden,
 			);
 		}

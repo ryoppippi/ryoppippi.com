@@ -38,6 +38,14 @@ export default function BlogList({ items }: BlogListProps) {
 					ryoppippi.com exclusive
 				</button>
 			</div>
+			<span
+				class={styles.visuallyHidden}
+				id="blog-filter-status"
+				aria-atomic="true"
+				aria-live="polite"
+			>
+				Showing all blog posts
+			</span>
 
 			<div class={styles.blogList}>
 				{items.map((item) => {

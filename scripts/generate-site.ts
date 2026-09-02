@@ -13,6 +13,11 @@ type GenerateSite = (options: {
 	root: string;
 }) => Promise<void>;
 
+function manifestCssFiles(manifest: Record<string, ManifestChunk>, source: string): string[] {
+	const chunk = manifest[source];
+	return chunk?.css ?? (chunk?.file.endsWith('.css') === true ? [chunk.file] : []);
+}
+
 async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 	const [index, manifestSource] = await Promise.all([
 		readFile(path.join(outDir, 'index.html'), 'utf8'),
@@ -20,17 +25,19 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 	]);
 	const manifest = JSON.parse(manifestSource) as Record<string, ManifestChunk>;
 	const assets = resolveSiteAssets(index, manifest);
-	const baseFiles = manifest['index.html']?.css ?? [];
-	const homeFile = manifest['src/site/pages/home/Home.module.css']?.file;
-	if (baseFiles.length === 0 || homeFile == null) {
+	const baseFiles = [
+		...manifestCssFiles(manifest, 'index.html'),
+		...manifestCssFiles(manifest, 'src/site/components/Shell/Shell.module.css'),
+	];
+	const homeFiles = manifestCssFiles(manifest, 'src/site/pages/home/Home.module.css');
+	if (baseFiles.length === 0 || homeFiles.length === 0) {
 		throw new Error('Missing CSS assets for inline home styles');
 	}
-	const [base, home] = await Promise.all([
-		Promise.all(baseFiles.map((file) => readFile(path.join(outDir, file), 'utf8'))).then((files) =>
-			files.join('\n'),
-		),
-		readFile(path.join(outDir, homeFile), 'utf8'),
-	]);
+	const readCss = (files: readonly string[]) =>
+		Promise.all(files.map((file) => readFile(path.join(outDir, file), 'utf8'))).then((contents) =>
+			contents.join('\n'),
+		);
+	const [base, home] = await Promise.all([readCss([...new Set(baseFiles)]), readCss(homeFiles)]);
 	return inlineHomeStyles(assets, base, home);
 }
 
