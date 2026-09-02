@@ -17,6 +17,8 @@ export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedF
 		path: 'works/media/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
+			'src/site/pages/works/_components',
+			'src/site/pages/works/page.css',
 			'src/site/pages/works/media',
 			'src/contents/external-rss/media.json',
 		],

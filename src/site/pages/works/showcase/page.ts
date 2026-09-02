@@ -15,6 +15,8 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 	return {
 		path: 'works/showcase/index.html',
 		sourcePaths: [
+			'src/site/pages/works/_components',
+			'src/site/pages/works/page.css',
 			'src/site/pages/works/showcase',
 			'src/content/showcase.ts',
 			'src/content/showcase',

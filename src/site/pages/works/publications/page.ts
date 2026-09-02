@@ -20,6 +20,8 @@ export function publicationsPage(
 		path: 'works/publications/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
+			'src/site/pages/works/_components',
+			'src/site/pages/works/page.css',
 			'src/site/pages/works/publications',
 			'src/contents/publication.json',
 		],

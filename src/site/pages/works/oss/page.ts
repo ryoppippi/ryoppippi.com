@@ -16,8 +16,11 @@ export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFi
 		path: 'works/oss/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
+			'src/site/pages/works/_components',
+			'src/site/pages/works/page.css',
 			'src/site/pages/works/oss',
 			'src/contents/works/oss/list.json',
+			'src/contents/works/oss/stars.json',
 		],
 		content: page({
 			title: 'Open-source projects',
