@@ -106,7 +106,7 @@ export async function generateSite({
 	await writeGeneratedFiles(outDir, pages);
 	await writeOxContentOutputFiles({ media: externalMedia, outDir, pages, root });
 
-	const install = extractSection(dotfiles, 'Initial Setup');
+	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [
 		['mac', 'macOS'],
 		['linux', 'Linux'],

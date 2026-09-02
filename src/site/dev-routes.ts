@@ -93,7 +93,7 @@ async function renderDotfilesRoute(
 	}
 	const readme = await dependencies.loadDotfiles();
 	if (pathname === '/dotfiles/install') {
-		return response(extractSection(readme, 'Initial Setup'), textContentType);
+		return response(extractSection(readme, 'Setup'), textContentType);
 	}
 
 	const sectionMatch = /^\/dotfiles\/(mac|linux)\.html$/.exec(pathname);

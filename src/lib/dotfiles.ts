@@ -41,7 +41,7 @@ export async function fetchDotfilesReadme(fetch: typeof globalThis.fetch): Promi
  * @throws If no heading matches.
  * @example
  * ```ts
- * const install = extractSection(readme, 'Initial Setup');
+ * const install = extractSection(readme, 'Setup');
  * ```
  */
 export function extractSection(markdown: string, heading: string): string {
@@ -86,12 +86,12 @@ export function extractSection(markdown: string, heading: string): string {
 /**
  * Heading of the install instructions inside the dotfiles README.
  */
-const INSTALL_HEADING = 'Initial Setup';
+const INSTALL_HEADING = 'Setup';
 
 /**
  * Extract the install steps for a single operating system from the README.
  *
- * The lookup is scoped to the `Initial Setup` section first, so OS sub-headings
+ * The lookup is scoped to the `Setup` section first, so OS sub-headings
  * that appear elsewhere in the README (e.g. under "Available Nix Apps") are
  * never matched by mistake.
  *
@@ -252,7 +252,7 @@ if (import.meta.vitest != null) {
 	const readme = [
 		'## Nix Configuration',
 		'',
-		'### Initial Setup',
+		'### Setup',
 		'',
 		'#### macOS',
 		'',
@@ -270,15 +270,15 @@ if (import.meta.vitest != null) {
 	].join('\n');
 
 	describe(extractInstallSection, () => {
-		it('extracts the OS section scoped to Initial Setup', () => {
+		it('extracts the OS section scoped to Setup', () => {
 			expect(extractInstallSection(readme, 'macOS')).toBe('#### macOS\n\nmac steps');
 		});
 
-		it('does not match OS sub-headings outside Initial Setup', () => {
+		it('does not match OS sub-headings outside Setup', () => {
 			expect(extractInstallSection(readme, 'macOS')).not.toContain('mac apps');
 		});
 
-		it('extracts the last OS section up to the end of Initial Setup', () => {
+		it('extracts the last OS section up to the end of Setup', () => {
 			expect(extractInstallSection(readme, 'Linux')).toBe('#### Linux\n\nlinux steps');
 		});
 	});
