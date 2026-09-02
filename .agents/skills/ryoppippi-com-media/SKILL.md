@@ -13,7 +13,7 @@ Read the current data and rendering code before searching:
 - `src/contents/external-rss/rss.json` — RSS feed sources used for external articles.
 - `src/contents/external-rss/media.json` — curated podcasts, videos, and the YouTube playlist.
 - `src/site/content.ts` — separation between Blog articles and Media entries.
-- `src/site/templates/Media.svelte` and `src/site/templates/Talks.svelte` — visible grouping, metadata, filters, and links.
+- `src/site/templates/Media.tsx` and `src/site/templates/Talks.tsx` — visible grouping, metadata, filters, and links.
 
 Use `ryoppippi-com-content` for blog-content implementation details after the source has been selected.
 
@@ -52,12 +52,12 @@ Before finishing, check for duplicate canonical URLs, invalid dates, missing tit
 Run these from the repository root:
 
 ```bash
-nix develop -c pnpm check
-nix develop -c pnpm test
-nix develop -c pnpm build
+direnv exec . pnpm check
+direnv exec . pnpm test
+direnv exec . pnpm build
 ```
 
-For UI changes or source updates, start the dev server with `nix develop -c pnpm dev --host 127.0.0.1` and inspect:
+For UI changes or source updates, start the dev server with `direnv exec . pnpm dev --host 127.0.0.1` and inspect:
 
 - `/blog/` — articles only; no podcast or video entries.
 - `/works/talks/` — formal talks, event links, slides, and talk video links.

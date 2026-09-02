@@ -120,7 +120,7 @@ export default defineConfig(({ command, mode }) => ({
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
 						'src/site/{generate,page-styles,pages,syntax-theme}.ts',
-						'src/content/{artifact,blog,island-renderer,islands,markdown-cache,paths}.ts',
+						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
 						'src/content/blog/**/*.ts',
 						'src/content/markdown/**/*.ts',
 					],
