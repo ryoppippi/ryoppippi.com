@@ -97,7 +97,7 @@
                   fi
                 fi
 
-                ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
+                AGENT_SKILLS_QUIET=1 ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
               '';
             };
         }
