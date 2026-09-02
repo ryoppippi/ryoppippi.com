@@ -1,6 +1,6 @@
 import type { DefaultTreeAdapterMap } from 'parse5';
 import { createHash } from 'node:crypto';
-import { link, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { link, mkdir, readFile, stat, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseFragment, serialize } from 'parse5';
 import { glob } from 'tinyglobby';
@@ -14,13 +14,34 @@ export type EmittedContentAssets = {
 	urls: ReadonlyMap<string, string>;
 };
 
+async function ensureHardLink(source: string, destination: string): Promise<void> {
+	try {
+		await link(source, destination);
+	} catch (error) {
+		if (!(error instanceof Error && 'code' in error && error.code === 'EEXIST')) {
+			throw error;
+		}
+		const [sourceStat, destinationStat] = await Promise.all([stat(source), stat(destination)]);
+		if (sourceStat.dev !== destinationStat.dev || sourceStat.ino !== destinationStat.ino) {
+			await unlink(destination);
+			await link(source, destination);
+		}
+	}
+}
+
 export async function contentAssetSources(
 	blogDir: string,
 	showcaseDir: string,
 ): Promise<ContentAssetSource[]> {
 	const [blogAssets, showcaseAssets] = await Promise.all([
-		glob(['**/*', '!**/*.md', '!**/*.generated.json'], { cwd: blogDir, onlyFiles: true }),
-		glob(['**/*', '!**/*.md', '!**/index.ts'], { cwd: showcaseDir, onlyFiles: true }),
+		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json'], {
+			cwd: blogDir,
+			onlyFiles: true,
+		}),
+		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/index.ts'], {
+			cwd: showcaseDir,
+			onlyFiles: true,
+		}),
 	]);
 	const publicUrl = (...parts: string[]) =>
 		`/${parts
@@ -89,7 +110,7 @@ export async function emitDeduplicatedAssets(
 				...asset.url.split('/').filter(Boolean).map(decodeURIComponent),
 			);
 			await mkdir(path.dirname(alias), { recursive: true });
-			await link(path.join(outDir, target.slice(1)), alias);
+			await ensureHardLink(path.join(outDir, target.slice(1)), alias);
 		}),
 	);
 
@@ -138,9 +159,8 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
+				'blog/post/component.mdx': '<Component />',
 				'blog/post/image one.png': 'image',
-				'blog/post/tweets.generated.json': '{}',
-				'blog/post/ogp.generated.json': '{}',
 				'showcase/project.md': '# Project',
 				'showcase/project cover.jpg': 'cover',
 				'showcase/index.ts': 'export {}',
@@ -165,6 +185,38 @@ if (import.meta.vitest != null) {
 	});
 
 	describe(emitDeduplicatedAssets, () => {
+		it('reuses aliases emitted by an earlier SSG pass', async () => {
+			const [{ createFixture }, { stat }] = await Promise.all([
+				import('fs-fixture'),
+				import('node:fs/promises'),
+			]);
+			await using fixture = await createFixture({ 'input/image.png': 'same image' });
+			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
+
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+
+			const asset = await stat(fixture.getPath('output/blog/post/image.png'));
+			expect(asset.nlink).toBe(2);
+		});
+
+		it('updates an alias when its source content changes', async () => {
+			const [{ createFixture }, { readFile, writeFile }] = await Promise.all([
+				import('fs-fixture'),
+				import('node:fs/promises'),
+			]);
+			await using fixture = await createFixture({ 'input/image.png': 'old image' });
+			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
+
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+			await writeFile(fixture.getPath('input/image.png'), 'new image');
+			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
+
+			expect(await readFile(fixture.getPath('output/blog/post/image.png'), 'utf8')).toBe(
+				'new image',
+			);
+		});
+
 		it('emits identical asset contents once', async () => {
 			const [{ createFixture }, { readdir }] = await Promise.all([
 				import('fs-fixture'),

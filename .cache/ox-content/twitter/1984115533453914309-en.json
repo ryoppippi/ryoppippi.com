@@ -1,0 +1,196 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 7,
+	"lang": "ja",
+	"created_at": "2025-10-31T04:29:40.000Z",
+	"display_text_range": [0, 29],
+	"entities": {},
+	"id_str": "1984115533453914309",
+	"text": "お土産ありがとうございます！家族といっしょにいただきます！",
+	"user": {
+		"id_str": "17755912",
+		"name": "kazupon",
+		"screen_name": "kazupon",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1991304146931322880/cJhUyeeQ_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1984115533453914309"],
+		"editable_until_msecs": "1761888580000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"favorite_count": 10,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"reply_count": 0,
+		"retweet_count": 1,
+		"created_at": "2025-10-31T04:25:44.000Z",
+		"display_text_range": [0, 23],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/dJViWonQa1",
+					"expanded_url": "https://x.com/ryoppippi/status/1984114541563932952/photo/1",
+					"indices": [24, 47],
+					"url": "https://t.co/dJViWonQa1"
+				}
+			]
+		},
+		"id_str": "1984114541563932952",
+		"text": "こないだご飯行ったのにお土産渡し忘れてたので！ https://t.co/dJViWonQa1",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"initial_tweet_id": "1984114041934245982",
+			"edit_tweet_ids": ["1984114041934245982", "1984114541563932952"],
+			"editable_until_msecs": "1761888225000",
+			"edits_remaining": "4",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/dJViWonQa1",
+				"expanded_url": "https://x.com/ryoppippi/status/1984114541563932952/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [24, 47],
+				"media_url_https": "https://pbs.twimg.com/media/G4j9My6a8AEyJ2q.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 2294,
+							"w": 4096,
+							"x": 0,
+							"y": 778
+						},
+						{
+							"h": 3072,
+							"w": 3072,
+							"x": 1024,
+							"y": 0
+						},
+						{
+							"h": 3072,
+							"w": 2695,
+							"x": 1401,
+							"y": 0
+						},
+						{
+							"h": 3072,
+							"w": 1536,
+							"x": 2201,
+							"y": 0
+						},
+						{
+							"h": 3072,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 3072,
+					"width": 4096
+				},
+				"sizes": {
+					"large": {
+						"h": 1536,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 900,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 510,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/dJViWonQa1"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 2294,
+						"w": 4096,
+						"x": 0,
+						"y": 778
+					},
+					{
+						"h": 3072,
+						"w": 3072,
+						"x": 1024,
+						"y": 0
+					},
+					{
+						"h": 3072,
+						"w": 2695,
+						"x": 1401,
+						"y": 0
+					},
+					{
+						"h": 3072,
+						"w": 1536,
+						"x": 2201,
+						"y": 0
+					},
+					{
+						"h": 3072,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/ryoppippi/status/1984114541563932952/photo/1",
+				"url": "https://pbs.twimg.com/media/G4j9My6a8AEyJ2q.jpg",
+				"width": 4096,
+				"height": 3072
+			}
+		],
+		"isEdited": true,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

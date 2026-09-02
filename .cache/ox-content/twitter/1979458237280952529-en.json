@@ -1,0 +1,174 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 20,
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-18T08:03:14.000Z",
+	"display_text_range": [0, 168],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/djlj6k6ry3",
+				"expanded_url": "https://x.com/ryoppippi/status/1979458237280952529/photo/1",
+				"indices": [169, 192],
+				"url": "https://t.co/djlj6k6ry3"
+			}
+		]
+	},
+	"id_str": "1979458237280952529",
+	"text": "It was a short time, but I was honored to have the opportunity to have a chat with you! It was fun to hear about creating products in AI era. got so much inspiration!!! https://t.co/djlj6k6ry3",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"initial_tweet_id": "1979456916725338473",
+		"edit_tweet_ids": ["1979456916725338473", "1979458175746347193", "1979458237280952529"],
+		"editable_until_msecs": "1760777880000",
+		"edits_remaining": "3",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/djlj6k6ry3",
+			"expanded_url": "https://x.com/ryoppippi/status/1979458237280952529/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [169, 192],
+			"media_url_https": "https://pbs.twimg.com/media/G3hxkcDW8AAo2t2.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 2258,
+						"w": 4032,
+						"x": 0,
+						"y": 383
+					},
+					{
+						"h": 3024,
+						"w": 3024,
+						"x": 604,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 2653,
+						"x": 790,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 1512,
+						"x": 1360,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 4032,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 3024,
+				"width": 4032
+			},
+			"sizes": {
+				"large": {
+					"h": 1536,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 510,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/djlj6k6ry3"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 2258,
+					"w": 4032,
+					"x": 0,
+					"y": 383
+				},
+				{
+					"h": 3024,
+					"w": 3024,
+					"x": 604,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 2653,
+					"x": 790,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 1512,
+					"x": 1360,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 4032,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1979458237280952529/photo/1",
+			"url": "https://pbs.twimg.com/media/G3hxkcDW8AAo2t2.jpg",
+			"width": 4032,
+			"height": 3024
+		}
+	],
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": true,
+	"isStaleEdit": false,
+	"previous_counts": {
+		"favorite_count": 1,
+		"quote_count": 0,
+		"reply_count": 0,
+		"retweet_count": 0
+	}
+}

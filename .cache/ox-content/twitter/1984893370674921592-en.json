@@ -1,0 +1,161 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 1,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-11-02T08:00:31.000Z",
+	"display_text_range": [0, 22],
+	"entities": {
+		"hashtags": [
+			{
+				"indices": [14, 22],
+				"text": "vimconf"
+			}
+		],
+		"media": [
+			{
+				"display_url": "pic.x.com/2nhMkUzvb4",
+				"expanded_url": "https://x.com/tomoyaton/status/1984893370674921592/photo/1",
+				"indices": [23, 46],
+				"url": "https://t.co/2nhMkUzvb4"
+			}
+		]
+	},
+	"id_str": "1984893370674921592",
+	"text": "ryoppippi の発表 #vimconf https://t.co/2nhMkUzvb4",
+	"user": {
+		"id_str": "22469275",
+		"name": "tomoya",
+		"screen_name": "tomoyaton",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1364231497360678912/OZSDtc9E_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1984893370674921592"],
+		"editable_until_msecs": "1762074031000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/2nhMkUzvb4",
+			"expanded_url": "https://x.com/tomoyaton/status/1984893370674921592/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [23, 46],
+			"media_url_https": "https://pbs.twimg.com/media/G4vB_rFbQAMoN7J.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 2258,
+						"w": 4032,
+						"x": 0,
+						"y": 181
+					},
+					{
+						"h": 3024,
+						"w": 3024,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 2653,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 1512,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 3024,
+						"w": 4032,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 3024,
+				"width": 4032
+			},
+			"sizes": {
+				"large": {
+					"h": 1536,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 510,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/2nhMkUzvb4"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 2258,
+					"w": 4032,
+					"x": 0,
+					"y": 181
+				},
+				{
+					"h": 3024,
+					"w": 3024,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 2653,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 1512,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 3024,
+					"w": 4032,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/tomoyaton/status/1984893370674921592/photo/1",
+			"url": "https://pbs.twimg.com/media/G4vB_rFbQAMoN7J.jpg",
+			"width": 4032,
+			"height": 3024
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

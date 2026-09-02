@@ -1,0 +1,189 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 49,
+	"lang": "en",
+	"possibly_sensitive": false,
+	"created_at": "2025-08-11T14:23:30.000Z",
+	"display_text_range": [0, 198],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/DLvYr0lxG2",
+				"expanded_url": "https://x.com/ryoppippi/status/1954911556879388686/photo/1",
+				"indices": [199, 222],
+				"url": "https://t.co/DLvYr0lxG2"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "3780357442",
+				"indices": [159, 172],
+				"name": "Kevin Deng 🦋 @sxzz.dev",
+				"screen_name": "sanxiaozhizi"
+			},
+			{
+				"id_str": "754180806373814274",
+				"indices": [173, 182],
+				"name": "Boshen",
+				"screen_name": "boshen_c"
+			},
+			{
+				"id_str": "702480823967154176",
+				"indices": [183, 198],
+				"name": "Alexander Lichter",
+				"screen_name": "TheAlexLichter"
+			}
+		]
+	},
+	"id_str": "1954911556879388686",
+	"text": "I just update tsdown from 0.13.4 -&gt; 0.13.5\n- same codebase\n- same dependencies\n- same tsdown configuration\n\nbut the total bundle is -100KB\nwhat happend!??! @sanxiaozhizi @boshen_c @TheAlexLichter https://t.co/DLvYr0lxG2",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1954911556879388686"],
+		"editable_until_msecs": "1754925810000",
+		"edits_remaining": "5",
+		"is_edit_eligible": false
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/DLvYr0lxG2",
+			"expanded_url": "https://x.com/ryoppippi/status/1954911556879388686/photo/1",
+			"ext_alt_text": "~/g/g/r/ccusage @3b850bc• ❱ bun run build | grep total:\n$ tsdown\nThe `tsgo` option is experimental and may change in the future.\nℹ 25 files, total: 946.01 kB\n~/g/g/r/ccusage @3b850bc• ❱ bun tsdown --version\ntsdown/0.13.5 darwin-arm64 node-v24.3.0\n~/g/g/r/ccusage @3b850bc• ❱\n\n\n~/g/g/r/ccusage @bb47158• ❱ bun run build | grep total:\n$ tsdown\nThe `tsgo` option is experimental and may change in the future.\nℹ 25 files, total: 1048.05 kB\n~/g/g/r/ccusage @bb47158• ❱ bun tsdown --version\ntsdown/0.13.4 darwin-arm64 node-v24.3.0\n~/g/g/r/ccusage @bb47158• ❱",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [199, 222],
+			"media_url_https": "https://pbs.twimg.com/media/GyE9KV-XEAAFHfr.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 900,
+						"w": 1607,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 900,
+						"w": 900,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 900,
+						"w": 789,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 900,
+						"w": 450,
+						"x": 61,
+						"y": 0
+					},
+					{
+						"h": 900,
+						"w": 1636,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 900,
+				"width": 1636
+			},
+			"sizes": {
+				"large": {
+					"h": 900,
+					"resize": "fit",
+					"w": 1636
+				},
+				"medium": {
+					"h": 660,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 374,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/DLvYr0lxG2"
+		}
+	],
+	"photos": [
+		{
+			"accessibilityLabel": "~/g/g/r/ccusage @3b850bc• ❱ bun run build | grep total:\n$ tsdown\nThe `tsgo` option is experimental and may change in the future.\nℹ 25 files, total: 946.01 kB\n~/g/g/r/ccusage @3b850bc• ❱ bun tsdown --version\ntsdown/0.13.5 darwin-arm64 node-v24.3.0\n~/g/g/r/ccusage @3b850bc• ❱\n\n\n~/g/g/r/ccusage @bb47158• ❱ bun run build | grep total:\n$ tsdown\nThe `tsgo` option is experimental and may change in the future.\nℹ 25 files, total: 1048.05 kB\n~/g/g/r/ccusage @bb47158• ❱ bun tsdown --version\ntsdown/0.13.4 darwin-arm64 node-v24.3.0\n~/g/g/r/ccusage @bb47158• ❱",
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 900,
+					"w": 1607,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 900,
+					"w": 900,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 900,
+					"w": 789,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 900,
+					"w": 450,
+					"x": 61,
+					"y": 0
+				},
+				{
+					"h": 900,
+					"w": 1636,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1954911556879388686/photo/1",
+			"url": "https://pbs.twimg.com/media/GyE9KV-XEAAFHfr.jpg",
+			"width": 1636,
+			"height": 900
+		}
+	],
+	"conversation_count": 3,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

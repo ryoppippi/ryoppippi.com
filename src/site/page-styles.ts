@@ -1,4 +1,4 @@
-import { PAGE_STYLES, type PageStyle } from './assets.ts';
+import { PAGE_STYLES, type PageStyle } from './page-style.ts';
 
 type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;
@@ -50,9 +50,9 @@ if (import.meta.vitest != null) {
 			expect(
 				missingPageStyles(
 					['/assets/base.css', '/assets/article.css'],
-					['/assets/base.css', '/assets/article.css', '/assets/Tweet.css'],
+					['/assets/base.css', '/assets/article.css', '/assets/Chart.css'],
 				),
-			).toEqual(['/assets/Tweet.css']);
+			).toEqual(['/assets/Chart.css']);
 		});
 	});
 

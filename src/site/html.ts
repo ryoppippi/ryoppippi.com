@@ -1,12 +1,10 @@
-import type { Component } from 'svelte';
-import type { Graph, Thing, WithContext } from 'schema-dts';
+import type { Component } from 'solid-js';
 import type { PageStyle, SiteAssets } from './assets.ts';
-import { render } from 'svelte/server';
+import type { StructuredData } from './head.ts';
+import { renderToString } from '@solidjs/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import Shell from './templates/Shell.svelte';
-
-type StructuredData = Graph | WithContext<Thing>;
+import Shell from './templates/Shell.tsx';
 
 type PageOptions = {
 	article?: boolean;
@@ -21,7 +19,6 @@ type PageOptions = {
 	pathname: string;
 	style: PageStyle;
 	title: string;
-	tweet?: boolean;
 	structuredData?: StructuredData;
 };
 
@@ -38,17 +35,17 @@ function escapeAttribute(value: string): string {
 }
 
 /**
- * Server-renders a Svelte component and returns its body markup.
+ * Server-renders a Solid component and returns its body markup.
  *
- * @param component - The Svelte component to render.
+ * @param component - The Solid component to render.
  * @param props - Props accepted by the component.
  * @returns The rendered component body.
  */
-export function renderComponent<Props extends Record<string, unknown>>(
+export function renderComponent<Props extends object>(
 	component: Component<Props>,
 	props: Props,
 ): string {
-	return render(component, { props }).body;
+	return renderToString(() => component(props));
 }
 
 /**
@@ -70,16 +67,10 @@ export function page({
 	assets,
 	islands = [],
 	style,
-	tweet = false,
 	structuredData,
 }: PageOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
-	const body = render(Shell, {
-		props: {
-			content,
-			pathname,
-		},
-	}).body;
+	const body = renderComponent(Shell, { content, pathname });
 	const head = renderPageHead({
 		article,
 		alternates,
@@ -92,6 +83,6 @@ export function page({
 		title,
 	});
 	const theme =
-		"document.documentElement.classList.add('js');try{const theme=localStorage.theme;document.documentElement.classList.toggle('dark',theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{document.documentElement.classList.toggle('dark',matchMedia('(prefers-color-scheme: dark)').matches)}";
-	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, tweet, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
+		"document.documentElement.classList.add('js');const applyTheme=dark=>{document.documentElement.classList.toggle('dark',dark);document.documentElement.dataset.theme=dark?'dark':'light'};try{const theme=localStorage.theme;applyTheme(theme==='dark'||(theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))}catch{applyTheme(matchMedia('(prefers-color-scheme: dark)').matches)}";
+	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>${theme}</script>${renderAssetTags(assets, style, islands)}</head><body data-page-style="${style}">${body}</body></html>`;
 }

@@ -1,5 +1,8 @@
 {
 	"extends": "./tsconfig.base.json",
-	"include": ["src/**/*.ts", "src/**/*.svelte", "scripts/**/*.ts", "*.ts"],
-	"exclude": ["packages"]
+	"compilerOptions": {
+		"jsx": "preserve",
+		"jsxImportSource": "@solidjs/web"
+	},
+	"include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.ts", "*.ts"]
 }

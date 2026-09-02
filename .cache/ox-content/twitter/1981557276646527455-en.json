@@ -1,0 +1,78 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 4,
+	"lang": "ja",
+	"created_at": "2025-10-24T03:04:04.000Z",
+	"display_text_range": [0, 43],
+	"entities": {},
+	"id_str": "1981557276646527455",
+	"text": "とても楽しかった and 美味しかったです！\n次回はイギリスでパンケーキ食べましょう！",
+	"user": {
+		"id_str": "2473432872",
+		"name": "r.kagaya | オライリーAIエンジニアリングが発売中です",
+		"screen_name": "ry0_kaga",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1925028677060026368/_3E5w9zl_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1981557276646527455"],
+		"editable_until_msecs": "1761278644000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"favorite_count": 3,
+		"lang": "ja",
+		"reply_count": 0,
+		"retweet_count": 0,
+		"created_at": "2025-10-24T02:45:15.000Z",
+		"display_text_range": [0, 35],
+		"entities": {
+			"user_mentions": [
+				{
+					"id_str": "2473432872",
+					"indices": [3, 12],
+					"name": "r.kagaya | オライリーAIエンジニアリングが発売中です",
+					"screen_name": "ry0_kaga"
+				}
+			]
+		},
+		"id_str": "1981552537972162592",
+		"text": "朝は @ry0_kaga 氏とパンケーキ食べてました！楽しかったです！",
+		"user": {
+			"id_str": "113598297",
+			"name": "ryoppippi",
+			"screen_name": "ryoppippi",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+			"highlighted_label": {
+				"badge": {
+					"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+				},
+				"description": "Rork",
+				"url": {
+					"url": "https://twitter.com/rork",
+					"url_type": "DeepLink"
+				},
+				"user_label_display_type": "Badge",
+				"user_label_type": "BusinessLabel"
+			}
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1981552537972162592"],
+			"editable_until_msecs": "1761277515000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

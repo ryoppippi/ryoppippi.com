@@ -24,7 +24,7 @@ details > *:not(summary) {
 	margin-left: 1.25rem;
 }
 
-.details-marker::before {
+details > summary::before {
 	content: '▶︎';
 	display: inline-block;
 	margin-right: 0.5ch;
@@ -32,7 +32,7 @@ details > *:not(summary) {
 	transition: 0.3s;
 }
 
-details[open] > summary .details-marker::before {
+details[open] > summary::before {
 	transform: rotate(90deg);
 	transform-origin: 40% 45% 0;
 }

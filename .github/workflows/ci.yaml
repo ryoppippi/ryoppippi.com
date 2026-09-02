@@ -20,6 +20,9 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
+      - name: Install Chromium for browser tests
+        run: pnpm exec playwright install --with-deps chromium
+
       - parallel:
           - name: Run Gitleaks
             run: gitleaks detect --source . --config .gitleaks.toml

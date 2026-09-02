@@ -1,7 +1,9 @@
-import type { TweetData } from '@ryoppippi/content';
-import type { JSX } from 'solid-js';
-import type { Component } from 'svelte';
-import '../styles/fonts.css';
+import type { JSX } from '@solidjs/web';
+import { initIslands, type IslandController } from '@ox-content/islands';
+import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
+import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
+import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
+import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
 import {
 	loadPageStyle,
 	missingPageStyles,
@@ -10,71 +12,6 @@ import {
 } from './page-styles.ts';
 import { hashTargetId } from './navigation.ts';
 import './style.css';
-
-const tweetCleanups = new Set<() => Promise<void>>();
-
-/**
- * Runs an action with all CSS transitions disabled so colour-scheme changes
- * apply instantly instead of tweening element by element.
- *
- * @see https://reemus.dev/article/disable-css-transition-color-scheme-change
- */
-function withoutTransition(action: () => void): void {
-	const style = document.createElement('style');
-	style.textContent = '* { transition: none !important; }';
-	document.head.append(style);
-	action();
-	// Reading a computed style forces a repaint while transitions are still disabled
-	void window.getComputedStyle(style).opacity;
-	style.remove();
-}
-
-/**
- * Applies a theme change with a circular reveal that expands from the given
- * point, ported from svelte-fancy-darkmode.
- *
- * Credit to [@hooray](https://github.com/hooray)
- * @see https://github.com/vuejs/vitepress/pull/2347
- * @see https://github.com/ryoppippi/svelte-fancy-darkmode
- */
-function animateThemeChange(x: number, y: number, apply: () => void): void {
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (document.startViewTransition == null || prefersReducedMotion) {
-		apply();
-		return;
-	}
-
-	// The reveal circle grows from the given point to the furthest viewport corner
-	const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-	const transition = document.startViewTransition(apply);
-	void transition.ready.then(() =>
-		withoutTransition(() => {
-			const dark = document.documentElement.classList.contains('dark');
-			const clipPath = [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`];
-			// Switching to dark shrinks the old light view into the click point;
-			// switching to light grows the new light view out of it. The z-index
-			// rules in style.css keep the animated snapshot on top in both cases.
-			// fill: 'forwards' holds the final clip-path after the animation ends,
-			// otherwise the unclipped old snapshot flashes for one frame before the
-			// view transition is torn down.
-			const animation = document.documentElement.animate(
-				{ clipPath: dark ? [...clipPath].reverse() : clipPath },
-				{
-					duration: 400,
-					easing: 'ease-out',
-					fill: 'forwards',
-					pseudoElement: dark ? '::view-transition-old(root)' : '::view-transition-new(root)',
-				},
-			);
-			// Remove the finished animation so a later transition cannot reuse its final clip-path.
-			void Promise.all([transition.finished, animation.finished]).then(
-				() => animation.cancel(),
-				() => undefined,
-			);
-		}),
-	);
-}
 
 function initialiseDarkMode(): void {
 	const target = document.querySelector<HTMLElement>('[data-dark-mode]');
@@ -96,10 +33,16 @@ function initialiseDarkMode(): void {
 			: 'icon-[line-md--moon-filled-to-sunny-filled-loop-transition]';
 	};
 	button.addEventListener('click', (event) => {
-		animateThemeChange(event.clientX, event.clientY, () => {
-			const dark = document.documentElement.classList.toggle('dark');
-			localStorage.theme = dark ? 'dark' : 'light';
-			render();
+		const dark = !document.documentElement.classList.contains('dark');
+		void applyThemeTransition({
+			event,
+			nextTheme: dark ? 'dark' : 'light',
+			apply: () => {
+				document.documentElement.classList.toggle('dark', dark);
+				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+				localStorage.theme = dark ? 'dark' : 'light';
+				render();
+			},
 		});
 	});
 	render();
@@ -149,21 +92,20 @@ function initialiseTalkFilter(): void {
 
 function initialiseSponsors(): void {
 	const sponsorImage = document.querySelector<HTMLImageElement>('[data-sponsor-image]');
-	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-sponsor-view]')) {
-		button.addEventListener('click', () => {
-			if (sponsorImage == null) {
-				return;
-			}
-			const circles = button.dataset.sponsorView === 'circles';
-			sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
-			sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
-			for (const candidate of document.querySelectorAll<HTMLElement>('[data-sponsor-view]')) {
-				candidate.classList.toggle('opacity-70', candidate === button);
-				candidate.classList.toggle('opacity-20', candidate !== button);
-				candidate.ariaPressed = String(candidate === button);
-			}
-		});
+	const button = document.querySelector<HTMLButtonElement>('[data-sponsor-view]');
+	const status = document.querySelector<HTMLElement>('#sponsor-view-status');
+	if (sponsorImage == null || button == null || status == null) {
+		return;
 	}
+
+	button.addEventListener('click', () => {
+		const circles = button.dataset.sponsorView !== 'circles';
+		button.dataset.sponsorView = circles ? 'circles' : 'tiers';
+		button.textContent = circles ? 'Show Sponsor Tiers' : 'Show Sponsor Circles';
+		sponsorImage.src = `https://sponsors.ryoppippi.com/${circles ? 'sponsors.circles.svg' : 'sponsors.past.svg'}`;
+		sponsorImage.alt = circles ? 'GitHub Sponsors' : 'Sponsor Tiers';
+		status.textContent = circles ? 'Showing Sponsor Circles' : 'Showing Sponsor Tiers';
+	});
 }
 
 function initialiseMediaFilter(): void {
@@ -188,150 +130,59 @@ function initialiseMediaFilter(): void {
 	});
 }
 
-async function hydrateTweet(element: HTMLElement): Promise<void> {
-	const id = element.dataset.tweetId;
-	const root = element.querySelector<HTMLElement>('[data-tweet-root]');
-	const data = element.querySelector<HTMLScriptElement>('[data-tweet-props]')?.textContent;
-	if (id == null || root == null || data == null) {
-		return;
-	}
-
-	try {
-		const tweet = JSON.parse(data) as TweetData;
-		const [{ hydrate, unmount }, { default: Tweet }] = await Promise.all([
-			import('svelte'),
-			import('@ryoppippi/content/Tweet.svelte'),
-		]);
-		const instance = hydrate(Tweet, { target: root, props: { id, tweet } });
-		element.dataset.hydrated = 'true';
-		tweetCleanups.add(() => unmount(instance));
-	} catch {
-		element.dataset.hydrated = 'false';
-	}
-}
-
-function initialiseTweets(): void {
-	const tweets = [...document.querySelectorAll<HTMLElement>('[data-tweet-id]')];
-	if (tweets.length === 0) {
-		return;
-	}
-
-	const start = () => {
-		if (!('IntersectionObserver' in window)) {
-			for (const tweet of tweets) {
-				void hydrateTweet(tweet);
-			}
-			return;
-		}
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						observer.unobserve(entry.target);
-						void hydrateTweet(entry.target as HTMLElement);
-					}
-				}
-			},
-			{ rootMargin: '400px' },
-		);
-		for (const tweet of tweets) {
-			observer.observe(tweet);
-		}
-	};
-
-	if ('requestIdleCallback' in window) {
-		window.requestIdleCallback(start);
-	} else {
-		setTimeout(start, 1);
-	}
-}
-
-type SvelteIslandModule = { default: Component<Record<string, unknown>> };
 type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
 
 // Every component colocated with a post is a potential island, so the loaders
 // are collected by glob rather than listed by hand. Vite keeps each one in its
 // own chunk, so a post only downloads the islands it actually uses. The globs
-// are split per framework because the file extension decides how a module is
-// mounted.
-const svelteIslandLoaders = import.meta.glob<SvelteIslandModule>(
-	'../../packages/content/src/blog/**/*.svelte',
-);
-const solidIslandLoaders = import.meta.glob<SolidIslandModule>(
-	'../../packages/content/src/blog/**/*.tsx',
-);
+const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
 
-const islandCleanups = new Set<() => void>();
-
-async function mountSvelteIsland(
-	element: HTMLElement,
-	load: () => Promise<SvelteIslandModule>,
-	props: Record<string, unknown>,
-): Promise<void> {
-	const [{ hydrate, mount, unmount }, { default: Island }] = await Promise.all([
-		import('svelte'),
-		load(),
-	]);
-	// Server-rendered islands carry a root element to adopt. Without one the
-	// component was never rendered on the server, so mount it fresh.
-	const root = element.querySelector<HTMLElement>('[data-ox-island-root]');
-	const instance =
-		root == null
-			? mount(Island, { target: element, props })
-			: hydrate(Island, { target: root, props });
-	islandCleanups.add(() => unmount(instance));
-}
+let islandController: IslandController | undefined;
 
 async function mountSolidIsland(
 	element: HTMLElement,
 	load: () => Promise<SolidIslandModule>,
 	props: Record<string, unknown>,
-): Promise<void> {
-	const [{ render }, { default: Island }] = await Promise.all([import('solid-js/web'), load()]);
+): Promise<() => void> {
+	const [{ render }, { default: Island }] = await Promise.all([import('@solidjs/web'), load()]);
 	// Solid islands are not compiled hydratable, so the server markup is
 	// replaced by a fresh client render instead of being adopted.
 	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;
 	target.replaceChildren();
-	const dispose = render(() => Island(props), target);
-	islandCleanups.add(dispose);
-}
-
-async function mountIsland(element: HTMLElement): Promise<void> {
-	const moduleId = element.dataset.oxIsland;
-	if (moduleId == null || element.dataset.oxMounted === 'true') {
-		return;
-	}
-
-	element.dataset.oxMounted = 'true';
-	try {
-		const modulePath = `../../packages/content/src/blog/${moduleId}`;
-		const serialised = element.dataset.oxProps;
-		const props = serialised == null ? {} : (JSON.parse(serialised) as Record<string, unknown>);
-		if (moduleId.endsWith('.tsx')) {
-			const load = solidIslandLoaders[modulePath];
-			if (load == null) {
-				element.dataset.oxMounted = 'false';
-				return;
-			}
-			await mountSolidIsland(element, load, props);
-		} else {
-			const load = svelteIslandLoaders[modulePath];
-			if (load == null) {
-				element.dataset.oxMounted = 'false';
-				return;
-			}
-			await mountSvelteIsland(element, load, props);
-		}
-	} catch {
-		element.dataset.oxMounted = 'false';
-	}
+	return render(() => Island(props), target);
 }
 
 function initialiseIslands(): void {
-	for (const element of document.querySelectorAll<HTMLElement>('[data-ox-island]')) {
-		void mountIsland(element);
-	}
+	islandController = initIslands((element, props) => {
+		const moduleId = element.dataset.oxIsland;
+		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
+		if (load == null) {
+			throw new Error(`Unknown island module: ${moduleId ?? ''}`);
+		}
+
+		let dispose: (() => void) | undefined;
+		let destroyed = false;
+		void mountSolidIsland(element, load, props)
+			.then((mountedDispose) => {
+				if (destroyed) {
+					mountedDispose();
+				} else {
+					dispose = mountedDispose;
+				}
+			})
+			.catch((error: unknown) => {
+				element.classList.add('ox-island-error');
+				element.dataset.oxError = error instanceof Error ? error.message : String(error);
+			});
+
+		// Loading stays asynchronous so unrelated pages do not download every
+		// post-colocated component. Cleanup still has to be synchronously
+		// registered with the Ox Content island controller.
+		return () => {
+			destroyed = true;
+			dispose?.();
+		};
+	});
 }
 
 function initialisePage(): void {
@@ -340,28 +191,35 @@ function initialisePage(): void {
 	initialiseTalkFilter();
 	initialiseMediaFilter();
 	initialiseSponsors();
-	initialiseTweets();
 	initialiseIslands();
+	initReaderChrome(document);
+	initTweetCards(document);
+	enhanceMarkdownTables(document);
 }
 
 function destroyPage(): void {
-	for (const cleanup of tweetCleanups) {
-		void cleanup();
-	}
-	tweetCleanups.clear();
-	for (const cleanup of islandCleanups) {
-		cleanup();
-	}
-
-	islandCleanups.clear();
+	islandController?.destroy();
+	islandController = undefined;
 }
+
+const pageHeadSelector = [
+	'meta[name="description"]',
+	'meta[name="robots"]',
+	'meta[name="Hatena::Bookmark"]',
+	'meta[name^="twitter:"]',
+	'meta[property^="og:"]',
+	'meta[property^="article:"]',
+	'link[rel="canonical"]',
+	'link[rel="alternate"][hreflang]',
+	'script[type="application/ld+json"]',
+].join(',');
 
 function syncHead(next: Document): void {
 	document.title = next.title;
-	for (const element of document.head.querySelectorAll('[data-page-head]')) {
+	for (const element of document.head.querySelectorAll(pageHeadSelector)) {
 		element.remove();
 	}
-	for (const element of next.head.querySelectorAll('[data-page-head]')) {
+	for (const element of next.head.querySelectorAll(pageHeadSelector)) {
 		document.head.append(element.cloneNode(true));
 	}
 }
@@ -498,6 +356,18 @@ document.addEventListener('click', (event) => {
 });
 
 window.addEventListener('popstate', () => void navigate(new URL(location.href), false));
+let markdownTableResizePending = false;
+window.addEventListener('resize', () => {
+	if (markdownTableResizePending) {
+		return;
+	}
+
+	markdownTableResizePending = true;
+	requestAnimationFrame(() => {
+		markdownTableResizePending = false;
+		enhanceMarkdownTables(document);
+	});
+});
 const initialStyle = document.body.dataset.pageStyle;
 const inlineStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')?.dataset
 	.inlinePageStyle;

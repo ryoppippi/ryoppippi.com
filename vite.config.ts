@@ -1,16 +1,16 @@
-import { oxContentSvelte } from '@ox-content/vite-plugin-svelte';
-import { cloudflareRedirect } from '@ryoppippi/vite-plugin-cloudflare-redirect';
-import { svelteRootDir } from '@ryoppippi/content/paths';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
+import { oxContent } from '@ox-content/vite-plugin';
+import solid from '@solidjs/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
-import { FontaineTransform } from 'fontaine';
+import { playwright } from '@vitest/browser-playwright';
+import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import solid from 'vite-plugin-solid';
-import { Route } from './routes.ts';
 import { staticSiteBuild } from './src/site/build-plugin.ts';
 import { staticSiteDevServer } from './src/site/dev-server.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
+import { syntaxThemeStylesheet } from './src/site/syntax-theme.ts';
 
-export default defineConfig({
+export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
 	envPrefix: ['PUBLIC_', 'VITE_'],
 	server: {
@@ -19,28 +19,20 @@ export default defineConfig({
 		},
 	},
 	plugins: [
-		svelte({ compilerOptions: { rootDir: svelteRootDir() } }),
-		solid({ ssr: true, solid: { hydratable: false } }),
-		cloudflareRedirect({
-			mode: 'generate',
-			entries: [...Route, { from: '/works', to: '/works/oss', status: 301 }],
-		}),
-		...oxContentSvelte({
-			components: { Tweet: './packages/content/src/Tweet.svelte' },
-			srcDir: 'packages/content/src/blog',
-			ssg: false,
+		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawaDragon),
+		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
+		...oxContent({
+			...OX_CONTENT_BUILD_OPTIONS,
+			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
+			ssg:
+				mode === 'test'
+					? false
+					: command === 'build'
+						? OX_CONTENT_BUILD_OPTIONS.ssg
+						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
 		staticSiteBuild(),
 		staticSiteDevServer(),
-		FontaineTransform.vite({
-			fallbacks: {
-				'DM Mono': ['Courier New'],
-				Inter: ['Arial'],
-				'JetBrains Mono': ['Courier New'],
-				'Roboto Condensed': ['Arial'],
-			},
-			resolvePath: (id) => new URL(import.meta.resolve(id)),
-		}),
 		tailwindcss(),
 	] satisfies PluginOption[],
 	build: {
@@ -57,7 +49,7 @@ export default defineConfig({
 			},
 			'site-build': {
 				command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
-				dependsOn: ['git-history', '@ryoppippi/content#build'],
+				dependsOn: ['git-history'],
 				env: ['PUBLIC_ORIGIN', 'CI'],
 				input: [
 					'package.json',
@@ -67,11 +59,7 @@ export default defineConfig({
 					'routes.ts',
 					'scripts/**',
 					'src/**',
-					'packages/content/dist/**',
-					'packages/content/article.css',
-					'packages/content/package.json',
-					'packages/content/src/**',
-					'!packages/content/src/**/*.md',
+					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'static/**',
 				],
 				output: ['build/**'],
@@ -80,14 +68,15 @@ export default defineConfig({
 	},
 	fmt: {
 		ignorePatterns: [
+			'.cache/**',
 			'.claude/**',
 			'.codex/**',
 			'.direnv/**',
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
-			'packages/content/src/blog/**',
-			'packages/content/src/showcase/**',
+			'src/content/blog/**',
+			'src/content/showcase/**',
 			'static/**',
 		],
 		singleQuote: true,
@@ -96,14 +85,15 @@ export default defineConfig({
 	},
 	lint: {
 		ignorePatterns: [
+			'.cache/**',
 			'.claude/**',
 			'.codex/**',
 			'.direnv/**',
 			'build/**',
 			'node_modules/**',
 			'src/contents/**',
-			'packages/content/src/blog/**',
-			'packages/content/src/showcase/**',
+			'src/content/blog/**',
+			'src/content/showcase/**',
 			'static/**',
 		],
 		options: {
@@ -112,15 +102,12 @@ export default defineConfig({
 		},
 	},
 	staged: {
-		'packages/content/src/blog/**/*.md': [
-			'packages/content/scripts/snapshot-tweets.ts',
-			'packages/content/scripts/snapshot-ogp.ts',
-		],
-		'*.{css,js,json,svelte,ts,yaml,yml}': 'vp check --fix',
+		'*.{css,js,json,ts,tsx,yaml,yml}': 'vp check --fix',
 		// gitleaks scans the whole staged diff itself, so no file arguments
 		'*': () => 'gitleaks protect --staged --config .gitleaks.toml',
 	},
 	test: {
+		environment: 'node',
 		projects: [
 			{
 				extends: true,
@@ -128,16 +115,35 @@ export default defineConfig({
 					name: 'node',
 					globals: true,
 					environment: 'node',
+					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
-						'src/site/{generate,page-styles,pages,sitemap}.ts',
-						'packages/content/src/{artifact,blog,island-renderer,islands,ogp-snapshots,paths,tweet-snapshots}.ts',
-						'packages/content/src/blog/**/*.ts',
-						'packages/content/src/markdown/**/*.ts',
+						'src/site/{generate,page-styles,pages,syntax-theme}.ts',
+						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
+						'src/content/blog/**/*.ts',
+						'src/content/markdown/**/*.ts',
 					],
+				},
+			},
+			{
+				extends: true,
+				test: {
+					name: 'browser',
+					globals: true,
+					include: ['src/**/*.browser.test.ts'],
+					browser: {
+						enabled: true,
+						headless: true,
+						provider: playwright({
+							contextOptions: {
+								permissions: ['clipboard-read', 'clipboard-write'],
+							},
+						}),
+						instances: [{ browser: 'chromium' }],
+					},
 				},
 			},
 		],
 	},
-});
+}));

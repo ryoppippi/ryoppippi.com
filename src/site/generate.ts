@@ -1,8 +1,7 @@
-import type { ContentArtifact, TweetRenderer } from '@ryoppippi/content';
+import type { ContentArtifact } from '../content/artifact.ts';
 import type { GeneratedFile } from './pages.ts';
 import type { SiteAssets } from './assets.ts';
-import { blogDirectory, showcaseDirectory } from '@ryoppippi/content/paths';
-import * as ufo from 'ufo';
+import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -16,10 +15,9 @@ import {
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
-import { SITE_ORIGIN } from './consts.ts';
 import { loadExternalMedia, loadExternalPosts } from './content.ts';
-import { gitLastModified } from './git-last-modified.ts';
-import { corePages, mediaFeed } from './pages.ts';
+import { writeOxContentOutputFiles } from './ox-content-output.ts';
+import { corePages } from './pages.ts';
 import {
 	aboutPage,
 	errorPage,
@@ -31,13 +29,11 @@ import {
 	talksPage,
 } from './secondary-pages.ts';
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
-import { sitemap } from './sitemap.ts';
 
 type GenerateSiteOptions = {
 	assets: SiteAssets;
 	content?: ContentArtifact;
 	outDir: string;
-	renderTweet?: TweetRenderer;
 	root: string;
 };
 
@@ -55,7 +51,6 @@ async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Prom
  * @param assets - Bundled site assets referenced by generated pages.
  * @param content - Optional prebuilt content artifact.
  * @param outDir - Directory that receives generated files.
- * @param renderTweet - Tweet renderer used when content must be built locally.
  * @param root - Repository root used for source loading and Git metadata.
  * @returns A promise that resolves after all generated files are written.
  */
@@ -63,16 +58,12 @@ export async function generateSite({
 	assets,
 	content,
 	outDir,
-	renderTweet,
 	root,
 }: GenerateSiteOptions): Promise<void> {
 	let localContent = content;
 	if (localContent == null) {
-		if (renderTweet == null) {
-			throw new Error('renderTweet is required when no content artifact is provided');
-		}
-		const { buildContentArtifact } = await import('@ryoppippi/content/build');
-		localContent = await buildContentArtifact(renderTweet);
+		const { buildContentArtifact } = await import('../content/build.ts');
+		localContent = await buildContentArtifact();
 	}
 	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =
 		await Promise.all([
@@ -108,23 +99,19 @@ export async function generateSite({
 		publicationsPage(publications, assets),
 		talksPage(talks, assets),
 		mediaPage(externalMedia, assets),
-		mediaFeed(externalMedia),
 		sponsorsPage(assets),
 		errorPage(assets),
 	];
 
 	await writeGeneratedFiles(outDir, pages);
+	await writeOxContentOutputFiles({ media: externalMedia, outDir, pages, root });
 
-	const install = extractSection(dotfiles, 'Initial Setup');
+	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [
 		['mac', 'macOS'],
 		['linux', 'Linux'],
 	] as const;
 	const plainFiles: GeneratedFile[] = [
-		{
-			path: 'works/index.html',
-			content: `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/works/oss/"><link rel="canonical" href="${ufo.joinURL(SITE_ORIGIN, 'works/oss/')}"><title>Redirecting to works</title></head><body><a href="/works/oss/">Continue to works</a></body></html>`,
-		},
 		{ path: 'dotfiles.md', content: dotfiles },
 		{ path: 'dotfiles/install', content: install },
 	];
@@ -140,24 +127,12 @@ export async function generateSite({
 		);
 	}
 
-	const urls = pages.filter((file) => file.path.endsWith('.html') && file.path !== '404.html');
-	const sitemapEntries = await Promise.all(
-		urls.map(async (file) => {
-			const loc = ufo.withTrailingSlash(
-				ufo.joinURL(SITE_ORIGIN, file.path.replace(/(?:index)?\.html$/, '')),
-			);
-			const lastmod = await gitLastModified(root, file.sourcePaths ?? []);
-			return lastmod == null ? { loc } : { loc, lastmod };
-		}),
-	);
-	plainFiles.push(sitemap(sitemapEntries));
 	await writeGeneratedFiles(outDir, plainFiles);
 
 	await Promise.all(
 		[
 			'index.html',
 			'about/index.html',
-			'works/index.html',
 			'works/oss/index.html',
 			'works/showcase/index.html',
 			'works/talks/index.html',

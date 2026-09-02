@@ -1,0 +1,175 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 17,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-28T07:29:25.000Z",
+	"display_text_range": [0, 41],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/PFCXzwU1cP",
+				"expanded_url": "https://x.com/tech_world18/status/1983073604670783837/photo/1",
+				"indices": [42, 65],
+				"url": "https://t.co/PFCXzwU1cP"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "113598297",
+				"indices": [4, 14],
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi"
+			},
+			{
+				"id_str": "1564483744056377345",
+				"indices": [15, 30],
+				"name": "Kei@外資のエンジニア",
+				"screen_name": "kei_english_ca"
+			},
+			{
+				"id_str": "1055062183321595906",
+				"indices": [31, 41],
+				"name": "Kyohei - OSS, 外資IT",
+				"screen_name": "labelmake"
+			}
+		]
+	},
+	"id_str": "1983073604670783837",
+	"text": "撮影　\n@ryoppippi @kei_english_ca @labelmake https://t.co/PFCXzwU1cP",
+	"user": {
+		"id_str": "1233283142519181312",
+		"name": "市川 達大@TECH WORLD",
+		"screen_name": "tech_world18",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1717677089154088960/tDuRN0aB_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1983073604670783837"],
+		"editable_until_msecs": "1761640165000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/PFCXzwU1cP",
+			"expanded_url": "https://x.com/tech_world18/status/1983073604670783837/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [42, 65],
+			"media_url_https": "https://pbs.twimg.com/media/G4VK7geakAAZUgj.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 860,
+						"w": 1536,
+						"x": 0,
+						"y": 542
+					},
+					{
+						"h": 1536,
+						"w": 1536,
+						"x": 0,
+						"y": 204
+					},
+					{
+						"h": 1751,
+						"w": 1536,
+						"x": 0,
+						"y": 97
+					},
+					{
+						"h": 2048,
+						"w": 1024,
+						"x": 51,
+						"y": 0
+					},
+					{
+						"h": 2048,
+						"w": 1536,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 2048,
+				"width": 1536
+			},
+			"sizes": {
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 1536
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 900
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 510
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/PFCXzwU1cP"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 860,
+					"w": 1536,
+					"x": 0,
+					"y": 542
+				},
+				{
+					"h": 1536,
+					"w": 1536,
+					"x": 0,
+					"y": 204
+				},
+				{
+					"h": 1751,
+					"w": 1536,
+					"x": 0,
+					"y": 97
+				},
+				{
+					"h": 2048,
+					"w": 1024,
+					"x": 51,
+					"y": 0
+				},
+				{
+					"h": 2048,
+					"w": 1536,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/tech_world18/status/1983073604670783837/photo/1",
+			"url": "https://pbs.twimg.com/media/G4VK7geakAAZUgj.jpg",
+			"width": 1536,
+			"height": 2048
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

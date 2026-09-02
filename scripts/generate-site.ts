@@ -1,4 +1,5 @@
-import { readContentArtifact, type ContentArtifact } from '@ryoppippi/content/artifact';
+import type { ContentArtifact } from '../src/content/artifact.ts';
+import type { IslandRenderer } from '../src/content/markdown/render.ts';
 import type { ManifestChunk, SiteAssets } from '../src/site/assets.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -39,6 +40,7 @@ const outDir = path.join(root, 'build');
 const server = await createServer({
 	appType: 'custom',
 	configFile: path.join(root, 'vite.config.ts'),
+	optimizeDeps: { noDiscovery: true },
 	server: { middlewareMode: true },
 });
 
@@ -46,9 +48,20 @@ try {
 	const { generateSite } = (await server.ssrLoadModule('/src/site/generate.ts')) as {
 		generateSite: GenerateSite;
 	};
+	const { buildContentArtifact } = (await server.ssrLoadModule('/src/content/build.ts')) as {
+		buildContentArtifact: (renderIsland?: IslandRenderer) => Promise<ContentArtifact>;
+	};
+	const { createIslandRenderer } = (await server.ssrLoadModule(
+		'/src/content/island-renderer.ts',
+	)) as {
+		createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
+	};
+	const content = await buildContentArtifact(
+		createIslandRenderer((modulePath) => server.ssrLoadModule(modulePath)),
+	);
 	await generateSite({
 		assets: await readSiteAssets(outDir),
-		content: await readContentArtifact(path.join(root, 'packages/content/dist/content.json')),
+		content,
 		outDir,
 		root,
 	});

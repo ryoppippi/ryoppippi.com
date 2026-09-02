@@ -1,0 +1,99 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 14,
+	"in_reply_to_screen_name": "hiitsricardo",
+	"in_reply_to_status_id_str": "1913435881245167984",
+	"in_reply_to_user_id_str": "1540813470186147840",
+	"lang": "en",
+	"created_at": "2025-04-19T04:25:27.000Z",
+	"display_text_range": [24, 147],
+	"entities": {
+		"user_mentions": [
+			{
+				"id_str": "1540813470186147840",
+				"indices": [0, 13],
+				"name": "Anya Mukherjee",
+				"screen_name": "hiitsricardo"
+			},
+			{
+				"id_str": "1265684588220702722",
+				"indices": [14, 23],
+				"name": "",
+				"screen_name": "alexyang"
+			},
+			{
+				"id_str": "3780357442",
+				"indices": [57, 70],
+				"name": "Kevin Deng 🦋 @sxzz.dev",
+				"screen_name": "sanxiaozhizi"
+			}
+		]
+	},
+	"id_str": "1913448837441806564",
+	"text": "@hiitsricardo @alexyang tsdown is the future, the author @sanxiaozhizi is also a contributor to tsup, but it's indeed no longer actively maintained",
+	"user": {
+		"id_str": "2813249270",
+		"name": "EGOIST",
+		"screen_name": "localhost_5173",
+		"is_blue_verified": false,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1682461881557204992/QWJFYyAT_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1913448837441806564"],
+		"editable_until_msecs": "1745040327000",
+		"edits_remaining": "5",
+		"is_edit_eligible": false
+	},
+	"conversation_count": 3,
+	"news_action_type": "conversation",
+	"parent": {
+		"favorite_count": 1,
+		"in_reply_to_screen_name": "alexyang",
+		"in_reply_to_status_id_str": "1913036863474143348",
+		"in_reply_to_user_id_str": "1265684588220702722",
+		"lang": "en",
+		"reply_count": 1,
+		"retweet_count": 0,
+		"created_at": "2025-04-19T03:33:58.000Z",
+		"display_text_range": [10, 35],
+		"entities": {
+			"user_mentions": [
+				{
+					"id_str": "1265684588220702722",
+					"indices": [0, 9],
+					"name": "",
+					"screen_name": "alexyang"
+				},
+				{
+					"id_str": "2813249270",
+					"indices": [10, 25],
+					"name": "EGOIST",
+					"screen_name": "localhost_5173"
+				}
+			]
+		},
+		"id_str": "1913435881245167984",
+		"text": "@alexyang @localhost_5173 thoughts?",
+		"user": {
+			"id_str": "1540813470186147840",
+			"name": "Anya Mukherjee",
+			"screen_name": "hiitsricardo",
+			"is_blue_verified": false,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/1902020601910636545/TdiT2wkZ_normal.jpg"
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1913435881245167984"],
+			"editable_until_msecs": "1745037238000",
+			"edits_remaining": "5",
+			"is_edit_eligible": false
+		},
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

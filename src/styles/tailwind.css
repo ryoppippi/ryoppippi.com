@@ -2,7 +2,6 @@
 @import 'tailwindcss' source(none);
 
 @plugin '@tailwindcss/typography';
-@plugin '@iconify/tailwind4';
 
 @custom-variant dark {
 	&:where(html.dark, html.dark *) {
@@ -45,10 +44,10 @@
 	--color-bg-100: #1e1e1e;
 	--color-bg-200: #2d2d2d;
 	--color-bg-300: #454545;
-	--font-sans: Inter, 'Inter fallback', sans-serif;
-	--font-mono: 'DM Mono', 'DM Mono fallback', monospace;
-	--font-condensed: 'Roboto Condensed', 'Roboto Condensed fallback', sans-serif;
-	--font-code: 'JetBrains Mono', 'JetBrains Mono fallback', 'Fira Code', monospace;
+	--font-sans: Inter, Arial, sans-serif;
+	--font-mono: 'DM Mono', 'Courier New', monospace;
+	--font-condensed: 'Roboto Condensed', Arial, sans-serif;
+	--font-code: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
 @utility fcc {

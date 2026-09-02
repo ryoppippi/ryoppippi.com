@@ -1,0 +1,420 @@
+---
+permalink: /blog/2026-08-15-uk-gtv-en
+title: I wrote OSS for fun. They called it Exceptional Talent.
+date: "2026-08-15"
+isPublished: true
+lang: en
+description: How I used open-source work, recommendation letters, and evidence of impact to earn the UK's Global Talent Visa as an Exceptional Talent.
+alternates:
+  ja: https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/
+  en: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
+  x-default: https://ryoppippi.com/blog/2026-08-15-uk-gtv-en/
+---
+
+import GtvChart from '../2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx'
+
+> [日本語版](https://ryoppippi.com/blog/2026-07-30-uk-gtv-ja/)
+
+# TL;DR
+
+This post is long. Jump to whatever you care about.
+
+- [I got Digital Technology / Exceptional Talent on the UK Global Talent Visa](#what-i-put-in)
+- [What Global Talent actually is](#what-global-talent-actually-is)
+- [The dates](#the-dates)
+- [My case centred on work with my name on it, not a founder or manager role](#what-i-think-they-could-see)
+- [OSS and talks I did for fun later became part of the work and the visa](#a-late-turnaround-in-my-twenties)
+- [Tech Nation's latest approval rate is about 14%](#one-in-seven)
+- [Published write-ups of Talent granted mainly on OSS are scarce, including in Japanese](#how-small-the-overlapping-set-looks)
+- [The numbers I looked up](#the-numbers-i-looked-up)
+- [Even a computer nerd can find a way to live abroad](#still-just-a-nerd)
+
+This is not a how-to. It is what I submitted, and the career that led there.
+
+> [!CAUTION]
+> This post is not legal advice. The policy details are as of August 2026; the rules, fees, and processing times all change. Check [GOV.UK](https://www.gov.uk/global-talent) for the latest information when you apply.
+
+::: details On using AI
+
+- I used ChatGPT, Claude, and Grok to organise the structure and tighten the prose. I also used Exa to search public sources. I checked the final content and wording myself.
+- This English version was translated from the Japanese post by Grok 4.6. I checked the translation myself.
+- For the estimated chance of success at the time of application, I had GPT-5.5 and Claude Fable 5 (the nerfed versions from July onwards) estimate independently, and I took the close values. I also built the chart with Fable.
+- The Fermi estimate of how rare this is was done with GPT-5.6 Sol (max reasoning), then reviewed by Claude Fable 5.
+- Numbers and policy descriptions in the body were checked against primary sources, with citations.
+
+:::
+
+# A life on someone else's visa
+
+In Japan you almost never think about visas. In the UK, how long you can stay and how you can work are decided by your visa.
+
+A visa is tied to something. An employer-sponsored visa is tied to the employer; a dependant visa is tied to a partner's visa. The expiry date follows you when you change jobs, are made redundant, or something happens in the family.
+
+I have been in the UK since 2022 as a dependant on my wife's visa.
+
+At the time I was earning from remote work for Japanese companies, and I had no plan to work in the UK. I picked the dependant visa without thinking too hard, because it was the easiest and the most flexible.
+
+Daily life was fine, but I could only stay in the UK because of my wife's visa. With Global Talent, I can stay on the basis of my own record, not my wife or my employer.
+
+# What Global Talent actually is
+
+The UK [Global Talent Visa](https://www.gov.uk/global-talent) is for people endorsed as a leader or potential leader in fields such as science, engineering, medicine, digital technology, and the arts.
+
+## Unusually free, as visas go
+
+Even the [GOV.UK](https://www.gov.uk/global-talent-digital-technology) description makes the freedom look unusually high.
+
+- no job offer and no sponsoring employer
+- you can work as an employee, self-employed, or company director (you can start a company)
+- you do not have to tell the Home Office if you change jobs or leave a job
+- you can bring dependants
+- you can choose a period of up to 5 years, and you can extend
+- no minimum salary requirement and no English-language requirement
+- you can apply for ILR (settlement) after 3–5 years
+
+Work visas are usually tied to an employer or a sponsor. Being able to apply and live on your own record, tied to nothing else, is quite rare.
+
+
+## Talent, or Promise
+
+The Global Talent Visa has two tracks. Exceptional Talent is for people already recognised as leaders in their field; Exceptional Promise is for people who may become leaders.
+
+| | Exceptional Talent | Exceptional Promise |
+|---|---|---|
+| Recognition the mandatory criteria ask for | **leading talent** in the field | **potential talent** in the field |
+| What you prove | that you already are a leader | that you may become a leader |
+| Typical career stage | more than 5 years as a guide | less than 5 years as a guide |
+| Examples of evidence | awards, talks, media coverage, significant engagement with OSS | academic results, contributions to innovative projects |
+| Time to ILR (settlement) | 3 years | 5 years |
+| Share of people who got the visa[^promise-share] | 37% | 44% |
+
+*Shares are based on survey respondents across all fields; the remaining 19% did not specify a track.*
+
+The application format is similar. Both require 3 recommendation letters, a CV, and up to 10 pieces of evidence that meet the criteria. What you can do after you get the visa is the same[^talent-promise-format], but the endorsement criteria and the guidance on career stage differ.
+
+I applied under Talent because I worked in digital technology and had more than five years of experience. That was part of my context, not a standalone route test[^talent-to-promise].
+
+## Leader, not manager
+
+A leader here is not necessarily an organisational leader. They look at the impact of the work on digital technology and at external recognition, not at headcount or job title[^leader-assessment].
+
+I am not a people manager, and I am not a founder. I am an engineer who builds OSS. Even so, I was recognised as leading talent in the field through OSS, talks, media, professional work, and recommendation letters.
+
+
+## Two stages
+
+The application has two stages.
+
+1. **Stage 1: endorsement** — an endorsing body in the field reviews whether you are recognised as a leader. The official guide time is 5–8 weeks[^stage1-weeks]
+2. **Stage 2: the visa application** — you apply to the Home Office after endorsement. What they check here is ordinary visa requirements; the talent assessment is already done in Stage 1
+
+When this post says "assessment", it almost always means Stage 1. The endorsing body depends on the field ([list](https://www.gov.uk/government/publications/global-talent-endorsing-bodies)).
+
+| Field | Endorsing body |
+|---|---|
+| Academia or research | the endorsing bodies for science / engineering / humanities / social science / medicine |
+| Digital technology | [Tech Nation](https://technation.io/) |
+| Arts and culture | Arts Council England |
+| └ Film and television | PACT |
+| └ Fashion design | British Fashion Council |
+| └ Architecture | RIBA |
+| └ Design industry | Design Business Association |
+| Winners of a [prestigious prize](https://www.gov.uk/government/publications/global-talent-eligible-prize-list) | no endorsement needed |
+
+The system keeps changing. Graphic design, brand design, and product design (industrial design), for example, now have a [dedicated Design industry route](https://www.gov.uk/global-talent-arts-culture/design-industry) (started 1 July 2026)[^design-uxui].
+
+
+I applied on the [Digital Technology route](https://www.gov.uk/global-talent-digital-technology) and was endorsed by [Tech Nation](https://technation.io/).
+
+## What the panel looks at
+
+The requirements are the same for both tracks. The application relies on evidence that can be checked externally, rather than a self-assessment[^evidence-split].
+
+- **MC** (mandatory criteria): recognition as "leading talent" for Talent, or "potential talent" for Promise
+- **OC** (optional criteria): you need to meet 2 of the 4 criteria (innovation / contribution outside your occupation / significant contribution in a company / research)[^oc-promise]
+- **3 recommendation letters**: written by experts in the field[^letters]
+- **up to 10 pieces of evidence**: those pieces prove the MC and the 2 OCs you chose
+
+Company revenue or fundraising does not by itself establish an individual applicant's contribution. The application needs evidence tying that contribution to the applicant, beyond a company name or job title[^company-evidence][^founder-share].
+
+In my case, OSS made parts of the record publicly attributable to me. Tech Nation also lists open source code as an example of evidence[^open-source-evidence]. Talks, media, and awards provided other public records[^oc2-wording].
+
+## One in seven
+
+Tech Nation's latest approval rate is about 14% (2025-26), almost half the roughly 27% of a year earlier (954/3,590 → 587/4,087)[^tn-rate-recent][^foi-gap]. One in seven. In 2020/21 it was 50%[^rates-2021].
+
+I submitted in April 2026, just after the year with the lowest disclosed approval rate had ended.
+
+Tech Nation's official guide also says this is not a checklist that you pass if you tick the boxes. The panel judges the application as a whole[^holistic-review].
+
+It is a hard visa. In my case, the application drew on both my employment record and OSS outside the job. I put a comparison with other endorsing bodies in the [addendum](#other-endorsing-bodies).
+
+## Then settlement
+
+This visa is also short to ILR (indefinite leave to remain, settlement). Exceptional Talent via Tech Nation can apply after 3 years; Promise after 5[^ilr-clock].
+
+What is good about ILR? Getting off the visa clock and renewals is the main thing, but the largest money item is the immigration health surcharge (IHS). UK visas charge £1,035 a year for NHS access, paid up front for the whole visa (5 years is £5,175, and the same again for each family member)[^ihs]. ILR has no IHS; that payment goes away.
+
+You also stop counting days. Until ILR you can generally be outside the UK for at most 180 days in any 12 months, so you count every trip. In our house my wife kept a careful tally. After ILR that arithmetic goes away[^ilr-absence].
+
+And the standard ILR route is being reformed towards stretching 5 years to 10 (not in force yet)[^earned-settlement]. Five years is already long; ten is too long. Even in that proposal, Global Talent sits on the 3-year fast track. It is also different from the usual [Skilled Worker](https://www.gov.uk/skilled-worker-visa) route for working in the UK (employer-sponsored; I summarised the differences in the [addendum](#not-skilled-worker)).
+
+
+# Why I wanted my own visa
+
+I could already work freely as a dependant, so I did not apply in order to change jobs. If the two of us are going to support each other, I wanted a visa of my own. Then if something happens to either of us, we can still help each other.
+
+I work at {link:Rork} now and still do OSS, but I will not necessarily stay at the same company, and I do not know what comes next.
+
+The nearby exit also matters. This visa reaches ILR (settlement) in 3 years. It is leave based on my own record, and I can stay in the UK with some peace of mind.
+
+I first heard of this visa because Rork suggested it. I decided to try.
+
+# What I put in
+
+## The evidence
+
+The centre of the record was, without a doubt, ccusage.
+
+{link:@ccusage|ccusage} is OSS that visualises usage and cost for AI coding agents such as Claude Code, Codex, and Gemini CLI. It grew a lot in 2025. At submission it had about 12.9k stars (about 17.8k as of 2026).
+
+The rest of what I submitted:
+
+- past OSS contributions such as {link:typia}
+- talks at {link:NeovimConf} / [Claude Code Meetup Tokyo](https://aiau.connpass.com/event/369265/) and elsewhere
+- external coverage such as {link:TECH WORLD} / [Software Design](https://gihyo.jp/magazine/SD/archive/2026/202602)
+- a [Thanks OSS Award](https://www.toyokumo.co.jp/2025/10/16/oss-award-2025-lasthalf)
+- professional work in AI agents / developer tooling at {link:@wrtnlabs|WRTN} / {link:@StackOneHQ|StackOne} / {link:Rork}
+- a Founding Engineer offer from {link:Rork}
+- recommendation letters from 3 people
+
+## What I think they could see
+
+Tech Nation only sent back the result. Afterwards I used AI to review what I had submitted for evidence that could be checked externally. This is my reconstruction, not Tech Nation's scoring.
+
+ccusage was not just published code. Users, issues, PRs, and derivative tools were growing, so the public record included measurable signs of engagement. Tech Nation lists significant engagement with open source code as a guide[^open-source-evidence].
+
+The public record also connected my name to work beyond OSS: talk pages and videos, media articles, an award page, and a job offer.
+
+There are public cases of OSS maintainers being refused[^oss-vs-tn]. Tech Nation is not looking only at the title "maintainer".
+
+## A late turnaround in my twenties
+
+My twenties were mostly a struggle. Computers were banned until I went to university, so I started writing code late. The salary at the first start-up I joined left nothing after postgraduate fees and rent. I went on to a doctoral programme and then gave up the PhD. Coming to the UK almost reset the network I had built in Japan. In 2024 I was unemployed. In the slightly more than six months it took to get my first UK job, I applied to 533 positions.
+
+The OSS and talks I was doing in that period were not for a visa, and not a bid for a reversal. I moved my hands because it looked interesting. I gave talks because I like speaking in front of people. ccusage itself was a [CLI I built to smirk at how much I was getting out of the Claude Max plan](https://ryoppippi.com/blog/2025-05-29-zenn-6c9a8fe6629cd6-ja), and the first implementation took two hours.
+
+What I was doing because it was fun connected later. I had not planned that, and I had not thought it would lead to a visa.
+
+The pass probabilities on the chart are a later reconstruction from the record at the time of application. They are not Tech Nation's scoring, and they do not prescribe a document structure or an assessment strategy.
+
+<GtvChart lang="en" />
+
+<div hidden>If the chart cannot be loaded, see the source data: /blog/2026-07-30-uk-gtv-ja/gtv-chart/timeline.json</div>
+
+I kept writing OSS even when I had no job. 2024 was the year I wrote more OSS code than in the rest of my life. The OSS from that period, the contributions to {link:typia}, and the talk at {link:NeovimConf} became the groundwork for what came later.
+
+<ogcard url="https://ryoppippi.com/blog/2024-12-31"></ogcard>
+
+I have written about job hunting in the UK in an earlier post.
+
+<ogcard url="https://ryoppippi.com/blog/2025-07-06-how-to-get-job-in-the-uk-en"></ogcard>
+
+When I published ccusage in 2025 it grew quickly and the situation changed. For the first time it became easy to explain from the outside what I was "the person for".
+
+Stars reached about 1K in three weeks after launch, and about 5K in two months. Growth slowed while I was in Japan, but ccusage led to invitations to several events, and I appeared on YouTube and in the technical press. I was simply happy that I could talk about ccusage with all kinds of people.
+
+<ogcard url="https://ryoppippi.com/blog/2025-11-06-japan-trip-en"></ogcard>
+
+Then I joined {link:Rork}. I started the application after joining.
+
+I finally got my first offer from a UK company at the end of May 2025. ccusage was born in the same month. A year later, I passed a review of whether I was "recognised as a leader in the field".
+
+I was honestly happy to be endorsed as Talent. It meant the panel had recognised the record I had built by then, not only my future potential.
+
+## The dates
+
+| 2026 | What happened |
+|---|---|
+| late January | started preparing |
+| 20 Apr | submitted all Stage 1 endorsement documents to the Home Office |
+| 10 May | the Home Office forwarded the application to Tech Nation[^stage1-process] |
+| 5 Jun | endorsed as Exceptional Talent |
+| 7 Jun | Stage 2: visa application |
+| 9 Jun | biometrics (fingerprints and photo) |
+| 9 Aug | visa granted |
+
+Stage 1 took 46 days from submission to endorsement. That is inside the official 5–8 week guide[^stage1-weeks], but it was longer than the 5-week floor[^stage1-slowdown]. Stage 2 also took 9 weeks from application to grant, longer than the official 8-week guide for in-country applications[^stage2-weeks]. The stretch with no contact after the guide time had passed was mentally hard.
+
+# Still just a nerd
+
+I am just an ordinary computer nerd who likes writing code, the kind you find anywhere. I kept making things I thought were interesting, some of them blew up, and being a bit of a show-off paid off in media and talk invitations.
+I was not at a big company, and I was not a start-up founder. But I kept doing what I liked, and the dots all connected into this visa.
+
+Through my twenties I could not see a future and I struggled every day. That my OSS and career were valued in this form, right at the end, makes me simply happy.
+
+I hope I can keep making things and enjoying it.
+
+And I hope this post is useful for people who are curious about living abroad, or who just love OSS.
+
+# Thanks
+
+- my wife: she brought me to Britain. My career opened up as a result. For four years after we moved, I stayed in the UK on her visa
+- the 3 people who wrote recommendation letters: each had seen my work in a different place. The 3 do not know each other, but they assessed my career from different angles
+- everyone in the {link:@times-yasunori|yasunori project}: they gave me the push to start job hunting in the UK. Without the work we did together, I would not have this job or this visa
+- {link:Rork}: they told me about this visa. Without that, I would never have known
+- {link:TECH WORLD}: they reached out. The videos travelled outside the community
+- {link:@ccusage|ccusage} contributors and users: stars, issues, PRs, even derivative tools. A lot of people used it. Thank you
+
+---
+
+# The numbers I looked up
+
+From here I will also put down the numbers I looked up. I could not find cases close to mine when I applied, so I ended up researching quite a lot. There is no point in the next person doing the same work, so I am leaving all of it here.
+
+## Other doors at the time
+
+Looking back, there were other options when I moved.
+
+- [High Potential Individual visa](https://www.gov.uk/high-potential-individual-visa): for graduates of listed universities[^hpi]
+- [Youth Mobility Scheme](https://www.gov.uk/youth-mobility): the working-holiday route[^yms]
+- [Global Talent Exceptional Promise](#talent-or-promise): the track that assesses early-career people on potential
+- dependant on my wife: almost no work restrictions; employed or self-employed both work
+
+As in the body, I picked the dependant route at the time because it was the easiest and the most flexible.
+
+## Other endorsing bodies
+
+*Approval rates are Talent and Promise combined. A breakdown by track is not disclosed. Periods differ outside Tech Nation, so this is not a simple comparison.*
+
+| Endorsing body | Field | Latest approval rate | 2020/21[^rates-2021] |
+|---|---|---:|---:|
+| Tech Nation | Digital technology | **about 14%** (2025-26)[^tn-rate-recent] | 50% |
+| UKRI | research in general | —[^no-perbody] | 98% |
+| Royal Society | natural sciences | — | 84% |
+| British Academy | humanities and social sciences | — | 82% |
+| Royal Academy of Engineering | engineering | — | 71% |
+| (4 academic bodies combined) | | about 87% (2024-25)[^rate-caveat] | about 84% |
+| Arts Council England | Arts and culture | about 76% (to 2023, cumulative)[^ace-rate] | 89% |
+
+## How small the overlapping set looks
+
+There is no statistic of people who got Talent with OSS at the centre. I estimated the size of the overlapping group by applying the assumptions below to published totals, using 2025 as the baseline (the premises come later).
+
+| Population | Scale per year | Period and source |
+|---|---:|---|
+| All long-term migrants to the UK | about 813,000 | 2025, [ONS](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2025) |
+| Global Talent visas issued (all fields, including dependants) | 6,655 | 2025, [Home Office](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables) |
+| of which main applicants | 3,904 | 2025, same source |
+| Tech Nation Digital Technology endorsements | 500+ | 10-year average to 2024, [Tech Nation](https://technation.io/global-talent-visa-report-2024/) |
+
+Even a simple comparison of issue counts puts Global Talent under 1% of all long-term migrants to the UK. Main applicants are 3,904, and the [Digital Technology route](https://www.gov.uk/global-talent-digital-technology) is a subset of that.
+
+Annual issues rose from 1,036 in 2020 to 7,360 in 2023, and have been flat since (6,689 in 2024, 6,655 in 2025).
+
+::: details Premises for the 500-a-year average
+
+The predecessor, Tier 1 (Exceptional Talent), had an annual cap until February 2020. A [Home Office impact assessment](https://www.legislation.gov.uk/ukia/2020/8/pdfs/ukia_20200008_en.pdf) puts the cap just before abolition at 2,000 a year (the initial Tech Nation allocation was 200). Actual issues were lower still. The same Home Office data shows 120 in 2014 and still only 1,172 in 2019 (all 5 endorsing bodies). The cumulative 5,000+ is clearly weighted towards the later years.
+
+:::
+
+The Digital Technology route is not only for famous software engineers. A [Tech Nation report](https://technation.io/global-talent-visa-report-2024/) says that of people endorsed over the past 10 years, 1 in 4 was a founder and 1 in 3 had software engineering skills. A substantial number were assessed mainly on a business record as a founder or CTO.
+
+As the body says, OSS is also contemplated as Exceptional Talent evidence. Overseas there is a [public case](https://blog.beraliv.dev/2025-04-23-how-i-earned-uk-global-talent-visa) of Exceptional Talent granted with an OSS maintainer record as important evidence.
+
+On that basis, starting from the 5,000+ endorsed by 2024, I used those published totals to estimate the scale of a group sharing several characteristics with this case.
+
+| Characteristic | Estimated count (including this case) | Calculation |
+|---|---:|---|
+| Endorsed on the Digital Technology route | 5,000+ | Tech Nation public figure (see note 2) |
+| of whom have software engineering skills | 1,700+ | × 1/3 (see note 2) |
+| of whom Exceptional Talent | around 500–850 | × 30–50% (see note 3) |
+| of whom OSS / developer tooling is the main record | around 25–170 | × 5% / 10% / 20% (see note 4) |
+| of whom in their twenties | around 3–40 | × 10–25% (see note 5) |
+| of whom Japanese citizenship (Home Office nationality data) | at least 1 (this case) | × about 0.8% (see notes 6 and 7) |
+
+Uncertainty grows towards the bottom of the table. The last rows are not a headcount. They are what happens to the published totals if you keep applying assumptions that have no official breakdown. Under those assumptions the remaining set is small. This case is one observed example within that estimated set.
+
+There are several write-ups in Japanese of Global Talent. Many of them say ILR takes "5 years". Five years could be Promise, but you cannot tell the track from the articles alone. A founder from Japan who got Exceptional Talent can be confirmed in press pieces[^jp-founder-talent]. I could not find a detailed account in Japanese of getting Talent on an OSS-centred record rather than as a founder.
+
+::: details Premises and sources for the estimate
+
+1. **Numbers in the first table**: they are aligned to a year, but they count different things, so they are not a funnel that narrows one population in order. 813,000 is an estimate of people who moved to the UK for 12 months or more. 6,655 and 3,904 are Global Talent issues from the detailed dataset Vis_D02; they include fields other than Digital Technology and exclude in-country switches and extensions (figures from 2025 onwards are provisional). 500+ is a simple 10-year average of Tech Nation's cumulative 5,000+, and as the body says the later years dominate.
+2. **5,000+ / 1 in 3**: both from [Tech Nation's 2024 report](https://technation.io/global-talent-visa-report-2024/), cumulative over "the past 10 years". The report was published in 2024, so that is roughly 2014–2024. The second table is also this 10-year cumulative, not a per-year figure.
+3. **30–50% Exceptional Talent**: in the [Home Office Wave 2 survey](https://www.gov.uk/government/publications/global-talent-visa-evaluation-wave-2-report/global-talent-visa-evaluation-wave-2-report), Exceptional Talent was 37% of 4,025 survey respondents who held the visa (Promise 44%, track unknown 19%). That is not an official Tech Nation-only split, it includes all endorsing bodies, and it is not a rate limited to the software engineering layer. So I used a 30–50% range rather than 37% itself.
+4. **5% / 10% / 20% OSS / developer tooling**: no statistic exists. 5%, 10%, and 20% are low / mid / high scenarios. I am not claiming any one number is correct; they show how much the result moves when the assumption changes.
+5. **10–25% in their twenties**: not a measured value. The same Wave 2 survey has 1% aged 18–24 and 51% aged 25–34, but the latter includes 30–34 and Exceptional Promise, so I assume the share is lower for Exceptional Talent.
+6. **about 0.8% Japanese citizenship**: aggregating [Home Office official data](https://www.gov.uk/government/statistical-data-sets/immigration-system-statistics-data-tables), issues to people with Japanese citizenship were 139 of 17,420 Global Talent main-applicant issues in 2020–2025, or 0.80%. That is citizenship as recorded in the nationality tables, not ethnicity. The rate includes fields other than Digital Technology and Exceptional Promise; it is out-of-country issues only, and does not include people who switched from inside the UK. It does not directly give a unique headcount under the same conditions as this case. Japan also does not appear in the [July 2026 nationality FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf) (Tech Nation, top applicant countries only), so applications recorded against Japan are not in the top 20 nationalities in a year.
+7. **"at least 1" in the last row**: applying note 6's rate to the previous row gives an expected value below 1, but even with the filters up to that point there is at least this application as a data point. So the arithmetic floor is 1. The published first-person record I could find is also on the order of 1 to a few people. Official statistics still cannot support "first person of Japanese citizenship". Grants of Digital Technology Exceptional Talent to people with Japanese citizenship can themselves be confirmed.
+
+:::
+
+## Tightening, except this route
+
+UK immigration policy as a whole is tightening. The [May 2025 white paper](https://www.gov.uk/government/publications/restoring-control-over-the-immigration-system-white-paper/restoring-control-over-the-immigration-system-accessible) set out a plan to reduce immigration and stretch the standard ILR qualifying period to 10 years. The earned settlement consultation mentioned in the body is part of that.
+
+But the same white paper has the opposite policy for very high talent routes such as Global Talent. It says explicitly to "increase the number of people coming through very high talent routes" and to make Global Talent easier for "top scientific and design talent", and in practice the moves to widen the target have continued: a [£54M Global Talent Fund](https://www.gov.uk/government/news/uk-launches-global-talent-drive-to-attract-world-leading-researchers-and-innovators), [visa-fee refunds for priority sectors](https://www.gov.uk/government/news/reeves-tells-davos-britain-is-the-best-place-in-the-world-to-invest), and the new Design industry route. A [MAC review of talent routes](https://www.gov.uk/government/publications/attracting-talent-to-the-uk-mac-self-commissioning-letter) also started in February 2026.
+
+Demand is up too. After the US announced a large H-1B fee increase in September 2025, a surge in enquiries was reported[^enquiry-surge]. Applications to Tech Nation rose 14% year on year. In January 2026 there were also reports of the Home Office replying that it was "processing an unprecedented volume of applications"[^stage1-slowdown].
+
+On top of that, I think the 10-year ILR announcement also created a rush (transitional arrangements are not settled, and there were rumours it might take effect from April 2026). I suspect those two sources of pressure overlapped: the reported increase in enquiries after the US change and the ILR-related rush.
+
+When the submission method changed in 2025, UKVI said the endorsement criteria would not change[^criteria-same]. The promotional changes and wider access went ahead; applications rose during the same period, while Tech Nation's approval rate fell, as noted above.
+
+## Not Skilled Worker
+
+The usual route for working in the UK is [Skilled Worker](https://www.gov.uk/skilled-worker-visa). It is an employer-sponsored work visa, a different thing from Global Talent.
+
+There are differences besides years to ILR. The standard salary requirement rose from £26,200 to £38,700 in 2024, then to £41,700 in July 2025 (still the same in 2026)[^sw-salary].
+
+After graduation you can stay in the UK for 2 years on the Graduate route (3 years for a PhD). It does not count towards Global Talent / Skilled Worker ILR[^graduate-ilr]. The ILR clock starts when you switch.
+
+Skilled Worker is also tied to the sponsoring company. If you are made redundant you usually have 60 days[^curtailment] to find another sponsor or leave the UK. Running 5 years to ILR in that state (10 if the reform goes through) is frightening. Global Talent is not tied to a particular job, so losing a job does not by itself end the permission; check the current [GOV.UK](https://www.gov.uk/global-talent) rules for your circumstances.
+
+Finding a sponsored job is especially hard at the junior end of the market. The UK unemployment rate for 16–24 year olds is 16.2% (2026 Q1). Graduate vacancies get 140 applications on average. Of UK university graduates, 56.4% were in full-time work 15 months after graduation[^young-job-market]. That is the same tight market in which a Skilled Worker visa also needs a sponsor and a salary at or above the threshold.
+
+## Why I stay anyway
+
+The UK has plenty of problems. Anti-immigrant politics have become more prominent in recent years, and the economy is not exactly booming. Prices are high, and tech salaries are nowhere near the US.
+
+Even so, it is a good place to work in tech. It is English-speaking, so work sits on the same plane as the world market. Capital and people collect in London. I see it as the centre for AI after San Francisco. DeepMind is here too. OSS and talks reach outside the Japanese-language sphere as they are. Clearly more chances flow in than when I was working in Japan.
+
+The time zone helps as well. London sits between Europe and the US: mornings overlap with Europe, evenings with the US east coast, and nights with the west coast. In OSS and at work, conversations with both sides usually go around in the same day.
+
+[^hpi]: Started May 2022. For people who graduated within 5 years from a university on that year's [Global Universities List](https://www.gov.uk/government/publications/high-potential-individual-visa-global-universities-list). In November 2025 the list widened from roughly top 50 to roughly top 100, doubling to about 80 universities. The period is 2 years (3 for a PhD), not extendable, and it does not lead directly to ILR.
+[^yms]: The period is 2 years. It does not lead directly to ILR, but you can [switch to Global Talent from inside the UK](https://www.gov.uk/global-talent/switch-to-this-visa) as the deadline approaches and stay on. You do not have to enter on Global Talent from the start. I also switched from a dependant visa to Global Talent. In the Home Office survey of holders across all fields, 30% of respondents applied from inside the UK.
+[^stage1-weeks]: Guide time from [GOV.UK](https://www.gov.uk/global-talent-digital-technology).
+[^design-uxui]: UX/UI is out of scope and stays under [Tech Nation](https://www.gov.uk/government/publications/global-talent-endorsing-bodies/technical-or-business-skills-covered-by-tech-nation).
+[^talent-promise-format]: From the [Home Office caseworker guidance](https://www.gov.uk/government/publications/global-talent-appendix-w-workers) and the [Tech Nation application guide](https://technation.io/global-talent-visa-guide). Mandatory criteria and evidence examples are from the same sources.
+[^promise-share]: From the [Home Office Wave 2 survey](https://www.gov.uk/government/publications/global-talent-visa-evaluation-wave-2-report/global-talent-visa-evaluation-wave-2-report). Of 4,025 survey respondents who held the visa, Talent was 37%, Promise 44%, and the remaining 19% unknown or other. Combined across all endorsing bodies; a Tech Nation-only split is not published.
+[^talent-to-promise]: There are [applicant reports](https://discourse.tnvisaforum.org/t/applied-for-exceptional-talent-but-got-endorsed-as-exceptional-promise-can-i-appeal/17598) of applying for Talent and being endorsed as Promise. There is also a detailed Japanese write-up on the Promise side, [Global Talent Visa (Exceptional Promise) 取得記](https://note.com/921kiyo/n/n1f8bf10b9f79).
+[^leader-assessment]: [GOV.UK assessment factors](https://www.gov.uk/global-talent-digital-technology/eligibility) include career history, the international reputation and impact of the work, the strength of letters and evidence, and the commercial impact of past work. Being a manager is not a requirement.
+[^ilr-clock]: From the [Home Office caseworker guidance](https://www.gov.uk/government/publications/global-talent-appendix-w-workers). Only time on Global Talent and some work routes counts towards this qualifying period. I have lived in the UK since 2022, but time as a Student-route dependant does not count, so the 3 years start again from here.
+[^ihs]: From the [GOV.UK IHS fee table](https://www.gov.uk/healthcare-immigration-application/how-much-pay).
+[^ilr-absence]: From the [continuous residence rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-continuous-residence). ILR can still [lapse if you leave the UK for more than 2 years continuously](https://www.gov.uk/returning-resident-visa). That is a different kind of problem from counting days per year.
+[^earned-settlement]: The ["earned settlement" reform](https://commonslibrary.parliament.uk/research-briefings/cbp-10267/). [Consultation closed in February 2026](https://www.gov.uk/government/consultations/earned-settlement) and it is not in force yet.
+[^sw-salary]: From a [Home Office impact assessment](https://www.gov.uk/government/publications/changes-to-immigration-rules-impact-assessments/2024-spring-immigration-rules-impact-assessment-accessible) and the [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-skilled-worker) updated 1 July 2026. This is the standard figure for a typical applicant; if the going rate for the occupation is higher, that is what you need. There are also exceptions for PhDs, new entrants, and so on.
+[^young-job-market]: The 16–24 unemployment rate is from the [ONS time series](https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgwy/lms); application counts are from the [Institute of Student Employers 2025 survey](https://ise.org.uk/knowledge/insights/552/the_application_explosion_key_insights_for_employers/). Graduate destinations are from [What do graduates do? 2025/26](https://luminate.prospects.ac.uk/what-do-graduates-do), based on HESA Graduate Outcomes. The population is 179,675 UK-domiciled first-degree graduates from 2022/23 who responded 15 months later.
+[^graduate-ilr]: The Graduate route is not in the qualifying period for [Immigration Rules on Global Talent](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent) or [Skilled Worker](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-skilled-worker). 10-year long residence is a different route.
+[^curtailment]: Practice from the [Home Office cancellation and curtailment guidance](https://www.gov.uk/government/publications/immigration-status-and-enforcement-action-caseworker-guidance/cancellation-and-curtailment-of-permission-accessible).
+[^evidence-split]: From the [Tech Nation application guide](https://technation.io/global-talent-visa-guide). There are also rules on the split: at least 2 pieces for MC, at least 4 for the 2 OCs you chose (2 per criterion). The same evidence cannot be reused across criteria.
+[^oc-promise]: From the [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent) and the Tech Nation application guide. Promise also looks at being early-career. OC1 is for founders or employees, and OC3 is also for founders or employees; the Talent wording about senior executives and board members is not there.
+[^founder-share]: From the [Tech Nation 2024 report](https://technation.io/global-talent-visa-report-2024/).
+[^company-evidence]: Founders and senior executives can more easily use company results such as fundraising and growth as evidence of leadership. In a large company the work tends to become a team result, and there are non-disclosure agreements, so turning an individual contribution into externally visible evidence is hard. Giving back to the community is not a mandatory requirement for everyone (you can also apply on OC1 and OC3).
+[^open-source-evidence]: Tech Nation lists, as a [guide](https://technation.io/home/global-talent-visa-what-to-consider/) for technical applicants, publishing open source code on a reputable platform and getting significant engagement. The [Application Guide](https://technation.io/global-talent-visa-guide) also lists repo stars, download stats, and commit summaries as example metrics.
+[^oc2-wording]: The [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent) wording is "work beyond the applicant's occupation". It does not draw the line at an employment contract or pay.
+[^letters]: From the [Immigration Rules](https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-global-talent) and the [Tech Nation official guide](https://technation.io/global-talent-visa-guide). The official guide does not accept letters written for another purpose, or template-like content. The Immigration Rules wording is "3 separate experts"; the caseworker guidance says "separate organisations". I asked 3 people from separate organisations.
+[^rates-2021]: Calculated from a [Home Office FOI](https://www.whatdotheyknow.com/request/tier_1_global_talent_application/response/1793960/attach/5/FOI%20Response%2063876%20E%20Thornton%20V0.1.pdf) (2020/21) as endorsed ÷ (endorsed + refused), including reviews.
+[^tn-rate-recent]: [Home Office FOI](https://www.whatdotheyknow.com/request/technation_accepted_and_rejected/response/3484702/attach/5/FOI2026%2008464.pdf) (FOI2026/08464, 16 July 2026). It does not say whether overturns on review are included.
+[^no-perbody]: Per-body approval rates have not been published since 2020/21. Academia only has an indicative combined figure for 4 bodies, and industry reports also [note the lack of a breakdown](https://www.abpi.org.uk/media/5y5nhiui/ey-abpi-attracting-global-talent-a-pro-growth-plan-for-uk-life-sciences.pdf).
+[^rate-caveat]: From the [UKRI Global Mobility Evidence Report 2025](https://www.ukri.org/publications/global-mobility-evidence-report/global-mobility-evidence-report-2025/). Combined Royal Society / Royal Academy of Engineering / British Academy / UKRI; UKRI itself says this is an indicative figure, not official statistics. 2021–2023 sat around 90%.
+[^ace-rate]: From [cumulative data Arts Council England gave to the press](https://www.artsprofessional.co.uk/news/exclusive-ace-endorses-2600-visas-outstanding-talent). Cumulative from 2011, with large year-to-year swings (89% in 2020).
+[^foi-gap]: The fractions in the body are Endorsed ÷ Total. For 2025-26 the disclosed Endorsed 587 and Not Endorsed 3,497 sum to 4,084, 3 off the Total of 4,087 (likely pending or withdrawn).
+[^holistic-review]: From the [Tech Nation official guide](https://technation.io/global-talent-visa-guide).
+[^oss-vs-tn]: There is also a maintainer who applied on an OSS record, was refused, and [published a critique of the assessment](https://art-deco.github.io/open-source/). Writing and publishing code, and that looking to the panel like value for the field, are different problems.
+[^stage1-process]: From 4 August 2025 Tech Nation's own portal was closed, and applications are submitted to the Home Office and then forwarded to Tech Nation ([Tech Nation official FAQ](https://technation.io/visa_faq/)). There are public cases of endorsement in a few days before the change, but those are fast individual cases, not the average of ordinary processing. There is a [3-working-day case](https://discourse.tnvisaforum.org/t/endorsed-for-talent-in-3-working-days/8350). My own application took 20 days from the 20 Apr submission to the 10 May forward to Tech Nation.
+[^stage1-slowdown]: In January 2026 the Home Office Global Talent desk was sending an auto-reply apologising for delay and saying it was "processing an unprecedented volume of applications". There is no official notice on gov.uk; a [repost on an applicant forum](https://web.archive.org/web/20260804184309/https://discourse.tnvisaforum.org/t/current-stage-1-waiting-time-2026/25207) is the only public source.
+[^stage2-weeks]: From [GOV.UK](https://www.gov.uk/global-talent). The guide is 3 weeks from outside the UK and 8 weeks from inside.
+[^jp-founder-talent]: A few mentions in interviews and speaker bios can be confirmed. None of them name the endorsing body, and none is a detailed first-person write-up.
+[^enquiry-surge]: [Irwin Mitchell report](https://www.irwinmitchell.com/news-and-insights/newsandmedia/2025/september/surge-in-global-talent-visas-as-uk-as-firms-respond-to-us-visa-clampdown) (29 September 2025). They say enquiries rose visibly right after the announcement.
+[^criteria-same]: [UKVI wording around the August 2025 change of submission method](https://eiglaw.com/uk-updates-global-talent-visa-endorsement-process-with-tech-nation-from-august-4-2025/): "The criteria for endorsement will remain the same". I did not find a new 2026 statement in response to the surge in demand.

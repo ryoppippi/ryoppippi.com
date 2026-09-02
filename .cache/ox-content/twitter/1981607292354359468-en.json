@@ -1,0 +1,331 @@
+{
+	"__typename": "Tweet",
+	"conversation_control": {
+		"policy": "Subscribers"
+	},
+	"favorite_count": 27,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-24T06:22:49.000Z",
+	"display_text_range": [0, 36],
+	"entities": {
+		"media": [
+			{
+				"display_url": "pic.x.com/hil3rBpyYW",
+				"expanded_url": "https://x.com/schroneko/status/1981607292354359468/photo/1",
+				"indices": [37, 60],
+				"url": "https://t.co/hil3rBpyYW"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "113598297",
+				"indices": [26, 36],
+				"name": "ryoppippi",
+				"screen_name": "ryoppippi"
+			}
+		]
+	},
+	"id_str": "1981607292354359468",
+	"text": "VITURE Luma Ultra がやたら似合う @ryoppippi https://t.co/hil3rBpyYW",
+	"user": {
+		"id_str": "851089529893146624",
+		"name": "ぬこぬこ / NUKO 🇯🇵",
+		"screen_name": "nukonuko",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/2051950657809362944/x6v0T-f1_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1981607292354359468"],
+		"editable_until_msecs": "1761290569000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/hil3rBpyYW",
+			"expanded_url": "https://x.com/schroneko/status/1981607292354359468/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [37, 60],
+			"media_url_https": "https://pbs.twimg.com/media/G4AVSW1WwAErU9t.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 2294,
+						"w": 4096,
+						"x": 0,
+						"y": 798
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 3593,
+						"x": 503,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 2048,
+						"x": 1740,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 4096,
+				"width": 4096
+			},
+			"sizes": {
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/hil3rBpyYW"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 2294,
+					"w": 4096,
+					"x": 0,
+					"y": 798
+				},
+				{
+					"h": 4096,
+					"w": 4096,
+					"x": 0,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 3593,
+					"x": 503,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 2048,
+					"x": 1740,
+					"y": 0
+				},
+				{
+					"h": 4096,
+					"w": 4096,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/schroneko/status/1981607292354359468/photo/1",
+			"url": "https://pbs.twimg.com/media/G4AVSW1WwAErU9t.jpg",
+			"width": 4096,
+			"height": 4096
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"quoted_tweet": {
+		"conversation_control": {
+			"policy": "Subscribers"
+		},
+		"favorite_count": 10,
+		"lang": "ja",
+		"possibly_sensitive": false,
+		"reply_count": 0,
+		"retweet_count": 2,
+		"created_at": "2025-10-24T06:12:45.000Z",
+		"display_text_range": [0, 36],
+		"entities": {
+			"media": [
+				{
+					"display_url": "pic.x.com/5nISc536el",
+					"expanded_url": "https://x.com/schroneko/status/1981604758042644928/photo/1",
+					"indices": [37, 60],
+					"url": "https://t.co/5nISc536el"
+				}
+			],
+			"urls": [
+				{
+					"display_url": "maps.app.goo.gl/BmaUBe7UrXRWS7…",
+					"expanded_url": "https://maps.app.goo.gl/BmaUBe7UrXRWS7h28",
+					"indices": [13, 36],
+					"url": "https://t.co/GUXech9L8t"
+				}
+			]
+		},
+		"id_str": "1981604758042644928",
+		"text": "GMK at 桜丘カフェ\nhttps://t.co/GUXech9L8t https://t.co/5nISc536el",
+		"user": {
+			"id_str": "851089529893146624",
+			"name": "ぬこぬこ / NUKO 🇯🇵",
+			"screen_name": "nukonuko",
+			"is_blue_verified": true,
+			"profile_image_shape": "Circle",
+			"verified": false,
+			"profile_image_url_https": "https://pbs.twimg.com/profile_images/2051950657809362944/x6v0T-f1_normal.jpg"
+		},
+		"edit_control": {
+			"edit_tweet_ids": ["1981604758042644928"],
+			"editable_until_msecs": "1761289965000",
+			"edits_remaining": "5",
+			"is_edit_eligible": true
+		},
+		"mediaDetails": [
+			{
+				"display_url": "pic.x.com/5nISc536el",
+				"expanded_url": "https://x.com/schroneko/status/1981604758042644928/photo/1",
+				"ext_media_availability": {
+					"status": "Available"
+				},
+				"indices": [37, 60],
+				"media_url_https": "https://pbs.twimg.com/media/G4ATAwuWkAABJdS.jpg",
+				"original_info": {
+					"focus_rects": [
+						{
+							"h": 2294,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 3593,
+							"x": 503,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 2048,
+							"x": 2048,
+							"y": 0
+						},
+						{
+							"h": 4096,
+							"w": 4096,
+							"x": 0,
+							"y": 0
+						}
+					],
+					"height": 4096,
+					"width": 4096
+				},
+				"sizes": {
+					"large": {
+						"h": 2048,
+						"resize": "fit",
+						"w": 2048
+					},
+					"medium": {
+						"h": 1200,
+						"resize": "fit",
+						"w": 1200
+					},
+					"small": {
+						"h": 680,
+						"resize": "fit",
+						"w": 680
+					},
+					"thumb": {
+						"h": 150,
+						"resize": "crop",
+						"w": 150
+					}
+				},
+				"type": "photo",
+				"url": "https://t.co/5nISc536el"
+			}
+		],
+		"photos": [
+			{
+				"backgroundColor": {
+					"red": 204,
+					"green": 214,
+					"blue": 221
+				},
+				"cropCandidates": [
+					{
+						"h": 2294,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 3593,
+						"x": 503,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 2048,
+						"x": 2048,
+						"y": 0
+					},
+					{
+						"h": 4096,
+						"w": 4096,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"expandedUrl": "https://x.com/schroneko/status/1981604758042644928/photo/1",
+				"url": "https://pbs.twimg.com/media/G4ATAwuWkAABJdS.jpg",
+				"width": 4096,
+				"height": 4096
+			}
+		],
+		"isEdited": false,
+		"isStaleEdit": false
+	},
+	"isEdited": false,
+	"isStaleEdit": false
+}

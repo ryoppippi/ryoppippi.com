@@ -37,17 +37,4 @@ if (import.meta.vitest != null) {
 			expect(formatDate(new Date(2024, 0, 2))).toBe('2 Jan 2024');
 		});
 	});
-
-	describe(capitalize, () => {
-		it('uppercases the first character and lowercases the rest', () => {
-			expect(capitalize('OSS')).toBe('Oss');
-			expect(capitalize('showcase')).toBe('Showcase');
-		});
-	});
-
-	describe(lowercase, () => {
-		it('lowercases the whole string', () => {
-			expect(lowercase('OSS')).toBe('oss');
-		});
-	});
 }

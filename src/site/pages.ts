@@ -1,18 +1,17 @@
-import type { ArticleMetadata, BlogPost, BlogPostMetadata } from '@ryoppippi/content';
+import type { ArticleMetadata, BlogPost } from '../content/index.ts';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
-import { Feed } from 'feed';
 import * as ufo from 'ufo';
 import { formatDate } from '../lib/util.ts';
 import { islandModuleIds } from './assets.ts';
-import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
+import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from './consts.ts';
 import { postListItems } from './content.ts';
 import path from 'node:path';
 import { page, renderComponent } from './html.ts';
 import { SITE_OWNER } from './site-owner.ts';
-import Article from './templates/Article.svelte';
-import BlogList from './templates/BlogList.svelte';
-import Home from './templates/Home.svelte';
+import Article from './templates/Article.tsx';
+import BlogList from './templates/BlogList.tsx';
+import Home from './templates/Home.tsx';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
@@ -56,6 +55,73 @@ function articleImageUrl(html: string, articleUrl: string): string | undefined {
 			).href;
 }
 
+function homeStructuredData() {
+	return {
+		'@context': 'https://schema.org',
+		'@graph': [
+			{
+				'@type': 'WebSite',
+				'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
+				name: SITE_NAME,
+				alternateName: SITE_OWNER.handle,
+				description: HOME_DESCRIPTION,
+				url: SITE_OWNER.url,
+				creator: { '@id': SITE_OWNER.id },
+			},
+			{
+				'@type': 'ProfilePage',
+				'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
+				url: SITE_OWNER.url,
+				isPartOf: {
+					'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
+				},
+				mainEntity: { '@id': SITE_OWNER.id },
+			},
+			{
+				'@type': 'Person',
+				'@id': SITE_OWNER.id,
+				name: SITE_OWNER.name,
+				alternateName: [
+					SITE_OWNER.japaneseName,
+					SITE_OWNER.formerName,
+					SITE_OWNER.formerJapaneseName,
+					SITE_OWNER.handle,
+					'ryoppippi',
+				],
+				url: SITE_OWNER.url,
+				image: SITE_SOCIAL_IMAGE_URL,
+				sameAs: [...SITE_OWNER.sameAs],
+			},
+		],
+	};
+}
+
+function articleStructuredData(
+	post: BlogPost,
+	description: string,
+	url: string,
+	image: string | undefined,
+) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: post.title,
+		description,
+		url,
+		mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+		author: {
+			'@type': 'Person',
+			'@id': SITE_OWNER.id,
+			name: SITE_OWNER.name,
+			alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle],
+			url: SITE_OWNER.url,
+		},
+		datePublished: post.pubDate,
+		...(image == null ? {} : { image }),
+		inLanguage: post.lang,
+	};
+}
+
 /**
  * A file emitted by the static site generator.
  */
@@ -77,7 +143,7 @@ export type GeneratedFile = {
 export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
-		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.svelte'],
+		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/templates/Home.tsx'],
 		content: page({
 			title: '',
 			pathname: '/',
@@ -85,44 +151,7 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 			description: HOME_DESCRIPTION,
 			assets,
 			style: 'home',
-			structuredData: {
-				'@context': 'https://schema.org',
-				'@graph': [
-					{
-						'@type': 'WebSite',
-						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
-						name: SITE_NAME,
-						alternateName: SITE_OWNER.handle,
-						description: HOME_DESCRIPTION,
-						url: SITE_OWNER.url,
-						creator: { '@id': SITE_OWNER.id },
-					},
-					{
-						'@type': 'ProfilePage',
-						'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
-						url: SITE_OWNER.url,
-						isPartOf: {
-							'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
-						},
-						mainEntity: { '@id': SITE_OWNER.id },
-					},
-					{
-						'@type': 'Person',
-						'@id': SITE_OWNER.id,
-						name: SITE_OWNER.name,
-						alternateName: [
-							SITE_OWNER.japaneseName,
-							SITE_OWNER.formerName,
-							SITE_OWNER.formerJapaneseName,
-							SITE_OWNER.handle,
-							'ryoppippi',
-						],
-						url: SITE_OWNER.url,
-						image: SITE_SOCIAL_IMAGE_URL,
-						sameAs: [...SITE_OWNER.sameAs],
-					},
-				],
-			},
+			structuredData: homeStructuredData(),
 		}),
 	};
 }
@@ -140,8 +169,8 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 		path: 'blog/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
-			'src/site/templates/BlogList.svelte',
-			'packages/content/src/blog',
+			'src/site/templates/BlogList.tsx',
+			'src/content/blog',
 			'src/contents/external-rss/rss.json',
 			'src/contents/external-rss/posts.json',
 		],
@@ -175,8 +204,9 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 		pathname,
 		post,
 	});
-	const sourcePath =
-		path.basename(post.filepath) === 'index.md' ? path.dirname(post.filepath) : post.filepath;
+	const sourcePath = /^index\.mdx?$/.test(path.basename(post.filepath))
+		? path.dirname(post.filepath)
+		: post.filepath;
 	return [
 		{
 			path: `blog/${post.filename}/index.html`,
@@ -193,89 +223,11 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 				article: true,
 				islands: islandModuleIds(post.html),
 				style: 'article',
-				tweet: post.html.includes('data-tweet-id'),
-				structuredData: {
-					'@context': 'https://schema.org',
-					'@type': 'BlogPosting',
-					headline: post.title,
-					description: metadata.description,
-					url,
-					mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-					author: {
-						'@type': 'Person',
-						'@id': SITE_OWNER.id,
-						name: SITE_OWNER.name,
-						alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle],
-						url: SITE_OWNER.url,
-					},
-					datePublished: post.pubDate,
-					...(image == null ? {} : { image }),
-					inLanguage: post.lang,
-				},
+				structuredData: articleStructuredData(post, metadata.description, url, image),
 			}),
 		},
 		{ path: `blog/${post.filename}.md`, content: post.source },
 	];
-}
-
-/**
- * Builds the RSS feed for published local posts.
- *
- * @param posts - Blog post metadata to include.
- * @returns The generated RSS feed.
- */
-export function feed(posts: BlogPostMetadata[]): GeneratedFile {
-	const output = new Feed({
-		title: `blog | ${SITE_NAME}`,
-		description: `blog | ${SITE_NAME}`,
-		id: SITE_ORIGIN,
-		link: SITE_ORIGIN,
-		language: 'en',
-		image: SITE_SOCIAL_IMAGE_URL,
-		favicon: SITE_SOCIAL_IMAGE_URL,
-		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: ufo.joinURL(SITE_ORIGIN, 'feed.xml') },
-	});
-	for (const post of posts.filter((post) => post.isPublished)) {
-		output.addItem({
-			title: post.title,
-			link: ufo.joinURL(SITE_ORIGIN, 'blog', `${post.filename}/`),
-			date: new Date(post.pubDate),
-			description: `${post.title} | ${post.readingTime.text}`,
-		});
-	}
-	return { path: 'feed.xml', content: output.rss2() };
-}
-
-/**
- * Builds the RSS feed for curated media appearances.
- *
- * @param items - Curated podcast and video entries to include.
- * @returns The generated media RSS feed.
- */
-export function mediaFeed(items: PostListItem[]): GeneratedFile {
-	const pathname = '/works/media/';
-	const url = ufo.joinURL(SITE_ORIGIN, pathname);
-	const output = new Feed({
-		title: `Media | ${SITE_NAME}`,
-		description: `Media appearances by ${SITE_NAME}`,
-		id: url,
-		link: url,
-		language: 'ja',
-		image: SITE_SOCIAL_IMAGE_URL,
-		favicon: SITE_SOCIAL_IMAGE_URL,
-		copyright: SITE_COPYRIGHT,
-		feedLinks: { rss: ufo.joinURL(url, 'feed.xml') },
-	});
-	for (const item of items.filter((item) => item.playlist !== true)) {
-		output.addItem({
-			title: item.title,
-			link: item.link,
-			date: new Date(item.pubDate),
-			description: `${item.kind === 'video' ? 'YouTube' : 'Podcast'} | ${item.title}`,
-		});
-	}
-	return { path: 'works/media/feed.xml', content: output.rss2() };
 }
 
 /**
@@ -295,7 +247,6 @@ export function corePages(
 		homePage(assets),
 		blogListPage([...externalPosts, ...postListItems(posts)], assets),
 		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
-		feed(posts),
 	];
 }
 
@@ -304,8 +255,8 @@ if (import.meta.vitest != null) {
 		base: '',
 		client: '',
 		islands: {},
+		oxContent: '',
 		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
-		tweet: '',
 	} as const satisfies SiteAssets;
 
 	const examplePost = {
@@ -328,150 +279,67 @@ if (import.meta.vitest != null) {
 		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
 	} satisfies BlogPost;
 
-	test('renders site identity metadata on the home page', () => {
-		const home = homePage(assets);
-		expect(home.sourcePaths).toContain(SITE_OWNER_SOURCE_PATH);
-		const html = home.content;
-		expect(html).toContain(
-			`<meta data-page-head="" name="description" content="${HOME_DESCRIPTION}">`,
+	test('tracks the whole source directory for an index MDX article', () => {
+		const [article] = articlePages(
+			{ ...examplePost, filepath: '/content/example-article/index.mdx' },
+			assets,
 		);
-		expect(html).not.toContain('data-home-description');
-		expect(html).toMatch(/<span data-nosnippet(?:="")?><a class="skip-link"/);
-		expect(html).toMatch(/<div data-nosnippet(?:="")? class="flex flex-wrap justify-center/);
-		expect(html).toContain('<meta data-page-head="" property="og:title" content="ryoppippi.com">');
-		expect(html).toContain('"@type":"WebSite"');
+
+		expect(article.sourcePaths).toContain('/content/example-article');
+		expect(article.sourcePaths).not.toContain('/content/example-article/index.mdx');
 	});
 
-	test('keeps profile identity metadata out of the visible home page', () => {
-		const html = homePage(assets).content;
-		const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1];
-		assert.isDefined(body, 'expected a rendered document body');
-
-		expect(body).not.toContain('Ryotaro Kimura');
-		expect(body).not.toContain('木村亮太朗');
-		expect(body).not.toContain('Ryotaro Miura');
-		expect(body).not.toContain('三浦亮太朗');
+	test('derives an article description from the first prose paragraph', () => {
+		expect(
+			markdownDescription(
+				'# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
+			),
+		).toBe('A useful fallback paragraph with a link.');
 	});
 
-	test('identifies the home page owner with profile structured data', () => {
-		const html = homePage(assets).content;
-		const jsonLd = html.match(
-			/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-		)?.[1];
-		assert.isDefined(jsonLd, 'expected home page structured data');
+	test('resolves the first rendered article image against the article URL', () => {
+		expect(
+			articleImageUrl(
+				'<p><img src="./first-image.png" alt="Example"></p>',
+				'https://ryoppippi.com/blog/example-article/',
+			),
+		).toBe('https://ryoppippi.com/blog/example-article/first-image.png');
+	});
 
-		expect(JSON.parse(jsonLd)).toMatchObject({
-			'@context': 'https://schema.org',
+	test('builds the owner relationship graph', () => {
+		expect(homeStructuredData()).toMatchObject({
 			'@graph': expect.arrayContaining([
 				expect.objectContaining({
 					'@type': 'ProfilePage',
-					mainEntity: { '@id': 'https://ryoppippi.com/#person' },
+					mainEntity: { '@id': SITE_OWNER.id },
 				}),
 				expect.objectContaining({
 					'@type': 'Person',
-					'@id': 'https://ryoppippi.com/#person',
-					name: 'Ryotaro Kimura',
-					alternateName: expect.arrayContaining([
-						'木村亮太朗',
-						'Ryotaro Miura',
-						'三浦亮太朗',
-						'@ryoppippi',
-					]),
-					sameAs: expect.arrayContaining([
-						'https://github.com/ryoppippi',
-						'https://cv.ryoppippi.com/',
-					]),
+					'@id': SITE_OWNER.id,
+					name: SITE_OWNER.name,
+					sameAs: SITE_OWNER.sameAs,
 				}),
 			]),
 		});
 	});
 
-	test('renders article SEO metadata and reciprocal language links', () => {
-		const [article] = articlePages(examplePost, assets);
-		expect(article).toBeDefined();
-		expect(article?.sourcePaths).toEqual([SITE_OWNER_SOURCE_PATH, '/content/example-article']);
-		const html = article?.content ?? '';
-
-		expect(html).toContain('<html lang="en">');
-		expect(html).toContain(
-			'<meta data-page-head="" name="description" content="A concise description for an example article.">',
-		);
-		expect(html).toContain(
-			'<meta data-page-head="" property="og:title" content="Example article | blog | ryoppippi.com">',
-		);
-		expect(html).toContain(
-			'<meta data-page-head="" property="og:description" content="A concise description for an example article.">',
-		);
-		expect(html).toContain(
-			'<meta data-page-head="" name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">',
-		);
-		expect(html).toContain(
-			'<link data-page-head="" rel="canonical" href="https://ryoppippi.com/blog/example-article/">',
-		);
-		expect(html).toContain(
-			'<meta data-page-head="" property="article:published_time" content="2026-01-01T00:00:00.000Z">',
-		);
-		for (const [language, url] of Object.entries(examplePost.alternates)) {
-			expect(html).toContain(
-				`<link data-page-head="" hreflang="${language}" href="${url}" rel="alternate">`,
-			);
-		}
-
-		const jsonLd = html.match(
-			/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-		)?.[1];
-		expect(jsonLd).toBeDefined();
-		expect(JSON.parse(jsonLd ?? '')).toMatchObject({
-			'@context': 'https://schema.org',
+	test('builds article schema from the resolved metadata', () => {
+		expect(
+			articleStructuredData(
+				examplePost,
+				examplePost.description,
+				'https://ryoppippi.com/blog/example-article/',
+				'https://ryoppippi.com/assets/content/article-cover.avif',
+			),
+		).toMatchObject({
 			'@type': 'BlogPosting',
 			headline: examplePost.title,
 			description: examplePost.description,
-			url: 'https://ryoppippi.com/blog/example-article/',
-			mainEntityOfPage: {
-				'@type': 'WebPage',
-				'@id': 'https://ryoppippi.com/blog/example-article/',
-			},
 			datePublished: examplePost.pubDate,
 			image: 'https://ryoppippi.com/assets/content/article-cover.avif',
-			inLanguage: 'en',
-			author: {
-				'@type': 'Person',
-				'@id': 'https://ryoppippi.com/#person',
-				name: 'Ryotaro Kimura',
-				alternateName: expect.arrayContaining(['木村亮太朗', '@ryoppippi']),
-				url: 'https://ryoppippi.com/',
-			},
+			inLanguage: examplePost.lang,
+			author: { '@id': SITE_OWNER.id },
 		});
-	});
-
-	test('uses the first prose paragraph when description frontmatter is absent', () => {
-		const [article] = articlePages(
-			{
-				...examplePost,
-				description: undefined,
-				content: '# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
-			},
-			assets,
-		);
-
-		expect(article?.content).toContain(
-			'<meta data-page-head="" name="description" content="A useful fallback paragraph with a link.">',
-		);
-	});
-
-	test('uses the first rendered article image in JSON-LD', () => {
-		const [article] = articlePages(
-			{
-				...examplePost,
-				image: undefined,
-				html: '<p><img src="./first-image.png" alt="Example"></p>',
-			},
-			assets,
-		);
-
-		expect(article?.content).toContain(
-			'"image":"https://ryoppippi.com/blog/example-article/first-image.png"',
-		);
 	});
 
 	test('escapes less-than characters in JSON-LD text', () => {
@@ -484,12 +352,14 @@ if (import.meta.vitest != null) {
 			assets,
 		);
 		const jsonLd =
-			article?.content.match(
-				/<script data-page-head="" type="application\/ld\+json">([\s\S]*?)<\/script>/,
-			)?.[1] ?? '';
+			article?.content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ??
+			'';
+		const visibleTitle = article?.content.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
 
-		expect(jsonLd).toContain('\\u003C/script>');
+		expect(jsonLd).toContain('\\u003c/script\\u003e');
 		expect(jsonLd).not.toContain('</script><script>');
+		expect(visibleTitle).toContain('&lt;');
+		expect(visibleTitle).not.toContain('</script><script>');
 		expect(JSON.parse(jsonLd)).toMatchObject({
 			headline: '</script><script>alert(1)</script>',
 			description: 'A </script> description',

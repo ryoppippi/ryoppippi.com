@@ -1,8 +1,13 @@
 .DS_Store
 node_modules
 /build
-/packages/content/dist
-/.svelte-kit
+/.cache/*
+!/.cache
+!/.cache/ox-content
+/.cache/ox-content/*
+!/.cache/ox-content/twitter
+/.cache/ox-content/twitter/*
+!/.cache/ox-content/twitter/*.json
 /package
 .env
 .env.*

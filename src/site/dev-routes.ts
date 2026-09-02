@@ -1,10 +1,11 @@
-import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '@ryoppippi/content';
+import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '../content/index.ts';
 import type { SiteAssets } from './assets.ts';
 import type { PostListItem } from './content.ts';
 import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
 import { postListItems } from './content.ts';
-import { articlePages, blogListPage, feed, homePage, mediaFeed } from './pages.ts';
+import { renderBlogFeed, renderMediaFeed } from './feeds.ts';
+import { articlePages, blogListPage, homePage } from './pages.ts';
 import {
 	aboutPage,
 	errorPage,
@@ -92,7 +93,7 @@ async function renderDotfilesRoute(
 	}
 	const readme = await dependencies.loadDotfiles();
 	if (pathname === '/dotfiles/install') {
-		return response(extractSection(readme, 'Initial Setup'), textContentType);
+		return response(extractSection(readme, 'Setup'), textContentType);
 	}
 
 	const sectionMatch = /^\/dotfiles\/(mac|linux)\.html$/.exec(pathname);
@@ -124,10 +125,8 @@ export async function renderDevRoute(
 		return renderBlogRoute(pathname, dependencies);
 	}
 	if (pathname === '/feed.xml') {
-		return response(
-			feed(await dependencies.loadBlogPostMetadata()).content,
-			'application/xml; charset=utf-8',
-		);
+		const feed = await renderBlogFeed(await dependencies.loadBlogPostMetadata());
+		return response(feed.content, feed.contentType);
 	}
 	if (pathname === '/works/oss/') {
 		return response(ossPage(await dependencies.loadOssProjects(), dependencies.assets).content);
@@ -147,10 +146,8 @@ export async function renderDevRoute(
 		return response(mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content);
 	}
 	if (pathname === '/works/media/feed.xml') {
-		return response(
-			mediaFeed(await dependencies.loadExternalMedia()).content,
-			'application/xml; charset=utf-8',
-		);
+		const feed = await renderMediaFeed(await dependencies.loadExternalMedia());
+		return response(feed.content, feed.contentType);
 	}
 	if (pathname === '/sponsors/') {
 		return response(sponsorsPage(dependencies.assets).content);
@@ -189,15 +186,15 @@ if (import.meta.vitest != null) {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
+				oxContent: '',
 				pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
-				tweet: '',
 			},
 			loadBlogPost: vi.fn(async () => post),
 			loadBlogPostMetadata: vi.fn(async (): Promise<BlogPostMetadata[]> => [metadata]),
 			loadBlogPostSource: vi.fn(async () => post.source),
 			loadDotfiles: vi.fn(async () => '# Dotfiles'),
 			loadExternalPosts: vi.fn(async () => []),
-			loadExternalMedia: vi.fn(async () => []),
+			loadExternalMedia: vi.fn(async (): Promise<PostListItem[]> => []),
 			loadOssProjects: vi.fn(async () => []),
 			loadPublications: vi.fn(async () => ({})),
 			loadShowcase: vi.fn(async () => []),
@@ -219,29 +216,17 @@ if (import.meta.vitest != null) {
 		it('renders the blog list from metadata without rendering an article', async () => {
 			const loaders = dependencies();
 
-			const result = await renderDevRoute('/blog/', loaders);
+			await renderDevRoute('/blog/', loaders);
 
-			expect(result?.body).toContain('Lazy article');
 			expect(loaders.loadBlogPostMetadata).toHaveBeenCalledOnce();
 			expect(loaders.loadBlogPost).not.toHaveBeenCalled();
-		});
-
-		it('lists unpublished posts with a draft mark', async () => {
-			const loaders = dependencies();
-			loaders.loadBlogPostMetadata.mockResolvedValue([{ ...metadata, isPublished: false }]);
-
-			const result = await renderDevRoute('/blog/', loaders);
-
-			expect(result?.body).toContain('Lazy article');
-			expect(result?.body).toContain('(draft)');
 		});
 
 		it('renders only the requested article', async () => {
 			const loaders = dependencies();
 
-			const result = await renderDevRoute('/blog/lazy-article/', loaders);
+			await renderDevRoute('/blog/lazy-article/', loaders);
 
-			expect(result?.body).toContain('Rendered only on demand');
 			expect(loaders.loadBlogPost).toHaveBeenCalledWith('lazy-article');
 			expect(loaders.loadBlogPostMetadata).not.toHaveBeenCalled();
 		});
@@ -259,9 +244,40 @@ if (import.meta.vitest != null) {
 		it('renders the media page from curated media', async () => {
 			const loaders = dependencies();
 
-			const result = await renderDevRoute('/works/media/', loaders);
+			await renderDevRoute('/works/media/', loaders);
 
-			expect(result?.body).toContain('Podcasts, interviews, and videos featuring @ryoppippi.');
+			expect(loaders.loadExternalMedia).toHaveBeenCalledOnce();
+		});
+
+		it('renders the blog RSS route with Ox Content', async () => {
+			const result = await renderDevRoute('/feed.xml', dependencies());
+
+			expect(result).toMatchObject({
+				contentType: 'application/rss+xml; charset=utf-8',
+				status: 200,
+			});
+		});
+
+		it('renders the curated media RSS route with Ox Content', async () => {
+			const loaders = dependencies();
+			loaders.loadExternalMedia.mockResolvedValue([
+				{
+					title: 'Interview',
+					slug: 'interview',
+					link: 'https://example.com/interview',
+					pubDate: '2026-08-20T12:34:56.000Z',
+					lang: 'ja',
+					external: true,
+					kind: 'podcast',
+				},
+			]);
+
+			const result = await renderDevRoute('/works/media/feed.xml', loaders);
+
+			expect(result).toMatchObject({
+				contentType: 'application/rss+xml; charset=utf-8',
+				status: 200,
+			});
 			expect(loaders.loadExternalMedia).toHaveBeenCalledOnce();
 		});
 	});

@@ -1,0 +1,72 @@
+---
+permalink: /blog/2024-10-11
+title: My Opinionated UnoCSS Shortcuts & Rules #1
+date: 2024-10-11
+isPublished: true
+lang: 'en'
+description: "UnoCSS shortcuts for flex alignment and grid centring, using `@ryoppippi/unocss-preset` to replace repetitive utility classes with concise rules."
+alternates:
+  ja: https://ryoppippi.com/blog/2024-10-10-zenn-a7eebed6675d9a-ja/
+  en: https://ryoppippi.com/blog/2024-10-11/
+  x-default: https://ryoppippi.com/blog/2024-10-11/
+---
+
+> [日本語版](/blog/2024-10-10-zenn-a7eebed6675d9a-ja)
+
+I recently started using [UnoCSS](https://unocss.dev/) in my projects, and I'm really enjoying it.
+
+One of my favourite features is [`shortcuts`](https://unocss.dev/config/shortcuts) and [`rules`](https://unocss.dev/config/rules).
+Shortcuts allow us to define a single shorthand for a set of multiple classes. For example, instead of writing `class="p-4 m-4 text-red"`, we can write `class="card"`.
+Rules allow us to define a set of classes that should be applied to a specific element. This is really useful when creating complicated rules.
+
+I created a library, [`@ryoppippi/unocss-preset`](https://github.com/ryoppippi/unocss-preset), which includes my opinionated shortcuts and rules.
+
+I'd like to share some of them.
+
+> [!Warning]
+> Using shortcuts that are too short can make your code less readable, so be careful when creating your own shortcuts.
+
+## `flex` shortcuts
+
+<!-- spellchecker:off -->
+
+You may have been confused about `items-center` and `justify-center` before. `items-center` is for vertical alignment, and `justify-center` is for horizontal alignment. When setting margins, we can use `mx-` for horizontal margins and `my-` for vertical margins. So, I created a shortcut for `flex` based on these naming rules.
+
+<!-- spellchecker:on -->
+
+<!-- spellchecker:off -->
+
+```ts
+const shortcuts = {
+	fxc: 'flex justify-center',
+	fxs: 'flex justify-start',
+	fxe: 'flex justify-end',
+	fyc: 'flex items-center',
+	fys: 'flex items-start',
+	fye: 'flex items-end',
+	fcc: 'flex items-center justify-center',
+};
+```
+
+<!-- spellchecker:on -->
+
+## `grid` shortcuts
+
+I also created a shortcut for grid.
+
+<!-- spellchecker:off -->
+
+You can centre the content using `grid` and `place-content-center`! This is easy. Additionally, you can use `place-items-center` to centre multiple items.
+
+```ts
+const shortcuts = {
+	gc: 'grid place-content-center',
+	gcc: 'gc place-items-center',
+};
+```
+
+<!-- spellchecker:on -->
+
+I’ll add more shortcuts in the future. When I do, I’ll write a new post.
+
+So, see you next time!

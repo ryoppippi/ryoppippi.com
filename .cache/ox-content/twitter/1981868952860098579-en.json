@@ -1,0 +1,161 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 13,
+	"lang": "ja",
+	"possibly_sensitive": false,
+	"created_at": "2025-10-24T23:42:34.000Z",
+	"display_text_range": [0, 68],
+	"entities": {
+		"hashtags": [
+			{
+				"indices": [56, 68],
+				"text": "sveltejapan"
+			}
+		],
+		"media": [
+			{
+				"display_url": "pic.x.com/FlgiyFBxUI",
+				"expanded_url": "https://x.com/Yuki_Ishii_Dev/status/1981868952860098579/photo/1",
+				"indices": [69, 92],
+				"url": "https://t.co/FlgiyFBxUI"
+			}
+		]
+	},
+	"id_str": "1981868952860098579",
+	"text": "Svelte Japan Offline Meetup の昨日の写真です。\n動画は編集したらアップロードします\n#sveltejapan https://t.co/FlgiyFBxUI",
+	"user": {
+		"id_str": "1323546376437821440",
+		"name": "Yuki Ishii (いっしー)",
+		"screen_name": "Yuki_Ishii_Dev",
+		"is_blue_verified": false,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1384262292309614592/Zpg_OlAt_normal.jpg"
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1981868952860098579"],
+		"editable_until_msecs": "1761352954000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/FlgiyFBxUI",
+			"expanded_url": "https://x.com/Yuki_Ishii_Dev/status/1981868952860098579/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [69, 92],
+			"media_url_https": "https://pbs.twimg.com/media/G4EDTyhXQAAt7az.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 1147,
+						"w": 2048,
+						"x": 0,
+						"y": 194
+					},
+					{
+						"h": 1542,
+						"w": 1542,
+						"x": 506,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 1353,
+						"x": 695,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 771,
+						"x": 997,
+						"y": 0
+					},
+					{
+						"h": 1542,
+						"w": 2048,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 1542,
+				"width": 2048
+			},
+			"sizes": {
+				"large": {
+					"h": 1542,
+					"resize": "fit",
+					"w": 2048
+				},
+				"medium": {
+					"h": 904,
+					"resize": "fit",
+					"w": 1200
+				},
+				"small": {
+					"h": 512,
+					"resize": "fit",
+					"w": 680
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/FlgiyFBxUI"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 1147,
+					"w": 2048,
+					"x": 0,
+					"y": 194
+				},
+				{
+					"h": 1542,
+					"w": 1542,
+					"x": 506,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 1353,
+					"x": 695,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 771,
+					"x": 997,
+					"y": 0
+				},
+				{
+					"h": 1542,
+					"w": 2048,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/Yuki_Ishii_Dev/status/1981868952860098579/photo/1",
+			"url": "https://pbs.twimg.com/media/G4EDTyhXQAAt7az.jpg",
+			"width": 2048,
+			"height": 1542
+		}
+	],
+	"conversation_count": 0,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

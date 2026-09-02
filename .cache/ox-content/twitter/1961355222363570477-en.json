@@ -1,0 +1,41 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 44,
+	"lang": "ja",
+	"created_at": "2025-08-29T09:08:19.000Z",
+	"display_text_range": [0, 20],
+	"entities": {},
+	"id_str": "1961355222363570477",
+	"text": "codex usage 無理で絶望してる",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1961355222363570477"],
+		"editable_until_msecs": "1756462099000",
+		"edits_remaining": "5",
+		"is_edit_eligible": false
+	},
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

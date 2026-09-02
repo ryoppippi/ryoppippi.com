@@ -1,0 +1,181 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 8,
+	"lang": "und",
+	"possibly_sensitive": false,
+	"created_at": "2025-11-06T11:02:00.000Z",
+	"display_text_range": [0, 20],
+	"entities": {
+		"hashtags": [
+			{
+				"indices": [0, 7],
+				"text": "vuefes"
+			}
+		],
+		"media": [
+			{
+				"display_url": "pic.x.com/N6QGVEytds",
+				"expanded_url": "https://x.com/ryoppippi/status/1986388591702950213/photo/1",
+				"indices": [21, 44],
+				"url": "https://t.co/N6QGVEytds"
+			}
+		],
+		"user_mentions": [
+			{
+				"id_str": "80150657",
+				"indices": [9, 19],
+				"name": "kzhrk//Kazuhiro Kobayashi",
+				"screen_name": "kzhrk0430"
+			}
+		]
+	},
+	"id_str": "1986388591702950213",
+	"text": "#vuefes ⁦@kzhrk0430⁩ https://t.co/N6QGVEytds",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"edit_tweet_ids": ["1986388591702950213"],
+		"editable_until_msecs": "1762430520000",
+		"edits_remaining": "5",
+		"is_edit_eligible": true
+	},
+	"mediaDetails": [
+		{
+			"display_url": "pic.x.com/N6QGVEytds",
+			"expanded_url": "https://x.com/ryoppippi/status/1986388591702950213/photo/1",
+			"ext_media_availability": {
+				"status": "Available"
+			},
+			"indices": [21, 44],
+			"media_url_https": "https://pbs.twimg.com/media/G5ER48GXkAAFlM1.jpg",
+			"original_info": {
+				"focus_rects": [
+					{
+						"h": 2056,
+						"w": 3672,
+						"x": 0,
+						"y": 1787
+					},
+					{
+						"h": 3672,
+						"w": 3672,
+						"x": 0,
+						"y": 979
+					},
+					{
+						"h": 4186,
+						"w": 3672,
+						"x": 0,
+						"y": 710
+					},
+					{
+						"h": 4896,
+						"w": 2448,
+						"x": 1224,
+						"y": 0
+					},
+					{
+						"h": 4896,
+						"w": 3672,
+						"x": 0,
+						"y": 0
+					}
+				],
+				"height": 4896,
+				"width": 3672
+			},
+			"sizes": {
+				"large": {
+					"h": 2048,
+					"resize": "fit",
+					"w": 1536
+				},
+				"medium": {
+					"h": 1200,
+					"resize": "fit",
+					"w": 900
+				},
+				"small": {
+					"h": 680,
+					"resize": "fit",
+					"w": 510
+				},
+				"thumb": {
+					"h": 150,
+					"resize": "crop",
+					"w": 150
+				}
+			},
+			"type": "photo",
+			"url": "https://t.co/N6QGVEytds"
+		}
+	],
+	"photos": [
+		{
+			"backgroundColor": {
+				"red": 204,
+				"green": 214,
+				"blue": 221
+			},
+			"cropCandidates": [
+				{
+					"h": 2056,
+					"w": 3672,
+					"x": 0,
+					"y": 1787
+				},
+				{
+					"h": 3672,
+					"w": 3672,
+					"x": 0,
+					"y": 979
+				},
+				{
+					"h": 4186,
+					"w": 3672,
+					"x": 0,
+					"y": 710
+				},
+				{
+					"h": 4896,
+					"w": 2448,
+					"x": 1224,
+					"y": 0
+				},
+				{
+					"h": 4896,
+					"w": 3672,
+					"x": 0,
+					"y": 0
+				}
+			],
+			"expandedUrl": "https://x.com/ryoppippi/status/1986388591702950213/photo/1",
+			"url": "https://pbs.twimg.com/media/G5ER48GXkAAFlM1.jpg",
+			"width": 3672,
+			"height": 4896
+		}
+	],
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": false,
+	"isStaleEdit": false
+}

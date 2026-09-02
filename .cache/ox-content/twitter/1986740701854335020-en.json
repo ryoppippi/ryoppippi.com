@@ -1,0 +1,62 @@
+{
+	"__typename": "Tweet",
+	"favorite_count": 93,
+	"lang": "ja",
+	"created_at": "2025-11-07T10:21:09.000Z",
+	"display_text_range": [0, 136],
+	"entities": {
+		"hashtags": [
+			{
+				"indices": [0, 8],
+				"text": "ccusage"
+			},
+			{
+				"indices": [48, 56],
+				"text": "ccusage"
+			}
+		]
+	},
+	"id_str": "1986740701854335020",
+	"text": "#ccusage をお使いの企業様へ【拡散希望】\n今回日本に滞在して、予想以上に多くの企業様で #ccusage が使われている話を聞いて驚きました。ありがとうございます。\nジョークツールから始まった個人プロジェクトがここまで大きくなっていることに大きな喜びを感じています",
+	"user": {
+		"id_str": "113598297",
+		"name": "ryoppippi",
+		"screen_name": "ryoppippi",
+		"is_blue_verified": true,
+		"profile_image_shape": "Circle",
+		"verified": false,
+		"profile_image_url_https": "https://pbs.twimg.com/profile_images/1345183412617789441/lDzpVPwZ_normal.jpg",
+		"highlighted_label": {
+			"badge": {
+				"url": "https://pbs.twimg.com/profile_images/2024413445236600832/nNHMz2Sc_bigger.jpg"
+			},
+			"description": "Rork",
+			"url": {
+				"url": "https://twitter.com/rork",
+				"url_type": "DeepLink"
+			},
+			"user_label_display_type": "Badge",
+			"user_label_type": "BusinessLabel"
+		}
+	},
+	"edit_control": {
+		"initial_tweet_id": "1986740463320047728",
+		"edit_tweet_ids": ["1986740463320047728", "1986740701854335020"],
+		"editable_until_msecs": "1762514412000",
+		"edits_remaining": "4",
+		"is_edit_eligible": false
+	},
+	"conversation_count": 1,
+	"news_action_type": "conversation",
+	"isEdited": true,
+	"isStaleEdit": false,
+	"previous_counts": {
+		"favorite_count": 0,
+		"quote_count": 0,
+		"reply_count": 0,
+		"retweet_count": 0
+	},
+	"note_tweet": {
+		"id": "Tm90ZVR3ZWV0UmVzdWx0czoxOTg2NzQwNzAxNzMyNjY3Mzky"
+	}
+}
