@@ -49,7 +49,7 @@ let
         echo "Remove it before syncing Nix-managed agent skills." >&2
         exit 1
       fi
-      exec skills-install-local "$@"
+      exec skills-install-local "$@" >/dev/null
     '';
   };
 in
