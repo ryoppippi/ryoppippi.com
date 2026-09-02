@@ -2,10 +2,10 @@ import { SITE_ORIGIN } from '../consts.ts';
 import ProfileImage from './ProfileImage.tsx';
 
 const socials = [
-	['icon-[line-md--github-loop] dark:invert', 'GitHub profile', '/github'],
+	['icon-[line-md--github-loop]', 'GitHub profile', '/github'],
 	['icon-[ph--git-pull-request-duotone]', 'Recent pull requests', '/pr'],
-	['icon-[line-md--linkedin] dark:invert', 'LinkedIn profile', '/linkedin'],
-	['icon-[line-md--twitter] dark:invert', 'Twitter profile', '/twitter'],
+	['icon-[line-md--linkedin]', 'LinkedIn profile', '/linkedin'],
+	['icon-[line-md--twitter]', 'Twitter profile', '/twitter'],
 	['icon-[simple-icons--bluesky]', 'Bluesky profile', '/bsky'],
 	['icon-[ri--youtube-line]', 'YouTube channel', '/youtube'],
 ] as const;

@@ -27,7 +27,7 @@ export default function Talks({ talks }: TalksProps) {
 					rel="noopener noreferrer"
 					target="_blank"
 				>
-					<span class="icon-[line-md--rss] dark:invert" aria-hidden="true" />
+					<span class="icon-[line-md--rss]" aria-hidden="true" />
 					Feed
 				</a>
 				<a
