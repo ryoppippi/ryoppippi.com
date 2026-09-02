@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-27T01:11:46Z",
+  "updatedAt": "2026-09-02T00:07:47Z",
   "projects": [
     {
       "repo": "ryoppippi/bad-apple",
@@ -8,7 +8,7 @@
     },
     {
       "repo": "ryoppippi/ccusage",
-      "stars": 18177,
+      "stars": 18281,
       "primaryLanguage": "Rust"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "repo": "ryoppippi/nix-secure-enclave-key",
-      "stars": 10,
+      "stars": 12,
       "primaryLanguage": "Nushell"
     },
     {
@@ -98,7 +98,7 @@
     },
     {
       "repo": "ryoppippi/tgrab",
-      "stars": 11,
+      "stars": 12,
       "primaryLanguage": "Rust"
     },
     {

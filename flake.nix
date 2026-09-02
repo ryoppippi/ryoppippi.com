@@ -96,7 +96,7 @@
                   fi
                 fi
 
-                ${nixpkgs.lib.getExe agentSkills.syncAgentSkills}
+                ${nixpkgs.lib.getExe agentSkills.syncAgentSkills} >/dev/null
               '';
             };
         }
