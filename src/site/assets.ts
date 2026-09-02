@@ -230,7 +230,7 @@ if (import.meta.vitest != null) {
 			'post/Table.tsx': ['assets/Legend.css'],
 		},
 		pages: {
-			about: '<link href="/about.css">',
+			about: '<link href="/profile.css">',
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
 			error: '<link href="/error.css">',
@@ -249,7 +249,7 @@ if (import.meta.vitest != null) {
 						file: 'assets/shell.css',
 					},
 					'src/site/pages/about/Profile.module.css': {
-						file: 'assets/about.css',
+						file: 'assets/profile.css',
 					},
 					'src/site/pages/blog/article/page.css': {
 						file: 'assets/article-global.css',
@@ -313,7 +313,7 @@ if (import.meta.vitest != null) {
 					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 				},
 				pages: {
-					about: '<link rel="stylesheet" crossorigin href="/assets/about.css">',
+					about: '<link rel="stylesheet" crossorigin href="/assets/profile.css">',
 					article:
 						'<link rel="stylesheet" crossorigin href="/assets/article-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
