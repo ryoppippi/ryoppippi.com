@@ -23,7 +23,7 @@ export default function Publications({ publications }: PublicationsProps) {
 	const years = Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a));
 
 	return (
-		<>
+		<div class={styles.publicationsPage}>
 			<WorksNav active="publications" />
 			{years.map(([year, items]) => (
 				<WorksSection title={year}>
@@ -44,6 +44,6 @@ export default function Publications({ publications }: PublicationsProps) {
 					</WorksList>
 				</WorksSection>
 			))}
-		</>
+		</div>
 	);
 }

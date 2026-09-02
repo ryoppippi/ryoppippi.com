@@ -75,11 +75,11 @@
 	--octc-color-bg: transparent;
 	--octc-color-bg-alt: #8881;
 	--octc-color-border: #8884;
-	--octc-color-primary: currentColor;
-	--octc-color-text: currentColor;
+	--octc-color-primary: currentcolor;
+	--octc-color-text: currentcolor;
 	--octc-color-text-muted: #808080;
 	--octc-focus-offset: 2px;
-	--octc-focus-ring: 2px solid currentColor;
+	--octc-focus-ring: 2px solid currentcolor;
 	word-break: keep-all;
 	overflow-wrap: anywhere;
 }

@@ -20,7 +20,7 @@ export default function Talks({ talks }: TalksProps) {
 	].sort(([a], [b]) => b - a);
 
 	return (
-		<>
+		<div class={styles.talksPage}>
 			<WorksNav active="talks" />
 			<div class={styles.talksControls}>
 				<a
@@ -109,6 +109,6 @@ export default function Talks({ talks }: TalksProps) {
 					</WorksList>
 				</WorksSection>
 			))}
-		</>
+		</div>
 	);
 }

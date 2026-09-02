@@ -12,7 +12,6 @@
 
 .homeProfileStage {
 	width: 100%;
-	animation: root-flip-in-x 1s both;
 }
 
 .homeProfileImage {
@@ -48,7 +47,6 @@
 	line-height: 1.75rem;
 	font-weight: 500;
 	color: var(--color-text-700);
-	animation: home-role-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .homeSocialsFrame {
@@ -66,7 +64,20 @@
 	place-content: center;
 	place-items: center;
 	gap: 0.75rem;
-	animation: root-fade-in 3s both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.homeProfileStage {
+		animation: root-flip-in-x 1s both;
+	}
+
+	.homeRole {
+		animation: home-role-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	.homeSocials {
+		animation: root-fade-in 3s both;
+	}
 }
 
 .homeSocialCard {
@@ -168,7 +179,7 @@
 		transform: perspective(400px) rotateX(-5deg);
 	}
 
-	to {
+	100% {
 		transform: perspective(400px);
 	}
 }

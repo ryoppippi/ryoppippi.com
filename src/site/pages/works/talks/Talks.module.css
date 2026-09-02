@@ -67,8 +67,16 @@
 	opacity: 0.5;
 }
 
+:global(html.dark) .talksPage h2 {
+	opacity: 0.2;
+}
+
 @media (prefers-color-scheme: dark) {
 	:global(html:not(.js)) .talkTitle {
 		opacity: 0.5;
+	}
+
+	:global(html:not(.js)) .talksPage h2 {
+		opacity: 0.2;
 	}
 }

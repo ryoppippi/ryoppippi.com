@@ -121,7 +121,7 @@
 	margin: -1px;
 	padding: 0;
 	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
 	white-space: nowrap;
 	border: 0;
 }
@@ -132,7 +132,7 @@
 	height: 1px;
 	margin: -1px;
 	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
 	white-space: nowrap;
 	border: 0;
 }
@@ -147,7 +147,7 @@
 	margin: 0;
 	padding: 0.5rem 1rem;
 	overflow: visible;
-	clip: auto;
+	clip-path: none;
 	white-space: normal;
 	border-radius: 0.25rem;
 	background-color: #ffffff;

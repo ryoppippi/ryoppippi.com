@@ -162,9 +162,17 @@
 	opacity: 0.5;
 }
 
+:global(html.dark) .ossProject:hover {
+	opacity: 0.8;
+}
+
 @media (prefers-color-scheme: dark) {
 	:global(html:not(.js)) .ossProject {
 		opacity: 0.5;
+	}
+
+	:global(html:not(.js)) .ossProject:hover {
+		opacity: 0.8;
 	}
 }
 
