@@ -3,7 +3,7 @@ import path from 'node:path';
 import { matter } from 'gray-matter-es';
 import readingTime from 'reading-time';
 import { glob } from 'tinyglobby';
-import type { MarkdownRenderer } from './markdown-cache.ts';
+import type { MarkdownRenderer } from './markdown/render.ts';
 import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 

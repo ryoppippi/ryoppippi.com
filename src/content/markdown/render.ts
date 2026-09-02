@@ -104,6 +104,12 @@ export type RenderMarkdownOptions = {
 	renderIsland?: IslandRenderer;
 };
 
+/** A Markdown renderer whose island loader is supplied by the host. */
+export type MarkdownRenderer = (
+	content: string,
+	options?: Omit<RenderMarkdownOptions, 'renderIsland'>,
+) => Promise<string>;
+
 async function renderIslands(
 	html: string,
 	islands: IslandModules,

@@ -2,8 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { matter } from 'gray-matter-es';
 import { glob } from 'tinyglobby';
-import { renderMarkdown } from './markdown/render.ts';
-import type { MarkdownRenderer } from './markdown-cache.ts';
+import { renderMarkdown, type MarkdownRenderer } from './markdown/render.ts';
 import { showcaseDirectory } from './paths.ts';
 
 export type ShowcaseProject = {
