@@ -1,11 +1,43 @@
 .prose {
-	--tw-prose-code: #0f0f0f;
-	--tw-prose-invert-code: #ffffff;
-	--tw-prose-hr: #7d7d7d4d;
-	--tw-prose-th-borders: #7d7d7d4d;
-	--tw-prose-td-borders: #7d7d7d4d;
+	--prose-body: #262626;
+	--prose-headings: #0f0f0f;
+	--prose-links: #0f0f0f;
+	--prose-bold: #0f0f0f;
+	--prose-counters: #4d4d4d;
+	--prose-bullets: #808080;
+	--prose-hr: #7d7d7d4d;
+	--prose-quotes: #0f0f0f;
+	--prose-quote-borders: #7d7d7d4d;
+	--prose-captions: #808080;
+	--prose-code: #0f0f0f;
+	--prose-pre-code: #e0e0e0;
+	--prose-pre-bg: #1e1e1e;
+	--prose-th-borders: #7d7d7d4d;
+	--prose-td-borders: #7d7d7d4d;
+}
 
-	@variant dark {
-		--tw-prose-code: #ffffff;
+html.dark .prose {
+	--prose-body: #e0e0e0;
+	--prose-headings: #ffffff;
+	--prose-links: #ffffff;
+	--prose-bold: #ffffff;
+	--prose-counters: #b3b3b3;
+	--prose-bullets: #808080;
+	--prose-quotes: #fafafa;
+	--prose-code: #ffffff;
+	--prose-pre-code: #e0e0e0;
+}
+
+@media (prefers-color-scheme: dark) {
+	html:not(.js) .prose {
+		--prose-body: #e0e0e0;
+		--prose-headings: #ffffff;
+		--prose-links: #ffffff;
+		--prose-bold: #ffffff;
+		--prose-counters: #b3b3b3;
+		--prose-bullets: #808080;
+		--prose-quotes: #fafafa;
+		--prose-code: #ffffff;
+		--prose-pre-code: #e0e0e0;
 	}
 }

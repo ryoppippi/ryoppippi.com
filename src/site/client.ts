@@ -13,6 +13,10 @@ import {
 import { hashTargetId } from './navigation.ts';
 import './style.css';
 
+// Shell is rendered only by the SSG, so this dynamic entry exposes its CSS to
+// the manifest used to generate a blocking stylesheet link.
+void import('./components/Shell/Shell.module.css');
+
 function initialiseDarkMode(): void {
 	const target = document.querySelector<HTMLElement>('[data-dark-mode]');
 	if (target == null) {

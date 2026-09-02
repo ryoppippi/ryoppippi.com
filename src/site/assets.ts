@@ -28,17 +28,32 @@ export type SiteAssets = {
 // server paint styled pages immediately, matching production; Vite serves the
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
 export const DEV_ASSETS = {
-	base: '<link rel="stylesheet" href="/src/site/style.css">',
+	base: [
+		'<link rel="stylesheet" href="/src/site/style.css">',
+		'<link rel="stylesheet" href="/src/site/components/Shell/Shell.module.css">',
+	].join('\n'),
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 	pages: {
-		about: '<link rel="stylesheet" href="/src/site/styles/about.css">',
-		article: '<link rel="stylesheet" href="/src/site/styles/article.css">',
-		blog: '<link rel="stylesheet" href="/src/site/styles/blog.css">',
-		error: '<link rel="stylesheet" href="/src/site/styles/error.css">',
-		home: '<link rel="stylesheet" href="/src/site/styles/home.css">',
-		sponsors: '<link rel="stylesheet" href="/src/site/styles/sponsors.css">',
-		works: '<link rel="stylesheet" href="/src/site/styles/works.css">',
+		about: '<link rel="stylesheet" href="/src/site/pages/about/About.module.css">',
+		article: [
+			'<link rel="stylesheet" href="/src/site/pages/blog/article/page.css">',
+			'<link rel="stylesheet" href="/src/site/pages/blog/article/Article.module.css">',
+		].join('\n'),
+		blog: '<link rel="stylesheet" href="/src/site/pages/blog/BlogList.module.css">',
+		error: '<link rel="stylesheet" href="/src/site/pages/error/Error.module.css">',
+		home: '<link rel="stylesheet" href="/src/site/pages/home/Home.module.css">',
+		sponsors: '<link rel="stylesheet" href="/src/site/pages/sponsors/Sponsors.module.css">',
+		works: [
+			'<link rel="stylesheet" href="/src/site/pages/works/page.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/_components/WorksNav/WorksNav.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/_components/WorksSection/WorksSection.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/media/Media.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/oss/Oss.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/publications/Publications.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/showcase/Showcase.module.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/talks/Talks.module.css">',
+		].join('\n'),
 	},
 	islands: {},
 } as const satisfies SiteAssets;
@@ -97,7 +112,7 @@ export function resolveSiteAssets(
 	index: string,
 	manifest: Record<string, ManifestChunk>,
 ): SiteAssets {
-	const base = [...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g)]
+	const indexStyles = [...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g)]
 		.map((match) => match[0])
 		.join('\n\t');
 	const client = [...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g)]
@@ -111,6 +126,11 @@ export function resolveSiteAssets(
 		}
 		return styles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`).join('\n\t');
 	};
+	const stylesForAll = (suffixes: readonly string[]): string =>
+		suffixes.map((suffix) => stylesFor(suffix)).join('\n\t');
+	const base = [indexStyles, stylesFor('/components/Shell/Shell.module.css')]
+		.filter(Boolean)
+		.join('\n\t');
 	const islands = Object.fromEntries(
 		Object.keys(manifest)
 			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.tsx'))
@@ -126,13 +146,25 @@ export function resolveSiteAssets(
 		oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 		islands,
 		pages: {
-			about: stylesFor('/styles/about.css'),
-			article: stylesFor('/styles/article.css'),
-			blog: stylesFor('/styles/blog.css'),
-			error: stylesFor('/styles/error.css'),
-			home: stylesFor('/styles/home.css'),
-			sponsors: stylesFor('/styles/sponsors.css'),
-			works: stylesFor('/styles/works.css'),
+			about: stylesFor('/pages/about/About.module.css'),
+			article: stylesForAll([
+				'/pages/blog/article/page.css',
+				'/pages/blog/article/Article.module.css',
+			]),
+			blog: stylesFor('/pages/blog/BlogList.module.css'),
+			error: stylesFor('/pages/error/Error.module.css'),
+			home: stylesFor('/pages/home/Home.module.css'),
+			sponsors: stylesFor('/pages/sponsors/Sponsors.module.css'),
+			works: stylesForAll([
+				'/pages/works/page.css',
+				'/pages/works/_components/WorksNav/WorksNav.module.css',
+				'/pages/works/_components/WorksSection/WorksSection.module.css',
+				'/pages/works/media/Media.module.css',
+				'/pages/works/oss/Oss.module.css',
+				'/pages/works/publications/Publications.module.css',
+				'/pages/works/showcase/Showcase.module.css',
+				'/pages/works/talks/Talks.module.css',
+			]),
 		},
 	};
 }
@@ -213,26 +245,53 @@ if (import.meta.vitest != null) {
 			const result = resolveSiteAssets(
 				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
 				{
-					'src/site/styles/about.css': {
+					'src/site/components/Shell/Shell.module.css': {
+						file: 'assets/shell.css',
+					},
+					'src/site/pages/about/About.module.css': {
 						file: 'assets/about.css',
 					},
-					'src/site/styles/article.css': {
+					'src/site/pages/blog/article/page.css': {
+						file: 'assets/article-global.css',
+					},
+					'src/site/pages/blog/article/Article.module.css': {
 						file: 'assets/article.css',
 					},
-					'src/site/styles/blog.css': {
+					'src/site/pages/blog/BlogList.module.css': {
 						file: 'assets/blog.css',
 					},
-					'src/site/styles/error.css': {
+					'src/site/pages/error/Error.module.css': {
 						file: 'assets/error.css',
 					},
-					'src/site/styles/home.css': {
+					'src/site/pages/home/Home.module.css': {
 						file: 'assets/home.css',
 					},
-					'src/site/styles/sponsors.css': {
+					'src/site/pages/sponsors/Sponsors.module.css': {
 						file: 'assets/sponsors.css',
 					},
-					'src/site/styles/works.css': {
-						file: 'assets/works.css',
+					'src/site/pages/works/page.css': {
+						file: 'assets/works-global.css',
+					},
+					'src/site/pages/works/_components/WorksNav/WorksNav.module.css': {
+						file: 'assets/works-nav.css',
+					},
+					'src/site/pages/works/_components/WorksSection/WorksSection.module.css': {
+						file: 'assets/works-section.css',
+					},
+					'src/site/pages/works/media/Media.module.css': {
+						file: 'assets/media.css',
+					},
+					'src/site/pages/works/oss/Oss.module.css': {
+						file: 'assets/oss.css',
+					},
+					'src/site/pages/works/publications/Publications.module.css': {
+						file: 'assets/publications.css',
+					},
+					'src/site/pages/works/showcase/Showcase.module.css': {
+						file: 'assets/showcase.css',
+					},
+					'src/site/pages/works/talks/Talks.module.css': {
+						file: 'assets/talks.css',
 					},
 					'src/content/blog/post/Chart.tsx': {
 						file: 'assets/Chart.js',
@@ -247,7 +306,7 @@ if (import.meta.vitest != null) {
 			);
 
 			expect(result).toEqual({
-				base: '<link rel="stylesheet" href="/base.css">',
+				base: '<link rel="stylesheet" href="/base.css">\n\t<link rel="stylesheet" crossorigin href="/assets/shell.css">',
 				client: '<script type="module" src="/client.js"></script>',
 				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
@@ -255,12 +314,14 @@ if (import.meta.vitest != null) {
 				},
 				pages: {
 					about: '<link rel="stylesheet" crossorigin href="/assets/about.css">',
-					article: '<link rel="stylesheet" crossorigin href="/assets/article.css">',
+					article:
+						'<link rel="stylesheet" crossorigin href="/assets/article-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
 					error: '<link rel="stylesheet" crossorigin href="/assets/error.css">',
 					home: '<link rel="stylesheet" crossorigin href="/assets/home.css">',
 					sponsors: '<link rel="stylesheet" crossorigin href="/assets/sponsors.css">',
-					works: '<link rel="stylesheet" crossorigin href="/assets/works.css">',
+					works:
+						'<link rel="stylesheet" crossorigin href="/assets/works-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/works-nav.css">\n\t<link rel="stylesheet" crossorigin href="/assets/works-section.css">\n\t<link rel="stylesheet" crossorigin href="/assets/media.css">\n\t<link rel="stylesheet" crossorigin href="/assets/oss.css">\n\t<link rel="stylesheet" crossorigin href="/assets/publications.css">\n\t<link rel="stylesheet" crossorigin href="/assets/showcase.css">\n\t<link rel="stylesheet" crossorigin href="/assets/talks.css">',
 				},
 			});
 		});

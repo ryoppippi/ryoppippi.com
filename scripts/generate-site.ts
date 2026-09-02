@@ -21,7 +21,7 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 	const manifest = JSON.parse(manifestSource) as Record<string, ManifestChunk>;
 	const assets = resolveSiteAssets(index, manifest);
 	const baseFiles = manifest['index.html']?.css ?? [];
-	const homeFile = manifest['src/site/styles/home.css']?.file;
+	const homeFile = manifest['src/site/pages/home/Home.module.css']?.file;
 	if (baseFiles.length === 0 || homeFile == null) {
 		throw new Error('Missing CSS assets for inline home styles');
 	}

@@ -4,13 +4,27 @@ type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;
 
 const pageStyleLoaders = {
-	about: () => import('./styles/about.css'),
-	article: () => import('./styles/article.css'),
-	blog: () => import('./styles/blog.css'),
-	error: () => import('./styles/error.css'),
-	home: () => import('./styles/home.css'),
-	sponsors: () => import('./styles/sponsors.css'),
-	works: () => import('./styles/works.css'),
+	about: () => import('./pages/about/About.module.css'),
+	article: () =>
+		Promise.all([
+			import('./pages/blog/article/page.css'),
+			import('./pages/blog/article/Article.module.css'),
+		]),
+	blog: () => import('./pages/blog/BlogList.module.css'),
+	error: () => import('./pages/error/Error.module.css'),
+	home: () => import('./pages/home/Home.module.css'),
+	sponsors: () => import('./pages/sponsors/Sponsors.module.css'),
+	works: () =>
+		Promise.all([
+			import('./pages/works/page.css'),
+			import('./pages/works/_components/WorksNav/WorksNav.module.css'),
+			import('./pages/works/_components/WorksSection/WorksSection.module.css'),
+			import('./pages/works/media/Media.module.css'),
+			import('./pages/works/oss/Oss.module.css'),
+			import('./pages/works/publications/Publications.module.css'),
+			import('./pages/works/showcase/Showcase.module.css'),
+			import('./pages/works/talks/Talks.module.css'),
+		]),
 } satisfies PageStyleLoaders;
 
 export function missingPageStyles(current: readonly string[], next: readonly string[]): string[] {

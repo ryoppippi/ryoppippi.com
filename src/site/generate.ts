@@ -1,5 +1,5 @@
 import type { ContentArtifact } from '../content/artifact.ts';
-import type { GeneratedFile } from './pages.ts';
+import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from './assets.ts';
 import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 import { access, mkdir, writeFile } from 'node:fs/promises';
@@ -15,19 +15,19 @@ import {
 	emitDeduplicatedAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
-import { loadExternalMedia, loadExternalPosts } from './content.ts';
+import { loadExternalMedia, loadExternalPosts, postListItems } from './content.ts';
 import { writeOxContentOutputFiles } from './ox-content-output.ts';
-import { corePages } from './pages.ts';
-import {
-	aboutPage,
-	errorPage,
-	mediaPage,
-	ossPage,
-	publicationsPage,
-	showcasePage,
-	sponsorsPage,
-	talksPage,
-} from './secondary-pages.ts';
+import { aboutPage } from './pages/about/page.ts';
+import { articlePages } from './pages/blog/article/page.ts';
+import { blogListPage } from './pages/blog/page.ts';
+import { errorPage } from './pages/error/page.ts';
+import { homePage } from './pages/home/page.ts';
+import { sponsorsPage } from './pages/sponsors/page.ts';
+import { mediaPage } from './pages/works/media/page.ts';
+import { ossPage } from './pages/works/oss/page.ts';
+import { publicationsPage } from './pages/works/publications/page.ts';
+import { showcasePage } from './pages/works/showcase/page.ts';
+import { talksPage } from './pages/works/talks/page.ts';
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
 
 type GenerateSiteOptions = {
@@ -92,7 +92,9 @@ export async function generateSite({
 	}));
 
 	const pages = [
-		...corePages(posts, externalPosts, assets),
+		homePage(assets),
+		blogListPage([...externalPosts, ...postListItems(posts)], assets),
+		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
 		aboutPage(assets),
 		ossPage(ossProjects, assets),
 		showcasePage(showcase, assets),

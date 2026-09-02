@@ -1,0 +1,98 @@
+.articlePage {
+	min-width: 0;
+	margin-inline: auto;
+}
+
+.articleUnpublished {
+	margin-top: 1rem;
+	border-radius: 0.25rem;
+	background-color: #ef4444;
+	padding: 0.5rem;
+	text-align: center;
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+.articleHeading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	margin-bottom: 0.75rem;
+	text-align: center;
+}
+
+.articleTitle {
+	margin-block: 2rem;
+	font-family: var(--font-mono);
+	font-size: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+	line-height: 1;
+	font-weight: 700;
+	color: transparent;
+	-webkit-text-stroke: 1.5px #aaaaaa;
+	word-break: keep-all;
+	overflow-wrap: anywhere;
+}
+
+.articleMeta {
+	color: var(--color-text-400);
+}
+
+.articleSourceLink {
+	opacity: 0.7;
+}
+
+.articleSourceLink:hover {
+	opacity: 1;
+}
+
+.articleSourceIcon {
+	display: inline-block;
+	width: 1.5rem;
+	height: 1.5rem;
+	vertical-align: middle;
+}
+
+.articleDivider {
+	padding: 0.5rem;
+}
+
+.articleDivider hr {
+	width: 100%;
+	max-width: 25rem;
+	margin-inline: auto;
+	opacity: 0.25;
+}
+
+.articleBody {
+	max-width: none;
+	padding-bottom: 2rem;
+}
+
+.articleContent {
+	--octc-color-bg: transparent;
+	--octc-color-bg-alt: #8881;
+	--octc-color-border: #8884;
+	--octc-color-primary: currentColor;
+	--octc-color-text: currentColor;
+	--octc-color-text-muted: #808080;
+	--octc-focus-offset: 2px;
+	--octc-focus-ring: 2px solid currentColor;
+	word-break: keep-all;
+	overflow-wrap: anywhere;
+}
+
+.articleFooterBlock {
+	padding-bottom: 2rem;
+	opacity: 0.5;
+}
+
+.articleFooterLabel {
+	opacity: 0.7;
+}
+
+.articleFooterSeparator {
+	opacity: 0.35;
+}

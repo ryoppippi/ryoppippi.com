@@ -1,0 +1,174 @@
+.homeIntro {
+	display: grid;
+	width: 100%;
+	place-content: center;
+	place-items: center;
+	margin: 2rem auto 0;
+}
+
+:global(body[data-page-style='home']) {
+	font-family: var(--font-sans);
+}
+
+.homeProfileStage {
+	width: 100%;
+	animation: root-flip-in-x 1s both;
+}
+
+.homeProfileImage {
+	display: block;
+	width: 50%;
+	max-width: 100%;
+	aspect-ratio: 1;
+	margin-inline: auto;
+	border-radius: 9999px;
+	object-fit: contain;
+	view-transition-name: name---profile;
+}
+
+.homeHeading {
+	margin-top: 2rem;
+}
+
+.homeTitle {
+	margin-bottom: 1.5rem;
+	text-align: center;
+	font-size: 2.25rem;
+	line-height: 2.5rem;
+	font-weight: 700;
+}
+
+.homeHandle {
+	display: block;
+}
+
+.homeRole {
+	text-align: center;
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	font-weight: 500;
+	color: var(--color-text-700);
+	animation: home-role-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.homeSocialsFrame {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	margin-inline: auto;
+}
+
+.homeSocials {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	place-content: center;
+	place-items: center;
+	gap: 0.75rem;
+	animation: root-fade-in 3s both;
+}
+
+.homeSocialCard {
+	opacity: 0.7;
+	transition:
+		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+		background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.homeSocialCard:hover {
+	z-index: 10;
+	opacity: 1;
+	transform: scale(1.1);
+	background-color: #8881;
+	box-shadow:
+		0 20px 25px -5px rgb(0 0 0 / 10%),
+		0 8px 10px -6px rgb(0 0 0 / 10%);
+}
+
+.homeSocialIcon {
+	font-size: 4.5vh;
+}
+
+:global(html.dark) .homeRole {
+	color: var(--color-text-200);
+}
+
+:global(html.dark) .homeSocialCard {
+	opacity: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+	:global(html:not(.js)) .homeRole {
+		color: var(--color-text-200);
+	}
+
+	:global(html:not(.js)) .homeSocialCard {
+		opacity: 0.5;
+	}
+}
+
+@media (min-width: 40rem) {
+	.homeHandle {
+		display: inline;
+	}
+
+	.homeSocials {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 48rem) {
+	.homeProfileImage {
+		width: 16rem;
+		height: 16rem;
+	}
+}
+
+:global(body[data-spa-navigation] [data-home-profile]) {
+	animation: none;
+}
+
+@keyframes home-role-pulse {
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes root-fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes root-flip-in-x {
+	0% {
+		opacity: 0;
+		animation-timing-function: ease-in;
+		transform: perspective(400px) rotateX(90deg);
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: perspective(400px) rotateX(-20deg);
+	}
+
+	60% {
+		opacity: 1;
+		transform: perspective(400px) rotateX(10deg);
+	}
+
+	80% {
+		transform: perspective(400px) rotateX(-5deg);
+	}
+
+	to {
+		transform: perspective(400px);
+	}
+}

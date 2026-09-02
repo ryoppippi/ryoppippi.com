@@ -1,0 +1,22 @@
+.publicationItem {
+	margin-block: 1.25rem;
+}
+
+.publicationLink {
+	display: inline;
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	opacity: 0.7;
+	text-decoration: underline;
+	transition:
+		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.publicationLink:hover {
+	opacity: 0.8;
+}
+
+.publicationPublisher {
+	opacity: 0.5;
+}

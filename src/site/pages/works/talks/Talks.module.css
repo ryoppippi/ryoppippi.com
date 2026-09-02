@@ -1,0 +1,74 @@
+.talksControls {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	margin-inline: auto;
+	padding-top: 2.5rem;
+}
+
+.talksControlLink {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	margin-block: auto;
+	opacity: 0.3;
+}
+
+.talksFilter {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 0.875rem;
+	opacity: 0.3;
+}
+
+.talkItem {
+	margin-block: 1.25rem;
+}
+
+.talkTitle {
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	opacity: 0.7;
+	transition:
+		opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.talkTitle:hover {
+	opacity: 0.8;
+}
+
+.talkLink {
+	text-decoration: underline;
+}
+
+.talkMeta {
+	opacity: 0.5;
+}
+
+.talkDate {
+	display: inline-block;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-left: 0.5rem;
+	font-size: 0.875rem;
+	opacity: 0.8;
+}
+
+.talkVideo {
+	font-size: 0.875rem;
+	opacity: 0.5;
+}
+
+:global(html.dark) .talkTitle {
+	opacity: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+	:global(html:not(.js)) .talkTitle {
+		opacity: 0.5;
+	}
+}

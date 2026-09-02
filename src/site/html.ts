@@ -4,7 +4,7 @@ import type { StructuredData } from './head.ts';
 import { renderToString } from '@solidjs/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import Shell from './templates/Shell.tsx';
+import Shell from './components/Shell/index.tsx';
 
 type PageOptions = {
 	article?: boolean;

@@ -1,7 +1,6 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContent } from '@ox-content/vite-plugin';
 import solid from '@solidjs/vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
@@ -19,7 +18,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
-		syntaxThemeStylesheet('/src/site/styles/article.css', kanagawaDragon),
+		syntaxThemeStylesheet('/src/site/pages/blog/article/page.css', kanagawaDragon),
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
@@ -33,7 +32,6 @@ export default defineConfig(({ command, mode }) => ({
 		}),
 		staticSiteBuild(),
 		staticSiteDevServer(),
-		tailwindcss(),
 	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
@@ -119,7 +117,8 @@ export default defineConfig(({ command, mode }) => ({
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
-						'src/site/{generate,page-styles,pages,syntax-theme}.ts',
+						'src/site/{generate,page-styles,syntax-theme}.ts',
+						'src/site/pages/**/*.ts',
 						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
 						'src/content/blog/**/*.ts',
 						'src/content/markdown/**/*.ts',
