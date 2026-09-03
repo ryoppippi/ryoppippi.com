@@ -4,16 +4,16 @@ import type {
 	IslandRenderer,
 	MarkdownRenderer,
 	ShowcaseProject,
-} from '../content/index.ts';
-import type { DevRouteDependencies, DevRouteResponse } from './dev-routes.ts';
-import type { PostListItem } from './content.ts';
-import type { OssProject, Talk } from './sections.ts';
-import type { SiteAssets } from './assets.ts';
+} from '../../content/index.ts';
+import type { DevRouteDependencies, DevRouteResponse } from '../dev-routes.ts';
+import type { PostListItem } from '../content.ts';
+import type { OssProject, Talk } from '../sections.ts';
+import type { SiteAssets } from '../assets.ts';
 import type { Plugin, ViteDevServer } from 'vite';
-import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
+import { blogDirectory, showcaseDirectory } from '../../content/paths.ts';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { DEV_ASSETS } from './assets.ts';
+import { DEV_ASSETS } from '../assets.ts';
 
 type BlogModule = {
 	loadBlogPost: (slug: string, renderContent?: MarkdownRenderer) => Promise<BlogPost | null>;
@@ -96,6 +96,12 @@ async function readContentAsset(pathname: string): Promise<{ body: Buffer; type:
 	}
 }
 
+/**
+ * Resolves which generated development routes depend on a changed source file.
+ *
+ * @param relativeFile - Source path relative to the Vite project root.
+ * @returns Affected routes, every route, or null when Vite handles the file directly.
+ */
 export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 	const file = relativeFile.replaceAll('\\', '/');
 	const blogMatch = /^src\/content\/blog\/([^/]+)(?:\/index\.mdx?|\.mdx?|\/.*)$/.exec(file);
@@ -234,9 +240,14 @@ function createDevRouteDependencies(server: ViteDevServer): DevRouteDependencies
 	};
 }
 
-export function staticSiteDevServer(): Plugin {
+/**
+ * Creates the development half of the static-site Vite integration.
+ *
+ * @returns The Vite plugin that renders static-site routes during development.
+ */
+export function staticSiteDevelopmentPlugin(): Plugin {
 	return {
-		name: 'ryoppippi-static-site-dev-server',
+		name: 'ryoppippi-static-site-development',
 		apply: (_config, { command, mode }) => command === 'serve' && mode !== 'test',
 		configureServer(server: ViteDevServer) {
 			const dependencies = createDevRouteDependencies(server);

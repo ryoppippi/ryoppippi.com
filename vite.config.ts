@@ -4,10 +4,9 @@ import solid from '@solidjs/vite-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import { staticSiteBuild } from './src/site/build-plugin.ts';
-import { staticSiteDevServer } from './src/site/dev-server.ts';
 import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
 import { syntaxThemeStylesheet } from './src/site/syntax-theme.ts';
+import { staticSite } from './src/site/vite-plugin/index.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
@@ -33,8 +32,7 @@ export default defineConfig(({ command, mode }) => ({
 						? OX_CONTENT_BUILD_OPTIONS.ssg
 						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
-		staticSiteBuild(),
-		staticSiteDevServer(),
+		...staticSite(),
 	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
@@ -57,7 +55,6 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
-					'scripts/**',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'static/**',
@@ -118,8 +115,9 @@ export default defineConfig(({ command, mode }) => ({
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
 						'src/lib/**/*.ts',
-						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
+						'src/site/{assets,content-assets,dev-routes}.ts',
 						'src/site/{generate,page-style-loader,syntax-theme}.ts',
+						'src/site/vite-plugin/**/*.ts',
 						'src/site/pages/**/*.ts',
 						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
 						'src/content/blog/**/*.ts',
