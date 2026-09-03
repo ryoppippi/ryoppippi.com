@@ -1,0 +1,6 @@
+@import './site.css';
+@import '@ox-content/vite-plugin/styles/theme-transition.css';
+
+@view-transition {
+	navigation: auto;
+}
