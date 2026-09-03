@@ -17,17 +17,17 @@ import {
 } from './content-assets.ts';
 import { loadExternalMedia, loadExternalPosts, postListItems } from './content.ts';
 import { writeOxContentOutputFiles } from './ox-content-output.ts';
-import { aboutPage } from './pages/about/page.ts';
-import { articlePages } from './pages/blog/article/page.ts';
-import { blogListPage } from './pages/blog/page.ts';
-import { errorPage } from './pages/error/page.ts';
-import { homePage } from './pages/home/page.ts';
-import { sponsorsPage } from './pages/sponsors/page.ts';
-import { mediaPage } from './pages/works/media/page.ts';
-import { ossPage } from './pages/works/oss/page.ts';
-import { publicationsPage } from './pages/works/publications/page.ts';
-import { showcasePage } from './pages/works/showcase/page.ts';
-import { talksPage } from './pages/works/talks/page.ts';
+import { createAboutPageFile } from './pages/about';
+import { createArticlePageFiles } from './pages/blog/article';
+import { createBlogListPageFile } from './pages/blog';
+import { createErrorPageFile } from './pages/error';
+import { createHomePageFile } from './pages/home';
+import { createSponsorsPageFile } from './pages/sponsors';
+import { createMediaPageFile } from './pages/works/media';
+import { createOssPageFile } from './pages/works/oss';
+import { createPublicationsPageFile } from './pages/works/publications';
+import { createShowcasePageFile } from './pages/works/showcase';
+import { createTalksPageFile } from './pages/works/talks';
 import { loadOssProjects, loadPublications, loadTalks } from './sections.ts';
 
 type GenerateSiteOptions = {
@@ -90,20 +90,22 @@ export async function generateSite({
 				: (emittedAssets.urls.get(new URL(project.image, 'https://content.invalid').pathname) ??
 					project.image),
 	}));
-	const about = aboutPage(assets);
+	const aboutPageFile = createAboutPageFile(assets);
 
 	const pages = [
-		homePage(assets),
-		blogListPage([...externalPosts, ...postListItems(posts)], assets),
-		...posts.filter((post) => post.isPublished).flatMap((post) => articlePages(post, assets)),
-		about,
-		ossPage(ossProjects, assets),
-		showcasePage(showcase, assets),
-		publicationsPage(publications, assets),
-		talksPage(talks, assets),
-		mediaPage(externalMedia, assets),
-		sponsorsPage(assets),
-		errorPage(assets),
+		createHomePageFile(assets),
+		createBlogListPageFile([...externalPosts, ...postListItems(posts)], assets),
+		...posts
+			.filter((post) => post.isPublished)
+			.flatMap((post) => createArticlePageFiles(post, assets)),
+		aboutPageFile,
+		createOssPageFile(ossProjects, assets),
+		createShowcasePageFile(showcase, assets),
+		createPublicationsPageFile(publications, assets),
+		createTalksPageFile(talks, assets),
+		createMediaPageFile(externalMedia, assets),
+		createSponsorsPageFile(assets),
+		createErrorPageFile(assets),
 	];
 
 	await writeGeneratedFiles(outDir, pages);

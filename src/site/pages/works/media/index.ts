@@ -2,7 +2,7 @@ import type { SiteAssets } from '@/site/assets.ts';
 import type { PostListItem } from '@/site/content.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
-import Media from './index.tsx';
+import MediaPage from './page.tsx';
 
 /**
  * Renders the podcasts and videos page.
@@ -11,7 +11,7 @@ import Media from './index.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated media page.
  */
-export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedFile {
+export function createMediaPageFile(items: PostListItem[], assets: SiteAssets): GeneratedFile {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return {
 		path: 'works/media/index.html',
@@ -25,7 +25,7 @@ export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedF
 		content: renderHtmlDocument({
 			title: 'Media',
 			pathname: '/works/media/',
-			content: renderComponent(Media, { items: sorted }),
+			content: renderComponent(MediaPage, { items: sorted }),
 			description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 			assets,
 			style: 'works',

@@ -2,7 +2,7 @@ import type { ShowcaseProject } from '@/content/index.ts';
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
-import Showcase from './index.tsx';
+import ShowcasePage from './page.tsx';
 
 /**
  * Renders the project showcase page.
@@ -11,7 +11,10 @@ import Showcase from './index.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated project showcase page.
  */
-export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): GeneratedFile {
+export function createShowcasePageFile(
+	projects: ShowcaseProject[],
+	assets: SiteAssets,
+): GeneratedFile {
 	return {
 		path: 'works/showcase/index.html',
 		sourcePaths: [
@@ -24,7 +27,7 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 		content: renderHtmlDocument({
 			title: 'Project showcase',
 			pathname: '/works/showcase/',
-			content: renderComponent(Showcase, { projects }),
+			content: renderComponent(ShowcasePage, { projects }),
 			description:
 				'Selected projects and experiments by @ryoppippi, with demos, source links, and implementation notes.',
 			assets,

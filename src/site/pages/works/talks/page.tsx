@@ -1,10 +1,10 @@
 import { formatDate } from '@/lib/util.ts';
-import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection';
 import type { Talk } from '@/site/sections.ts';
 import styles from './Talks.module.css';
 
-type TalksProps = {
+type TalksPageProps = {
 	talks: Talk[];
 };
 
@@ -14,7 +14,7 @@ type TalksProps = {
  * @param props - Talks to group and display.
  * @returns The talks page fragment.
  */
-export default function Talks({ talks }: TalksProps) {
+export default function TalksPage({ talks }: TalksPageProps) {
 	const byYear = [
 		...Map.groupBy(talks, (talk) => new Date(talk.date).getFullYear()).entries(),
 	].sort(([a], [b]) => b - a);

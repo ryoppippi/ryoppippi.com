@@ -7,7 +7,7 @@ import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
-import Article from './index.tsx';
+import ArticlePage from './page.tsx';
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 
@@ -83,13 +83,13 @@ function articleStructuredData(
  * @param assets - Site assets used by the article page.
  * @returns The published HTML page and its source companion file.
  */
-export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
+export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
 	const pathname = `/blog/${post.filename}/`;
 	const url = ufo.joinURL(SITE_ORIGIN, pathname);
 	const metadata = articleSeoMetadata(post);
 	const image =
 		metadata.image == null ? articleImageUrl(post.html, url) : new URL(metadata.image, url).href;
-	const content = renderComponent(Article, {
+	const content = renderComponent(ArticlePage, {
 		date: formatDate(new Date(post.pubDate)),
 		pathname,
 		post,
@@ -150,7 +150,7 @@ if (import.meta.vitest != null) {
 	} satisfies BlogPost;
 
 	test('tracks the whole source directory for an index MDX article', () => {
-		const [article] = articlePages(
+		const [article] = createArticlePageFiles(
 			{ ...examplePost, filepath: '/content/example-article/index.mdx' },
 			assets,
 		);
@@ -196,7 +196,7 @@ if (import.meta.vitest != null) {
 	});
 
 	test('escapes less-than characters in JSON-LD text', () => {
-		const [article] = articlePages(
+		const [article] = createArticlePageFiles(
 			{
 				...examplePost,
 				title: '</script><script>alert(1)</script>',

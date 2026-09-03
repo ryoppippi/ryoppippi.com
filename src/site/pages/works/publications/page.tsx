@@ -1,5 +1,5 @@
-import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection';
 import styles from './Publications.module.css';
 
 type Publication = {
@@ -9,7 +9,7 @@ type Publication = {
 	title: string;
 };
 
-type PublicationsProps = {
+type PublicationsPageProps = {
 	publications: Record<string, Publication[]>;
 };
 
@@ -19,7 +19,7 @@ type PublicationsProps = {
  * @param props - Publications keyed by year.
  * @returns The publications page fragment.
  */
-export default function Publications({ publications }: PublicationsProps) {
+export default function PublicationsPage({ publications }: PublicationsPageProps) {
 	const years = Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a));
 
 	return (

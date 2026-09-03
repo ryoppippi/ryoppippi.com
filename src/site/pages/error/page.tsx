@@ -3,7 +3,7 @@ import styles from './Error.module.css';
 /**
  * Renders the not-found page body.
  *
- * @returns The not-found page fragment.
+ * @returns The not-found page content.
  */
 export default function ErrorPage() {
 	return (

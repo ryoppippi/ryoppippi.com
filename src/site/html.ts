@@ -4,7 +4,7 @@ import type { StructuredData } from './head.ts';
 import { renderToString } from '@solidjs/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import SiteLayout from './components/SiteLayout/index.tsx';
+import SiteLayout from './components/SiteLayout';
 
 type HtmlDocumentOptions = {
 	article?: boolean;

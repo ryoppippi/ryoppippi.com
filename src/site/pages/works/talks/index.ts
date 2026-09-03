@@ -2,7 +2,7 @@ import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import type { Talk } from '@/site/sections.ts';
-import Talks from './index.tsx';
+import TalksPage from './page.tsx';
 
 /**
  * Renders the talks page.
@@ -11,7 +11,7 @@ import Talks from './index.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated talks page.
  */
-export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
+export function createTalksPageFile(talks: Talk[], assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'works/talks/index.html',
 		sourcePaths: [
@@ -23,7 +23,7 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 		content: renderHtmlDocument({
 			title: 'Talks',
 			pathname: '/works/talks/',
-			content: renderComponent(Talks, { talks }),
+			content: renderComponent(TalksPage, { talks }),
 			description:
 				'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 			assets,

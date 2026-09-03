@@ -1,10 +1,10 @@
 import { formatDate } from '@/lib/util.ts';
 import type { PostListItem } from '@/site/content.ts';
-import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection';
 import styles from './Media.module.css';
 
-type MediaProps = {
+type MediaPageProps = {
 	items: PostListItem[];
 };
 
@@ -20,7 +20,7 @@ const kindDetails = {
  * @param props - Curated media entries to display.
  * @returns The media page fragment.
  */
-export default function Media({ items }: MediaProps) {
+export default function MediaPage({ items }: MediaPageProps) {
 	const playlist = items.find((item) => item.playlist === true);
 	const mediaItems = items.filter((item) => item.playlist !== true);
 	const byYear = [

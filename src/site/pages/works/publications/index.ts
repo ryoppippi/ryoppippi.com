@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
-import Publications from './index.tsx';
+import PublicationsPage from './page.tsx';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
@@ -12,7 +12,7 @@ type Publication = { title: string; link: string; authors: string; publisher: st
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated publications page.
  */
-export function publicationsPage(
+export function createPublicationsPageFile(
 	publications: Record<string, Publication[]>,
 	assets: SiteAssets,
 ): GeneratedFile {
@@ -28,7 +28,7 @@ export function publicationsPage(
 		content: renderHtmlDocument({
 			title: 'Publications',
 			pathname: '/works/publications/',
-			content: renderComponent(Publications, { publications }),
+			content: renderComponent(PublicationsPage, { publications }),
 			description:
 				'Research papers and technical publications authored or co-authored by @ryoppippi.',
 			assets,

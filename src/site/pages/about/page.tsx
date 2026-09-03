@@ -1,4 +1,4 @@
-import ProfileImage from '@/site/components/ProfileImage/index.tsx';
+import ProfileImage from '@/site/components/ProfileImage';
 import { SITE_ORIGIN } from '@/site/consts.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import styles from './About.module.css';
@@ -17,7 +17,7 @@ const links = [
  *
  * @returns The profile page fragment.
  */
-export default function About() {
+export default function AboutPage() {
 	return (
 		<article class={styles.page}>
 			<section class={styles.profileCard}>

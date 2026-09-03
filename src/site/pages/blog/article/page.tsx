@@ -5,7 +5,7 @@ import styles from './Article.module.css';
 
 const budoux = loadDefaultJapaneseParser();
 
-type ArticleProps = {
+type ArticlePageProps = {
 	date: string;
 	pathname: string;
 	post: BlogPost;
@@ -17,7 +17,7 @@ type ArticleProps = {
  * @param props - Rendered post data and its canonical pathname.
  * @returns The article body fragment.
  */
-export default function Article({ date, pathname, post }: ArticleProps) {
+export default function ArticlePage({ date, pathname, post }: ArticlePageProps) {
 	const markdownPath = `${pathname.slice(0, -1)}.md`;
 	const title = budoux.parse(post.title).join('\u200B');
 	const url = `${SITE_ORIGIN}${pathname}`;

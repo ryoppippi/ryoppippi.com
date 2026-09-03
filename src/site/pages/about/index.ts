@@ -4,7 +4,7 @@ import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
-import About from './index.tsx';
+import AboutPage from './page.tsx';
 
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
@@ -17,7 +17,7 @@ const ABOUT_DESCRIPTION =
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated About page.
  */
-export function aboutPage(assets: SiteAssets): GeneratedFile {
+export function createAboutPageFile(assets: SiteAssets): GeneratedFile {
 	const url = ufo.joinURL(SITE_ORIGIN, ABOUT_PATHNAME);
 	return {
 		path: 'about/index.html',
@@ -25,7 +25,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 		content: renderHtmlDocument({
 			title: ABOUT_TITLE,
 			pathname: ABOUT_PATHNAME,
-			content: renderComponent(About, {}),
+			content: renderComponent(AboutPage, {}),
 			description: ABOUT_DESCRIPTION,
 			assets,
 			style: 'about',

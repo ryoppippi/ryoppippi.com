@@ -4,7 +4,7 @@ import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
-import Home from './index.tsx';
+import HomePage from './page.tsx';
 
 const SITE_OWNER_SOURCE_PATH = 'src/site/site-owner.ts';
 const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle}, featuring open-source projects, talks, publications, and software engineering articles.`;
@@ -56,14 +56,14 @@ function homeStructuredData() {
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated home page.
  */
-export function homePage(assets: SiteAssets): GeneratedFile {
+export function createHomePageFile(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
 		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/pages/home'],
 		content: renderHtmlDocument({
 			title: '',
 			pathname: '/',
-			content: renderComponent(Home, {}),
+			content: renderComponent(HomePage, {}),
 			description: HOME_DESCRIPTION,
 			assets,
 			style: 'home',

@@ -1,9 +1,9 @@
 import type { ShowcaseProject } from '@/content/index.ts';
 import { formatDate } from '@/lib/util.ts';
-import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav';
 import styles from './Showcase.module.css';
 
-type ShowcaseProps = {
+type ShowcasePageProps = {
 	projects: ShowcaseProject[];
 };
 
@@ -13,7 +13,7 @@ type ShowcaseProps = {
  * @param props - Showcase projects to display.
  * @returns The project showcase fragment.
  */
-export default function Showcase({ projects }: ShowcaseProps) {
+export default function ShowcasePage({ projects }: ShowcasePageProps) {
 	return (
 		<>
 			<WorksNav active="showcase" />

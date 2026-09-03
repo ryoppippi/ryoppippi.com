@@ -1,10 +1,10 @@
 import { SITE_ORIGIN } from '@/site/consts.ts';
-import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
-import WorksSection from '@/site/pages/works/_components/WorksSection/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav';
+import WorksSection from '@/site/pages/works/_components/WorksSection';
 import type { OssProject, OssProjectKind } from '@/site/sections.ts';
 import styles from './Oss.module.css';
 
-type OssProps = {
+type OssPageProps = {
 	projects: OssProject[];
 };
 
@@ -26,7 +26,7 @@ function formatStars(stars: number): string {
  * @param props - Projects to group and display.
  * @returns The OSS page fragment.
  */
-export default function Oss({ projects }: OssProps) {
+export default function OssPage({ projects }: OssPageProps) {
 	return (
 		<>
 			<WorksNav active="oss" />

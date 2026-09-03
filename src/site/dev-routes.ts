@@ -5,17 +5,17 @@ import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
 import { postListItems } from './content.ts';
 import { renderBlogFeed, renderMediaFeed } from './feeds.ts';
-import { aboutPage } from './pages/about/page.ts';
-import { articlePages } from './pages/blog/article/page.ts';
-import { blogListPage } from './pages/blog/page.ts';
-import { errorPage } from './pages/error/page.ts';
-import { homePage } from './pages/home/page.ts';
-import { sponsorsPage } from './pages/sponsors/page.ts';
-import { mediaPage } from './pages/works/media/page.ts';
-import { ossPage } from './pages/works/oss/page.ts';
-import { publicationsPage } from './pages/works/publications/page.ts';
-import { showcasePage } from './pages/works/showcase/page.ts';
-import { talksPage } from './pages/works/talks/page.ts';
+import { createAboutPageFile } from './pages/about';
+import { createArticlePageFiles } from './pages/blog/article';
+import { createBlogListPageFile } from './pages/blog';
+import { createErrorPageFile } from './pages/error';
+import { createHomePageFile } from './pages/home';
+import { createSponsorsPageFile } from './pages/sponsors';
+import { createMediaPageFile } from './pages/works/media';
+import { createOssPageFile } from './pages/works/oss';
+import { createPublicationsPageFile } from './pages/works/publications';
+import { createShowcasePageFile } from './pages/works/showcase';
+import { createTalksPageFile } from './pages/works/talks';
 
 type Publications = Record<
 	string,
@@ -64,7 +64,7 @@ async function renderBlogRoute(
 			dependencies.loadExternalPosts(),
 		]);
 		return createDevRouteResponse(
-			blogListPage(
+			createBlogListPageFile(
 				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],
 				dependencies.assets,
 			).content,
@@ -83,9 +83,13 @@ async function renderBlogRoute(
 	}
 	const post = await dependencies.loadBlogPost(articleMatch[1]);
 	if (post == null) {
-		return createDevRouteResponse(errorPage(dependencies.assets).content, htmlContentType, 404);
+		return createDevRouteResponse(
+			createErrorPageFile(dependencies.assets).content,
+			htmlContentType,
+			404,
+		);
 	}
-	return createDevRouteResponse(articlePages(post, dependencies.assets)[0].content);
+	return createDevRouteResponse(createArticlePageFiles(post, dependencies.assets)[0].content);
 }
 
 async function renderDotfilesRoute(
@@ -120,10 +124,10 @@ export async function renderDevRoute(
 	dependencies: DevRouteDependencies,
 ): Promise<DevRouteResponse | null> {
 	if (pathname === '/') {
-		return createDevRouteResponse(homePage(dependencies.assets).content);
+		return createDevRouteResponse(createHomePageFile(dependencies.assets).content);
 	}
 	if (pathname === '/about/') {
-		return createDevRouteResponse(aboutPage(dependencies.assets).content);
+		return createDevRouteResponse(createAboutPageFile(dependencies.assets).content);
 	}
 	if (pathname.startsWith('/blog/')) {
 		return renderBlogRoute(pathname, dependencies);
@@ -134,27 +138,28 @@ export async function renderDevRoute(
 	}
 	if (pathname === '/works/oss/') {
 		return createDevRouteResponse(
-			ossPage(await dependencies.loadOssProjects(), dependencies.assets).content,
+			createOssPageFile(await dependencies.loadOssProjects(), dependencies.assets).content,
 		);
 	}
 	if (pathname === '/works/showcase/') {
 		return createDevRouteResponse(
-			showcasePage(await dependencies.loadShowcase(), dependencies.assets).content,
+			createShowcasePageFile(await dependencies.loadShowcase(), dependencies.assets).content,
 		);
 	}
 	if (pathname === '/works/publications/') {
 		return createDevRouteResponse(
-			publicationsPage(await dependencies.loadPublications(), dependencies.assets).content,
+			createPublicationsPageFile(await dependencies.loadPublications(), dependencies.assets)
+				.content,
 		);
 	}
 	if (pathname === '/works/talks/') {
 		return createDevRouteResponse(
-			talksPage(await dependencies.loadTalks(), dependencies.assets).content,
+			createTalksPageFile(await dependencies.loadTalks(), dependencies.assets).content,
 		);
 	}
 	if (pathname === '/works/media/') {
 		return createDevRouteResponse(
-			mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content,
+			createMediaPageFile(await dependencies.loadExternalMedia(), dependencies.assets).content,
 		);
 	}
 	if (pathname === '/works/media/feed.xml') {
@@ -162,7 +167,7 @@ export async function renderDevRoute(
 		return createDevRouteResponse(feed.content, feed.contentType);
 	}
 	if (pathname === '/sponsors/') {
-		return createDevRouteResponse(sponsorsPage(dependencies.assets).content);
+		return createDevRouteResponse(createSponsorsPageFile(dependencies.assets).content);
 	}
 	if (pathname === '/dotfiles.md') {
 		return createDevRouteResponse(await dependencies.loadDotfiles(), markdownContentType);
@@ -171,7 +176,7 @@ export async function renderDevRoute(
 }
 
 export function renderDevNotFound(assets: SiteAssets): DevRouteResponse {
-	return createDevRouteResponse(errorPage(assets).content, htmlContentType, 404);
+	return createDevRouteResponse(createErrorPageFile(assets).content, htmlContentType, 404);
 }
 
 if (import.meta.vitest != null) {

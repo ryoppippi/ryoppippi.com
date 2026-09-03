@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
 import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
-import ErrorPage from './index.tsx';
+import ErrorPage from './page.tsx';
 
 /**
  * Renders the non-indexable error page.
@@ -9,7 +9,7 @@ import ErrorPage from './index.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated error page.
  */
-export function errorPage(assets: SiteAssets): GeneratedFile {
+export function createErrorPageFile(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
 		sourcePaths: ['src/site/pages/error'],

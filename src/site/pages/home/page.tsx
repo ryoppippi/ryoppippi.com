@@ -1,4 +1,4 @@
-import ProfileImage from '@/site/components/ProfileImage/index.tsx';
+import ProfileImage from '@/site/components/ProfileImage';
 import { SITE_ORIGIN } from '@/site/consts.ts';
 import styles from './Home.module.css';
 
@@ -16,7 +16,7 @@ const socials = [
  *
  * @returns The home page fragment.
  */
-export default function Home() {
+export default function HomePage() {
 	return (
 		<>
 			<article class={styles.homeIntro}>
