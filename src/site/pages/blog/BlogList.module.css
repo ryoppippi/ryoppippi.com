@@ -54,13 +54,9 @@
 
 .blogEntryContent {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	gap: 0.5rem;
 	margin-block: 0.5rem;
-}
-
-.blogEntryIconFrame {
-	margin-top: 0.25rem;
 }
 
 .blogEntryIcon {
