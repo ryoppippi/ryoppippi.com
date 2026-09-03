@@ -66,13 +66,11 @@ export default function BlogListPage({ items }: BlogListPageProps) {
 								target={item.link.startsWith('http') ? '_blank' : undefined}
 							>
 								<div class={styles.blogEntryContent}>
-									<span class={styles.blogEntryIconFrame}>
-										<span
-											class={`${external ? externalKindIcons[kind] : 'icon-[simple-icons--markdown]'} ${styles.blogEntryIcon}`}
-											title={external ? externalKindLabels[kind] : undefined}
-											aria-hidden="true"
-										/>
-									</span>
+									<span
+										class={`${external ? externalKindIcons[kind] : 'icon-[simple-icons--markdown]'} ${styles.blogEntryIcon}`}
+										title={external ? externalKindLabels[kind] : undefined}
+										aria-hidden="true"
+									/>
 									<p class={styles.blogEntryTitle} style={`view-transition-name:blog-${item.slug}`}>
 										{item.draft === true && <span class={styles.blogEntryDraft}>(draft)</span>}{' '}
 										{item.title}

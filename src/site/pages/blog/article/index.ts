@@ -101,7 +101,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 				post,
 			},
 			outputPath: `blog/${post.filename}/index.html`,
-			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
+			sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/pages/blog/article', sourcePath],
 			title: `${post.title} | blog`,
 			pathname,
 			description: metadata.description,
