@@ -1,6 +1,5 @@
 import type { SiteAssets } from '@/site/assets.ts';
-import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
+import { definePage } from '@/site/define-page.ts';
 import PublicationsPage from './page.tsx';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
@@ -15,9 +14,11 @@ type Publication = { title: string; link: string; authors: string; publisher: st
 export function createPublicationsPageFile(
 	publications: Record<string, Publication[]>,
 	assets: SiteAssets,
-): GeneratedFile {
-	return {
-		path: 'works/publications/index.html',
+) {
+	return definePage({
+		component: PublicationsPage,
+		componentProps: { publications },
+		outputPath: 'works/publications/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
 			'src/site/pages/works/_components',
@@ -25,14 +26,11 @@ export function createPublicationsPageFile(
 			'src/site/pages/works/publications',
 			'src/contents/publication.json',
 		],
-		content: renderHtmlDocument({
-			title: 'Publications',
-			pathname: '/works/publications/',
-			content: renderComponent(PublicationsPage, { publications }),
-			description:
-				'Research papers and technical publications authored or co-authored by @ryoppippi.',
-			assets,
-			style: 'works',
-		}),
-	};
+		title: 'Publications',
+		pathname: '/works/publications/',
+		description:
+			'Research papers and technical publications authored or co-authored by @ryoppippi.',
+		assets,
+		style: 'works',
+	});
 }

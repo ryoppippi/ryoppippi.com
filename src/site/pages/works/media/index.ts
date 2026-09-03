@@ -1,7 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { PostListItem } from '@/site/content.ts';
-import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
+import { definePage } from '@/site/define-page.ts';
 import MediaPage from './page.tsx';
 
 /**
@@ -11,10 +10,12 @@ import MediaPage from './page.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated media page.
  */
-export function createMediaPageFile(items: PostListItem[], assets: SiteAssets): GeneratedFile {
+export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
-	return {
-		path: 'works/media/index.html',
+	return definePage({
+		component: MediaPage,
+		componentProps: { items: sorted },
+		outputPath: 'works/media/index.html',
 		sourcePaths: [
 			'src/site/content.ts',
 			'src/site/pages/works/_components',
@@ -22,13 +23,10 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets): 
 			'src/site/pages/works/media',
 			'src/contents/external-rss/media.json',
 		],
-		content: renderHtmlDocument({
-			title: 'Media',
-			pathname: '/works/media/',
-			content: renderComponent(MediaPage, { items: sorted }),
-			description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
-			assets,
-			style: 'works',
-		}),
-	};
+		title: 'Media',
+		pathname: '/works/media/',
+		description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
+		assets,
+		style: 'works',
+	});
 }

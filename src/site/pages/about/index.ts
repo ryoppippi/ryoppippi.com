@@ -1,7 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import { SITE_ORIGIN } from '@/site/consts.ts';
-import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
+import { definePage } from '@/site/define-page.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import AboutPage from './page.tsx';
@@ -17,47 +16,46 @@ const ABOUT_DESCRIPTION =
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated About page.
  */
-export function createAboutPageFile(assets: SiteAssets): GeneratedFile {
+export function createAboutPageFile(assets: SiteAssets) {
 	const url = ufo.joinURL(SITE_ORIGIN, ABOUT_PATHNAME);
-	return {
-		path: 'about/index.html',
+	return definePage({
+		component: AboutPage,
+		componentProps: {},
+		outputPath: 'about/index.html',
 		sourcePaths: ['src/site/site-owner.ts', 'src/site/pages/about'],
-		content: renderHtmlDocument({
-			title: ABOUT_TITLE,
-			pathname: ABOUT_PATHNAME,
-			content: renderComponent(AboutPage, {}),
+		title: ABOUT_TITLE,
+		pathname: ABOUT_PATHNAME,
+		description: ABOUT_DESCRIPTION,
+		assets,
+		style: 'about',
+		structuredData: {
+			'@context': 'https://schema.org',
+			'@type': 'ProfilePage',
+			'@id': ufo.withFragment(url, 'profile'),
+			url,
+			name: ABOUT_TITLE,
 			description: ABOUT_DESCRIPTION,
-			assets,
-			style: 'about',
-			structuredData: {
-				'@context': 'https://schema.org',
-				'@type': 'ProfilePage',
-				'@id': ufo.withFragment(url, 'profile'),
-				url,
-				name: ABOUT_TITLE,
+			mainEntity: {
+				'@type': 'Person',
+				'@id': SITE_OWNER.id,
+				name: SITE_OWNER.name,
 				description: ABOUT_DESCRIPTION,
-				mainEntity: {
-					'@type': 'Person',
-					'@id': SITE_OWNER.id,
-					name: SITE_OWNER.name,
-					description: ABOUT_DESCRIPTION,
-					jobTitle: 'Founding Engineer',
-					worksFor: {
-						'@type': 'Organization',
-						name: 'Rork',
-						url: 'https://rork.com/',
-					},
-					alternateName: [
-						SITE_OWNER.japaneseName,
-						SITE_OWNER.formerName,
-						SITE_OWNER.formerJapaneseName,
-						SITE_OWNER.handle,
-					],
-					url: SITE_OWNER.url,
-					image: ufo.joinURL(SITE_ORIGIN, 'ryoppippi.avif'),
-					sameAs: [...SITE_OWNER.sameAs],
+				jobTitle: 'Founding Engineer',
+				worksFor: {
+					'@type': 'Organization',
+					name: 'Rork',
+					url: 'https://rork.com/',
 				},
+				alternateName: [
+					SITE_OWNER.japaneseName,
+					SITE_OWNER.formerName,
+					SITE_OWNER.formerJapaneseName,
+					SITE_OWNER.handle,
+				],
+				url: SITE_OWNER.url,
+				image: ufo.joinURL(SITE_ORIGIN, 'ryoppippi.avif'),
+				sameAs: [...SITE_OWNER.sameAs],
 			},
-		}),
-	};
+		},
+	});
 }

@@ -1,7 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '@/site/consts.ts';
-import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
+import { definePage } from '@/site/define-page.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import HomePage from './page.tsx';
@@ -56,20 +55,19 @@ function homeStructuredData() {
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated home page.
  */
-export function createHomePageFile(assets: SiteAssets): GeneratedFile {
-	return {
-		path: 'index.html',
+export function createHomePageFile(assets: SiteAssets) {
+	return definePage({
+		component: HomePage,
+		componentProps: {},
+		outputPath: 'index.html',
 		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/pages/home'],
-		content: renderHtmlDocument({
-			title: '',
-			pathname: '/',
-			content: renderComponent(HomePage, {}),
-			description: HOME_DESCRIPTION,
-			assets,
-			style: 'home',
-			structuredData: homeStructuredData(),
-		}),
-	};
+		title: '',
+		pathname: '/',
+		description: HOME_DESCRIPTION,
+		assets,
+		style: 'home',
+		structuredData: homeStructuredData(),
+	});
 }
 
 if (import.meta.vitest != null) {

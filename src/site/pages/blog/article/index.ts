@@ -2,8 +2,8 @@ import type { ArticleMetadata, BlogPost } from '@/content/index.ts';
 import { formatDate } from '@/lib/util.ts';
 import { islandModuleIds, type SiteAssets } from '@/site/assets.ts';
 import { SITE_ORIGIN } from '@/site/consts.ts';
+import { definePage } from '@/site/define-page.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
@@ -89,33 +89,31 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 	const metadata = articleSeoMetadata(post);
 	const image =
 		metadata.image == null ? articleImageUrl(post.html, url) : new URL(metadata.image, url).href;
-	const content = renderComponent(ArticlePage, {
-		date: formatDate(new Date(post.pubDate)),
-		pathname,
-		post,
-	});
 	const sourcePath = /^index\.mdx?$/.test(path.basename(post.filepath))
 		? path.dirname(post.filepath)
 		: post.filepath;
 	return [
-		{
-			path: `blog/${post.filename}/index.html`,
-			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
-			content: renderHtmlDocument({
-				title: `${post.title} | blog`,
+		definePage({
+			component: ArticlePage,
+			componentProps: {
+				date: formatDate(new Date(post.pubDate)),
 				pathname,
-				content,
-				description: metadata.description,
-				datePublished: post.pubDate,
-				lang: post.lang,
-				alternates: metadata.alternates,
-				assets,
-				article: true,
-				islands: islandModuleIds(post.html),
-				style: 'article',
-				structuredData: articleStructuredData(post, metadata.description, url, image),
-			}),
-		},
+				post,
+			},
+			outputPath: `blog/${post.filename}/index.html`,
+			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
+			title: `${post.title} | blog`,
+			pathname,
+			description: metadata.description,
+			datePublished: post.pubDate,
+			lang: post.lang,
+			alternates: metadata.alternates,
+			assets,
+			article: true,
+			islands: islandModuleIds(post.html),
+			style: 'article',
+			structuredData: articleStructuredData(post, metadata.description, url, image),
+		}),
 		{ path: `blog/${post.filename}.md`, content: post.source },
 	];
 }

@@ -1,6 +1,5 @@
 import type { SiteAssets } from '@/site/assets.ts';
-import type { GeneratedFile } from '@/site/generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
+import { definePage } from '@/site/define-page.ts';
 import type { OssProject } from '@/site/sections.ts';
 import OssPage from './page.tsx';
 
@@ -11,9 +10,11 @@ import OssPage from './page.tsx';
  * @param assets - Bundled site assets referenced by the page.
  * @returns The generated open-source projects page.
  */
-export function createOssPageFile(projects: OssProject[], assets: SiteAssets): GeneratedFile {
-	return {
-		path: 'works/oss/index.html',
+export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
+	return definePage({
+		component: OssPage,
+		componentProps: { projects },
+		outputPath: 'works/oss/index.html',
 		sourcePaths: [
 			'src/site/sections.ts',
 			'src/site/pages/works/_components',
@@ -22,14 +23,11 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets): G
 			'src/contents/works/oss/list.json',
 			'src/contents/works/oss/stars.json',
 		],
-		content: renderHtmlDocument({
-			title: 'Open-source projects',
-			pathname: '/works/oss/',
-			content: renderComponent(OssPage, { projects }),
-			description:
-				'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
-			assets,
-			style: 'works',
-		}),
-	};
+		title: 'Open-source projects',
+		pathname: '/works/oss/',
+		description:
+			'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
+		assets,
+		style: 'works',
+	});
 }
