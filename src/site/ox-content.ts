@@ -3,7 +3,7 @@ import {
 	resolveSelfHostedAssetManifest,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
-import { Route } from '../../routes.ts';
+import { Route } from './routes.ts';
 import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
 import { BLOG_FEED_OPTIONS } from './feeds.ts';
 

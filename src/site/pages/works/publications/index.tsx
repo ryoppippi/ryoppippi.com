@@ -1,5 +1,5 @@
-import WorksNav from '../_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '../_components/WorksSection/index.tsx';
+import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
 import styles from './Publications.module.css';
 
 type Publication = {

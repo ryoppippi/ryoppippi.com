@@ -1,7 +1,7 @@
-import type { PostListItem } from '../../../content.ts';
-import { formatDate } from '../../../../lib/util.ts';
-import WorksNav from '../_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '../_components/WorksSection/index.tsx';
+import { formatDate } from '@/lib/util.ts';
+import type { PostListItem } from '@/site/content.ts';
+import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
 import styles from './Media.module.css';
 
 type MediaProps = {

@@ -1,9 +1,9 @@
-import type { SiteAssets } from '../../assets.ts';
-import type { GeneratedFile } from '../../generated-file.ts';
+import type { SiteAssets } from '@/site/assets.ts';
+import { SITE_ORIGIN } from '@/site/consts.ts';
+import type { GeneratedFile } from '@/site/generated-file.ts';
+import { page, renderComponent } from '@/site/html.ts';
+import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
-import { SITE_ORIGIN } from '../../consts.ts';
-import { page, renderComponent } from '../../html.ts';
-import { SITE_OWNER } from '../../site-owner.ts';
 import About from './index.tsx';
 
 const ABOUT_PATHNAME = '/about/';

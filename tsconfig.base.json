@@ -6,6 +6,7 @@
 		"module": "ESNext",
 		"moduleDetection": "force",
 		"moduleResolution": "Bundler",
+		"paths": { "@/*": ["./src/*"] },
 		"resolveJsonModule": true,
 		"types": ["node", "vite/client", "vite-plus/test/globals", "vite-plus/test/importMeta"],
 		"allowImportingTsExtensions": true,

@@ -1,7 +1,7 @@
-import type { OssProject, OssProjectKind } from '../../../sections.ts';
-import { SITE_ORIGIN } from '../../../consts.ts';
-import WorksNav from '../_components/WorksNav/index.tsx';
-import WorksSection from '../_components/WorksSection/index.tsx';
+import { SITE_ORIGIN } from '@/site/consts.ts';
+import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
+import WorksSection from '@/site/pages/works/_components/WorksSection/index.tsx';
+import type { OssProject, OssProjectKind } from '@/site/sections.ts';
 import styles from './Oss.module.css';
 
 type OssProps = {

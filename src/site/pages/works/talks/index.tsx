@@ -1,7 +1,7 @@
-import type { Talk } from '../../../sections.ts';
-import { formatDate } from '../../../../lib/util.ts';
-import WorksNav from '../_components/WorksNav/index.tsx';
-import WorksSection, { WorksList } from '../_components/WorksSection/index.tsx';
+import { formatDate } from '@/lib/util.ts';
+import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
+import WorksSection, { WorksList } from '@/site/pages/works/_components/WorksSection/index.tsx';
+import type { Talk } from '@/site/sections.ts';
 import styles from './Talks.module.css';
 
 type TalksProps = {

@@ -1,6 +1,6 @@
-import type { ShowcaseProject } from '../../../../content/index.ts';
-import { formatDate } from '../../../../lib/util.ts';
-import WorksNav from '../_components/WorksNav/index.tsx';
+import type { ShowcaseProject } from '@/content/index.ts';
+import { formatDate } from '@/lib/util.ts';
+import WorksNav from '@/site/pages/works/_components/WorksNav/index.tsx';
 import styles from './Showcase.module.css';
 
 type ShowcaseProps = {

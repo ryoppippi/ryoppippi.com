@@ -12,6 +12,9 @@ import { syntaxThemeStylesheet } from './src/site/syntax-theme.ts';
 export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
 	envPrefix: ['PUBLIC_', 'VITE_'],
+	resolve: {
+		tsconfigPaths: true,
+	},
 	server: {
 		watch: {
 			ignored: ['**/.direnv/**'],
@@ -54,7 +57,6 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
-					'routes.ts',
 					'scripts/**',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },

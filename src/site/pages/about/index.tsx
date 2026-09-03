@@ -1,6 +1,6 @@
-import { SITE_ORIGIN } from '../../consts.ts';
-import { SITE_OWNER } from '../../site-owner.ts';
-import ProfileImage from '../../components/ProfileImage/index.tsx';
+import ProfileImage from '@/site/components/ProfileImage/index.tsx';
+import { SITE_ORIGIN } from '@/site/consts.ts';
+import { SITE_OWNER } from '@/site/site-owner.ts';
 import styles from './About.module.css';
 
 const links = [

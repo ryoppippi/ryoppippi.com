@@ -1,6 +1,6 @@
-import type { BlogPost } from '../../../../content/index.ts';
+import type { BlogPost } from '@/content/index.ts';
+import { SITE_COPYRIGHT, SITE_ORIGIN } from '@/site/consts.ts';
 import { loadDefaultJapaneseParser } from 'budoux';
-import { SITE_COPYRIGHT, SITE_ORIGIN } from '../../../consts.ts';
 import styles from './Article.module.css';
 
 const budoux = loadDefaultJapaneseParser();

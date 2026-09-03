@@ -124,11 +124,10 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/works/showcase/'];
 	}
 	if (
-		file === 'routes.ts' ||
 		file.startsWith('src/content/markdown/') ||
 		file.startsWith('src/site/components/') ||
 		file.startsWith('src/site/pages/') ||
-		/^src\/site\/(assets|client|consts|content|dev-routes|generated-file|head|html|page-styles|sections|style)\.(?:css|ts)$/.test(
+		/^src\/site\/(assets|client|consts|content|dev-routes|generated-file|head|html|page-styles|routes|sections|style)\.(?:css|ts)$/.test(
 			file,
 		)
 	) {
@@ -343,6 +342,7 @@ if (import.meta.vitest != null) {
 		it('invalidates all rendered pages for head metadata changes', () => {
 			expect(invalidatedRoutes('src/site/head.ts')).toBe('*');
 			expect(invalidatedRoutes('src/site/consts.ts')).toBe('*');
+			expect(invalidatedRoutes('src/site/routes.ts')).toBe('*');
 		});
 
 		it('invalidates the OSS page when its star snapshot changes', () => {
