@@ -27,6 +27,7 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	gap: 0.25rem;
+	justify-content: center;
 	margin-bottom: 2rem;
 	font-size: 1.875rem;
 	line-height: 2.25rem;
