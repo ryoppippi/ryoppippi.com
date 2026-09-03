@@ -1,7 +1,7 @@
 import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { blogDirectory, showcaseDirectory } from '@/content/paths.ts';
+import { writeCollectionAssets } from '@ox-content/vite-plugin';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -11,8 +11,8 @@ import {
 	parseStepCommands,
 } from '@/lib/dotfiles.ts';
 import {
-	contentAssetSources,
-	emitDeduplicatedAssets,
+	collectionAssetUrls,
+	planSiteContentAssets,
 	rewriteContentAssetUrls,
 } from './content-assets.ts';
 import {
@@ -78,20 +78,19 @@ export async function generateStaticSite({
 			loadTalks(),
 			fetchDotfilesReadme(fetch),
 		]);
-	const emittedAssets = await emitDeduplicatedAssets(
-		await contentAssetSources(blogDirectory(), showcaseDirectory()),
-		outDir,
-	);
+	const contentAssets = await planSiteContentAssets(root);
+	await writeCollectionAssets({ manifest: contentAssets, outDir });
+	const assetUrls = collectionAssetUrls(contentAssets);
 	const posts = localContent.posts.map((post) => ({
 		...post,
-		html: rewriteContentAssetUrls(post.html, `/blog/${post.filename}/`, emittedAssets.urls),
+		html: rewriteContentAssetUrls(post.html, `/blog/${post.filename}/`, assetUrls),
 	}));
 	const showcase = localContent.showcase.map((project) => ({
 		...project,
 		image:
 			project.image == null
 				? undefined
-				: (emittedAssets.urls.get(new URL(project.image, 'https://content.invalid').pathname) ??
+				: (assetUrls.get(new URL(project.image, 'https://content.invalid').pathname) ??
 					project.image),
 	}));
 	const aboutPageFile = createAboutPageFile(assets);

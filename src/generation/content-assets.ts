@@ -1,38 +1,39 @@
 import type { DefaultTreeAdapterMap } from 'parse5';
-import { createHash } from 'node:crypto';
-import { link, mkdir, readFile, stat, unlink, writeFile } from 'node:fs/promises';
+import type { CollectionAssetInput, CollectionAssetManifest } from '@ox-content/vite-plugin';
+import { planCollectionAssets } from '@ox-content/vite-plugin';
 import path from 'node:path';
 import { parseFragment, serialize } from 'parse5';
 import { glob } from 'tinyglobby';
+import { blogDirectory, showcaseDirectory } from '@/content/paths.ts';
 
-export type ContentAssetSource = {
-	source: string;
-	url: string;
-};
-
-export type EmittedContentAssets = {
-	urls: ReadonlyMap<string, string>;
-};
-
-async function ensureHardLink(source: string, destination: string): Promise<void> {
-	try {
-		await link(source, destination);
-	} catch (error) {
-		if (!(error instanceof Error && 'code' in error && error.code === 'EEXIST')) {
-			throw error;
-		}
-		const [sourceStat, destinationStat] = await Promise.all([stat(source), stat(destination)]);
-		if (sourceStat.dev !== destinationStat.dev || sourceStat.ino !== destinationStat.ino) {
-			await unlink(destination);
-			await link(source, destination);
-		}
-	}
+function publicUrl(...parts: string[]): string {
+	return `/${parts
+		.flatMap((part) => part.split('/'))
+		.map(encodeURIComponent)
+		.join('/')}`;
 }
 
-export async function contentAssetSources(
+function isWithin(directory: string, file: string): boolean {
+	const relative = path.relative(directory, file);
+	return (
+		relative !== '' &&
+		relative !== '..' &&
+		!relative.startsWith(`..${path.sep}`) &&
+		!path.isAbsolute(relative)
+	);
+}
+
+/**
+ * Discovers non-Markdown assets and assigns the public aliases owned by this site.
+ *
+ * @param blogDir - Directory containing blog posts and their local assets.
+ * @param showcaseDir - Directory containing showcase entries and images.
+ * @returns Explicit source-to-public mappings for Ox Content.
+ */
+export async function discoverSiteContentAssets(
 	blogDir: string,
 	showcaseDir: string,
-): Promise<ContentAssetSource[]> {
+): Promise<CollectionAssetInput[]> {
 	const [blogAssets, showcaseAssets] = await Promise.all([
 		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json'], {
 			cwd: blogDir,
@@ -43,80 +44,76 @@ export async function contentAssetSources(
 			onlyFiles: true,
 		}),
 	]);
-	const publicUrl = (...parts: string[]) =>
-		`/${parts
-			.flatMap((part) => part.split('/'))
-			.map(encodeURIComponent)
-			.join('/')}`;
 
 	return [
 		...blogAssets
 			.filter((asset) => asset.includes('/'))
 			.map((asset) => ({
-				source: path.join(blogDir, asset),
-				url: publicUrl('blog', asset),
+				sourcePath: path.join(blogDir, asset),
+				publicPath: publicUrl('blog', asset),
 			})),
 		...showcaseAssets.map((asset) => ({
-			source: path.join(showcaseDir, asset),
-			url: publicUrl('works', 'showcase', 'assets', asset),
+			sourcePath: path.join(showcaseDir, asset),
+			publicPath: publicUrl('works', 'showcase', 'assets', asset),
 		})),
 	];
 }
 
-export async function emitDeduplicatedAssets(
-	sources: readonly ContentAssetSource[],
-	outDir: string,
-): Promise<EmittedContentAssets> {
-	const loaded = await Promise.all(
-		sources.map(async (asset) => {
-			const content = await readFile(asset.source);
-			return {
-				...asset,
-				content,
-				hash: createHash('sha256').update(content).digest('hex'),
-			};
-		}),
-	);
-	const emitted = new Map<string, { content: Buffer; target: string }>();
-	const urls = new Map<string, string>();
-
-	for (const asset of loaded) {
-		let output = emitted.get(asset.hash);
-		if (output == null) {
-			const extension = path.extname(asset.source).toLowerCase();
-			output = {
-				content: asset.content,
-				target: `/assets/content/${asset.hash}${extension}`,
-			};
-			emitted.set(asset.hash, output);
-		}
-		urls.set(asset.url, output.target);
-	}
-
-	await mkdir(path.join(outDir, 'assets', 'content'), { recursive: true });
-	await Promise.all(
-		[...emitted.values()].map((asset) =>
-			writeFile(path.join(outDir, asset.target.slice(1)), asset.content),
-		),
-	);
-	await Promise.all(
-		loaded.map(async (asset) => {
-			const target = urls.get(asset.url);
-			if (target == null) {
-				throw new Error(`Missing emitted asset for ${asset.url}`);
-			}
-			const alias = path.join(
-				outDir,
-				...asset.url.split('/').filter(Boolean).map(decodeURIComponent),
-			);
-			await mkdir(path.dirname(alias), { recursive: true });
-			await ensureHardLink(path.join(outDir, target.slice(1)), alias);
-		}),
-	);
-
-	return { urls };
+/**
+ * Plans the site's content-addressed asset targets and legacy public aliases.
+ *
+ * @param root - Vite project root containing every asset source.
+ * @returns An Ox Content manifest shared by build and development serving.
+ */
+export async function planSiteContentAssets(root: string): Promise<CollectionAssetManifest> {
+	return planCollectionAssets({
+		root,
+		assets: await discoverSiteContentAssets(blogDirectory(), showcaseDirectory()),
+	});
 }
 
+/**
+ * Reports whether a changed source requires the development asset manifest to be replanned.
+ *
+ * @param file - Absolute source path reported by Vite's watcher.
+ * @returns Whether the path can affect the collection asset manifest.
+ */
+export function isSiteContentAssetSource(file: string): boolean {
+	if (isWithin(blogDirectory(), file)) {
+		return !file.endsWith('.md') && !file.endsWith('.mdx') && !file.endsWith('.generated.json');
+	}
+	if (isWithin(showcaseDirectory(), file)) {
+		return !file.endsWith('.md') && !file.endsWith('.mdx') && path.basename(file) !== 'index.ts';
+	}
+	return false;
+}
+
+/**
+ * Maps every public alias to the content-addressed target emitted by Ox Content.
+ *
+ * @param manifest - Planned collection asset manifest.
+ * @returns Public alias to content target mappings used while rendering HTML.
+ */
+export function collectionAssetUrls(
+	manifest: CollectionAssetManifest,
+): ReadonlyMap<string, string> {
+	const urls = new Map<string, string>();
+	for (const asset of manifest.assets) {
+		for (const publicPath of asset.publicPaths) {
+			urls.set(publicPath, asset.contentPath);
+		}
+	}
+	return urls;
+}
+
+/**
+ * Rewrites local asset attributes to their content-addressed production URLs.
+ *
+ * @param html - Rendered HTML containing local asset references.
+ * @param basePath - Public page path used to resolve relative references.
+ * @param urls - Public alias to content target mappings.
+ * @returns HTML with known local asset references rewritten.
+ */
 export function rewriteContentAssetUrls(
 	html: string,
 	basePath: string,
@@ -154,8 +151,8 @@ export function rewriteContentAssetUrls(
 }
 
 if (import.meta.vitest != null) {
-	describe(contentAssetSources, () => {
-		it('lists non-Markdown assets with encoded public URLs', async () => {
+	describe(discoverSiteContentAssets, () => {
+		it('lists non-Markdown assets with encoded public aliases', async () => {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
@@ -166,112 +163,37 @@ if (import.meta.vitest != null) {
 				'showcase/index.ts': 'export {}',
 			});
 
-			const sources = await contentAssetSources(
-				fixture.getPath('blog'),
-				fixture.getPath('showcase'),
-			);
-
-			expect(sources).toEqual([
+			expect(
+				await discoverSiteContentAssets(fixture.getPath('blog'), fixture.getPath('showcase')),
+			).toEqual([
 				{
-					source: fixture.getPath('blog/post/image one.png'),
-					url: '/blog/post/image%20one.png',
+					sourcePath: fixture.getPath('blog/post/image one.png'),
+					publicPath: '/blog/post/image%20one.png',
 				},
 				{
-					source: fixture.getPath('showcase/project cover.jpg'),
-					url: '/works/showcase/assets/project%20cover.jpg',
+					sourcePath: fixture.getPath('showcase/project cover.jpg'),
+					publicPath: '/works/showcase/assets/project%20cover.jpg',
 				},
 			]);
 		});
 	});
 
-	describe(emitDeduplicatedAssets, () => {
-		it('reuses aliases emitted by an earlier SSG pass', async () => {
-			const [{ createFixture }, { stat }] = await Promise.all([
-				import('fs-fixture'),
-				import('node:fs/promises'),
-			]);
-			await using fixture = await createFixture({ 'input/image.png': 'same image' });
-			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
-
-			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
-			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
-
-			const asset = await stat(fixture.getPath('output/blog/post/image.png'));
-			expect(asset.nlink).toBe(2);
-		});
-
-		it('updates an alias when its source content changes', async () => {
-			const [{ createFixture }, { readFile, writeFile }] = await Promise.all([
-				import('fs-fixture'),
-				import('node:fs/promises'),
-			]);
-			await using fixture = await createFixture({ 'input/image.png': 'old image' });
-			const sources = [{ source: fixture.getPath('input/image.png'), url: '/blog/post/image.png' }];
-
-			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
-			await writeFile(fixture.getPath('input/image.png'), 'new image');
-			await emitDeduplicatedAssets(sources, fixture.getPath('output'));
-
-			expect(await readFile(fixture.getPath('output/blog/post/image.png'), 'utf8')).toBe(
-				'new image',
-			);
-		});
-
-		it('emits identical asset contents once', async () => {
-			const [{ createFixture }, { readdir }] = await Promise.all([
-				import('fs-fixture'),
-				import('node:fs/promises'),
-			]);
-			await using fixture = await createFixture({
-				'input/first.png': 'same image',
-				'input/second.png': 'same image',
-				'input/unique.jpg': 'unique image',
+	describe(collectionAssetUrls, () => {
+		it('maps every alias to its content-addressed target', () => {
+			const urls = collectionAssetUrls({
+				assets: [
+					{
+						sourcePath: '/workspace/image.png',
+						publicPaths: ['/blog/post/image.png', '/legacy/image.png'],
+						contentPath: '/assets/content/digest.png',
+					},
+				],
 			});
 
-			await emitDeduplicatedAssets(
-				[
-					{ source: fixture.getPath('input/first.png'), url: '/blog/first/image.png' },
-					{ source: fixture.getPath('input/second.png'), url: '/blog/second/image.png' },
-					{ source: fixture.getPath('input/unique.jpg'), url: '/showcase/unique.jpg' },
-				],
-				fixture.getPath('output'),
-			);
-
-			const output = await readdir(fixture.getPath('output/assets/content'));
-			expect(output).toHaveLength(2);
-		});
-
-		it('maps legacy URLs to content-addressed assets and emits static aliases', async () => {
-			const [{ createFixture }, { readFile, stat }] = await Promise.all([
-				import('fs-fixture'),
-				import('node:fs/promises'),
+			expect([...urls]).toEqual([
+				['/blog/post/image.png', '/assets/content/digest.png'],
+				['/legacy/image.png', '/assets/content/digest.png'],
 			]);
-			await using fixture = await createFixture({
-				'input/first.png': 'same image',
-				'input/second.png': 'same image',
-			});
-
-			const result = await emitDeduplicatedAssets(
-				[
-					{ source: fixture.getPath('input/first.png'), url: '/blog/first/image.png' },
-					{ source: fixture.getPath('input/second.png'), url: '/blog/second/image.png' },
-				],
-				fixture.getPath('output'),
-			);
-
-			expect(result.urls.get('/blog/first/image.png')).toMatch(
-				/^\/assets\/content\/[\da-f]{64}\.png$/,
-			);
-			expect(result.urls.get('/blog/second/image.png')).toBe(
-				result.urls.get('/blog/first/image.png'),
-			);
-			expect(await readFile(fixture.getPath('output/blog/first/image.png'), 'utf8')).toBe(
-				'same image',
-			);
-			expect(await readFile(fixture.getPath('output/blog/second/image.png'), 'utf8')).toBe(
-				'same image',
-			);
-			expect((await stat(fixture.getPath('output/blog/first/image.png'))).nlink).toBe(3);
 		});
 	});
 

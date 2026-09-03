@@ -10,9 +10,9 @@ import type { PostListItem } from '@/contents/external-content.ts';
 import type { OssProject, Talk } from '@/contents/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { ViteDevServer } from 'vite';
-import { blogDirectory, showcaseDirectory } from '@/content/paths.ts';
-import { readFile } from 'node:fs/promises';
+import { createCollectionAssetsMiddleware } from '@ox-content/vite-plugin';
 import path from 'node:path';
+import { isSiteContentAssetSource, planSiteContentAssets } from '@/generation/content-assets.ts';
 import { DEV_ASSETS } from '@/rendering/site-assets.ts';
 
 type BlogModule = {
@@ -52,49 +52,6 @@ type DevRoutesModule = {
 		dependencies: DevRouteDependencies,
 	) => Promise<DevRouteResponse | null>;
 };
-
-function contentTypeForFile(file: string): string {
-	const extension = path.extname(file);
-	return (
-		{
-			'.avif': 'image/avif',
-			'.gif': 'image/gif',
-			'.jpeg': 'image/jpeg',
-			'.jpg': 'image/jpeg',
-			'.png': 'image/png',
-			'.svg': 'image/svg+xml',
-			'.webp': 'image/webp',
-		}[extension] ?? 'application/octet-stream'
-	);
-}
-
-async function readContentAsset(pathname: string): Promise<{ body: Buffer; type: string } | null> {
-	const decoded = decodeURIComponent(pathname);
-	if (decoded.includes('..')) {
-		return null;
-	}
-
-	const blogMatch = /^\/blog\/([^/]+)\/(.+)$/.exec(decoded);
-	const showcaseMatch = /^\/works\/showcase\/assets\/([^/]+)$/.exec(decoded);
-	const file =
-		blogMatch == null
-			? showcaseMatch == null
-				? null
-				: path.join(showcaseDirectory(), showcaseMatch[1])
-			: path.join(blogDirectory(), blogMatch[1], blogMatch[2]);
-	if (file == null || path.extname(file).length === 0) {
-		return null;
-	}
-
-	try {
-		return { body: await readFile(file), type: contentTypeForFile(file) };
-	} catch (error) {
-		if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
-			return null;
-		}
-		throw error;
-	}
-}
 
 /**
  * Resolves which generated development routes depend on a changed source file.
@@ -261,12 +218,20 @@ function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDepe
  * @param server - Vite development server used for module loading and middleware.
  * @returns Nothing.
  */
-export function configureStaticSiteDevelopmentServer(server: ViteDevServer): void {
+export async function configureStaticSiteDevelopmentServer(server: ViteDevServer): Promise<void> {
 	const dependencies = createDevelopmentRouteDependencies(server);
 	const cache = new Map<string, Promise<DevRouteResponse | null>>();
+	let contentAssetsMiddleware = planSiteContentAssets(server.config.root).then(
+		createCollectionAssetsMiddleware,
+	);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
 	server.watcher.on('all', (_event, file) => {
+		if (isSiteContentAssetSource(file)) {
+			contentAssetsMiddleware = planSiteContentAssets(server.config.root).then(
+				createCollectionAssetsMiddleware,
+			);
+		}
 		const routes = invalidatedRoutes(path.relative(server.config.root, file));
 		if (routes == null) {
 			return;
@@ -283,20 +248,22 @@ export function configureStaticSiteDevelopmentServer(server: ViteDevServer): voi
 	});
 
 	server.middlewares.use(async (request, response, next) => {
+		try {
+			await (
+				await contentAssetsMiddleware
+			)(request, response, next);
+		} catch (error) {
+			next(error);
+		}
+	});
+
+	server.middlewares.use(async (request, response, next) => {
 		if (request.method !== 'GET' || request.url == null) {
 			next();
 			return;
 		}
 
 		const url = new URL(request.url, 'http://localhost');
-		const asset = await readContentAsset(url.pathname);
-		if (asset != null) {
-			response.statusCode = 200;
-			response.setHeader('Content-Type', asset.type);
-			response.end(asset.body);
-			return;
-		}
-
 		let rendered = cache.get(url.pathname);
 		let routesModule: DevRoutesModule | undefined;
 		if (rendered == null) {

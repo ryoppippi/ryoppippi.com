@@ -12,7 +12,7 @@ type StaticSiteBuildModule = {
 };
 
 type StaticSiteDevelopmentModule = {
-	configureStaticSiteDevelopmentServer: (server: ViteDevServer) => void;
+	configureStaticSiteDevelopmentServer: (server: ViteDevServer) => Promise<void>;
 };
 
 async function runStaticSiteBuild(config: ResolvedConfig): Promise<void> {
@@ -92,7 +92,7 @@ export function createStaticSitePlugin(): Plugin {
 			const { configureStaticSiteDevelopmentServer } = (await server.ssrLoadModule(
 				'/src/dev-server/index.ts',
 			)) as StaticSiteDevelopmentModule;
-			configureStaticSiteDevelopmentServer(server);
+			await configureStaticSiteDevelopmentServer(server);
 		},
 		async closeBundle() {
 			if (resolvedConfig?.command !== 'build') {
