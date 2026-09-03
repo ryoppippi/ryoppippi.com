@@ -1,9 +1,6 @@
 @import '../styles/site.css';
 @import '@ox-content/vite-plugin/styles/theme-transition.css';
 
-@source './client.ts';
-@source './templates/Shell.tsx';
-
 @view-transition {
 	navigation: auto;
 }

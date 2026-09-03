@@ -9,10 +9,21 @@ extend-ignore-re = [
 ]
 
 [default.extend-words]
+Artifact = "Artifact"
 Edn = "Edn"
 IHS = "IHS"
+Organization = "Organization"
+behavior = "behavior"
+capitalize = "capitalize"
+catalog = "catalog"
+center = "center"
+color = "color"
 items-center = "items-center"
 justify-center = "justify-center"
+normalized = "normalized"
+optimize = "optimize"
+serialize = "serialize"
+serialized = "serialized"
 
 [files]
 extend-exclude = [

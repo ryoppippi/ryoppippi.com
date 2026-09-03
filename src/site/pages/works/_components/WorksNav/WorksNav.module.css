@@ -1,0 +1,50 @@
+.worksNavigationHeader {
+	text-align: center;
+	font-family: var(--font-mono);
+}
+
+.worksTitle {
+	padding-bottom: 1rem;
+	font-size: 3rem;
+	line-height: 1;
+	font-weight: 700;
+	opacity: 0.7;
+}
+
+.worksTagline {
+	margin-bottom: 1.25rem;
+	font-size: 1.125rem;
+	font-style: italic;
+	opacity: 0.5;
+}
+
+.worksNowrap {
+	white-space: nowrap;
+}
+
+.worksSections {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+	font-size: 1.875rem;
+	line-height: 2.25rem;
+}
+
+.worksSectionLink {
+	opacity: 0.2;
+	transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.worksSectionLinkActive {
+	opacity: 0.7;
+}
+
+@media (min-width: 40rem) {
+	.worksSections {
+		flex-direction: row;
+		gap: 0.75rem;
+	}
+}

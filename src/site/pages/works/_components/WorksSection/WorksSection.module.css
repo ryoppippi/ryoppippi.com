@@ -1,0 +1,25 @@
+.worksYear {
+	margin-block: 2rem;
+	font-family: var(--font-mono);
+	font-size: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+	line-height: 1;
+	font-weight: 700;
+	color: transparent;
+	-webkit-text-stroke: 1.5px #aaaaaa;
+	opacity: 0.35;
+}
+
+.worksList {
+	margin-inline: auto;
+	padding-inline: 2.5rem;
+}
+
+:global(html.dark) .worksYear {
+	opacity: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+	:global(html:not(.js)) .worksYear {
+		opacity: 0.5;
+	}
+}

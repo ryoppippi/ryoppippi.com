@@ -1,8 +1,0 @@
-@import '../../styles/works.css';
-
-@source '../templates/Oss.tsx';
-@source '../templates/Media.tsx';
-@source '../templates/Publications.tsx';
-@source '../templates/Showcase.tsx';
-@source '../templates/Talks.tsx';
-@source '../templates/WorksNav.tsx';

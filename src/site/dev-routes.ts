@@ -5,17 +5,17 @@ import type { OssProject, Talk } from './sections.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '../lib/dotfiles.ts';
 import { postListItems } from './content.ts';
 import { renderBlogFeed, renderMediaFeed } from './feeds.ts';
-import { articlePages, blogListPage, homePage } from './pages.ts';
-import {
-	aboutPage,
-	errorPage,
-	mediaPage,
-	ossPage,
-	publicationsPage,
-	showcasePage,
-	sponsorsPage,
-	talksPage,
-} from './secondary-pages.ts';
+import { createAboutPageFile } from './pages/about';
+import { createArticlePageFiles } from './pages/blog/article';
+import { createBlogListPageFile } from './pages/blog';
+import { createErrorPageFile } from './pages/error';
+import { createHomePageFile } from './pages/home';
+import { createSponsorsPageFile } from './pages/sponsors';
+import { createMediaPageFile } from './pages/works/media';
+import { createOssPageFile } from './pages/works/oss';
+import { createPublicationsPageFile } from './pages/works/publications';
+import { createShowcasePageFile } from './pages/works/showcase';
+import { createTalksPageFile } from './pages/works/talks';
 
 type Publications = Record<
 	string,
@@ -46,7 +46,11 @@ const htmlContentType = 'text/html; charset=utf-8';
 const markdownContentType = 'text/markdown; charset=utf-8';
 const textContentType = 'text/plain; charset=utf-8';
 
-function response(body: string, contentType = htmlContentType, status = 200): DevRouteResponse {
+function createDevRouteResponse(
+	body: string,
+	contentType = htmlContentType,
+	status = 200,
+): DevRouteResponse {
 	return { body, contentType, status };
 }
 
@@ -59,8 +63,8 @@ async function renderBlogRoute(
 			dependencies.loadBlogPostMetadata(),
 			dependencies.loadExternalPosts(),
 		]);
-		return response(
-			blogListPage(
+		return createDevRouteResponse(
+			createBlogListPageFile(
 				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],
 				dependencies.assets,
 			).content,
@@ -70,7 +74,7 @@ async function renderBlogRoute(
 	const markdownMatch = /^\/blog\/([^/]+)\.md$/.exec(pathname);
 	if (markdownMatch != null) {
 		const source = await dependencies.loadBlogPostSource(markdownMatch[1]);
-		return source == null ? null : response(source, markdownContentType);
+		return source == null ? null : createDevRouteResponse(source, markdownContentType);
 	}
 
 	const articleMatch = /^\/blog\/([^/]+)\/$/.exec(pathname);
@@ -79,9 +83,13 @@ async function renderBlogRoute(
 	}
 	const post = await dependencies.loadBlogPost(articleMatch[1]);
 	if (post == null) {
-		return response(errorPage(dependencies.assets).content, htmlContentType, 404);
+		return createDevRouteResponse(
+			createErrorPageFile(dependencies.assets).content,
+			htmlContentType,
+			404,
+		);
 	}
-	return response(articlePages(post, dependencies.assets)[0].content);
+	return createDevRouteResponse(createArticlePageFiles(post, dependencies.assets)[0].content);
 }
 
 async function renderDotfilesRoute(
@@ -93,7 +101,7 @@ async function renderDotfilesRoute(
 	}
 	const readme = await dependencies.loadDotfiles();
 	if (pathname === '/dotfiles/install') {
-		return response(extractSection(readme, 'Setup'), textContentType);
+		return createDevRouteResponse(extractSection(readme, 'Setup'), textContentType);
 	}
 
 	const sectionMatch = /^\/dotfiles\/(mac|linux)\.html$/.exec(pathname);
@@ -104,11 +112,11 @@ async function renderDotfilesRoute(
 	}
 	const section = extractInstallSection(readme, match[1] === 'mac' ? 'macOS' : 'Linux');
 	if (stepMatch == null) {
-		return response(section, htmlContentType);
+		return createDevRouteResponse(section, htmlContentType);
 	}
 	const step = Number(stepMatch[2]);
 	const command = parseStepCommands(section).find((entry) => entry.step === step)?.command;
-	return command == null ? null : response(command, textContentType);
+	return command == null ? null : createDevRouteResponse(command, textContentType);
 }
 
 export async function renderDevRoute(
@@ -116,50 +124,59 @@ export async function renderDevRoute(
 	dependencies: DevRouteDependencies,
 ): Promise<DevRouteResponse | null> {
 	if (pathname === '/') {
-		return response(homePage(dependencies.assets).content);
+		return createDevRouteResponse(createHomePageFile(dependencies.assets).content);
 	}
 	if (pathname === '/about/') {
-		return response(aboutPage(dependencies.assets).content);
+		return createDevRouteResponse(createAboutPageFile(dependencies.assets).content);
 	}
 	if (pathname.startsWith('/blog/')) {
 		return renderBlogRoute(pathname, dependencies);
 	}
 	if (pathname === '/feed.xml') {
 		const feed = await renderBlogFeed(await dependencies.loadBlogPostMetadata());
-		return response(feed.content, feed.contentType);
+		return createDevRouteResponse(feed.content, feed.contentType);
 	}
 	if (pathname === '/works/oss/') {
-		return response(ossPage(await dependencies.loadOssProjects(), dependencies.assets).content);
+		return createDevRouteResponse(
+			createOssPageFile(await dependencies.loadOssProjects(), dependencies.assets).content,
+		);
 	}
 	if (pathname === '/works/showcase/') {
-		return response(showcasePage(await dependencies.loadShowcase(), dependencies.assets).content);
+		return createDevRouteResponse(
+			createShowcasePageFile(await dependencies.loadShowcase(), dependencies.assets).content,
+		);
 	}
 	if (pathname === '/works/publications/') {
-		return response(
-			publicationsPage(await dependencies.loadPublications(), dependencies.assets).content,
+		return createDevRouteResponse(
+			createPublicationsPageFile(await dependencies.loadPublications(), dependencies.assets)
+				.content,
 		);
 	}
 	if (pathname === '/works/talks/') {
-		return response(talksPage(await dependencies.loadTalks(), dependencies.assets).content);
+		return createDevRouteResponse(
+			createTalksPageFile(await dependencies.loadTalks(), dependencies.assets).content,
+		);
 	}
 	if (pathname === '/works/media/') {
-		return response(mediaPage(await dependencies.loadExternalMedia(), dependencies.assets).content);
+		return createDevRouteResponse(
+			createMediaPageFile(await dependencies.loadExternalMedia(), dependencies.assets).content,
+		);
 	}
 	if (pathname === '/works/media/feed.xml') {
 		const feed = await renderMediaFeed(await dependencies.loadExternalMedia());
-		return response(feed.content, feed.contentType);
+		return createDevRouteResponse(feed.content, feed.contentType);
 	}
 	if (pathname === '/sponsors/') {
-		return response(sponsorsPage(dependencies.assets).content);
+		return createDevRouteResponse(createSponsorsPageFile(dependencies.assets).content);
 	}
 	if (pathname === '/dotfiles.md') {
-		return response(await dependencies.loadDotfiles(), markdownContentType);
+		return createDevRouteResponse(await dependencies.loadDotfiles(), markdownContentType);
 	}
 	return renderDotfilesRoute(pathname, dependencies);
 }
 
 export function renderDevNotFound(assets: SiteAssets): DevRouteResponse {
-	return response(errorPage(assets).content, htmlContentType, 404);
+	return createDevRouteResponse(createErrorPageFile(assets).content, htmlContentType, 404);
 }
 
 if (import.meta.vitest != null) {
@@ -180,14 +197,22 @@ if (import.meta.vitest != null) {
 		html: '<h1>Rendered only on demand</h1>',
 	} satisfies BlogPost;
 
-	function dependencies() {
+	function createTestDependencies() {
 		return {
 			assets: {
 				base: '',
 				client: '<script type="module" src="/src/site/client.ts"></script>',
 				islands: {},
 				oxContent: '',
-				pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+				pageStyles: {
+					about: '',
+					article: '',
+					blog: '',
+					error: '',
+					home: '',
+					sponsors: '',
+					works: '',
+				},
 			},
 			loadBlogPost: vi.fn(async () => post),
 			loadBlogPostMetadata: vi.fn(async (): Promise<BlogPostMetadata[]> => [metadata]),
@@ -204,7 +229,7 @@ if (import.meta.vitest != null) {
 
 	describe(renderDevRoute, () => {
 		it('renders home without loading blog content', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 
 			const result = await renderDevRoute('/', loaders);
 
@@ -214,7 +239,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders the blog list from metadata without rendering an article', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 
 			await renderDevRoute('/blog/', loaders);
 
@@ -223,7 +248,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders only the requested article', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 
 			await renderDevRoute('/blog/lazy-article/', loaders);
 
@@ -232,7 +257,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('serves raw Markdown without rendering the article', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 
 			const result = await renderDevRoute('/blog/lazy-article.md', loaders);
 
@@ -242,7 +267,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders the media page from curated media', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 
 			await renderDevRoute('/works/media/', loaders);
 
@@ -250,7 +275,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders the blog RSS route with Ox Content', async () => {
-			const result = await renderDevRoute('/feed.xml', dependencies());
+			const result = await renderDevRoute('/feed.xml', createTestDependencies());
 
 			expect(result).toMatchObject({
 				contentType: 'application/rss+xml; charset=utf-8',
@@ -259,7 +284,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('renders the curated media RSS route with Ox Content', async () => {
-			const loaders = dependencies();
+			const loaders = createTestDependencies();
 			loaders.loadExternalMedia.mockResolvedValue([
 				{
 					title: 'Interview',
@@ -283,7 +308,7 @@ if (import.meta.vitest != null) {
 	});
 
 	it('renders the site error page with a 404 status', () => {
-		expect(renderDevNotFound(dependencies().assets)).toMatchObject({
+		expect(renderDevNotFound(createTestDependencies().assets)).toMatchObject({
 			status: 404,
 			contentType: htmlContentType,
 		});

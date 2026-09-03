@@ -53,7 +53,7 @@ type DevRoutesModule = {
 	) => Promise<DevRouteResponse | null>;
 };
 
-function contentType(file: string): string {
+function contentTypeForFile(file: string): string {
 	const extension = path.extname(file);
 	return (
 		{
@@ -87,7 +87,7 @@ async function readContentAsset(pathname: string): Promise<{ body: Buffer; type:
 	}
 
 	try {
-		return { body: await readFile(file), type: contentType(file) };
+		return { body: await readFile(file), type: contentTypeForFile(file) };
 	} catch (error) {
 		if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
 			return null;
@@ -124,10 +124,10 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/works/showcase/'];
 	}
 	if (
-		file === 'routes.ts' ||
 		file.startsWith('src/content/markdown/') ||
-		file.startsWith('src/site/templates/') ||
-		/^src\/site\/(assets|client|consts|content|dev-routes|head|html|page-styles|pages|secondary-pages|sections|style)\.(?:css|ts)$/.test(
+		file.startsWith('src/site/components/') ||
+		file.startsWith('src/site/pages/') ||
+		/^src\/site\/(assets|client|consts|content|dev-routes|generated-file|head|html|page-style-loader|page-style-registry|redirects|sections|style)\.(?:css|ts)$/.test(
 			file,
 		)
 	) {
@@ -171,7 +171,7 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 	return hrefs;
 }
 
-function createDependencies(server: ViteDevServer): DevRouteDependencies {
+function createDevRouteDependencies(server: ViteDevServer): DevRouteDependencies {
 	const root = server.config.root;
 	// Rebuilt as islands render so a page links the styles of the islands it
 	// actually mounts, the way the built site does from the manifest.
@@ -239,7 +239,7 @@ export function staticSiteDevServer(): Plugin {
 		name: 'ryoppippi-static-site-dev-server',
 		apply: (_config, { command, mode }) => command === 'serve' && mode !== 'test',
 		configureServer(server: ViteDevServer) {
-			const dependencies = createDependencies(server);
+			const dependencies = createDevRouteDependencies(server);
 			const cache = new Map<string, Promise<DevRouteResponse | null>>();
 			let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -342,6 +342,7 @@ if (import.meta.vitest != null) {
 		it('invalidates all rendered pages for head metadata changes', () => {
 			expect(invalidatedRoutes('src/site/head.ts')).toBe('*');
 			expect(invalidatedRoutes('src/site/consts.ts')).toBe('*');
+			expect(invalidatedRoutes('src/site/redirects.ts')).toBe('*');
 		});
 
 		it('invalidates the OSS page when its star snapshot changes', () => {

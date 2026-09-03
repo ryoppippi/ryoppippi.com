@@ -6,8 +6,8 @@
 	border-left: 0.25em solid var(--callout-color);
 }
 
-/* The typography plugin styles blockquotes as quotations (italics plus
-   inserted quotation marks); a callout is not a quotation, so undo both. */
+/* Prose blockquotes are quotations (italics plus inserted quotation marks);
+   a callout is not a quotation, so undo both. */
 .prose .ox-callout {
 	font-style: normal;
 }
@@ -34,82 +34,126 @@
 
 .prose .ox-callout--note {
 	--callout-color: #0969da;
-
-	@variant dark {
-		--callout-color: #2f81f7;
-	}
 }
 
 .prose .ox-callout--tip {
 	--callout-color: #1a7f37;
-
-	@variant dark {
-		--callout-color: #3fb950;
-	}
 }
 
 .prose .ox-callout--important {
 	--callout-color: #8250df;
-
-	@variant dark {
-		--callout-color: #a371f7;
-	}
 }
 
 .prose .ox-callout--warning {
 	--callout-color: #9a6700;
-
-	@variant dark {
-		--callout-color: #d29922;
-	}
 }
 
 .prose .ox-callout--caution {
 	--callout-color: #d1242f;
+}
 
-	@variant dark {
-		--callout-color: #f85149;
-	}
+html.dark .prose .ox-callout--note {
+	--callout-color: #2f81f7;
+}
+
+html.dark .prose .ox-callout--tip {
+	--callout-color: #3fb950;
+}
+
+html.dark .prose .ox-callout--important {
+	--callout-color: #a371f7;
+}
+
+html.dark .prose .ox-callout--warning {
+	--callout-color: #d29922;
+}
+
+html.dark .prose .ox-callout--caution {
+	--callout-color: #f85149;
 }
 
 @media (prefers-contrast: more) {
 	.prose .ox-callout--note {
 		--callout-color: #0550ae;
-
-		@variant dark {
-			--callout-color: #58a6ff;
-		}
 	}
 
 	.prose .ox-callout--tip {
 		--callout-color: #116329;
-
-		@variant dark {
-			--callout-color: #56d364;
-		}
 	}
 
 	.prose .ox-callout--important {
 		--callout-color: #6639ba;
-
-		@variant dark {
-			--callout-color: #bc8cff;
-		}
 	}
 
 	.prose .ox-callout--warning {
 		--callout-color: #7d4e00;
-
-		@variant dark {
-			--callout-color: #e3b341;
-		}
 	}
 
 	.prose .ox-callout--caution {
 		--callout-color: #a40e26;
+	}
 
-		@variant dark {
-			--callout-color: #ff7b72;
-		}
+	html.dark .prose .ox-callout--note {
+		--callout-color: #58a6ff;
+	}
+
+	html.dark .prose .ox-callout--tip {
+		--callout-color: #56d364;
+	}
+
+	html.dark .prose .ox-callout--important {
+		--callout-color: #bc8cff;
+	}
+
+	html.dark .prose .ox-callout--warning {
+		--callout-color: #e3b341;
+	}
+
+	html.dark .prose .ox-callout--caution {
+		--callout-color: #ff7b72;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	html:not(.js) .prose .ox-callout--note {
+		--callout-color: #2f81f7;
+	}
+
+	html:not(.js) .prose .ox-callout--tip {
+		--callout-color: #3fb950;
+	}
+
+	html:not(.js) .prose .ox-callout--important {
+		--callout-color: #a371f7;
+	}
+
+	html:not(.js) .prose .ox-callout--warning {
+		--callout-color: #d29922;
+	}
+
+	html:not(.js) .prose .ox-callout--caution {
+		--callout-color: #f85149;
+	}
+}
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+	html:not(.js) .prose .ox-callout--note {
+		--callout-color: #58a6ff;
+	}
+
+	html:not(.js) .prose .ox-callout--tip {
+		--callout-color: #56d364;
+	}
+
+	html:not(.js) .prose .ox-callout--important {
+		--callout-color: #bc8cff;
+	}
+
+	html:not(.js) .prose .ox-callout--warning {
+		--callout-color: #e3b341;
+	}
+
+	html:not(.js) .prose .ox-callout--caution {
+		--callout-color: #ff7b72;
 	}
 }
