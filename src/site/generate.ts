@@ -90,7 +90,7 @@ export async function generateSite({
 				: (emittedAssets.urls.get(new URL(project.image, 'https://content.invalid').pathname) ??
 					project.image),
 	}));
-	const about = await aboutPage(assets);
+	const about = aboutPage(assets);
 
 	const pages = [
 		homePage(assets),

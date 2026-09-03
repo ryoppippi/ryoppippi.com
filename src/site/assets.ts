@@ -35,7 +35,7 @@ export const DEV_ASSETS = {
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 	pages: {
-		about: '<link rel="stylesheet" href="/src/site/pages/about/Profile.module.css">',
+		about: '<link rel="stylesheet" href="/src/site/pages/about/About.module.css">',
 		article: [
 			'<link rel="stylesheet" href="/src/site/pages/blog/article/page.css">',
 			'<link rel="stylesheet" href="/src/site/pages/blog/article/Article.module.css">',
@@ -146,7 +146,7 @@ export function resolveSiteAssets(
 		oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 		islands,
 		pages: {
-			about: stylesFor('/pages/about/Profile.module.css'),
+			about: stylesFor('/pages/about/About.module.css'),
 			article: stylesForAll([
 				'/pages/blog/article/page.css',
 				'/pages/blog/article/Article.module.css',
@@ -230,7 +230,7 @@ if (import.meta.vitest != null) {
 			'post/Table.tsx': ['assets/Legend.css'],
 		},
 		pages: {
-			about: '<link href="/profile.css">',
+			about: '<link href="/about-page.css">',
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
 			error: '<link href="/error.css">',
@@ -248,8 +248,8 @@ if (import.meta.vitest != null) {
 					'src/site/components/Shell/Shell.module.css': {
 						file: 'assets/shell.css',
 					},
-					'src/site/pages/about/Profile.module.css': {
-						file: 'assets/profile.css',
+					'src/site/pages/about/About.module.css': {
+						file: 'assets/about-page.css',
 					},
 					'src/site/pages/blog/article/page.css': {
 						file: 'assets/article-global.css',
@@ -313,7 +313,7 @@ if (import.meta.vitest != null) {
 					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 				},
 				pages: {
-					about: '<link rel="stylesheet" crossorigin href="/assets/profile.css">',
+					about: '<link rel="stylesheet" crossorigin href="/assets/about-page.css">',
 					article:
 						'<link rel="stylesheet" crossorigin href="/assets/article-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/article.css">',
 					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',

@@ -84,7 +84,7 @@
 	padding-top: 2rem;
 }
 
-.copy [data-about-heading] {
+.heading {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -96,7 +96,7 @@
 	border: 0;
 }
 
-.copy [data-about-kicker] {
+.kicker {
 	font-family: var(--font-mono);
 	font-size: 1.125rem;
 	font-style: italic;
@@ -104,7 +104,7 @@
 	opacity: 0.6;
 }
 
-.copy [data-about-description] {
+.description {
 	margin-top: 1.25rem;
 	text-wrap: pretty;
 	font-size: 1.125rem;
@@ -112,18 +112,18 @@
 	color: var(--color-text-600);
 }
 
-.copy [data-about-name] {
+.name {
 	font-weight: 600;
 	color: var(--color-text-800);
 }
 
-.copy [data-about-alias] {
+.alias {
 	font-family: var(--font-mono);
 	font-size: 0.875rem;
 	color: var(--color-text-400);
 }
 
-.copy [data-about-description] a {
+.inlineLink {
 	font-weight: 500;
 	color: inherit;
 	text-decoration: underline;
@@ -134,11 +134,11 @@
 		text-decoration-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.copy [data-about-description] a:hover {
+.inlineLink:hover {
 	text-decoration-color: var(--color-accent-100);
 }
 
-.copy [data-about-role] {
+.role {
 	font-weight: 500;
 	color: var(--color-text-700);
 }
@@ -189,15 +189,15 @@
 	box-shadow: 0 2rem 6rem #00000045;
 }
 
-:global(html.dark) .copy [data-about-description] {
+:global(html.dark) .description {
 	color: var(--color-text-300);
 }
 
-:global(html.dark) .copy [data-about-name] {
+:global(html.dark) .name {
 	color: var(--color-text-100);
 }
 
-:global(html.dark) .copy [data-about-role] {
+:global(html.dark) .role {
 	color: var(--color-text-200);
 }
 
@@ -210,15 +210,15 @@
 		box-shadow: 0 2rem 6rem #00000045;
 	}
 
-	:global(html:not(.js)) .copy [data-about-description] {
+	:global(html:not(.js)) .description {
 		color: var(--color-text-300);
 	}
 
-	:global(html:not(.js)) .copy [data-about-name] {
+	:global(html:not(.js)) .name {
 		color: var(--color-text-100);
 	}
 
-	:global(html:not(.js)) .copy [data-about-role] {
+	:global(html:not(.js)) .role {
 		color: var(--color-text-200);
 	}
 
@@ -232,7 +232,7 @@
 		padding: 3rem 2.5rem;
 	}
 
-	.copy [data-about-description] {
+	.description {
 		font-size: 1.25rem;
 		line-height: 2.25rem;
 	}

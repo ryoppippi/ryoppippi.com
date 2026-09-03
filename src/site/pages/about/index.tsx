@@ -1,6 +1,7 @@
 import { SITE_ORIGIN } from '../../consts.ts';
+import { SITE_OWNER } from '../../site-owner.ts';
 import ProfileImage from '../../components/ProfileImage/index.tsx';
-import styles from './Profile.module.css';
+import styles from './About.module.css';
 
 const links = [
 	['GitHub', `${SITE_ORIGIN}/github`],
@@ -11,17 +12,12 @@ const links = [
 	['CV', '/cv'],
 ] as const satisfies readonly (readonly [label: string, href: string])[];
 
-type ProfileProps = {
-	content: string;
-};
-
 /**
- * Renders the site owner's profile page around its colocated MDX content.
+ * Renders the site owner's profile page.
  *
- * @param props - Rendered MDX content for the profile page.
  * @returns The profile page fragment.
  */
-export default function Profile(props: ProfileProps) {
+export default function About() {
 	return (
 		<article class={styles.page}>
 			<section class={styles.profileCard}>
@@ -45,7 +41,39 @@ export default function Profile(props: ProfileProps) {
 						</figure>
 					</div>
 					<div class={styles.copy}>
-						<div innerHTML={props.content} />
+						<h1 class={styles.heading}>ryoppippi</h1>
+						<p class={styles.kicker}>
+							<em>... coder without ai</em>
+						</p>
+						<p class={styles.description}>
+							<strong class={styles.name}>{SITE_OWNER.handle.slice(1)}</strong>{' '}
+							<span class={styles.alias}>
+								({SITE_OWNER.name} / <span lang="ja">{SITE_OWNER.japaneseName}</span>)
+							</span>{' '}
+							builds coding agents, developer tools, and human-centred AI products. Maintains{' '}
+							<a
+								class={styles.inlineLink}
+								href="https://ccusage.com/gh"
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								ccusage
+							</a>{' '}
+							and{' '}
+							<a class={styles.inlineLink} href="/works/oss/">
+								multiple OSS projects
+							</a>
+							. <span class={styles.role}>Founding Engineer</span> at{' '}
+							<a
+								class={styles.inlineLink}
+								href="https://rork.com/"
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								Rork
+							</a>
+							.
+						</p>
 						<ul class={styles.links}>
 							{links.map(([label, href]) => (
 								<li class={styles.linkItem}>
