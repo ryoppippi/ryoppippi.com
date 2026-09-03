@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import Sponsors from './index.tsx';
 
 /**
@@ -13,7 +13,7 @@ export function sponsorsPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'sponsors/index.html',
 		sourcePaths: ['src/site/pages/sponsors'],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Sponsors',
 			pathname: '/sponsors/',
 			content: renderComponent(Sponsors, {}),

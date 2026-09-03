@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '@/site/consts.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import Home from './index.tsx';
@@ -60,7 +60,7 @@ export function homePage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'index.html',
 		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/site/pages/home'],
-		content: page({
+		content: renderHtmlDocument({
 			title: '',
 			pathname: '/',
 			content: renderComponent(Home, {}),

@@ -1,6 +1,6 @@
-import styles from './Shell.module.css';
+import styles from './SiteLayout.module.css';
 
-type ShellProps = {
+type SiteLayoutProps = {
 	content: string;
 	pathname: string;
 };
@@ -11,7 +11,7 @@ type NavigationLink = {
 	label: string;
 };
 
-const links = [
+const navigationLinks = [
 	{ href: '/about/', label: 'about' },
 	{ href: '/works/oss/', label: 'works', activePrefix: '/works/' },
 	{ href: '/sponsors/', label: 'sponsors' },
@@ -22,9 +22,9 @@ const links = [
  * Renders the shared site navigation around a page body.
  *
  * @param props - Rendered page content and current pathname.
- * @returns The shared page shell.
+ * @returns The shared site layout.
  */
-export default function Shell({ content, pathname }: ShellProps) {
+export default function SiteLayout({ content, pathname }: SiteLayoutProps) {
 	const isHome = pathname === '/';
 
 	return (
@@ -34,7 +34,7 @@ export default function Shell({ content, pathname }: ShellProps) {
 					Skip to content
 				</a>
 			</span>
-			<div class={styles.siteFrame}>
+			<div class={styles.siteLayout}>
 				<header class={styles.siteHeader}>
 					<div
 						data-nosnippet
@@ -48,7 +48,7 @@ export default function Shell({ content, pathname }: ShellProps) {
 					</div>
 					<nav class={styles.siteNavigation} aria-label="Primary navigation">
 						<div data-nosnippet class={styles.siteNavigationLinks}>
-							{links.map((link) => {
+							{navigationLinks.map((link) => {
 								const active = pathname.startsWith(
 									'activePrefix' in link ? link.activePrefix : link.href,
 								);

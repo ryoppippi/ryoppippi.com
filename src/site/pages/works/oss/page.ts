@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import type { OssProject } from '@/site/sections.ts';
 import Oss from './index.tsx';
 
@@ -17,12 +17,12 @@ export function ossPage(projects: OssProject[], assets: SiteAssets): GeneratedFi
 		sourcePaths: [
 			'src/site/sections.ts',
 			'src/site/pages/works/_components',
-			'src/site/pages/works/page.css',
+			'src/site/pages/works/WorksProse.css',
 			'src/site/pages/works/oss',
 			'src/contents/works/oss/list.json',
 			'src/contents/works/oss/stars.json',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Open-source projects',
 			pathname: '/works/oss/',
 			content: renderComponent(Oss, { projects }),

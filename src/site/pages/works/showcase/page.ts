@@ -1,7 +1,7 @@
 import type { ShowcaseProject } from '@/content/index.ts';
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import Showcase from './index.tsx';
 
 /**
@@ -16,12 +16,12 @@ export function showcasePage(projects: ShowcaseProject[], assets: SiteAssets): G
 		path: 'works/showcase/index.html',
 		sourcePaths: [
 			'src/site/pages/works/_components',
-			'src/site/pages/works/page.css',
+			'src/site/pages/works/WorksProse.css',
 			'src/site/pages/works/showcase',
 			'src/content/showcase.ts',
 			'src/content/showcase',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Project showcase',
 			pathname: '/works/showcase/',
 			content: renderComponent(Showcase, { projects }),

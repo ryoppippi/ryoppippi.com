@@ -27,7 +27,7 @@ async function readSiteAssets(outDir: string): Promise<SiteAssets> {
 	const assets = resolveSiteAssets(index, manifest);
 	const baseFiles = [
 		...manifestCssFiles(manifest, 'index.html'),
-		...manifestCssFiles(manifest, 'src/site/components/Shell/Shell.module.css'),
+		...manifestCssFiles(manifest, 'src/site/components/SiteLayout/SiteLayout.module.css'),
 	];
 	const homeFiles = manifestCssFiles(manifest, 'src/site/pages/home/Home.module.css');
 	if (baseFiles.length === 0 || homeFiles.length === 0) {

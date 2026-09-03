@@ -1,4 +1,4 @@
-import { PAGE_STYLES, type PageStyle } from './page-style.ts';
+import { PAGE_STYLES, type PageStyle } from './page-style-registry.ts';
 
 type PageStyleLoader = () => Promise<unknown>;
 type PageStyleLoaders = Record<PageStyle, PageStyleLoader>;
@@ -7,7 +7,7 @@ const pageStyleLoaders = {
 	about: () => import('./pages/about/About.module.css'),
 	article: () =>
 		Promise.all([
-			import('./pages/blog/article/page.css'),
+			import('./pages/blog/article/ArticleContent.css'),
 			import('./pages/blog/article/Article.module.css'),
 		]),
 	blog: () => import('./pages/blog/BlogList.module.css'),
@@ -16,7 +16,7 @@ const pageStyleLoaders = {
 	sponsors: () => import('./pages/sponsors/Sponsors.module.css'),
 	works: () =>
 		Promise.all([
-			import('./pages/works/page.css'),
+			import('./pages/works/WorksProse.css'),
 			import('./pages/works/_components/WorksNav/WorksNav.module.css'),
 			import('./pages/works/_components/WorksSection/WorksSection.module.css'),
 			import('./pages/works/media/Media.module.css'),

@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import { SITE_ORIGIN } from '@/site/consts.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import About from './index.tsx';
@@ -22,7 +22,7 @@ export function aboutPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: 'about/index.html',
 		sourcePaths: ['src/site/site-owner.ts', 'src/site/pages/about'],
-		content: page({
+		content: renderHtmlDocument({
 			title: ABOUT_TITLE,
 			pathname: ABOUT_PATHNAME,
 			content: renderComponent(About, {}),

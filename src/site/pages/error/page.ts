@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import ErrorPage from './index.tsx';
 
 /**
@@ -13,7 +13,7 @@ export function errorPage(assets: SiteAssets): GeneratedFile {
 	return {
 		path: '404.html',
 		sourcePaths: ['src/site/pages/error'],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Page not found',
 			pathname: '/404',
 			content: renderComponent(ErrorPage, {}),

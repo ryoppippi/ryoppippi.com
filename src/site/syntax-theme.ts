@@ -2,7 +2,7 @@ import { renderThemeTokenCss, type ThemeTokenSource } from '@ox-content/vite-plu
 import type { Plugin } from 'vite';
 
 /**
- * Renders the syntax tokens from an Ox Content color theme for a custom site shell.
+ * Renders the syntax tokens from an Ox Content color theme for the custom site design.
  *
  * @param theme - An Ox Content theme containing light and dark syntax tokens.
  * @returns CSS variables matching the theme switch contract used by Ox Content.

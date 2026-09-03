@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import type { Talk } from '@/site/sections.ts';
 import Talks from './index.tsx';
 
@@ -17,10 +17,10 @@ export function talksPage(talks: Talk[], assets: SiteAssets): GeneratedFile {
 		sourcePaths: [
 			'src/site/sections.ts',
 			'src/site/pages/works/_components',
-			'src/site/pages/works/page.css',
+			'src/site/pages/works/WorksProse.css',
 			'src/site/pages/works/talks',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Talks',
 			pathname: '/works/talks/',
 			content: renderComponent(Talks, { talks }),

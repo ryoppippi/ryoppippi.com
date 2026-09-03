@@ -4,7 +4,7 @@ export type RedirectRoute = {
 	status?: 301;
 };
 
-export const Route = [
+export const REDIRECT_ROUTES = [
 	{ from: '/dotfiles', to: 'https://github.com/ryoppippi/dotfiles' },
 	{ from: '/cv', to: 'https://cv.ryoppippi.com' },
 	{ from: '/icon', to: '/ryoppippi.jpg' },

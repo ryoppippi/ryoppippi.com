@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { PostListItem } from '@/site/content.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import BlogList from './index.tsx';
 
 /**
@@ -22,7 +22,7 @@ export function blogListPage(items: PostListItem[], assets: SiteAssets): Generat
 			'src/contents/external-rss/rss.json',
 			'src/contents/external-rss/posts.json',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Blog',
 			pathname: '/blog/',
 			content: renderComponent(BlogList, { items: sorted }),

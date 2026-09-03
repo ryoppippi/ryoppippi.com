@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import Publications from './index.tsx';
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
@@ -21,11 +21,11 @@ export function publicationsPage(
 		sourcePaths: [
 			'src/site/sections.ts',
 			'src/site/pages/works/_components',
-			'src/site/pages/works/page.css',
+			'src/site/pages/works/WorksProse.css',
 			'src/site/pages/works/publications',
 			'src/contents/publication.json',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Publications',
 			pathname: '/works/publications/',
 			content: renderComponent(Publications, { publications }),

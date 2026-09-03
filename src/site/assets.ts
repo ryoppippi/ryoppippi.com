@@ -1,7 +1,7 @@
 import { OX_CONTENT_ASSET_MANIFEST } from './ox-content.ts';
-import { type PageStyle } from './page-style.ts';
+import { type PageStyle } from './page-style-registry.ts';
 
-export type { PageStyle } from './page-style.ts';
+export type { PageStyle } from './page-style-registry.ts';
 
 export type SiteAssets = {
 	base: string;
@@ -19,7 +19,7 @@ export type SiteAssets = {
 	 * that share a chunk, and the duplicates have to be dropped at render time.
 	 */
 	islands: Record<string, string[]>;
-	pages: Record<PageStyle, string>;
+	pageStyles: Record<PageStyle, string>;
 };
 
 // In development the client entry also imports the site stylesheets as JS
@@ -30,14 +30,14 @@ export type SiteAssets = {
 export const DEV_ASSETS = {
 	base: [
 		'<link rel="stylesheet" href="/src/site/style.css">',
-		'<link rel="stylesheet" href="/src/site/components/Shell/Shell.module.css">',
+		'<link rel="stylesheet" href="/src/site/components/SiteLayout/SiteLayout.module.css">',
 	].join('\n'),
 	client: '<script type="module" src="/src/site/client.ts"></script>',
 	oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
-	pages: {
+	pageStyles: {
 		about: '<link rel="stylesheet" href="/src/site/pages/about/About.module.css">',
 		article: [
-			'<link rel="stylesheet" href="/src/site/pages/blog/article/page.css">',
+			'<link rel="stylesheet" href="/src/site/pages/blog/article/ArticleContent.css">',
 			'<link rel="stylesheet" href="/src/site/pages/blog/article/Article.module.css">',
 		].join('\n'),
 		blog: '<link rel="stylesheet" href="/src/site/pages/blog/BlogList.module.css">',
@@ -45,7 +45,7 @@ export const DEV_ASSETS = {
 		home: '<link rel="stylesheet" href="/src/site/pages/home/Home.module.css">',
 		sponsors: '<link rel="stylesheet" href="/src/site/pages/sponsors/Sponsors.module.css">',
 		works: [
-			'<link rel="stylesheet" href="/src/site/pages/works/page.css">',
+			'<link rel="stylesheet" href="/src/site/pages/works/WorksProse.css">',
 			'<link rel="stylesheet" href="/src/site/pages/works/_components/WorksNav/WorksNav.module.css">',
 			'<link rel="stylesheet" href="/src/site/pages/works/_components/WorksSection/WorksSection.module.css">',
 			'<link rel="stylesheet" href="/src/site/pages/works/media/Media.module.css">',
@@ -128,7 +128,7 @@ export function resolveSiteAssets(
 	};
 	const stylesForAll = (suffixes: readonly string[]): string =>
 		suffixes.map((suffix) => stylesFor(suffix)).join('\n\t');
-	const base = [indexStyles, stylesFor('/components/Shell/Shell.module.css')]
+	const base = [indexStyles, stylesFor('/components/SiteLayout/SiteLayout.module.css')]
 		.filter(Boolean)
 		.join('\n\t');
 	const islands = Object.fromEntries(
@@ -145,10 +145,10 @@ export function resolveSiteAssets(
 		client,
 		oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 		islands,
-		pages: {
+		pageStyles: {
 			about: stylesFor('/pages/about/About.module.css'),
 			article: stylesForAll([
-				'/pages/blog/article/page.css',
+				'/pages/blog/article/ArticleContent.css',
 				'/pages/blog/article/Article.module.css',
 			]),
 			blog: stylesFor('/pages/blog/BlogList.module.css'),
@@ -156,7 +156,7 @@ export function resolveSiteAssets(
 			home: stylesFor('/pages/home/Home.module.css'),
 			sponsors: stylesFor('/pages/sponsors/Sponsors.module.css'),
 			works: stylesForAll([
-				'/pages/works/page.css',
+				'/pages/works/WorksProse.css',
 				'/pages/works/_components/WorksNav/WorksNav.module.css',
 				'/pages/works/_components/WorksSection/WorksSection.module.css',
 				'/pages/works/media/Media.module.css',
@@ -211,7 +211,7 @@ export function renderAssetTags(
 	return [
 		assets.oxContent,
 		inline?.base ?? assets.base,
-		inline?.page ?? assets.pages[style],
+		inline?.page ?? assets.pageStyles[style],
 		renderIslandStyles(assets, islands),
 		assets.client,
 	]
@@ -229,7 +229,7 @@ if (import.meta.vitest != null) {
 			'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 			'post/Table.tsx': ['assets/Legend.css'],
 		},
-		pages: {
+		pageStyles: {
 			about: '<link href="/about-page.css">',
 			article: '<link href="/article.css">',
 			blog: '<link href="/blog.css">',
@@ -245,13 +245,13 @@ if (import.meta.vitest != null) {
 			const result = resolveSiteAssets(
 				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
 				{
-					'src/site/components/Shell/Shell.module.css': {
-						file: 'assets/shell.css',
+					'src/site/components/SiteLayout/SiteLayout.module.css': {
+						file: 'assets/site-layout.css',
 					},
 					'src/site/pages/about/About.module.css': {
 						file: 'assets/about-page.css',
 					},
-					'src/site/pages/blog/article/page.css': {
+					'src/site/pages/blog/article/ArticleContent.css': {
 						file: 'assets/article-global.css',
 					},
 					'src/site/pages/blog/article/Article.module.css': {
@@ -269,7 +269,7 @@ if (import.meta.vitest != null) {
 					'src/site/pages/sponsors/Sponsors.module.css': {
 						file: 'assets/sponsors.css',
 					},
-					'src/site/pages/works/page.css': {
+					'src/site/pages/works/WorksProse.css': {
 						file: 'assets/works-global.css',
 					},
 					'src/site/pages/works/_components/WorksNav/WorksNav.module.css': {
@@ -306,13 +306,13 @@ if (import.meta.vitest != null) {
 			);
 
 			expect(result).toEqual({
-				base: '<link rel="stylesheet" href="/base.css">\n\t<link rel="stylesheet" crossorigin href="/assets/shell.css">',
+				base: '<link rel="stylesheet" href="/base.css">\n\t<link rel="stylesheet" crossorigin href="/assets/site-layout.css">',
 				client: '<script type="module" src="/client.js"></script>',
 				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
 					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
 				},
-				pages: {
+				pageStyles: {
 					about: '<link rel="stylesheet" crossorigin href="/assets/about-page.css">',
 					article:
 						'<link rel="stylesheet" crossorigin href="/assets/article-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/article.css">',

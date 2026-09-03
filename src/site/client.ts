@@ -9,15 +9,15 @@ import {
 	missingPageStyles,
 	needsInitialPageStyle,
 	obsoletePageStyles,
-} from './page-styles.ts';
+} from './page-style-loader.ts';
 import { hashTargetId } from './navigation.ts';
 import './style.css';
 
-// Shell is rendered only by the SSG, so this dynamic entry exposes its CSS to
+// SiteLayout is rendered only by the SSG, so this dynamic entry exposes its CSS to
 // the manifest used to generate a blocking stylesheet link.
-void import('./components/Shell/Shell.module.css');
+void import('./components/SiteLayout/SiteLayout.module.css');
 
-function initialiseDarkMode(): void {
+function initialiseThemeToggle(): void {
 	const target = document.querySelector<HTMLElement>('[data-dark-mode]');
 	if (target == null) {
 		return;
@@ -52,7 +52,7 @@ function initialiseDarkMode(): void {
 	render();
 }
 
-function initialiseFilters(): void {
+function initialiseBlogFilters(): void {
 	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-filter]')) {
 		button.addEventListener('click', () => {
 			const pressed = button.ariaPressed !== 'true';
@@ -107,7 +107,7 @@ function initialiseTalkFilter(): void {
 	});
 }
 
-function initialiseSponsors(): void {
+function initialiseSponsorViewToggle(): void {
 	const sponsorImage = document.querySelector<HTMLImageElement>('[data-sponsor-image]');
 	const button = document.querySelector<HTMLButtonElement>('[data-sponsor-view]');
 	const status = document.querySelector<HTMLElement>('#sponsor-view-status');
@@ -169,7 +169,7 @@ async function mountSolidIsland(
 	return render(() => Island(props), target);
 }
 
-function initialiseIslands(): void {
+function initialiseSolidIslands(): void {
 	islandController = initIslands((element, props) => {
 		const moduleId = element.dataset.oxIsland;
 		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
@@ -202,19 +202,19 @@ function initialiseIslands(): void {
 	});
 }
 
-function initialisePage(): void {
-	initialiseDarkMode();
-	initialiseFilters();
+function initialisePageInteractions(): void {
+	initialiseThemeToggle();
+	initialiseBlogFilters();
 	initialiseTalkFilter();
 	initialiseMediaFilter();
-	initialiseSponsors();
-	initialiseIslands();
+	initialiseSponsorViewToggle();
+	initialiseSolidIslands();
 	initReaderChrome(document);
 	initTweetCards(document);
 	enhanceMarkdownTables(document);
 }
 
-function destroyPage(): void {
+function destroyMountedIslands(): void {
 	islandController?.destroy();
 	islandController = undefined;
 }
@@ -231,7 +231,7 @@ const pageHeadSelector = [
 	'script[type="application/ld+json"]',
 ].join(',');
 
-function syncHead(next: Document): void {
+function synchroniseDocumentHead(next: Document): void {
 	document.title = next.title;
 	for (const element of document.head.querySelectorAll(pageHeadSelector)) {
 		element.remove();
@@ -241,7 +241,7 @@ function syncHead(next: Document): void {
 	}
 }
 
-let navigation: AbortController | undefined;
+let activeNavigationRequest: AbortController | undefined;
 
 function stylesheetLinks(target: Document): HTMLLinkElement[] {
 	return [...target.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
@@ -278,7 +278,7 @@ function removeObsoletePageStyles(next: Document): void {
 	}
 }
 
-function syncInlineStyles(next: Document): void {
+function synchroniseInlineStyles(next: Document): void {
 	for (const style of document.querySelectorAll(
 		'style[data-inline-base-style], style[data-inline-page-style]',
 	)) {
@@ -302,12 +302,12 @@ function scrollAfterNavigation(url: URL): void {
 	window.scrollTo({ top: 0 });
 }
 
-async function navigate(url: URL, push: boolean): Promise<void> {
-	navigation?.abort();
-	navigation = new AbortController();
+async function navigateWithinSite(url: URL, pushHistory: boolean): Promise<void> {
+	activeNavigationRequest?.abort();
+	activeNavigationRequest = new AbortController();
 	const response = await fetch(url, {
 		headers: { Accept: 'text/html' },
-		signal: navigation.signal,
+		signal: activeNavigationRequest.signal,
 	});
 	if (!response.ok || response.headers.get('content-type')?.includes('text/html') !== true) {
 		location.href = url.href;
@@ -319,26 +319,26 @@ async function navigate(url: URL, push: boolean): Promise<void> {
 		await loadPageStyle(next.body.dataset.pageStyle);
 	}
 	await loadLinkedPageStyles(next);
-	const update = () => {
-		destroyPage();
+	const applyNavigation = () => {
+		destroyMountedIslands();
 		removeObsoletePageStyles(next);
-		syncInlineStyles(next);
-		syncHead(next);
+		synchroniseInlineStyles(next);
+		synchroniseDocumentHead(next);
 		if (next.body.dataset.pageStyle === 'home') {
 			next.body.dataset.spaNavigation = 'true';
 		}
 		document.body.replaceWith(next.body);
-		if (push) {
+		if (pushHistory) {
 			history.pushState({}, '', url);
 		}
-		initialisePage();
+		initialisePageInteractions();
 		scrollAfterNavigation(url);
 	};
 
 	if (document.startViewTransition != null) {
-		document.startViewTransition(update);
+		document.startViewTransition(applyNavigation);
 	} else {
-		update();
+		applyNavigation();
 	}
 }
 
@@ -369,10 +369,10 @@ document.addEventListener('click', (event) => {
 		return;
 	}
 	event.preventDefault();
-	void navigate(url, true);
+	void navigateWithinSite(url, true);
 });
 
-window.addEventListener('popstate', () => void navigate(new URL(location.href), false));
+window.addEventListener('popstate', () => void navigateWithinSite(new URL(location.href), false));
 let markdownTableResizePending = false;
 window.addEventListener('resize', () => {
 	if (markdownTableResizePending) {
@@ -385,9 +385,11 @@ window.addEventListener('resize', () => {
 		enhanceMarkdownTables(document);
 	});
 });
-const initialStyle = document.body.dataset.pageStyle;
-const inlineStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')?.dataset
-	.inlinePageStyle;
+const initialPageStyle = document.body.dataset.pageStyle;
+const inlinedPageStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')
+	?.dataset.inlinePageStyle;
 void (
-	needsInitialPageStyle(initialStyle, inlineStyle) ? loadPageStyle(initialStyle) : Promise.resolve()
-).then(initialisePage);
+	needsInitialPageStyle(initialPageStyle, inlinedPageStyle)
+		? loadPageStyle(initialPageStyle)
+		: Promise.resolve()
+).then(initialisePageInteractions);

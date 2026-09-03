@@ -4,9 +4,9 @@ import type { StructuredData } from './head.ts';
 import { renderToString } from '@solidjs/web';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import Shell from './components/Shell/index.tsx';
+import SiteLayout from './components/SiteLayout/index.tsx';
 
-type PageOptions = {
+type HtmlDocumentOptions = {
 	article?: boolean;
 	alternates?: Readonly<Record<string, string>>;
 	assets: SiteAssets;
@@ -54,7 +54,7 @@ export function renderComponent<Props extends object>(
  * @param options - Document content, metadata, and assets.
  * @returns A complete HTML document.
  */
-export function page({
+export function renderHtmlDocument({
 	title,
 	pathname,
 	content,
@@ -68,9 +68,9 @@ export function page({
 	islands = [],
 	style,
 	structuredData,
-}: PageOptions): string {
+}: HtmlDocumentOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
-	const body = renderComponent(Shell, { content, pathname });
+	const body = renderComponent(SiteLayout, { content, pathname });
 	const head = renderPageHead({
 		article,
 		alternates,

@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/site/assets.ts';
 import type { PostListItem } from '@/site/content.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import Media from './index.tsx';
 
 /**
@@ -18,11 +18,11 @@ export function mediaPage(items: PostListItem[], assets: SiteAssets): GeneratedF
 		sourcePaths: [
 			'src/site/content.ts',
 			'src/site/pages/works/_components',
-			'src/site/pages/works/page.css',
+			'src/site/pages/works/WorksProse.css',
 			'src/site/pages/works/media',
 			'src/contents/external-rss/media.json',
 		],
-		content: page({
+		content: renderHtmlDocument({
 			title: 'Media',
 			pathname: '/works/media/',
 			content: renderComponent(Media, { items: sorted }),

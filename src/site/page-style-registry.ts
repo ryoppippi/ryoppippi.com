@@ -1,3 +1,4 @@
+/** Page-specific stylesheet groups supported by the site. */
 export const PAGE_STYLES = [
 	'about',
 	'article',
@@ -8,5 +9,5 @@ export const PAGE_STYLES = [
 	'works',
 ] as const;
 
-/** Page-specific stylesheet groups emitted by the site build. */
+/** Name of a page-specific stylesheet group emitted by the site build. */
 export type PageStyle = (typeof PAGE_STYLES)[number];

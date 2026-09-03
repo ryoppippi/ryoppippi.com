@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
-		syntaxThemeStylesheet('/src/site/pages/blog/article/page.css', kanagawaDragon),
+		syntaxThemeStylesheet('/src/site/pages/blog/article/ArticleContent.css', kanagawaDragon),
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
@@ -119,7 +119,7 @@ export default defineConfig(({ command, mode }) => ({
 					includeSource: [
 						'src/lib/**/*.ts',
 						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
-						'src/site/{generate,page-styles,syntax-theme}.ts',
+						'src/site/{generate,page-style-loader,syntax-theme}.ts',
 						'src/site/pages/**/*.ts',
 						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
 						'src/content/blog/**/*.ts',

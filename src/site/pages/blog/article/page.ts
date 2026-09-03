@@ -3,7 +3,7 @@ import { formatDate } from '@/lib/util.ts';
 import { islandModuleIds, type SiteAssets } from '@/site/assets.ts';
 import { SITE_ORIGIN } from '@/site/consts.ts';
 import type { GeneratedFile } from '@/site/generated-file.ts';
-import { page, renderComponent } from '@/site/html.ts';
+import { renderComponent, renderHtmlDocument } from '@/site/html.ts';
 import { SITE_OWNER } from '@/site/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
@@ -101,7 +101,7 @@ export function articlePages(post: BlogPost, assets: SiteAssets): GeneratedFile[
 		{
 			path: `blog/${post.filename}/index.html`,
 			sourcePaths: [SITE_OWNER_SOURCE_PATH, sourcePath],
-			content: page({
+			content: renderHtmlDocument({
 				title: `${post.title} | blog`,
 				pathname,
 				content,
@@ -126,7 +126,7 @@ if (import.meta.vitest != null) {
 		client: '',
 		islands: {},
 		oxContent: '',
-		pages: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		pageStyles: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
 	} as const satisfies SiteAssets;
 
 	const examplePost = {
