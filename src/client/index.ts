@@ -1,16 +1,10 @@
 import type { JSX } from '@solidjs/web';
-import { initIslands, type IslandController } from '@ox-content/islands';
+import { initIslands } from '@ox-content/islands';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
-import {
-	loadPageStyle,
-	missingPageStyles,
-	needsInitialPageStyle,
-	obsoletePageStyles,
-} from './page-style-loader.ts';
-import { hashTargetId } from './navigation.ts';
+import { loadPageStyle, needsInitialPageStyle } from './page-style-loader.ts';
 import '@/styles/global.css';
 
 // SiteLayout is rendered only by the SSG, so this dynamic entry exposes its CSS to
@@ -154,8 +148,6 @@ type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Elem
 // own chunk, so a post only downloads the islands it actually uses. The globs
 const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
 
-let islandController: IslandController | undefined;
-
 async function mountSolidIsland(
 	element: HTMLElement,
 	load: () => Promise<SolidIslandModule>,
@@ -170,7 +162,7 @@ async function mountSolidIsland(
 }
 
 function initialiseSolidIslands(): void {
-	islandController = initIslands((element, props) => {
+	initIslands((element, props) => {
 		const moduleId = element.dataset.oxIsland;
 		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
 		if (load == null) {
@@ -214,165 +206,6 @@ function initialisePageInteractions(): void {
 	enhanceMarkdownTables(document);
 }
 
-function destroyMountedIslands(): void {
-	islandController?.destroy();
-	islandController = undefined;
-}
-
-const pageHeadSelector = [
-	'meta[name="description"]',
-	'meta[name="robots"]',
-	'meta[name="Hatena::Bookmark"]',
-	'meta[name^="twitter:"]',
-	'meta[property^="og:"]',
-	'meta[property^="article:"]',
-	'link[rel="canonical"]',
-	'link[rel="alternate"][hreflang]',
-	'script[type="application/ld+json"]',
-].join(',');
-
-function synchroniseDocumentHead(next: Document): void {
-	document.title = next.title;
-	for (const element of document.head.querySelectorAll(pageHeadSelector)) {
-		element.remove();
-	}
-	for (const element of next.head.querySelectorAll(pageHeadSelector)) {
-		document.head.append(element.cloneNode(true));
-	}
-}
-
-let activeNavigationRequest: AbortController | undefined;
-
-function stylesheetLinks(target: Document): HTMLLinkElement[] {
-	return [...target.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
-}
-
-function stylesheetHrefs(target: Document): string[] {
-	return stylesheetLinks(target).map((link) => link.href);
-}
-
-async function loadLinkedPageStyles(next: Document): Promise<void> {
-	await Promise.all(
-		missingPageStyles(stylesheetHrefs(document), stylesheetHrefs(next)).map(
-			(href) =>
-				new Promise<void>((resolve, reject) => {
-					const link = document.createElement('link');
-					link.rel = 'stylesheet';
-					link.href = href;
-					link.addEventListener('load', () => resolve(), { once: true });
-					link.addEventListener('error', () => reject(new Error(`Failed to load ${href}`)), {
-						once: true,
-					});
-					document.head.append(link);
-				}),
-		),
-	);
-}
-
-function removeObsoletePageStyles(next: Document): void {
-	const obsolete = new Set(obsoletePageStyles(stylesheetHrefs(document), stylesheetHrefs(next)));
-	for (const link of stylesheetLinks(document)) {
-		if (obsolete.has(link.href)) {
-			link.remove();
-		}
-	}
-}
-
-function synchroniseInlineStyles(next: Document): void {
-	for (const style of document.querySelectorAll(
-		'style[data-inline-base-style], style[data-inline-page-style]',
-	)) {
-		style.remove();
-	}
-	for (const style of next.querySelectorAll(
-		'style[data-inline-base-style], style[data-inline-page-style]',
-	)) {
-		document.head.append(style.cloneNode(true));
-	}
-}
-
-function scrollAfterNavigation(url: URL): void {
-	const targetId = hashTargetId(url);
-	const target = targetId == null ? null : document.getElementById(targetId);
-	if (target != null) {
-		target.scrollIntoView();
-		return;
-	}
-
-	window.scrollTo({ top: 0 });
-}
-
-async function navigateWithinSite(url: URL, pushHistory: boolean): Promise<void> {
-	activeNavigationRequest?.abort();
-	activeNavigationRequest = new AbortController();
-	const response = await fetch(url, {
-		headers: { Accept: 'text/html' },
-		signal: activeNavigationRequest.signal,
-	});
-	if (!response.ok || response.headers.get('content-type')?.includes('text/html') !== true) {
-		location.href = url.href;
-		return;
-	}
-
-	const next = new DOMParser().parseFromString(await response.text(), 'text/html');
-	if (next.querySelector('style[data-inline-page-style]') == null) {
-		await loadPageStyle(next.body.dataset.pageStyle);
-	}
-	await loadLinkedPageStyles(next);
-	const applyNavigation = () => {
-		destroyMountedIslands();
-		removeObsoletePageStyles(next);
-		synchroniseInlineStyles(next);
-		synchroniseDocumentHead(next);
-		if (next.body.dataset.pageStyle === 'home') {
-			next.body.dataset.spaNavigation = 'true';
-		}
-		document.body.replaceWith(next.body);
-		if (pushHistory) {
-			history.pushState({}, '', url);
-		}
-		initialisePageInteractions();
-		scrollAfterNavigation(url);
-	};
-
-	if (document.startViewTransition != null) {
-		document.startViewTransition(applyNavigation);
-	} else {
-		applyNavigation();
-	}
-}
-
-document.addEventListener('click', (event) => {
-	if (
-		event.defaultPrevented ||
-		event.button !== 0 ||
-		event.metaKey ||
-		event.ctrlKey ||
-		event.shiftKey ||
-		event.altKey
-	) {
-		return;
-	}
-	const anchor = (event.target as Element).closest<HTMLAnchorElement>('a[href]');
-	if (anchor == null || anchor.target.length > 0 || anchor.hasAttribute('download')) {
-		return;
-	}
-	const url = new URL(anchor.href, location.href);
-	if (
-		url.origin !== location.origin ||
-		url.pathname.endsWith('.md') ||
-		url.pathname.endsWith('.xml')
-	) {
-		return;
-	}
-	if (url.pathname === location.pathname && url.search === location.search) {
-		return;
-	}
-	event.preventDefault();
-	void navigateWithinSite(url, true);
-});
-
-window.addEventListener('popstate', () => void navigateWithinSite(new URL(location.href), false));
 let markdownTableResizePending = false;
 window.addEventListener('resize', () => {
 	if (markdownTableResizePending) {

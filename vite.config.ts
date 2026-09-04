@@ -113,7 +113,7 @@ export default defineConfig(({ command, mode }) => ({
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
 						'vite-plugin.ts',
-						'src/client/{navigation,page-style-loader}.ts',
+						'src/client/page-style-loader.ts',
 						'src/contents/{external-content,works-data}.ts',
 						'src/dev-server/**/*.ts',
 						'src/generation/**/*.ts',

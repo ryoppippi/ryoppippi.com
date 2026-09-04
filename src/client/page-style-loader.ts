@@ -27,16 +27,6 @@ const pageStyleLoaders = {
 		]),
 } satisfies PageStyleLoaders;
 
-export function missingPageStyles(current: readonly string[], next: readonly string[]): string[] {
-	const loaded = new Set(current);
-	return next.filter((href) => !loaded.has(href));
-}
-
-export function obsoletePageStyles(current: readonly string[], next: readonly string[]): string[] {
-	const required = new Set(next);
-	return current.filter((href) => !required.has(href));
-}
-
 export function needsInitialPageStyle(
 	style: string | undefined,
 	inlineStyle: string | undefined,
@@ -59,28 +49,6 @@ export async function loadPageStyle(
 }
 
 if (import.meta.vitest != null) {
-	describe(missingPageStyles, () => {
-		it('returns only stylesheets not already loaded by the document', () => {
-			expect(
-				missingPageStyles(
-					['/assets/base.css', '/assets/article.css'],
-					['/assets/base.css', '/assets/article.css', '/assets/Chart.css'],
-				),
-			).toEqual(['/assets/Chart.css']);
-		});
-	});
-
-	describe(obsoletePageStyles, () => {
-		it('returns stylesheets that the next document does not use', () => {
-			expect(
-				obsoletePageStyles(
-					['/assets/base.css', '/assets/home.css', '/assets/blog.css'],
-					['/assets/base.css', '/assets/blog.css'],
-				),
-			).toEqual(['/assets/home.css']);
-		});
-	});
-
 	describe(needsInitialPageStyle, () => {
 		it('skips a page style already inlined by the static document', () => {
 			expect(needsInitialPageStyle('home', 'home')).toBe(false);
