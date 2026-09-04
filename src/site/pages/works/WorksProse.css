@@ -1,3 +1,0 @@
-/* Rendered Markdown is raw HTML, so its shared content styles must remain global. */
-@import '../../../styles/prose-theme.css';
-@import '../../../styles/blog/prose.css';

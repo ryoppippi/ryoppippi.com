@@ -4,10 +4,8 @@ import solid from '@solidjs/vite-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import { staticSiteBuild } from './src/site/build-plugin.ts';
-import { staticSiteDevServer } from './src/site/dev-server.ts';
-import { OX_CONTENT_BUILD_OPTIONS } from './src/site/ox-content.ts';
-import { syntaxThemeStylesheet } from './src/site/syntax-theme.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
+import { createStaticSitePlugin, createSyntaxThemeStylesheetPlugin } from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	publicDir: 'static',
@@ -21,7 +19,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
-		syntaxThemeStylesheet('/src/site/pages/blog/article/ArticleContent.css', kanagawaDragon),
+		createSyntaxThemeStylesheetPlugin('/src/pages/blog/article/ArticleContent.css', kanagawaDragon),
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
@@ -33,8 +31,7 @@ export default defineConfig(({ command, mode }) => ({
 						? OX_CONTENT_BUILD_OPTIONS.ssg
 						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
-		staticSiteBuild(),
-		staticSiteDevServer(),
+		createStaticSitePlugin(),
 	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
@@ -57,7 +54,6 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
-					'scripts/**',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'static/**',
@@ -117,10 +113,14 @@ export default defineConfig(({ command, mode }) => ({
 					environment: 'node',
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
+						'vite-plugin.ts',
+						'src/client/{navigation,page-style-loader}.ts',
+						'src/contents/{external-content,works-data}.ts',
+						'src/dev-server/**/*.ts',
+						'src/generation/**/*.ts',
 						'src/lib/**/*.ts',
-						'src/site/{assets,content-assets,dev-routes,dev-server}.ts',
-						'src/site/{generate,page-style-loader,syntax-theme}.ts',
-						'src/site/pages/**/*.ts',
+						'src/pages/**/*.ts',
+						'src/rendering/site-assets.ts',
 						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
 						'src/content/blog/**/*.ts',
 						'src/content/markdown/**/*.ts',
