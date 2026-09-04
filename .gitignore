@@ -18,6 +18,7 @@ vite.config.ts.timestamp-*
 /static/_redirects
 /src/lib/assets/favicons.html
 /.vite-inspect
+/.vite-hooks/
 /.eslintrc-components.json
 
 # Generated local agent skills
