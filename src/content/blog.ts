@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { matter } from 'gray-matter-es';
-import readingTime from 'reading-time';
+import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown/render.ts';
 import { resolvePostIslands } from './islands.ts';
@@ -41,7 +41,8 @@ export type BlogPost = ArticleMetadata & {
 	pubDate: string;
 	lang: string;
 	isPublished: boolean;
-	readingTime: ReturnType<typeof readingTime>;
+	/** Estimated reading duration in minutes, using Ox Content's CJK-aware estimator. */
+	readingTime: number;
 };
 
 /**
@@ -165,36 +166,41 @@ export async function loadBlogPost(
 		pubDate: new Date(String(data.date)).toJSON(),
 		lang: typeof data.lang === 'string' ? data.lang : 'ja',
 		isPublished: data.isPublished === true,
-		readingTime: readingTime(content),
+		readingTime: readingTimeMinutes(content),
 	} satisfies BlogPost;
 }
 
 /**
- * Loads article frontmatter without rendering article HTML.
+ * Loads collection metadata and reading minutes without rendering article HTML.
  *
  * @param directory - Blog source directory.
+ * @param entries - Optional collection entries supplied by a host or fixture.
  * @returns Metadata sorted from newest publication date to oldest.
  */
 export async function loadBlogPostMetadata(
 	directory = blogDirectory(),
+	entries?: readonly CollectionEntry[],
 ): Promise<BlogPostMetadata[]> {
-	const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
-	const posts = await Promise.all(
-		files.map(async (filepath) => {
-			const source = await readFile(filepath, 'utf8');
-			const { data, content } = matter(source);
-			return {
-				...parseArticleMetadata(data),
-				title: String(data.title),
-				filename: filenameFor(filepath),
-				filepath,
-				pubDate: new Date(String(data.date)).toJSON(),
-				lang: typeof data.lang === 'string' ? data.lang : 'ja',
-				isPublished: data.isPublished === true,
-				readingTime: readingTime(content),
-			} satisfies BlogPostMetadata;
-		}),
-	);
+	const collection =
+		entries ??
+		(await (await import('virtual:ox-content/collections')).queryCollection('blog').all());
+	const posts = collection.map((entry) => {
+		if (entry.body == null) {
+			throw new Error(`Blog collection must include body for reading time: ${entry.source}`);
+		}
+		const data = entry.frontmatter;
+		const filepath = path.join(directory, entry.source);
+		return {
+			...parseArticleMetadata(data),
+			title: String(data.title),
+			filename: filenameFor(filepath),
+			filepath,
+			pubDate: new Date(String(data.date)).toJSON(),
+			lang: typeof data.lang === 'string' ? data.lang : 'ja',
+			isPublished: data.isPublished === true,
+			readingTime: readingTimeMinutes(entry.body),
+		} satisfies BlogPostMetadata;
+	});
 
 	return posts.sort((a, b) => b.pubDate.localeCompare(a.pubDate));
 }
@@ -226,7 +232,7 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
 				isPublished: data.isPublished === true,
-				readingTime: readingTime(content),
+				readingTime: readingTimeMinutes(content),
 			} satisfies BlogPost;
 		}),
 	);
@@ -236,6 +242,59 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 
 if (import.meta.vitest != null) {
 	describe('blog loaders', () => {
+		it('preserves metadata for every configured source through the collection', async () => {
+			const directory = blogDirectory();
+			const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
+			const expected = await Promise.all(
+				files.map(async (filepath) => {
+					const { data, content } = matter(await readFile(filepath, 'utf8'));
+					return {
+						...parseArticleMetadata(data),
+						title: String(data.title),
+						filename: filenameFor(filepath),
+						filepath,
+						pubDate: new Date(String(data.date)).toJSON(),
+						lang: typeof data.lang === 'string' ? data.lang : 'ja',
+						isPublished: data.isPublished === true,
+						readingTime: readingTimeMinutes(content),
+					};
+				}),
+			);
+
+			const actual = await loadBlogPostMetadata();
+			expect(actual.map((post) => post.pubDate)).toEqual(
+				expected.map((post) => post.pubDate).sort((a, b) => b.localeCompare(a)),
+			);
+			// Filesystem traversal and collection order need not agree for same-day posts.
+			expect(actual.toSorted((a, b) => a.filename.localeCompare(b.filename))).toEqual(
+				expected.toSorted((a, b) => a.filename.localeCompare(b.filename)),
+			);
+		});
+
+		it('uses the same CJK reading minutes for metadata and rendered articles', async () => {
+			const { createFixture } = await import('fs-fixture');
+			await using fixture = await createFixture({
+				'article.md': `---\ntitle: Article\ndate: 2026-06-22\nisPublished: true\n---\n${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
+			});
+			const metadata = await loadBlogPostMetadata(fixture.getPath(), [
+				{
+					id: 'article',
+					collection: 'blog',
+					path: '/article',
+					stem: 'article',
+					source: 'article.md',
+					extension: '.md',
+					title: 'Article',
+					frontmatter: { title: 'Article', date: '2026-06-22', isPublished: true },
+					body: `${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
+				},
+			]);
+			const post = await loadBlogPost('article', async (content) => content, fixture.getPath());
+
+			expect(metadata[0]?.readingTime).toBe(2);
+			expect(post?.readingTime).toBe(2);
+		});
+
 		it('keeps one central Tweet snapshot for every embedded post', async () => {
 			const directory = blogDirectory();
 			const cacheDirectory = path.resolve(
@@ -346,7 +405,19 @@ if (import.meta.vitest != null) {
 				].join('\n'),
 			});
 
-			const posts = await loadBlogPostMetadata(fixture.getPath());
+			const posts = await loadBlogPostMetadata(fixture.getPath(), [
+				{
+					id: '2026-06-22',
+					collection: 'blog',
+					path: '/2026-06-22',
+					stem: '2026-06-22/index',
+					source: '2026-06-22/index.md',
+					extension: '.md',
+					title: 'Lazy content',
+					frontmatter: { title: 'Lazy content', date: '2026-06-22', isPublished: true, lang: 'en' },
+					body: 'Hello world',
+				},
+			]);
 
 			expect(posts).toEqual([
 				expect.objectContaining({

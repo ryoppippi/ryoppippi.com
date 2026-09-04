@@ -144,7 +144,7 @@ if (import.meta.vitest != null) {
 		image: '/assets/content/article-cover.avif',
 		lang: 'en',
 		isPublished: true,
-		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
+		readingTime: 1,
 	} satisfies BlogPost;
 
 	test('tracks the whole source directory for an index MDX article', () => {

@@ -7,7 +7,7 @@ import { BLOG_COLLECTION_PATTERNS, OX_CONTENT_BUILD_OPTIONS } from './ox-content
 describe('Ox Content build outputs', () => {
 	it('configures the blog RSS feed and Cloudflare redirects', () => {
 		expect(OX_CONTENT_BUILD_OPTIONS).toMatchObject({
-			collections: { blog: BLOG_COLLECTION_PATTERNS },
+			collections: { blog: { source: BLOG_COLLECTION_PATTERNS, include: ['body'] } },
 			feeds: {
 				collection: 'blog',
 				formats: ['rss'],
