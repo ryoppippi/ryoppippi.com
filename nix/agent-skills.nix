@@ -32,6 +32,11 @@ let
       structure = "link";
     };
   };
+  shellHook = agentLib.mkShellHook {
+    inherit pkgs bundle;
+    targets = localTargets;
+    quiet = true;
+  };
   installLocal = agentLib.mkLocalInstallScript {
     inherit pkgs bundle;
     targets = localTargets;
@@ -49,10 +54,10 @@ let
         echo "Remove it before syncing Nix-managed agent skills." >&2
         exit 1
       fi
-      exec skills-install-local "$@" >/dev/null
+      exec skills-install-local "$@"
     '';
   };
 in
 {
-  inherit bundle syncAgentSkills;
+  inherit bundle shellHook syncAgentSkills;
 }
