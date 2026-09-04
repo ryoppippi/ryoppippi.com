@@ -187,7 +187,7 @@ if (import.meta.vitest != null) {
 		pubDate: '2026-06-22T00:00:00.000Z',
 		lang: 'en',
 		isPublished: true,
-		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
+		readingTime: 1,
 	} satisfies BlogPostMetadata;
 
 	const post = {

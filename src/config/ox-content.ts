@@ -17,7 +17,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	budoux: true,
 	srcDir: 'src/content/blog',
 	outDir: 'build',
-	collections: { blog: BLOG_COLLECTION_PATTERNS },
+	collections: { blog: { source: BLOG_COLLECTION_PATTERNS, include: ['body'] } },
 	docs: false,
 	icons: {
 		include: ['src/**/*.{css,json,md,mdx,ts,tsx}'],

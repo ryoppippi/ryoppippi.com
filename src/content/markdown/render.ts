@@ -1,6 +1,6 @@
 import {
 	applyIslandSsrHtml,
-	renderMarkdown as renderOxMarkdown,
+	createMarkdownProcessor,
 	transformAllPlugins,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
@@ -83,6 +83,8 @@ const OX_MARKDOWN_OPTIONS = {
 	toc: false,
 } as const satisfies OxContentOptions;
 
+const markdownProcessor = createMarkdownProcessor(OX_MARKDOWN_OPTIONS);
+
 /**
  * Renders a post-colocated component to HTML so its island is present before
  * any JavaScript runs.
@@ -149,10 +151,9 @@ async function renderIslands(
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const islands = options.islands ?? {};
 	const mdx = options.mdx ?? Object.keys(islands).length > 0;
-	const transformed = await renderOxMarkdown(
+	const transformed = await markdownProcessor.render(
 		content,
 		`/virtual/article.${mdx ? 'mdx' : 'md'}`,
-		OX_MARKDOWN_OPTIONS,
 	);
 	const media = await transformAllPlugins(transformed.html, {
 		bluesky: true,
