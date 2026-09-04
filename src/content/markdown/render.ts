@@ -12,7 +12,7 @@ import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
 const twitterCacheDirectory = path.join(workspaceDirectory, '.cache/ox-content/twitter');
-const twitterMediaDirectory = path.join(workspaceDirectory, 'static/ox-content/twitter');
+const twitterMediaDirectory = path.join(workspaceDirectory, 'public/ox-content/twitter');
 
 const magicLinkAliases = {
 	'vim-jp': {

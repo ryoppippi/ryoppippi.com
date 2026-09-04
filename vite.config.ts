@@ -8,7 +8,6 @@ import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
 import { createStaticSitePlugin, createSyntaxThemeStylesheetPlugin } from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
-	publicDir: 'static',
 	envPrefix: ['PUBLIC_', 'VITE_'],
 	resolve: {
 		tsconfigPaths: true,
@@ -56,7 +55,7 @@ export default defineConfig(({ command, mode }) => ({
 					'vite.config.ts',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
-					'static/**',
+					'public/**',
 				],
 				output: ['build/**'],
 			},
@@ -73,7 +72,7 @@ export default defineConfig(({ command, mode }) => ({
 			'src/contents/**',
 			'src/content/blog/**',
 			'src/content/showcase/**',
-			'static/**',
+			'public/**',
 		],
 		singleQuote: true,
 		sortPackageJson: true,
@@ -90,7 +89,7 @@ export default defineConfig(({ command, mode }) => ({
 			'src/contents/**',
 			'src/content/blog/**',
 			'src/content/showcase/**',
-			'static/**',
+			'public/**',
 		],
 		options: {
 			typeAware: true,
