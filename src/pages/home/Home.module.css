@@ -138,10 +138,6 @@
 	}
 }
 
-:global(body[data-spa-navigation] [data-home-profile]) {
-	animation: none;
-}
-
 @keyframes home-role-pulse {
 	50% {
 		opacity: 0.5;
