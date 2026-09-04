@@ -15,7 +15,7 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .eslintcache
-/static/_redirects
+/public/_redirects
 /src/lib/assets/favicons.html
 /.vite-inspect
 /.vite-hooks/

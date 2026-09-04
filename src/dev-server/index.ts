@@ -345,7 +345,7 @@ if (import.meta.vitest != null) {
 		});
 
 		it('ignores client assets handled by Vite', () => {
-			expect(invalidatedRoutes('static/ryoppippi.jpg')).toBeNull();
+			expect(invalidatedRoutes('public/ryoppippi.jpg')).toBeNull();
 		});
 	});
 }
