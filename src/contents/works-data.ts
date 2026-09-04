@@ -74,9 +74,9 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 					? [...project.tags, primaryLanguage]
 					: project.tags;
 			let description = project.description ?? null;
-			if (description == null) {
+			if (description == null && repository != null) {
 				try {
-					const response = await fetch(`https://ungh.cc/repos/ryoppippi/${project.name}`);
+					const response = await fetch(`https://ungh.cc/repos/${repository}`);
 					if (response.ok) {
 						const data = (await response.json()) as {
 							repo?: { description?: string | null };
@@ -141,5 +141,31 @@ if (import.meta.vitest != null) {
 		expect(await loadOssProjects(fixture.getPath('.'))).toMatchObject([
 			{ tags: ['AI', 'CLI', 'Rust'], stars: 1 },
 		]);
+	});
+
+	test('loads a missing description from the linked GitHub repository', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+			new Response(JSON.stringify({ repo: { description: 'External project' } })),
+		);
+		await using fixture = await createFixture({
+			'src/contents/works/oss/list.json': JSON.stringify([
+				{
+					name: 'project',
+					link: 'https://github.com/example/project',
+					icon: 'icon',
+					tags: [],
+				},
+			]),
+			'src/contents/works/oss/stars.json': JSON.stringify({
+				updatedAt: '2026-08-25T00:00:00Z',
+				projects: [],
+			}),
+		});
+
+		expect(await loadOssProjects(fixture.getPath('.'))).toMatchObject([
+			{ description: 'External project' },
+		]);
+		expect(fetchSpy).toHaveBeenCalledWith('https://ungh.cc/repos/example/project');
 	});
 }

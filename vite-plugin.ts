@@ -21,6 +21,7 @@ async function runStaticSiteBuild(config: ResolvedConfig): Promise<void> {
 		appType: 'custom',
 		configFile: config.configFile ?? path.join(root, 'vite.config.ts'),
 		optimizeDeps: { noDiscovery: true },
+		root,
 		server: { middlewareMode: true },
 	});
 

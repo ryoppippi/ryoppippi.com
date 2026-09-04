@@ -35,7 +35,7 @@ export async function discoverSiteContentAssets(
 	showcaseDir: string,
 ): Promise<CollectionAssetInput[]> {
 	const [blogAssets, showcaseAssets] = await Promise.all([
-		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json'], {
+		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json', '!**/index.html'], {
 			cwd: blogDir,
 			onlyFiles: true,
 		}),
@@ -80,7 +80,12 @@ export async function planSiteContentAssets(root: string): Promise<CollectionAss
  */
 export function isSiteContentAssetSource(file: string): boolean {
 	if (isWithin(blogDirectory(), file)) {
-		return !file.endsWith('.md') && !file.endsWith('.mdx') && !file.endsWith('.generated.json');
+		return (
+			!file.endsWith('.md') &&
+			!file.endsWith('.mdx') &&
+			!file.endsWith('.generated.json') &&
+			path.basename(file) !== 'index.html'
+		);
 	}
 	if (isWithin(showcaseDirectory(), file)) {
 		return !file.endsWith('.md') && !file.endsWith('.mdx') && path.basename(file) !== 'index.ts';
@@ -135,7 +140,7 @@ export function rewriteContentAssetUrls(
 				}
 				const replacement = urls.get(resolved.pathname);
 				if (replacement != null) {
-					attribute.value = replacement;
+					attribute.value = `${replacement}${resolved.search}${resolved.hash}`;
 				}
 			}
 		}
@@ -156,6 +161,7 @@ if (import.meta.vitest != null) {
 			const { createFixture } = await import('fs-fixture');
 			await using fixture = await createFixture({
 				'blog/post/index.md': '# Post',
+				'blog/post/index.html': '<p>Generated elsewhere</p>',
 				'blog/post/component.mdx': '<Component />',
 				'blog/post/image one.png': 'image',
 				'showcase/project.md': '# Project',
@@ -210,6 +216,16 @@ if (import.meta.vitest != null) {
 
 			expect(rewritten).toContain('src="/assets/content/digest.png"');
 			expect(rewritten).toContain('href="https://example.com/image.png"');
+		});
+
+		it('preserves query strings and fragments on rewritten asset URLs', () => {
+			const rewritten = rewriteContentAssetUrls(
+				'<img src="./image.png?width=800#preview">',
+				'/blog/post/',
+				new Map([['/blog/post/image.png', '/assets/content/digest.png']]),
+			);
+
+			expect(rewritten).toContain('src="/assets/content/digest.png?width=800#preview"');
 		});
 	});
 }
