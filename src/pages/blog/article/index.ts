@@ -147,6 +147,12 @@ if (import.meta.vitest != null) {
 		readingTime: 1,
 	} satisfies BlogPost;
 
+	test('labels a zero-minute estimate as under a minute', () => {
+		const [article] = createArticlePageFiles({ ...examplePost, readingTime: 0 }, assets);
+		expect(article.content).toContain('Under a minute');
+		expect(article.content).not.toContain('0 min read');
+	});
+
 	test('tracks the whole source directory for an index MDX article', () => {
 		const [article] = createArticlePageFiles(
 			{ ...examplePost, filepath: '/content/example-article/index.mdx' },

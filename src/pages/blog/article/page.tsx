@@ -37,7 +37,7 @@ export default function ArticlePage({ date, pathname, post }: ArticlePageProps) 
 						{title}
 					</h1>
 					<p class={styles.articleMeta}>
-						{date} ・ {post.readingTime} min read ・{' '}
+						{date} ・ {post.readingTime < 1 ? 'Under a minute' : `${post.readingTime} min read`} ・{' '}
 						<a
 							class={styles.articleSourceLink}
 							aria-label="Markdown source"
