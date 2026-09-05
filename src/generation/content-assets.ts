@@ -4,11 +4,33 @@ import path from 'node:path';
 import { glob } from 'tinyglobby';
 import { blogDirectory, showcaseDirectory } from '@/content/paths.ts';
 
+const PUBLISHABLE_CONTENT_ASSET_EXTENSIONS = new Set([
+	'.avif',
+	'.gif',
+	'.ico',
+	'.jpeg',
+	'.jpg',
+	'.m4a',
+	'.mp3',
+	'.mp4',
+	'.ogg',
+	'.pdf',
+	'.png',
+	'.svg',
+	'.wav',
+	'.webm',
+	'.webp',
+]);
+
 function publicUrl(...parts: string[]): string {
 	return `/${parts
 		.flatMap((part) => part.split('/'))
 		.map(encodeURIComponent)
 		.join('/')}`;
+}
+
+function isPublishableContentAsset(file: string): boolean {
+	return PUBLISHABLE_CONTENT_ASSET_EXTENSIONS.has(path.extname(file).toLowerCase());
 }
 
 function isWithin(directory: string, file: string): boolean {
@@ -48,12 +70,13 @@ export async function discoverSiteContentAssets(
 	return [
 		...blogAssets
 			.filter((asset) => asset.includes('/'))
+			.filter(isPublishableContentAsset)
 			.filter((asset) => publishedPosts == null || publishedPosts.has(asset.split('/')[0]))
 			.map((asset) => ({
 				sourcePath: path.join(blogDir, asset),
 				publicPath: publicUrl('blog', asset),
 			})),
-		...showcaseAssets.map((asset) => ({
+		...showcaseAssets.filter(isPublishableContentAsset).map((asset) => ({
 			sourcePath: path.join(showcaseDir, asset),
 			publicPath: publicUrl('works', 'showcase', 'assets', asset),
 		})),
@@ -85,15 +108,10 @@ export async function planSiteContentAssets(
  */
 export function isSiteContentAssetSource(file: string): boolean {
 	if (isWithin(blogDirectory(), file)) {
-		return (
-			!file.endsWith('.md') &&
-			!file.endsWith('.mdx') &&
-			!file.endsWith('.generated.json') &&
-			path.basename(file) !== 'index.html'
-		);
+		return isPublishableContentAsset(file);
 	}
 	if (isWithin(showcaseDirectory(), file)) {
-		return !file.endsWith('.md') && !file.endsWith('.mdx') && path.basename(file) !== 'index.ts';
+		return isPublishableContentAsset(file);
 	}
 	return false;
 }
@@ -142,6 +160,9 @@ if (import.meta.vitest != null) {
 				'blog/post/index.md': '# Post',
 				'blog/post/index.html': '<p>Generated elsewhere</p>',
 				'blog/post/component.mdx': '<Component />',
+				'blog/post/component.tsx': 'export default () => null',
+				'blog/post/data.json': '{"private":true}',
+				'blog/post/styles.css': '.private {}',
 				'blog/post/image one.png': 'image',
 				'showcase/project.md': '# Project',
 				'showcase/project cover.jpg': 'cover',
