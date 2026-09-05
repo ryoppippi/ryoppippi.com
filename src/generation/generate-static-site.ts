@@ -112,7 +112,7 @@ export async function generateStaticSite({
 	];
 
 	await writeGeneratedFiles(outDir, pages);
-	await writeOxContentOutputFiles({ media: externalMedia, outDir, pages, root });
+	await writeOxContentOutputFiles({ posts, media: externalMedia, outDir, pages, root });
 
 	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [

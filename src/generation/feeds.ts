@@ -35,7 +35,7 @@ export const BLOG_FEED_OPTIONS = {
 
 function feedInput(channel: FeedChannelOptions, items: readonly FeedItemInput[]) {
 	return {
-		base: '/',
+		base: channel.path ?? '/',
 		items,
 		options: resolveFeedsOptions(channel),
 		siteName: SITE_NAME,
