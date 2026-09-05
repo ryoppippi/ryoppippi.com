@@ -173,7 +173,7 @@ export async function loadBlogPost(
 /**
  * Loads collection metadata and reading minutes without rendering article HTML.
  *
- * @param directory - Blog source directory.
+ * @param directory - Root for entry source paths; custom roots require explicit entries.
  * @param entries - Optional collection entries supplied by a host or fixture.
  * @returns Metadata sorted from newest publication date to oldest.
  */
@@ -181,6 +181,9 @@ export async function loadBlogPostMetadata(
 	directory = blogDirectory(),
 	entries?: readonly CollectionEntry[],
 ): Promise<BlogPostMetadata[]> {
+	if (entries == null && path.resolve(directory) !== blogDirectory()) {
+		throw new Error('A custom blog directory requires explicit collection entries');
+	}
 	const collection =
 		entries ??
 		(await (await import('virtual:ox-content/collections')).queryCollection('blog').all());
@@ -242,6 +245,11 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 
 if (import.meta.vitest != null) {
 	describe('blog loaders', () => {
+		it('rejects custom directories without their own collection entries', async () => {
+			await expect(loadBlogPostMetadata('/different-content')).rejects.toThrow(
+				'A custom blog directory requires explicit collection entries',
+			);
+		});
 		it('preserves metadata for every configured source through the collection', async () => {
 			const directory = blogDirectory();
 			const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
