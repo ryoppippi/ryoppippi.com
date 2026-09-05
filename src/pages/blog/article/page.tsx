@@ -26,7 +26,6 @@ export default function ArticlePage({ date, pathname, post }: ArticlePageProps) 
 
 	return (
 		<>
-			<link href={markdownPath} rel="alternate" title="Markdown source" type="text/plain" />
 			<div class={styles.articlePage}>
 				{!post.isPublished && (
 					<p class={styles.articleUnpublished}>This article is not published yet.</p>
