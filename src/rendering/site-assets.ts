@@ -74,7 +74,7 @@ export type ManifestChunk = {
 const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
 
 /**
- * Resolves production site assets from the Vite manifest without serializing page fragments.
+ * Resolves production site assets from the Vite manifest without serialising page fragments.
  *
  * @param manifest - Vite client build manifest.
  * @returns Structured shared, route, island, self-hosted, and client assets.
