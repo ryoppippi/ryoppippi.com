@@ -73,25 +73,6 @@ export type ManifestChunk = {
 /** Prefix every island module id carries in the Vite manifest. */
 const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
 
-/**
- * Reads the island module ids a rendered page mounts.
- *
- * @param html - Rendered page or post markup.
- * @returns Module ids as they appear on the island placeholders.
- * @example
- * islandModuleIds('<div data-ox-module="/src/content/blog/post/Chart.tsx"></div>');
- * // ['post/Chart.tsx']
- */
-export function islandModuleIds(html: string): string[] {
-	return [
-		...new Set(
-			[...html.matchAll(/data-ox-module="\/src\/content\/blog\/([^"]*)"/g)].map(
-				(match) => match[1],
-			),
-		),
-	];
-}
-
 export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): SiteAssets {
 	const entry = renderDocumentAssets({
 		manifest,
@@ -123,10 +104,7 @@ export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): Site
 				if (result.diagnostics.length > 0) {
 					throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 				}
-				return [
-					source.slice(ISLAND_SOURCE_PREFIX.length),
-					result.stylesheets.map(({ href }) => withoutLeadingSlash(href)),
-				];
+				return [`/${source}`, result.stylesheets.map(({ href }) => withoutLeadingSlash(href))];
 			}),
 	);
 
@@ -217,8 +195,8 @@ if (import.meta.vitest != null) {
 		oxContent:
 			'<link rel="stylesheet" href="/__ox_icons__/icons.css">\n<link rel="stylesheet" href="/__ox_fonts__/fonts.css">',
 		islands: {
-			'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
-			'post/Table.tsx': ['assets/Legend.css'],
+			'/src/content/blog/post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
+			'/src/content/blog/post/Table.tsx': ['assets/Legend.css'],
 		},
 		pageStyles: {
 			about: '<link href="/about-page.css">',
@@ -307,7 +285,7 @@ if (import.meta.vitest != null) {
 				client: '<script type="module" src="/client.js" crossorigin></script>',
 				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
-					'post/Chart.tsx': ['assets/Legend.css', 'assets/Chart.css'],
+					'/src/content/blog/post/Chart.tsx': ['assets/Legend.css', 'assets/Chart.css'],
 				},
 				pageStyles: {
 					about: '<link rel="stylesheet" href="/assets/about-page.css" crossorigin>',
@@ -330,7 +308,7 @@ if (import.meta.vitest != null) {
 			expect(renderAssetTags(assets, 'home')).not.toContain('/__ox_theme_tokens__/syntax.css');
 		});
 		it('links the styles of the islands the page mounts', () => {
-			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx']);
+			const tags = renderAssetTags(assets, 'article', ['/src/content/blog/post/Chart.tsx']);
 
 			expect(tags).toContain('<link rel="stylesheet" href="/assets/Chart.css" crossorigin>');
 			expect(tags).toContain('<link rel="stylesheet" href="/assets/Legend.css" crossorigin>');
@@ -341,27 +319,9 @@ if (import.meta.vitest != null) {
 		});
 
 		it('ignores an island with no styles of its own', () => {
-			expect(renderAssetTags(assets, 'article', ['post/Unknown.tsx'])).not.toContain('/assets/');
-		});
-	});
-
-	describe(islandModuleIds, () => {
-		it('reads the module ids off island placeholders', () => {
-			const html =
-				'<div data-ox-module="/src/content/blog/post/Chart.tsx"></div><div data-ox-module="/src/content/blog/post/Table.tsx"></div>';
-
-			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx', 'post/Table.tsx']);
-		});
-
-		it('reports a repeated island once', () => {
-			const html =
-				'<div data-ox-module="/src/content/blog/post/Chart.tsx"></div><div data-ox-module="/src/content/blog/post/Chart.tsx"></div>';
-
-			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx']);
-		});
-
-		it('returns nothing for markup without islands', () => {
-			expect(islandModuleIds('<p>plain</p>')).toEqual([]);
+			expect(
+				renderAssetTags(assets, 'article', ['/src/content/blog/post/Unknown.tsx']),
+			).not.toContain('/assets/');
 		});
 	});
 

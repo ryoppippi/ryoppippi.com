@@ -44,7 +44,7 @@ type MarkdownModule = {
 		options: NonNullable<Parameters<MarkdownRenderer>[1]> & {
 			renderIsland: IslandRenderer;
 		},
-	) => Promise<string>;
+	) => ReturnType<MarkdownRenderer>;
 };
 
 type DevRoutesModule = {
@@ -146,10 +146,7 @@ function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDepe
 		const { createIslandRenderer } = islands;
 		const renderIsland = createIslandRenderer(async (modulePath) => {
 			const module = await server.ssrLoadModule(modulePath);
-			assets.islands[modulePath.replace('/src/content/blog/', '')] = await islandStyleHrefs(
-				server,
-				modulePath,
-			);
+			assets.islands[modulePath] = await islandStyleHrefs(server, modulePath);
 			return module;
 		});
 		return markdown.renderMarkdown(content, { ...options, renderIsland });

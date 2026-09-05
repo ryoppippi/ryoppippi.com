@@ -201,6 +201,7 @@ if (import.meta.vitest != null) {
 		source: '---\ntitle: Lazy article\n---\n\n# Lazy article',
 		content: '# Lazy article',
 		html: '<h1>Rendered only on demand</h1>',
+		clientModules: [],
 	} satisfies BlogPost;
 
 	function createTestDependencies() {

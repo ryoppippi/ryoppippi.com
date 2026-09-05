@@ -24,7 +24,7 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 		if (result.diagnostics.length > 0) {
 			throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 		}
-		return result.html;
+		return { html: result.html, clientModules: result.clientModules };
 	};
 }
 
@@ -55,8 +55,11 @@ if (import.meta.vitest != null) {
 				default: () => ssr('<p>solid</p>'),
 			}));
 			const rendered = await renderIsland(html, islands);
-			expect(rendered).toContain('<p>solid</p>');
-			expect(rendered).toContain('data-ox-module="/src/content/blog/post/Chart.tsx"');
+			expect(rendered.html).toContain('<p>solid</p>');
+			expect(rendered.html).toContain('data-ox-module="/src/content/blog/post/Chart.tsx"');
+			expect(rendered.clientModules).toEqual([
+				{ name: 'Chart', moduleId: '/src/content/blog/post/Chart.tsx', exportName: 'default' },
+			]);
 		});
 	});
 }
