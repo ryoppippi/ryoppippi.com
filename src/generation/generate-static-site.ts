@@ -1,7 +1,7 @@
 import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { writeCollectionAssets } from '@ox-content/vite-plugin';
+import { rewriteCollectionAssetUrls, writeCollectionAssets } from '@ox-content/vite-plugin';
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import {
@@ -10,11 +10,7 @@ import {
 	fetchDotfilesReadme,
 	parseStepCommands,
 } from '@/lib/dotfiles.ts';
-import {
-	collectionAssetUrls,
-	planSiteContentAssets,
-	rewriteContentAssetUrls,
-} from './content-assets.ts';
+import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
 import {
 	loadExternalMedia,
 	loadExternalPosts,
@@ -78,12 +74,21 @@ export async function generateStaticSite({
 			loadTalks(),
 			fetchDotfilesReadme(fetch),
 		]);
-	const contentAssets = await planSiteContentAssets(root);
+	const contentAssets = await planSiteContentAssets(
+		root,
+		new Set(
+			localContent.posts.filter((post) => post.isPublished === true).map((post) => post.filename),
+		),
+	);
 	await writeCollectionAssets({ manifest: contentAssets, outDir });
 	const assetUrls = collectionAssetUrls(contentAssets);
 	const posts = localContent.posts.map((post) => ({
 		...post,
-		html: rewriteContentAssetUrls(post.html, `/blog/${post.filename}/`, assetUrls),
+		html: rewriteCollectionAssetUrls({
+			html: post.html,
+			pagePath: `/blog/${post.filename}/`,
+			manifest: contentAssets,
+		}).html,
 	}));
 	const showcase = localContent.showcase.map((project) => ({
 		...project,

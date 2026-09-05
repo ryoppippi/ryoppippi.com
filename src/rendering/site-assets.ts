@@ -1,3 +1,4 @@
+import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import { OX_CONTENT_ASSET_MANIFEST } from '@/config/ox-content.ts';
 import { type PageStyle } from '@/client/page-style-registry.ts';
 
@@ -68,34 +69,6 @@ export type ManifestChunk = {
 const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
 
 /**
- * Collects the stylesheets a chunk needs, including those of the chunks it
- * statically imports.
- *
- * An island's own `css` entry only covers its own `<style>` block, so a chart
- * built from child components would otherwise ship without their styles.
- */
-function chunkStyles(
-	manifest: Record<string, ManifestChunk>,
-	source: string,
-	seen = new Set<string>(),
-): string[] {
-	if (seen.has(source)) {
-		return [];
-	}
-	seen.add(source);
-
-	const chunk = manifest[source];
-	if (chunk == null) {
-		return [];
-	}
-
-	return [
-		...(chunk.css ?? []),
-		...(chunk.imports ?? []).flatMap((imported) => chunkStyles(manifest, imported, seen)),
-	];
-}
-
-/**
  * Reads the island module ids a rendered page mounts.
  *
  * @param html - Rendered page or post markup.
@@ -134,10 +107,16 @@ export function resolveSiteAssets(
 	const islands = Object.fromEntries(
 		Object.keys(manifest)
 			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.tsx'))
-			.map((source) => [
-				source.slice(ISLAND_SOURCE_PREFIX.length),
-				[...new Set(chunkStyles(manifest, source))],
-			]),
+			.map((source) => {
+				const result = resolveSolidIslandStylesheets({ modules: [source], manifest });
+				if (result.diagnostics.length > 0) {
+					throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
+				}
+				return [
+					source.slice(ISLAND_SOURCE_PREFIX.length),
+					result.stylesheets.map(({ href }) => href.replace(/^\//, '')),
+				];
+			}),
 	);
 
 	return {
@@ -241,6 +220,14 @@ if (import.meta.vitest != null) {
 	} as const satisfies SiteAssets;
 
 	describe(resolveSiteAssets, () => {
+		it('rejects unresolved island stylesheet dependencies', () => {
+			expect(() =>
+				resolveSiteAssets('', {
+					'src/components/SiteLayout/SiteLayout.module.css': { file: 'layout.css' },
+					'src/content/blog/post/Chart.tsx': { file: 'chart.js', imports: ['missing-dependency'] },
+				}),
+			).toThrow('missing-dependency');
+		});
 		it('separates base and page assets from the Vite manifest', () => {
 			const result = resolveSiteAssets(
 				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
@@ -310,7 +297,7 @@ if (import.meta.vitest != null) {
 				client: '<script type="module" src="/client.js"></script>',
 				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
-					'post/Chart.tsx': ['assets/Chart.css', 'assets/Legend.css'],
+					'post/Chart.tsx': ['assets/Legend.css', 'assets/Chart.css'],
 				},
 				pageStyles: {
 					about: '<link rel="stylesheet" crossorigin href="/assets/about-page.css">',

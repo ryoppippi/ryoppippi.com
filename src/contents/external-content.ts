@@ -1,7 +1,7 @@
 import type { BlogPostMetadata } from '@/content/index.ts';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
-import Parser from 'rss-parser';
+import { loadBlogFeedEntries } from '@ox-content/vite-plugin';
 import path from 'node:path';
 
 export type PostListItem = {
@@ -64,17 +64,24 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
 	]);
 	const sources = JSON.parse(rssSource) as string[];
 	const configuredPosts = JSON.parse(postsSource) as ExternalPostInput[];
-	const parser = new Parser();
-	const feeds = await Promise.allSettled(sources.map(async (source) => parser.parseURL(source)));
-	const feedPosts = feeds.flatMap((result) => {
-		if (result.status === 'rejected') {
-			console.warn(`Skipping external RSS feed: ${String(result.reason)}`);
-			return [];
-		}
-		return result.value.items.flatMap((item) => {
-			const post = toExternalPost(item);
-			return post == null ? [] : [post];
+	const feeds = await loadBlogFeedEntries({
+		sources: sources.map((url) => ({ url, onError: 'warn', language: 'ja' })),
+	});
+	if (feeds.fatals.length > 0) {
+		throw new Error(feeds.fatals.join('\n'));
+	}
+	for (const warning of feeds.warnings) {
+		console.warn(warning);
+	}
+	const feedPosts = feeds.entries.flatMap((item) => {
+		const post = toExternalPost({
+			title: item.title,
+			link: item.url,
+			guid: item.id,
+			pubDate: item.date,
+			lang: item.language,
 		});
+		return post == null ? [] : [post];
 	});
 	const manualPosts = configuredPosts.flatMap((item) => {
 		const post = toExternalPost(item);
@@ -122,4 +129,20 @@ export function postListItems(
 			external: false,
 			draft: !post.isPublished,
 		}));
+}
+
+if (import.meta.vitest != null) {
+	it('loads curated entries with no remote sources and excludes invalid dates', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'src/contents/external-rss/rss.json': '[]',
+			'src/contents/external-rss/posts.json': JSON.stringify([
+				{ title: 'Article', link: 'https://example.com/article', pubDate: '2026-01-01' },
+				{ title: 'Invalid', link: 'https://example.com/invalid', pubDate: 'invalid' },
+			]),
+		});
+		expect(await loadExternalPosts(fixture.getPath())).toEqual([
+			{ title: 'Article', slug: 'https://example.com/article', link: 'https://example.com/article', pubDate: '2026-01-01T00:00:00.000Z', lang: 'ja', external: true, kind: 'article' },
+		]);
+	});
 }

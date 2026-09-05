@@ -1,5 +1,4 @@
 import {
-	applyIslandSsrHtml,
 	createMarkdownProcessor,
 	transformAllPlugins,
 	type OxContentOptions,
@@ -86,16 +85,13 @@ const OX_MARKDOWN_OPTIONS = {
 const markdownProcessor = createMarkdownProcessor(OX_MARKDOWN_OPTIONS);
 
 /**
- * Renders a post-colocated component to HTML so its island is present before
+ * Renders post-colocated components into HTML so their islands are present before
  * any JavaScript runs.
  *
  * Implemented by callers that have a Vite SSR loader because a Solid `.tsx`
  * file has to be compiled before it can be rendered.
  */
-export type IslandRenderer = (
-	moduleId: string,
-	props: Record<string, unknown>,
-) => Promise<string | null>;
+export type IslandRenderer = (html: string, islands: IslandModules) => Promise<string>;
 
 /** Options for rendering a Markdown or MDX document into the site article body. */
 export type RenderMarkdownOptions = {
@@ -118,18 +114,7 @@ async function renderIslands(
 	renderIsland: IslandRenderer | undefined,
 ) {
 	const names = Object.keys(islands);
-	const rendered =
-		renderIsland == null
-			? html
-			: await applyIslandSsrHtml(
-					html,
-					async (name, props) => {
-						const body = await renderIsland(islands[name], props);
-						return body == null ? '' : `<div data-ox-island-root>${body}</div>`;
-					},
-					'/virtual/article.mdx',
-					names,
-				);
+	const rendered = renderIsland == null ? html : await renderIsland(html, islands);
 
 	return names.reduce(
 		(output, name) =>
@@ -146,7 +131,7 @@ async function renderIslands(
  *
  * @param content - Markdown or MDX source text.
  * @param options - Document-specific island and parser options.
- * @returns The rendered article HTML and referenced island module ids.
+ * @returns The rendered article HTML.
  */
 export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
 	const islands = options.islands ?? {};
