@@ -1,6 +1,12 @@
 import type { PostListItem } from '@/contents/external-content.ts';
 import type { GeneratedFile } from './generated-file.ts';
-import { planSsgOutputs, resolveGitLastmod, writeSiteMapFiles } from '@ox-content/vite-plugin';
+import {
+	planSsgOutputs,
+	resolveGitLastmod,
+	writeSiteMapFiles,
+	writeRedirectOutputs,
+} from '@ox-content/vite-plugin';
+import { OX_CONTENT_BUILD_OPTIONS } from '@/config/ox-content.ts';
 import path from 'node:path';
 import { SITE_NAME, SITE_ORIGIN } from '@/config/site.ts';
 import { renderBlogFeed, writeMediaFeed } from './feeds.ts';
@@ -79,6 +85,11 @@ export async function writeOxContentOutputFiles({
 		writeMediaFeed(media, outDir),
 		writeSiteMapFiles(plan.siteMaps),
 		renderBlogFeed(posts).then((feed) => writeFile(path.join(outDir, feed.path), feed.content)),
+		writeRedirectOutputs({
+			outDir,
+			redirects: OX_CONTENT_BUILD_OPTIONS.redirects,
+			occupiedPaths: sitePages.map(({ urlPath }) => `/${urlPath}`),
+		}),
 	]);
 	const warnings = [siteMaps.warning].filter((warning): warning is string => warning != null);
 	if (warnings.length > 0) {

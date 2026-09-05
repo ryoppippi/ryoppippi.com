@@ -96,7 +96,7 @@ export function createStaticSitePlugin(): Plugin {
 			await configureStaticSiteDevelopmentServer(server);
 		},
 		closeBundle: {
-			// Both generators write article routes; the custom document must be the final output.
+			// Finish framework asset emission before generating pages that reference those assets.
 			sequential: true,
 			async handler() {
 				if (resolvedConfig?.command !== 'build') {

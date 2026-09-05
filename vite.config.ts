@@ -23,12 +23,7 @@ export default defineConfig(({ command, mode }) => ({
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
 			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
-			ssg:
-				mode === 'test'
-					? false
-					: command === 'build'
-						? OX_CONTENT_BUILD_OPTIONS.ssg
-						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
+			ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
 		createStaticSitePlugin(),
 	] satisfies PluginOption[],

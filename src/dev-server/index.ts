@@ -11,6 +11,7 @@ import type { OssProject, Talk } from '@/contents/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { ViteDevServer } from 'vite';
 import { createCollectionAssetsMiddleware } from '@ox-content/vite-plugin';
+import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
 import { isSiteContentAssetSource, planSiteContentAssets } from '@/generation/content-assets.ts';
 import { DEV_ASSETS } from '@/rendering/site-assets.ts';
@@ -119,25 +120,14 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 		return [];
 	}
 
-	const hrefs: string[] = [];
-	const seen = new Set<string>();
-	const visit = async (node: typeof entry): Promise<void> => {
-		const file = node.id?.split('?')[0];
-		if (file == null || seen.has(file)) {
-			return;
-		}
-
-		seen.add(file);
-		if (file.endsWith('.css')) {
-			hrefs.push(path.relative(server.config.root, file).replaceAll(path.sep, '/'));
-		}
-		for (const imported of node.importedModules) {
-			await visit(imported);
-		}
-	};
-	await visit(entry);
-
-	return hrefs;
+	const result = resolveSolidIslandStylesheets({
+		modules: [entry.id ?? url],
+		moduleGraph: server.moduleGraph,
+	});
+	if (result.diagnostics.length > 0) {
+		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
+	}
+	return result.stylesheets.map(({ href }) => href.replace(/^\//, ''));
 }
 
 function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDependencies {
