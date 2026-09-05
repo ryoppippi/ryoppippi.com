@@ -190,6 +190,12 @@ if (import.meta.vitest != null) {
 		readingTime: 1,
 	} satisfies BlogPostMetadata;
 
+	it('describes a zero-minute blog RSS estimate as under a minute', async () => {
+		const feed = await renderBlogFeed([{ ...metadata, readingTime: 0 }]);
+		expect(feed.content).toContain('Under a minute');
+		expect(feed.content).not.toContain('0 min read');
+	});
+
 	const post = {
 		...metadata,
 		source: '---\ntitle: Lazy article\n---\n\n# Lazy article',

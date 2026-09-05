@@ -48,7 +48,7 @@ function blogFeedItems(posts: readonly BlogPostMetadata[]): FeedItemInput[] {
 		title: post.title,
 		path: `blog/${post.filename}`,
 		date: post.pubDate,
-		description: `${post.title} | ${post.readingTime} min read`,
+		description: `${post.title} | ${post.readingTime < 1 ? 'Under a minute' : `${post.readingTime} min read`}`,
 		draft: !post.isPublished,
 	}));
 }
