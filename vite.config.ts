@@ -7,7 +7,7 @@ import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
-import { loadPublishedIslandDocuments } from './src/content/islands.ts';
+import { loadIslandDocuments } from './src/content/islands.ts';
 import { createStaticSitePlugin, createSyntaxThemeStylesheetPlugin } from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
@@ -24,7 +24,10 @@ export default defineConfig(({ command, mode }) => ({
 		createSolidHtmlHostIslandRegistry({
 			oxContent: OX_CONTENT_BUILD_OPTIONS,
 			watch: ['src/content/blog'],
-			documents: ({ root }) => loadPublishedIslandDocuments(path.join(root, 'src/content/blog')),
+			documents: ({ root, command }) =>
+				loadIslandDocuments(path.join(root, 'src/content/blog'), {
+					includeDrafts: command === 'serve',
+				}),
 		}).plugin,
 		createSyntaxThemeStylesheetPlugin('/src/pages/blog/article/ArticleContent.css', kanagawaDragon),
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
