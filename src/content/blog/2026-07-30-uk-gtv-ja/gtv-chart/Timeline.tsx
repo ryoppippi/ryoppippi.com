@@ -1,7 +1,7 @@
 import type { ChartHostOptions } from '@tanstack/charts';
 import type { ChartLang } from './copy.ts';
 import { createChartAdapter } from '@tanstack/charts';
-import { createEffect, onSettled } from 'solid-js';
+import { createEffect, onSettled, untrack } from 'solid-js';
 import { isServer } from '@solidjs/web';
 import { resolveChartLang, uiCopy } from './copy.ts';
 import { buildChartDefinition } from './definition.ts';
@@ -36,7 +36,8 @@ export default function Timeline(props: TimelineProps) {
 			props.onFocusedChange(point != null && isRowMark(point.markId) ? point.datumIndex : null);
 		},
 	});
-	const adapter = createChartAdapter(options());
+	// The adapter takes an initial snapshot; the effect below owns subsequent updates.
+	const adapter = createChartAdapter(untrack(options));
 	let surface!: HTMLDivElement;
 	if (!isServer) {
 		createEffect(options, (next) => adapter.update(next));
