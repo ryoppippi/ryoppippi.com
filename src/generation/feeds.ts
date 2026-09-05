@@ -102,6 +102,26 @@ export function renderMediaFeed(items: readonly PostListItem[]): Promise<Rendere
 }
 
 /**
+ * Writes the local blog RSS output with Ox Content.
+ *
+ * @param posts - Local blog metadata to publish.
+ * @param outDir - Static site output directory.
+ * @returns A promise that resolves after the feed has been written.
+ */
+export async function writeBlogFeed(
+	posts: readonly BlogPostMetadata[],
+	outDir: string,
+): Promise<void> {
+	const result = await writeFeedFiles({
+		...feedInput(BLOG_FEED_CHANNEL, blogFeedItems(posts)),
+		outDir,
+	});
+	if (result.warning != null) {
+		throw new Error(result.warning);
+	}
+}
+
+/**
  * Writes the curated media RSS output with Ox Content.
  *
  * @param items - Curated podcast and video appearances.

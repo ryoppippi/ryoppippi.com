@@ -9,12 +9,13 @@ import { generateStaticSite } from './generate-static-site.ts';
 
 function manifestCssFiles(manifest: Record<string, ManifestChunk>, source: string): string[] {
 	const chunk = manifest[source];
-	return chunk?.css ?? (chunk?.file.endsWith('.css') === true ? [chunk.file] : []);
+	return chunk?.css ?? (chunk?.file?.endsWith('.css') === true ? [chunk.file] : []);
 }
 
-async function readBuiltSiteAssets(outDir: string): Promise<SiteAssets> {
-	const manifestSource = await readFile(path.join(outDir, '.vite/manifest.json'), 'utf8');
-	const manifest = JSON.parse(manifestSource) as Record<string, ManifestChunk>;
+async function readBuiltSiteAssets(
+	outDir: string,
+	manifest: Record<string, ManifestChunk>,
+): Promise<SiteAssets> {
 	const assets = resolveSiteAssets(manifest);
 	const baseFiles = [
 		...manifestCssFiles(manifest, 'index.html'),
@@ -38,11 +39,14 @@ async function readBuiltSiteAssets(outDir: string): Promise<SiteAssets> {
 const host = {
 	async routes(context) {
 		const { outDir, root } = context;
+		if (context.assets.clientManifest == null) {
+			throw new Error('Ox Content custom host did not provide the Vite client manifest');
+		}
 		const content = await buildContentArtifact(
 			createIslandRenderer((id) => context.loadModule(id)),
 		);
 		const files = await generateStaticSite({
-			assets: await readBuiltSiteAssets(outDir),
+			assets: await readBuiltSiteAssets(outDir, context.assets.clientManifest),
 			content,
 			outDir,
 			root,

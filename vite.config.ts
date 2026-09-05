@@ -60,7 +60,6 @@ export default defineConfig(({ command, mode }) => ({
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
-		manifest: true,
 	},
 	run: {
 		tasks: {

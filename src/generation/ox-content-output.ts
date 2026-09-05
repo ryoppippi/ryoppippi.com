@@ -9,9 +9,8 @@ import {
 import { OX_CONTENT_BUILD_OPTIONS } from '@/config/ox-content.ts';
 import path from 'node:path';
 import { SITE_NAME, SITE_ORIGIN } from '@/config/site.ts';
-import { renderBlogFeed, writeMediaFeed } from './feeds.ts';
+import { writeBlogFeed, writeMediaFeed } from './feeds.ts';
 import type { BlogPostMetadata } from '../content/blog.ts';
-import { writeFile } from 'node:fs/promises';
 
 type GitLastmodResolver = (filePath: string, root?: string) => number | undefined;
 
@@ -84,7 +83,7 @@ export async function writeOxContentOutputFiles({
 	const [, siteMaps] = await Promise.all([
 		writeMediaFeed(media, outDir),
 		writeSiteMapFiles(plan.siteMaps),
-		renderBlogFeed(posts).then((feed) => writeFile(path.join(outDir, feed.path), feed.content)),
+		writeBlogFeed(posts, outDir),
 		writeRedirectOutputs({
 			outDir,
 			redirects: OX_CONTENT_BUILD_OPTIONS.redirects,
