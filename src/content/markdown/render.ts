@@ -6,7 +6,6 @@ import {
 import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
-import { escapeHtml } from './html.ts';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
@@ -108,24 +107,6 @@ export type MarkdownRenderer = (
 	options?: Omit<RenderMarkdownOptions, 'renderIsland'>,
 ) => Promise<string>;
 
-async function renderIslands(
-	html: string,
-	islands: IslandModules,
-	renderIsland: IslandRenderer | undefined,
-) {
-	const names = Object.keys(islands);
-	const rendered = renderIsland == null ? html : await renderIsland(html, islands);
-
-	return names.reduce(
-		(output, name) =>
-			output.replaceAll(
-				`data-ox-island="${escapeHtml(name)}"`,
-				`data-ox-island="${escapeHtml(islands[name])}"`,
-			),
-		rendered,
-	);
-}
-
 /**
  * Renders Markdown with Ox Content and the site's post-render transforms.
  *
@@ -160,14 +141,10 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 
 	// Islands are rendered after every HTML transform so the link rewrites
 	// cannot alter component markup that the client then hydrates.
-	const body = await renderIslands(
-		applyReaderChromeHtml(media, {
-			backToTop: false,
-			copy: true,
-			externalLinks: false,
-		}),
-		islands,
-		options.renderIsland,
-	);
-	return body;
+	const body = applyReaderChromeHtml(media, {
+		backToTop: false,
+		copy: true,
+		externalLinks: false,
+	});
+	return options.renderIsland == null ? body : options.renderIsland(body, islands);
 }

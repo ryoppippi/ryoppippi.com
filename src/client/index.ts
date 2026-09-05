@@ -1,5 +1,6 @@
 import type { JSX } from '@solidjs/web';
 import { initIslands } from '@ox-content/islands';
+import { initSolidHtmlHost } from '@ox-content/vite-plugin-solid/html-host/client';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -142,57 +143,24 @@ function initialiseMediaFilter(): void {
 
 type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
 
-// Every component colocated with a post is a potential island, so the loaders
-// are collected by glob rather than listed by hand. Vite keeps each one in its
-// own chunk, so a post only downloads the islands it actually uses. The globs
-const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
-
-async function mountSolidIsland(
-	element: HTMLElement,
-	load: () => Promise<SolidIslandModule>,
-	props: Record<string, unknown>,
-): Promise<() => void> {
-	const [{ render }, { default: Island }] = await Promise.all([import('@solidjs/web'), load()]);
-	// Solid islands are not compiled hydratable, so the server markup is
-	// replaced by a fresh client render instead of being adopted.
-	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;
-	target.replaceChildren();
-	return render(() => Island(props), target);
-}
+// The whole-blog registry remains until the host-selected build registry is released (#1287).
+const solidIslandLoaders = import.meta.glob<SolidIslandModule>('/src/content/blog/**/*.tsx');
 
 function initialiseSolidIslands(): void {
-	initIslands((element, props) => {
-		const moduleId = element.dataset.oxIsland;
-		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
-		if (load == null) {
-			throw new Error(`Unknown island module: ${moduleId ?? ''}`);
-		}
-
-		let dispose: (() => void) | undefined;
-		let destroyed = false;
-		void mountSolidIsland(element, load, props)
-			.then((mountedDispose) => {
-				if (destroyed) {
-					mountedDispose();
-				} else {
-					dispose = mountedDispose;
-				}
-			})
-			.catch((error: unknown) => {
-				element.classList.add('ox-island-error');
-				element.dataset.oxError = error instanceof Error ? error.message : String(error);
-			});
-
-		// Loading stays asynchronous so unrelated pages do not download every
-		// post-colocated component. Cleanup still has to be synchronously
-		// registered with the Ox Content island controller.
-		return () => {
-			destroyed = true;
-			dispose?.();
-		};
+	initSolidHtmlHost({
+		initIslands,
+		modules: solidIslandLoaders,
+		loadRuntime: () => import('@solidjs/web'),
+		render: ({ component, element, props, runtime }) => {
+			if (typeof component !== 'function' || runtime == null) {
+				throw new Error('Expected a Solid component and renderer');
+			}
+			const Island = component as SolidIslandModule['default'];
+			// This site compiles non-hydratable Solid; the host clears SSR markup before mounting.
+			return runtime.render(() => Island(props), element);
+		},
 	});
 }
-
 function initialisePageInteractions(): void {
 	initialiseThemeToggle();
 	initialiseBlogFilters();
