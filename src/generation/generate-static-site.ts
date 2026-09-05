@@ -2,8 +2,6 @@ import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { rewriteCollectionAssetUrls, writeCollectionAssets } from '@ox-content/vite-plugin';
-import { access, mkdir, writeFile } from 'node:fs/promises';
-import path from 'node:path';
 import {
 	extractInstallSection,
 	extractSection,
@@ -37,29 +35,21 @@ type GenerateStaticSiteOptions = {
 	root: string;
 };
 
-async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Promise<void> {
-	for (const file of files) {
-		const destination = path.join(outDir, file.path);
-		await mkdir(path.dirname(destination), { recursive: true });
-		await writeFile(destination, file.content);
-	}
-}
-
 /**
- * Generates the static site and its auxiliary files.
+ * Prepares site-owned pages and writes auxiliary content outputs.
  *
  * @param assets - Bundled site assets referenced by generated pages.
  * @param content - Optional prebuilt content artifact.
  * @param outDir - Directory that receives generated files.
  * @param root - Repository root used for source loading and Git metadata.
- * @returns A promise that resolves after all generated files are written.
+ * @returns Pages and plain-text files for the framework host writer.
  */
 export async function generateStaticSite({
 	assets,
 	content,
 	outDir,
 	root,
-}: GenerateStaticSiteOptions): Promise<void> {
+}: GenerateStaticSiteOptions): Promise<GeneratedFile[]> {
 	let localContent = content;
 	if (localContent == null) {
 		const { buildContentArtifact } = await import('@/content/build.ts');
@@ -116,7 +106,6 @@ export async function generateStaticSite({
 		createErrorPageFile(assets),
 	];
 
-	await writeGeneratedFiles(outDir, pages);
 	await writeOxContentOutputFiles({ posts, media: externalMedia, outDir, pages, root });
 
 	const install = extractSection(dotfiles, 'Setup');
@@ -140,18 +129,5 @@ export async function generateStaticSite({
 		);
 	}
 
-	await writeGeneratedFiles(outDir, plainFiles);
-
-	await Promise.all(
-		[
-			'index.html',
-			'about/index.html',
-			'works/oss/index.html',
-			'works/showcase/index.html',
-			'works/talks/index.html',
-			'works/media/index.html',
-			'works/media/feed.xml',
-			'works/publications/index.html',
-		].map((file) => access(path.join(outDir, file))),
-	);
+	return [...pages, ...plainFiles];
 }

@@ -1,4 +1,5 @@
 import type { ManifestChunk, SiteAssets } from '@/rendering/site-assets.ts';
+import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildContentArtifact } from '@/content/build.ts';
@@ -34,22 +35,27 @@ async function readBuiltSiteAssets(outDir: string): Promise<SiteAssets> {
 	return inlineHomeStyles(assets, base, home);
 }
 
-/**
- * Builds the custom static site after Vite finishes its client output.
- *
- * @param options - Build directories and a Vite-backed loader for Solid island modules.
- * @returns A promise that resolves when every static output has been written.
- */
-export async function buildStaticSite(options: {
-	loadModule: (modulePath: string) => Promise<unknown>;
-	outDir: string;
-	root: string;
-}): Promise<void> {
-	const content = await buildContentArtifact(createIslandRenderer(options.loadModule));
-	await generateStaticSite({
-		assets: await readBuiltSiteAssets(options.outDir),
-		content,
-		outDir: options.outDir,
-		root: options.root,
-	});
-}
+const host = {
+	async routes(context) {
+		const { outDir, root } = context;
+		const content = await buildContentArtifact(
+			createIslandRenderer((id) => context.loadModule(id)),
+		);
+		const files = await generateStaticSite({
+			assets: await readBuiltSiteAssets(outDir),
+			content,
+			outDir,
+			root,
+		});
+		return files.map((file) => ({
+			path: `/${file.path.replace(/index\.html$/, '')}`,
+			render: () => ({
+				body: file.content,
+				outputPath: file.path,
+				contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
+			}),
+		}));
+	},
+} satisfies OxContentCustomHostModule;
+
+export default host;
