@@ -66,7 +66,7 @@ export const DEV_ASSETS = {
 
 export type ManifestChunk = {
 	css?: string[];
-	file: string;
+	file?: string;
 	imports?: string[];
 };
 
@@ -87,7 +87,7 @@ export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): Site
 	});
 	const stylesFor = (suffix: string): DocumentStyleDescriptor[] => {
 		const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
-		const styles = chunk?.css ?? (chunk?.file.endsWith('.css') === true ? [chunk.file] : []);
+		const styles = chunk?.css ?? (chunk?.file?.endsWith('.css') === true ? [chunk.file] : []);
 		if (styles.length === 0) {
 			throw new Error(`Missing CSS for ${suffix}`);
 		}
