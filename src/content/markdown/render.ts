@@ -1,11 +1,11 @@
 import {
 	createMarkdownProcessor,
 	transformAllPlugins,
+	type MdxImport,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
 import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
-import type { IslandModules } from '../islands.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 
@@ -96,12 +96,27 @@ export type RenderedMarkdown = {
 	clientModules: readonly SolidHtmlHostClientModule[];
 };
 
-export type IslandRenderer = (html: string, islands: IslandModules) => Promise<RenderedMarkdown>;
+/** Document context required to resolve MDX-local Solid imports. */
+export type IslandRenderContext = {
+	/** Root directory that document-local imports may not escape. */
+	contentRoot?: string;
+	/** Real source path used to resolve relative imports. */
+	documentPath: string;
+	/** Imports already collected by the Ox Content Markdown transform. */
+	imports: readonly MdxImport[];
+};
+
+export type IslandRenderer = (
+	html: string,
+	context: IslandRenderContext,
+) => Promise<RenderedMarkdown>;
 
 /** Options for rendering a Markdown or MDX document into the site article body. */
 export type RenderMarkdownOptions = {
-	/** Component names available to this document, mapped to their module ids. */
-	islands?: IslandModules;
+	/** Root directory that document-local imports may not escape. */
+	contentRoot?: string;
+	/** Real source path used to resolve document-local imports. */
+	documentPath?: string;
 	/** Whether Ox Content should parse MDX syntax for this document. */
 	mdx?: boolean;
 	renderIsland?: IslandRenderer;
@@ -124,12 +139,9 @@ export async function renderMarkdown(
 	content: string,
 	options: RenderMarkdownOptions = {},
 ): Promise<RenderedMarkdown> {
-	const islands = options.islands ?? {};
-	const mdx = options.mdx ?? Object.keys(islands).length > 0;
-	const transformed = await markdownProcessor.render(
-		content,
-		`/virtual/article.${mdx ? 'mdx' : 'md'}`,
-	);
+	const mdx = options.mdx ?? false;
+	const documentPath = options.documentPath ?? `/virtual/article.${mdx ? 'mdx' : 'md'}`;
+	const transformed = await markdownProcessor.render(content, documentPath);
 	const media = await transformAllPlugins(transformed.html, {
 		bluesky: true,
 		github: false,
@@ -157,5 +169,9 @@ export async function renderMarkdown(
 	});
 	return options.renderIsland == null
 		? { html: body, clientModules: [] }
-		: options.renderIsland(body, islands);
+		: options.renderIsland(body, {
+				contentRoot: options.contentRoot,
+				documentPath,
+				imports: transformed.imports,
+			});
 }

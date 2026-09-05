@@ -5,7 +5,6 @@ import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugi
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown/render.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 
 const BLOG_SOURCE_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
@@ -97,13 +96,11 @@ function filenameFor(filepath: string): string {
 		: path.basename(filepath, path.extname(filepath));
 }
 
-async function loadRenderOptions(content: string, filepath: string, directory: string) {
+function loadRenderOptions(filepath: string, directory: string) {
 	if (path.extname(filepath).toLowerCase() !== '.mdx') {
 		return undefined;
 	}
-	const islands = await resolvePostIslands(content, filepath, directory);
-	const hasIslands = Object.keys(islands).length > 0;
-	return hasIslands ? { islands, mdx: true } : { mdx: true };
+	return { contentRoot: directory, documentPath: filepath, mdx: true };
 }
 
 async function findBlogPostSource(slug: string, directory: string) {
@@ -156,7 +153,7 @@ export async function loadBlogPost(
 
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
-	const renderOptions = await loadRenderOptions(content, entry.filepath, directory);
+	const renderOptions = loadRenderOptions(entry.filepath, directory);
 	const rendered =
 		renderOptions == null ? await render(content) : await render(content, renderOptions);
 	return {
@@ -228,7 +225,7 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const source = await readFile(filepath, 'utf8');
 			const { data, content } = matter(source);
 			const filename = filenameFor(filepath);
-			const renderOptions = await loadRenderOptions(content, filepath, blogDir);
+			const renderOptions = loadRenderOptions(filepath, blogDir);
 			const rendered =
 				renderOptions == null ? await render(content) : await render(content, renderOptions);
 			return {
@@ -420,8 +417,9 @@ if (import.meta.vitest != null) {
 			expect(renderContent).toHaveBeenCalledWith(
 				expect.stringContaining("import Chart from './Chart.tsx'\n\n<Chart />"),
 				{
+					contentRoot: fixture.path,
+					documentPath: fixture.getPath('component/index.mdx'),
 					mdx: true,
-					islands: { Chart: 'component/Chart.tsx' },
 				},
 			);
 		});

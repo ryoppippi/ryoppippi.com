@@ -1,5 +1,8 @@
 import type { IslandRenderer } from './markdown/render.ts';
-import { renderSolidHtmlHost } from '@ox-content/vite-plugin-solid';
+import path from 'node:path';
+import { renderSolidHtmlHost, toSolidHtmlHostClientModuleId } from '@ox-content/vite-plugin-solid';
+
+const workspaceDirectory = path.resolve(import.meta.dirname, '../..');
 
 /** Vite loader that compiles Solid modules before rendering. */
 export type IslandModuleLoader = (path: string) => Promise<unknown>;
@@ -8,18 +11,21 @@ export type IslandModuleLoader = (path: string) => Promise<unknown>;
  * Connects the host's Vite loader to Ox Content's Solid HTML renderer.
  *
  * @param load - Vite SSR module loader.
+ * @param root - Vite project root used to produce browser module ids.
  * @returns A document renderer that fails on any upstream diagnostic.
  */
-export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
-	return async (html, islands) => {
+export function createIslandRenderer(
+	load: IslandModuleLoader,
+	root = workspaceDirectory,
+): IslandRenderer {
+	return async (html, context) => {
 		const result = await renderSolidHtmlHost({
 			html,
-			documentPath: '/virtual/article.mdx',
-			components: Object.fromEntries(
-				Object.entries(islands).map(([name, moduleId]) => [name, `/src/content/blog/${moduleId}`]),
-			),
+			...context,
+			root,
 			loadModule: load,
-			resolveClientModule: ({ serverModuleId }) => serverModuleId,
+			resolveClientModule: ({ serverModuleId }) =>
+				toSolidHtmlHostClientModuleId(serverModuleId, root),
 		});
 		if (result.diagnostics.length > 0) {
 			throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
@@ -30,31 +36,44 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 
 if (import.meta.vitest != null) {
 	const html = '<div data-ox-island="Chart"><script type="application/json">{}</script></div>';
-	const islands = { Chart: 'post/Chart.tsx' };
+	const context = {
+		documentPath: '/workspace/src/content/blog/post/index.mdx',
+		contentRoot: '/workspace/src/content/blog',
+		imports: [
+			{
+				source: './Chart.tsx',
+				specifiers: [{ imported: 'default', local: 'Chart', kind: 'default' as const }],
+			},
+		],
+	};
 
 	describe(createIslandRenderer, () => {
 		it('rejects when the module has no component export', async () => {
-			const renderIsland = createIslandRenderer(async () => ({}));
-			await expect(renderIsland(html, islands)).rejects.toThrow('export');
+			const renderIsland = createIslandRenderer(async () => ({}), '/workspace');
+			await expect(renderIsland(html, context)).rejects.toThrow('export');
 		});
 
 		it('propagates module loading failures', async () => {
-			const renderIsland = createIslandRenderer(() => Promise.reject(new Error('missing')));
-			await expect(renderIsland(html, islands)).rejects.toThrow('missing');
+			const renderIsland = createIslandRenderer(
+				() => Promise.reject(new Error('missing')),
+				'/workspace',
+			);
+			await expect(renderIsland(html, context)).rejects.toThrow('missing');
 		});
 
 		it('loads the module from the content blog directory', async () => {
 			const load = vi.fn(async () => ({ default: () => null }));
-			await createIslandRenderer(load)(html, islands);
-			expect(load).toHaveBeenCalledWith('/src/content/blog/post/Chart.tsx');
+			await createIslandRenderer(load, '/workspace')(html, context);
+			expect(load).toHaveBeenCalledWith('/workspace/src/content/blog/post/Chart.tsx');
 		});
 
 		it('renders a Solid component through the framework host contract', async () => {
 			const { ssr } = await import('@solidjs/web');
-			const renderIsland = createIslandRenderer(async () => ({
-				default: () => ssr('<p>solid</p>'),
-			}));
-			const rendered = await renderIsland(html, islands);
+			const renderIsland = createIslandRenderer(
+				async () => ({ default: () => ssr('<p>solid</p>') }),
+				'/workspace',
+			);
+			const rendered = await renderIsland(html, context);
 			expect(rendered.html).toContain('<p>solid</p>');
 			expect(rendered.html).toContain('data-ox-module="/src/content/blog/post/Chart.tsx"');
 			expect(rendered.clientModules).toEqual([
