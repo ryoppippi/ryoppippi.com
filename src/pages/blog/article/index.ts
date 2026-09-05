@@ -120,11 +120,11 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 
 if (import.meta.vitest != null) {
 	const assets = {
-		base: '',
-		client: '',
+		sharedStyles: [],
+		scripts: [],
 		islands: {},
-		oxContent: '',
-		pageStyles: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		selfHosted: {},
+		pageStyles: { about: [], article: [], blog: [], error: [], home: [], sponsors: [], works: [] },
 	} as const satisfies SiteAssets;
 
 	const examplePost = {

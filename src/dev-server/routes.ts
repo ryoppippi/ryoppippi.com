@@ -207,18 +207,18 @@ if (import.meta.vitest != null) {
 	function createTestDependencies() {
 		return {
 			assets: {
-				base: '',
-				client: '<script type="module" src="/src/client/index.ts"></script>',
+				sharedStyles: [],
+				scripts: ['/src/client/index.ts'],
 				islands: {},
-				oxContent: '',
+				selfHosted: {},
 				pageStyles: {
-					about: '',
-					article: '',
-					blog: '',
-					error: '',
-					home: '',
-					sponsors: '',
-					works: '',
+					about: [],
+					article: [],
+					blog: [],
+					error: [],
+					home: [],
+					sponsors: [],
+					works: [],
 				},
 			},
 			loadBlogPost: vi.fn(async () => post),
