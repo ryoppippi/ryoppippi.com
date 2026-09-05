@@ -27,13 +27,14 @@ export async function loadShowcase(
 			typeof data.image === 'string'
 				? `/works/showcase/assets/${path.basename(data.image)}`
 				: undefined;
+		const rendered = await renderContent(content);
 		projects.push({
 			title: String(data.title),
 			link: String(data.link),
 			image,
 			pubDate: new Date(String(data.date ?? data.pubDate)).toJSON(),
 			featured: data.featured === true,
-			html: await renderContent(content),
+			html: rendered.html,
 		});
 	}
 	return projects.sort(

@@ -6,6 +6,7 @@ import {
 import { applyReaderChromeHtml } from '@ox-content/vite-plugin/reader-chrome';
 import path from 'node:path';
 import type { IslandModules } from '../islands.ts';
+import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 
 const workspaceDirectory = path.resolve(import.meta.dirname, '../../..');
@@ -90,7 +91,12 @@ const markdownProcessor = createMarkdownProcessor(OX_MARKDOWN_OPTIONS);
  * Implemented by callers that have a Vite SSR loader because a Solid `.tsx`
  * file has to be compiled before it can be rendered.
  */
-export type IslandRenderer = (html: string, islands: IslandModules) => Promise<string>;
+export type RenderedMarkdown = {
+	html: string;
+	clientModules: readonly SolidHtmlHostClientModule[];
+};
+
+export type IslandRenderer = (html: string, islands: IslandModules) => Promise<RenderedMarkdown>;
 
 /** Options for rendering a Markdown or MDX document into the site article body. */
 export type RenderMarkdownOptions = {
@@ -105,16 +111,19 @@ export type RenderMarkdownOptions = {
 export type MarkdownRenderer = (
 	content: string,
 	options?: Omit<RenderMarkdownOptions, 'renderIsland'>,
-) => Promise<string>;
+) => Promise<RenderedMarkdown>;
 
 /**
  * Renders Markdown with Ox Content and the site's post-render transforms.
  *
  * @param content - Markdown or MDX source text.
  * @param options - Document-specific island and parser options.
- * @returns The rendered article HTML.
+ * @returns The rendered article HTML and its client module metadata.
  */
-export async function renderMarkdown(content: string, options: RenderMarkdownOptions = {}) {
+export async function renderMarkdown(
+	content: string,
+	options: RenderMarkdownOptions = {},
+): Promise<RenderedMarkdown> {
 	const islands = options.islands ?? {};
 	const mdx = options.mdx ?? Object.keys(islands).length > 0;
 	const transformed = await markdownProcessor.render(
@@ -146,5 +155,7 @@ export async function renderMarkdown(content: string, options: RenderMarkdownOpt
 		copy: true,
 		externalLinks: false,
 	});
-	return options.renderIsland == null ? body : options.renderIsland(body, islands);
+	return options.renderIsland == null
+		? { html: body, clientModules: [] }
+		: options.renderIsland(body, islands);
 }

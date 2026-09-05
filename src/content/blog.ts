@@ -4,6 +4,7 @@ import { matter } from 'gray-matter-es';
 import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown/render.ts';
+import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
 import { resolvePostIslands } from './islands.ts';
 import { blogDirectory } from './paths.ts';
 
@@ -38,6 +39,7 @@ export type BlogPost = ArticleMetadata & {
 	source: string;
 	content: string;
 	html: string;
+	clientModules: readonly SolidHtmlHostClientModule[];
 	pubDate: string;
 	lang: string;
 	isPublished: boolean;
@@ -155,6 +157,8 @@ export async function loadBlogPost(
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const { data, content } = matter(entry.source);
 	const renderOptions = await loadRenderOptions(content, entry.filepath, directory);
+	const rendered =
+		renderOptions == null ? await render(content) : await render(content, renderOptions);
 	return {
 		...parseArticleMetadata(data),
 		title: String(data.title),
@@ -162,7 +166,8 @@ export async function loadBlogPost(
 		filepath: entry.filepath,
 		source: entry.source,
 		content,
-		html: renderOptions == null ? await render(content) : await render(content, renderOptions),
+		html: rendered.html,
+		clientModules: rendered.clientModules,
 		pubDate: new Date(String(data.date)).toJSON(),
 		lang: typeof data.lang === 'string' ? data.lang : 'ja',
 		isPublished: data.isPublished === true,
@@ -224,6 +229,8 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 			const { data, content } = matter(source);
 			const filename = filenameFor(filepath);
 			const renderOptions = await loadRenderOptions(content, filepath, blogDir);
+			const rendered =
+				renderOptions == null ? await render(content) : await render(content, renderOptions);
 			return {
 				...parseArticleMetadata(data),
 				title: String(data.title),
@@ -231,7 +238,8 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 				filepath,
 				source,
 				content,
-				html: renderOptions == null ? await render(content) : await render(content, renderOptions),
+				html: rendered.html,
+				clientModules: rendered.clientModules,
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
 				isPublished: data.isPublished === true,
@@ -297,7 +305,11 @@ if (import.meta.vitest != null) {
 					body: `${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
 				},
 			]);
-			const post = await loadBlogPost('article', async (content) => content, fixture.getPath());
+			const post = await loadBlogPost(
+				'article',
+				async (content) => ({ html: content, clientModules: [] }),
+				fixture.getPath(),
+			);
 
 			expect(metadata[0]?.readingTime).toBe(2);
 			expect(post?.readingTime).toBe(2);
@@ -333,7 +345,10 @@ if (import.meta.vitest != null) {
 				'secret.md': '---\ntitle: Secret\ndate: 2026-06-22\nisPublished: true\n---\nSecret',
 				content: {},
 			});
-			const renderContent = vi.fn(async (content: string) => content);
+			const renderContent = vi.fn(async (content: string) => ({
+				html: content,
+				clientModules: [],
+			}));
 
 			await expect(
 				loadBlogPost('../secret', renderContent, fixture.getPath('content')),
@@ -348,7 +363,10 @@ if (import.meta.vitest != null) {
 				'second/index.md':
 					'---\ntitle: Second\ndate: 2026-06-22\nisPublished: true\n---\nSecond body',
 			});
-			const renderContent = vi.fn(async (content: string) => `<p>${content}</p>`);
+			const renderContent = vi.fn(async (content: string) => ({
+				html: `<p>${content}</p>`,
+				clientModules: [],
+			}));
 
 			const post = await loadBlogPost('second', renderContent, fixture.getPath());
 
@@ -373,12 +391,31 @@ if (import.meta.vitest != null) {
 				].join('\n'),
 				'component/Chart.tsx': 'export default () => null',
 			});
-			const renderContent = vi.fn(async (content: string) => content);
+			const renderContent = vi.fn(async (content: string) => ({
+				html: content,
+				clientModules: [
+					{
+						name: 'Chart',
+						moduleId: '/src/content/blog/component/Chart.tsx',
+						exportName: 'default',
+					},
+				],
+			}));
 
 			const post = await loadBlogPost('component', renderContent, fixture.getPath());
 
 			expect(post).toEqual(
-				expect.objectContaining({ filename: 'component', title: 'Component post' }),
+				expect.objectContaining({
+					filename: 'component',
+					title: 'Component post',
+					clientModules: [
+						{
+							name: 'Chart',
+							moduleId: '/src/content/blog/component/Chart.tsx',
+							exportName: 'default',
+						},
+					],
+				}),
 			);
 			expect(renderContent).toHaveBeenCalledWith(
 				expect.stringContaining("import Chart from './Chart.tsx'\n\n<Chart />"),
@@ -459,7 +496,10 @@ if (import.meta.vitest != null) {
 					'Article body',
 				].join('\n'),
 			});
-			const renderContent = vi.fn(async (content: string) => content);
+			const renderContent = vi.fn(async (content: string) => ({
+				html: content,
+				clientModules: [],
+			}));
 
 			await expect(loadBlogPost('article', renderContent, fixture.getPath())).resolves.toEqual(
 				expect.objectContaining({

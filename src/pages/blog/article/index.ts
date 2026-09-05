@@ -1,6 +1,6 @@
 import type { ArticleMetadata, BlogPost } from '@/content/index.ts';
 import { formatDate } from '@/lib/util.ts';
-import { islandModuleIds, type SiteAssets } from '@/rendering/site-assets.ts';
+import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/generation/define-page.ts';
 import type { GeneratedFile } from '@/generation/generated-file.ts';
@@ -110,7 +110,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 			alternates: metadata.alternates,
 			assets,
 			article: true,
-			islands: islandModuleIds(post.html),
+			islands: post.clientModules.map(({ moduleId }) => moduleId),
 			style: 'article',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
@@ -140,6 +140,7 @@ if (import.meta.vitest != null) {
 		source: '---\ntitle: Example\n---\nBody',
 		content: 'A concise article summary.',
 		html: '<p>A concise article summary.</p>',
+		clientModules: [],
 		pubDate: '2026-01-01T00:00:00.000Z',
 		image: '/assets/content/article-cover.avif',
 		lang: 'en',
