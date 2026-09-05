@@ -1,43 +1,9 @@
-import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
+import type { Plugin, ViteDevServer } from 'vite';
 import { renderThemeTokenCss, type ThemeTokenSource } from '@ox-content/vite-plugin/theme-tokens';
-import path from 'node:path';
-import { createServer } from 'vite';
-
-type StaticSiteBuildModule = {
-	buildStaticSite: (options: {
-		loadModule: (modulePath: string) => Promise<unknown>;
-		outDir: string;
-		root: string;
-	}) => Promise<void>;
-};
 
 type StaticSiteDevelopmentModule = {
 	configureStaticSiteDevelopmentServer: (server: ViteDevServer) => Promise<void>;
 };
-
-async function runStaticSiteBuild(config: ResolvedConfig): Promise<void> {
-	const root = config.root;
-	const moduleServer = await createServer({
-		appType: 'custom',
-		configFile: config.configFile ?? path.join(root, 'vite.config.ts'),
-		optimizeDeps: { noDiscovery: true },
-		root,
-		server: { middlewareMode: true },
-	});
-
-	try {
-		const { buildStaticSite } = (await moduleServer.ssrLoadModule(
-			'/src/generation/index.ts',
-		)) as StaticSiteBuildModule;
-		await buildStaticSite({
-			loadModule: (modulePath) => moduleServer.ssrLoadModule(modulePath),
-			outDir: path.resolve(root, config.build.outDir),
-			root,
-		});
-	} finally {
-		await moduleServer.close();
-	}
-}
 
 /**
  * Renders the syntax tokens from an Ox Content color theme for the custom site design.
@@ -74,37 +40,20 @@ export function createSyntaxThemeStylesheetPlugin(
 }
 
 /**
- * Integrates the custom static site with Vite's development and build lifecycles.
+ * Connects the remaining development middleware to Vite.
  *
  * @returns The Vite plugin that connects site rendering to Vite.
  */
-export function createStaticSitePlugin(): Plugin {
-	let resolvedConfig: ResolvedConfig | undefined;
-	let staticSiteBuild: Promise<void> | undefined;
-
+export function createStaticSiteDevelopmentPlugin(): Plugin {
 	return {
 		name: 'ryoppippi-static-site',
 		apply: (_config, { mode }) => mode !== 'test',
 		applyToEnvironment: (environment) => environment.name === 'client',
-		configResolved(config) {
-			resolvedConfig = config;
-		},
 		async configureServer(server) {
 			const { configureStaticSiteDevelopmentServer } = (await server.ssrLoadModule(
 				'/src/dev-server/index.ts',
 			)) as StaticSiteDevelopmentModule;
 			await configureStaticSiteDevelopmentServer(server);
-		},
-		closeBundle: {
-			// Finish framework asset emission before generating pages that reference those assets.
-			sequential: true,
-			async handler() {
-				if (resolvedConfig?.command !== 'build') {
-					return;
-				}
-				staticSiteBuild ??= runStaticSiteBuild(resolvedConfig);
-				await staticSiteBuild;
-			},
 		},
 	};
 }

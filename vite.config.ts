@@ -1,5 +1,6 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContent } from '@ox-content/vite-plugin';
+import { createOxContentCustomHostPlugin } from '@ox-content/vite-plugin/custom-host';
 import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
 import solid from '@solidjs/vite-plugin';
@@ -8,7 +9,10 @@ import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
 import { loadIslandDocuments } from './src/content/islands.ts';
-import { createStaticSitePlugin, createSyntaxThemeStylesheetPlugin } from './vite-plugin.ts';
+import {
+	createStaticSiteDevelopmentPlugin,
+	createSyntaxThemeStylesheetPlugin,
+} from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	envPrefix: ['PUBLIC_', 'VITE_'],
@@ -36,7 +40,21 @@ export default defineConfig(({ command, mode }) => ({
 			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
 			ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
-		createStaticSitePlugin(),
+		createStaticSiteDevelopmentPlugin(),
+		createOxContentCustomHostPlugin({
+			host: '/src/generation/index.ts',
+			dev: { enabled: false },
+			build: { transformHtml: false },
+			// Site-owned auxiliary output policy is still supplied by the generator.
+			oxContent: {
+				ssg: false,
+				icons: false,
+				feeds: false,
+				siteMaps: false,
+				resources: false,
+				redirects: false,
+			},
+		}),
 	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
@@ -59,6 +77,7 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
+					'vite-plugin.ts',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'public/**',
