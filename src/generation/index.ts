@@ -12,12 +12,9 @@ function manifestCssFiles(manifest: Record<string, ManifestChunk>, source: strin
 }
 
 async function readBuiltSiteAssets(outDir: string): Promise<SiteAssets> {
-	const [index, manifestSource] = await Promise.all([
-		readFile(path.join(outDir, 'index.html'), 'utf8'),
-		readFile(path.join(outDir, '.vite/manifest.json'), 'utf8'),
-	]);
+	const manifestSource = await readFile(path.join(outDir, '.vite/manifest.json'), 'utf8');
 	const manifest = JSON.parse(manifestSource) as Record<string, ManifestChunk>;
-	const assets = resolveSiteAssets(index, manifest);
+	const assets = resolveSiteAssets(manifest);
 	const baseFiles = [
 		...manifestCssFiles(manifest, 'index.html'),
 		...manifestCssFiles(manifest, 'src/components/SiteLayout/SiteLayout.module.css'),

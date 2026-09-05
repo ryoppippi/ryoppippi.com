@@ -2,6 +2,7 @@ import type { JSX } from '@solidjs/web';
 import { initIslands } from '@ox-content/islands';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
+import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
 import { loadPageStyle, needsInitialPageStyle } from './page-style-loader.ts';
@@ -36,9 +37,7 @@ function initialiseThemeToggle(): void {
 			event,
 			nextTheme: dark ? 'dark' : 'light',
 			apply: () => {
-				document.documentElement.classList.toggle('dark', dark);
-				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-				localStorage.theme = dark ? 'dark' : 'light';
+				setThemeBootstrapPreference(dark ? 'dark' : 'light');
 				render();
 			},
 		});
