@@ -111,6 +111,14 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 			assets,
 			article: true,
 			islands: post.clientModules.map(({ moduleId }) => moduleId),
+			links: [
+				{
+					rel: 'alternate',
+					href: `${pathname.slice(0, -1)}.md`,
+					title: 'Markdown source',
+					type: 'text/markdown',
+				},
+			],
 			style: 'article',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
@@ -152,6 +160,15 @@ if (import.meta.vitest != null) {
 		const [article] = createArticlePageFiles({ ...examplePost, readingTime: 0 }, assets);
 		expect(article.content).toContain('Under a minute');
 		expect(article.content).not.toContain('0 min read');
+	});
+
+	test('places the Markdown alternate in the document head', () => {
+		const [article] = createArticlePageFiles(examplePost, assets);
+		const [head, body] = article.content.split('</head>');
+
+		expect(head).toContain('href="/blog/example-article.md"');
+		expect(head).toContain('title="Markdown source"');
+		expect(body).not.toContain('rel="alternate"');
 	});
 
 	test('tracks the whole source directory for an index MDX article', () => {

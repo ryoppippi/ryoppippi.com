@@ -2,6 +2,7 @@ import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import {
 	type DocumentScriptInput,
 	type DocumentSelfHostedAssets,
+	type DocumentLinkInput,
 	type DocumentStyleDescriptor,
 	type DocumentStylesheetInput,
 	renderDocumentAssets,
@@ -180,15 +181,18 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
  * @param assets - Resolved shared, route, island, and client assets.
  * @param style - Site-owned page style selection.
  * @param islands - Client module ids mounted by the rendered page.
+ * @param links - Additional links selected by the rendered page.
  * @returns Head tags in document order with duplicate assets removed.
  */
 export function renderAssetTags(
 	assets: SiteAssets,
 	style: PageStyle,
 	islands: string[] = [],
+	links: readonly DocumentLinkInput[] = [],
 ): string {
 	const inline = style === 'home' ? assets.homeInline : undefined;
 	return renderDocumentAssets({
+		links,
 		selfHostedAssets: assets.selfHosted,
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
