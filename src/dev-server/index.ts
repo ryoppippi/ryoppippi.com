@@ -87,7 +87,8 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/works/showcase/'];
 	}
 	if (
-		file.startsWith('src/content/markdown/') ||
+		file.startsWith('src/content/') ||
+		file.startsWith('src/lib/') ||
 		file.startsWith('src/client/') ||
 		file.startsWith('src/components/') ||
 		file.startsWith('src/config/') ||
@@ -325,6 +326,16 @@ if (import.meta.vitest != null) {
 
 		it('invalidates all rendered pages for Markdown pipeline changes', () => {
 			expect(invalidatedRoutes('src/content/markdown/render.ts')).toBe('*');
+		});
+
+		it.each([
+			'src/content/blog.ts',
+			'src/content/islands.ts',
+			'src/content/island-renderer.ts',
+			'src/content/showcase.ts',
+			'src/lib/dotfiles.ts',
+		])('invalidates rendered pages when shared loader %s changes', (file) => {
+			expect(invalidatedRoutes(file)).toBe('*');
 		});
 
 		it('invalidates all rendered pages for head metadata changes', () => {
