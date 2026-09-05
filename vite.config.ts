@@ -1,11 +1,15 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContent } from '@ox-content/vite-plugin';
+import { createOxContentCustomHostPlugin } from '@ox-content/vite-plugin/custom-host';
+import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
+import path from 'node:path';
 import solid from '@solidjs/vite-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
-import { createStaticSitePlugin, createSyntaxThemeStylesheetPlugin } from './vite-plugin.ts';
+import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
+import { loadIslandDocuments } from './src/content/islands.ts';
+import { createStaticSiteDevelopmentPlugin } from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	envPrefix: ['PUBLIC_', 'VITE_'],
@@ -18,24 +22,44 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	plugins: [
-		createSyntaxThemeStylesheetPlugin('/src/pages/blog/article/ArticleContent.css', kanagawaDragon),
+		createSolidHtmlHostIslandRegistry({
+			oxContent: OX_CONTENT_BUILD_OPTIONS,
+			watch: ['src/content/blog'],
+			documents: ({ root, command }) =>
+				loadIslandDocuments(path.join(root, 'src/content/blog'), {
+					includeDrafts: command === 'serve',
+				}),
+		}).plugin,
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
 			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
-			ssg:
-				mode === 'test'
-					? false
-					: command === 'build'
-						? OX_CONTENT_BUILD_OPTIONS.ssg
-						: { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
+			ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
-		createStaticSitePlugin(),
+		createStaticSiteDevelopmentPlugin(),
+		createOxContentCustomHostPlugin({
+			// Development page routes remain in the existing middleware during migration.
+			host: command === 'serve' ? { routes: [] } : '/src/generation/index.ts',
+			themeTokens: {
+				theme: kanagawaDragon,
+				include: (name) => name.startsWith('syntax-'),
+				href: SYNTAX_THEME_HREF,
+			},
+			build: { transformHtml: false },
+			// Site-owned auxiliary output policy is still supplied by the generator.
+			oxContent: {
+				ssg: false,
+				icons: false,
+				feeds: false,
+				siteMaps: false,
+				resources: false,
+				redirects: false,
+			},
+		}),
 	] satisfies PluginOption[],
 	build: {
 		outDir: 'build',
 		emptyOutDir: true,
-		manifest: true,
 	},
 	run: {
 		tasks: {
@@ -53,6 +77,7 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
+					'vite-plugin.ts',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'public/**',
@@ -113,7 +138,7 @@ export default defineConfig(({ command, mode }) => ({
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
 						'vite-plugin.ts',
-						'src/client/{navigation,page-style-loader}.ts',
+						'src/client/page-style-loader.ts',
 						'src/contents/{external-content,works-data}.ts',
 						'src/dev-server/**/*.ts',
 						'src/generation/**/*.ts',

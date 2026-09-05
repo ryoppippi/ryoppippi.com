@@ -1,16 +1,16 @@
 import type { JSX } from '@solidjs/web';
-import { initIslands, type IslandController } from '@ox-content/islands';
+import { initIslands } from '@ox-content/islands';
+import {
+	initSolidHtmlHost,
+	type SolidHtmlHostClientContext,
+} from '@ox-content/vite-plugin-solid/html-host/client';
+import solidIslandLoaders from 'virtual:ox-content-solid/html-host/modules';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
+import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
-import {
-	loadPageStyle,
-	missingPageStyles,
-	needsInitialPageStyle,
-	obsoletePageStyles,
-} from './page-style-loader.ts';
-import { hashTargetId } from './navigation.ts';
+import { loadPageStyle, needsInitialPageStyle } from './page-style-loader.ts';
 import '@/styles/global.css';
 
 // SiteLayout is rendered only by the SSG, so this dynamic entry exposes its CSS to
@@ -42,9 +42,7 @@ function initialiseThemeToggle(): void {
 			event,
 			nextTheme: dark ? 'dark' : 'light',
 			apply: () => {
-				document.documentElement.classList.toggle('dark', dark);
-				document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-				localStorage.theme = dark ? 'dark' : 'light';
+				setThemeBootstrapPreference(dark ? 'dark' : 'light');
 				render();
 			},
 		});
@@ -148,60 +146,47 @@ function initialiseMediaFilter(): void {
 }
 
 type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
+type SolidIslandRuntime = typeof import('@solidjs/web');
 
-// Every component colocated with a post is a potential island, so the loaders
-// are collected by glob rather than listed by hand. Vite keeps each one in its
-// own chunk, so a post only downloads the islands it actually uses. The globs
-const solidIslandLoaders = import.meta.glob<SolidIslandModule>('../content/blog/**/*.tsx');
-
-let islandController: IslandController | undefined;
-
-async function mountSolidIsland(
-	element: HTMLElement,
-	load: () => Promise<SolidIslandModule>,
-	props: Record<string, unknown>,
-): Promise<() => void> {
-	const [{ render }, { default: Island }] = await Promise.all([import('@solidjs/web'), load()]);
-	// Solid islands are not compiled hydratable, so the server markup is
-	// replaced by a fresh client render instead of being adopted.
-	const target = element.querySelector<HTMLElement>('[data-ox-island-root]') ?? element;
-	target.replaceChildren();
-	return render(() => Island(props), target);
+/**
+ * Mounts a loaded Solid island into its HTML-host element.
+ *
+ * @param context - Loaded component, runtime, props, slot markup, and target element.
+ * @returns The Solid root disposer.
+ */
+export function mountSolidIsland({
+	component,
+	element,
+	props,
+	runtime,
+	slotHtml,
+}: Pick<
+	SolidHtmlHostClientContext<SolidIslandRuntime>,
+	'component' | 'element' | 'props' | 'runtime' | 'slotHtml'
+>): () => void {
+	if (typeof component !== 'function' || runtime == null) {
+		throw new Error('Expected a Solid component and renderer');
+	}
+	const Island = component as SolidIslandModule['default'];
+	const componentProps =
+		slotHtml == null
+			? props
+			: {
+					...props,
+					children: [...document.createRange().createContextualFragment(slotHtml).childNodes],
+				};
+	return runtime.render(() => runtime.createComponent(Island, componentProps), element);
 }
 
 function initialiseSolidIslands(): void {
-	islandController = initIslands((element, props) => {
-		const moduleId = element.dataset.oxIsland;
-		const load = moduleId == null ? undefined : solidIslandLoaders[`../content/blog/${moduleId}`];
-		if (load == null) {
-			throw new Error(`Unknown island module: ${moduleId ?? ''}`);
-		}
-
-		let dispose: (() => void) | undefined;
-		let destroyed = false;
-		void mountSolidIsland(element, load, props)
-			.then((mountedDispose) => {
-				if (destroyed) {
-					mountedDispose();
-				} else {
-					dispose = mountedDispose;
-				}
-			})
-			.catch((error: unknown) => {
-				element.classList.add('ox-island-error');
-				element.dataset.oxError = error instanceof Error ? error.message : String(error);
-			});
-
-		// Loading stays asynchronous so unrelated pages do not download every
-		// post-colocated component. Cleanup still has to be synchronously
-		// registered with the Ox Content island controller.
-		return () => {
-			destroyed = true;
-			dispose?.();
-		};
+	initSolidHtmlHost({
+		initIslands,
+		modules: solidIslandLoaders,
+		loadRuntime: () => import('@solidjs/web'),
+		// This site compiles non-hydratable Solid; the host clears SSR markup before mounting.
+		render: mountSolidIsland,
 	});
 }
-
 function initialisePageInteractions(): void {
 	initialiseThemeToggle();
 	initialiseBlogFilters();
@@ -214,165 +199,6 @@ function initialisePageInteractions(): void {
 	enhanceMarkdownTables(document);
 }
 
-function destroyMountedIslands(): void {
-	islandController?.destroy();
-	islandController = undefined;
-}
-
-const pageHeadSelector = [
-	'meta[name="description"]',
-	'meta[name="robots"]',
-	'meta[name="Hatena::Bookmark"]',
-	'meta[name^="twitter:"]',
-	'meta[property^="og:"]',
-	'meta[property^="article:"]',
-	'link[rel="canonical"]',
-	'link[rel="alternate"][hreflang]',
-	'script[type="application/ld+json"]',
-].join(',');
-
-function synchroniseDocumentHead(next: Document): void {
-	document.title = next.title;
-	for (const element of document.head.querySelectorAll(pageHeadSelector)) {
-		element.remove();
-	}
-	for (const element of next.head.querySelectorAll(pageHeadSelector)) {
-		document.head.append(element.cloneNode(true));
-	}
-}
-
-let activeNavigationRequest: AbortController | undefined;
-
-function stylesheetLinks(target: Document): HTMLLinkElement[] {
-	return [...target.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
-}
-
-function stylesheetHrefs(target: Document): string[] {
-	return stylesheetLinks(target).map((link) => link.href);
-}
-
-async function loadLinkedPageStyles(next: Document): Promise<void> {
-	await Promise.all(
-		missingPageStyles(stylesheetHrefs(document), stylesheetHrefs(next)).map(
-			(href) =>
-				new Promise<void>((resolve, reject) => {
-					const link = document.createElement('link');
-					link.rel = 'stylesheet';
-					link.href = href;
-					link.addEventListener('load', () => resolve(), { once: true });
-					link.addEventListener('error', () => reject(new Error(`Failed to load ${href}`)), {
-						once: true,
-					});
-					document.head.append(link);
-				}),
-		),
-	);
-}
-
-function removeObsoletePageStyles(next: Document): void {
-	const obsolete = new Set(obsoletePageStyles(stylesheetHrefs(document), stylesheetHrefs(next)));
-	for (const link of stylesheetLinks(document)) {
-		if (obsolete.has(link.href)) {
-			link.remove();
-		}
-	}
-}
-
-function synchroniseInlineStyles(next: Document): void {
-	for (const style of document.querySelectorAll(
-		'style[data-inline-base-style], style[data-inline-page-style]',
-	)) {
-		style.remove();
-	}
-	for (const style of next.querySelectorAll(
-		'style[data-inline-base-style], style[data-inline-page-style]',
-	)) {
-		document.head.append(style.cloneNode(true));
-	}
-}
-
-function scrollAfterNavigation(url: URL): void {
-	const targetId = hashTargetId(url);
-	const target = targetId == null ? null : document.getElementById(targetId);
-	if (target != null) {
-		target.scrollIntoView();
-		return;
-	}
-
-	window.scrollTo({ top: 0 });
-}
-
-async function navigateWithinSite(url: URL, pushHistory: boolean): Promise<void> {
-	activeNavigationRequest?.abort();
-	activeNavigationRequest = new AbortController();
-	const response = await fetch(url, {
-		headers: { Accept: 'text/html' },
-		signal: activeNavigationRequest.signal,
-	});
-	if (!response.ok || response.headers.get('content-type')?.includes('text/html') !== true) {
-		location.href = url.href;
-		return;
-	}
-
-	const next = new DOMParser().parseFromString(await response.text(), 'text/html');
-	if (next.querySelector('style[data-inline-page-style]') == null) {
-		await loadPageStyle(next.body.dataset.pageStyle);
-	}
-	await loadLinkedPageStyles(next);
-	const applyNavigation = () => {
-		destroyMountedIslands();
-		removeObsoletePageStyles(next);
-		synchroniseInlineStyles(next);
-		synchroniseDocumentHead(next);
-		if (next.body.dataset.pageStyle === 'home') {
-			next.body.dataset.spaNavigation = 'true';
-		}
-		document.body.replaceWith(next.body);
-		if (pushHistory) {
-			history.pushState({}, '', url);
-		}
-		initialisePageInteractions();
-		scrollAfterNavigation(url);
-	};
-
-	if (document.startViewTransition != null) {
-		document.startViewTransition(applyNavigation);
-	} else {
-		applyNavigation();
-	}
-}
-
-document.addEventListener('click', (event) => {
-	if (
-		event.defaultPrevented ||
-		event.button !== 0 ||
-		event.metaKey ||
-		event.ctrlKey ||
-		event.shiftKey ||
-		event.altKey
-	) {
-		return;
-	}
-	const anchor = (event.target as Element).closest<HTMLAnchorElement>('a[href]');
-	if (anchor == null || anchor.target.length > 0 || anchor.hasAttribute('download')) {
-		return;
-	}
-	const url = new URL(anchor.href, location.href);
-	if (
-		url.origin !== location.origin ||
-		url.pathname.endsWith('.md') ||
-		url.pathname.endsWith('.xml')
-	) {
-		return;
-	}
-	if (url.pathname === location.pathname && url.search === location.search) {
-		return;
-	}
-	event.preventDefault();
-	void navigateWithinSite(url, true);
-});
-
-window.addEventListener('popstate', () => void navigateWithinSite(new URL(location.href), false));
 let markdownTableResizePending = false;
 window.addEventListener('resize', () => {
 	if (markdownTableResizePending) {

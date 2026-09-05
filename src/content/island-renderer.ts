@@ -1,86 +1,84 @@
 import type { IslandRenderer } from './markdown/render.ts';
-import { renderToString } from '@solidjs/web';
+import path from 'node:path';
+import { renderSolidHtmlHost, toSolidHtmlHostClientModuleId } from '@ox-content/vite-plugin-solid';
 
-type SolidIslandModule = { default: (props: Record<string, unknown>) => unknown };
+const workspaceDirectory = path.resolve(import.meta.dirname, '../..');
 
-/**
- * Loads a module by a path relative to the site source root, such as
- * `/src/content/blog/2026-07-23-post/Chart.tsx`.
- *
- * A Solid `.tsx` file has to be compiled before it can be rendered, so callers
- * supply a Vite SSR loader rather than a plain dynamic import.
- */
+/** Vite loader that compiles Solid modules before rendering. */
 export type IslandModuleLoader = (path: string) => Promise<unknown>;
 
 /**
- * Builds the island renderer used by the markdown pipeline to server-render
- * post-colocated components.
+ * Connects the host's Vite loader to Ox Content's Solid HTML renderer.
  *
- * @param load - Vite SSR loader for paths relative to the site source root.
- * @returns A renderer that returns the component's HTML, or null when the
- * module cannot be loaded or does not export a component.
- * @example
- * const renderIsland = createIslandRenderer((path) => server.ssrLoadModule(path));
- * await renderIsland('2026-07-23-post/Chart.tsx', { bars: 3 });
+ * @param load - Vite SSR module loader.
+ * @param root - Vite project root used to produce browser module ids.
+ * @returns A document renderer that fails on any upstream diagnostic.
  */
-export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
-	const cache = new Map<string, Promise<string | null>>();
-
-	return async (moduleId, props) => {
-		const key = `${moduleId} ${JSON.stringify(props)}`;
-		const cached = cache.get(key);
-		if (cached != null) {
-			return cached;
+export function createIslandRenderer(
+	load: IslandModuleLoader,
+	root = workspaceDirectory,
+): IslandRenderer {
+	return async (html, context) => {
+		const result = await renderSolidHtmlHost({
+			html,
+			...context,
+			root,
+			loadModule: load,
+			resolveClientModule: ({ serverModuleId }) =>
+				toSolidHtmlHostClientModuleId(serverModuleId, root),
+		});
+		if (result.diagnostics.length > 0) {
+			throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 		}
-
-		const pending = (async () => {
-			try {
-				const module = (await load(`/src/content/blog/${moduleId}`)) as SolidIslandModule;
-				if (typeof module?.default !== 'function') {
-					return null;
-				}
-
-				return renderToString(() => module.default(props));
-			} catch (error) {
-				console.warn(`[islands] failed to render ${moduleId}:`, error);
-				return null;
-			}
-		})();
-
-		cache.set(key, pending);
-		return pending;
+		return { html: result.html, clientModules: result.clientModules };
 	};
 }
 
 if (import.meta.vitest != null) {
-	describe(createIslandRenderer, () => {
-		it('returns null when the module has no component export', async () => {
-			const renderIsland = createIslandRenderer(async () => ({ default: 'not a component' }));
+	const html = '<div data-ox-island="Chart"><script type="application/json">{}</script></div>';
+	const context = {
+		documentPath: '/workspace/src/content/blog/post/index.mdx',
+		contentRoot: '/workspace/src/content/blog',
+		imports: [
+			{
+				source: './Chart.tsx',
+				specifiers: [{ imported: 'default', local: 'Chart', kind: 'default' as const }],
+			},
+		],
+	};
 
-			expect(await renderIsland('post/Chart.tsx', {})).toBeNull();
+	describe(createIslandRenderer, () => {
+		it('rejects when the module has no component export', async () => {
+			const renderIsland = createIslandRenderer(async () => ({}), '/workspace');
+			await expect(renderIsland(html, context)).rejects.toThrow('export');
 		});
 
-		it('returns null when loading fails', async () => {
-			const renderIsland = createIslandRenderer(() => Promise.reject(new Error('missing')));
-
-			expect(await renderIsland('post/Chart.tsx', {})).toBeNull();
+		it('propagates module loading failures', async () => {
+			const renderIsland = createIslandRenderer(
+				() => Promise.reject(new Error('missing')),
+				'/workspace',
+			);
+			await expect(renderIsland(html, context)).rejects.toThrow('missing');
 		});
 
 		it('loads the module from the content blog directory', async () => {
-			const load = vi.fn(async () => ({ default: 'not a component' }));
-			const renderIsland = createIslandRenderer(load);
-			await renderIsland('2026-07-23-post/Chart.tsx', {});
-
-			expect(load).toHaveBeenCalledWith('/src/content/blog/2026-07-23-post/Chart.tsx');
+			const load = vi.fn(async () => ({ default: () => null }));
+			await createIslandRenderer(load, '/workspace')(html, context);
+			expect(load).toHaveBeenCalledWith('/workspace/src/content/blog/post/Chart.tsx');
 		});
 
-		it('renders a Solid component through renderToString', async () => {
+		it('renders a Solid component through the framework host contract', async () => {
 			const { ssr } = await import('@solidjs/web');
-			const renderIsland = createIslandRenderer(async () => ({
-				default: () => ssr('<p>solid</p>'),
-			}));
-
-			expect(await renderIsland('post/Chart.tsx', {})).toBe('<p>solid</p>');
+			const renderIsland = createIslandRenderer(
+				async () => ({ default: () => ssr('<p>solid</p>') }),
+				'/workspace',
+			);
+			const rendered = await renderIsland(html, context);
+			expect(rendered.html).toContain('<p>solid</p>');
+			expect(rendered.html).toContain('data-ox-module="/src/content/blog/post/Chart.tsx"');
+			expect(rendered.clientModules).toEqual([
+				{ name: 'Chart', moduleId: '/src/content/blog/post/Chart.tsx', exportName: 'default' },
+			]);
 		});
 	});
 }

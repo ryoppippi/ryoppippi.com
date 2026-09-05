@@ -26,7 +26,6 @@ export default function ArticlePage({ date, pathname, post }: ArticlePageProps) 
 
 	return (
 		<>
-			<link href={markdownPath} rel="alternate" title="Markdown source" type="text/plain" />
 			<div class={styles.articlePage}>
 				{!post.isPublished && (
 					<p class={styles.articleUnpublished}>This article is not published yet.</p>
@@ -37,7 +36,7 @@ export default function ArticlePage({ date, pathname, post }: ArticlePageProps) 
 						{title}
 					</h1>
 					<p class={styles.articleMeta}>
-						{date} ・ {post.readingTime.text} ・{' '}
+						{date} ・ {post.readingTime < 1 ? 'Under a minute' : `${post.readingTime} min read`} ・{' '}
 						<a
 							class={styles.articleSourceLink}
 							aria-label="Markdown source"

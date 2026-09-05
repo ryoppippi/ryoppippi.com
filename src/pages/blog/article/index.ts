@@ -1,6 +1,6 @@
 import type { ArticleMetadata, BlogPost } from '@/content/index.ts';
 import { formatDate } from '@/lib/util.ts';
-import { islandModuleIds, type SiteAssets } from '@/rendering/site-assets.ts';
+import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/generation/define-page.ts';
 import type { GeneratedFile } from '@/generation/generated-file.ts';
@@ -110,7 +110,15 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 			alternates: metadata.alternates,
 			assets,
 			article: true,
-			islands: islandModuleIds(post.html),
+			islands: post.clientModules.map(({ moduleId }) => moduleId),
+			links: [
+				{
+					rel: 'alternate',
+					href: `${pathname.slice(0, -1)}.md`,
+					title: 'Markdown source',
+					type: 'text/markdown',
+				},
+			],
 			style: 'article',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
@@ -120,11 +128,11 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 
 if (import.meta.vitest != null) {
 	const assets = {
-		base: '',
-		client: '',
+		sharedStyles: [],
+		scripts: [],
 		islands: {},
-		oxContent: '',
-		pageStyles: { about: '', article: '', blog: '', error: '', home: '', sponsors: '', works: '' },
+		selfHosted: {},
+		pageStyles: { about: [], article: [], blog: [], error: [], home: [], sponsors: [], works: [] },
 	} as const satisfies SiteAssets;
 
 	const examplePost = {
@@ -140,12 +148,28 @@ if (import.meta.vitest != null) {
 		source: '---\ntitle: Example\n---\nBody',
 		content: 'A concise article summary.',
 		html: '<p>A concise article summary.</p>',
+		clientModules: [],
 		pubDate: '2026-01-01T00:00:00.000Z',
 		image: '/assets/content/article-cover.avif',
 		lang: 'en',
 		isPublished: true,
-		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
+		readingTime: 1,
 	} satisfies BlogPost;
+
+	test('labels a zero-minute estimate as under a minute', () => {
+		const [article] = createArticlePageFiles({ ...examplePost, readingTime: 0 }, assets);
+		expect(article.content).toContain('Under a minute');
+		expect(article.content).not.toContain('0 min read');
+	});
+
+	test('places the Markdown alternate in the document head', () => {
+		const [article] = createArticlePageFiles(examplePost, assets);
+		const [head, body] = article.content.split('</head>');
+
+		expect(head).toContain('href="/blog/example-article.md"');
+		expect(head).toContain('title="Markdown source"');
+		expect(body).not.toContain('rel="alternate"');
+	});
 
 	test('tracks the whole source directory for an index MDX article', () => {
 		const [article] = createArticlePageFiles(

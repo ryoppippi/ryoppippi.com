@@ -35,7 +35,7 @@ export const BLOG_FEED_OPTIONS = {
 
 function feedInput(channel: FeedChannelOptions, items: readonly FeedItemInput[]) {
 	return {
-		base: '/',
+		base: channel.path ?? '/',
 		items,
 		options: resolveFeedsOptions(channel),
 		siteName: SITE_NAME,
@@ -48,7 +48,7 @@ function blogFeedItems(posts: readonly BlogPostMetadata[]): FeedItemInput[] {
 		title: post.title,
 		path: `blog/${post.filename}`,
 		date: post.pubDate,
-		description: `${post.title} | ${post.readingTime.text}`,
+		description: `${post.title} | ${post.readingTime < 1 ? 'Under a minute' : `${post.readingTime} min read`}`,
 		draft: !post.isPublished,
 	}));
 }
@@ -99,6 +99,26 @@ export function renderBlogFeed(posts: readonly BlogPostMetadata[]): Promise<Rend
  */
 export function renderMediaFeed(items: readonly PostListItem[]): Promise<RenderedFeedFile> {
 	return renderRssFeed(MEDIA_FEED_CHANNEL, mediaFeedItems(items), 'works/media/feed.xml');
+}
+
+/**
+ * Writes the local blog RSS output with Ox Content.
+ *
+ * @param posts - Local blog metadata to publish.
+ * @param outDir - Static site output directory.
+ * @returns A promise that resolves after the feed has been written.
+ */
+export async function writeBlogFeed(
+	posts: readonly BlogPostMetadata[],
+	outDir: string,
+): Promise<void> {
+	const result = await writeFeedFiles({
+		...feedInput(BLOG_FEED_CHANNEL, blogFeedItems(posts)),
+		outDir,
+	});
+	if (result.warning != null) {
+		throw new Error(result.warning);
+	}
 }
 
 /**

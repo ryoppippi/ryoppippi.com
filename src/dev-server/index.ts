@@ -11,7 +11,9 @@ import type { OssProject, Talk } from '@/contents/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { ViteDevServer } from 'vite';
 import { createCollectionAssetsMiddleware } from '@ox-content/vite-plugin';
+import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
+import { withoutLeadingSlash } from 'ufo';
 import { isSiteContentAssetSource, planSiteContentAssets } from '@/generation/content-assets.ts';
 import { DEV_ASSETS } from '@/rendering/site-assets.ts';
 
@@ -42,7 +44,7 @@ type MarkdownModule = {
 		options: NonNullable<Parameters<MarkdownRenderer>[1]> & {
 			renderIsland: IslandRenderer;
 		},
-	) => Promise<string>;
+	) => ReturnType<MarkdownRenderer>;
 };
 
 type DevRoutesModule = {
@@ -87,7 +89,8 @@ export function invalidatedRoutes(relativeFile: string): '*' | string[] | null {
 		return ['/works/showcase/'];
 	}
 	if (
-		file.startsWith('src/content/markdown/') ||
+		file.startsWith('src/content/') ||
+		file.startsWith('src/lib/') ||
 		file.startsWith('src/client/') ||
 		file.startsWith('src/components/') ||
 		file.startsWith('src/config/') ||
@@ -118,25 +121,14 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 		return [];
 	}
 
-	const hrefs: string[] = [];
-	const seen = new Set<string>();
-	const visit = async (node: typeof entry): Promise<void> => {
-		const file = node.id?.split('?')[0];
-		if (file == null || seen.has(file)) {
-			return;
-		}
-
-		seen.add(file);
-		if (file.endsWith('.css')) {
-			hrefs.push(path.relative(server.config.root, file).replaceAll(path.sep, '/'));
-		}
-		for (const imported of node.importedModules) {
-			await visit(imported);
-		}
-	};
-	await visit(entry);
-
-	return hrefs;
+	const result = resolveSolidIslandStylesheets({
+		modules: [entry.id ?? url],
+		moduleGraph: server.moduleGraph,
+	});
+	if (result.diagnostics.length > 0) {
+		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
+	}
+	return result.stylesheets.map(({ href }) => withoutLeadingSlash(href));
 }
 
 function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDependencies {
@@ -154,10 +146,7 @@ function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDepe
 		const { createIslandRenderer } = islands;
 		const renderIsland = createIslandRenderer(async (modulePath) => {
 			const module = await server.ssrLoadModule(modulePath);
-			assets.islands[modulePath.replace('/src/content/blog/', '')] = await islandStyleHrefs(
-				server,
-				modulePath,
-			);
+			assets.islands[modulePath] = await islandStyleHrefs(server, modulePath);
 			return module;
 		});
 		return markdown.renderMarkdown(content, { ...options, renderIsland });
@@ -258,52 +247,100 @@ export async function configureStaticSiteDevelopmentServer(server: ViteDevServer
 	});
 
 	server.middlewares.use(async (request, response, next) => {
-		if (request.method !== 'GET' || request.url == null) {
-			next();
-			return;
-		}
-
-		const url = new URL(request.url, 'http://localhost');
-		let rendered = cache.get(url.pathname);
-		let routesModule: DevRoutesModule | undefined;
-		if (rendered == null) {
-			routesModule = (await server.ssrLoadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
-			rendered = routesModule.renderDevRoute(url.pathname, dependencies);
-			cache.set(url.pathname, rendered);
-		}
-		let result = await rendered;
-		if (result == null) {
-			cache.delete(url.pathname);
-			if (request.headers.accept?.includes('text/html') === true) {
-				routesModule ??= (await server.ssrLoadModule(
-					'/src/dev-server/routes.ts',
-				)) as DevRoutesModule;
-				result = routesModule.renderDevNotFound(DEV_ASSETS);
-			} else if (
-				url.pathname.startsWith('/blog/') ||
-				url.pathname.startsWith('/works/showcase/assets/')
-			) {
-				response.statusCode = 404;
-				response.end();
+		let pathname: string | undefined;
+		let rendered: Promise<DevRouteResponse | null> | undefined;
+		try {
+			if (request.method !== 'GET' || request.url == null) {
+				next();
 				return;
 			}
-		}
-		if (result == null) {
-			next();
-			return;
-		}
 
-		response.statusCode = result.status;
-		response.setHeader('Content-Type', result.contentType);
-		response.end(
-			result.contentType.startsWith('text/html')
-				? await server.transformIndexHtml(url.pathname, result.body)
-				: result.body,
-		);
+			const url = new URL(request.url, 'http://localhost');
+			pathname = url.pathname;
+			rendered = cache.get(url.pathname);
+			let routesModule: DevRoutesModule | undefined;
+			if (rendered == null) {
+				routesModule = (await server.ssrLoadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
+				rendered = routesModule.renderDevRoute(url.pathname, dependencies);
+				cache.set(url.pathname, rendered);
+			}
+			let result = await rendered;
+			if (result == null) {
+				cache.delete(url.pathname);
+				if (request.headers.accept?.includes('text/html') === true) {
+					routesModule ??= (await server.ssrLoadModule(
+						'/src/dev-server/routes.ts',
+					)) as DevRoutesModule;
+					result = routesModule.renderDevNotFound(DEV_ASSETS);
+				} else if (
+					url.pathname.startsWith('/blog/') ||
+					url.pathname.startsWith('/works/showcase/assets/')
+				) {
+					response.statusCode = 404;
+					response.end();
+					return;
+				}
+			}
+			if (result == null) {
+				next();
+				return;
+			}
+
+			response.statusCode = result.status;
+			response.setHeader('Content-Type', result.contentType);
+			response.end(
+				result.contentType.startsWith('text/html')
+					? await server.transformIndexHtml(url.pathname, result.body)
+					: result.body,
+			);
+		} catch (error) {
+			// Failed renders must be retryable, without evicting a newer in-flight response.
+			if (pathname != null && cache.get(pathname) === rendered) {
+				cache.delete(pathname);
+			}
+			next(error);
+		}
 	});
 }
 
 if (import.meta.vitest != null) {
+	it('returns a server error and retries a transient route failure', async () => {
+		const { createServer } = await import('vite');
+		const { createServer: createHttpServer } = await import('node:http');
+		const server = await createServer({
+			configFile: false,
+			appType: 'custom',
+			logLevel: 'silent',
+			server: { middlewareMode: true },
+		});
+		let attempts = 0;
+		using _loader = vi.spyOn(server, 'ssrLoadModule').mockResolvedValue({
+			renderDevRoute: async () => {
+				if (attempts++ === 0) throw new Error('Transient render failure');
+				return { status: 200, contentType: 'text/plain', body: 'Recovered' };
+			},
+			renderDevNotFound: () => ({ status: 404, contentType: 'text/plain', body: 'Missing' }),
+		} satisfies DevRoutesModule);
+		const http = createHttpServer(server.middlewares);
+		try {
+			await configureStaticSiteDevelopmentServer(server);
+			await new Promise<void>((resolve) => http.listen(0, '127.0.0.1', resolve));
+			const address = http.address();
+			assert(address != null && typeof address !== 'string');
+			const url = `http://127.0.0.1:${address.port}/retry-fixture`;
+			const failed = await fetch(url, { signal: AbortSignal.timeout(2_000) });
+			expect(failed.status).toBe(500);
+			await failed.text();
+			const recovered = await fetch(url, { signal: AbortSignal.timeout(2_000) });
+			expect(recovered.status).toBe(200);
+			expect(await recovered.text()).toBe('Recovered');
+		} finally {
+			http.closeAllConnections();
+			await new Promise<void>((resolve) => http.close(() => resolve()));
+			await server.close();
+		}
+	});
+
 	describe(invalidatedRoutes, () => {
 		it('invalidates only an edited article and its indexes', () => {
 			expect(invalidatedRoutes('src/content/blog/2026-06-22/index.md')).toEqual([
@@ -325,6 +362,16 @@ if (import.meta.vitest != null) {
 
 		it('invalidates all rendered pages for Markdown pipeline changes', () => {
 			expect(invalidatedRoutes('src/content/markdown/render.ts')).toBe('*');
+		});
+
+		it.each([
+			'src/content/blog.ts',
+			'src/content/islands.ts',
+			'src/content/island-renderer.ts',
+			'src/content/showcase.ts',
+			'src/lib/dotfiles.ts',
+		])('invalidates rendered pages when shared loader %s changes', (file) => {
+			expect(invalidatedRoutes(file)).toBe('*');
 		});
 
 		it('invalidates all rendered pages for head metadata changes', () => {

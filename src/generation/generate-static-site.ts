@@ -1,20 +1,14 @@
 import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { writeCollectionAssets } from '@ox-content/vite-plugin';
-import { access, mkdir, writeFile } from 'node:fs/promises';
-import path from 'node:path';
+import { rewriteCollectionAssetUrls, writeCollectionAssets } from '@ox-content/vite-plugin';
 import {
 	extractInstallSection,
 	extractSection,
 	fetchDotfilesReadme,
 	parseStepCommands,
 } from '@/lib/dotfiles.ts';
-import {
-	collectionAssetUrls,
-	planSiteContentAssets,
-	rewriteContentAssetUrls,
-} from './content-assets.ts';
+import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
 import {
 	loadExternalMedia,
 	loadExternalPosts,
@@ -41,29 +35,21 @@ type GenerateStaticSiteOptions = {
 	root: string;
 };
 
-async function writeGeneratedFiles(outDir: string, files: GeneratedFile[]): Promise<void> {
-	for (const file of files) {
-		const destination = path.join(outDir, file.path);
-		await mkdir(path.dirname(destination), { recursive: true });
-		await writeFile(destination, file.content);
-	}
-}
-
 /**
- * Generates the static site and its auxiliary files.
+ * Prepares site-owned pages and writes auxiliary content outputs.
  *
  * @param assets - Bundled site assets referenced by generated pages.
  * @param content - Optional prebuilt content artifact.
  * @param outDir - Directory that receives generated files.
  * @param root - Repository root used for source loading and Git metadata.
- * @returns A promise that resolves after all generated files are written.
+ * @returns Pages and plain-text files for the framework host writer.
  */
 export async function generateStaticSite({
 	assets,
 	content,
 	outDir,
 	root,
-}: GenerateStaticSiteOptions): Promise<void> {
+}: GenerateStaticSiteOptions): Promise<GeneratedFile[]> {
 	let localContent = content;
 	if (localContent == null) {
 		const { buildContentArtifact } = await import('@/content/build.ts');
@@ -78,12 +64,21 @@ export async function generateStaticSite({
 			loadTalks(),
 			fetchDotfilesReadme(fetch),
 		]);
-	const contentAssets = await planSiteContentAssets(root);
+	const contentAssets = await planSiteContentAssets(
+		root,
+		new Set(
+			localContent.posts.filter((post) => post.isPublished === true).map((post) => post.filename),
+		),
+	);
 	await writeCollectionAssets({ manifest: contentAssets, outDir });
 	const assetUrls = collectionAssetUrls(contentAssets);
 	const posts = localContent.posts.map((post) => ({
 		...post,
-		html: rewriteContentAssetUrls(post.html, `/blog/${post.filename}/`, assetUrls),
+		html: rewriteCollectionAssetUrls({
+			html: post.html,
+			pagePath: `/blog/${post.filename}/`,
+			manifest: contentAssets,
+		}).html,
 	}));
 	const showcase = localContent.showcase.map((project) => ({
 		...project,
@@ -111,8 +106,7 @@ export async function generateStaticSite({
 		createErrorPageFile(assets),
 	];
 
-	await writeGeneratedFiles(outDir, pages);
-	await writeOxContentOutputFiles({ media: externalMedia, outDir, pages, root });
+	await writeOxContentOutputFiles({ posts, media: externalMedia, outDir, pages, root });
 
 	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [
@@ -135,18 +129,5 @@ export async function generateStaticSite({
 		);
 	}
 
-	await writeGeneratedFiles(outDir, plainFiles);
-
-	await Promise.all(
-		[
-			'index.html',
-			'about/index.html',
-			'works/oss/index.html',
-			'works/showcase/index.html',
-			'works/talks/index.html',
-			'works/media/index.html',
-			'works/media/feed.xml',
-			'works/publications/index.html',
-		].map((file) => access(path.join(outDir, file))),
-	);
+	return [...pages, ...plainFiles];
 }

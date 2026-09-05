@@ -187,31 +187,38 @@ if (import.meta.vitest != null) {
 		pubDate: '2026-06-22T00:00:00.000Z',
 		lang: 'en',
 		isPublished: true,
-		readingTime: { text: '1 min read', minutes: 1, time: 60_000, words: 100 },
+		readingTime: 1,
 	} satisfies BlogPostMetadata;
+
+	it('describes a zero-minute blog RSS estimate as under a minute', async () => {
+		const feed = await renderBlogFeed([{ ...metadata, readingTime: 0 }]);
+		expect(feed.content).toContain('Under a minute');
+		expect(feed.content).not.toContain('0 min read');
+	});
 
 	const post = {
 		...metadata,
 		source: '---\ntitle: Lazy article\n---\n\n# Lazy article',
 		content: '# Lazy article',
 		html: '<h1>Rendered only on demand</h1>',
+		clientModules: [],
 	} satisfies BlogPost;
 
 	function createTestDependencies() {
 		return {
 			assets: {
-				base: '',
-				client: '<script type="module" src="/src/client/index.ts"></script>',
+				sharedStyles: [],
+				scripts: ['/src/client/index.ts'],
 				islands: {},
-				oxContent: '',
+				selfHosted: {},
 				pageStyles: {
-					about: '',
-					article: '',
-					blog: '',
-					error: '',
-					home: '',
-					sponsors: '',
-					works: '',
+					about: [],
+					article: [],
+					blog: [],
+					error: [],
+					home: [],
+					sponsors: [],
+					works: [],
 				},
 			},
 			loadBlogPost: vi.fn(async () => post),
