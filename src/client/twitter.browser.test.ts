@@ -4,7 +4,7 @@ import { userEvent } from 'vitest/browser';
 const TWEET_URL = 'https://x.com/ryoppippi/status/1941072675872641440';
 
 describe('Tweet copy action', () => {
-	it('copies the post URL after the document initializes', async () => {
+	it('copies the post URL after the document initialises', async () => {
 		const nextBody = document.createElement('body');
 		nextBody.innerHTML = `
 			<a
