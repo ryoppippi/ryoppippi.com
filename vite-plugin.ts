@@ -95,12 +95,16 @@ export function createStaticSitePlugin(): Plugin {
 			)) as StaticSiteDevelopmentModule;
 			await configureStaticSiteDevelopmentServer(server);
 		},
-		async closeBundle() {
-			if (resolvedConfig?.command !== 'build') {
-				return;
-			}
-			staticSiteBuild ??= runStaticSiteBuild(resolvedConfig);
-			await staticSiteBuild;
+		closeBundle: {
+			// Both generators write article routes; the custom document must be the final output.
+			sequential: true,
+			async handler() {
+				if (resolvedConfig?.command !== 'build') {
+					return;
+				}
+				staticSiteBuild ??= runStaticSiteBuild(resolvedConfig);
+				await staticSiteBuild;
+			},
 		},
 	};
 }
