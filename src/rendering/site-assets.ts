@@ -4,7 +4,7 @@ import {
 	renderDocumentAssets,
 	renderDocumentAssetTag,
 } from '@ox-content/vite-plugin/document-assets';
-import { OX_CONTENT_ASSET_MANIFEST } from '@/config/ox-content.ts';
+import { OX_CONTENT_ASSET_MANIFEST, SYNTAX_THEME_HREF } from '@/config/ox-content.ts';
 import { type PageStyle } from '@/client/page-style-registry.ts';
 
 export type { PageStyle } from '@/client/page-style-registry.ts';
@@ -202,6 +202,7 @@ export function renderAssetTags(
 		assets.oxContent,
 		inline?.base ?? assets.base,
 		inline?.page ?? assets.pageStyles[style],
+		style === 'article' ? renderDocumentAssetTag({ kind: 'style', href: SYNTAX_THEME_HREF }) : '',
 		renderIslandStyles(assets, islands),
 		assets.client,
 	]
@@ -324,6 +325,10 @@ if (import.meta.vitest != null) {
 	});
 
 	describe(renderAssetTags, () => {
+		it('loads syntax theme tokens only for article pages', () => {
+			expect(renderAssetTags(assets, 'article')).toContain('/__ox_theme_tokens__/syntax.css');
+			expect(renderAssetTags(assets, 'home')).not.toContain('/__ox_theme_tokens__/syntax.css');
+		});
 		it('links the styles of the islands the page mounts', () => {
 			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx']);
 

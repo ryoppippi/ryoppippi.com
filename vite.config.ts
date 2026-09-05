@@ -7,12 +7,9 @@ import solid from '@solidjs/vite-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
-import { OX_CONTENT_BUILD_OPTIONS } from './src/config/ox-content.ts';
+import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { loadIslandDocuments } from './src/content/islands.ts';
-import {
-	createStaticSiteDevelopmentPlugin,
-	createSyntaxThemeStylesheetPlugin,
-} from './vite-plugin.ts';
+import { createStaticSiteDevelopmentPlugin } from './vite-plugin.ts';
 
 export default defineConfig(({ command, mode }) => ({
 	envPrefix: ['PUBLIC_', 'VITE_'],
@@ -33,7 +30,6 @@ export default defineConfig(({ command, mode }) => ({
 					includeDrafts: command === 'serve',
 				}),
 		}).plugin,
-		createSyntaxThemeStylesheetPlugin('/src/pages/blog/article/ArticleContent.css', kanagawaDragon),
 		solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 		...oxContent({
 			...OX_CONTENT_BUILD_OPTIONS,
@@ -42,8 +38,13 @@ export default defineConfig(({ command, mode }) => ({
 		}),
 		createStaticSiteDevelopmentPlugin(),
 		createOxContentCustomHostPlugin({
-			host: '/src/generation/index.ts',
-			dev: { enabled: false },
+			// Development page routes remain in the existing middleware during migration.
+			host: command === 'serve' ? { routes: [] } : '/src/generation/index.ts',
+			themeTokens: {
+				theme: kanagawaDragon,
+				include: (name) => name.startsWith('syntax-'),
+				href: SYNTAX_THEME_HREF,
+			},
 			build: { transformHtml: false },
 			// Site-owned auxiliary output policy is still supplied by the generator.
 			oxContent: {
