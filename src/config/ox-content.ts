@@ -9,6 +9,9 @@ import { BLOG_FEED_OPTIONS } from '../generation/feeds.ts';
 
 export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
 
+/** Public stylesheet shared by the custom host's dev server and build writer. */
+export const SYNTAX_THEME_HREF = '/__ox_theme_tokens__/syntax.css';
+
 const redirects = [...REDIRECT_ROUTES, { from: '/works', to: '/works/oss', status: 301 }] as const;
 const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to]));
 
