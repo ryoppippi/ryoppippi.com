@@ -259,52 +259,100 @@ export async function configureStaticSiteDevelopmentServer(server: ViteDevServer
 	});
 
 	server.middlewares.use(async (request, response, next) => {
-		if (request.method !== 'GET' || request.url == null) {
-			next();
-			return;
-		}
-
-		const url = new URL(request.url, 'http://localhost');
-		let rendered = cache.get(url.pathname);
-		let routesModule: DevRoutesModule | undefined;
-		if (rendered == null) {
-			routesModule = (await server.ssrLoadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
-			rendered = routesModule.renderDevRoute(url.pathname, dependencies);
-			cache.set(url.pathname, rendered);
-		}
-		let result = await rendered;
-		if (result == null) {
-			cache.delete(url.pathname);
-			if (request.headers.accept?.includes('text/html') === true) {
-				routesModule ??= (await server.ssrLoadModule(
-					'/src/dev-server/routes.ts',
-				)) as DevRoutesModule;
-				result = routesModule.renderDevNotFound(DEV_ASSETS);
-			} else if (
-				url.pathname.startsWith('/blog/') ||
-				url.pathname.startsWith('/works/showcase/assets/')
-			) {
-				response.statusCode = 404;
-				response.end();
+		let pathname: string | undefined;
+		let rendered: Promise<DevRouteResponse | null> | undefined;
+		try {
+			if (request.method !== 'GET' || request.url == null) {
+				next();
 				return;
 			}
-		}
-		if (result == null) {
-			next();
-			return;
-		}
 
-		response.statusCode = result.status;
-		response.setHeader('Content-Type', result.contentType);
-		response.end(
-			result.contentType.startsWith('text/html')
-				? await server.transformIndexHtml(url.pathname, result.body)
-				: result.body,
-		);
+			const url = new URL(request.url, 'http://localhost');
+			pathname = url.pathname;
+			rendered = cache.get(url.pathname);
+			let routesModule: DevRoutesModule | undefined;
+			if (rendered == null) {
+				routesModule = (await server.ssrLoadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
+				rendered = routesModule.renderDevRoute(url.pathname, dependencies);
+				cache.set(url.pathname, rendered);
+			}
+			let result = await rendered;
+			if (result == null) {
+				cache.delete(url.pathname);
+				if (request.headers.accept?.includes('text/html') === true) {
+					routesModule ??= (await server.ssrLoadModule(
+						'/src/dev-server/routes.ts',
+					)) as DevRoutesModule;
+					result = routesModule.renderDevNotFound(DEV_ASSETS);
+				} else if (
+					url.pathname.startsWith('/blog/') ||
+					url.pathname.startsWith('/works/showcase/assets/')
+				) {
+					response.statusCode = 404;
+					response.end();
+					return;
+				}
+			}
+			if (result == null) {
+				next();
+				return;
+			}
+
+			response.statusCode = result.status;
+			response.setHeader('Content-Type', result.contentType);
+			response.end(
+				result.contentType.startsWith('text/html')
+					? await server.transformIndexHtml(url.pathname, result.body)
+					: result.body,
+			);
+		} catch (error) {
+			// Failed renders must be retryable, without evicting a newer in-flight response.
+			if (pathname != null && cache.get(pathname) === rendered) {
+				cache.delete(pathname);
+			}
+			next(error);
+		}
 	});
 }
 
 if (import.meta.vitest != null) {
+	it('returns a server error and retries a transient route failure', async () => {
+		const { createServer } = await import('vite');
+		const { createServer: createHttpServer } = await import('node:http');
+		const server = await createServer({
+			configFile: false,
+			appType: 'custom',
+			logLevel: 'silent',
+			server: { middlewareMode: true },
+		});
+		let attempts = 0;
+		using _loader = vi.spyOn(server, 'ssrLoadModule').mockResolvedValue({
+			renderDevRoute: async () => {
+				if (attempts++ === 0) throw new Error('Transient render failure');
+				return { status: 200, contentType: 'text/plain', body: 'Recovered' };
+			},
+			renderDevNotFound: () => ({ status: 404, contentType: 'text/plain', body: 'Missing' }),
+		} satisfies DevRoutesModule);
+		const http = createHttpServer(server.middlewares);
+		try {
+			await configureStaticSiteDevelopmentServer(server);
+			await new Promise<void>((resolve) => http.listen(0, '127.0.0.1', resolve));
+			const address = http.address();
+			assert(address != null && typeof address !== 'string');
+			const url = `http://127.0.0.1:${address.port}/retry-fixture`;
+			const failed = await fetch(url, { signal: AbortSignal.timeout(2_000) });
+			expect(failed.status).toBe(500);
+			await failed.text();
+			const recovered = await fetch(url, { signal: AbortSignal.timeout(2_000) });
+			expect(recovered.status).toBe(200);
+			expect(await recovered.text()).toBe('Recovered');
+		} finally {
+			http.closeAllConnections();
+			await new Promise<void>((resolve) => http.close(() => resolve()));
+			await server.close();
+		}
+	});
+
 	describe(invalidatedRoutes, () => {
 		it('invalidates only an edited article and its indexes', () => {
 			expect(invalidatedRoutes('src/content/blog/2026-06-22/index.md')).toEqual([

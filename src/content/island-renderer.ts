@@ -17,8 +17,7 @@ export type IslandModuleLoader = (path: string) => Promise<unknown>;
  * post-colocated components.
  *
  * @param load - Vite SSR loader for paths relative to the site source root.
- * @returns A renderer that returns the component's HTML, or null when the
- * module cannot be loaded or does not export a component.
+ * @returns A renderer that returns component HTML and propagates loading/rendering failures.
  * @example
  * const renderIsland = createIslandRenderer((path) => server.ssrLoadModule(path));
  * await renderIsland('2026-07-23-post/Chart.tsx', { bars: 3 });
@@ -34,17 +33,11 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 		}
 
 		const pending = (async () => {
-			try {
-				const module = (await load(`/src/content/blog/${moduleId}`)) as SolidIslandModule;
-				if (typeof module?.default !== 'function') {
-					return null;
-				}
-
-				return renderToString(() => module.default(props));
-			} catch (error) {
-				console.warn(`[islands] failed to render ${moduleId}:`, error);
-				return null;
+			const module = (await load(`/src/content/blog/${moduleId}`)) as SolidIslandModule;
+			if (typeof module?.default !== 'function') {
+				throw new TypeError(`Island ${moduleId} must export a default component`);
 			}
+			return renderToString(() => module.default(props));
 		})();
 
 		cache.set(key, pending);
@@ -54,20 +47,20 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 
 if (import.meta.vitest != null) {
 	describe(createIslandRenderer, () => {
-		it('returns null when the module has no component export', async () => {
+		it('rejects when the module has no component export', async () => {
 			const renderIsland = createIslandRenderer(async () => ({ default: 'not a component' }));
 
-			expect(await renderIsland('post/Chart.tsx', {})).toBeNull();
+			await expect(renderIsland('post/Chart.tsx', {})).rejects.toThrow('component');
 		});
 
-		it('returns null when loading fails', async () => {
+		it('propagates module loading failures', async () => {
 			const renderIsland = createIslandRenderer(() => Promise.reject(new Error('missing')));
 
-			expect(await renderIsland('post/Chart.tsx', {})).toBeNull();
+			await expect(renderIsland('post/Chart.tsx', {})).rejects.toThrow('missing');
 		});
 
 		it('loads the module from the content blog directory', async () => {
-			const load = vi.fn(async () => ({ default: 'not a component' }));
+			const load = vi.fn(async () => ({ default: () => null }));
 			const renderIsland = createIslandRenderer(load);
 			await renderIsland('2026-07-23-post/Chart.tsx', {});
 
