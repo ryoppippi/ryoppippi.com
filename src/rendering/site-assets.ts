@@ -79,11 +79,17 @@ const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
  * @param html - Rendered page or post markup.
  * @returns Module ids as they appear on the island placeholders.
  * @example
- * islandModuleIds('<div data-ox-island="post/Chart.tsx"></div>');
+ * islandModuleIds('<div data-ox-module="/src/content/blog/post/Chart.tsx"></div>');
  * // ['post/Chart.tsx']
  */
 export function islandModuleIds(html: string): string[] {
-	return [...new Set([...html.matchAll(/data-ox-island="([^"]*)"/g)].map((match) => match[1]))];
+	return [
+		...new Set(
+			[...html.matchAll(/data-ox-module="\/src\/content\/blog\/([^"]*)"/g)].map(
+				(match) => match[1],
+			),
+		),
+	];
 }
 
 export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): SiteAssets {
@@ -337,14 +343,14 @@ if (import.meta.vitest != null) {
 	describe(islandModuleIds, () => {
 		it('reads the module ids off island placeholders', () => {
 			const html =
-				'<div data-ox-island="post/Chart.tsx"></div><div data-ox-island="post/Table.tsx"></div>';
+				'<div data-ox-module="/src/content/blog/post/Chart.tsx"></div><div data-ox-module="/src/content/blog/post/Table.tsx"></div>';
 
 			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx', 'post/Table.tsx']);
 		});
 
 		it('reports a repeated island once', () => {
 			const html =
-				'<div data-ox-island="post/Chart.tsx"></div><div data-ox-island="post/Chart.tsx"></div>';
+				'<div data-ox-module="/src/content/blog/post/Chart.tsx"></div><div data-ox-module="/src/content/blog/post/Chart.tsx"></div>';
 
 			expect(islandModuleIds(html)).toEqual(['post/Chart.tsx']);
 		});

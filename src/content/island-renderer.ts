@@ -19,6 +19,7 @@ export function createIslandRenderer(load: IslandModuleLoader): IslandRenderer {
 				Object.entries(islands).map(([name, moduleId]) => [name, `/src/content/blog/${moduleId}`]),
 			),
 			loadModule: load,
+			resolveClientModule: ({ serverModuleId }) => serverModuleId,
 		});
 		if (result.diagnostics.length > 0) {
 			throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
@@ -53,7 +54,9 @@ if (import.meta.vitest != null) {
 			const renderIsland = createIslandRenderer(async () => ({
 				default: () => ssr('<p>solid</p>'),
 			}));
-			expect(await renderIsland(html, islands)).toContain('<p>solid</p>');
+			const rendered = await renderIsland(html, islands);
+			expect(rendered).toContain('<p>solid</p>');
+			expect(rendered).toContain('data-ox-module="/src/content/blog/post/Chart.tsx"');
 		});
 	});
 }
