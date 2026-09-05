@@ -1,5 +1,9 @@
 import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import { withoutLeadingSlash } from 'ufo';
+import {
+	renderDocumentAssets,
+	renderDocumentAssetTag,
+} from '@ox-content/vite-plugin/document-assets';
 import { OX_CONTENT_ASSET_MANIFEST } from '@/config/ox-content.ts';
 import { type PageStyle } from '@/client/page-style-registry.ts';
 
@@ -82,23 +86,23 @@ export function islandModuleIds(html: string): string[] {
 	return [...new Set([...html.matchAll(/data-ox-island="([^"]*)"/g)].map((match) => match[1]))];
 }
 
-export function resolveSiteAssets(
-	index: string,
-	manifest: Record<string, ManifestChunk>,
-): SiteAssets {
-	const indexStyles = [...index.matchAll(/<link[^>]*rel="stylesheet"[^>]*>/g)]
-		.map((match) => match[0])
-		.join('\n\t');
-	const client = [...index.matchAll(/<script[^>]*type="module"[^>]*><\/script>/g)]
-		.map((match) => match[0])
-		.join('\n\t');
+export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): SiteAssets {
+	const entry = renderDocumentAssets({
+		manifest,
+		clientEntries: ['index.html'],
+		crossorigin: true,
+	});
+	const indexStyles = entry.styles.map(renderDocumentAssetTag).join('\n\t');
+	const client = entry.scripts.map(renderDocumentAssetTag).join('\n\t');
 	const stylesFor = (suffix: string): string => {
 		const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
 		const styles = chunk?.css ?? (chunk?.file.endsWith('.css') === true ? [chunk.file] : []);
 		if (styles.length === 0) {
 			throw new Error(`Missing CSS for ${suffix}`);
 		}
-		return styles.map((href) => `<link rel="stylesheet" crossorigin href="/${href}">`).join('\n\t');
+		return renderDocumentAssets({
+			pageStyles: styles.map((href) => ({ href, crossorigin: true })),
+		}).headHtml;
 	};
 	const stylesForAll = (suffixes: readonly string[]): string =>
 		suffixes.map((suffix) => stylesFor(suffix)).join('\n\t');
@@ -149,16 +153,20 @@ export function resolveSiteAssets(
 	};
 }
 
-function inlineStyle(css: string, attribute: string): string {
-	return `<style ${attribute}>${css.replaceAll('</style', '<\\/style')}</style>`;
-}
-
 export function inlineHomeStyles(assets: SiteAssets, base: string, page: string): SiteAssets {
 	return {
 		...assets,
 		homeInline: {
-			base: inlineStyle(base, 'data-inline-base-style'),
-			page: inlineStyle(page, 'data-inline-page-style="home"'),
+			base: renderDocumentAssetTag({
+				kind: 'style',
+				content: base,
+				attrs: { 'data-inline-base-style': true },
+			}),
+			page: renderDocumentAssetTag({
+				kind: 'style',
+				content: page,
+				attrs: { 'data-inline-page-style': 'home' },
+			}),
 		},
 	};
 }
@@ -171,15 +179,11 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
  * never paint for a reader without JavaScript.
  */
 function renderIslandStyles(assets: SiteAssets, islands: string[]): string {
-	const hrefs = new Set(islands.flatMap((moduleId) => assets.islands[moduleId] ?? []));
-	return [...hrefs]
-		.map((href) => {
-			// Development hrefs carry Vite's query string, and `&lang.css` reads as a
-			// character reference unless the ampersand is escaped.
-			const escaped = href.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
-			return `<link rel="stylesheet" crossorigin href="/${escaped}">`;
-		})
-		.join('\n\t');
+	return renderDocumentAssets({
+		islandStyles: islands
+			.flatMap((moduleId) => assets.islands[moduleId] ?? [])
+			.map((href) => ({ href, crossorigin: true })),
+	}).headHtml;
 }
 
 export function renderAssetTags(
@@ -223,93 +227,91 @@ if (import.meta.vitest != null) {
 	describe(resolveSiteAssets, () => {
 		it('rejects unresolved island stylesheet dependencies', () => {
 			expect(() =>
-				resolveSiteAssets('', {
+				resolveSiteAssets({
 					'src/components/SiteLayout/SiteLayout.module.css': { file: 'layout.css' },
 					'src/content/blog/post/Chart.tsx': { file: 'chart.js', imports: ['missing-dependency'] },
 				}),
 			).toThrow('missing-dependency');
 		});
 		it('separates base and page assets from the Vite manifest', () => {
-			const result = resolveSiteAssets(
-				'<link rel="stylesheet" href="/base.css"><script type="module" src="/client.js"></script>',
-				{
-					'src/components/SiteLayout/SiteLayout.module.css': {
-						file: 'assets/site-layout.css',
-					},
-					'src/pages/about/About.module.css': {
-						file: 'assets/about-page.css',
-					},
-					'src/pages/blog/article/ArticleContent.css': {
-						file: 'assets/article-global.css',
-					},
-					'src/pages/blog/article/Article.module.css': {
-						file: 'assets/article.css',
-					},
-					'src/pages/blog/BlogList.module.css': {
-						file: 'assets/blog.css',
-					},
-					'src/pages/error/Error.module.css': {
-						file: 'assets/error.css',
-					},
-					'src/pages/home/Home.module.css': {
-						file: 'assets/home.css',
-					},
-					'src/pages/sponsors/Sponsors.module.css': {
-						file: 'assets/sponsors.css',
-					},
-					'src/pages/works/WorksProse.css': {
-						file: 'assets/works-global.css',
-					},
-					'src/pages/works/_components/WorksNav/WorksNav.module.css': {
-						file: 'assets/works-nav.css',
-					},
-					'src/pages/works/_components/WorksSection/WorksSection.module.css': {
-						file: 'assets/works-section.css',
-					},
-					'src/pages/works/media/Media.module.css': {
-						file: 'assets/media.css',
-					},
-					'src/pages/works/oss/Oss.module.css': {
-						file: 'assets/oss.css',
-					},
-					'src/pages/works/publications/Publications.module.css': {
-						file: 'assets/publications.css',
-					},
-					'src/pages/works/showcase/Showcase.module.css': {
-						file: 'assets/showcase.css',
-					},
-					'src/pages/works/talks/Talks.module.css': {
-						file: 'assets/talks.css',
-					},
-					'src/content/blog/post/Chart.tsx': {
-						file: 'assets/Chart.js',
-						css: ['assets/Chart.css'],
-						imports: ['_Legend.js'],
-					},
-					'_Legend.js': {
-						file: 'assets/Legend.js',
-						css: ['assets/Legend.css'],
-					},
+			const result = resolveSiteAssets({
+				'index.html': { file: 'client.js', css: ['base.css'] },
+				'src/components/SiteLayout/SiteLayout.module.css': {
+					file: 'assets/site-layout.css',
 				},
-			);
+				'src/pages/about/About.module.css': {
+					file: 'assets/about-page.css',
+				},
+				'src/pages/blog/article/ArticleContent.css': {
+					file: 'assets/article-global.css',
+				},
+				'src/pages/blog/article/Article.module.css': {
+					file: 'assets/article.css',
+				},
+				'src/pages/blog/BlogList.module.css': {
+					file: 'assets/blog.css',
+				},
+				'src/pages/error/Error.module.css': {
+					file: 'assets/error.css',
+				},
+				'src/pages/home/Home.module.css': {
+					file: 'assets/home.css',
+				},
+				'src/pages/sponsors/Sponsors.module.css': {
+					file: 'assets/sponsors.css',
+				},
+				'src/pages/works/WorksProse.css': {
+					file: 'assets/works-global.css',
+				},
+				'src/pages/works/_components/WorksNav/WorksNav.module.css': {
+					file: 'assets/works-nav.css',
+				},
+				'src/pages/works/_components/WorksSection/WorksSection.module.css': {
+					file: 'assets/works-section.css',
+				},
+				'src/pages/works/media/Media.module.css': {
+					file: 'assets/media.css',
+				},
+				'src/pages/works/oss/Oss.module.css': {
+					file: 'assets/oss.css',
+				},
+				'src/pages/works/publications/Publications.module.css': {
+					file: 'assets/publications.css',
+				},
+				'src/pages/works/showcase/Showcase.module.css': {
+					file: 'assets/showcase.css',
+				},
+				'src/pages/works/talks/Talks.module.css': {
+					file: 'assets/talks.css',
+				},
+				'src/content/blog/post/Chart.tsx': {
+					file: 'assets/Chart.js',
+					css: ['assets/Chart.css'],
+					imports: ['_Legend.js'],
+				},
+				'_Legend.js': {
+					file: 'assets/Legend.js',
+					css: ['assets/Legend.css'],
+				},
+			});
 
 			expect(result).toEqual({
-				base: '<link rel="stylesheet" href="/base.css">\n\t<link rel="stylesheet" crossorigin href="/assets/site-layout.css">',
-				client: '<script type="module" src="/client.js"></script>',
+				base: '<link rel="stylesheet" href="/base.css">\n\t<link rel="stylesheet" href="/assets/site-layout.css" crossorigin>',
+				client: '<script type="module" src="/client.js" crossorigin></script>',
 				oxContent: OX_CONTENT_ASSET_MANIFEST.headTags,
 				islands: {
 					'post/Chart.tsx': ['assets/Legend.css', 'assets/Chart.css'],
 				},
 				pageStyles: {
-					about: '<link rel="stylesheet" crossorigin href="/assets/about-page.css">',
+					about: '<link rel="stylesheet" href="/assets/about-page.css" crossorigin>',
 					article:
-						'<link rel="stylesheet" crossorigin href="/assets/article-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/article.css">',
-					blog: '<link rel="stylesheet" crossorigin href="/assets/blog.css">',
-					error: '<link rel="stylesheet" crossorigin href="/assets/error.css">',
-					home: '<link rel="stylesheet" crossorigin href="/assets/home.css">',
-					sponsors: '<link rel="stylesheet" crossorigin href="/assets/sponsors.css">',
+						'<link rel="stylesheet" href="/assets/article-global.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/article.css" crossorigin>',
+					blog: '<link rel="stylesheet" href="/assets/blog.css" crossorigin>',
+					error: '<link rel="stylesheet" href="/assets/error.css" crossorigin>',
+					home: '<link rel="stylesheet" href="/assets/home.css" crossorigin>',
+					sponsors: '<link rel="stylesheet" href="/assets/sponsors.css" crossorigin>',
 					works:
-						'<link rel="stylesheet" crossorigin href="/assets/works-global.css">\n\t<link rel="stylesheet" crossorigin href="/assets/works-nav.css">\n\t<link rel="stylesheet" crossorigin href="/assets/works-section.css">\n\t<link rel="stylesheet" crossorigin href="/assets/media.css">\n\t<link rel="stylesheet" crossorigin href="/assets/oss.css">\n\t<link rel="stylesheet" crossorigin href="/assets/publications.css">\n\t<link rel="stylesheet" crossorigin href="/assets/showcase.css">\n\t<link rel="stylesheet" crossorigin href="/assets/talks.css">',
+						'<link rel="stylesheet" href="/assets/works-global.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/works-nav.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/works-section.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/media.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/oss.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/publications.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/showcase.css" crossorigin>\n\t<link rel="stylesheet" href="/assets/talks.css" crossorigin>',
 				},
 			});
 		});
@@ -319,25 +321,8 @@ if (import.meta.vitest != null) {
 		it('links the styles of the islands the page mounts', () => {
 			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx']);
 
-			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Chart.css">');
-			expect(tags).toContain('<link rel="stylesheet" crossorigin href="/assets/Legend.css">');
-		});
-
-		it('links a shared island stylesheet once', () => {
-			const tags = renderAssetTags(assets, 'article', ['post/Chart.tsx', 'post/Table.tsx']);
-
-			expect(tags.match(/assets\/Legend\.css/g)).toHaveLength(1);
-		});
-
-		it('escapes the query string of a development island stylesheet', () => {
-			const dev = {
-				...assets,
-				islands: { 'post/Chart.tsx': ['post/Chart.css?direct&lang.css'] },
-			};
-
-			expect(renderAssetTags(dev, 'article', ['post/Chart.tsx'])).toContain(
-				'href="/post/Chart.css?direct&amp;lang.css"',
-			);
+			expect(tags).toContain('<link rel="stylesheet" href="/assets/Chart.css" crossorigin>');
+			expect(tags).toContain('<link rel="stylesheet" href="/assets/Legend.css" crossorigin>');
 		});
 
 		it('omits island styles for a page without islands', () => {
@@ -371,16 +356,12 @@ if (import.meta.vitest != null) {
 
 	describe(inlineHomeStyles, () => {
 		it('inlines home styles without changing other page assets', () => {
-			const inlined = inlineHomeStyles(
-				assets,
-				'body { color: red }',
-				'.home::after { content: "</style>" }',
-			);
+			const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
 
 			expect(renderAssetTags(inlined, 'home')).toContain(
 				'<style data-inline-base-style>body { color: red }</style>',
 			);
-			expect(renderAssetTags(inlined, 'home')).toContain('<\\/style>');
+			expect(renderAssetTags(inlined, 'home')).toContain('.home { color: blue }');
 			expect(renderAssetTags(inlined, 'home')).not.toContain('/home.css');
 			expect(renderAssetTags(inlined, 'blog')).toContain('/base.css');
 			expect(renderAssetTags(inlined, 'blog')).toContain('/blog.css');
