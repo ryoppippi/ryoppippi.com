@@ -13,6 +13,7 @@ import type { ViteDevServer } from 'vite';
 import { createCollectionAssetsMiddleware } from '@ox-content/vite-plugin';
 import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
+import { withoutLeadingSlash } from 'ufo';
 import { isSiteContentAssetSource, planSiteContentAssets } from '@/generation/content-assets.ts';
 import { DEV_ASSETS } from '@/rendering/site-assets.ts';
 
@@ -127,7 +128,7 @@ async function islandStyleHrefs(server: ViteDevServer, url: string): Promise<str
 	if (result.diagnostics.length > 0) {
 		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 	}
-	return result.stylesheets.map(({ href }) => href.replace(/^\//, ''));
+	return result.stylesheets.map(({ href }) => withoutLeadingSlash(href));
 }
 
 function createDevelopmentRouteDependencies(server: ViteDevServer): DevRouteDependencies {

@@ -1,4 +1,5 @@
 import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
+import { withoutLeadingSlash } from 'ufo';
 import { OX_CONTENT_ASSET_MANIFEST } from '@/config/ox-content.ts';
 import { type PageStyle } from '@/client/page-style-registry.ts';
 
@@ -114,7 +115,7 @@ export function resolveSiteAssets(
 				}
 				return [
 					source.slice(ISLAND_SOURCE_PREFIX.length),
-					result.stylesheets.map(({ href }) => href.replace(/^\//, '')),
+					result.stylesheets.map(({ href }) => withoutLeadingSlash(href)),
 				];
 			}),
 	);
