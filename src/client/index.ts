@@ -1,6 +1,7 @@
 import type { JSX } from '@solidjs/web';
 import { initIslands } from '@ox-content/islands';
 import { initSolidHtmlHost } from '@ox-content/vite-plugin-solid/html-host/client';
+import solidIslandLoaders from 'virtual:ox-content-solid/html-host/modules';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -142,9 +143,6 @@ function initialiseMediaFilter(): void {
 }
 
 type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
-
-// The whole-blog registry remains until the host-selected build registry is released (#1287).
-const solidIslandLoaders = import.meta.glob<SolidIslandModule>('/src/content/blog/**/*.tsx');
 
 function initialiseSolidIslands(): void {
 	initSolidHtmlHost({

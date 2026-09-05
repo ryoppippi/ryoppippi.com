@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@ox-content/napi':
-      specifier: 3.0.0-beta.12
-      version: 3.0.0-beta.12
+      specifier: 3.0.0-beta.13
+      version: 3.0.0-beta.13
 
 overrides:
   sharp: ^0.35.3
@@ -36,20 +36,20 @@ importers:
         specifier: ^2.2.510
         version: 2.2.520
       '@ox-content/islands':
-        specifier: 3.0.0-beta.12
-        version: 3.0.0-beta.12
+        specifier: 3.0.0-beta.13
+        version: 3.0.0-beta.13
       '@ox-content/napi':
         specifier: 'catalog:'
-        version: 3.0.0-beta.12
+        version: 3.0.0-beta.13
       '@ox-content/theme-color-kanagawa':
-        specifier: 3.0.0-beta.12
-        version: 3.0.0-beta.12(@ox-content/vite-plugin@3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3))
+        specifier: 3.0.0-beta.13
+        version: 3.0.0-beta.13(@ox-content/vite-plugin@3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3))
       '@ox-content/vite-plugin':
-        specifier: 3.0.0-beta.12
-        version: 3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
+        specifier: 3.0.0-beta.13
+        version: 3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
       '@ox-content/vite-plugin-solid':
-        specifier: 3.0.0-beta.12
-        version: 3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@solidjs/vite-plugin@3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4))(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(solid-js@2.0.0-rc.4)(svelte@5.56.10)(tailwindcss@4.3.3)
+        specifier: 3.0.0-beta.13
+        version: 3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@solidjs/vite-plugin@3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4))(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(solid-js@2.0.0-rc.4)(svelte@5.56.10)(tailwindcss@4.3.3)
       '@solidjs/vite-plugin':
         specifier: ^3.0.0-next.36
         version: 3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4)
@@ -764,69 +764,69 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@ox-content/binding-darwin-arm64@3.0.0-beta.12':
-    resolution: {integrity: sha512-203pA2Knc0cHBeYGHrMaM9ktcMxOznol9u+LUxvZP9AdhtUU/A89C8reYowgNAC9jFUCAQT5cnXIEr2wLvHJNg==}
+  '@ox-content/binding-darwin-arm64@3.0.0-beta.13':
+    resolution: {integrity: sha512-uzNtponJgLLHzq842pYug9VZNWPMeM/U2L7ks+iUhJa2lAgrWRECtirUqaEtCtyojic/1aDNHegBIet5po/9Mg==}
     cpu: [arm64]
     os: [darwin]
 
-  '@ox-content/binding-darwin-x64@3.0.0-beta.12':
-    resolution: {integrity: sha512-igfOeSjS/tY5KLROmynizKscSPrnSxioLqSemhE9yOrTHSGcGBexOGbKEnEVF4S2mvAq5lc5lOS9n0TTR5Khxg==}
+  '@ox-content/binding-darwin-x64@3.0.0-beta.13':
+    resolution: {integrity: sha512-PfJml5x7yes7YHf/gMsZCKKUy0eZ2l1p8rsAJbNYQbxgcHPh/jeihhJTsmLTrAHvsx1736//uCqwxZv+39j5qQ==}
     cpu: [x64]
     os: [darwin]
 
-  '@ox-content/binding-linux-arm64-gnu@3.0.0-beta.12':
-    resolution: {integrity: sha512-zyJaWvFin8ditejYhBRDYmSLhxenE/pwTvKRMJeB6eXQ8j/Ilts/DikfYW9jDm/0/TEVqKgtLpzeGP0e/nO6+Q==}
+  '@ox-content/binding-linux-arm64-gnu@3.0.0-beta.13':
+    resolution: {integrity: sha512-PddB7BRrVyt1hBFlGhZhL7mteDBBMSaq5TbWsTYFnXJJA6RcBHUV4IjcQEqbSwpbpQmwNpHUYVyrgvkaCd5p2g==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@ox-content/binding-linux-arm64-musl@3.0.0-beta.12':
-    resolution: {integrity: sha512-5khROg9JUccw+CqkfiTIl9v+2vQ6hhWDMdHI8JjDuZ7akv19PZ+GlnNsVhYrAFlQvO/2PbHODyJD18nlote9Ww==}
+  '@ox-content/binding-linux-arm64-musl@3.0.0-beta.13':
+    resolution: {integrity: sha512-k/lBwPwfrd/LVKY/CENnaadz8llh1sV0KRLwbB1sa5mvEXr/3YH5IuErhkZ3apm8bywxs7XXhOlhiau4pe2iSA==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@ox-content/binding-linux-x64-gnu@3.0.0-beta.12':
-    resolution: {integrity: sha512-HQ4uTdDOxi+G/HQWJq8UhILp3PY2BlU90MBhy+QyuqzzbcH2/8Z2cZxEgI/wE/dpuwXK/kDqgrtbBPqBudta9w==}
+  '@ox-content/binding-linux-x64-gnu@3.0.0-beta.13':
+    resolution: {integrity: sha512-DHUf5P/tf/vG+mvIkGgBPu1yy1TQmDrwJ8ONshiPeNwMkrlYSAnxHww3ozLcgpYESR4h8qGtFHDNzEBhCYCqoQ==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@ox-content/binding-linux-x64-musl@3.0.0-beta.12':
-    resolution: {integrity: sha512-AKKk8YCyIXn1L+s4wYycfh3M+tvUJVslo+8fHZVjCeX+hb7ip8VrgNI51ZcyA8oIE4QllwbMi622zkwKfDgg5g==}
+  '@ox-content/binding-linux-x64-musl@3.0.0-beta.13':
+    resolution: {integrity: sha512-+LwiVrvV+aEh1QKLiT0X2TMFtQBZw+MFifQaxT5w0AMurHrEvp1WkFg7Arqv/7ClejVRgd0N8rOpf/Jfpq8BNw==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@ox-content/binding-win32-x64-msvc@3.0.0-beta.12':
-    resolution: {integrity: sha512-/GD1Sq/TA5QROj0c0PL5VdYHBfIkB3+BgOVNRjl66ETy4+juNTwmh2Tn2xS2Nc5tMp8ob+BP0m+sE0HzttgElg==}
+  '@ox-content/binding-win32-x64-msvc@3.0.0-beta.13':
+    resolution: {integrity: sha512-eMu8gb7Sj1O452onijpjHK0GZ13ghRymMTbClFZQ9oFVypSOYsSnDlZLEO6bf3/IOlOb/GfAisVvw3GjR5gIcg==}
     cpu: [x64]
     os: [win32]
 
-  '@ox-content/islands@3.0.0-beta.12':
-    resolution: {integrity: sha512-iriv5/tm4XRidaLqfsytz3Da0eJvF1K/lndRjRJZXdCmM2MU8QLodcm3Z/0LAGMFNdXCx4oG5jUIxpx+R6hg4g==}
+  '@ox-content/islands@3.0.0-beta.13':
+    resolution: {integrity: sha512-u84ZsIweTmCOvn3CwJ4xz5+6n33p8YjYwStNjMny4Ol1uSFIQsb0y2oGk6lHyyuqUhOg3t7k9DsqL7/mpjwsVQ==}
 
-  '@ox-content/napi@3.0.0-beta.12':
-    resolution: {integrity: sha512-BorD6uraEjGTaTtEtQ2VxsswtXIDHWMsssIMdAgbKhw/M3EkuFGoQtu/wchJ3X0ZH9X0Jh51aRN+VQvHtWJKug==}
+  '@ox-content/napi@3.0.0-beta.13':
+    resolution: {integrity: sha512-ImFH8ns4hirJX07POJmFe8JPqVgWjyOXK6R/DDFmfKKiZ2GNG9BSJpi14jROInCMe5g+cnXr0uU9jbaErZqvwg==}
 
-  '@ox-content/theme-color-kanagawa@3.0.0-beta.12':
-    resolution: {integrity: sha512-xnTleurpWHM9oqReg1iw1fcRNzHAcMwGFCqL0O3hLhtVXc4C2xAVq8DcViprBRvky1iWiUQmkcsN8DJKl0katA==}
+  '@ox-content/theme-color-kanagawa@3.0.0-beta.13':
+    resolution: {integrity: sha512-YwDIjVrbgcOWxEKjt3RLmgigmimwZcAwEYrxKvzL9lEFC+X87nosRH0iTM723RHlP7cxlzS3zukmkesIZnOB9Q==}
     peerDependencies:
       '@ox-content/vite-plugin': '>=3.0.0-alpha.1'
     peerDependenciesMeta:
       '@ox-content/vite-plugin':
         optional: true
 
-  '@ox-content/vite-plugin-solid@3.0.0-beta.12':
-    resolution: {integrity: sha512-6Fl11tQ2/5LxIJtYSY1dnRaXxVzrF6Xu0MAiwAKoFF+UtQZySThNxfMMHLh896M4/vGA5WZseu80mf17cAp32A==}
+  '@ox-content/vite-plugin-solid@3.0.0-beta.13':
+    resolution: {integrity: sha512-kgtglNZg6LJu7uC0HPN0Td1V+hkipP90vRtMgHhPIbvLJBdfmMb/iJn3GHBGMM9He7HDLnubM4u/xa3fwfbsLg==}
     peerDependencies:
       '@solidjs/vite-plugin': ^3.0.0-next.36
       '@solidjs/web': ^2.0.0-rc.4
       solid-js: ^2.0.0-rc.4
       vite: ^8.0.0 || ^9.0.0
 
-  '@ox-content/vite-plugin@3.0.0-beta.12':
-    resolution: {integrity: sha512-inHBiKl/aPWCMTuRZOL0ClnAAiLRopnv5RZMfcm+c+qTIwlzBpT63PNyxUnzezii83TJgx/vTN9Neg8vuHGWFQ==}
+  '@ox-content/vite-plugin@3.0.0-beta.13':
+    resolution: {integrity: sha512-xPCXWDd/OFlE/o+P21wl0iqdajPI+KArXv2qlyeRL4hE6SDv3s+6oBUbxSrW9w4DGscyiIXE95a0Q2tdXs3eWg==}
     hasBin: true
     peerDependencies:
       '@vue/compiler-sfc': ^3.4.0
@@ -4569,47 +4569,47 @@ snapshots:
   '@oven/bun-windows-x64@1.3.14':
     optional: true
 
-  '@ox-content/binding-darwin-arm64@3.0.0-beta.12':
+  '@ox-content/binding-darwin-arm64@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-darwin-x64@3.0.0-beta.12':
+  '@ox-content/binding-darwin-x64@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-linux-arm64-gnu@3.0.0-beta.12':
+  '@ox-content/binding-linux-arm64-gnu@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-linux-arm64-musl@3.0.0-beta.12':
+  '@ox-content/binding-linux-arm64-musl@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-linux-x64-gnu@3.0.0-beta.12':
+  '@ox-content/binding-linux-x64-gnu@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-linux-x64-musl@3.0.0-beta.12':
+  '@ox-content/binding-linux-x64-musl@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/binding-win32-x64-msvc@3.0.0-beta.12':
+  '@ox-content/binding-win32-x64-msvc@3.0.0-beta.13':
     optional: true
 
-  '@ox-content/islands@3.0.0-beta.12': {}
+  '@ox-content/islands@3.0.0-beta.13': {}
 
-  '@ox-content/napi@3.0.0-beta.12':
+  '@ox-content/napi@3.0.0-beta.13':
     optionalDependencies:
-      '@ox-content/binding-darwin-arm64': 3.0.0-beta.12
-      '@ox-content/binding-darwin-x64': 3.0.0-beta.12
-      '@ox-content/binding-linux-arm64-gnu': 3.0.0-beta.12
-      '@ox-content/binding-linux-arm64-musl': 3.0.0-beta.12
-      '@ox-content/binding-linux-x64-gnu': 3.0.0-beta.12
-      '@ox-content/binding-linux-x64-musl': 3.0.0-beta.12
-      '@ox-content/binding-win32-x64-msvc': 3.0.0-beta.12
+      '@ox-content/binding-darwin-arm64': 3.0.0-beta.13
+      '@ox-content/binding-darwin-x64': 3.0.0-beta.13
+      '@ox-content/binding-linux-arm64-gnu': 3.0.0-beta.13
+      '@ox-content/binding-linux-arm64-musl': 3.0.0-beta.13
+      '@ox-content/binding-linux-x64-gnu': 3.0.0-beta.13
+      '@ox-content/binding-linux-x64-musl': 3.0.0-beta.13
+      '@ox-content/binding-win32-x64-msvc': 3.0.0-beta.13
 
-  '@ox-content/theme-color-kanagawa@3.0.0-beta.12(@ox-content/vite-plugin@3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3))':
+  '@ox-content/theme-color-kanagawa@3.0.0-beta.13(@ox-content/vite-plugin@3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3))':
     optionalDependencies:
-      '@ox-content/vite-plugin': 3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
+      '@ox-content/vite-plugin': 3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
 
-  '@ox-content/vite-plugin-solid@3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@solidjs/vite-plugin@3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4))(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(solid-js@2.0.0-rc.4)(svelte@5.56.10)(tailwindcss@4.3.3)':
+  '@ox-content/vite-plugin-solid@3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@solidjs/vite-plugin@3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4))(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(solid-js@2.0.0-rc.4)(svelte@5.56.10)(tailwindcss@4.3.3)':
     dependencies:
-      '@ox-content/islands': 3.0.0-beta.12
-      '@ox-content/vite-plugin': 3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
+      '@ox-content/islands': 3.0.0-beta.13
+      '@ox-content/vite-plugin': 3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)
       '@solidjs/vite-plugin': 3.0.0-next.36(@solidjs/web@2.0.0-rc.4(solid-js@2.0.0-rc.4))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(solid-js@2.0.0-rc.4)
       '@solidjs/web': 2.0.0-rc.4(solid-js@2.0.0-rc.4)
       solid-js: 2.0.0-rc.4
@@ -4632,14 +4632,14 @@ snapshots:
       - vue
       - yauzl
 
-  '@ox-content/vite-plugin@3.0.0-beta.12(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)':
+  '@ox-content/vite-plugin@3.0.0-beta.13(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.56.10)(tailwindcss@4.3.3)':
     dependencies:
       '@cspell/dict-de-de': 4.1.2
       '@cspell/dict-en_us': 4.4.37
       '@cspell/dict-fr-fr': 2.3.2
       '@cspell/dict-pl_pl': 3.0.6
       '@mermaid-js/mermaid-cli': 11.16.0(@babel/core@7.29.7)(@babel/template@7.29.7)(puppeteer@25.9.0)(tailwindcss@4.3.3)
-      '@ox-content/napi': 3.0.0-beta.12
+      '@ox-content/napi': 3.0.0-beta.13
       '@resvg/resvg-js': 2.6.2
       cspell-lib: 10.1.1
       glob: 13.0.6
