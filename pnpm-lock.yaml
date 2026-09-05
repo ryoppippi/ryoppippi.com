@@ -4,12 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@ox-content/napi':
-      specifier: 3.0.0-beta.13
-      version: 3.0.0-beta.13
-
 overrides:
   sharp: ^0.35.3
 
@@ -37,9 +31,6 @@ importers:
         version: 2.2.520
       '@ox-content/islands':
         specifier: 3.0.0-beta.13
-        version: 3.0.0-beta.13
-      '@ox-content/napi':
-        specifier: 'catalog:'
         version: 3.0.0-beta.13
       '@ox-content/theme-color-kanagawa':
         specifier: 3.0.0-beta.13
