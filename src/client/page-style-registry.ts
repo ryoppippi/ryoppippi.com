@@ -1,17 +1,3 @@
-/** Page-specific stylesheet groups supported by the site. */
-export const PAGE_STYLES = [
-	'about',
-	'article',
-	'blog',
-	'error',
-	'home',
-	'sponsors',
-	'works',
-] as const;
-
-/** Name of a page-specific stylesheet group emitted by the site build. */
-export type PageStyle = (typeof PAGE_STYLES)[number];
-
 /** Server-rendered stylesheet modules included in each page style group. */
 export const PAGE_STYLE_MODULES = {
 	about: ['/src/pages/about/About.module.css'],
@@ -33,7 +19,10 @@ export const PAGE_STYLE_MODULES = {
 		'/src/pages/works/showcase/Showcase.module.css',
 		'/src/pages/works/talks/Talks.module.css',
 	],
-} as const satisfies Record<PageStyle, readonly string[]>;
+} as const satisfies Record<string, readonly string[]>;
+
+/** Name of a page-specific stylesheet group emitted by the site build. */
+export type PageStyle = keyof typeof PAGE_STYLE_MODULES;
 
 /** CSS-only build entries rendered by the server rather than imported by client code. */
 export const SERVER_STYLE_MODULES = [

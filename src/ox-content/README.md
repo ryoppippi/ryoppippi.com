@@ -31,17 +31,24 @@ temporary adapter boundary, not a proposed requirement for the final upstream AP
 
 All issue numbers below belong to <https://github.com/ubugeeei-prod/ox-content>.
 
-| Issue                                                            | Downstream deletion target                                                    |
-| ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [#1315](https://github.com/ubugeeei-prod/ox-content/issues/1315) | Workarounds for missing public custom-host declaration exports.               |
-| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `pages/content-assets.ts`.                      |
-| [#1317](https://github.com/ubugeeei-prod/ox-content/issues/1317) | Renderer factory glue in `ox-content/island-renderer.ts`.                     |
-| [#1318](https://github.com/ubugeeei-prod/ox-content/issues/1318) | Repeated collection asset planning in production generation.                  |
-| [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `pages/feed.ts` and dev-only feed response adapters.                          |
-| [#1320](https://github.com/ubugeeei-prod/ox-content/issues/1320) | Markdown pipeline composition and its dev-host connection.                    |
-| [#1321](https://github.com/ubugeeei-prod/ox-content/issues/1321) | `ox-content/virtual.d.ts`.                                                    |
-| [#1322](https://github.com/ubugeeei-prod/ox-content/issues/1322) | Repeated glob/read/frontmatter discovery in `pages/blog/island-documents.ts`. |
-| [#1323](https://github.com/ubugeeei-prod/ox-content/issues/1323) | CSS href-to-filesystem reconstruction in `pages/home/styles.ts`.              |
+| Issue                                                            | Downstream deletion target                                                                                   |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [#1315](https://github.com/ubugeeei-prod/ox-content/issues/1315) | Workarounds for missing public custom-host declaration exports.                                              |
+| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `pages/content-assets.ts`.                                                     |
+| [#1317](https://github.com/ubugeeei-prod/ox-content/issues/1317) | Renderer factory glue in `ox-content/island-renderer.ts`.                                                    |
+| [#1318](https://github.com/ubugeeei-prod/ox-content/issues/1318) | Repeated collection asset planning in production generation.                                                 |
+| [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `pages/feed.ts` and dev-only feed response adapters.                                                         |
+| [#1320](https://github.com/ubugeeei-prod/ox-content/issues/1320) | Markdown pipeline composition and its dev-host connection.                                                   |
+| [#1321](https://github.com/ubugeeei-prod/ox-content/issues/1321) | `ox-content/virtual.d.ts`.                                                                                   |
+| [#1322](https://github.com/ubugeeei-prod/ox-content/issues/1322) | Repeated glob/read/frontmatter discovery in `pages/blog/island-documents.ts`.                                |
+| [#1323](https://github.com/ubugeeei-prod/ox-content/issues/1323) | CSS href-to-filesystem reconstruction in `pages/home/styles.ts`.                                             |
+| [#1328](https://github.com/ubugeeei-prod/ox-content/issues/1328) | Manual SSR page/layout CSS registry and CSS-only build-entry enumeration in `client/page-style-registry.ts`. |
+
+Page/layout CSS imports should become the source of stylesheet dependencies via
+#1328. The current registry is a temporary duplication, not inherently site-owned
+policy. Keep explicit global-style and homepage inlining choices, but do not replace
+the registry with a filesystem glob that overfetches sibling-page CSS. The earlier
+#1284 contract deliberately accepted declared CSS groups; #1328 extends that scope.
 
 Feed development output and stylesheet-content access are enhancement requests,
 not claims that their current documented contracts are broken. Publication
