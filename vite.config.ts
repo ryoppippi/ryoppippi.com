@@ -88,8 +88,10 @@ export default defineConfig(({ command, mode }) => ({
 		}),
 	] satisfies PluginOption[],
 	build: {
+		cssMinify: true,
 		outDir: 'dist',
 		emptyOutDir: true,
+		minify: true,
 	},
 	run: {
 		tasks: {
