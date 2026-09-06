@@ -12,13 +12,10 @@ describe('document navigation', () => {
 				event.preventDefault();
 			};
 			document.addEventListener('click', observe, { once: true });
-			try {
-				link.click();
-				expect(intercepted).toBe(false);
-			} finally {
-				link.remove();
-				document.removeEventListener('click', observe);
-			}
+			link.click();
+			link.remove();
+
+			expect(intercepted).toBe(false);
 		},
 	);
 });
