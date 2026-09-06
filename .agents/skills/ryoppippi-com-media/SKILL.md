@@ -9,9 +9,9 @@ Use this skill for external-source discovery and curation in `ryoppippi/ryoppipp
 
 Read the current data before searching:
 
-- `src/contents/external-rss/posts.json` — manually curated external articles shown on Blog.
-- `src/contents/external-rss/rss.json` — RSS feed sources used for external articles.
-- `src/contents/external-rss/media.json` — curated podcasts, videos, and the YouTube playlist.
+- `src/content/blog/external/posts.json` — manually curated external articles shown on Blog.
+- `src/content/blog/external/rss.json` — RSS feed sources used for external articles.
+- `src/content/works/media/list.json` — curated podcasts, videos, and the YouTube playlist.
 
 Inspect the current page loaders and components when visible grouping, metadata, filters, or links matter. Their internal file names are not part of this workflow.
 

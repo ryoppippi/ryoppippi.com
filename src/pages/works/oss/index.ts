@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { definePage } from '@/generation/define-page.ts';
-import type { OssProject } from '@/contents/works-data.ts';
+import type { OssProject } from '@/content/works-data.ts';
 import OssPage from './page.tsx';
 
 /**
@@ -16,12 +16,12 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		componentProps: { projects },
 		outputPath: 'works/oss/index.html',
 		sourcePaths: [
-			'src/contents/works-data.ts',
+			'src/content/works-data.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/oss',
-			'src/contents/works/oss/list.json',
-			'src/contents/works/oss/stars.json',
+			'src/content/works/oss/list.json',
+			'src/content/works/oss/stars.json',
 		],
 		title: 'Open-source projects',
 		pathname: '/works/oss/',

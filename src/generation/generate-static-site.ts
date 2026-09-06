@@ -9,8 +9,8 @@ import {
 	parseStepCommands,
 } from '@/lib/dotfiles.ts';
 import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
-import { loadExternalPosts, postListItems } from '@/contents/external-content.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
+import { loadExternalPosts, postListItems } from '@/content/external-content.ts';
+import type { PostListItem } from '@/content/external-content.ts';
 import { createAboutPageFile } from '@/pages/about';
 import { createArticlePageFiles } from '@/pages/blog/article';
 import { createBlogListPageFile } from '@/pages/blog';
@@ -22,7 +22,7 @@ import { createOssPageFile } from '@/pages/works/oss';
 import { createPublicationsPageFile } from '@/pages/works/publications';
 import { createShowcasePageFile } from '@/pages/works/showcase';
 import { createTalksPageFile } from '@/pages/works/talks';
-import { loadOssProjects, loadPublications, loadTalks } from '@/contents/works-data.ts';
+import { loadOssProjects, loadPublications, loadTalks } from '@/content/works-data.ts';
 
 type GenerateStaticSiteOptions = {
 	assets: SiteAssets;

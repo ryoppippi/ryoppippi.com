@@ -34,7 +34,7 @@ jobs:
         id: diff
         shell: bash
         run: |
-          if git diff --quiet -- src/contents/works/oss/stars.json; then
+          if git diff --quiet -- src/content/works/oss/stars.json; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
           else
             echo 'changed=true' >> "$GITHUB_OUTPUT"
@@ -45,6 +45,6 @@ jobs:
         run: |
           git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git config --local user.name 'github-actions[bot]'
-          git add src/contents/works/oss/stars.json
+          git add src/content/works/oss/stars.json
           git commit -m 'chore(oss): update GitHub repository metadata'
           git push

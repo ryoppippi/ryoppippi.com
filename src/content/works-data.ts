@@ -51,8 +51,8 @@ function githubRepository(link: string): string | null {
 
 export async function loadOssProjects(root: string): Promise<OssProject[]> {
 	const [source, starSnapshot] = await Promise.all([
-		readFile(path.join(root, 'src/contents/works/oss/list.json'), 'utf8'),
-		readFile(path.join(root, 'src/contents/works/oss/stars.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/works/oss/list.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/works/oss/stars.json'), 'utf8'),
 	]);
 	const projects = JSON.parse(source) as OssProjectSource[];
 	const stars = JSON.parse(starSnapshot) as OssStarSnapshot;
@@ -114,7 +114,7 @@ export async function loadPublications(
 	Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>
 > {
 	return JSON.parse(
-		await readFile(path.join(root, 'src/contents/publication.json'), 'utf8'),
+		await readFile(path.join(root, 'src/content/works/publications/list.json'), 'utf8'),
 	) as Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>;
 }
 
@@ -122,7 +122,7 @@ if (import.meta.vitest != null) {
 	test('uses the GitHub primary language for opted-in OSS projects', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
-			'src/contents/works/oss/list.json': JSON.stringify([
+			'src/content/works/oss/list.json': JSON.stringify([
 				{
 					name: 'ccusage',
 					link: 'https://github.com/ccusage/ccusage',
@@ -132,7 +132,7 @@ if (import.meta.vitest != null) {
 					description: 'Token usage analyser',
 				},
 			]),
-			'src/contents/works/oss/stars.json': JSON.stringify({
+			'src/content/works/oss/stars.json': JSON.stringify({
 				updatedAt: '2026-08-25T00:00:00Z',
 				projects: [{ repo: 'ccusage/ccusage', stars: 1, primaryLanguage: 'Rust' }],
 			}),
@@ -145,11 +145,13 @@ if (import.meta.vitest != null) {
 
 	test('loads a missing description from the linked GitHub repository', async () => {
 		const { createFixture } = await import('fs-fixture');
-		await using fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-			new Response(JSON.stringify({ repo: { description: 'External project' } })),
-		);
+		using fetchSpy = vi
+			.spyOn(globalThis, 'fetch')
+			.mockResolvedValue(
+				new Response(JSON.stringify({ repo: { description: 'External project' } })),
+			);
 		await using fixture = await createFixture({
-			'src/contents/works/oss/list.json': JSON.stringify([
+			'src/content/works/oss/list.json': JSON.stringify([
 				{
 					name: 'project',
 					link: 'https://github.com/example/project',
@@ -157,7 +159,7 @@ if (import.meta.vitest != null) {
 					tags: [],
 				},
 			]),
-			'src/contents/works/oss/stars.json': JSON.stringify({
+			'src/content/works/oss/stars.json': JSON.stringify({
 				updatedAt: '2026-08-25T00:00:00Z',
 				projects: [],
 			}),

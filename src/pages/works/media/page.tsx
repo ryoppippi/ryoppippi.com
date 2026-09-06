@@ -1,5 +1,5 @@
 import { formatDate } from '@/lib/date.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
+import type { PostListItem } from '@/content/external-content.ts';
 import WorksNav from '@/pages/works/_components/WorksNav';
 import WorksSection, { WorksList } from '@/pages/works/_components/WorksSection';
 import styles from './Media.module.css';

@@ -4,7 +4,7 @@ import type {
 	OxContentCustomHostRoutesContext,
 } from '@ox-content/vite-plugin/custom-host';
 import type { ContentArtifact } from '@/content/artifact.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
+import type { PostListItem } from '@/content/external-content.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
 import { readFile } from 'node:fs/promises';
@@ -12,7 +12,7 @@ import path from 'node:path';
 import { withoutLeadingSlash } from 'ufo';
 import { buildContentArtifact } from '@/content/build.ts';
 import { createIslandRenderer } from '@/content/island-renderer.ts';
-import { loadExternalMedia } from '@/contents/external-content.ts';
+import { loadExternalMedia } from '@/content/external-content.ts';
 import { inlineHomeStyles, resolveSiteAssets } from '@/rendering/site-assets.ts';
 import { siteFeedCollections } from './feeds.ts';
 import { generateStaticSite } from './generate-static-site.ts';

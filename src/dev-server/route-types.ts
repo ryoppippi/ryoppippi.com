@@ -1,6 +1,6 @@
 import type { BlogPost, BlogPostMetadata, ShowcaseProject } from '@/content/index.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
-import type { OssProject, Talk } from '@/contents/works-data.ts';
+import type { PostListItem } from '@/content/external-content.ts';
+import type { OssProject, Talk } from '@/content/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 
 /** Publication groups consumed by the publications page. */

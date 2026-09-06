@@ -20,11 +20,11 @@ export function createPublicationsPageFile(
 		componentProps: { publications },
 		outputPath: 'works/publications/index.html',
 		sourcePaths: [
-			'src/contents/works-data.ts',
+			'src/content/works-data.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/publications',
-			'src/contents/publication.json',
+			'src/content/works/publications/list.json',
 		],
 		title: 'Publications',
 		pathname: '/works/publications/',

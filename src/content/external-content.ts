@@ -59,8 +59,8 @@ function toExternalPost(
  */
 export async function loadExternalPosts(root = process.cwd()): Promise<PostListItem[]> {
 	const [rssSource, postsSource] = await Promise.all([
-		readFile(path.join(root, 'src/contents/external-rss/rss.json'), 'utf8'),
-		readFile(path.join(root, 'src/contents/external-rss/posts.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/blog/external/rss.json'), 'utf8'),
+		readFile(path.join(root, 'src/content/blog/external/posts.json'), 'utf8'),
 	]);
 	const sources = JSON.parse(rssSource) as string[];
 	const configuredPosts = JSON.parse(postsSource) as ExternalPostInput[];
@@ -97,7 +97,7 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
  * @returns Media entries for the media page.
  */
 export async function loadExternalMedia(root = process.cwd()): Promise<PostListItem[]> {
-	const source = await readFile(path.join(root, 'src/contents/external-rss/media.json'), 'utf8');
+	const source = await readFile(path.join(root, 'src/content/works/media/list.json'), 'utf8');
 	const configuredMedia = JSON.parse(source) as ExternalPostInput[];
 	const mediaPosts = configuredMedia.flatMap((item) => {
 		const post = toExternalPost(item, 'podcast');
@@ -135,14 +135,22 @@ if (import.meta.vitest != null) {
 	test('loads curated entries with no remote sources and excludes invalid dates', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
-			'src/contents/external-rss/rss.json': '[]',
-			'src/contents/external-rss/posts.json': JSON.stringify([
+			'src/content/blog/external/rss.json': '[]',
+			'src/content/blog/external/posts.json': JSON.stringify([
 				{ title: 'Article', link: 'https://example.com/article', pubDate: '2026-01-01' },
 				{ title: 'Invalid', link: 'https://example.com/invalid', pubDate: 'invalid' },
 			]),
 		});
 		expect(await loadExternalPosts(fixture.getPath())).toEqual([
-			{ title: 'Article', slug: 'https://example.com/article', link: 'https://example.com/article', pubDate: '2026-01-01T00:00:00.000Z', lang: 'ja', external: true, kind: 'article' },
+			{
+				title: 'Article',
+				slug: 'https://example.com/article',
+				link: 'https://example.com/article',
+				pubDate: '2026-01-01T00:00:00.000Z',
+				lang: 'ja',
+				external: true,
+				kind: 'article',
+			},
 		]);
 	});
 }

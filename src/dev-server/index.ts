@@ -17,8 +17,8 @@ import type {
 	DevRouteDependencies,
 	DevRouteResponse,
 } from './route-types.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
-import type { OssProject, Talk } from '@/contents/works-data.ts';
+import type { PostListItem } from '@/content/external-content.ts';
+import type { OssProject, Talk } from '@/content/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { resolveDevSiteAssets } from '@/rendering/site-assets.ts';
 
@@ -97,26 +97,22 @@ function createDevelopmentRouteDependencies(
 		loadBlogPostSource: async (slug) => (await loadBlogModule()).loadBlogPostSource(slug),
 		loadExternalPosts: async () => {
 			const externalContent = (await context.loadModule(
-				'/src/contents/external-content.ts',
+				'/src/content/external-content.ts',
 			)) as ExternalContentModule;
 			return externalContent.loadExternalPosts(root);
 		},
 		loadExternalMedia: async () => {
 			const externalContent = (await context.loadModule(
-				'/src/contents/external-content.ts',
+				'/src/content/external-content.ts',
 			)) as ExternalContentModule;
 			return externalContent.loadExternalMedia(root);
 		},
 		loadOssProjects: async () => {
-			const worksData = (await context.loadModule(
-				'/src/contents/works-data.ts',
-			)) as WorksDataModule;
+			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
 			return worksData.loadOssProjects(root);
 		},
 		loadPublications: async () => {
-			const worksData = (await context.loadModule(
-				'/src/contents/works-data.ts',
-			)) as WorksDataModule;
+			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
 			return worksData.loadPublications(root);
 		},
 		loadShowcase: async () => {
@@ -124,9 +120,7 @@ function createDevelopmentRouteDependencies(
 			return showcase.loadShowcase(renderContent);
 		},
 		loadTalks: async () => {
-			const worksData = (await context.loadModule(
-				'/src/contents/works-data.ts',
-			)) as WorksDataModule;
+			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
 			return worksData.loadTalks();
 		},
 	};

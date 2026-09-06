@@ -6,7 +6,7 @@ import type {
 } from './route-types.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '@/lib/dotfiles.ts';
-import { postListItems } from '@/contents/external-content.ts';
+import { postListItems } from '@/content/external-content.ts';
 import { renderBlogFeed, renderMediaFeed } from '@/generation/feeds.ts';
 import { createAboutPageFile } from '@/pages/about';
 import { createArticlePageFiles } from '@/pages/blog/article';

@@ -30,5 +30,5 @@ For discovering and updating external articles, podcasts, or YouTube appearances
 
 ## Portfolio data
 
-- Edit `src/contents/works/oss/list.json` for portfolio curation and follow `src/contents/works/oss/README.md`.
-- Do not hand-edit `src/contents/works/oss/stars.json`; refresh it with `pnpm update:oss-stars` when requested.
+- Edit `src/content/works/oss/list.json` for portfolio curation and follow `src/content/works/oss/README.md`.
+- Do not hand-edit `src/content/works/oss/stars.json`; refresh it with `pnpm update:oss-stars` when requested.

@@ -1,7 +1,7 @@
 import { SITE_ORIGIN } from '@/config/site.ts';
 import WorksNav from '@/pages/works/_components/WorksNav';
 import WorksSection from '@/pages/works/_components/WorksSection';
-import type { OssProject, OssProjectKind } from '@/contents/works-data.ts';
+import type { OssProject, OssProjectKind } from '@/content/works-data.ts';
 import styles from './Oss.module.css';
 
 type OssPageProps = {

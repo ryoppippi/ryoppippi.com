@@ -20,7 +20,7 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/showcase',
 			'src/content/showcase.ts',
-			'src/content/showcase',
+			'src/content/works/showcase',
 		],
 		title: 'Project showcase',
 		pathname: '/works/showcase/',

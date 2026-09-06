@@ -1,6 +1,6 @@
 import type { BlogPostMetadata } from '../content/index.ts';
 import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
-import type { PostListItem } from '../contents/external-content.ts';
+import type { PostListItem } from '../content/external-content.ts';
 import { renderFeedFiles, resolveFeedsOptions } from '@ox-content/vite-plugin';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '../config/site.ts';
 
