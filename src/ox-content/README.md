@@ -10,12 +10,19 @@ are released. It is not a home for site data, layout, or page policy.
 - `components/SiteLayout/`: shared document structure, head values, and asset selection.
 - `config/`: site configuration, source selection, and Markdown options.
 - `pages/prerender.ts`: site-owned production route preparation.
-- `dev-server/`: development host composition.
+- `pages/dev.ts`: development route/data composition and site-specific 404 policy.
 - `ox-content/`: build-host connection, temporary framework adapters, and the virtual-module type shim.
 
 Post-local components remain beside their articles. Island discovery and rendering
 are framework integration, so they do not live in the authored-content directory.
 Page endpoint URLs remain explicit; file discovery does not infer URL semantics.
+
+`dev-plugin.ts` is a local proof of the plugin interface requested in #1320.
+It supplies request-local Markdown/Solid rendering and island styles to the site
+host while the native plugin still owns middleware, caching, loading and watchers.
+The old `dev-server/` directory is deleted, but this generic bridge remains local
+until a released upstream interface replaces it. Renderer module paths are a
+temporary adapter boundary, not a proposed requirement for the final upstream API.
 
 ## Release/adoption ledger
 
