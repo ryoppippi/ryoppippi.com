@@ -136,20 +136,17 @@ function initialiseMediaFilter(): void {
 	});
 }
 
-function initialiseSolidIslands(): void {
-	initSolidHtmlHost({
-		initIslands,
-		modules: solidIslandLoaders,
-		mount: { mode: 'render' },
-	});
-}
 function initialisePageInteractions(): void {
 	initialiseThemeToggle();
 	initialiseBlogFilters();
 	initialiseTalkFilter();
 	initialiseMediaFilter();
 	initialiseSponsorViewToggle();
-	initialiseSolidIslands();
+	initSolidHtmlHost({
+		initIslands,
+		modules: solidIslandLoaders,
+		mount: { mode: 'render' },
+	});
 	initReaderChrome(document);
 	initTweetCards(document);
 	enhanceMarkdownTables(document);
