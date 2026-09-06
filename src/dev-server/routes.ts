@@ -7,7 +7,8 @@ import type {
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from '@/lib/dotfiles.ts';
 import { postListItems } from '@/content/external-content.ts';
-import { renderBlogFeed, renderMediaFeed } from '@/generation/feeds.ts';
+import { renderBlogFeed } from '@/pages/blog/feed.ts';
+import { renderMediaFeed } from '@/pages/works/media/feed.ts';
 import { createAboutPageFile } from '@/pages/about';
 import { createArticlePageFiles } from '@/pages/blog/article';
 import { createBlogListPageFile } from '@/pages/blog';

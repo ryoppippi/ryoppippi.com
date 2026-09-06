@@ -2,7 +2,8 @@ import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
 import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from '../content/paths.ts';
-import { BLOG_FEED_OPTIONS, MEDIA_FEED_OPTIONS } from '../generation/feeds.ts';
+import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
+import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
 
 /** Public stylesheet shared by the custom host's dev server and build writer. */
 export const SYNTAX_THEME_HREF = '/__ox_theme_tokens__/syntax.css';

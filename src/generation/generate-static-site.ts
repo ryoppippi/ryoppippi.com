@@ -2,12 +2,8 @@ import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
-import {
-	extractInstallSection,
-	extractSection,
-	fetchDotfilesReadme,
-	parseStepCommands,
-} from '@/lib/dotfiles.ts';
+import { fetchDotfilesReadme } from '@/lib/dotfiles.ts';
+import { createDotfilesPageFiles } from '@/pages/dotfiles';
 import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
 import { loadExternalPosts, postListItems } from '@/content/external-content.ts';
 import type { PostListItem } from '@/content/external-content.ts';
@@ -92,26 +88,5 @@ export async function generateStaticSite({
 		createErrorPageFile(assets),
 	];
 
-	const install = extractSection(dotfiles, 'Setup');
-	const osSections = [
-		['mac', 'macOS'],
-		['linux', 'Linux'],
-	] as const;
-	const plainFiles: GeneratedFile[] = [
-		{ path: 'dotfiles.md', content: dotfiles },
-		{ path: 'dotfiles/install', content: install },
-	];
-
-	for (const [slug, heading] of osSections) {
-		const section = extractInstallSection(dotfiles, heading);
-		plainFiles.push({ path: `dotfiles/${slug}.html`, content: section });
-		plainFiles.push(
-			...parseStepCommands(section).map(({ step, command }) => ({
-				path: `dotfiles/${slug}/${step}`,
-				content: command,
-			})),
-		);
-	}
-
-	return [...pages, ...plainFiles];
+	return [...pages, ...createDotfilesPageFiles(dotfiles)];
 }

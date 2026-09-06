@@ -14,7 +14,8 @@ import { buildContentArtifact } from '@/content/build.ts';
 import { createIslandRenderer } from '@/content/island-renderer.ts';
 import { loadExternalMedia } from '@/content/external-content.ts';
 import { inlineHomeStyles, resolveSiteAssets } from '@/rendering/site-assets.ts';
-import { siteFeedCollections } from './feeds.ts';
+import { blogFeedItems } from '@/pages/blog/feed.ts';
+import { mediaFeedItems } from '@/pages/works/media/feed.ts';
 import { generateStaticSite } from './generate-static-site.ts';
 
 type HostContent = {
@@ -99,7 +100,9 @@ const host = {
 	},
 	async outputs(context) {
 		const { content, externalMedia } = await loadHostContent(context);
-		return { collections: siteFeedCollections(content.posts, externalMedia) };
+		return {
+			collections: { blog: blogFeedItems(content.posts), media: mediaFeedItems(externalMedia) },
+		};
 	},
 } satisfies OxContentCustomHostModule;
 
