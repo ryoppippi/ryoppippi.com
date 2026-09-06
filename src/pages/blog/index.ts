@@ -4,7 +4,7 @@ import { definePage } from '@/pages/page.ts';
 import BlogListPage from './page.tsx';
 import type { PageRoutes } from '../route.ts';
 import { postListItems } from './external.ts';
-import { renderBlogFeed } from './feed.ts';
+import { blogFeedRoute } from './feed.ts';
 
 /** Blog page and development feed; production feeds are emitted by Ox Content. */
 export const routes = (() => [
@@ -21,14 +21,7 @@ export const routes = (() => [
 			);
 		},
 	},
-	{
-		path: '/feed.xml',
-		devOnly: true,
-		render: async ({ loadBlogPostMetadata }) => {
-			const feed = await renderBlogFeed(await loadBlogPostMetadata());
-			return { path: 'feed.xml', content: feed.content, contentType: feed.contentType };
-		},
-	},
+	blogFeedRoute,
 ]) satisfies PageRoutes;
 
 /**

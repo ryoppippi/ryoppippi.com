@@ -3,7 +3,7 @@ import type { PostListItem } from '@/pages/post-list.ts';
 import { definePage } from '@/pages/page.ts';
 import MediaPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
-import { renderMediaFeed } from './feed.ts';
+import { mediaFeedRoute } from './feed.ts';
 
 /** Media page and development feed; production feeds are emitted by Ox Content. */
 export const routes = (() => [
@@ -12,14 +12,7 @@ export const routes = (() => [
 		render: async ({ assets, loadExternalMedia }) =>
 			createMediaPageFile(await loadExternalMedia(), assets),
 	},
-	{
-		path: '/works/media/feed.xml',
-		devOnly: true,
-		render: async ({ loadExternalMedia }) => {
-			const feed = await renderMediaFeed(await loadExternalMedia());
-			return { path: 'works/media/feed.xml', content: feed.content, contentType: feed.contentType };
-		},
-	},
+	mediaFeedRoute,
 ]) satisfies PageRoutes;
 
 /**

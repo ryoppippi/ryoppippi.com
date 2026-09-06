@@ -2,7 +2,7 @@ import type { OxContentCustomHostRoutesContext } from '@ox-content/vite-plugin/c
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
 import { loadBlogPosts } from '@/pages/blog/data.ts';
 import { loadShowcase } from '@/pages/works/showcase/data.ts';
-import { renderMarkdown, type MarkdownRenderer } from './markdown.ts';
+import { renderMarkdown, type MarkdownRenderer } from '@/ox-content/markdown.ts';
 import { createIslandRenderer } from '@/ox-content/island-renderer.ts';
 import { loadExternalMedia } from '@/pages/works/media/data.ts';
 import { resolveSiteAssets } from '@/components/SiteLayout/assets.ts';

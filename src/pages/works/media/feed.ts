@@ -1,7 +1,8 @@
-import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
+import type { FeedChannelOptions, FeedItemInput } from '@ox-content/vite-plugin';
+import type { PageRoute } from '../../route.ts';
 import type { PostListItem } from '@/pages/post-list.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_SOCIAL_IMAGE_URL } from '../../../config/site.ts';
-import { renderRssFeed } from '../../../ox-content/feed.ts';
+import { renderRssFeed } from '../../feed.ts';
 
 export const MEDIA_FEED_OPTIONS = {
 	collection: 'media',
@@ -28,7 +29,14 @@ export function mediaFeedItems(items: readonly PostListItem[]): FeedItemInput[] 
 		}));
 }
 
-/** Renders the media RSS response for development without writing to disk. */
-export function renderMediaFeed(items: readonly PostListItem[]): Promise<RenderedFeedFile> {
-	return renderRssFeed(MEDIA_FEED_OPTIONS, mediaFeedItems(items), 'works/media/feed.xml');
-}
+/** Development endpoint; production uses the same options/items via coordinated outputs. */
+export const mediaFeedRoute = {
+	path: '/works/media/feed.xml',
+	devOnly: true,
+	render: async ({ loadExternalMedia }) =>
+		renderRssFeed(
+			MEDIA_FEED_OPTIONS,
+			mediaFeedItems(await loadExternalMedia()),
+			'works/media/feed.xml',
+		),
+} satisfies PageRoute;

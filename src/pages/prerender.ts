@@ -5,7 +5,7 @@ import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import { fetchDotfilesReadme } from '@/pages/dotfiles/data.ts';
 import { createPageRoutes } from '@/pages/route.ts';
-import { collectionAssetUrls, planSiteContentAssets } from '@/ox-content/content-assets.ts';
+import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
 import type { PostListItem } from '@/pages/post-list.ts';
 import { createPageContext } from '@/pages/context.ts';
 

@@ -11,10 +11,13 @@ are released. It is not a home for site data, layout, or page policy.
 - `config/`: site configuration, source selection, and Markdown options.
 - `pages/prerender.ts`: site-owned production route preparation.
 - `pages/dev.ts`: development route/data composition and site-specific 404 policy.
-- `ox-content/`: build-host connection, temporary framework adapters, and the virtual-module type shim.
+- `ox-content/`: generic plugin/rendering adapters and the virtual-module type shim.
 
-Post-local components remain beside their articles. Island discovery and rendering
-are framework integration, so they do not live in the authored-content directory.
+Post-local components remain beside their articles. Site build assembly, shared RSS
+handling, content asset policy and blog island-document selection live under `pages/`.
+Feed options, item mapping and the development endpoint live in each page's `feed.ts`.
+Upstream ownership of a future API does not make today's site-specific caller a
+framework module. Publication and route policy stay with their pages after adoption.
 Page endpoint URLs remain explicit; file discovery does not infer URL semantics.
 
 `dev-plugin.ts` is a local proof of the plugin interface requested in #1320.
@@ -31,13 +34,13 @@ All issue numbers below belong to <https://github.com/ubugeeei-prod/ox-content>.
 | Issue                                                            | Downstream deletion target                                                    |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | [#1315](https://github.com/ubugeeei-prod/ox-content/issues/1315) | Workarounds for missing public custom-host declaration exports.               |
-| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `ox-content/content-assets.ts`.                 |
+| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `pages/content-assets.ts`.                      |
 | [#1317](https://github.com/ubugeeei-prod/ox-content/issues/1317) | Renderer factory glue in `ox-content/island-renderer.ts`.                     |
 | [#1318](https://github.com/ubugeeei-prod/ox-content/issues/1318) | Repeated collection asset planning in production generation.                  |
-| [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `ox-content/feed.ts` and dev-only feed response adapters.                     |
+| [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `pages/feed.ts` and dev-only feed response adapters.                          |
 | [#1320](https://github.com/ubugeeei-prod/ox-content/issues/1320) | Markdown pipeline composition and its dev-host connection.                    |
 | [#1321](https://github.com/ubugeeei-prod/ox-content/issues/1321) | `ox-content/virtual.d.ts`.                                                    |
-| [#1322](https://github.com/ubugeeei-prod/ox-content/issues/1322) | Repeated glob/read/frontmatter discovery in `ox-content/island-documents.ts`. |
+| [#1322](https://github.com/ubugeeei-prod/ox-content/issues/1322) | Repeated glob/read/frontmatter discovery in `pages/blog/island-documents.ts`. |
 | [#1323](https://github.com/ubugeeei-prod/ox-content/issues/1323) | CSS href-to-filesystem reconstruction in `pages/home/styles.ts`.              |
 
 Feed development output and stylesheet-content access are enhancement requests,

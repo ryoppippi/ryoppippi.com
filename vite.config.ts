@@ -13,8 +13,8 @@ import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { SERVER_STYLE_MODULES } from './src/client/page-style-registry.ts';
-import { loadIslandDocuments } from './src/ox-content/island-documents.ts';
-import { planSiteContentAssets } from './src/ox-content/content-assets.ts';
+import { loadIslandDocuments } from './src/pages/blog/island-documents.ts';
+import { planSiteContentAssets } from './src/pages/content-assets.ts';
 
 type BlogCatalogueModule = {
 	loadBlogPostMetadata: () => Promise<Array<{ filename: string; isPublished: boolean }>>;
@@ -97,7 +97,7 @@ export default defineConfig(({ command, mode }) => {
 						markdownModule: '/src/ox-content/markdown.ts',
 						islandRendererModule: '/src/ox-content/island-renderer.ts',
 					})
-				: createOxContentCustomHostPlugin({ ...hostOptions, host: '/src/ox-content/build.ts' }),
+				: createOxContentCustomHostPlugin({ ...hostOptions, host: '/src/pages/build.ts' }),
 		] satisfies PluginOption[],
 		build: {
 			cssMinify: true,
