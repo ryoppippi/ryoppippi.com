@@ -1,4 +1,4 @@
-import { formatDate } from '@/lib/util.ts';
+import { formatDate } from '@/lib/date.ts';
 import type { PostListItem } from '@/contents/external-content.ts';
 import styles from './BlogList.module.css';
 

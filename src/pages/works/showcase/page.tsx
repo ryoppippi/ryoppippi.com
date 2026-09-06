@@ -1,5 +1,5 @@
 import type { ShowcaseProject } from '@/content/index.ts';
-import { formatDate } from '@/lib/util.ts';
+import { formatDate } from '@/lib/date.ts';
 import WorksNav from '@/pages/works/_components/WorksNav';
 import styles from './Showcase.module.css';
 

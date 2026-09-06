@@ -1,4 +1,4 @@
-import { formatDate } from '@/lib/util.ts';
+import { formatDate } from '@/lib/date.ts';
 import WorksNav from '@/pages/works/_components/WorksNav';
 import WorksSection, { WorksList } from '@/pages/works/_components/WorksSection';
 import type { Talk } from '@/contents/works-data.ts';

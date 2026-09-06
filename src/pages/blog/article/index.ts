@@ -1,5 +1,5 @@
 import type { ArticleMetadata, BlogPost } from '@/content/index.ts';
-import { formatDate } from '@/lib/util.ts';
+import { formatDate } from '@/lib/date.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/generation/define-page.ts';
