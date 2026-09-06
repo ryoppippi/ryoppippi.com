@@ -1,0 +1,46 @@
+name: Check Links
+
+on:
+  workflow_dispatch:
+  schedule:
+    # External links can break without a repository change.
+    - cron: '23 6 * * 1'
+
+concurrency:
+  group: check-links
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Check Markdown links
+        id: lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          # Report failures while exclusions are calibrated against real results.
+          fail: false
+          jobSummary: true
+          format: markdown
+          args: >-
+            --scheme http --scheme https
+            --exclude-all-private
+            --max-concurrency 8
+            --host-concurrency 2
+            --max-retries 2
+            --timeout 20
+            --no-progress
+            -- README.md 'src/content/**/*.md'
+
+      - name: Fail on checker errors
+        if: steps.lychee.outputs.exit_code != '0' && steps.lychee.outputs.exit_code != '2'
+        run: exit 1
