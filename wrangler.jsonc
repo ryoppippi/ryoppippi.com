@@ -3,7 +3,7 @@
 	"name": "ryoppippi-com",
 	"compatibility_date": "2025-06-19",
 	"assets": {
-		"directory": "build",
+		"directory": "dist",
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page",
 	},

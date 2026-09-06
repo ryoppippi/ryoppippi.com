@@ -16,7 +16,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	attrs: true,
 	budoux: true,
 	srcDir: 'src/content/blog',
-	outDir: 'build',
+	outDir: 'dist',
 	collections: { blog: BLOG_COLLECTION_PATTERNS },
 	docs: false,
 	icons: {
