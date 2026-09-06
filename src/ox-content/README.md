@@ -9,8 +9,9 @@ are released. It is not a home for site data, layout, or page policy.
 - `pages/`: discovered endpoint definitions, page UI, and page-specific data loaders.
 - `components/SiteLayout/`: shared document structure, head values, and asset selection.
 - `config/`: site configuration, source selection, and Markdown options.
-- `generation/`: production orchestration; `dev-server/`: development host composition.
-- `ox-content/`: temporary framework adapters and the virtual-module type shim.
+- `pages/prerender.ts`: site-owned production route preparation.
+- `dev-server/`: development host composition.
+- `ox-content/`: build-host connection, temporary framework adapters, and the virtual-module type shim.
 
 Post-local components remain beside their articles. Island discovery and rendering
 are framework integration, so they do not live in the authored-content directory.
@@ -23,7 +24,7 @@ All issue numbers below belong to <https://github.com/ubugeeei-prod/ox-content>.
 | Issue                                                            | Downstream deletion target                                                    |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | [#1315](https://github.com/ubugeeei-prod/ox-content/issues/1315) | Workarounds for missing public custom-host declaration exports.               |
-| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `generation/content-assets.ts`.                 |
+| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `ox-content/content-assets.ts`.                 |
 | [#1317](https://github.com/ubugeeei-prod/ox-content/issues/1317) | Renderer factory glue in `ox-content/island-renderer.ts`.                     |
 | [#1318](https://github.com/ubugeeei-prod/ox-content/issues/1318) | Repeated collection asset planning in production generation.                  |
 | [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `ox-content/feed.ts` and dev-only feed response adapters.                     |

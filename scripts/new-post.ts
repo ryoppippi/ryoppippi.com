@@ -7,7 +7,7 @@ import * as d from 'date-fns';
 import fs from 'fs-extra';
 import { stringify } from 'gray-matter-es';
 import openEditor from 'open-editor';
-import { blogDirectory } from '../src/config/content.ts';
+import { BLOG_DIRECTORY } from '../src/config/content.ts';
 
 p.intro('Create a new blog post');
 
@@ -32,7 +32,7 @@ if (p.isCancel(lang)) {
 
 p.log.message('Creating post...');
 
-const blogDir = blogDirectory();
+const blogDir = BLOG_DIRECTORY;
 const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}-${lang}`;
 const postDir = join(blogDir, slug);
 const md = join(postDir, 'index.md');

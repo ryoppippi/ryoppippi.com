@@ -1,55 +1,55 @@
 import type { OxContentCustomHostRoutesContext } from '@ox-content/vite-plugin/custom-host';
-import type { ContentArtifact } from '@/generation/content-types.ts';
-import type { PostListItem } from '@/pages/post-list.ts';
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
-import { buildContentArtifact } from '@/generation/content.ts';
+import { loadBlogPosts } from '@/pages/blog/data.ts';
+import { loadShowcase } from '@/pages/works/showcase/data.ts';
+import { renderMarkdown, type MarkdownRenderer } from './markdown.ts';
 import { createIslandRenderer } from '@/ox-content/island-renderer.ts';
 import { loadExternalMedia } from '@/pages/works/media/data.ts';
 import { resolveSiteAssets } from '@/components/SiteLayout/assets.ts';
 import { inlineBuiltHomeStyles } from '@/pages/home/styles.ts';
 import { blogFeedItems } from '@/pages/blog/feed.ts';
 import { mediaFeedItems } from '@/pages/works/media/feed.ts';
-import { generateStaticSite } from './generate-static-site.ts';
-
-type HostContent = {
-	content: ContentArtifact;
-	externalMedia: PostListItem[];
-};
+import { prerenderPages } from '@/pages/prerender.ts';
 
 type HostContentContext = Pick<OxContentCustomHostRoutesContext, 'loadModule' | 'memo' | 'root'>;
 
-function loadHostContent(context: HostContentContext): Promise<HostContent> {
+function loadHostContent(context: HostContentContext) {
 	return context.memo('site-content', async () => {
-		const [content, externalMedia] = await Promise.all([
-			buildContentArtifact(createIslandRenderer((id) => context.loadModule(id))),
+		const renderIsland = createIslandRenderer((id) => context.loadModule(id));
+		const renderContent = ((content, options) =>
+			renderMarkdown(content, { ...options, renderIsland })) satisfies MarkdownRenderer;
+		const [posts, showcase, externalMedia] = await Promise.all([
+			loadBlogPosts(renderContent),
+			loadShowcase(renderContent),
 			loadExternalMedia(context.root),
 		]);
-		return { content, externalMedia };
+		return { posts, showcase, externalMedia };
 	});
 }
 
 const host = {
 	async routes(context) {
 		const { outDir, root } = context;
-		const { content, externalMedia } = await loadHostContent(context);
+		const { posts, showcase, externalMedia } = await loadHostContent(context);
 		const islandModules = [
 			...new Set(
-				content.posts
+				posts
 					.filter(({ isPublished }) => isPublished)
 					.flatMap(({ clientModules }) => clientModules.map(({ moduleId }) => moduleId)),
 			),
 		];
-		return generateStaticSite({
+		return prerenderPages({
 			assets: await inlineBuiltHomeStyles(outDir, resolveSiteAssets(context.assets, islandModules)),
-			content,
+			posts,
+			showcase,
 			externalMedia,
 			root,
 		});
 	},
 	async outputs(context) {
-		const { content, externalMedia } = await loadHostContent(context);
+		const { posts, externalMedia } = await loadHostContent(context);
 		return {
-			collections: { blog: blogFeedItems(content.posts), media: mediaFeedItems(externalMedia) },
+			collections: { blog: blogFeedItems(posts), media: mediaFeedItems(externalMedia) },
 		};
 	},
 } satisfies OxContentCustomHostModule;

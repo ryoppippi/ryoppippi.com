@@ -1,8 +1,8 @@
 import type { CollectionAssetInput, CollectionAssetManifest } from '@ox-content/vite-plugin';
-import { planCollectionAssets, rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
+import { planCollectionAssets } from '@ox-content/vite-plugin';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import { blogDirectory, showcaseDirectory } from '../config/content.ts';
+import { BLOG_DIRECTORY, SHOWCASE_DIRECTORY } from '../config/content.ts';
 
 const PUBLISHABLE_CONTENT_ASSET_EXTENSIONS = new Set([
 	'.avif',
@@ -86,7 +86,7 @@ export async function planSiteContentAssets(
 ): Promise<CollectionAssetManifest> {
 	return planCollectionAssets({
 		root,
-		assets: await discoverSiteContentAssets(blogDirectory(), showcaseDirectory(), publishedPosts),
+		assets: await discoverSiteContentAssets(BLOG_DIRECTORY, SHOWCASE_DIRECTORY, publishedPosts),
 	});
 }
 
@@ -171,38 +171,5 @@ if (import.meta.vitest != null) {
 			['/blog/post/image.png', '/assets/content/digest.png'],
 			['/legacy/image.png', '/assets/content/digest.png'],
 		]);
-	});
-
-	const manifest = {
-		assets: [
-			{
-				sourcePath: '/workspace/image.png',
-				publicPaths: ['/blog/post/image.png'],
-				contentPath: '/assets/content/digest.png',
-			},
-		],
-	} satisfies CollectionAssetManifest;
-	test('collection asset rewriting preserves external URLs', () => {
-		const html =
-			'<p><img src="./image.png" alt="local"><a href="https://example.com/image.png">external</a></p>';
-
-		const rewritten = rewriteCollectionAssetUrls({
-			html,
-			pagePath: '/blog/post/',
-			manifest,
-		}).html;
-
-		expect(rewritten).toContain('src="/assets/content/digest.png"');
-		expect(rewritten).toContain('href="https://example.com/image.png"');
-	});
-
-	test('collection asset rewriting preserves query strings and fragments', () => {
-		const rewritten = rewriteCollectionAssetUrls({
-			html: '<img src="./image.png?width=800#preview">',
-			pagePath: '/blog/post/',
-			manifest,
-		}).html;
-
-		expect(rewritten).toContain('src="/assets/content/digest.png?width=800#preview"');
 	});
 }

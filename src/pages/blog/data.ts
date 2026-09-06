@@ -5,7 +5,7 @@ import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugi
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from '../../ox-content/markdown.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { BLOG_SOURCE_PATTERNS, blogDirectory } from '../../config/content.ts';
+import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY } from '../../config/content.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.
@@ -116,7 +116,7 @@ async function findBlogPostSource(slug: string, directory: string) {
 	if (slug.length === 0 || path.basename(slug) !== slug) {
 		return null;
 	}
-	if (path.resolve(directory) === blogDirectory()) {
+	if (path.resolve(directory) === BLOG_DIRECTORY) {
 		const entry = (await loadBlogCollection()).find(
 			(candidate) => filenameFor(path.join(directory, candidate.source)) === slug,
 		);
@@ -154,7 +154,7 @@ async function findBlogPostSource(slug: string, directory: string) {
 
 export async function loadBlogPostSource(
 	slug: string,
-	directory = blogDirectory(),
+	directory = BLOG_DIRECTORY,
 ): Promise<string | null> {
 	return (await findBlogPostSource(slug, directory))?.source ?? null;
 }
@@ -170,7 +170,7 @@ export async function loadBlogPostSource(
 export async function loadBlogPost(
 	slug: string,
 	renderContent?: MarkdownRenderer,
-	directory = blogDirectory(),
+	directory = BLOG_DIRECTORY,
 ): Promise<BlogPost | null> {
 	const entry = await findBlogPostSource(slug, directory);
 	if (entry == null) {
@@ -207,10 +207,10 @@ export async function loadBlogPost(
  * @returns Metadata sorted from newest publication date to oldest.
  */
 export async function loadBlogPostMetadata(
-	directory = blogDirectory(),
+	directory = BLOG_DIRECTORY,
 	entries?: readonly CollectionEntry[],
 ): Promise<BlogPostMetadata[]> {
-	if (entries == null && path.resolve(directory) !== blogDirectory()) {
+	if (entries == null && path.resolve(directory) !== BLOG_DIRECTORY) {
 		throw new Error('A custom blog directory requires explicit collection entries');
 	}
 	const collection = entries ?? (await loadBlogCollection());
@@ -240,7 +240,7 @@ export async function loadBlogPostMetadata(
  */
 export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
 	const render = renderContent ?? (await import('../../ox-content/markdown.ts')).renderMarkdown;
-	const blogDir = blogDirectory();
+	const blogDir = BLOG_DIRECTORY;
 	const entries = await loadBlogCollection();
 	const posts = await Promise.all(
 		entries.map(async (entry) => {
@@ -279,7 +279,7 @@ if (import.meta.vitest != null) {
 		);
 	});
 	test('preserves metadata for every configured source through the collection', async () => {
-		const directory = blogDirectory();
+		const directory = BLOG_DIRECTORY;
 		const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
 		const expected = await Promise.all(
 			files.map(async (filepath) => {
@@ -332,7 +332,7 @@ if (import.meta.vitest != null) {
 	});
 
 	test('keeps one central Tweet snapshot for every embedded post', async () => {
-		const directory = blogDirectory();
+		const directory = BLOG_DIRECTORY;
 		const cacheDirectory = path.resolve(
 			import.meta.dirname,
 			'../../..',

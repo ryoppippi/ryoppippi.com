@@ -8,10 +8,8 @@ export const BLOG_SOURCE_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx
 /** Showcase files relative to the configured blog collection root. */
 export const SHOWCASE_SOURCE_PATTERN = '../works/showcase/*.md';
 
-export function blogDirectory(root = contentRoot) {
-	return path.join(root, 'blog');
-}
+/** Canonical authored blog directory, shared with the new-post command. */
+export const BLOG_DIRECTORY = path.join(contentRoot, 'blog');
 
-export function showcaseDirectory(root = contentRoot) {
-	return path.join(root, 'works/showcase');
-}
+/** Canonical authored showcase directory. */
+export const SHOWCASE_DIRECTORY = path.join(contentRoot, 'works/showcase');

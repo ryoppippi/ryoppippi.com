@@ -10,7 +10,7 @@ import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { SERVER_STYLE_MODULES } from './src/client/page-style-registry.ts';
 import { loadIslandDocuments } from './src/ox-content/island-documents.ts';
-import { planSiteContentAssets } from './src/generation/content-assets.ts';
+import { planSiteContentAssets } from './src/ox-content/content-assets.ts';
 
 type BlogCatalogueModule = {
 	loadBlogPostMetadata: () => Promise<Array<{ filename: string; isPublished: boolean }>>;
@@ -42,7 +42,7 @@ export default defineConfig(({ command, mode }) => ({
 			ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
 		createOxContentCustomHostPlugin({
-			host: command === 'serve' ? '/src/dev-server/index.ts' : '/src/generation/index.ts',
+			host: command === 'serve' ? '/src/dev-server/index.ts' : '/src/ox-content/build.ts',
 			dev: {
 				enabled: mode !== 'test',
 				routeDependencies: [
