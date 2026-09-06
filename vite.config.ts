@@ -76,11 +76,12 @@ export default defineConfig(({ command, mode }) => ({
 			build: { transformHtml: false },
 			oxContent: {
 				ssg: {
+					minifyHtml: OX_CONTENT_BUILD_OPTIONS.ssg.minifyHtml,
 					siteName: OX_CONTENT_BUILD_OPTIONS.ssg.siteName,
 					siteUrl: OX_CONTENT_BUILD_OPTIONS.ssg.siteUrl,
 				},
 				icons: false,
-				feeds: false,
+				feeds: OX_CONTENT_BUILD_OPTIONS.feeds,
 				siteMaps: { robots: false, llms: false },
 				resources: false,
 				redirects: OX_CONTENT_BUILD_OPTIONS.redirects,

@@ -5,7 +5,7 @@ import {
 } from '@ox-content/vite-plugin';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
-import { BLOG_FEED_OPTIONS } from '../generation/feeds.ts';
+import { BLOG_FEED_OPTIONS, MEDIA_FEED_OPTIONS } from '../generation/feeds.ts';
 
 export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
 
@@ -28,7 +28,10 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	embeds: {
 		openGraph: OPEN_GRAPH_OPTIONS,
 	},
-	feeds: BLOG_FEED_OPTIONS,
+	feeds: {
+		blog: BLOG_FEED_OPTIONS,
+		media: MEDIA_FEED_OPTIONS,
+	},
 	permalinks: true,
 	notByAi: true,
 	redirects: {
@@ -40,6 +43,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	ssg: {
 		bare: true,
 		markdownSource: { alternate: true },
+		minifyHtml: true,
 		siteName: 'blog | ryoppippi.com',
 		siteUrl: 'https://ryoppippi.com',
 		transformConcurrency: 4,

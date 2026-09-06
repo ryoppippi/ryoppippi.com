@@ -1,28 +1,28 @@
 import type { DocumentStylesheetInput } from '@ox-content/vite-plugin/document-assets';
-import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
+import type {
+	OxContentCustomHostAssetsContext,
+	OxContentCustomHostRoutesContext,
+} from '@ox-content/vite-plugin/custom-host';
+import type { ContentArtifact } from '@/content/artifact.ts';
+import type { PostListItem } from '@/contents/external-content.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
-import type { MinifierOptions } from 'html-minifier-next';
 import { readFile } from 'node:fs/promises';
-import { minify } from 'html-minifier-next';
 import path from 'node:path';
 import { withoutLeadingSlash } from 'ufo';
 import { buildContentArtifact } from '@/content/build.ts';
 import { createIslandRenderer } from '@/content/island-renderer.ts';
+import { loadExternalMedia } from '@/contents/external-content.ts';
 import { inlineHomeStyles, resolveSiteAssets } from '@/rendering/site-assets.ts';
+import { siteFeedCollections } from './feeds.ts';
 import { generateStaticSite } from './generate-static-site.ts';
 
-const HTML_MINIFIER_OPTIONS = {
-	collapseWhitespace: true,
-	conservativeCollapse: true,
-	continueOnMinifyError: false,
-	continueOnParseError: false,
-	minifyCSS: true,
-	minifyJS: true,
-	removeComments: true,
-	removeRedundantAttributes: true,
-	useShortDoctype: true,
-} as const satisfies MinifierOptions;
+type HostContent = {
+	content: ContentArtifact;
+	externalMedia: PostListItem[];
+};
+
+type HostContentContext = Pick<OxContentCustomHostRoutesContext, 'loadModule' | 'memo' | 'root'>;
 
 function linkedStylesheets(stylesheets: readonly DocumentStylesheetInput[]): string[] {
 	return stylesheets.flatMap((stylesheet) => {
@@ -55,12 +55,20 @@ async function readBuiltSiteAssets(
 	return inlineHomeStyles(assets, base, home);
 }
 
+function loadHostContent(context: HostContentContext): Promise<HostContent> {
+	return context.memo('site-content', async () => {
+		const [content, externalMedia] = await Promise.all([
+			buildContentArtifact(createIslandRenderer((id) => context.loadModule(id))),
+			loadExternalMedia(context.root),
+		]);
+		return { content, externalMedia };
+	});
+}
+
 const host = {
 	async routes(context) {
 		const { outDir, root } = context;
-		const content = await buildContentArtifact(
-			createIslandRenderer((id) => context.loadModule(id)),
-		);
+		const { content, externalMedia } = await loadHostContent(context);
 		const islandModules = [
 			...new Set(
 				content.posts
@@ -71,28 +79,27 @@ const host = {
 		const files = await generateStaticSite({
 			assets: await readBuiltSiteAssets(outDir, context.assets, islandModules),
 			content,
-			outDir,
+			externalMedia,
 			root,
 		});
-		return Promise.all(
-			files.map(async (file) => {
-				const content = file.path.endsWith('.html')
-					? await minify(file.content, HTML_MINIFIER_OPTIONS)
-					: file.content;
-				const sourcePaths = file.sourcePaths ?? [];
-				return {
-					path: `/${file.path.replace(/index\.html$/, '')}`,
-					inputPath: sourcePaths[0],
-					lastUpdatedPaths: sourcePaths.slice(1),
-					unlisted: file.unlisted,
-					render: () => ({
-						body: content,
-						outputPath: file.path,
-						contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
-					}),
-				};
-			}),
-		);
+		return files.map((file) => {
+			const sourcePaths = file.sourcePaths ?? [];
+			return {
+				path: `/${file.path.replace(/index\.html$/, '')}`,
+				inputPath: sourcePaths[0],
+				lastUpdatedPaths: sourcePaths.slice(1),
+				unlisted: file.unlisted,
+				render: () => ({
+					body: file.content,
+					outputPath: file.path,
+					contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
+				}),
+			};
+		});
+	},
+	async outputs(context) {
+		const { content, externalMedia } = await loadHostContent(context);
+		return { collections: siteFeedCollections(content.posts, externalMedia) };
 	},
 } satisfies OxContentCustomHostModule;
 

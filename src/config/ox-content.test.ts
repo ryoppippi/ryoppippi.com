@@ -9,9 +9,16 @@ describe('Ox Content build outputs', () => {
 		expect(OX_CONTENT_BUILD_OPTIONS).toMatchObject({
 			collections: { blog: { source: BLOG_COLLECTION_PATTERNS, include: ['body'] } },
 			feeds: {
-				collection: 'blog',
-				formats: ['rss'],
-				path: '/',
+				blog: {
+					collection: 'blog',
+					formats: ['rss'],
+					path: '/',
+				},
+				media: {
+					collection: 'media',
+					formats: ['rss'],
+					path: '/works/media',
+				},
 			},
 			redirects: {
 				allowExternal: true,
@@ -27,6 +34,7 @@ describe('Ox Content build outputs', () => {
 			},
 			ssg: {
 				bare: true,
+				minifyHtml: true,
 				siteName: 'blog | ryoppippi.com',
 				siteUrl: 'https://ryoppippi.com',
 			},

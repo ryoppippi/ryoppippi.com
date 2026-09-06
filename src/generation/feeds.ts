@@ -1,7 +1,7 @@
 import type { BlogPostMetadata } from '../content/index.ts';
 import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
 import type { PostListItem } from '../contents/external-content.ts';
-import { renderFeedFiles, resolveFeedsOptions, writeFeedFiles } from '@ox-content/vite-plugin';
+import { renderFeedFiles, resolveFeedsOptions } from '@ox-content/vite-plugin';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '../config/site.ts';
 
 const BLOG_FEED_CHANNEL = {
@@ -33,6 +33,11 @@ export const BLOG_FEED_OPTIONS = {
 	collection: 'blog',
 } as const satisfies FeedChannelOptions;
 
+export const MEDIA_FEED_OPTIONS = {
+	...MEDIA_FEED_CHANNEL,
+	collection: 'media',
+} as const satisfies FeedChannelOptions;
+
 function feedInput(channel: FeedChannelOptions, items: readonly FeedItemInput[]) {
 	return {
 		base: channel.path ?? '/',
@@ -62,6 +67,23 @@ function mediaFeedItems(items: readonly PostListItem[]): FeedItemInput[] {
 			date: item.pubDate,
 			description: `${item.kind === 'video' ? 'YouTube' : 'Podcast'} | ${item.title}`,
 		}));
+}
+
+/**
+ * Maps site content into the named collections consumed by Ox Content feeds.
+ *
+ * @param posts - Local blog metadata to publish.
+ * @param media - Curated podcast and video appearances.
+ * @returns Feed items keyed by their configured collection names.
+ */
+export function siteFeedCollections(
+	posts: readonly BlogPostMetadata[],
+	media: readonly PostListItem[],
+): Record<'blog' | 'media', FeedItemInput[]> {
+	return {
+		blog: blogFeedItems(posts),
+		media: mediaFeedItems(media),
+	};
 }
 
 async function renderRssFeed(
@@ -99,44 +121,4 @@ export function renderBlogFeed(posts: readonly BlogPostMetadata[]): Promise<Rend
  */
 export function renderMediaFeed(items: readonly PostListItem[]): Promise<RenderedFeedFile> {
 	return renderRssFeed(MEDIA_FEED_CHANNEL, mediaFeedItems(items), 'works/media/feed.xml');
-}
-
-/**
- * Writes the local blog RSS output with Ox Content.
- *
- * @param posts - Local blog metadata to publish.
- * @param outDir - Static site output directory.
- * @returns A promise that resolves after the feed has been written.
- */
-export async function writeBlogFeed(
-	posts: readonly BlogPostMetadata[],
-	outDir: string,
-): Promise<void> {
-	const result = await writeFeedFiles({
-		...feedInput(BLOG_FEED_CHANNEL, blogFeedItems(posts)),
-		outDir,
-	});
-	if (result.warning != null) {
-		throw new Error(result.warning);
-	}
-}
-
-/**
- * Writes the curated media RSS output with Ox Content.
- *
- * @param items - Curated podcast and video appearances.
- * @param outDir - Static site output directory.
- * @returns A promise that resolves after the feed has been written.
- */
-export async function writeMediaFeed(
-	items: readonly PostListItem[],
-	outDir: string,
-): Promise<void> {
-	const result = await writeFeedFiles({
-		...feedInput(MEDIA_FEED_CHANNEL, mediaFeedItems(items)),
-		outDir,
-	});
-	if (result.warning != null) {
-		throw new Error(result.warning);
-	}
 }

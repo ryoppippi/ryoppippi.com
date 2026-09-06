@@ -9,12 +9,8 @@ import {
 	parseStepCommands,
 } from '@/lib/dotfiles.ts';
 import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
-import {
-	loadExternalMedia,
-	loadExternalPosts,
-	postListItems,
-} from '@/contents/external-content.ts';
-import { writeBlogFeed, writeMediaFeed } from './feeds.ts';
+import { loadExternalPosts, postListItems } from '@/contents/external-content.ts';
+import type { PostListItem } from '@/contents/external-content.ts';
 import { createAboutPageFile } from '@/pages/about';
 import { createArticlePageFiles } from '@/pages/blog/article';
 import { createBlogListPageFile } from '@/pages/blog';
@@ -30,48 +26,39 @@ import { loadOssProjects, loadPublications, loadTalks } from '@/contents/works-d
 
 type GenerateStaticSiteOptions = {
 	assets: SiteAssets;
-	content?: ContentArtifact;
-	outDir: string;
+	content: ContentArtifact;
+	externalMedia: PostListItem[];
 	root: string;
 };
 
 /**
- * Prepares site-owned pages and writes auxiliary content outputs.
+ * Prepares site-owned pages and plain-text outputs.
  *
  * @param assets - Bundled site assets referenced by generated pages.
- * @param content - Optional prebuilt content artifact.
- * @param outDir - Directory that receives generated files.
+ * @param content - Prebuilt content shared with coordinated outputs.
+ * @param externalMedia - Curated media shared with the media feed.
  * @param root - Repository root used for source loading and Git metadata.
  * @returns Pages and plain-text files for the framework host writer.
  */
 export async function generateStaticSite({
 	assets,
 	content,
-	outDir,
+	externalMedia,
 	root,
 }: GenerateStaticSiteOptions): Promise<GeneratedFile[]> {
-	let localContent = content;
-	if (localContent == null) {
-		const { buildContentArtifact } = await import('@/content/build.ts');
-		localContent = await buildContentArtifact();
-	}
-	const [externalPosts, externalMedia, ossProjects, publications, talks, dotfiles] =
-		await Promise.all([
-			loadExternalPosts(root),
-			loadExternalMedia(root),
-			loadOssProjects(root),
-			loadPublications(root),
-			loadTalks(),
-			fetchDotfilesReadme(fetch),
-		]);
+	const [externalPosts, ossProjects, publications, talks, dotfiles] = await Promise.all([
+		loadExternalPosts(root),
+		loadOssProjects(root),
+		loadPublications(root),
+		loadTalks(),
+		fetchDotfilesReadme(fetch),
+	]);
 	const contentAssets = await planSiteContentAssets(
 		root,
-		new Set(
-			localContent.posts.filter((post) => post.isPublished === true).map((post) => post.filename),
-		),
+		new Set(content.posts.filter((post) => post.isPublished === true).map((post) => post.filename)),
 	);
 	const assetUrls = collectionAssetUrls(contentAssets);
-	const posts = localContent.posts.map((post) => ({
+	const posts = content.posts.map((post) => ({
 		...post,
 		html: rewriteCollectionAssetUrls({
 			html: post.html,
@@ -79,7 +66,7 @@ export async function generateStaticSite({
 			manifest: contentAssets,
 		}).html,
 	}));
-	const showcase = localContent.showcase.map((project) => ({
+	const showcase = content.showcase.map((project) => ({
 		...project,
 		image:
 			project.image == null
@@ -104,8 +91,6 @@ export async function generateStaticSite({
 		createSponsorsPageFile(assets),
 		createErrorPageFile(assets),
 	];
-
-	await Promise.all([writeBlogFeed(posts, outDir), writeMediaFeed(externalMedia, outDir)]);
 
 	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [
