@@ -1,6 +1,6 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
-import { definePage } from '@/generation/define-page.ts';
+import { definePage } from '@/pages/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import AboutPage from './page.tsx';

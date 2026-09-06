@@ -2,7 +2,7 @@ import type { CollectionAssetInput, CollectionAssetManifest } from '@ox-content/
 import { planCollectionAssets, rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
+import { blogDirectory, showcaseDirectory } from '../config/content.ts';
 
 const PUBLISHABLE_CONTENT_ASSET_EXTENSIONS = new Set([
 	'.avif',

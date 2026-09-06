@@ -1,7 +1,11 @@
-import type { ContentArtifact } from './artifact.ts';
-import { loadBlogPosts } from './blog.ts';
-import { renderMarkdown, type IslandRenderer, type MarkdownRenderer } from './markdown/render.ts';
-import { loadShowcase } from './showcase.ts';
+import type { ContentArtifact } from './content-types.ts';
+import { loadBlogPosts } from '../pages/blog/data.ts';
+import {
+	renderMarkdown,
+	type IslandRenderer,
+	type MarkdownRenderer,
+} from '../ox-content/markdown.ts';
+import { loadShowcase } from '../pages/works/showcase/data.ts';
 
 export async function buildContentArtifact(
 	renderIsland?: IslandRenderer,

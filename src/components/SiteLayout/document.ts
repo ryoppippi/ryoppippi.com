@@ -1,11 +1,11 @@
 import type { Component } from 'solid-js';
 import type { DocumentLinkInput } from '@ox-content/vite-plugin/document-assets';
-import type { PageStyle, SiteAssets } from './site-assets.ts';
-import type { StructuredData } from './page-head.ts';
+import type { PageStyle, SiteAssets } from './assets.ts';
+import type { StructuredData } from './head.ts';
 import { renderToString } from '@solidjs/web';
 import { renderThemeBootstrapScript } from '@ox-content/vite-plugin/theme-bootstrap';
-import { renderAssetTags } from './site-assets.ts';
-import { renderPageHead } from './page-head.ts';
+import { renderAssetTags } from './assets.ts';
+import { renderPageHead } from './head.ts';
 import SiteLayout from '@/components/SiteLayout';
 
 type HtmlDocumentOptions = {

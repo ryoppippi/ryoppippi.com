@@ -1,5 +1,5 @@
-import type { GeneratedFile } from '@/generation/generated-file.ts';
-import { extractInstallSection, extractSection, parseStepCommands } from '@/lib/dotfiles.ts';
+import type { GeneratedFile } from '@/pages/output.ts';
+import { extractInstallSection, extractSection, parseStepCommands } from './data.ts';
 import type { PageRoutes } from '../route.ts';
 
 /** Installation endpoints derived once from the README for both hosts. */

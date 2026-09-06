@@ -1,13 +1,12 @@
-import type { ContentArtifact } from '@/content/artifact.ts';
+import type { ContentArtifact } from '@/generation/content-types.ts';
 import type { OxContentCustomHostRoute } from '@ox-content/vite-plugin/custom-host';
-import type { SiteAssets } from '@/rendering/site-assets.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
-import { fetchDotfilesReadme } from '@/lib/dotfiles.ts';
+import { fetchDotfilesReadme } from '@/pages/dotfiles/data.ts';
 import { createPageRoutes } from '@/pages/route.ts';
 import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
-import { loadExternalPosts } from '@/content/external-content.ts';
-import type { PostListItem } from '@/content/external-content.ts';
-import { loadOssProjects, loadPublications, loadTalks } from '@/content/works-data.ts';
+import type { PostListItem } from '@/pages/post-list.ts';
+import { createPageContext } from '@/pages/context.ts';
 
 type GenerateStaticSiteOptions = {
 	assets: SiteAssets;
@@ -31,13 +30,7 @@ export async function generateStaticSite({
 	externalMedia,
 	root,
 }: GenerateStaticSiteOptions): Promise<OxContentCustomHostRoute[]> {
-	const [externalPosts, ossProjects, publications, talks, dotfiles] = await Promise.all([
-		loadExternalPosts(root),
-		loadOssProjects(root),
-		loadPublications(root),
-		loadTalks(),
-		fetchDotfilesReadme(fetch),
-	]);
+	const dotfiles = await fetchDotfilesReadme(fetch);
 	const contentAssets = await planSiteContentAssets(
 		root,
 		new Set(content.posts.filter((post) => post.isPublished === true).map((post) => post.filename)),
@@ -65,18 +58,14 @@ export async function generateStaticSite({
 			.filter((route) => !route.devOnly)
 			.map(async (route) => {
 				const result = await route.render({
-					assets,
+					...createPageContext(root, assets),
 					loadBlogPost: async (slug) =>
 						publishedPosts.find((post) => post.filename === slug) ?? null,
 					loadBlogPostMetadata: async () => publishedPosts,
 					loadBlogPostSource: async (slug) =>
 						publishedPosts.find((post) => post.filename === slug)?.source ?? null,
-					loadExternalPosts: async () => externalPosts,
 					loadExternalMedia: async () => externalMedia,
-					loadOssProjects: async () => ossProjects,
-					loadPublications: async () => publications,
 					loadShowcase: async () => showcase,
-					loadTalks: async () => talks,
 				});
 				return { path: route.path, render: () => result } satisfies OxContentCustomHostRoute;
 			}),

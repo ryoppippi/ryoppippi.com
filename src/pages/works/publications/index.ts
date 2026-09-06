@@ -1,5 +1,5 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/pages/page.ts';
 import PublicationsPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
 
@@ -30,7 +30,7 @@ export function createPublicationsPageFile(
 		componentProps: { publications },
 		outputPath: 'works/publications/index.html',
 		sourcePaths: [
-			'src/content/works-data.ts',
+			'src/pages/works/publications/data.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/publications',

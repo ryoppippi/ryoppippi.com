@@ -1,5 +1,5 @@
-import type { BlogPost } from './blog.ts';
-import type { ShowcaseProject } from './showcase.ts';
+import type { BlogPost } from '../pages/blog/data.ts';
+import type { ShowcaseProject } from '../pages/works/showcase/data.ts';
 
 /**
  * The rendered content passed from the root content build to site generation.

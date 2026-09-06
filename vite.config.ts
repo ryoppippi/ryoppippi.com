@@ -9,7 +9,7 @@ import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { SERVER_STYLE_MODULES } from './src/client/page-style-registry.ts';
-import { loadIslandDocuments } from './src/content/islands.ts';
+import { loadIslandDocuments } from './src/ox-content/island-documents.ts';
 import { planSiteContentAssets } from './src/generation/content-assets.ts';
 
 type BlogCatalogueModule = {
@@ -58,7 +58,7 @@ export default defineConfig(({ command, mode }) => ({
 							: new Set(
 									(
 										await (
-											(await context.loadModule('/src/content/blog.ts')) as BlogCatalogueModule
+											(await context.loadModule('/src/pages/blog/data.ts')) as BlogCatalogueModule
 										).loadBlogPostMetadata()
 									)
 										.filter(({ isPublished }) => isPublished)
@@ -166,18 +166,7 @@ export default defineConfig(({ command, mode }) => ({
 					globals: true,
 					environment: 'node',
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
-					includeSource: [
-						'src/config/ox-content.ts',
-						'src/content/{external-content,works-data}.ts',
-						'src/dev-server/**/*.ts',
-						'src/generation/**/*.ts',
-						'src/lib/**/*.ts',
-						'src/pages/**/*.ts',
-						'src/rendering/site-assets.ts',
-						'src/content/{artifact,blog,island-renderer,islands,paths}.ts',
-						'src/content/blog/**/*.ts',
-						'src/content/markdown/**/*.ts',
-					],
+					includeSource: ['src/**/*.ts'],
 				},
 			},
 			{

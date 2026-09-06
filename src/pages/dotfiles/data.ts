@@ -10,8 +10,7 @@ export const DOTFILES_README_URL =
 /**
  * Fetch the raw dotfiles README.
  *
- * @param fetch - The fetch implementation to use (SvelteKit's scoped `fetch`
- * during prerendering).
+ * @param fetch - The fetch implementation used by the host.
  * @returns The README contents as markdown text.
  * @throws If the request fails (non-2xx response).
  * @example

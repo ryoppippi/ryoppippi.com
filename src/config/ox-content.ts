@@ -1,7 +1,8 @@
 import type { OxContentOptions } from '@ox-content/vite-plugin';
+import { SITE_NAME, SITE_ORIGIN } from './site.ts';
 import { REDIRECT_ROUTES } from './redirects.ts';
-import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
-import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from '../content/paths.ts';
+import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
+import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from './content.ts';
 import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
 import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
 
@@ -43,8 +44,8 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		bare: true,
 		markdownSource: { alternate: true },
 		minifyHtml: true,
-		siteName: 'blog | ryoppippi.com',
-		siteUrl: 'https://ryoppippi.com',
+		siteName: `blog | ${SITE_NAME}`,
+		siteUrl: SITE_ORIGIN,
 		transformConcurrency: 4,
 		theme: {
 			fonts: {

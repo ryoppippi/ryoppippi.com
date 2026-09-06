@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
-import type { GeneratedFile } from './generated-file.ts';
-import { renderComponent, renderHtmlDocument } from '@/rendering/html-document.ts';
+import type { GeneratedFile } from './output.ts';
+import { renderComponent, renderHtmlDocument } from '@/components/SiteLayout/document.ts';
 
 type HtmlDocumentOptions = Parameters<typeof renderHtmlDocument>[0];
 

@@ -1,16 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-export type Talk = {
-	title: string;
-	date: string;
-	lang?: string;
-	event: string;
-	eventLink?: string;
-	videoLink?: string;
-	links: string[];
-};
-
 export type OssProjectKind = 'project' | 'contribution';
 
 export type OssProject = {
@@ -98,24 +88,6 @@ export async function loadOssProjects(root: string): Promise<OssProject[]> {
 			} satisfies OssProject;
 		}),
 	);
-}
-
-export async function loadTalks(): Promise<Talk[]> {
-	const response = await fetch('https://talks.ryoppippi.com/talks.json');
-	if (!response.ok) {
-		throw new Error(`Failed to fetch talks: ${response.status} ${response.statusText}`);
-	}
-	return (await response.json()) as Talk[];
-}
-
-export async function loadPublications(
-	root: string,
-): Promise<
-	Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>
-> {
-	return JSON.parse(
-		await readFile(path.join(root, 'src/content/works/publications/list.json'), 'utf8'),
-	) as Record<string, Array<{ title: string; link: string; authors: string; publisher: string }>>;
 }
 
 if (import.meta.vitest != null) {

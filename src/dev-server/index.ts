@@ -1,4 +1,4 @@
-import type { IslandRenderer, MarkdownRenderer } from '@/content/index.ts';
+import type { MarkdownRenderer } from '@/ox-content/markdown.ts';
 import type {
 	OxContentCustomHostModule,
 	OxContentCustomHostRenderContext,
@@ -6,29 +6,25 @@ import type {
 	OxContentCustomHostRoutesContext,
 } from '@ox-content/vite-plugin/custom-host';
 import type { PageContext } from '@/pages/context.ts';
-import { resolveDevSiteAssets } from '@/rendering/site-assets.ts';
+import { resolveDevSiteAssets } from '@/components/SiteLayout/assets.ts';
 
-type BlogModule = typeof import('@/content/blog.ts');
-type ShowcaseModule = typeof import('@/content/showcase.ts');
-type ExternalContentModule = typeof import('@/content/external-content.ts');
-type WorksDataModule = typeof import('@/content/works-data.ts');
-type MarkdownModule = typeof import('@/content/markdown/render.ts');
+type BlogModule = typeof import('@/pages/blog/data.ts');
+type PageContextModule = typeof import('@/pages/context.ts');
+type IslandModule = typeof import('@/ox-content/island-renderer.ts');
+type MarkdownModule = typeof import('@/ox-content/markdown.ts');
 type PageRoutesModule = typeof import('@/pages/route.ts');
 type ErrorPageModule = typeof import('@/pages/error/index.ts');
-type DotfilesModule = typeof import('@/lib/dotfiles.ts');
+type DotfilesModule = typeof import('@/pages/dotfiles/data.ts');
 
-function createDevelopmentRouteDependencies(
+async function createDevelopmentRouteDependencies(
 	context: OxContentCustomHostRenderContext,
-	dependencies: Set<string>,
-): PageContext {
+): Promise<PageContext> {
 	const root = context.root;
 	const assets = resolveDevSiteAssets(context.assets);
-	const renderContent: MarkdownRenderer = async (content, options) => {
+	const renderContent = (async (content, options) => {
 		const [markdown, islands] = await Promise.all([
-			context.loadModule('/src/content/markdown/render.ts') as Promise<MarkdownModule>,
-			context.loadModule('/src/content/island-renderer.ts') as Promise<{
-				createIslandRenderer: (load: (path: string) => Promise<unknown>) => IslandRenderer;
-			}>,
+			context.loadModule('/src/ox-content/markdown.ts') as Promise<MarkdownModule>,
+			context.loadModule('/src/ox-content/island-renderer.ts') as Promise<IslandModule>,
 		]);
 		const renderIsland = islands.createIslandRenderer(async (modulePath) => {
 			const module = await context.loadModule(modulePath);
@@ -37,49 +33,12 @@ function createDevelopmentRouteDependencies(
 				throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 			}
 			assets.islands[modulePath] = result.stylesheets;
-			for (const dependency of result.dependencies) {
-				dependencies.add(dependency);
-			}
 			return module;
 		});
 		return markdown.renderMarkdown(content, { ...options, renderIsland });
-	};
-	const loadBlogModule = () => context.loadModule('/src/content/blog.ts') as Promise<BlogModule>;
-
-	return {
-		assets,
-		loadBlogPost: async (slug) => (await loadBlogModule()).loadBlogPost(slug, renderContent),
-		loadBlogPostMetadata: async () => (await loadBlogModule()).loadBlogPostMetadata(),
-		loadBlogPostSource: async (slug) => (await loadBlogModule()).loadBlogPostSource(slug),
-		loadExternalPosts: async () => {
-			const externalContent = (await context.loadModule(
-				'/src/content/external-content.ts',
-			)) as ExternalContentModule;
-			return externalContent.loadExternalPosts(root);
-		},
-		loadExternalMedia: async () => {
-			const externalContent = (await context.loadModule(
-				'/src/content/external-content.ts',
-			)) as ExternalContentModule;
-			return externalContent.loadExternalMedia(root);
-		},
-		loadOssProjects: async () => {
-			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
-			return worksData.loadOssProjects(root);
-		},
-		loadPublications: async () => {
-			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
-			return worksData.loadPublications(root);
-		},
-		loadShowcase: async () => {
-			const showcase = (await context.loadModule('/src/content/showcase.ts')) as ShowcaseModule;
-			return showcase.loadShowcase(renderContent);
-		},
-		loadTalks: async () => {
-			const worksData = (await context.loadModule('/src/content/works-data.ts')) as WorksDataModule;
-			return worksData.loadTalks();
-		},
-	};
+	}) satisfies MarkdownRenderer;
+	const pages = (await context.loadModule('/src/pages/context.ts')) as PageContextModule;
+	return pages.createPageContext(root, assets, renderContent);
 }
 
 function createDevelopmentRoute(
@@ -88,17 +47,15 @@ function createDevelopmentRoute(
 	return {
 		path: route.path,
 		async render(context) {
-			const dependencies = new Set<string>();
-			const result = await route.render(createDevelopmentRouteDependencies(context, dependencies));
-			return result == null ? undefined : { ...result, dependencies: [...dependencies] };
+			return route.render(await createDevelopmentRouteDependencies(context));
 		},
 	};
 }
 
 async function loadDevelopmentCatalogue(context: OxContentCustomHostRoutesContext) {
 	const [blog, dotfilesModule, routes] = await Promise.all([
-		context.loadModule('/src/content/blog.ts') as Promise<BlogModule>,
-		context.loadModule('/src/lib/dotfiles.ts') as Promise<DotfilesModule>,
+		context.loadModule('/src/pages/blog/data.ts') as Promise<BlogModule>,
+		context.loadModule('/src/pages/dotfiles/data.ts') as Promise<DotfilesModule>,
 		context.loadModule('/src/pages/route.ts') as Promise<PageRoutesModule>,
 	]);
 	const [posts, dotfiles] = await Promise.all([

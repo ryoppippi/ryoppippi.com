@@ -1,7 +1,7 @@
-import type { BlogPostMetadata } from '@/content/index.ts';
+import type { BlogPostMetadata } from '@/pages/blog/data.ts';
 import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_SOCIAL_IMAGE_URL } from '../../config/site.ts';
-import { renderRssFeed } from '../../rendering/feed.ts';
+import { renderRssFeed } from '../../ox-content/feed.ts';
 
 export const BLOG_FEED_OPTIONS = {
 	collection: 'blog',

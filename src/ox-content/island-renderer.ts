@@ -1,4 +1,4 @@
-import type { IslandRenderer } from './markdown/render.ts';
+import type { IslandRenderer } from './markdown.ts';
 import path from 'node:path';
 import { renderSolidHtmlHost, toSolidHtmlHostClientModuleId } from '@ox-content/vite-plugin-solid';
 

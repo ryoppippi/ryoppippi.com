@@ -1,7 +1,7 @@
 import type { FeedChannelOptions, FeedItemInput, RenderedFeedFile } from '@ox-content/vite-plugin';
-import type { PostListItem } from '@/content/external-content.ts';
+import type { PostListItem } from '@/pages/post-list.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_SOCIAL_IMAGE_URL } from '../../../config/site.ts';
-import { renderRssFeed } from '../../../rendering/feed.ts';
+import { renderRssFeed } from '../../../ox-content/feed.ts';
 
 export const MEDIA_FEED_OPTIONS = {
 	collection: 'media',

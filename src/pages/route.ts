@@ -1,4 +1,4 @@
-import type { GeneratedFile } from '@/generation/generated-file.ts';
+import type { GeneratedFile } from '@/pages/output.ts';
 import type { PageCatalogue, PageContext } from './context.ts';
 import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
 

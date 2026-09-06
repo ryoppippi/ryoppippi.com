@@ -1,6 +1,6 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
-import type { Talk } from '@/content/works-data.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/pages/page.ts';
+import type { Talk } from './data.ts';
 import TalksPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
 
@@ -25,7 +25,7 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		componentProps: { talks },
 		outputPath: 'works/talks/index.html',
 		sourcePaths: [
-			'src/content/works-data.ts',
+			'src/pages/works/talks/data.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/talks',

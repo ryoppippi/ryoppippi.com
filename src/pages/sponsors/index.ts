@@ -1,5 +1,5 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/pages/page.ts';
 import SponsorsPage from './page.tsx';
 import type { PageRoutes } from '../route.ts';
 

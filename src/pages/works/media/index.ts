@@ -1,6 +1,6 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import type { PostListItem } from '@/content/external-content.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import type { PostListItem } from '@/pages/post-list.ts';
+import { definePage } from '@/pages/page.ts';
 import MediaPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
 import { renderMediaFeed } from './feed.ts';
@@ -36,7 +36,7 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 		componentProps: { items: sorted },
 		outputPath: 'works/media/index.html',
 		sourcePaths: [
-			'src/content/external-content.ts',
+			'src/pages/post-list.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/media',

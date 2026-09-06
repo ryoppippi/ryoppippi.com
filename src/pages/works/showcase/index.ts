@@ -1,6 +1,6 @@
-import type { ShowcaseProject } from '@/content/index.ts';
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { ShowcaseProject } from '@/pages/works/showcase/data.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/pages/page.ts';
 import ShowcasePage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
 
@@ -29,7 +29,7 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/showcase',
-			'src/content/showcase.ts',
+			'src/pages/works/showcase/data.ts',
 			'src/content/works/showcase',
 		],
 		title: 'Project showcase',

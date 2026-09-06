@@ -1,9 +1,9 @@
-import type { ArticleMetadata, BlogPost } from '@/content/index.ts';
+import type { ArticleMetadata, BlogPost } from '@/pages/blog/data.ts';
 import { formatDate } from '@/lib/date.ts';
-import type { SiteAssets } from '@/rendering/site-assets.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
-import { definePage } from '@/generation/define-page.ts';
-import type { GeneratedFile } from '@/generation/generated-file.ts';
+import { definePage } from '@/pages/page.ts';
+import type { GeneratedFile } from '@/pages/output.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';

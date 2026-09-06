@@ -1,9 +1,9 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import type { PostListItem } from '@/content/external-content.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import type { PostListItem } from '@/pages/post-list.ts';
+import { definePage } from '@/pages/page.ts';
 import BlogListPage from './page.tsx';
 import type { PageRoutes } from '../route.ts';
-import { postListItems } from '@/content/external-content.ts';
+import { postListItems } from './external.ts';
 import { renderBlogFeed } from './feed.ts';
 
 /** Blog page and development feed; production feeds are emitted by Ox Content. */
@@ -45,7 +45,7 @@ export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets
 		componentProps: { items: sorted },
 		outputPath: 'blog/index.html',
 		sourcePaths: [
-			'src/content/external-content.ts',
+			'src/pages/blog/external.ts',
 			'src/pages/blog',
 			'src/content/blog',
 			'src/content/blog/external/rss.json',

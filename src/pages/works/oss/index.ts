@@ -1,6 +1,6 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
-import type { OssProject } from '@/content/works-data.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/pages/page.ts';
+import type { OssProject } from './data.ts';
 import OssPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
 
@@ -26,7 +26,7 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		componentProps: { projects },
 		outputPath: 'works/oss/index.html',
 		sourcePaths: [
-			'src/content/works-data.ts',
+			'src/pages/works/oss/data.ts',
 			'src/pages/works/_components',
 			'src/pages/works/WorksProse.css',
 			'src/pages/works/oss',

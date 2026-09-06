@@ -3,9 +3,9 @@ import path from 'node:path';
 import { matter } from 'gray-matter-es';
 import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
-import type { MarkdownRenderer } from './markdown/render.ts';
+import type { MarkdownRenderer } from '../../ox-content/markdown.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { BLOG_SOURCE_PATTERNS, blogDirectory } from './paths.ts';
+import { BLOG_SOURCE_PATTERNS, blogDirectory } from '../../config/content.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.
@@ -177,7 +177,7 @@ export async function loadBlogPost(
 		return null;
 	}
 
-	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
+	const render = renderContent ?? (await import('../../ox-content/markdown.ts')).renderMarkdown;
 	const renderOptions = loadRenderOptions(entry.filepath, directory);
 	const rendered =
 		renderOptions == null
@@ -239,7 +239,7 @@ export async function loadBlogPostMetadata(
  * @returns Rendered articles sorted from newest publication date to oldest.
  */
 export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
-	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
+	const render = renderContent ?? (await import('../../ox-content/markdown.ts')).renderMarkdown;
 	const blogDir = blogDirectory();
 	const entries = await loadBlogCollection();
 	const posts = await Promise.all(
@@ -333,7 +333,11 @@ if (import.meta.vitest != null) {
 
 	test('keeps one central Tweet snapshot for every embedded post', async () => {
 		const directory = blogDirectory();
-		const cacheDirectory = path.resolve(import.meta.dirname, '../..', '.cache/ox-content/twitter');
+		const cacheDirectory = path.resolve(
+			import.meta.dirname,
+			'../../..',
+			'.cache/ox-content/twitter',
+		);
 		const [files, cacheFiles] = await Promise.all([
 			glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true }),
 			glob('*-en.json', { cwd: cacheDirectory }),
@@ -380,8 +384,8 @@ if (import.meta.vitest != null) {
 	test('loads an MDX post with its document-local islands enabled', async () => {
 		const { createFixture } = await import('fs-fixture');
 		const { pathToFileURL } = await import('node:url');
-		const { renderMarkdown } = await import('./markdown/render.ts');
-		const { createIslandRenderer } = await import('./island-renderer.ts');
+		const { renderMarkdown } = await import('../../ox-content/markdown.ts');
+		const { createIslandRenderer } = await import('../../ox-content/island-renderer.ts');
 		await using fixture = await createFixture({
 			'component/index.mdx': [
 				'---',

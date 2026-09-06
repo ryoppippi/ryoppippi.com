@@ -1,6 +1,6 @@
 import path from 'node:path';
 import type { CollectionEntry } from '@ox-content/vite-plugin';
-import { renderMarkdown, type MarkdownRenderer } from './markdown/render.ts';
+import { renderMarkdown, type MarkdownRenderer } from '../../../ox-content/markdown.ts';
 
 export type ShowcaseProject = {
 	title: string;

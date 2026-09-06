@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-const contentRoot = path.resolve(import.meta.dirname);
+const contentRoot = path.resolve(import.meta.dirname, '../content');
 
 /** Markdown and MDX files that form the blog collection. */
 export const BLOG_SOURCE_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;

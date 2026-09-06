@@ -1,55 +1,9 @@
-import type { BlogPostMetadata } from '@/content/index.ts';
+import type { BlogPostMetadata } from './data.ts';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
-import { loadBlogFeedEntries } from '@ox-content/vite-plugin';
 import path from 'node:path';
-
-export type PostListItem = {
-	title: string;
-	slug: string;
-	link: string;
-	pubDate: string;
-	lang: string;
-	external: boolean;
-	kind?: 'article' | 'podcast' | 'video';
-	playlist?: boolean;
-	draft?: boolean;
-};
-
-type ExternalPostInput = {
-	title?: string | null;
-	link?: string | null;
-	pubDate?: string | null;
-	guid?: string | null;
-	lang?: string | null;
-	kind?: 'article' | 'podcast' | 'video' | null;
-	playlist?: boolean | null;
-};
-
-function toExternalPost(
-	item: ExternalPostInput,
-	defaultKind: NonNullable<PostListItem['kind']> = 'article',
-): PostListItem | null {
-	if (item.title == null || item.link == null || item.pubDate == null) {
-		return null;
-	}
-
-	const pubDate = new Date(item.pubDate);
-	if (Number.isNaN(pubDate.getTime())) {
-		return null;
-	}
-
-	return {
-		title: item.title,
-		slug: item.guid ?? item.link,
-		link: item.link,
-		pubDate: pubDate.toJSON(),
-		lang: item.lang ?? 'ja',
-		external: true,
-		kind: item.kind ?? defaultKind,
-		...(item.playlist === true ? { playlist: true } : {}),
-	};
-}
+import { loadBlogFeedEntries } from '@ox-content/vite-plugin';
+import { toExternalPost, type ExternalPostInput, type PostListItem } from '../post-list.ts';
 
 /**
  * Loads external blog entries from RSS feeds and curated articles.
@@ -88,22 +42,6 @@ export async function loadExternalPosts(root = process.cwd()): Promise<PostListI
 		return post == null ? [] : [post];
 	});
 	return [...feedPosts, ...manualPosts];
-}
-
-/**
- * Loads curated podcasts and videos for the media page.
- *
- * @param root - Repository root containing the media configuration.
- * @returns Media entries for the media page.
- */
-export async function loadExternalMedia(root = process.cwd()): Promise<PostListItem[]> {
-	const source = await readFile(path.join(root, 'src/content/works/media/list.json'), 'utf8');
-	const configuredMedia = JSON.parse(source) as ExternalPostInput[];
-	const mediaPosts = configuredMedia.flatMap((item) => {
-		const post = toExternalPost(item, 'podcast');
-		return post == null ? [] : [post];
-	});
-	return mediaPosts;
 }
 
 /**

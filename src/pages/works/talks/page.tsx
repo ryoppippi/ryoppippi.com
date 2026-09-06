@@ -1,7 +1,7 @@
 import { formatDate } from '@/lib/date.ts';
 import WorksNav from '@/pages/works/_components/WorksNav';
 import WorksSection, { WorksList } from '@/pages/works/_components/WorksSection';
-import type { Talk } from '@/content/works-data.ts';
+import type { Talk } from './data.ts';
 import styles from './Talks.module.css';
 
 type TalksPageProps = {

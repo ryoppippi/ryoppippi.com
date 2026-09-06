@@ -2,7 +2,7 @@ import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { matter } from 'gray-matter-es';
 import { glob } from 'tinyglobby';
-import { BLOG_SOURCE_PATTERNS } from './paths.ts';
+import { BLOG_SOURCE_PATTERNS } from '../config/content.ts';
 
 /**
  * Selects documents whose islands may enter the client graph.
