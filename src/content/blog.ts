@@ -5,9 +5,7 @@ import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugi
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from './markdown/render.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { blogDirectory } from './paths.ts';
-
-const BLOG_SOURCE_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
+import { BLOG_SOURCE_PATTERNS, blogDirectory } from './paths.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.
@@ -103,9 +101,35 @@ function loadRenderOptions(filepath: string, directory: string) {
 	return { contentRoot: directory, documentPath: filepath, mdx: true };
 }
 
+async function loadBlogCollection(): Promise<CollectionEntry[]> {
+	return (await import('virtual:ox-content/collections')).queryCollection('blog').all();
+}
+
+function collectionEntryBody(entry: CollectionEntry): string {
+	if (entry.body == null) {
+		throw new Error(`Blog collection must include body: ${entry.source}`);
+	}
+	return entry.body;
+}
+
 async function findBlogPostSource(slug: string, directory: string) {
 	if (slug.length === 0 || path.basename(slug) !== slug) {
 		return null;
+	}
+	if (path.resolve(directory) === blogDirectory()) {
+		const entry = (await loadBlogCollection()).find(
+			(candidate) => filenameFor(path.join(directory, candidate.source)) === slug,
+		);
+		if (entry == null) {
+			return null;
+		}
+		const filepath = path.join(directory, entry.source);
+		return {
+			filepath,
+			source: await readFile(filepath, 'utf8'),
+			data: entry.frontmatter,
+			content: collectionEntryBody(entry),
+		};
 	}
 
 	for (const filepath of [
@@ -115,7 +139,9 @@ async function findBlogPostSource(slug: string, directory: string) {
 		path.join(directory, slug, 'index.mdx'),
 	]) {
 		try {
-			return { filepath, source: await readFile(filepath, 'utf8') };
+			const source = await readFile(filepath, 'utf8');
+			const { data, content } = matter(source);
+			return { filepath, source, data, content };
 		} catch (error) {
 			if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) {
 				throw error;
@@ -152,23 +178,24 @@ export async function loadBlogPost(
 	}
 
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
-	const { data, content } = matter(entry.source);
 	const renderOptions = loadRenderOptions(entry.filepath, directory);
 	const rendered =
-		renderOptions == null ? await render(content) : await render(content, renderOptions);
+		renderOptions == null
+			? await render(entry.content)
+			: await render(entry.content, renderOptions);
 	return {
-		...parseArticleMetadata(data),
-		title: String(data.title),
+		...parseArticleMetadata(entry.data),
+		title: String(entry.data.title),
 		filename: filenameFor(entry.filepath),
 		filepath: entry.filepath,
 		source: entry.source,
-		content,
+		content: entry.content,
 		html: rendered.html,
 		clientModules: rendered.clientModules,
-		pubDate: new Date(String(data.date)).toJSON(),
-		lang: typeof data.lang === 'string' ? data.lang : 'ja',
-		isPublished: data.isPublished === true,
-		readingTime: readingTimeMinutes(content),
+		pubDate: new Date(String(entry.data.date)).toJSON(),
+		lang: typeof entry.data.lang === 'string' ? entry.data.lang : 'ja',
+		isPublished: entry.data.isPublished === true,
+		readingTime: readingTimeMinutes(entry.content),
 	} satisfies BlogPost;
 }
 
@@ -186,13 +213,8 @@ export async function loadBlogPostMetadata(
 	if (entries == null && path.resolve(directory) !== blogDirectory()) {
 		throw new Error('A custom blog directory requires explicit collection entries');
 	}
-	const collection =
-		entries ??
-		(await (await import('virtual:ox-content/collections')).queryCollection('blog').all());
+	const collection = entries ?? (await loadBlogCollection());
 	const posts = collection.map((entry) => {
-		if (entry.body == null) {
-			throw new Error(`Blog collection must include body for reading time: ${entry.source}`);
-		}
 		const data = entry.frontmatter;
 		const filepath = path.join(directory, entry.source);
 		return {
@@ -203,7 +225,7 @@ export async function loadBlogPostMetadata(
 			pubDate: new Date(String(data.date)).toJSON(),
 			lang: typeof data.lang === 'string' ? data.lang : 'ja',
 			isPublished: data.isPublished === true,
-			readingTime: readingTimeMinutes(entry.body),
+			readingTime: readingTimeMinutes(collectionEntryBody(entry)),
 		} satisfies BlogPostMetadata;
 	});
 
@@ -219,11 +241,13 @@ export async function loadBlogPostMetadata(
 export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
 	const render = renderContent ?? (await import('./markdown/render.ts')).renderMarkdown;
 	const blogDir = blogDirectory();
-	const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: blogDir, absolute: true });
+	const entries = await loadBlogCollection();
 	const posts = await Promise.all(
-		files.map(async (filepath) => {
+		entries.map(async (entry) => {
+			const filepath = path.join(blogDir, entry.source);
 			const source = await readFile(filepath, 'utf8');
-			const { data, content } = matter(source);
+			const data = entry.frontmatter;
+			const content = collectionEntryBody(entry);
 			const filename = filenameFor(filepath);
 			const renderOptions = loadRenderOptions(filepath, blogDir);
 			const rendered =

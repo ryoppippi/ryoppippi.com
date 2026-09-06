@@ -8,6 +8,7 @@ import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
+import { SERVER_STYLE_MODULES } from './src/client/page-style-registry.ts';
 import { loadIslandDocuments } from './src/content/islands.ts';
 import { planSiteContentAssets } from './src/generation/content-assets.ts';
 
@@ -75,12 +76,7 @@ export default defineConfig(({ command, mode }) => ({
 			},
 			build: { transformHtml: false },
 			oxContent: {
-				ssg: {
-					minifyHtml: OX_CONTENT_BUILD_OPTIONS.ssg.minifyHtml,
-					siteName: OX_CONTENT_BUILD_OPTIONS.ssg.siteName,
-					siteUrl: OX_CONTENT_BUILD_OPTIONS.ssg.siteUrl,
-				},
-				icons: false,
+				...OX_CONTENT_BUILD_OPTIONS,
 				feeds: OX_CONTENT_BUILD_OPTIONS.feeds,
 				siteMaps: { robots: false, llms: false },
 				resources: false,
@@ -93,6 +89,7 @@ export default defineConfig(({ command, mode }) => ({
 		outDir: 'dist',
 		emptyOutDir: true,
 		minify: true,
+		rollupOptions: { input: ['index.html', ...SERVER_STYLE_MODULES] },
 	},
 	run: {
 		tasks: {
@@ -169,7 +166,6 @@ export default defineConfig(({ command, mode }) => ({
 					environment: 'node',
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
-						'src/client/page-style-loader.ts',
 						'src/contents/{external-content,works-data}.ts',
 						'src/dev-server/**/*.ts',
 						'src/generation/**/*.ts',

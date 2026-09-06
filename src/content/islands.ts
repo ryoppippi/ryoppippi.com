@@ -2,6 +2,7 @@ import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { matter } from 'gray-matter-es';
 import { glob } from 'tinyglobby';
+import { BLOG_SOURCE_PATTERNS } from './paths.ts';
 
 /**
  * Selects documents whose islands may enter the client graph.
@@ -13,7 +14,7 @@ export async function loadIslandDocuments(
 	directory: string,
 	options: { includeDrafts?: boolean } = {},
 ) {
-	const files = await glob(['*.md', '*.mdx', '*/index.md', '*/index.mdx'], {
+	const files = await glob(BLOG_SOURCE_PATTERNS, {
 		cwd: directory,
 		absolute: true,
 	});

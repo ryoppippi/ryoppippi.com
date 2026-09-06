@@ -1,13 +1,8 @@
-import {
-	planSsgOutputs,
-	resolveSelfHostedAssetManifest,
-	type OxContentOptions,
-} from '@ox-content/vite-plugin';
+import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
+import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from '../content/paths.ts';
 import { BLOG_FEED_OPTIONS, MEDIA_FEED_OPTIONS } from '../generation/feeds.ts';
-
-export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
 
 /** Public stylesheet shared by the custom host's dev server and build writer. */
 export const SYNTAX_THEME_HREF = '/__ox_theme_tokens__/syntax.css';
@@ -20,7 +15,10 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	budoux: true,
 	srcDir: 'src/content/blog',
 	outDir: 'dist',
-	collections: { blog: { source: BLOG_COLLECTION_PATTERNS, include: ['body'] } },
+	collections: {
+		blog: { source: BLOG_SOURCE_PATTERNS, include: ['body'] },
+		showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
+	},
 	docs: false,
 	icons: {
 		include: ['src/**/*.{css,json,md,mdx,ts,tsx}'],
@@ -84,15 +82,3 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	},
 	search: false,
 } as const satisfies OxContentOptions;
-
-const oxContentOutputPlan = planSsgOutputs({
-	outDir: OX_CONTENT_BUILD_OPTIONS.outDir,
-	root: process.cwd(),
-	srcDir: OX_CONTENT_BUILD_OPTIONS.srcDir,
-	options: OX_CONTENT_BUILD_OPTIONS,
-	pages: [],
-});
-
-export const OX_CONTENT_ASSET_MANIFEST = resolveSelfHostedAssetManifest(
-	oxContentOutputPlan.selfHostedAssets.options,
-);

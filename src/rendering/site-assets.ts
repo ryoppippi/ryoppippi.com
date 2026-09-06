@@ -7,8 +7,7 @@ import {
 	renderDocumentAssets,
 } from '@ox-content/vite-plugin/document-assets';
 import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
-import { OX_CONTENT_ASSET_MANIFEST, SYNTAX_THEME_HREF } from '@/config/ox-content.ts';
-import { type PageStyle } from '@/client/page-style-registry.ts';
+import { PAGE_STYLE_MODULES, type PageStyle } from '@/client/page-style-registry.ts';
 
 export type { PageStyle } from '@/client/page-style-registry.ts';
 
@@ -17,6 +16,7 @@ export type SiteAssets = {
 	sharedStyles: readonly DocumentStylesheetInput[];
 	scripts: readonly DocumentScriptInput[];
 	selfHosted: DocumentSelfHostedAssets;
+	syntaxThemeHref?: string;
 	homeInline?: {
 		sharedStyles: readonly DocumentStylesheetInput[];
 		pageStyles: readonly DocumentStylesheetInput[];
@@ -37,35 +37,27 @@ export type SiteAssets = {
 // unstyled (light) content on every reload. Blocking <link> tags make the dev
 // server paint styled pages immediately, matching production; Vite serves the
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
-export const DEV_ASSETS = {
-	sharedStyles: ['/src/styles/global.css', '/src/components/SiteLayout/SiteLayout.module.css'],
-	scripts: ['/src/client/index.ts'],
-	selfHosted: OX_CONTENT_ASSET_MANIFEST,
-	pageStyles: {
-		about: ['/src/pages/about/About.module.css'],
-		article: [
-			'/src/pages/blog/article/ArticleContent.css',
-			'/src/pages/blog/article/Article.module.css',
-		],
-		blog: ['/src/pages/blog/BlogList.module.css'],
-		error: ['/src/pages/error/Error.module.css'],
-		home: ['/src/pages/home/Home.module.css'],
-		sponsors: ['/src/pages/sponsors/Sponsors.module.css'],
-		works: [
-			'/src/pages/works/WorksProse.css',
-			'/src/pages/works/_components/WorksNav/WorksNav.module.css',
-			'/src/pages/works/_components/WorksSection/WorksSection.module.css',
-			'/src/pages/works/media/Media.module.css',
-			'/src/pages/works/oss/Oss.module.css',
-			'/src/pages/works/publications/Publications.module.css',
-			'/src/pages/works/showcase/Showcase.module.css',
-			'/src/pages/works/talks/Talks.module.css',
-		],
-	},
-	islands: {},
-} as const satisfies SiteAssets;
+type SiteAssetResolver = Pick<
+	OxContentCustomHostAssetsContext,
+	'document' | 'selfHosted' | 'stylesheets' | 'themeTokens'
+>;
 
-type SiteAssetResolver = Pick<OxContentCustomHostAssetsContext, 'document' | 'stylesheets'>;
+/**
+ * Resolves development assets from the same custom-host context used in production.
+ *
+ * @param assets - Ox Content's development asset context.
+ * @returns Blocking source stylesheets plus framework-owned generated assets.
+ */
+export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
+	return {
+		sharedStyles: ['/src/styles/global.css', '/src/components/SiteLayout/SiteLayout.module.css'],
+		scripts: ['/src/client/index.ts'],
+		selfHosted: assets.selfHosted,
+		syntaxThemeHref: assets.themeTokens?.href,
+		pageStyles: PAGE_STYLE_MODULES,
+		islands: {},
+	};
+}
 
 function moduleStyles(
 	assets: SiteAssetResolver,
@@ -103,28 +95,17 @@ export function resolveSiteAssets(
 			...moduleStyles(assets, ['/src/components/SiteLayout/SiteLayout.module.css']),
 		],
 		scripts: entry.scripts,
-		selfHosted: OX_CONTENT_ASSET_MANIFEST,
+		selfHosted: assets.selfHosted,
+		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
 		pageStyles: {
-			about: moduleStyles(assets, ['/src/pages/about/About.module.css']),
-			article: moduleStyles(assets, [
-				'/src/pages/blog/article/ArticleContent.css',
-				'/src/pages/blog/article/Article.module.css',
-			]),
-			blog: moduleStyles(assets, ['/src/pages/blog/BlogList.module.css']),
-			error: moduleStyles(assets, ['/src/pages/error/Error.module.css']),
-			home: moduleStyles(assets, ['/src/pages/home/Home.module.css']),
-			sponsors: moduleStyles(assets, ['/src/pages/sponsors/Sponsors.module.css']),
-			works: moduleStyles(assets, [
-				'/src/pages/works/WorksProse.css',
-				'/src/pages/works/_components/WorksNav/WorksNav.module.css',
-				'/src/pages/works/_components/WorksSection/WorksSection.module.css',
-				'/src/pages/works/media/Media.module.css',
-				'/src/pages/works/oss/Oss.module.css',
-				'/src/pages/works/publications/Publications.module.css',
-				'/src/pages/works/showcase/Showcase.module.css',
-				'/src/pages/works/talks/Talks.module.css',
-			]),
+			about: moduleStyles(assets, PAGE_STYLE_MODULES.about),
+			article: moduleStyles(assets, PAGE_STYLE_MODULES.article),
+			blog: moduleStyles(assets, PAGE_STYLE_MODULES.blog),
+			error: moduleStyles(assets, PAGE_STYLE_MODULES.error),
+			home: moduleStyles(assets, PAGE_STYLE_MODULES.home),
+			sponsors: moduleStyles(assets, PAGE_STYLE_MODULES.sponsors),
+			works: moduleStyles(assets, PAGE_STYLE_MODULES.works),
 		},
 	};
 }
@@ -184,7 +165,7 @@ export function renderAssetTags(
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
 			...(inline?.pageStyles ?? assets.pageStyles[style]),
-			...(style === 'article' ? [SYNTAX_THEME_HREF] : []),
+			...(style === 'article' && assets.syntaxThemeHref != null ? [assets.syntaxThemeHref] : []),
 		],
 		islandStyles: islands.flatMap((moduleId) => assets.islands[moduleId] ?? []),
 		scripts: assets.scripts,
@@ -192,10 +173,12 @@ export function renderAssetTags(
 }
 
 if (import.meta.vitest != null) {
+	const testSelfHosted = { stylesheets: [], preloads: [], headTags: '' };
 	const assets = {
 		sharedStyles: ['/base.css'],
 		scripts: ['/client.js'],
-		selfHosted: OX_CONTENT_ASSET_MANIFEST,
+		selfHosted: testSelfHosted,
+		syntaxThemeHref: '/__ox_theme_tokens__/syntax.css',
 		islands: {
 			'/src/content/blog/post/Chart.tsx': [
 				{ href: 'assets/Chart.css', crossorigin: true },
@@ -239,6 +222,8 @@ if (import.meta.vitest != null) {
 
 		function createTestAssetResolver(missing: ReadonlySet<string> = new Set()): SiteAssetResolver {
 			return {
+				selfHosted: testSelfHosted,
+				themeTokens: { href: '/__ox_theme_tokens__/syntax.css', outputPath: '', css: '' },
 				document: (input) =>
 					renderDocumentAssets({
 						...input,

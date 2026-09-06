@@ -20,7 +20,7 @@ import type {
 import type { PostListItem } from '@/contents/external-content.ts';
 import type { OssProject, Talk } from '@/contents/works-data.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { DEV_ASSETS } from '@/rendering/site-assets.ts';
+import { resolveDevSiteAssets } from '@/rendering/site-assets.ts';
 
 type BlogModule = {
 	loadBlogPost: (slug: string, renderContent?: MarkdownRenderer) => Promise<BlogPost | null>;
@@ -66,7 +66,7 @@ function createDevelopmentRouteDependencies(
 	dependencies: Set<string>,
 ): DevRouteDependencies {
 	const root = context.root;
-	const assets: SiteAssets = { ...DEV_ASSETS, islands: {} };
+	const assets = resolveDevSiteAssets(context.assets);
 	const renderContent: MarkdownRenderer = async (content, options) => {
 		const [markdown, islands] = await Promise.all([
 			context.loadModule('/src/content/markdown/render.ts') as Promise<MarkdownModule>,
@@ -161,7 +161,7 @@ const host = {
 	async notFound(context) {
 		if (context.request.headers.get('accept')?.includes('text/html') === true) {
 			const routes = (await context.loadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
-			return routes.renderDevNotFound(DEV_ASSETS);
+			return routes.renderDevNotFound(resolveDevSiteAssets(context.assets));
 		}
 		if (
 			context.url.pathname.startsWith('/blog/') ||

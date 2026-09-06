@@ -6,12 +6,7 @@ import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
-import { loadPageStyle, needsInitialPageStyle } from './page-style-loader.ts';
 import '@/styles/global.css';
-
-// SiteLayout is rendered only by the SSG, so this dynamic entry exposes its CSS to
-// the manifest used to generate a blocking stylesheet link.
-void import('@/components/SiteLayout/SiteLayout.module.css');
 
 function initialiseThemeToggle(): void {
 	const target = document.querySelector<HTMLElement>('[data-dark-mode]');
@@ -172,11 +167,4 @@ window.addEventListener('resize', () => {
 		enhanceMarkdownTables(document);
 	});
 });
-const initialPageStyle = document.body.dataset.pageStyle;
-const inlinedPageStyle = document.querySelector<HTMLElement>('style[data-inline-page-style]')
-	?.dataset.inlinePageStyle;
-void (
-	needsInitialPageStyle(initialPageStyle, inlinedPageStyle)
-		? loadPageStyle(initialPageStyle)
-		: Promise.resolve()
-).then(initialisePageInteractions);
+initialisePageInteractions();

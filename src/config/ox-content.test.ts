@@ -2,12 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import { BLOG_COLLECTION_PATTERNS, OX_CONTENT_BUILD_OPTIONS } from './ox-content.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from './ox-content.ts';
+import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from '../content/paths.ts';
 
 describe('Ox Content build outputs', () => {
 	it('configures the blog RSS feed and Cloudflare redirects', () => {
 		expect(OX_CONTENT_BUILD_OPTIONS).toMatchObject({
-			collections: { blog: { source: BLOG_COLLECTION_PATTERNS, include: ['body'] } },
+			collections: {
+				blog: { source: BLOG_SOURCE_PATTERNS, include: ['body'] },
+				showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
+			},
 			feeds: {
 				blog: {
 					collection: 'blog',
@@ -43,7 +47,7 @@ describe('Ox Content build outputs', () => {
 
 	it('mounts every blog source below the public blog route', async () => {
 		const root = path.join(process.cwd(), 'src/content/blog');
-		const files = await glob(BLOG_COLLECTION_PATTERNS, { cwd: root });
+		const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: root });
 
 		for (const file of files) {
 			const slug = path.dirname(file);
