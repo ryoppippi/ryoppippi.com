@@ -20,7 +20,7 @@ export type ExternalPostInput = {
 	playlist?: boolean | null;
 };
 
-/** Normalizes a curated article or media item for site lists. */
+/** Normalises a curated article or media item for site lists. */
 export function toExternalPost(
 	item: ExternalPostInput,
 	defaultKind: NonNullable<PostListItem['kind']> = 'article',
