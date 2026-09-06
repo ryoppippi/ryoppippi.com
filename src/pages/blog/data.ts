@@ -303,7 +303,7 @@ if (import.meta.vitest != null) {
 		);
 	});
 
-	test('rejects blog paths outside the content directory', async () => {
+	test('returns null for blog paths outside the content directory', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'secret.md': '---\ntitle: Secret\ndate: 2026-06-22\nisPublished: true\n---\nSecret',

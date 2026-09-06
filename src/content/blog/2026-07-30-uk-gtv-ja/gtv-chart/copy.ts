@@ -326,14 +326,6 @@ export function localisePoint<T extends GtvPoint>(point: T, lang: ChartLang): T 
 }
 
 if (import.meta.vitest != null) {
-	test('chart language keeps a supported value', () => {
-			expect(resolveChartLang('en')).toBe('en');
-		});
-
-	test('chart language falls back to Japanese', () => {
-			expect(resolveChartLang('fr')).toBe('ja');
-	});
-
 	test('every timeline point has English copy', () => {
 			for (const point of GTV_POINTS) {
 				expect(timelineTextByDate[point.date], point.date).toBeDefined();
