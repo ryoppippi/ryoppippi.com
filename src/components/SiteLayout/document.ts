@@ -1,8 +1,7 @@
-import type { Component } from 'solid-js';
 import type { DocumentLinkInput } from '@ox-content/vite-plugin/document-assets';
 import type { PageStyle, SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
-import { renderToString } from '@solidjs/web';
+import { escape, renderToString } from '@solidjs/web';
 import { renderThemeBootstrapScript } from '@ox-content/vite-plugin/theme-bootstrap';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
@@ -27,32 +26,6 @@ type HtmlDocumentOptions = {
 
 const JAVASCRIPT_CLASS_SCRIPT = "<script>document.documentElement.classList.add('js')</script>";
 
-function normalizedLanguage(value: string | undefined): string {
-	return value?.trim() || 'en';
-}
-
-function escapeAttribute(value: string): string {
-	return value
-		.replaceAll('&', '&amp;')
-		.replaceAll('"', '&quot;')
-		.replaceAll('<', '&lt;')
-		.replaceAll('>', '&gt;');
-}
-
-/**
- * Server-renders a Solid component and returns its body markup.
- *
- * @param component - The Solid component to render.
- * @param props - Props accepted by the component.
- * @returns The rendered component body.
- */
-export function renderComponent<Props extends object>(
-	component: Component<Props>,
-	props: Props,
-): string {
-	return renderToString(() => component(props));
-}
-
 /**
  * Renders a complete static HTML document with shared metadata and assets.
  *
@@ -75,8 +48,8 @@ export function renderHtmlDocument({
 	style,
 	structuredData,
 }: HtmlDocumentOptions): string {
-	const documentLanguage = normalizedLanguage(lang);
-	const body = renderComponent(SiteLayout, { content, pathname });
+	const documentLanguage = lang.trim() || 'en';
+	const body = renderToString(() => SiteLayout({ content, pathname }));
 	const head = [
 		renderPageHead({
 			article,
@@ -96,7 +69,7 @@ export function renderHtmlDocument({
 
 	return [
 		'<!doctype html>',
-		`<html lang="${escapeAttribute(documentLanguage)}">`,
+		`<html lang="${escape(documentLanguage, true)}">`,
 		`<head>${head}</head>`,
 		`<body data-page-style="${style}">${body}</body>`,
 		'</html>',

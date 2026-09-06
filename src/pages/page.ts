@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js';
 import type { GeneratedFile } from './output.ts';
-import { renderComponent, renderHtmlDocument } from '@/components/SiteLayout/document.ts';
+import { renderToString } from '@solidjs/web';
+import { renderHtmlDocument } from '@/components/SiteLayout/document.ts';
 
 type HtmlDocumentOptions = Parameters<typeof renderHtmlDocument>[0];
 
@@ -30,7 +31,7 @@ export function definePage<Props extends object>({
 		unlisted: documentOptions.indexable === false,
 		content: renderHtmlDocument({
 			...documentOptions,
-			content: renderComponent(component, componentProps),
+			content: renderToString(() => component(componentProps)),
 		}),
 	};
 }

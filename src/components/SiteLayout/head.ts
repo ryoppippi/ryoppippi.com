@@ -17,10 +17,6 @@ const fixedHead = [
 	'<link rel="icon" type="image/png" sizes="48x48" href="/favicons/favicon-48x48.png">',
 ].join('\n');
 
-function absolutePageUrl(pathname: string): string {
-	return new URL(pathname, `${SITE_ORIGIN}/`).href;
-}
-
 /**
  * Renders page metadata with the Ox Content build-time head resolver.
  *
@@ -48,7 +44,8 @@ export function renderPageHead({
 	structuredData?: StructuredData;
 	title: string;
 }): string {
-	const canonical = indexable ? absolutePageUrl(pathname) : undefined;
+	const pageUrl = new URL(pathname, `${SITE_ORIGIN}/`).href;
+	const canonical = indexable ? pageUrl : undefined;
 	const documentTitle = title.length === 0 ? SITE_NAME : `${title} | ${SITE_NAME}`;
 	const input = {
 		site: { name: SITE_NAME, url: SITE_ORIGIN },
@@ -66,12 +63,10 @@ export function renderPageHead({
 		emitSiteName: indexable,
 		alternates:
 			indexable && alternates != null
-				? Object.entries({ ...alternates, [lang]: absolutePageUrl(pathname) }).map(
-						([alternateLang, href]) => ({
-							lang: alternateLang,
-							href,
-						}),
-					)
+				? Object.entries({ ...alternates, [lang]: pageUrl }).map(([alternateLang, href]) => ({
+						lang: alternateLang,
+						href,
+					}))
 				: [],
 		metas: indexable
 			? [
