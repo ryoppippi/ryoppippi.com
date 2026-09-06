@@ -60,12 +60,6 @@ if (import.meta.vitest != null) {
 		await expect(renderIsland(html, context)).rejects.toThrow('missing');
 	});
 
-	test('loads the module from the content blog directory', async () => {
-		const load = vi.fn(async () => ({ default: () => null }));
-		await createIslandRenderer(load, '/workspace')(html, context);
-		expect(load).toHaveBeenCalledWith('/workspace/src/content/blog/post/Chart.tsx');
-	});
-
 	test('renders a Solid component through the framework host contract', async () => {
 		const { ssr } = await import('@solidjs/web');
 		const renderIsland = createIslandRenderer(

@@ -325,11 +325,7 @@ if (import.meta.vitest != null) {
 				body: `${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
 			},
 		]);
-		const post = await loadBlogPost(
-			'article',
-			async (content) => ({ html: content, clientModules: [] }),
-			fixture.getPath(),
-		);
+		const post = await loadBlogPost('article', undefined, fixture.getPath());
 
 		expect(metadata[0]?.readingTime).toBe(2);
 		expect(post?.readingTime).toBe(2);
@@ -361,15 +357,9 @@ if (import.meta.vitest != null) {
 			'secret.md': '---\ntitle: Secret\ndate: 2026-06-22\nisPublished: true\n---\nSecret',
 			content: {},
 		});
-		const renderContent = vi.fn(async (content: string) => ({
-			html: content,
-			clientModules: [],
-		}));
-
 		await expect(
-			loadBlogPost('../secret', renderContent, fixture.getPath('content')),
+			loadBlogPost('../secret', undefined, fixture.getPath('content')),
 		).resolves.toBeNull();
-		expect(renderContent).not.toHaveBeenCalled();
 	});
 
 	test('renders only the requested blog post', async () => {
@@ -379,20 +369,19 @@ if (import.meta.vitest != null) {
 			'second/index.md':
 				'---\ntitle: Second\ndate: 2026-06-22\nisPublished: true\n---\nSecond body',
 		});
-		const renderContent = vi.fn(async (content: string) => ({
-			html: `<p>${content}</p>`,
-			clientModules: [],
-		}));
+		const post = await loadBlogPost('second', undefined, fixture.getPath());
 
-		const post = await loadBlogPost('second', renderContent, fixture.getPath());
-
-		expect(renderContent).toHaveBeenCalledOnce();
-		expect(renderContent).toHaveBeenCalledWith('Second body');
+		assert.isNotNull(post);
+		expect(post.html).toContain('<p>Second body</p>');
+		expect(post.html).not.toContain('First body');
 		expect(post).toEqual(expect.objectContaining({ filename: 'second', title: 'Second' }));
 	});
 
 	test('loads an MDX post with its document-local islands enabled', async () => {
 		const { createFixture } = await import('fs-fixture');
+		const { pathToFileURL } = await import('node:url');
+		const { renderMarkdown } = await import('./markdown/render.ts');
+		const { createIslandRenderer } = await import('./island-renderer.ts');
 		await using fixture = await createFixture({
 			'component/index.mdx': [
 				'---',
@@ -401,24 +390,22 @@ if (import.meta.vitest != null) {
 				'isPublished: true',
 				'---',
 				'',
-				"import Chart from './Chart.tsx'",
+				"import Chart from './Chart.mjs'",
 				'',
 				'<Chart />',
 			].join('\n'),
-			'component/Chart.tsx': 'export default () => null',
+			'component/Chart.mjs': 'export default () => "Fixture chart"',
 		});
-		const renderContent = vi.fn(async (content: string) => ({
-			html: content,
-			clientModules: [
-				{
-					name: 'Chart',
-					moduleId: '/src/content/blog/component/Chart.tsx',
-					exportName: 'default',
-				},
-			],
-		}));
+		const renderIsland = createIslandRenderer(
+			(moduleId) => import(/* @vite-ignore */ pathToFileURL(moduleId).href),
+			fixture.path,
+		);
 
-		const post = await loadBlogPost('component', renderContent, fixture.getPath());
+		const post = await loadBlogPost(
+			'component',
+			(content, options) => renderMarkdown(content, { ...options, renderIsland }),
+			fixture.path,
+		);
 
 		expect(post).toEqual(
 			expect.objectContaining({
@@ -427,20 +414,15 @@ if (import.meta.vitest != null) {
 				clientModules: [
 					{
 						name: 'Chart',
-						moduleId: '/src/content/blog/component/Chart.tsx',
+						moduleId: '/component/Chart.mjs',
 						exportName: 'default',
 					},
 				],
 			}),
 		);
-		expect(renderContent).toHaveBeenCalledWith(
-			expect.stringContaining("import Chart from './Chart.tsx'\n\n<Chart />"),
-			{
-				contentRoot: fixture.path,
-				documentPath: fixture.getPath('component/index.mdx'),
-				mdx: true,
-			},
-		);
+		assert.isNotNull(post);
+		expect(post.html).toContain('Fixture chart');
+		expect(post.html).toContain('data-ox-ssr="true"');
 	});
 
 	test('loads raw source without rendering Markdown', async () => {
@@ -513,12 +495,7 @@ if (import.meta.vitest != null) {
 				'Article body',
 			].join('\n'),
 		});
-		const renderContent = vi.fn(async (content: string) => ({
-			html: content,
-			clientModules: [],
-		}));
-
-		await expect(loadBlogPost('article', renderContent, fixture.getPath())).resolves.toEqual(
+		await expect(loadBlogPost('article', undefined, fixture.getPath())).resolves.toEqual(
 			expect.objectContaining({
 				description: 'A useful article summary.',
 				image: '/images/article-cover.jpg',
