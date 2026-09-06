@@ -166,6 +166,7 @@ export default defineConfig(({ command, mode }) => ({
 					environment: 'node',
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
+						'src/config/ox-content.ts',
 						'src/contents/{external-content,works-data}.ts',
 						'src/dev-server/**/*.ts',
 						'src/generation/**/*.ts',
