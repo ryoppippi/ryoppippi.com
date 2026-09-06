@@ -1,9 +1,5 @@
-import type { JSX } from '@solidjs/web';
 import { initIslands } from '@ox-content/islands';
-import {
-	initSolidHtmlHost,
-	type SolidHtmlHostClientContext,
-} from '@ox-content/vite-plugin-solid/html-host/client';
+import { initSolidHtmlHost } from '@ox-content/vite-plugin-solid/html-host/client';
 import solidIslandLoaders from 'virtual:ox-content-solid/html-host/modules';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
@@ -145,46 +141,11 @@ function initialiseMediaFilter(): void {
 	});
 }
 
-type SolidIslandModule = { default: (props: Record<string, unknown>) => JSX.Element };
-type SolidIslandRuntime = typeof import('@solidjs/web');
-
-/**
- * Mounts a loaded Solid island into its HTML-host element.
- *
- * @param context - Loaded component, runtime, props, slot markup, and target element.
- * @returns The Solid root disposer.
- */
-export function mountSolidIsland({
-	component,
-	element,
-	props,
-	runtime,
-	slotHtml,
-}: Pick<
-	SolidHtmlHostClientContext<SolidIslandRuntime>,
-	'component' | 'element' | 'props' | 'runtime' | 'slotHtml'
->): () => void {
-	if (typeof component !== 'function' || runtime == null) {
-		throw new Error('Expected a Solid component and renderer');
-	}
-	const Island = component as SolidIslandModule['default'];
-	const componentProps =
-		slotHtml == null
-			? props
-			: {
-					...props,
-					children: [...document.createRange().createContextualFragment(slotHtml).childNodes],
-				};
-	return runtime.render(() => runtime.createComponent(Island, componentProps), element);
-}
-
 function initialiseSolidIslands(): void {
 	initSolidHtmlHost({
 		initIslands,
 		modules: solidIslandLoaders,
-		loadRuntime: () => import('@solidjs/web'),
-		// This site compiles non-hydratable Solid; the host clears SSR markup before mounting.
-		render: mountSolidIsland,
+		mount: { mode: 'render' },
 	});
 }
 function initialisePageInteractions(): void {

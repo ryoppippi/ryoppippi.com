@@ -1,4 +1,3 @@
-import { resolveSolidIslandStylesheets } from '@ox-content/vite-plugin-solid';
 import {
 	type DocumentScriptInput,
 	type DocumentSelfHostedAssets,
@@ -7,6 +6,7 @@ import {
 	type DocumentStylesheetInput,
 	renderDocumentAssets,
 } from '@ox-content/vite-plugin/document-assets';
+import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
 import { OX_CONTENT_ASSET_MANIFEST, SYNTAX_THEME_HREF } from '@/config/ox-content.ts';
 import { type PageStyle } from '@/client/page-style-registry.ts';
 
@@ -65,78 +65,65 @@ export const DEV_ASSETS = {
 	islands: {},
 } as const satisfies SiteAssets;
 
-export type ManifestChunk = {
-	css?: string[];
-	file?: string;
-	imports?: string[];
-};
+type SiteAssetResolver = Pick<OxContentCustomHostAssetsContext, 'document' | 'stylesheets'>;
 
-/** Prefix every island module id carries in the Vite manifest. */
-const ISLAND_SOURCE_PREFIX = 'src/content/blog/';
+function moduleStyles(
+	assets: SiteAssetResolver,
+	modules: readonly string[],
+): DocumentStyleDescriptor[] {
+	const result = assets.stylesheets({ modules });
+	if (result.diagnostics.length > 0) {
+		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
+	}
+	return result.stylesheets.map(({ moduleId: _moduleId, ...style }) => ({
+		...style,
+		crossorigin: true,
+	}));
+}
 
 /**
  * Resolves production site assets from the Vite manifest without serialising page fragments.
  *
- * @param manifest - Vite client build manifest.
+ * @param assets - Ox Content's build-aware document and stylesheet resolver.
+ * @param islandModules - Browser module ids mounted by published articles.
  * @returns Structured shared, route, island, self-hosted, and client assets.
  */
-export function resolveSiteAssets(manifest: Record<string, ManifestChunk>): SiteAssets {
-	const entry = renderDocumentAssets({
-		manifest,
-		clientEntries: ['index.html'],
-		crossorigin: true,
-	});
-	const stylesFor = (suffix: string): DocumentStyleDescriptor[] => {
-		const chunk = Object.entries(manifest).find(([source]) => source.endsWith(suffix))?.[1];
-		const styles = chunk?.css ?? (chunk?.file?.endsWith('.css') === true ? [chunk.file] : []);
-		if (styles.length === 0) {
-			throw new Error(`Missing CSS for ${suffix}`);
-		}
-		return styles.map((href) => ({ kind: 'style', href, crossorigin: true }));
-	};
-	const stylesForAll = (suffixes: readonly string[]): DocumentStyleDescriptor[] =>
-		suffixes.flatMap((suffix) => stylesFor(suffix));
+export function resolveSiteAssets(
+	assets: SiteAssetResolver,
+	islandModules: readonly string[] = [],
+): SiteAssets {
+	const entry = assets.document({ clientEntries: ['index.html'], crossorigin: true });
 	const islands = Object.fromEntries(
-		Object.keys(manifest)
-			.filter((source) => source.startsWith(ISLAND_SOURCE_PREFIX) && source.endsWith('.tsx'))
-			.map((source) => {
-				const result = resolveSolidIslandStylesheets({ modules: [source], manifest });
-				if (result.diagnostics.length > 0) {
-					throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
-				}
-				return [
-					`/${source}`,
-					result.stylesheets.map(
-						({ href }) => ({ href, crossorigin: true }) satisfies DocumentStylesheetInput,
-					),
-				];
-			}),
+		islandModules.map((moduleId) => [moduleId, moduleStyles(assets, [moduleId])]),
 	);
 
 	return {
-		sharedStyles: [...entry.styles, ...stylesFor('/components/SiteLayout/SiteLayout.module.css')],
+		sharedStyles: [
+			...entry.styles,
+			...moduleStyles(assets, ['/src/components/SiteLayout/SiteLayout.module.css']),
+		],
 		scripts: entry.scripts,
 		selfHosted: OX_CONTENT_ASSET_MANIFEST,
 		islands,
 		pageStyles: {
-			about: stylesFor('/pages/about/About.module.css'),
-			article: stylesForAll([
-				'/pages/blog/article/ArticleContent.css',
-				'/pages/blog/article/Article.module.css',
+			about: moduleStyles(assets, ['/src/pages/about/About.module.css']),
+			article: moduleStyles(assets, [
+				'/src/pages/blog/article/ArticleContent.css',
+				'/src/pages/blog/article/Article.module.css',
 			]),
-			blog: stylesFor('/pages/blog/BlogList.module.css'),
-			error: stylesFor('/pages/error/Error.module.css'),
-			home: stylesFor('/pages/home/Home.module.css'),
-			sponsors: stylesFor('/pages/sponsors/Sponsors.module.css'),
-			works: stylesForAll([
-				'/pages/works/WorksProse.css',
-				'/pages/works/_components/WorksNav/WorksNav.module.css',
-				'/pages/works/_components/WorksSection/WorksSection.module.css',
-				'/pages/works/media/Media.module.css',
-				'/pages/works/oss/Oss.module.css',
-				'/pages/works/publications/Publications.module.css',
-				'/pages/works/showcase/Showcase.module.css',
-				'/pages/works/talks/Talks.module.css',
+			blog: moduleStyles(assets, ['/src/pages/blog/BlogList.module.css']),
+			error: moduleStyles(assets, ['/src/pages/error/Error.module.css']),
+			home: moduleStyles(assets, ['/src/pages/home/Home.module.css']),
+			sponsors: moduleStyles(assets, ['/src/pages/sponsors/Sponsors.module.css']),
+			works: moduleStyles(assets, [
+				'/src/pages/works/WorksProse.css',
+				'/src/pages/works/_components/WorksNav/WorksNav.module.css',
+				'/src/pages/works/_components/WorksSection/WorksSection.module.css',
+				'/src/pages/works/media/Media.module.css',
+				'/src/pages/works/oss/Oss.module.css',
+				'/src/pages/works/publications/Publications.module.css',
+				'/src/pages/works/showcase/Showcase.module.css',
+				'/src/pages/works/talks/Talks.module.css',
 			]),
 		},
 	};
@@ -228,90 +215,83 @@ if (import.meta.vitest != null) {
 	} as const satisfies SiteAssets;
 
 	describe(resolveSiteAssets, () => {
+		const stylesByModule = {
+			'/src/components/SiteLayout/SiteLayout.module.css': ['/assets/site-layout.css'],
+			'/src/pages/about/About.module.css': ['/assets/about-page.css'],
+			'/src/pages/blog/article/ArticleContent.css': ['/assets/article-global.css'],
+			'/src/pages/blog/article/Article.module.css': ['/assets/article.css'],
+			'/src/pages/blog/BlogList.module.css': ['/assets/blog.css'],
+			'/src/pages/error/Error.module.css': ['/assets/error.css'],
+			'/src/pages/home/Home.module.css': ['/assets/home.css'],
+			'/src/pages/sponsors/Sponsors.module.css': ['/assets/sponsors.css'],
+			'/src/pages/works/WorksProse.css': ['/assets/works-global.css'],
+			'/src/pages/works/_components/WorksNav/WorksNav.module.css': ['/assets/works-nav.css'],
+			'/src/pages/works/_components/WorksSection/WorksSection.module.css': [
+				'/assets/works-section.css',
+			],
+			'/src/pages/works/media/Media.module.css': ['/assets/media.css'],
+			'/src/pages/works/oss/Oss.module.css': ['/assets/oss.css'],
+			'/src/pages/works/publications/Publications.module.css': ['/assets/publications.css'],
+			'/src/pages/works/showcase/Showcase.module.css': ['/assets/showcase.css'],
+			'/src/pages/works/talks/Talks.module.css': ['/assets/talks.css'],
+			'/src/content/blog/post/Chart.tsx': ['/assets/Legend.css', '/assets/Chart.css'],
+		} as const satisfies Record<string, readonly string[]>;
+
+		function createTestAssetResolver(missing: ReadonlySet<string> = new Set()): SiteAssetResolver {
+			return {
+				document: (input) =>
+					renderDocumentAssets({
+						...input,
+						manifest: { 'index.html': { file: 'client.js', css: ['base.css'] } },
+					}),
+				stylesheets: ({ modules }) => ({
+					stylesheets: modules.flatMap((moduleId) =>
+						missing.has(moduleId)
+							? []
+							: (stylesByModule[moduleId as keyof typeof stylesByModule] ?? []).map((href) => ({
+									kind: 'style' as const,
+									href,
+									moduleId,
+								})),
+					),
+					diagnostics: modules
+						.filter((moduleId) => missing.has(moduleId))
+						.map((moduleId) => ({
+							code: 'missing-module' as const,
+							moduleId,
+							message: `Missing ${moduleId}`,
+						})),
+					dependencies: [],
+				}),
+			};
+		}
+
 		it('rejects unresolved island stylesheet dependencies', () => {
 			expect(() =>
-				resolveSiteAssets({
-					'src/components/SiteLayout/SiteLayout.module.css': { file: 'layout.css' },
-					'src/content/blog/post/Chart.tsx': { file: 'chart.js', imports: ['missing-dependency'] },
-				}),
-			).toThrow('missing-dependency');
+				resolveSiteAssets(createTestAssetResolver(new Set(['/src/content/blog/post/Chart.tsx'])), [
+					'/src/content/blog/post/Chart.tsx',
+				]),
+			).toThrow('Missing /src/content/blog/post/Chart.tsx');
 		});
-		it('separates base and page assets from the Vite manifest', () => {
-			const result = resolveSiteAssets({
-				'index.html': { file: 'client.js', css: ['base.css'] },
-				'src/components/SiteLayout/SiteLayout.module.css': {
-					file: 'assets/site-layout.css',
-				},
-				'src/pages/about/About.module.css': {
-					file: 'assets/about-page.css',
-				},
-				'src/pages/blog/article/ArticleContent.css': {
-					file: 'assets/article-global.css',
-				},
-				'src/pages/blog/article/Article.module.css': {
-					file: 'assets/article.css',
-				},
-				'src/pages/blog/BlogList.module.css': {
-					file: 'assets/blog.css',
-				},
-				'src/pages/error/Error.module.css': {
-					file: 'assets/error.css',
-				},
-				'src/pages/home/Home.module.css': {
-					file: 'assets/home.css',
-				},
-				'src/pages/sponsors/Sponsors.module.css': {
-					file: 'assets/sponsors.css',
-				},
-				'src/pages/works/WorksProse.css': {
-					file: 'assets/works-global.css',
-				},
-				'src/pages/works/_components/WorksNav/WorksNav.module.css': {
-					file: 'assets/works-nav.css',
-				},
-				'src/pages/works/_components/WorksSection/WorksSection.module.css': {
-					file: 'assets/works-section.css',
-				},
-				'src/pages/works/media/Media.module.css': {
-					file: 'assets/media.css',
-				},
-				'src/pages/works/oss/Oss.module.css': {
-					file: 'assets/oss.css',
-				},
-				'src/pages/works/publications/Publications.module.css': {
-					file: 'assets/publications.css',
-				},
-				'src/pages/works/showcase/Showcase.module.css': {
-					file: 'assets/showcase.css',
-				},
-				'src/pages/works/talks/Talks.module.css': {
-					file: 'assets/talks.css',
-				},
-				'src/content/blog/post/Chart.tsx': {
-					file: 'assets/Chart.js',
-					css: ['assets/Chart.css'],
-					imports: ['_Legend.js'],
-				},
-				'_Legend.js': {
-					file: 'assets/Legend.js',
-					css: ['assets/Legend.css'],
-				},
-			});
+		it('separates base and page assets from the custom host resolver', () => {
+			const result = resolveSiteAssets(createTestAssetResolver(), [
+				'/src/content/blog/post/Chart.tsx',
+			]);
 
 			expect(result.sharedStyles).toEqual([
 				{ kind: 'style', href: '/base.css' },
-				{ kind: 'style', href: 'assets/site-layout.css', crossorigin: true },
+				{ kind: 'style', href: '/assets/site-layout.css', crossorigin: true },
 			]);
 			expect(result.scripts).toEqual([
 				{ kind: 'script', src: '/client.js', type: 'module', crossorigin: true },
 			]);
 			expect(result.islands['/src/content/blog/post/Chart.tsx']).toEqual([
-				{ href: '/assets/Legend.css', crossorigin: true },
-				{ href: '/assets/Chart.css', crossorigin: true },
+				{ kind: 'style', href: '/assets/Legend.css', crossorigin: true },
+				{ kind: 'style', href: '/assets/Chart.css', crossorigin: true },
 			]);
 			expect(result.pageStyles.article).toEqual([
-				{ kind: 'style', href: 'assets/article-global.css', crossorigin: true },
-				{ kind: 'style', href: 'assets/article.css', crossorigin: true },
+				{ kind: 'style', href: '/assets/article-global.css', crossorigin: true },
+				{ kind: 'style', href: '/assets/article.css', crossorigin: true },
 			]);
 			expect(result.pageStyles.works).toHaveLength(8);
 		});

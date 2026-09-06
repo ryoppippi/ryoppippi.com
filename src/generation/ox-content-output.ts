@@ -1,42 +1,19 @@
 import type { PostListItem } from '@/contents/external-content.ts';
 import type { GeneratedFile } from './generated-file.ts';
-import {
-	planSsgOutputs,
-	resolveGitLastmod,
-	writeSiteMapFiles,
-	writeRedirectOutputs,
-} from '@ox-content/vite-plugin';
+import { planSsgOutputs, writeSiteMapFiles, writeRedirectOutputs } from '@ox-content/vite-plugin';
 import { OX_CONTENT_BUILD_OPTIONS } from '@/config/ox-content.ts';
 import path from 'node:path';
 import { SITE_NAME, SITE_ORIGIN } from '@/config/site.ts';
 import { writeBlogFeed, writeMediaFeed } from './feeds.ts';
 import type { BlogPostMetadata } from '../content/blog.ts';
 
-type GitLastmodResolver = (filePath: string, root?: string) => number | undefined;
-
 type WriteOxContentOutputFilesOptions = {
 	posts: readonly BlogPostMetadata[];
 	media: readonly PostListItem[];
 	outDir: string;
 	pages: readonly GeneratedFile[];
-	resolveLastmod?: GitLastmodResolver;
 	root: string;
 };
-
-function latestSourceLastmod(
-	root: string,
-	sourcePaths: readonly string[],
-	resolveLastmod: GitLastmodResolver,
-): number | undefined {
-	let latest: number | undefined;
-	for (const sourcePath of sourcePaths) {
-		const timestamp = resolveLastmod(path.resolve(root, sourcePath), root);
-		if (timestamp != null && (latest == null || timestamp > latest)) {
-			latest = timestamp;
-		}
-	}
-	return latest;
-}
 
 /**
  * Writes custom-host sitemap and blog/media feeds through Ox Content.
@@ -53,7 +30,6 @@ export async function writeOxContentOutputFiles({
 	media,
 	outDir,
 	pages,
-	resolveLastmod = resolveGitLastmod,
 	root,
 }: WriteOxContentOutputFilesOptions): Promise<void> {
 	const sitePages = pages
@@ -62,8 +38,8 @@ export async function writeOxContentOutputFiles({
 			const sourcePaths = file.sourcePaths ?? [];
 			return {
 				inputPath: path.resolve(root, sourcePaths[0] ?? 'src/generation/generate-static-site.ts'),
+				lastUpdatedPaths: sourcePaths.slice(1).map((sourcePath) => path.resolve(root, sourcePath)),
 				urlPath: file.path.replace(/(?:index)?\.html$/u, ''),
-				lastUpdated: latestSourceLastmod(root, sourcePaths, resolveLastmod),
 			};
 		});
 	const plan = planSsgOutputs({
@@ -119,7 +95,6 @@ if (import.meta.vitest != null) {
 			outDir: fixture.getPath(),
 			root: fixture.getPath(),
 			pages: [{ path: 'index.html', content: '<p>Home</p>' }],
-			resolveLastmod: () => undefined,
 		});
 		const blog = await readFile(fixture.getPath('feed.xml'), 'utf8');
 		expect(blog).toContain('Published article | 2 min read');

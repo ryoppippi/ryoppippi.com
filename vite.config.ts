@@ -9,7 +9,11 @@ import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { loadIslandDocuments } from './src/content/islands.ts';
-import { createStaticSiteDevelopmentPlugin } from './vite-plugin.ts';
+import { planSiteContentAssets } from './src/generation/content-assets.ts';
+
+type BlogCatalogueModule = {
+	loadBlogPostMetadata: () => Promise<Array<{ filename: string; isPublished: boolean }>>;
+};
 
 export default defineConfig(({ command, mode }) => ({
 	envPrefix: ['PUBLIC_', 'VITE_'],
@@ -36,10 +40,34 @@ export default defineConfig(({ command, mode }) => ({
 			icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
 			ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 		}),
-		createStaticSiteDevelopmentPlugin(),
 		createOxContentCustomHostPlugin({
-			// Development page routes remain in the existing middleware during migration.
-			host: command === 'serve' ? { routes: [] } : '/src/generation/index.ts',
+			host: command === 'serve' ? '/src/dev-server/index.ts' : '/src/generation/index.ts',
+			dev: {
+				enabled: mode !== 'test',
+				routeDependencies: [{ path: 'src/content/blog', kind: 'directory' }],
+			},
+			collectionAssets: {
+				async manifest(context) {
+					const publishedPosts =
+						context.mode === 'serve'
+							? undefined
+							: new Set(
+									(
+										await (
+											(await context.loadModule('/src/content/blog.ts')) as BlogCatalogueModule
+										).loadBlogPostMetadata()
+									)
+										.filter(({ isPublished }) => isPublished)
+										.map(({ filename }) => filename),
+								);
+					return planSiteContentAssets(context.root, publishedPosts);
+				},
+				watch: [
+					{ path: 'src/content/blog', kind: 'directory' },
+					{ path: 'src/content/showcase', kind: 'directory' },
+				],
+				ownedPrefixes: ['/assets/content', '/works/showcase/assets'],
+			},
 			themeTokens: {
 				theme: kanagawaDragon,
 				include: (name) => name.startsWith('syntax-'),
@@ -77,7 +105,6 @@ export default defineConfig(({ command, mode }) => ({
 					'pnpm-lock.yaml',
 					'tsconfig.json',
 					'vite.config.ts',
-					'vite-plugin.ts',
 					'src/**',
 					{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
 					'public/**',
@@ -137,7 +164,6 @@ export default defineConfig(({ command, mode }) => ({
 					environment: 'node',
 					exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
 					includeSource: [
-						'vite-plugin.ts',
 						'src/client/page-style-loader.ts',
 						'src/contents/{external-content,works-data}.ts',
 						'src/dev-server/**/*.ts',

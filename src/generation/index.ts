@@ -1,34 +1,39 @@
-import type { ManifestChunk, SiteAssets } from '@/rendering/site-assets.ts';
+import type { DocumentStylesheetInput } from '@ox-content/vite-plugin/document-assets';
+import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
+import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { withoutLeadingSlash } from 'ufo';
 import { buildContentArtifact } from '@/content/build.ts';
 import { createIslandRenderer } from '@/content/island-renderer.ts';
 import { inlineHomeStyles, resolveSiteAssets } from '@/rendering/site-assets.ts';
 import { generateStaticSite } from './generate-static-site.ts';
 
-function manifestCssFiles(manifest: Record<string, ManifestChunk>, source: string): string[] {
-	const chunk = manifest[source];
-	return chunk?.css ?? (chunk?.file?.endsWith('.css') === true ? [chunk.file] : []);
+function linkedStylesheets(stylesheets: readonly DocumentStylesheetInput[]): string[] {
+	return stylesheets.flatMap((stylesheet) => {
+		if (typeof stylesheet === 'string') {
+			return [stylesheet];
+		}
+		return stylesheet.href == null ? [] : [stylesheet.href];
+	});
 }
 
 async function readBuiltSiteAssets(
 	outDir: string,
-	manifest: Record<string, ManifestChunk>,
+	assetsContext: OxContentCustomHostAssetsContext,
+	islandModules: readonly string[],
 ): Promise<SiteAssets> {
-	const assets = resolveSiteAssets(manifest);
-	const baseFiles = [
-		...manifestCssFiles(manifest, 'index.html'),
-		...manifestCssFiles(manifest, 'src/components/SiteLayout/SiteLayout.module.css'),
-	];
-	const homeFiles = manifestCssFiles(manifest, 'src/pages/home/Home.module.css');
+	const assets = resolveSiteAssets(assetsContext, islandModules);
+	const baseFiles = linkedStylesheets(assets.sharedStyles);
+	const homeFiles = linkedStylesheets(assets.pageStyles.home);
 	if (baseFiles.length === 0 || homeFiles.length === 0) {
 		throw new Error('Missing CSS assets for inline home styles');
 	}
 	const readCssFiles = (files: readonly string[]) =>
-		Promise.all(files.map((file) => readFile(path.join(outDir, file), 'utf8'))).then((contents) =>
-			contents.join('\n'),
-		);
+		Promise.all(
+			files.map((file) => readFile(path.join(outDir, withoutLeadingSlash(file)), 'utf8')),
+		).then((contents) => contents.join('\n'));
 	const [base, home] = await Promise.all([
 		readCssFiles([...new Set(baseFiles)]),
 		readCssFiles(homeFiles),
@@ -39,26 +44,35 @@ async function readBuiltSiteAssets(
 const host = {
 	async routes(context) {
 		const { outDir, root } = context;
-		if (context.assets.clientManifest == null) {
-			throw new Error('Ox Content custom host did not provide the Vite client manifest');
-		}
 		const content = await buildContentArtifact(
 			createIslandRenderer((id) => context.loadModule(id)),
 		);
+		const islandModules = [
+			...new Set(
+				content.posts
+					.filter(({ isPublished }) => isPublished)
+					.flatMap(({ clientModules }) => clientModules.map(({ moduleId }) => moduleId)),
+			),
+		];
 		const files = await generateStaticSite({
-			assets: await readBuiltSiteAssets(outDir, context.assets.clientManifest),
+			assets: await readBuiltSiteAssets(outDir, context.assets, islandModules),
 			content,
 			outDir,
 			root,
 		});
-		return files.map((file) => ({
-			path: `/${file.path.replace(/index\.html$/, '')}`,
-			render: () => ({
-				body: file.content,
-				outputPath: file.path,
-				contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
-			}),
-		}));
+		return files.map((file) => {
+			const sourcePaths = file.sourcePaths ?? [];
+			return {
+				path: `/${file.path.replace(/index\.html$/, '')}`,
+				inputPath: sourcePaths[0],
+				lastUpdatedPaths: sourcePaths.slice(1),
+				render: () => ({
+					body: file.content,
+					outputPath: file.path,
+					contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
+				}),
+			};
+		});
 	},
 } satisfies OxContentCustomHostModule;
 

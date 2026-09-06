@@ -1,7 +1,7 @@
 import type { ContentArtifact } from '@/content/artifact.ts';
 import type { GeneratedFile } from './generated-file.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { rewriteCollectionAssetUrls, writeCollectionAssets } from '@ox-content/vite-plugin';
+import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import {
 	extractInstallSection,
 	extractSection,
@@ -70,7 +70,6 @@ export async function generateStaticSite({
 			localContent.posts.filter((post) => post.isPublished === true).map((post) => post.filename),
 		),
 	);
-	await writeCollectionAssets({ manifest: contentAssets, outDir });
 	const assetUrls = collectionAssetUrls(contentAssets);
 	const posts = localContent.posts.map((post) => ({
 		...post,

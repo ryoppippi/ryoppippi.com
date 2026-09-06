@@ -2,7 +2,7 @@ import type { CollectionAssetInput, CollectionAssetManifest } from '@ox-content/
 import { planCollectionAssets, rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import path from 'node:path';
 import { glob } from 'tinyglobby';
-import { blogDirectory, showcaseDirectory } from '@/content/paths.ts';
+import { blogDirectory, showcaseDirectory } from '../content/paths.ts';
 
 const PUBLISHABLE_CONTENT_ASSET_EXTENSIONS = new Set([
 	'.avif',
@@ -31,16 +31,6 @@ function publicUrl(...parts: string[]): string {
 
 function isPublishableContentAsset(file: string): boolean {
 	return PUBLISHABLE_CONTENT_ASSET_EXTENSIONS.has(path.extname(file).toLowerCase());
-}
-
-function isWithin(directory: string, file: string): boolean {
-	const relative = path.relative(directory, file);
-	return (
-		relative !== '' &&
-		relative !== '..' &&
-		!relative.startsWith(`..${path.sep}`) &&
-		!path.isAbsolute(relative)
-	);
 }
 
 /**
@@ -98,22 +88,6 @@ export async function planSiteContentAssets(
 		root,
 		assets: await discoverSiteContentAssets(blogDirectory(), showcaseDirectory(), publishedPosts),
 	});
-}
-
-/**
- * Reports whether a changed source requires the development asset manifest to be replanned.
- *
- * @param file - Absolute source path reported by Vite's watcher.
- * @returns Whether the path can affect the collection asset manifest.
- */
-export function isSiteContentAssetSource(file: string): boolean {
-	if (isWithin(blogDirectory(), file)) {
-		return isPublishableContentAsset(file);
-	}
-	if (isWithin(showcaseDirectory(), file)) {
-		return isPublishableContentAsset(file);
-	}
-	return false;
 }
 
 /**
