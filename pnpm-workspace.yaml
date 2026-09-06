@@ -29,6 +29,7 @@ catalog:
   fs-extra: ^11.4.0
   fs-fixture: ^2.14.0
   gray-matter-es: 0.2.1
+  msw: ^2.15.0
   only-allow: ^1.2.2
   open-editor: ^6.0.0
   playwright: 1.61.1
@@ -62,6 +63,7 @@ allowBuilds:
   bun: true
   core-js: true
   esbuild: true
+  msw: false
   puppeteer: false
   sharp: true
   unrs-resolver: true

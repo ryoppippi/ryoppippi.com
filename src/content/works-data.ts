@@ -119,8 +119,18 @@ export async function loadPublications(
 }
 
 if (import.meta.vitest != null) {
+	const { createFixture } = await import('fs-fixture');
+	const { http, HttpResponse } = await import('msw');
+	const { setupServer } = await import('msw/node');
+	const server = setupServer(
+		http.get('https://ungh.cc/repos/example/project', () =>
+			HttpResponse.json({ repo: { description: 'External project' } }),
+		),
+	);
+	beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+	afterAll(() => server.close());
+
 	test('uses the GitHub primary language for opted-in OSS projects', async () => {
-		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'src/content/works/oss/list.json': JSON.stringify([
 				{
@@ -144,12 +154,6 @@ if (import.meta.vitest != null) {
 	});
 
 	test('loads a missing description from the linked GitHub repository', async () => {
-		const { createFixture } = await import('fs-fixture');
-		using fetchSpy = vi
-			.spyOn(globalThis, 'fetch')
-			.mockResolvedValue(
-				new Response(JSON.stringify({ repo: { description: 'External project' } })),
-			);
 		await using fixture = await createFixture({
 			'src/content/works/oss/list.json': JSON.stringify([
 				{
@@ -168,6 +172,5 @@ if (import.meta.vitest != null) {
 		expect(await loadOssProjects(fixture.getPath('.'))).toMatchObject([
 			{ description: 'External project' },
 		]);
-		expect(fetchSpy).toHaveBeenCalledWith('https://ungh.cc/repos/example/project');
 	});
 }

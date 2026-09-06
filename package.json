@@ -49,6 +49,7 @@
 		"fs-extra": "catalog:",
 		"fs-fixture": "catalog:",
 		"gray-matter-es": "catalog:",
+		"msw": "catalog:",
 		"only-allow": "catalog:",
 		"open-editor": "catalog:",
 		"playwright": "catalog:",
