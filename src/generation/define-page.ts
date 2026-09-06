@@ -27,6 +27,7 @@ export function definePage<Props extends object>({
 	return {
 		path: outputPath,
 		sourcePaths,
+		unlisted: documentOptions.indexable === false,
 		content: renderHtmlDocument({
 			...documentOptions,
 			content: renderComponent(component, componentProps),

@@ -74,14 +74,16 @@ export default defineConfig(({ command, mode }) => ({
 				href: SYNTAX_THEME_HREF,
 			},
 			build: { transformHtml: false },
-			// Site-owned auxiliary output policy is still supplied by the generator.
 			oxContent: {
-				ssg: false,
+				ssg: {
+					siteName: OX_CONTENT_BUILD_OPTIONS.ssg.siteName,
+					siteUrl: OX_CONTENT_BUILD_OPTIONS.ssg.siteUrl,
+				},
 				icons: false,
 				feeds: false,
-				siteMaps: false,
+				siteMaps: { robots: false, llms: false },
 				resources: false,
-				redirects: false,
+				redirects: OX_CONTENT_BUILD_OPTIONS.redirects,
 			},
 		}),
 	] satisfies PluginOption[],

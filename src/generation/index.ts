@@ -66,6 +66,7 @@ const host = {
 				path: `/${file.path.replace(/index\.html$/, '')}`,
 				inputPath: sourcePaths[0],
 				lastUpdatedPaths: sourcePaths.slice(1),
+				unlisted: file.unlisted,
 				render: () => ({
 					body: file.content,
 					outputPath: file.path,

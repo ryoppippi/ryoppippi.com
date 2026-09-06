@@ -14,7 +14,7 @@ import {
 	loadExternalPosts,
 	postListItems,
 } from '@/contents/external-content.ts';
-import { writeOxContentOutputFiles } from './ox-content-output.ts';
+import { writeBlogFeed, writeMediaFeed } from './feeds.ts';
 import { createAboutPageFile } from '@/pages/about';
 import { createArticlePageFiles } from '@/pages/blog/article';
 import { createBlogListPageFile } from '@/pages/blog';
@@ -105,7 +105,7 @@ export async function generateStaticSite({
 		createErrorPageFile(assets),
 	];
 
-	await writeOxContentOutputFiles({ posts, media: externalMedia, outDir, pages, root });
+	await Promise.all([writeBlogFeed(posts, outDir), writeMediaFeed(externalMedia, outDir)]);
 
 	const install = extractSection(dotfiles, 'Setup');
 	const osSections = [
