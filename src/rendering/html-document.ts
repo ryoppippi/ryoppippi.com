@@ -25,6 +25,8 @@ type HtmlDocumentOptions = {
 	structuredData?: StructuredData;
 };
 
+const JAVASCRIPT_CLASS_SCRIPT = "<script>document.documentElement.classList.add('js')</script>";
+
 function normalizedLanguage(value: string | undefined): string {
 	return value?.trim() || 'en';
 }
@@ -75,16 +77,28 @@ export function renderHtmlDocument({
 }: HtmlDocumentOptions): string {
 	const documentLanguage = normalizedLanguage(lang);
 	const body = renderComponent(SiteLayout, { content, pathname });
-	const head = renderPageHead({
-		article,
-		alternates,
-		datePublished,
-		description,
-		indexable,
-		lang: documentLanguage,
-		pathname,
-		structuredData,
-		title,
-	});
-	return `<!doctype html><html lang="${escapeAttribute(documentLanguage)}"><head>${head}<script>document.documentElement.classList.add('js')</script>${renderThemeBootstrapScript()}${renderAssetTags(assets, style, islands, links)}</head><body data-page-style="${style}">${body}</body></html>`;
+	const head = [
+		renderPageHead({
+			article,
+			alternates,
+			datePublished,
+			description,
+			indexable,
+			lang: documentLanguage,
+			pathname,
+			structuredData,
+			title,
+		}),
+		JAVASCRIPT_CLASS_SCRIPT,
+		renderThemeBootstrapScript(),
+		renderAssetTags(assets, style, islands, links),
+	].join('');
+
+	return [
+		'<!doctype html>',
+		`<html lang="${escapeAttribute(documentLanguage)}">`,
+		`<head>${head}</head>`,
+		`<body data-page-style="${style}">${body}</body>`,
+		'</html>',
+	].join('');
 }
