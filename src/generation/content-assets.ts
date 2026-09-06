@@ -109,106 +109,100 @@ export function collectionAssetUrls(
 }
 
 if (import.meta.vitest != null) {
-	describe(discoverSiteContentAssets, () => {
-		it('excludes attachments of posts outside the production publication allowlist', async () => {
-			const { createFixture } = await import('fs-fixture');
-			await using fixture = await createFixture({
-				'blog/published/image.png': 'public',
-				'blog/draft/image.png': 'private',
-				'blog/missing-publication/image.png': 'private',
-				'showcase/cover.png': 'public',
-			});
-			const assets = await discoverSiteContentAssets(
-				fixture.getPath('blog'),
-				fixture.getPath('showcase'),
-				new Set(['published']),
-			);
-			expect(assets.map(({ publicPath }) => publicPath)).toEqual([
-				'/blog/published/image.png',
-				'/works/showcase/assets/cover.png',
-			]);
+	test('content asset discovery excludes posts outside the publication allowlist', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'blog/published/image.png': 'public',
+			'blog/draft/image.png': 'private',
+			'blog/missing-publication/image.png': 'private',
+			'showcase/cover.png': 'public',
 		});
-		it('lists non-Markdown assets with encoded public aliases', async () => {
-			const { createFixture } = await import('fs-fixture');
-			await using fixture = await createFixture({
-				'blog/post/index.md': '# Post',
-				'blog/post/index.html': '<p>Generated elsewhere</p>',
-				'blog/post/component.mdx': '<Component />',
-				'blog/post/component.tsx': 'export default () => null',
-				'blog/post/data.json': '{"private":true}',
-				'blog/post/styles.css': '.private {}',
-				'blog/post/image one.png': 'image',
-				'showcase/project.md': '# Project',
-				'showcase/project cover.jpg': 'cover',
-				'showcase/index.ts': 'export {}',
-			});
+		const assets = await discoverSiteContentAssets(
+			fixture.getPath('blog'),
+			fixture.getPath('showcase'),
+			new Set(['published']),
+		);
+		expect(assets.map(({ publicPath }) => publicPath)).toEqual([
+			'/blog/published/image.png',
+			'/works/showcase/assets/cover.png',
+		]);
+	});
+	test('content asset discovery lists non-Markdown assets with encoded aliases', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'blog/post/index.md': '# Post',
+			'blog/post/index.html': '<p>Generated elsewhere</p>',
+			'blog/post/component.mdx': '<Component />',
+			'blog/post/component.tsx': 'export default () => null',
+			'blog/post/data.json': '{"private":true}',
+			'blog/post/styles.css': '.private {}',
+			'blog/post/image one.png': 'image',
+			'showcase/project.md': '# Project',
+			'showcase/project cover.jpg': 'cover',
+			'showcase/index.ts': 'export {}',
+		});
 
-			expect(
-				await discoverSiteContentAssets(fixture.getPath('blog'), fixture.getPath('showcase')),
-			).toEqual([
-				{
-					sourcePath: fixture.getPath('blog/post/image one.png'),
-					publicPath: '/blog/post/image%20one.png',
-				},
-				{
-					sourcePath: fixture.getPath('showcase/project cover.jpg'),
-					publicPath: '/works/showcase/assets/project%20cover.jpg',
-				},
-			]);
-		});
+		expect(
+			await discoverSiteContentAssets(fixture.getPath('blog'), fixture.getPath('showcase')),
+		).toEqual([
+			{
+				sourcePath: fixture.getPath('blog/post/image one.png'),
+				publicPath: '/blog/post/image%20one.png',
+			},
+			{
+				sourcePath: fixture.getPath('showcase/project cover.jpg'),
+				publicPath: '/works/showcase/assets/project%20cover.jpg',
+			},
+		]);
 	});
 
-	describe(collectionAssetUrls, () => {
-		it('maps every alias to its content-addressed target', () => {
-			const urls = collectionAssetUrls({
-				assets: [
-					{
-						sourcePath: '/workspace/image.png',
-						publicPaths: ['/blog/post/image.png', '/legacy/image.png'],
-						contentPath: '/assets/content/digest.png',
-					},
-				],
-			});
-
-			expect([...urls]).toEqual([
-				['/blog/post/image.png', '/assets/content/digest.png'],
-				['/legacy/image.png', '/assets/content/digest.png'],
-			]);
-		});
-	});
-
-	describe(rewriteCollectionAssetUrls, () => {
-		const manifest = {
+	test('collection asset URLs map every alias to its content-addressed target', () => {
+		const urls = collectionAssetUrls({
 			assets: [
 				{
 					sourcePath: '/workspace/image.png',
-					publicPaths: ['/blog/post/image.png'],
+					publicPaths: ['/blog/post/image.png', '/legacy/image.png'],
 					contentPath: '/assets/content/digest.png',
 				},
 			],
-		} satisfies CollectionAssetManifest;
-		it('rewrites local asset attributes without changing external URLs', () => {
-			const html =
-				'<p><img src="./image.png" alt="local"><a href="https://example.com/image.png">external</a></p>';
-
-			const rewritten = rewriteCollectionAssetUrls({
-				html,
-				pagePath: '/blog/post/',
-				manifest,
-			}).html;
-
-			expect(rewritten).toContain('src="/assets/content/digest.png"');
-			expect(rewritten).toContain('href="https://example.com/image.png"');
 		});
 
-		it('preserves query strings and fragments on rewritten asset URLs', () => {
-			const rewritten = rewriteCollectionAssetUrls({
-				html: '<img src="./image.png?width=800#preview">',
-				pagePath: '/blog/post/',
-				manifest,
-			}).html;
+		expect([...urls]).toEqual([
+			['/blog/post/image.png', '/assets/content/digest.png'],
+			['/legacy/image.png', '/assets/content/digest.png'],
+		]);
+	});
 
-			expect(rewritten).toContain('src="/assets/content/digest.png?width=800#preview"');
-		});
+	const manifest = {
+		assets: [
+			{
+				sourcePath: '/workspace/image.png',
+				publicPaths: ['/blog/post/image.png'],
+				contentPath: '/assets/content/digest.png',
+			},
+		],
+	} satisfies CollectionAssetManifest;
+	test('collection asset rewriting preserves external URLs', () => {
+		const html =
+			'<p><img src="./image.png" alt="local"><a href="https://example.com/image.png">external</a></p>';
+
+		const rewritten = rewriteCollectionAssetUrls({
+			html,
+			pagePath: '/blog/post/',
+			manifest,
+		}).html;
+
+		expect(rewritten).toContain('src="/assets/content/digest.png"');
+		expect(rewritten).toContain('href="https://example.com/image.png"');
+	});
+
+	test('collection asset rewriting preserves query strings and fragments', () => {
+		const rewritten = rewriteCollectionAssetUrls({
+			html: '<img src="./image.png?width=800#preview">',
+			pagePath: '/blog/post/',
+			manifest,
+		}).html;
+
+		expect(rewritten).toContain('src="/assets/content/digest.png?width=800#preview"');
 	});
 }

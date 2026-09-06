@@ -234,7 +234,7 @@ if (import.meta.vitest != null) {
 		].join('\n'),
 	} satisfies DevRouteCatalogue;
 
-	it('derives generated paths from the existing content catalogue', () => {
+	test('derives generated paths from the existing content catalogue', () => {
 		const paths = createDevRoutes(catalogue).map(({ path }) => path);
 
 		expect(paths).toHaveLength(19);

@@ -229,24 +229,22 @@ if (import.meta.vitest != null) {
 		'run it',
 	].join('\n');
 
-	describe(extractSection, () => {
-		it('extracts a section and keeps nested sub-headings', () => {
-			expect(extractSection(sample, 'Install')).toBe(
-				['### Install', '', '1. Do a thing', '', '#### Note', '', 'nested detail'].join('\n'),
-			);
-		});
+	test('section extraction keeps nested sub-headings', () => {
+		expect(extractSection(sample, 'Install')).toBe(
+			['### Install', '', '1. Do a thing', '', '#### Note', '', 'nested detail'].join('\n'),
+		);
+	});
 
-		it('stops at the next heading of the same level', () => {
-			expect(extractSection(sample, 'Install')).not.toContain('Usage');
-		});
+	test('section extraction stops at the next heading of the same level', () => {
+		expect(extractSection(sample, 'Install')).not.toContain('Usage');
+	});
 
-		it('matches heading text case-insensitively', () => {
-			expect(extractSection(sample, 'install')).toContain('### Install');
-		});
+	test('section extraction matches heading text case-insensitively', () => {
+		expect(extractSection(sample, 'install')).toContain('### Install');
+	});
 
-		it('throws when the heading is missing', () => {
-			expect(() => extractSection(sample, 'Nope')).toThrow('Section not found');
-		});
+	test('section extraction throws when the heading is missing', () => {
+		expect(() => extractSection(sample, 'Nope')).toThrow('Section not found');
 	});
 
 	const readme = [
@@ -269,18 +267,16 @@ if (import.meta.vitest != null) {
 		'mac apps',
 	].join('\n');
 
-	describe(extractInstallSection, () => {
-		it('extracts the OS section scoped to Setup', () => {
-			expect(extractInstallSection(readme, 'macOS')).toBe('#### macOS\n\nmac steps');
-		});
+	test('install section extraction stays scoped to Setup', () => {
+		expect(extractInstallSection(readme, 'macOS')).toBe('#### macOS\n\nmac steps');
+	});
 
-		it('does not match OS sub-headings outside Setup', () => {
-			expect(extractInstallSection(readme, 'macOS')).not.toContain('mac apps');
-		});
+	test('install section extraction ignores OS headings outside Setup', () => {
+		expect(extractInstallSection(readme, 'macOS')).not.toContain('mac apps');
+	});
 
-		it('extracts the last OS section up to the end of Setup', () => {
-			expect(extractInstallSection(readme, 'Linux')).toBe('#### Linux\n\nlinux steps');
-		});
+	test('install section extraction handles the last Setup section', () => {
+		expect(extractInstallSection(readme, 'Linux')).toBe('#### Linux\n\nlinux steps');
 	});
 
 	const macSection = [
@@ -309,34 +305,32 @@ if (import.meta.vitest != null) {
 		'   > Do it manually.',
 	].join('\n');
 
-	describe(parseStepCommands, () => {
-		it('returns one entry per numbered step with its command', () => {
-			expect(parseStepCommands(macSection)).toEqual([
-				{ step: 1, command: 'curl -sSfL https://example.com/install | sh' },
-				{ step: 2, command: 'git clone https://example.com/repo\ncd repo' },
-				{ step: 3, command: 'open -a "App Store"' },
-			]);
-		});
+	test('step parsing returns one command per numbered step', () => {
+		expect(parseStepCommands(macSection)).toEqual([
+			{ step: 1, command: 'curl -sSfL https://example.com/install | sh' },
+			{ step: 2, command: 'git clone https://example.com/repo\ncd repo' },
+			{ step: 3, command: 'open -a "App Store"' },
+		]);
+	});
 
-		it('dedents code regardless of inconsistent indentation', () => {
-			expect(parseStepCommands(macSection)[0].command).not.toMatch(/^\s/);
-		});
+	test('step parsing dedents inconsistent code indentation', () => {
+		expect(parseStepCommands(macSection)[0].command).not.toMatch(/^\s/);
+	});
 
-		it('ignores non-code content such as note blockquotes', () => {
-			expect(parseStepCommands(macSection)[2].command).toBe('open -a "App Store"');
-		});
+	test('step parsing ignores non-code content', () => {
+		expect(parseStepCommands(macSection)[2].command).toBe('open -a "App Store"');
+	});
 
-		it('skips steps that have no code block', () => {
-			const section = [
-				'1. Just read this.',
-				'',
-				'2. Run:',
-				'',
-				'   ```sh',
-				'   echo hi',
-				'   ```',
-			].join('\n');
-			expect(parseStepCommands(section)).toEqual([{ step: 2, command: 'echo hi' }]);
-		});
+	test('step parsing skips steps without a code block', () => {
+		const section = [
+			'1. Just read this.',
+			'',
+			'2. Run:',
+			'',
+			'   ```sh',
+			'   echo hi',
+			'   ```',
+		].join('\n');
+		expect(parseStepCommands(section)).toEqual([{ step: 2, command: 'echo hi' }]);
 	});
 }

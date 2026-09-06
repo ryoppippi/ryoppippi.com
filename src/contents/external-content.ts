@@ -132,7 +132,7 @@ export function postListItems(
 }
 
 if (import.meta.vitest != null) {
-	it('loads curated entries with no remote sources and excludes invalid dates', async () => {
+	test('loads curated entries with no remote sources and excludes invalid dates', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'src/contents/external-rss/rss.json': '[]',

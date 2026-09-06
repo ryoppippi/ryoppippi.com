@@ -30,7 +30,7 @@ export async function loadIslandDocuments(
 }
 
 if (import.meta.vitest != null) {
-	it.each([
+	test.each([
 		{ includeDrafts: false, expected: ['public/index.mdx'] },
 		{
 			includeDrafts: true,

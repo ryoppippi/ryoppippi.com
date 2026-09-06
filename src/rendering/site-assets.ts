@@ -197,129 +197,123 @@ if (import.meta.vitest != null) {
 		},
 	} as const satisfies SiteAssets;
 
-	describe(resolveSiteAssets, () => {
-		const stylesByModule = {
-			'/src/components/SiteLayout/SiteLayout.module.css': ['/assets/site-layout.css'],
-			'/src/pages/about/About.module.css': ['/assets/about-page.css'],
-			'/src/pages/blog/article/ArticleContent.css': ['/assets/article-global.css'],
-			'/src/pages/blog/article/Article.module.css': ['/assets/article.css'],
-			'/src/pages/blog/BlogList.module.css': ['/assets/blog.css'],
-			'/src/pages/error/Error.module.css': ['/assets/error.css'],
-			'/src/pages/home/Home.module.css': ['/assets/home.css'],
-			'/src/pages/sponsors/Sponsors.module.css': ['/assets/sponsors.css'],
-			'/src/pages/works/WorksProse.css': ['/assets/works-global.css'],
-			'/src/pages/works/_components/WorksNav/WorksNav.module.css': ['/assets/works-nav.css'],
-			'/src/pages/works/_components/WorksSection/WorksSection.module.css': [
-				'/assets/works-section.css',
-			],
-			'/src/pages/works/media/Media.module.css': ['/assets/media.css'],
-			'/src/pages/works/oss/Oss.module.css': ['/assets/oss.css'],
-			'/src/pages/works/publications/Publications.module.css': ['/assets/publications.css'],
-			'/src/pages/works/showcase/Showcase.module.css': ['/assets/showcase.css'],
-			'/src/pages/works/talks/Talks.module.css': ['/assets/talks.css'],
-			'/src/content/blog/post/Chart.tsx': ['/assets/Legend.css', '/assets/Chart.css'],
-		} as const satisfies Record<string, readonly string[]>;
+	const stylesByModule = {
+		'/src/components/SiteLayout/SiteLayout.module.css': ['/assets/site-layout.css'],
+		'/src/pages/about/About.module.css': ['/assets/about-page.css'],
+		'/src/pages/blog/article/ArticleContent.css': ['/assets/article-global.css'],
+		'/src/pages/blog/article/Article.module.css': ['/assets/article.css'],
+		'/src/pages/blog/BlogList.module.css': ['/assets/blog.css'],
+		'/src/pages/error/Error.module.css': ['/assets/error.css'],
+		'/src/pages/home/Home.module.css': ['/assets/home.css'],
+		'/src/pages/sponsors/Sponsors.module.css': ['/assets/sponsors.css'],
+		'/src/pages/works/WorksProse.css': ['/assets/works-global.css'],
+		'/src/pages/works/_components/WorksNav/WorksNav.module.css': ['/assets/works-nav.css'],
+		'/src/pages/works/_components/WorksSection/WorksSection.module.css': [
+			'/assets/works-section.css',
+		],
+		'/src/pages/works/media/Media.module.css': ['/assets/media.css'],
+		'/src/pages/works/oss/Oss.module.css': ['/assets/oss.css'],
+		'/src/pages/works/publications/Publications.module.css': ['/assets/publications.css'],
+		'/src/pages/works/showcase/Showcase.module.css': ['/assets/showcase.css'],
+		'/src/pages/works/talks/Talks.module.css': ['/assets/talks.css'],
+		'/src/content/blog/post/Chart.tsx': ['/assets/Legend.css', '/assets/Chart.css'],
+	} as const satisfies Record<string, readonly string[]>;
 
-		function createTestAssetResolver(missing: ReadonlySet<string> = new Set()): SiteAssetResolver {
-			return {
-				selfHosted: testSelfHosted,
-				themeTokens: { href: '/__ox_theme_tokens__/syntax.css', outputPath: '', css: '' },
-				document: (input) =>
-					renderDocumentAssets({
-						...input,
-						manifest: { 'index.html': { file: 'client.js', css: ['base.css'] } },
-					}),
-				stylesheets: ({ modules }) => ({
-					stylesheets: modules.flatMap((moduleId) =>
-						missing.has(moduleId)
-							? []
-							: (stylesByModule[moduleId as keyof typeof stylesByModule] ?? []).map((href) => ({
-									kind: 'style' as const,
-									href,
-									moduleId,
-								})),
-					),
-					diagnostics: modules
-						.filter((moduleId) => missing.has(moduleId))
-						.map((moduleId) => ({
-							code: 'missing-module' as const,
-							moduleId,
-							message: `Missing ${moduleId}`,
-						})),
-					dependencies: [],
+	function createTestAssetResolver(missing: ReadonlySet<string> = new Set()): SiteAssetResolver {
+		return {
+			selfHosted: testSelfHosted,
+			themeTokens: { href: '/__ox_theme_tokens__/syntax.css', outputPath: '', css: '' },
+			document: (input) =>
+				renderDocumentAssets({
+					...input,
+					manifest: { 'index.html': { file: 'client.js', css: ['base.css'] } },
 				}),
-			};
-		}
+			stylesheets: ({ modules }) => ({
+				stylesheets: modules.flatMap((moduleId) =>
+					missing.has(moduleId)
+						? []
+						: (stylesByModule[moduleId as keyof typeof stylesByModule] ?? []).map((href) => ({
+								kind: 'style' as const,
+								href,
+								moduleId,
+							})),
+				),
+				diagnostics: modules
+					.filter((moduleId) => missing.has(moduleId))
+					.map((moduleId) => ({
+						code: 'missing-module' as const,
+						moduleId,
+						message: `Missing ${moduleId}`,
+					})),
+				dependencies: [],
+			}),
+		};
+	}
 
-		it('rejects unresolved island stylesheet dependencies', () => {
-			expect(() =>
-				resolveSiteAssets(createTestAssetResolver(new Set(['/src/content/blog/post/Chart.tsx'])), [
-					'/src/content/blog/post/Chart.tsx',
-				]),
-			).toThrow('Missing /src/content/blog/post/Chart.tsx');
-		});
-		it('separates base and page assets from the custom host resolver', () => {
-			const result = resolveSiteAssets(createTestAssetResolver(), [
+	test('site asset resolution rejects unresolved island stylesheet dependencies', () => {
+		expect(() =>
+			resolveSiteAssets(createTestAssetResolver(new Set(['/src/content/blog/post/Chart.tsx'])), [
 				'/src/content/blog/post/Chart.tsx',
-			]);
+			]),
+		).toThrow('Missing /src/content/blog/post/Chart.tsx');
+	});
+	test('site asset resolution separates base and page assets', () => {
+		const result = resolveSiteAssets(createTestAssetResolver(), [
+			'/src/content/blog/post/Chart.tsx',
+		]);
 
-			expect(result.sharedStyles).toEqual([
-				{ kind: 'style', href: '/base.css' },
-				{ kind: 'style', href: '/assets/site-layout.css', crossorigin: true },
-			]);
-			expect(result.scripts).toEqual([
-				{ kind: 'script', src: '/client.js', type: 'module', crossorigin: true },
-			]);
-			expect(result.islands['/src/content/blog/post/Chart.tsx']).toEqual([
-				{ kind: 'style', href: '/assets/Legend.css', crossorigin: true },
-				{ kind: 'style', href: '/assets/Chart.css', crossorigin: true },
-			]);
-			expect(result.pageStyles.article).toEqual([
-				{ kind: 'style', href: '/assets/article-global.css', crossorigin: true },
-				{ kind: 'style', href: '/assets/article.css', crossorigin: true },
-			]);
-			expect(result.pageStyles.works).toHaveLength(8);
-		});
+		expect(result.sharedStyles).toEqual([
+			{ kind: 'style', href: '/base.css' },
+			{ kind: 'style', href: '/assets/site-layout.css', crossorigin: true },
+		]);
+		expect(result.scripts).toEqual([
+			{ kind: 'script', src: '/client.js', type: 'module', crossorigin: true },
+		]);
+		expect(result.islands['/src/content/blog/post/Chart.tsx']).toEqual([
+			{ kind: 'style', href: '/assets/Legend.css', crossorigin: true },
+			{ kind: 'style', href: '/assets/Chart.css', crossorigin: true },
+		]);
+		expect(result.pageStyles.article).toEqual([
+			{ kind: 'style', href: '/assets/article-global.css', crossorigin: true },
+			{ kind: 'style', href: '/assets/article.css', crossorigin: true },
+		]);
+		expect(result.pageStyles.works).toHaveLength(8);
 	});
 
-	describe(renderAssetTags, () => {
-		it('loads syntax theme tokens only for article pages', () => {
-			expect(renderAssetTags(assets, 'article')).toContain('/__ox_theme_tokens__/syntax.css');
-			expect(renderAssetTags(assets, 'home')).not.toContain('/__ox_theme_tokens__/syntax.css');
-		});
-		it('links the styles of the islands the page mounts', () => {
-			const tags = renderAssetTags(assets, 'article', ['/src/content/blog/post/Chart.tsx']);
+	test('asset tags load syntax theme tokens only for article pages', () => {
+		expect(renderAssetTags(assets, 'article')).toContain('/__ox_theme_tokens__/syntax.css');
+		expect(renderAssetTags(assets, 'home')).not.toContain('/__ox_theme_tokens__/syntax.css');
+	});
+	test('asset tags link the styles of mounted islands', () => {
+		const tags = renderAssetTags(assets, 'article', ['/src/content/blog/post/Chart.tsx']);
 
-			expect(tags).toContain('<link rel="stylesheet" href="/assets/Chart.css" crossorigin>');
-			expect(tags).toContain('<link rel="stylesheet" href="/assets/Legend.css" crossorigin>');
-		});
-
-		it('emits a stylesheet shared by document sections once', () => {
-			const sharedHref = '/assets/shared.css';
-			const duplicated = {
-				...assets,
-				sharedStyles: [sharedHref],
-				islands: { '/src/content/blog/post/Chart.tsx': [sharedHref] },
-				pageStyles: { ...assets.pageStyles, article: [sharedHref] },
-			};
-
-			const tags = renderAssetTags(duplicated, 'article', ['/src/content/blog/post/Chart.tsx']);
-
-			expect(Array.from(tags.matchAll(new RegExp(sharedHref, 'g')))).toHaveLength(1);
-		});
+		expect(tags).toContain('<link rel="stylesheet" href="/assets/Chart.css" crossorigin>');
+		expect(tags).toContain('<link rel="stylesheet" href="/assets/Legend.css" crossorigin>');
 	});
 
-	describe(inlineHomeStyles, () => {
-		it('inlines home styles without changing other page assets', () => {
-			const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
+	test('asset tags emit a stylesheet shared by document sections once', () => {
+		const sharedHref = '/assets/shared.css';
+		const duplicated = {
+			...assets,
+			sharedStyles: [sharedHref],
+			islands: { '/src/content/blog/post/Chart.tsx': [sharedHref] },
+			pageStyles: { ...assets.pageStyles, article: [sharedHref] },
+		};
 
-			expect(renderAssetTags(inlined, 'home')).toContain(
-				'<style data-inline-base-style>body { color: red }</style>',
-			);
-			expect(renderAssetTags(inlined, 'home')).toContain('.home { color: blue }');
-			expect(renderAssetTags(inlined, 'home')).not.toContain('/home.css');
-			expect(renderAssetTags(inlined, 'blog')).toContain('/base.css');
-			expect(renderAssetTags(inlined, 'blog')).toContain('/blog.css');
-		});
+		const tags = renderAssetTags(duplicated, 'article', ['/src/content/blog/post/Chart.tsx']);
+
+		expect(Array.from(tags.matchAll(new RegExp(sharedHref, 'g')))).toHaveLength(1);
+	});
+
+	test('home style inlining leaves other page assets unchanged', () => {
+		const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
+
+		expect(renderAssetTags(inlined, 'home')).toContain(
+			'<style data-inline-base-style>body { color: red }</style>',
+		);
+		expect(renderAssetTags(inlined, 'home')).toContain('.home { color: blue }');
+		expect(renderAssetTags(inlined, 'home')).not.toContain('/home.css');
+		expect(renderAssetTags(inlined, 'blog')).toContain('/base.css');
+		expect(renderAssetTags(inlined, 'blog')).toContain('/blog.css');
 	});
 }

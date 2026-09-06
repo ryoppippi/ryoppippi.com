@@ -15,9 +15,7 @@ export function formatDate(date: Date): string {
 }
 
 if (import.meta.vitest != null) {
-	describe(formatDate, () => {
-		it('formats dates with day, short month, and year', () => {
-			expect(formatDate(new Date(2024, 0, 2))).toBe('2 Jan 2024');
-		});
+	test('formats dates with day, short month, and year', () => {
+		expect(formatDate(new Date(2024, 0, 2))).toBe('2 Jan 2024');
 	});
 }

@@ -102,14 +102,12 @@ export function describeRow(row: Row, lang: ChartLang = 'ja'): string {
 }
 
 if (import.meta.vitest != null) {
-	describe(describeRow, () => {
-		it('uses English series labels when asked', () => {
-			const row = rows.find((entry) => entry.date === '2023-10-01T23:59:59Z');
-			assert.isDefined(row);
+	test('row description uses English series labels when asked', () => {
+		const row = rows.find((entry) => entry.date === '2023-10-01T23:59:59Z');
+		assert.isDefined(row);
 
-			expect(describeRow(row, 'en')).toContain('Central');
-			expect(describeRow(row, 'en')).not.toContain('中央');
-		});
+		expect(describeRow(row, 'en')).toContain('Central');
+		expect(describeRow(row, 'en')).not.toContain('中央');
 	});
 }
 
