@@ -1,5 +1,5 @@
 import type { DocumentLinkInput } from '@ox-content/vite-plugin/document-assets';
-import type { PageStyle, SiteAssets } from './assets.ts';
+import type { SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
 import { escape, renderToString } from '@solidjs/web';
 import { renderThemeBootstrapScript } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -19,7 +19,7 @@ type HtmlDocumentOptions = {
 	islands?: string[];
 	links?: readonly DocumentLinkInput[];
 	pathname: string;
-	style: PageStyle;
+	style: string;
 	title: string;
 	structuredData?: StructuredData;
 };
@@ -71,7 +71,7 @@ export function renderHtmlDocument({
 		'<!doctype html>',
 		`<html lang="${escape(documentLanguage, true)}">`,
 		`<head>${head}</head>`,
-		`<body data-page-style="${style}">${body}</body>`,
+		`<body data-page-style="${escape(style, true)}">${body}</body>`,
 		'</html>',
 	].join('');
 }

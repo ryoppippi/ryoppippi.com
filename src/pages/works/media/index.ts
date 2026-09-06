@@ -39,6 +39,6 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 		pathname: '/works/media/',
 		description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 		assets,
-		style: 'works',
+		style: 'works/media',
 	});
 }

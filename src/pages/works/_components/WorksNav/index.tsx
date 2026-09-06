@@ -1,3 +1,4 @@
+import '../../WorksProse.css';
 import styles from './WorksNav.module.css';
 
 const sections = ['oss', 'showcase', 'talks', 'media', 'publications'] as const satisfies readonly [

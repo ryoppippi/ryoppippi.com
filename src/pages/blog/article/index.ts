@@ -139,7 +139,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 					type: 'text/markdown',
 				},
 			],
-			style: 'article',
+			style: 'blog/article',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
 		{ path: `blog/${post.filename}.md`, content: post.source },
@@ -152,7 +152,7 @@ if (import.meta.vitest != null) {
 		scripts: [],
 		islands: {},
 		selfHosted: {},
-		pageStyles: { about: [], article: [], blog: [], error: [], home: [], sponsors: [], works: [] },
+		pageStyles: { 'blog/article': [] },
 	} as const satisfies SiteAssets;
 
 	const examplePost = {

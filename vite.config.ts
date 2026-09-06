@@ -12,7 +12,7 @@ import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
-import { SERVER_STYLE_MODULES } from './src/client/page-style-registry.ts';
+import { ssrStylesPlugin } from './src/ox-content/ssr-styles-plugin.ts';
 import { loadIslandDocuments } from './src/pages/blog/island-documents.ts';
 import { planSiteContentAssets } from './src/pages/content-assets.ts';
 
@@ -76,6 +76,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
+			ssrStylesPlugin({ pages: 'src/pages', layout: 'src/components/SiteLayout/index.tsx' }),
 			createSolidHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				watch: ['src/content/blog'],
@@ -104,7 +105,7 @@ export default defineConfig(({ command, mode }) => {
 			outDir: 'dist',
 			emptyOutDir: true,
 			minify: true,
-			rollupOptions: { input: ['index.html', ...SERVER_STYLE_MODULES] },
+			rollupOptions: { input: ['index.html'] },
 		},
 		run: {
 			tasks: {

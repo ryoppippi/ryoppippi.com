@@ -37,6 +37,6 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 		description:
 			'Selected projects and experiments by @ryoppippi, with demos, source links, and implementation notes.',
 		assets,
-		style: 'works',
+		style: 'works/showcase',
 	});
 }

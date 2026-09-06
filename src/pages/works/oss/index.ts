@@ -38,6 +38,6 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		description:
 			'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
 		assets,
-		style: 'works',
+		style: 'works/oss',
 	});
 }

@@ -6,3 +6,7 @@ declare module 'virtual:ox-content/collections' {
 		name: string,
 	): CollectionQueryBuilder<T>;
 }
+declare module 'virtual:site/ssr-styles' {
+	const styles: { sharedStyles: string[]; pageStyles: Record<string, string[]> };
+	export default styles;
+}

@@ -41,6 +41,6 @@ export function createPublicationsPageFile(
 		description:
 			'Research papers and technical publications authored or co-authored by @ryoppippi.',
 		assets,
-		style: 'works',
+		style: 'works/publications',
 	});
 }

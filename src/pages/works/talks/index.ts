@@ -35,6 +35,6 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		description:
 			'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 		assets,
-		style: 'works',
+		style: 'works/talks',
 	});
 }

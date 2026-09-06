@@ -7,9 +7,7 @@ import {
 	renderDocumentAssets,
 } from '@ox-content/vite-plugin/document-assets';
 import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
-import { PAGE_STYLE_MODULES, type PageStyle } from '@/client/page-style-registry.ts';
-
-export type { PageStyle } from '@/client/page-style-registry.ts';
+import discoveredStyles from 'virtual:site/ssr-styles';
 
 /** Structured assets selected by the site before final document-level composition. */
 export type SiteAssets = {
@@ -29,7 +27,7 @@ export type SiteAssets = {
 	 * that share a chunk, and the duplicates have to be dropped at render time.
 	 */
 	islands: Record<string, readonly DocumentStylesheetInput[]>;
-	pageStyles: Record<PageStyle, readonly DocumentStylesheetInput[]>;
+	pageStyles: Record<string, readonly DocumentStylesheetInput[]>;
 };
 
 // In development the client entry also imports the site stylesheets as JS
@@ -50,11 +48,11 @@ type SiteAssetResolver = Pick<
  */
 export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 	return {
-		sharedStyles: ['/src/styles/global.css', '/src/components/SiteLayout/SiteLayout.module.css'],
+		sharedStyles: ['/src/styles/global.css', ...discoveredStyles.sharedStyles],
 		scripts: ['/src/client/index.ts'],
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
-		pageStyles: PAGE_STYLE_MODULES,
+		pageStyles: discoveredStyles.pageStyles,
 		islands: {},
 	};
 }
@@ -90,23 +88,17 @@ export function resolveSiteAssets(
 	);
 
 	return {
-		sharedStyles: [
-			...entry.styles,
-			...moduleStyles(assets, ['/src/components/SiteLayout/SiteLayout.module.css']),
-		],
+		sharedStyles: [...entry.styles, ...moduleStyles(assets, discoveredStyles.sharedStyles)],
 		scripts: entry.scripts,
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
-		pageStyles: {
-			about: moduleStyles(assets, PAGE_STYLE_MODULES.about),
-			article: moduleStyles(assets, PAGE_STYLE_MODULES.article),
-			blog: moduleStyles(assets, PAGE_STYLE_MODULES.blog),
-			error: moduleStyles(assets, PAGE_STYLE_MODULES.error),
-			home: moduleStyles(assets, PAGE_STYLE_MODULES.home),
-			sponsors: moduleStyles(assets, PAGE_STYLE_MODULES.sponsors),
-			works: moduleStyles(assets, PAGE_STYLE_MODULES.works),
-		},
+		pageStyles: Object.fromEntries(
+			Object.entries(discoveredStyles.pageStyles).map(([page, modules]) => [
+				page,
+				moduleStyles(assets, modules),
+			]),
+		),
 	};
 }
 
@@ -154,7 +146,7 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
  */
 export function renderAssetTags(
 	assets: SiteAssets,
-	style: PageStyle,
+	style: string,
 	islands: string[] = [],
 	links: readonly DocumentLinkInput[] = [],
 ): string {
@@ -165,7 +157,9 @@ export function renderAssetTags(
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
 			...(inline?.pageStyles ?? assets.pageStyles[style]),
-			...(style === 'article' && assets.syntaxThemeHref != null ? [assets.syntaxThemeHref] : []),
+			...(style === 'blog/article' && assets.syntaxThemeHref != null
+				? [assets.syntaxThemeHref]
+				: []),
 		],
 		islandStyles: islands.flatMap((moduleId) => assets.islands[moduleId] ?? []),
 		scripts: assets.scripts,
@@ -188,7 +182,7 @@ if (import.meta.vitest != null) {
 		},
 		pageStyles: {
 			about: ['/about-page.css'],
-			article: ['/article.css'],
+			'blog/article': ['/article.css'],
 			blog: ['/blog.css'],
 			error: ['/error.css'],
 			home: ['/home.css'],
@@ -201,7 +195,7 @@ if (import.meta.vitest != null) {
 		const { renderHtmlDocument } = await import('./document.ts');
 		const article = renderHtmlDocument({
 			assets,
-			style: 'article',
+			style: 'blog/article',
 			title: 'Article',
 			pathname: '/blog/post/',
 			content: '',
