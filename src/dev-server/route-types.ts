@@ -15,7 +15,6 @@ export type DevRouteDependencies = {
 	loadBlogPost: (slug: string) => Promise<BlogPost | null>;
 	loadBlogPostMetadata: () => Promise<BlogPostMetadata[]>;
 	loadBlogPostSource: (slug: string) => Promise<string | null>;
-	loadDotfiles: () => Promise<string>;
 	loadExternalPosts: () => Promise<PostListItem[]>;
 	loadExternalMedia: () => Promise<PostListItem[]>;
 	loadOssProjects: () => Promise<OssProject[]>;
@@ -31,32 +30,21 @@ export type DevRouteResponse = {
 	status: number;
 };
 
-/** Data used to expand dynamic route parameters into exact development URLs. */
+/** Content used to enumerate generated development URLs. */
 export type DevRouteCatalogue = {
 	posts: readonly BlogPostMetadata[];
 	dotfiles: string;
 };
 
-/** Parameters captured from bracketed segments in a route filename. */
-export type DevRouteParameters = Readonly<Record<string, string>>;
+/** Lazy renderer for one exact development route. */
+export type DevRouteRenderer = (
+	dependencies: DevRouteDependencies,
+) => Promise<DevRouteResponse | null>;
 
-/** Context passed to a file-based route renderer. */
-export type DevRouteRenderContext = {
-	dependencies: DevRouteDependencies;
-	params: DevRouteParameters;
-};
-
-/** Contract implemented by each file-based route module. */
-export type DevFileRouteModule = {
-	entries?: (catalogue: DevRouteCatalogue) => readonly DevRouteParameters[];
-	render: (context: DevRouteRenderContext) => Promise<DevRouteResponse | null>;
-};
-
-/** An exact route produced from a route module and optional dynamic entries. */
-export type DevFileRoute = {
-	moduleId: string;
-	params: DevRouteParameters;
+/** One exact development route derived from site content or fixed endpoints. */
+export type DevRoute = {
 	path: string;
+	render: DevRouteRenderer;
 };
 
 /** HTML response content type used by page routes. */

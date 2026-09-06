@@ -12,8 +12,7 @@ import type {
 	OxContentCustomHostRoutesContext,
 } from '@ox-content/vite-plugin/custom-host';
 import type {
-	DevFileRoute,
-	DevFileRouteModule,
+	DevRoute,
 	DevRouteCatalogue,
 	DevRouteDependencies,
 	DevRouteResponse,
@@ -54,7 +53,7 @@ type MarkdownModule = {
 };
 
 type DevRoutesModule = {
-	createDevFileRoutes: (catalogue: DevRouteCatalogue) => DevFileRoute[];
+	createDevRoutes: (catalogue: DevRouteCatalogue) => DevRoute[];
 	renderDevNotFound: (assets: SiteAssets) => DevRouteResponse;
 };
 
@@ -64,7 +63,6 @@ type DotfilesModule = {
 
 function createDevelopmentRouteDependencies(
 	context: OxContentCustomHostRenderContext,
-	dotfiles: string,
 	dependencies: Set<string>,
 ): DevRouteDependencies {
 	const root = context.root;
@@ -97,7 +95,6 @@ function createDevelopmentRouteDependencies(
 		loadBlogPost: async (slug) => (await loadBlogModule()).loadBlogPost(slug, renderContent),
 		loadBlogPostMetadata: async () => (await loadBlogModule()).loadBlogPostMetadata(),
 		loadBlogPostSource: async (slug) => (await loadBlogModule()).loadBlogPostSource(slug),
-		loadDotfiles: async () => dotfiles,
 		loadExternalPosts: async () => {
 			const externalContent = (await context.loadModule(
 				'/src/contents/external-content.ts',
@@ -135,16 +132,12 @@ function createDevelopmentRouteDependencies(
 	};
 }
 
-function createDevelopmentRoute(route: DevFileRoute, dotfiles: string): OxContentCustomHostRoute {
+function createDevelopmentRoute(route: DevRoute): OxContentCustomHostRoute {
 	return {
 		path: route.path,
 		async render(context) {
 			const dependencies = new Set<string>();
-			const routeModule = (await context.loadModule(route.moduleId)) as DevFileRouteModule;
-			const result = await routeModule.render({
-				dependencies: createDevelopmentRouteDependencies(context, dotfiles, dependencies),
-				params: route.params,
-			});
+			const result = await route.render(createDevelopmentRouteDependencies(context, dependencies));
 			return result == null ? undefined : { ...result, dependencies: [...dependencies] };
 		},
 	};
@@ -160,9 +153,7 @@ async function loadDevelopmentCatalogue(context: OxContentCustomHostRoutesContex
 		blog.loadBlogPostMetadata(),
 		dotfilesModule.fetchDotfilesReadme(fetch),
 	]);
-	return routes
-		.createDevFileRoutes({ posts, dotfiles })
-		.map((route) => createDevelopmentRoute(route, dotfiles));
+	return routes.createDevRoutes({ posts, dotfiles }).map((route) => createDevelopmentRoute(route));
 }
 
 const host = {
