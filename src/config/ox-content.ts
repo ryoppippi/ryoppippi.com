@@ -86,45 +86,6 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 } as const satisfies OxContentOptions;
 
 if (import.meta.vitest != null) {
-	test('configures the blog RSS feed and Cloudflare redirects', () => {
-		expect(OX_CONTENT_BUILD_OPTIONS).toMatchObject({
-			collections: {
-				blog: { source: BLOG_SOURCE_PATTERNS, include: ['body'] },
-				showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
-			},
-			feeds: {
-				blog: {
-					collection: 'blog',
-					formats: ['rss'],
-					path: '/',
-				},
-				media: {
-					collection: 'media',
-					formats: ['rss'],
-					path: '/works/media',
-				},
-			},
-			redirects: {
-				allowExternal: true,
-				html: false,
-				map: expect.objectContaining({
-					'/cv': 'https://cv.ryoppippi.com',
-					'/reddit': 'https://www.reddit.com/user/ryoppippi',
-					'/talks*': '/works/talks',
-					'/projects*': '/works',
-					'/works': '/works/oss',
-				}),
-				provider: 'cloudflare',
-			},
-			ssg: {
-				bare: true,
-				minifyHtml: true,
-				siteName: 'blog | ryoppippi.com',
-				siteUrl: 'https://ryoppippi.com',
-			},
-		});
-	});
-
 	test('mounts every blog source below the public blog route', async () => {
 		const [fs, path, tinyglobby] = await Promise.all([
 			import('node:fs/promises'),

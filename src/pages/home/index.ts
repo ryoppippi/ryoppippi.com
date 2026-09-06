@@ -78,7 +78,26 @@ export function createHomePageFile(assets: SiteAssets) {
 
 if (import.meta.vitest != null) {
 	test('builds the owner relationship graph', () => {
-		expect(homeStructuredData()).toMatchObject({
+		const page = createHomePageFile({
+			sharedStyles: [],
+			scripts: [],
+			islands: {},
+			selfHosted: {},
+			pageStyles: {
+				about: [],
+				article: [],
+				blog: [],
+				error: [],
+				home: [],
+				sponsors: [],
+				works: [],
+			},
+		});
+		const jsonLd = page.content.match(
+			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+		)?.[1];
+		assert.isDefined(jsonLd);
+		expect(JSON.parse(jsonLd)).toMatchObject({
 			'@graph': expect.arrayContaining([
 				expect.objectContaining({
 					'@type': 'ProfilePage',

@@ -202,31 +202,42 @@ if (import.meta.vitest != null) {
 	});
 
 	test('derives an article description from the first prose paragraph', () => {
-		expect(
-			markdownDescription(
-				'# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
-			),
-		).toBe('A useful fallback paragraph with a link.');
+		const [article] = createArticlePageFiles(
+			{
+				...examplePost,
+				description: undefined,
+				content: '# Heading\n\nA useful fallback paragraph with [a link](https://example.com).',
+			},
+			assets,
+		);
+		expect(article.content).toContain('content="A useful fallback paragraph with a link."');
 	});
 
 	test('resolves the first rendered article image against the article URL', () => {
-		expect(
-			articleImageUrl(
-				'<p><img src="./first-image.png" alt="Example"></p>',
-				'https://ryoppippi.com/blog/example-article/',
-			),
-		).toBe('https://ryoppippi.com/blog/example-article/first-image.png');
+		const [article] = createArticlePageFiles(
+			{
+				...examplePost,
+				image: undefined,
+				html: '<p><img src="./first-image.png" alt="Example"></p>',
+			},
+			assets,
+		);
+		const jsonLd = article.content.match(
+			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+		)?.[1];
+		assert.isDefined(jsonLd);
+		expect(JSON.parse(jsonLd)).toMatchObject({
+			image: 'https://ryoppippi.com/blog/example-article/first-image.png',
+		});
 	});
 
 	test('builds article schema from the resolved metadata', () => {
-		expect(
-			articleStructuredData(
-				examplePost,
-				examplePost.description,
-				'https://ryoppippi.com/blog/example-article/',
-				'https://ryoppippi.com/assets/content/article-cover.avif',
-			),
-		).toMatchObject({
+		const [article] = createArticlePageFiles(examplePost, assets);
+		const jsonLd = article.content.match(
+			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+		)?.[1];
+		assert.isDefined(jsonLd);
+		expect(JSON.parse(jsonLd)).toMatchObject({
 			'@type': 'BlogPosting',
 			headline: examplePost.title,
 			description: examplePost.description,

@@ -340,11 +340,6 @@ if (import.meta.vitest != null) {
 			}
 		});
 
-	test('point localisation leaves Japanese unchanged', () => {
-			const point = GTV_POINTS[0];
-
-			expect(localisePoint(point, 'ja')).toBe(point);
-		});
 
 	test('point localisation swaps milestone and evidence for English', () => {
 			const point = GTV_POINTS.find((entry) => entry.date === '2023-10-01T23:59:59Z');

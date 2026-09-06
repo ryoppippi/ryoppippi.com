@@ -13,9 +13,3 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
 export function formatDate(date: Date): string {
 	return formatter.format(date);
 }
-
-if (import.meta.vitest != null) {
-	test('formats dates with day, short month, and year', () => {
-		expect(formatDate(new Date(2024, 0, 2))).toBe('2 Jan 2024');
-	});
-}

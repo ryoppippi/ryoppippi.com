@@ -234,10 +234,6 @@ if (import.meta.vitest != null) {
 		);
 	});
 
-	test('section extraction stops at the next heading of the same level', () => {
-		expect(extractSection(sample, 'Install')).not.toContain('Usage');
-	});
-
 	test('section extraction matches heading text case-insensitively', () => {
 		expect(extractSection(sample, 'install')).toContain('### Install');
 	});
@@ -268,10 +264,6 @@ if (import.meta.vitest != null) {
 
 	test('install section extraction stays scoped to Setup', () => {
 		expect(extractInstallSection(readme, 'macOS')).toBe('#### macOS\n\nmac steps');
-	});
-
-	test('install section extraction ignores OS headings outside Setup', () => {
-		expect(extractInstallSection(readme, 'macOS')).not.toContain('mac apps');
 	});
 
 	test('install section extraction handles the last Setup section', () => {
@@ -310,14 +302,6 @@ if (import.meta.vitest != null) {
 			{ step: 2, command: 'git clone https://example.com/repo\ncd repo' },
 			{ step: 3, command: 'open -a "App Store"' },
 		]);
-	});
-
-	test('step parsing dedents inconsistent code indentation', () => {
-		expect(parseStepCommands(macSection)[0].command).not.toMatch(/^\s/);
-	});
-
-	test('step parsing ignores non-code content', () => {
-		expect(parseStepCommands(macSection)[2].command).toBe('open -a "App Store"');
 	});
 
 	test('step parsing skips steps without a code block', () => {

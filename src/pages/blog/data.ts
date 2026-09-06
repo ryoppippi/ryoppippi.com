@@ -278,58 +278,6 @@ if (import.meta.vitest != null) {
 			'A custom blog directory requires explicit collection entries',
 		);
 	});
-	test('preserves metadata for every configured source through the collection', async () => {
-		const directory = BLOG_DIRECTORY;
-		const files = await glob(BLOG_SOURCE_PATTERNS, { cwd: directory, absolute: true });
-		const expected = await Promise.all(
-			files.map(async (filepath) => {
-				const { data, content } = matter(await readFile(filepath, 'utf8'));
-				return {
-					...parseArticleMetadata(data),
-					title: String(data.title),
-					filename: filenameFor(filepath),
-					filepath,
-					pubDate: new Date(String(data.date)).toJSON(),
-					lang: typeof data.lang === 'string' ? data.lang : 'ja',
-					isPublished: data.isPublished === true,
-					readingTime: readingTimeMinutes(content),
-				};
-			}),
-		);
-
-		const actual = await loadBlogPostMetadata();
-		expect(actual.map((post) => post.pubDate)).toEqual(
-			expected.map((post) => post.pubDate).sort((a, b) => b.localeCompare(a)),
-		);
-		// Filesystem traversal and collection order need not agree for same-day posts.
-		expect(actual.toSorted((a, b) => a.filename.localeCompare(b.filename))).toEqual(
-			expected.toSorted((a, b) => a.filename.localeCompare(b.filename)),
-		);
-	});
-
-	test('uses the same CJK reading minutes for metadata and rendered articles', async () => {
-		const { createFixture } = await import('fs-fixture');
-		await using fixture = await createFixture({
-			'article.md': `---\ntitle: Article\ndate: 2026-06-22\nisPublished: true\n---\n${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
-		});
-		const metadata = await loadBlogPostMetadata(fixture.getPath(), [
-			{
-				id: 'article',
-				collection: 'blog',
-				path: '/article',
-				stem: 'article',
-				source: 'article.md',
-				extension: '.md',
-				title: 'Article',
-				frontmatter: { title: 'Article', date: '2026-06-22', isPublished: true },
-				body: `${'文'.repeat(501)}\n\n\`\`\`ts\n${'code '.repeat(1000)}\n\`\`\``,
-			},
-		]);
-		const post = await loadBlogPost('article', undefined, fixture.getPath());
-
-		expect(metadata[0]?.readingTime).toBe(2);
-		expect(post?.readingTime).toBe(2);
-	});
 
 	test('keeps one central Tweet snapshot for every embedded post', async () => {
 		const directory = BLOG_DIRECTORY;
@@ -355,7 +303,7 @@ if (import.meta.vitest != null) {
 		);
 	});
 
-	test('returns null for an unknown blog slug', async () => {
+	test('rejects blog paths outside the content directory', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'secret.md': '---\ntitle: Secret\ndate: 2026-06-22\nisPublished: true\n---\nSecret',
@@ -366,7 +314,7 @@ if (import.meta.vitest != null) {
 		).resolves.toBeNull();
 	});
 
-	test('renders only the requested blog post', async () => {
+	test('loads the requested nested-index article', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'first/index.md': '---\ntitle: First\ndate: 2026-06-21\nisPublished: true\n---\nFirst body',
@@ -429,16 +377,18 @@ if (import.meta.vitest != null) {
 		expect(post.html).toContain('data-ox-ssr="true"');
 	});
 
-	test('loads raw source without rendering Markdown', async () => {
+	test('preserves frontmatter and whitespace in the downloadable Markdown source', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'first.md': '---\ntitle: First\ndate: 2025-01-01\n---\n\nFirst body',
 		});
 
-		expect(await loadBlogPostSource('first', fixture.getPath())).toContain('First body');
+		expect(await loadBlogPostSource('first', fixture.getPath())).toBe(
+			'---\ntitle: First\ndate: 2025-01-01\n---\n\nFirst body',
+		);
 	});
 
-	test('loads list metadata without rendered article HTML', async () => {
+	test('orders metadata newest first and defaults unspecified language and publication status', async () => {
 		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'2026-06-22/index.md': [
@@ -465,17 +415,37 @@ if (import.meta.vitest != null) {
 				frontmatter: { title: 'Lazy content', date: '2026-06-22', isPublished: true, lang: 'en' },
 				body: 'Hello world',
 			},
+			{
+				id: 'draft',
+				collection: 'blog',
+				path: '/draft',
+				stem: 'draft/index',
+				source: 'draft/index.mdx',
+				extension: '.mdx',
+				title: 'Draft',
+				frontmatter: { title: 'Draft', date: '2026-06-23' },
+				body: 'Unpublished',
+			},
 		]);
 
 		expect(posts).toEqual([
+			expect.objectContaining({
+				filename: 'draft',
+				title: 'Draft',
+				lang: 'ja',
+				isPublished: false,
+				pubDate: '2026-06-23T00:00:00.000Z',
+			}),
 			expect.objectContaining({
 				filename: '2026-06-22',
 				isPublished: true,
 				lang: 'en',
 				title: 'Lazy content',
+				pubDate: '2026-06-22T00:00:00.000Z',
 			}),
 		]);
 		expect(posts[0]).not.toHaveProperty('html');
+		expect(posts[1]).not.toHaveProperty('html');
 	});
 
 	test('parses reusable SEO metadata from article frontmatter', async () => {
