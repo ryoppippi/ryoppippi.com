@@ -2,6 +2,15 @@ import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { definePage } from '@/generation/define-page.ts';
 import type { Talk } from '@/content/works-data.ts';
 import TalksPage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+
+/** Talks endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/talks/',
+		render: async ({ assets, loadTalks }) => createTalksPageFile(await loadTalks(), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the talks page.

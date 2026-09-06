@@ -1,6 +1,16 @@
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { definePage } from '@/generation/define-page.ts';
 import PublicationsPage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+
+/** Publications endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/publications/',
+		render: async ({ assets, loadPublications }) =>
+			createPublicationsPageFile(await loadPublications(), assets),
+	},
+]) satisfies PageRoutes;
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 

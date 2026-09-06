@@ -2,6 +2,34 @@ import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { PostListItem } from '@/content/external-content.ts';
 import { definePage } from '@/generation/define-page.ts';
 import BlogListPage from './page.tsx';
+import type { PageRoutes } from '../route.ts';
+import { postListItems } from '@/content/external-content.ts';
+import { renderBlogFeed } from './feed.ts';
+
+/** Blog page and development feed; production feeds are emitted by Ox Content. */
+export const routes = (() => [
+	{
+		path: '/blog/',
+		render: async ({ assets, loadBlogPostMetadata, loadExternalPosts }) => {
+			const [posts, externalPosts] = await Promise.all([
+				loadBlogPostMetadata(),
+				loadExternalPosts(),
+			]);
+			return createBlogListPageFile(
+				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],
+				assets,
+			);
+		},
+	},
+	{
+		path: '/feed.xml',
+		devOnly: true,
+		render: async ({ loadBlogPostMetadata }) => {
+			const feed = await renderBlogFeed(await loadBlogPostMetadata());
+			return { path: 'feed.xml', content: feed.content, contentType: feed.contentType };
+		},
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the blog index page.

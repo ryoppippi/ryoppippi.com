@@ -45,7 +45,10 @@ export default defineConfig(({ command, mode }) => ({
 			host: command === 'serve' ? '/src/dev-server/index.ts' : '/src/generation/index.ts',
 			dev: {
 				enabled: mode !== 'test',
-				routeDependencies: [{ path: 'src/content/blog', kind: 'directory' }],
+				routeDependencies: [
+					{ path: 'src/content/blog', kind: 'directory' },
+					{ path: 'src/pages', kind: 'directory' },
+				],
 			},
 			collectionAssets: {
 				async manifest(context) {

@@ -4,6 +4,12 @@ import { definePage } from '@/generation/define-page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import AboutPage from './page.tsx';
+import type { PageRoutes } from '../route.ts';
+
+/** Profile endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{ path: '/about/', render: async ({ assets }) => createAboutPageFile(assets) },
+]) satisfies PageRoutes;
 
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';

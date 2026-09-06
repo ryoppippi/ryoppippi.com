@@ -4,6 +4,8 @@ export type GeneratedFile = {
 	path: string;
 	/** Serialized file contents. */
 	content: string;
+	/** Explicit MIME type for non-HTML endpoints such as feeds. */
+	contentType?: string;
 	/** Repository paths whose meaningful changes update the generated file. */
 	sourcePaths?: readonly string[];
 	/** Exclude this HTML file from discovery outputs such as the sitemap. */

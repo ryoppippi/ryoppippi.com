@@ -4,6 +4,12 @@ import { definePage } from '@/generation/define-page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import HomePage from './page.tsx';
+import type { PageRoutes } from '../route.ts';
+
+/** Home endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{ path: '/', render: async ({ assets }) => createHomePageFile(assets) },
+]) satisfies PageRoutes;
 
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';
 const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle}, featuring open-source projects, talks, publications, and software engineering articles.`;

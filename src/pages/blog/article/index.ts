@@ -8,6 +8,26 @@ import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
 import ArticlePage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+
+/** Article endpoints follow the existing content catalogue, without a second routes tree. */
+export const routes = (({ posts }) =>
+	posts.flatMap(({ filename }) => [
+		{
+			path: `/blog/${encodeURIComponent(filename)}/`,
+			render: async ({ assets, loadBlogPost }) => {
+				const post = await loadBlogPost(filename);
+				return post == null ? null : createArticlePageFiles(post, assets)[0];
+			},
+		},
+		{
+			path: `/blog/${encodeURIComponent(filename)}.md`,
+			render: async ({ loadBlogPostSource }) => {
+				const source = await loadBlogPostSource(filename);
+				return source == null ? null : { path: `blog/${filename}.md`, content: source };
+			},
+		},
+	])) satisfies PageRoutes;
 
 type ArticleSeoMetadata = ArticleMetadata & { description: string };
 

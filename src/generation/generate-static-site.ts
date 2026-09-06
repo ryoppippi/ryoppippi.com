@@ -1,23 +1,12 @@
 import type { ContentArtifact } from '@/content/artifact.ts';
-import type { GeneratedFile } from './generated-file.ts';
+import type { OxContentCustomHostRoute } from '@ox-content/vite-plugin/custom-host';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import { fetchDotfilesReadme } from '@/lib/dotfiles.ts';
-import { createDotfilesPageFiles } from '@/pages/dotfiles';
+import { createPageRoutes } from '@/pages/route.ts';
 import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
-import { loadExternalPosts, postListItems } from '@/content/external-content.ts';
+import { loadExternalPosts } from '@/content/external-content.ts';
 import type { PostListItem } from '@/content/external-content.ts';
-import { createAboutPageFile } from '@/pages/about';
-import { createArticlePageFiles } from '@/pages/blog/article';
-import { createBlogListPageFile } from '@/pages/blog';
-import { createErrorPageFile } from '@/pages/error';
-import { createHomePageFile } from '@/pages/home';
-import { createSponsorsPageFile } from '@/pages/sponsors';
-import { createMediaPageFile } from '@/pages/works/media';
-import { createOssPageFile } from '@/pages/works/oss';
-import { createPublicationsPageFile } from '@/pages/works/publications';
-import { createShowcasePageFile } from '@/pages/works/showcase';
-import { createTalksPageFile } from '@/pages/works/talks';
 import { loadOssProjects, loadPublications, loadTalks } from '@/content/works-data.ts';
 
 type GenerateStaticSiteOptions = {
@@ -41,7 +30,7 @@ export async function generateStaticSite({
 	content,
 	externalMedia,
 	root,
-}: GenerateStaticSiteOptions): Promise<GeneratedFile[]> {
+}: GenerateStaticSiteOptions): Promise<OxContentCustomHostRoute[]> {
 	const [externalPosts, ossProjects, publications, talks, dotfiles] = await Promise.all([
 		loadExternalPosts(root),
 		loadOssProjects(root),
@@ -70,23 +59,27 @@ export async function generateStaticSite({
 				: (assetUrls.get(new URL(project.image, 'https://content.invalid').pathname) ??
 					project.image),
 	}));
-	const aboutPageFile = createAboutPageFile(assets);
-
-	const pages = [
-		createHomePageFile(assets),
-		createBlogListPageFile([...externalPosts, ...postListItems(posts)], assets),
-		...posts
-			.filter((post) => post.isPublished)
-			.flatMap((post) => createArticlePageFiles(post, assets)),
-		aboutPageFile,
-		createOssPageFile(ossProjects, assets),
-		createShowcasePageFile(showcase, assets),
-		createPublicationsPageFile(publications, assets),
-		createTalksPageFile(talks, assets),
-		createMediaPageFile(externalMedia, assets),
-		createSponsorsPageFile(assets),
-		createErrorPageFile(assets),
-	];
-
-	return [...pages, ...createDotfilesPageFiles(dotfiles)];
+	const publishedPosts = posts.filter((post) => post.isPublished);
+	const files = await Promise.all(
+		createPageRoutes({ posts: publishedPosts, dotfiles })
+			.filter((route) => !route.devOnly)
+			.map(async (route) => {
+				const result = await route.render({
+					assets,
+					loadBlogPost: async (slug) =>
+						publishedPosts.find((post) => post.filename === slug) ?? null,
+					loadBlogPostMetadata: async () => publishedPosts,
+					loadBlogPostSource: async (slug) =>
+						publishedPosts.find((post) => post.filename === slug)?.source ?? null,
+					loadExternalPosts: async () => externalPosts,
+					loadExternalMedia: async () => externalMedia,
+					loadOssProjects: async () => ossProjects,
+					loadPublications: async () => publications,
+					loadShowcase: async () => showcase,
+					loadTalks: async () => talks,
+				});
+				return { path: route.path, render: () => result } satisfies OxContentCustomHostRoute;
+			}),
+	);
+	return files;
 }

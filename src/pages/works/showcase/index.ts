@@ -2,6 +2,16 @@ import type { ShowcaseProject } from '@/content/index.ts';
 import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { definePage } from '@/generation/define-page.ts';
 import ShowcasePage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+
+/** Showcase endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/showcase/',
+		render: async ({ assets, loadShowcase }) =>
+			createShowcasePageFile(await loadShowcase(), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the project showcase page.

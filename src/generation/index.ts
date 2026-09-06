@@ -77,25 +77,11 @@ const host = {
 					.flatMap(({ clientModules }) => clientModules.map(({ moduleId }) => moduleId)),
 			),
 		];
-		const files = await generateStaticSite({
+		return generateStaticSite({
 			assets: await readBuiltSiteAssets(outDir, context.assets, islandModules),
 			content,
 			externalMedia,
 			root,
-		});
-		return files.map((file) => {
-			const sourcePaths = file.sourcePaths ?? [];
-			return {
-				path: `/${file.path.replace(/index\.html$/, '')}`,
-				inputPath: sourcePaths[0],
-				lastUpdatedPaths: sourcePaths.slice(1),
-				unlisted: file.unlisted,
-				render: () => ({
-					body: file.content,
-					outputPath: file.path,
-					contentType: file.path.endsWith('.html') ? 'text/html' : 'text/plain',
-				}),
-			};
 		});
 	},
 	async outputs(context) {

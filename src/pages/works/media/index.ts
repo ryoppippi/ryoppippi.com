@@ -2,6 +2,25 @@ import type { SiteAssets } from '@/rendering/site-assets.ts';
 import type { PostListItem } from '@/content/external-content.ts';
 import { definePage } from '@/generation/define-page.ts';
 import MediaPage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+import { renderMediaFeed } from './feed.ts';
+
+/** Media page and development feed; production feeds are emitted by Ox Content. */
+export const routes = (() => [
+	{
+		path: '/works/media/',
+		render: async ({ assets, loadExternalMedia }) =>
+			createMediaPageFile(await loadExternalMedia(), assets),
+	},
+	{
+		path: '/works/media/feed.xml',
+		devOnly: true,
+		render: async ({ loadExternalMedia }) => {
+			const feed = await renderMediaFeed(await loadExternalMedia());
+			return { path: 'works/media/feed.xml', content: feed.content, contentType: feed.contentType };
+		},
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the podcasts and videos page.

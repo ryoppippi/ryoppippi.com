@@ -2,6 +2,16 @@ import type { SiteAssets } from '@/rendering/site-assets.ts';
 import { definePage } from '@/generation/define-page.ts';
 import type { OssProject } from '@/content/works-data.ts';
 import OssPage from './page.tsx';
+import type { PageRoutes } from '../../route.ts';
+
+/** OSS endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/oss/',
+		render: async ({ assets, loadOssProjects }) =>
+			createOssPageFile(await loadOssProjects(), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the open-source projects page.

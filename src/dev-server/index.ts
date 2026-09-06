@@ -1,70 +1,26 @@
-import type {
-	BlogPost,
-	BlogPostMetadata,
-	IslandRenderer,
-	MarkdownRenderer,
-	ShowcaseProject,
-} from '@/content/index.ts';
+import type { IslandRenderer, MarkdownRenderer } from '@/content/index.ts';
 import type {
 	OxContentCustomHostModule,
 	OxContentCustomHostRenderContext,
 	OxContentCustomHostRoute,
 	OxContentCustomHostRoutesContext,
 } from '@ox-content/vite-plugin/custom-host';
-import type {
-	DevRoute,
-	DevRouteCatalogue,
-	DevRouteDependencies,
-	DevRouteResponse,
-} from './route-types.ts';
-import type { PostListItem } from '@/content/external-content.ts';
-import type { OssProject, Talk } from '@/content/works-data.ts';
-import type { SiteAssets } from '@/rendering/site-assets.ts';
+import type { PageContext } from '@/pages/context.ts';
 import { resolveDevSiteAssets } from '@/rendering/site-assets.ts';
 
-type BlogModule = {
-	loadBlogPost: (slug: string, renderContent?: MarkdownRenderer) => Promise<BlogPost | null>;
-	loadBlogPostMetadata: () => Promise<BlogPostMetadata[]>;
-	loadBlogPostSource: (slug: string) => Promise<string | null>;
-};
-
-type ShowcaseModule = {
-	loadShowcase: (renderContent?: MarkdownRenderer) => Promise<ShowcaseProject[]>;
-};
-
-type ExternalContentModule = {
-	loadExternalMedia: (root: string) => Promise<PostListItem[]>;
-	loadExternalPosts: (root: string) => Promise<PostListItem[]>;
-};
-
-type WorksDataModule = {
-	loadOssProjects: (root: string) => Promise<OssProject[]>;
-	loadPublications: (root: string) => ReturnType<DevRouteDependencies['loadPublications']>;
-	loadTalks: () => Promise<Talk[]>;
-};
-
-type MarkdownModule = {
-	renderMarkdown: (
-		content: string,
-		options: NonNullable<Parameters<MarkdownRenderer>[1]> & {
-			renderIsland: IslandRenderer;
-		},
-	) => ReturnType<MarkdownRenderer>;
-};
-
-type DevRoutesModule = {
-	createDevRoutes: (catalogue: DevRouteCatalogue) => DevRoute[];
-	renderDevNotFound: (assets: SiteAssets) => DevRouteResponse;
-};
-
-type DotfilesModule = {
-	fetchDotfilesReadme: (fetchImplementation: typeof fetch) => Promise<string>;
-};
+type BlogModule = typeof import('@/content/blog.ts');
+type ShowcaseModule = typeof import('@/content/showcase.ts');
+type ExternalContentModule = typeof import('@/content/external-content.ts');
+type WorksDataModule = typeof import('@/content/works-data.ts');
+type MarkdownModule = typeof import('@/content/markdown/render.ts');
+type PageRoutesModule = typeof import('@/pages/route.ts');
+type ErrorPageModule = typeof import('@/pages/error/index.ts');
+type DotfilesModule = typeof import('@/lib/dotfiles.ts');
 
 function createDevelopmentRouteDependencies(
 	context: OxContentCustomHostRenderContext,
 	dependencies: Set<string>,
-): DevRouteDependencies {
+): PageContext {
 	const root = context.root;
 	const assets = resolveDevSiteAssets(context.assets);
 	const renderContent: MarkdownRenderer = async (content, options) => {
@@ -126,7 +82,9 @@ function createDevelopmentRouteDependencies(
 	};
 }
 
-function createDevelopmentRoute(route: DevRoute): OxContentCustomHostRoute {
+function createDevelopmentRoute(
+	route: ReturnType<PageRoutesModule['createPageRoutes']>[number],
+): OxContentCustomHostRoute {
 	return {
 		path: route.path,
 		async render(context) {
@@ -141,21 +99,25 @@ async function loadDevelopmentCatalogue(context: OxContentCustomHostRoutesContex
 	const [blog, dotfilesModule, routes] = await Promise.all([
 		context.loadModule('/src/content/blog.ts') as Promise<BlogModule>,
 		context.loadModule('/src/lib/dotfiles.ts') as Promise<DotfilesModule>,
-		context.loadModule('/src/dev-server/routes.ts') as Promise<DevRoutesModule>,
+		context.loadModule('/src/pages/route.ts') as Promise<PageRoutesModule>,
 	]);
 	const [posts, dotfiles] = await Promise.all([
 		blog.loadBlogPostMetadata(),
 		dotfilesModule.fetchDotfilesReadme(fetch),
 	]);
-	return routes.createDevRoutes({ posts, dotfiles }).map((route) => createDevelopmentRoute(route));
+	return routes.createPageRoutes({ posts, dotfiles }).map((route) => createDevelopmentRoute(route));
 }
 
 const host = {
 	routes: loadDevelopmentCatalogue,
 	async notFound(context) {
 		if (context.request.headers.get('accept')?.includes('text/html') === true) {
-			const routes = (await context.loadModule('/src/dev-server/routes.ts')) as DevRoutesModule;
-			return routes.renderDevNotFound(resolveDevSiteAssets(context.assets));
+			const page = (await context.loadModule('/src/pages/error/index.ts')) as ErrorPageModule;
+			return {
+				body: page.createErrorPageFile(resolveDevSiteAssets(context.assets)).content,
+				contentType: 'text/html; charset=utf-8',
+				status: 404,
+			};
 		}
 		if (
 			context.url.pathname.startsWith('/blog/') ||
