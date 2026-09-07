@@ -1,6 +1,6 @@
 import { formatDate } from '@/lib/date.ts';
-import WorksNav from '@/pages/works/_components/WorksNav';
-import WorksSection, { WorksList } from '@/pages/works/_components/WorksSection';
+import WorksNav from '@/components/WorksNav/index.tsx';
+import WorksSection, { WorksList } from '@/components/WorksSection/index.tsx';
 import type { Talk } from './data.ts';
 import styles from './Talks.module.css';
 

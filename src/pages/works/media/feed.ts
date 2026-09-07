@@ -1,5 +1,5 @@
 import type { FeedChannelOptions, FeedItemInput } from '@ox-content/vite-plugin';
-import type { PostListItem } from '@/pages/post-list.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_SOCIAL_IMAGE_URL } from '../../../config/site.ts';
 
 export const MEDIA_FEED_OPTIONS = {

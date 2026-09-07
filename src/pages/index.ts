@@ -1,10 +1,10 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '@/config/site.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import HomePage from './page.tsx';
-import type { PageRoutes } from '../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
 export const routes = (() => [
@@ -66,12 +66,17 @@ export function createHomePageFile(assets: SiteAssets) {
 		component: HomePage,
 		componentProps: {},
 		outputPath: 'index.html',
-		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/pages/home'],
+		sourcePaths: [
+			SITE_OWNER_SOURCE_PATH,
+			'src/pages/index.ts',
+			'src/pages/page.tsx',
+			'src/pages/Home.module.css',
+		],
 		title: '',
 		pathname: '/',
 		description: HOME_DESCRIPTION,
 		assets,
-		style: 'home',
+		style: '.',
 		structuredData: homeStructuredData(),
 	});
 }
@@ -88,7 +93,7 @@ if (import.meta.vitest != null) {
 				article: [],
 				blog: [],
 				error: [],
-				home: [],
+				'.': [],
 				sponsors: [],
 				works: [],
 			},

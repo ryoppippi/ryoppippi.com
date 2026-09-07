@@ -2,13 +2,13 @@ import type { ArticleMetadata, BlogPost } from '@/pages/blog/data.ts';
 import { formatDate } from '@/lib/date.ts';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
-import { definePage } from '@/pages/page.ts';
-import type { GeneratedFile } from '@/pages/output.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
+import type { GeneratedFile } from '@/utils/ssg/output.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
 import ArticlePage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Article endpoints follow the existing content catalogue, without a second routes tree. */
 export const routes = (({ posts }) =>
@@ -121,7 +121,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 				post,
 			},
 			outputPath: `blog/${post.filename}/index.html`,
-			sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/pages/blog/article', sourcePath],
+			sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/pages/blog/[slug]', sourcePath],
 			title: `${post.title} | blog`,
 			pathname,
 			description: metadata.description,
@@ -139,7 +139,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 					type: 'text/markdown',
 				},
 			],
-			style: 'blog/article',
+			style: 'blog/[slug]',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
 		{ path: `blog/${post.filename}.md`, content: post.source },
@@ -152,7 +152,7 @@ if (import.meta.vitest != null) {
 		scripts: [],
 		islands: {},
 		selfHosted: {},
-		pageStyles: { 'blog/article': [] },
+		pageStyles: { 'blog/[slug]': [] },
 	} as const satisfies SiteAssets;
 
 	const examplePost = {

@@ -150,14 +150,14 @@ export function renderAssetTags(
 	islands: string[] = [],
 	links: readonly DocumentLinkInput[] = [],
 ): string {
-	const inline = style === 'home' ? assets.homeInline : undefined;
+	const inline = style === '.' ? assets.homeInline : undefined;
 	return renderDocumentAssets({
 		links,
 		selfHostedAssets: assets.selfHosted,
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
 			...(inline?.pageStyles ?? assets.pageStyles[style]),
-			...(style === 'blog/article' && assets.syntaxThemeHref != null
+			...(style === 'blog/[slug]' && assets.syntaxThemeHref != null
 				? [assets.syntaxThemeHref]
 				: []),
 		],
@@ -182,10 +182,10 @@ if (import.meta.vitest != null) {
 		},
 		pageStyles: {
 			about: ['/about-page.css'],
-			'blog/article': ['/article.css'],
+			'blog/[slug]': ['/article.css'],
 			blog: ['/blog.css'],
 			error: ['/error.css'],
-			home: ['/home.css'],
+			'.': ['/home.css'],
 			sponsors: ['/sponsors.css'],
 			works: ['/works.css'],
 		},
@@ -195,7 +195,7 @@ if (import.meta.vitest != null) {
 		const { renderHtmlDocument } = await import('./document.ts');
 		const article = renderHtmlDocument({
 			assets,
-			style: 'blog/article',
+			style: 'blog/[slug]',
 			title: 'Article',
 			pathname: '/blog/post/',
 			content: '',
@@ -203,7 +203,7 @@ if (import.meta.vitest != null) {
 		});
 		const home = renderHtmlDocument({
 			assets,
-			style: 'home',
+			style: '.',
 			title: '',
 			pathname: '/',
 			content: '',
@@ -221,7 +221,7 @@ if (import.meta.vitest != null) {
 		const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
 		const home = renderHtmlDocument({
 			assets: inlined,
-			style: 'home',
+			style: '.',
 			title: '',
 			pathname: '/',
 			content: '',

@@ -6,11 +6,10 @@ import {
 } from '@ox-content/vite-plugin/custom-host';
 import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
 import solid from '@solidjs/vite-plugin';
-import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
-import { planSiteContentAssets } from './src/pages/content-assets.ts';
+import { planSiteContentAssets } from './src/utils/ssg/content-assets.ts';
 import { BLOG_ISLAND_DOCUMENTS } from './src/pages/blog/island-documents.ts';
 import { ssrStylesPlugin } from './src/ox-content/ssr-styles-plugin.ts';
 
@@ -22,6 +21,7 @@ export default defineConfig(({ command, mode }) => {
 			routeDependencies: [
 				{ path: 'src/content/blog', kind: 'directory' },
 				{ path: 'src/pages', kind: 'directory' },
+				{ path: 'src/utils/ssg', kind: 'directory' },
 			],
 		},
 		collectionAssets: {
@@ -71,7 +71,7 @@ export default defineConfig(({ command, mode }) => {
 			}),
 			createOxContentCustomHostPlugin({
 				...hostOptions,
-				host: command === 'serve' ? '/src/pages/dev.ts' : '/src/pages/build.ts',
+				host: command === 'serve' ? '/src/utils/ssg/dev.ts' : '/src/utils/ssg/build.ts',
 			}),
 		] satisfies PluginOption[],
 		build: {
@@ -145,36 +145,9 @@ export default defineConfig(({ command, mode }) => {
 		},
 		test: {
 			environment: 'node',
-			projects: [
-				{
-					extends: true,
-					test: {
-						name: 'node',
-						globals: true,
-						environment: 'node',
-						exclude: [...configDefaults.exclude, '**/.direnv/**', '**/*.browser.test.{ts,tsx}'],
-						includeSource: ['src/**/*.ts'],
-					},
-				},
-				{
-					extends: true,
-					test: {
-						name: 'browser',
-						globals: true,
-						include: ['src/**/*.browser.test.ts'],
-						browser: {
-							enabled: true,
-							headless: true,
-							provider: playwright({
-								contextOptions: {
-									permissions: ['clipboard-read', 'clipboard-write'],
-								},
-							}),
-							instances: [{ browser: 'chromium' }],
-						},
-					},
-				},
-			],
+			globals: true,
+			exclude: [...configDefaults.exclude, '**/.direnv/**'],
+			includeSource: ['src/**/*.ts'],
 		},
 	};
 });

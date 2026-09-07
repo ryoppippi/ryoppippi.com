@@ -26,7 +26,7 @@ export async function inlineBuiltHomeStyles(
 	}
 	const [base, home] = await Promise.all([
 		content([resolver.stylesheets({ modules: ['index.html', ...discoveredStyles.sharedStyles] })]),
-		content([resolver.stylesheets({ modules: discoveredStyles.pageStyles.home })]),
+		content([resolver.stylesheets({ modules: discoveredStyles.pageStyles['.'] })]),
 	]);
 	return inlineHomeStyles(assets, base, home);
 }

@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 import path from 'node:path';
-import { toExternalPost, type ExternalPostInput, type PostListItem } from '../../post-list.ts';
+import { toExternalPost, type ExternalPostInput, type PostListItem } from '@/lib/post-list.ts';
 
 /**
  * Loads curated podcasts and videos for the media page.

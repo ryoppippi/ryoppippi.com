@@ -1,6 +1,6 @@
 import { SITE_ORIGIN } from '@/config/site.ts';
-import WorksNav from '@/pages/works/_components/WorksNav';
-import WorksSection from '@/pages/works/_components/WorksSection';
+import WorksNav from '@/components/WorksNav/index.tsx';
+import WorksSection from '@/components/WorksSection/index.tsx';
 import type { OssProject, OssProjectKind } from './data.ts';
 import styles from './Oss.module.css';
 

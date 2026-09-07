@@ -5,10 +5,10 @@ import { loadShowcase } from '@/pages/works/showcase/data.ts';
 import { createPageMarkdownRenderer } from './markdown.ts';
 import { loadExternalMedia } from '@/pages/works/media/data.ts';
 import { resolveSiteAssets } from '@/components/SiteLayout/assets.ts';
-import { inlineBuiltHomeStyles } from '@/pages/home/styles.ts';
+import { inlineBuiltHomeStyles } from '@/pages/styles.ts';
 import { blogFeedItems } from '@/pages/blog/feed.ts';
 import { mediaFeedItems } from '@/pages/works/media/feed.ts';
-import { prerenderPages } from '@/pages/prerender.ts';
+import { prerenderPages } from '@/utils/ssg/prerender.ts';
 
 function loadHostContent(context: OxContentCustomHostRoutesContext) {
 	return context.memo('site-content', async () => {

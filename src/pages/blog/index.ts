@@ -1,8 +1,8 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import type { PostListItem } from '@/pages/post-list.ts';
-import { definePage } from '@/pages/page.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import BlogListPage from './page.tsx';
-import type { PageRoutes } from '../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 import { postListItems } from './external.ts';
 
 /** Blog index; feeds are emitted by Ox Content in development and production. */

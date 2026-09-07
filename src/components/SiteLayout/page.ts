@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import type { GeneratedFile } from './output.ts';
+import type { GeneratedFile } from '@/utils/ssg/output.ts';
 import { renderToString } from '@solidjs/web';
 import { renderHtmlDocument } from '@/components/SiteLayout/document.ts';
 

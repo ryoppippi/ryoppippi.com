@@ -7,9 +7,9 @@ import {
 	type CollectionEntry,
 } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
-import type { MarkdownRenderer } from '../markdown.ts';
+import type { MarkdownRenderer } from '@/utils/ssg/markdown.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '../../config/content.ts';
+import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/config/content.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.

@@ -1,7 +1,7 @@
 import { planCollectionAssetsFromDocuments, type OxContentOptions } from '@ox-content/vite-plugin';
 import { resolveSolidHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
-import { OX_CONTENT_BUILD_OPTIONS } from '../config/ox-content.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
 import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
 
 /** Native snapshot type, pending repair of the root package's declaration re-exports. */

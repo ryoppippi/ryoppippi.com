@@ -1,4 +1,4 @@
-import ProfileImage from '@/components/ProfileImage';
+import ProfileImage from '@/components/ProfileImage/index.tsx';
 import { SITE_ORIGIN } from '@/config/site.ts';
 import styles from './Home.module.css';
 

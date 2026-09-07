@@ -1,8 +1,8 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import type { Talk } from './data.ts';
 import TalksPage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Talks endpoint shared by dev and SSG. */
 export const routes = (() => [
@@ -26,8 +26,9 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		outputPath: 'works/talks/index.html',
 		sourcePaths: [
 			'src/pages/works/talks/data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/talks',
 		],
 		title: 'Talks',

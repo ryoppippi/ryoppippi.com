@@ -62,7 +62,7 @@ export function ssrStylesPlugin({ pages, layout }: SsrStylesOptions): Plugin {
 				entries.map(
 					async (entry) =>
 						[
-							entry.slice(0, -'/page.tsx'.length),
+							path.posix.dirname(entry),
 							await stylesFor(`/${pages}/${entry}`),
 						] as const satisfies readonly [string, string[]],
 				),
@@ -128,6 +128,8 @@ if (import.meta.vitest != null) {
 			'index.html': '<html><body>Fixture</body></html>',
 			'layout.tsx': "import './layout.css'; export default () => null",
 			'layout.css': '.shared-layout { color: red }',
+			'pages/page.tsx': "import './home.css'; export default () => null",
+			'pages/home.css': '.home-page { color: orange }',
 			'pages/first/page.tsx':
 				"import './Child'; import './first.css'; export const secret = 'server-only-sentinel'",
 			'pages/first/Child.ts': "import './child.css'; export default () => null",
@@ -149,6 +151,7 @@ if (import.meta.vitest != null) {
 		expect(styles).toEqual({
 			sharedStyles: ['/layout.css'],
 			pageStyles: {
+				'.': ['/pages/home.css'],
 				first: ['/pages/first/child.css', '/pages/first/first.css'],
 				second: ['/pages/second/second.css'],
 			},
@@ -167,6 +170,7 @@ if (import.meta.vitest != null) {
 			'layout.css',
 			'pages/first/child.css',
 			'pages/first/first.css',
+			'pages/home.css',
 			'pages/second/second.css',
 		]);
 		const scripts = await glob('**/*.js', { cwd: fixture.getPath('dist'), absolute: true });

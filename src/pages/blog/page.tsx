@@ -1,5 +1,5 @@
 import { formatDate } from '@/lib/date.ts';
-import type { PostListItem } from '@/pages/post-list.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
 import styles from './BlogList.module.css';
 
 type BlogListPageProps = {

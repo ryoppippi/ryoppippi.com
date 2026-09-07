@@ -1,8 +1,8 @@
 import type { ShowcaseProject } from '@/pages/works/showcase/data.ts';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import ShowcasePage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Showcase endpoint shared by dev and SSG. */
 export const routes = (() => [
@@ -26,8 +26,9 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 		componentProps: { projects },
 		outputPath: 'works/showcase/index.html',
 		sourcePaths: [
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/showcase',
 			'src/pages/works/showcase/data.ts',
 			'src/content/works/showcase',

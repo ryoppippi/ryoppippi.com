@@ -15,9 +15,7 @@
 		"lint": "vp lint",
 		"new": "bun scripts/new-post.ts",
 		"preview": "vp preview",
-		"test": "vp test --run --project=node --project=browser",
-		"test:browser": "vp test --project browser",
-		"test:browser:run": "vp test --run --project browser",
+		"test": "vp test --run",
 		"typos": "typos --force-exclude",
 		"update:oss-stars": "./.github/update-oss-stars.nu"
 	},
@@ -40,7 +38,6 @@
 		"@types/d3-shape": "catalog:",
 		"@types/fs-extra": "catalog:",
 		"@types/node": "catalog:",
-		"@vitest/browser-playwright": "catalog:",
 		"budoux": "catalog:",
 		"bun": "catalog:",
 		"d3-scale": "catalog:",

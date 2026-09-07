@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import PublicationsPage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Publications endpoint shared by dev and SSG. */
 export const routes = (() => [
@@ -31,8 +31,9 @@ export function createPublicationsPageFile(
 		outputPath: 'works/publications/index.html',
 		sourcePaths: [
 			'src/pages/works/publications/data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/publications',
 			'src/content/works/publications/list.json',
 		],

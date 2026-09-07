@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 import path from 'node:path';
 import { loadBlogFeedEntries } from '@ox-content/vite-plugin';
-import { toExternalPost, type ExternalPostInput, type PostListItem } from '../post-list.ts';
+import { toExternalPost, type ExternalPostInput, type PostListItem } from '@/lib/post-list.ts';
 
 /**
  * Loads external blog entries from RSS feeds and curated articles.

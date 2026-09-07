@@ -6,15 +6,16 @@ only the temporary SSR CSS discovery plugin and its local virtual declaration.
 ## Ownership
 
 - `content/`: authored Markdown/MDX, JSON, media and post-local components.
-- `pages/`: endpoint definitions, page UI, data loading and publication policy.
+- `pages/`: URL-shaped endpoints and their colocated UI, data and publication policy.
+- `utils/ssg/`: shared build/dev host composition, route collection and output preparation.
 - `components/SiteLayout/`: document structure, head values and asset selection.
 - `config/`: shared content root, collection selection and Markdown options.
-- `pages/markdown.ts`: page-level composition of native Markdown rendering and
+- `utils/ssg/markdown.ts`: page-level composition of native Markdown rendering and
   the native Solid renderer, returning the article's client modules and selecting
   their styles. It does not parse Markdown, run embed transforms, discover MDX
   imports or implement the Solid renderer lifecycle.
-- `pages/home/styles.ts`: homepage-only inlining using native artifact contents.
-- `pages/content-assets.ts`: selected document references and explicit showcase
+- `pages/styles.ts`: homepage-only inlining using native artifact contents.
+- `utils/ssg/content-assets.ts`: selected document references and explicit showcase
   covers/legacy aliases, not an extension allowlist or recursive asset scanner.
 
 All collections are rooted at `src/content`; blog and showcase source patterns

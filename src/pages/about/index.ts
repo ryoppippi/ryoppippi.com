@@ -1,10 +1,10 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import AboutPage from './page.tsx';
-import type { PageRoutes } from '../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Profile endpoint shared by dev and SSG. */
 export const routes = (() => [

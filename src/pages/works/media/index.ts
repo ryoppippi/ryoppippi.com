@@ -1,8 +1,8 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import type { PostListItem } from '@/pages/post-list.ts';
-import { definePage } from '@/pages/page.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import MediaPage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Media index; feeds are emitted by Ox Content in development and production. */
 export const routes = (() => [
@@ -27,9 +27,10 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 		componentProps: { items: sorted },
 		outputPath: 'works/media/index.html',
 		sourcePaths: [
-			'src/pages/post-list.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/lib/post-list.ts',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/media',
 			'src/content/works/media/list.json',
 		],

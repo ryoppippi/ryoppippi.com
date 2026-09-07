@@ -1,6 +1,6 @@
-import type { GeneratedFile } from '@/pages/output.ts';
+import type { GeneratedFile } from '@/utils/ssg/output.ts';
 import { extractInstallSection, extractSection, parseStepCommands } from './data.ts';
-import type { PageRoutes } from '../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Installation endpoints derived once from the README for both hosts. */
 export const routes = (({ dotfiles }) =>

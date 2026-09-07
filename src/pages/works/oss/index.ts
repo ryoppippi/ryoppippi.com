@@ -1,8 +1,8 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import { definePage } from '@/pages/page.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import type { OssProject } from './data.ts';
 import OssPage from './page.tsx';
-import type { PageRoutes } from '../../route.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** OSS endpoint shared by dev and SSG. */
 export const routes = (() => [
@@ -27,8 +27,9 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		outputPath: 'works/oss/index.html',
 		sourcePaths: [
 			'src/pages/works/oss/data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/oss',
 			'src/content/works/oss/list.json',
 			'src/content/works/oss/stars.json',

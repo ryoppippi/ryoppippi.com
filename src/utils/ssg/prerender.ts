@@ -1,15 +1,15 @@
-import type { BlogPost } from './blog/data.ts';
+import type { BlogPost } from '@/pages/blog/data.ts';
 import type { MarkdownRenderer } from './markdown.ts';
 import type { SiteContentAssetManifest } from './content-assets.ts';
-import type { ShowcaseProject } from './works/showcase/data.ts';
+import type { ShowcaseProject } from '@/pages/works/showcase/data.ts';
 import type { OxContentCustomHostRoute } from '@ox-content/vite-plugin/custom-host';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import { fetchDotfilesReadme } from '@/pages/dotfiles/data.ts';
-import { createPageRoutes } from '@/pages/route.ts';
+import { createPageRoutes } from '@/utils/ssg/route.ts';
 import { collectionAssetUrls } from './content-assets.ts';
-import type { PostListItem } from '@/pages/post-list.ts';
-import { createPageContext } from '@/pages/context.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import { createPageContext } from '@/utils/ssg/context.ts';
 
 type PrerenderPagesOptions = {
 	assets: SiteAssets;
