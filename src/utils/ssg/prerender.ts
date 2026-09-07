@@ -1,6 +1,6 @@
 import type { BlogPost } from '@/pages/blog/data.ts';
 import type { MarkdownRenderer } from './markdown.ts';
-import type { SiteContentAssetManifest } from './content-assets.ts';
+import type { CollectionAssetManifest } from '@ox-content/vite-plugin';
 import type { ShowcaseProject } from '@/pages/works/showcase/data.ts';
 import type { OxContentCustomHostRoute } from '@ox-content/vite-plugin/custom-host';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
@@ -17,7 +17,7 @@ type PrerenderPagesOptions = {
 	showcase: ShowcaseProject[];
 	externalMedia: PostListItem[];
 	root: string;
-	contentAssets: SiteContentAssetManifest;
+	contentAssets: CollectionAssetManifest;
 	renderContent: MarkdownRenderer;
 };
 

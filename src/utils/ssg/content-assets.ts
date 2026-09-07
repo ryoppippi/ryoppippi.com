@@ -1,13 +1,11 @@
-import { planCollectionAssetsFromDocuments, type OxContentOptions } from '@ox-content/vite-plugin';
+import {
+	planCollectionAssetsFromDocuments,
+	type CollectionAssetManifest,
+	type OxContentOptions,
+} from '@ox-content/vite-plugin';
 import { resolveSolidHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
 import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
-import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
-
-/** Native snapshot type, pending repair of the root package's declaration re-exports. */
-export type SiteContentAssetManifest = NonNullable<
-	Awaited<ReturnType<OxContentCustomHostAssetsContext['collectionManifest']>>
->;
 
 /**
  * Publishes only selected documents' references and explicitly declared showcase covers.
@@ -20,7 +18,7 @@ export async function planSiteContentAssets(
 	root: string,
 	command: 'build' | 'serve',
 	oxContent: OxContentOptions = OX_CONTENT_BUILD_OPTIONS,
-): Promise<SiteContentAssetManifest> {
+): Promise<CollectionAssetManifest> {
 	const documents = await resolveSolidHtmlHostCollectionDocuments(
 		{
 			oxContent,
@@ -66,7 +64,7 @@ export async function planSiteContentAssets(
  * @returns Public alias to content target mappings used while rendering HTML.
  */
 export function collectionAssetUrls(
-	manifest: SiteContentAssetManifest,
+	manifest: CollectionAssetManifest,
 ): ReadonlyMap<string, string> {
 	const urls = new Map<string, string>();
 	for (const asset of manifest.assets) {
