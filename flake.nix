@@ -67,8 +67,8 @@
               agentSkills = agentSkillsFor system;
             in
             pkgs.mkShellNoCC {
-              # The driver's browser revision must match the repo's `playwright`,
-              # so bump the nixpkgs input alongside it.
+              # Browser binaries remain available for optional regression tests.
+              # When adding a JS driver, match its revision to this nixpkgs input.
               PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
               PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
 
