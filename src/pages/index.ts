@@ -98,7 +98,7 @@ if (import.meta.vitest != null) {
 				works: [],
 			},
 		});
-		const jsonLd = page.content.match(
+		const jsonLd = page.body.match(
 			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
 		)?.[1];
 		assert.isDefined(jsonLd);

@@ -14,7 +14,7 @@ only the temporary SSR CSS discovery plugin and its local virtual declaration.
   the native Solid renderer, returning the article's client modules and selecting
   their styles. It does not parse Markdown, run embed transforms, discover MDX
   imports or implement the Solid renderer lifecycle.
-- `pages/styles.ts`: homepage-only inlining using native artifact contents.
+- `utils/ssg/home-styles.ts`: homepage-only inlining using native artifact contents.
 - `utils/ssg/content-assets.ts`: selected document references and explicit showcase
   covers/legacy aliases, not an extension allowlist or recursive asset scanner.
 

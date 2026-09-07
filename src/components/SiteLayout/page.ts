@@ -1,5 +1,5 @@
 import type { Component } from 'solid-js';
-import type { GeneratedFile } from '@/utils/ssg/output.ts';
+import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
 import { renderToString } from '@solidjs/web';
 import { renderHtmlDocument } from '@/components/SiteLayout/document.ts';
 
@@ -24,14 +24,17 @@ export function definePage<Props extends object>({
 	outputPath,
 	sourcePaths,
 	...documentOptions
-}: DefinePageOptions<Props>): GeneratedFile {
+}: DefinePageOptions<Props>) {
+	const [inputPath, ...lastUpdatedPaths] = sourcePaths ?? [];
 	return {
-		path: outputPath,
-		sourcePaths,
+		outputPath,
+		inputPath,
+		lastUpdatedPaths,
+		contentType: 'text/html; charset=utf-8',
 		unlisted: documentOptions.indexable === false,
-		content: renderHtmlDocument({
+		body: renderHtmlDocument({
 			...documentOptions,
 			content: renderToString(() => component(componentProps)),
 		}),
-	};
+	} satisfies OxContentCustomHostRenderResult;
 }

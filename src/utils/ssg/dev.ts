@@ -42,7 +42,7 @@ const host = {
 	notFound(context) {
 		if (context.request.headers.get('accept')?.includes('text/html') === true) {
 			return {
-				body: createErrorPageFile(resolveDevSiteAssets(context.assets)).content,
+				body: createErrorPageFile(resolveDevSiteAssets(context.assets)).body,
 				contentType: 'text/html; charset=utf-8',
 				status: 404,
 			};

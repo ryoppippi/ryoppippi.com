@@ -3,7 +3,7 @@ import { formatDate } from '@/lib/date.ts';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import type { GeneratedFile } from '@/utils/ssg/output.ts';
+import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
@@ -17,14 +17,20 @@ export const routes = (({ posts }) =>
 			path: `/blog/${encodeURIComponent(filename)}/`,
 			render: async ({ assets, loadBlogPost }) => {
 				const post = await loadBlogPost(filename);
-				return post == null ? null : createArticlePageFiles(post, assets)[0];
+				return post == null ? undefined : createArticlePageFiles(post, assets)[0];
 			},
 		},
 		{
 			path: `/blog/${encodeURIComponent(filename)}.md`,
 			render: async ({ loadBlogPostSource }) => {
 				const source = await loadBlogPostSource(filename);
-				return source == null ? null : { path: `blog/${filename}.md`, content: source };
+				return source == null
+					? undefined
+					: {
+							outputPath: `blog/${filename}.md`,
+							body: source,
+							contentType: 'text/markdown; charset=utf-8',
+						};
 			},
 		},
 	])) satisfies PageRoutes;
@@ -103,7 +109,7 @@ function articleStructuredData(
  * @param assets - Site assets used by the article page.
  * @returns The published HTML page and its source companion file.
  */
-export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): GeneratedFile[] {
+export function createArticlePageFiles(post: BlogPost, assets: SiteAssets) {
 	const pathname = `/blog/${post.filename}/`;
 	const url = ufo.joinURL(SITE_ORIGIN, pathname);
 	const metadata = articleSeoMetadata(post);
@@ -142,8 +148,12 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets): Gene
 			style: 'blog/[slug]',
 			structuredData: articleStructuredData(post, metadata.description, url, image),
 		}),
-		{ path: `blog/${post.filename}.md`, content: post.source },
-	];
+		{
+			outputPath: `blog/${post.filename}.md`,
+			body: post.source,
+			contentType: 'text/markdown; charset=utf-8',
+		},
+	] as const satisfies readonly OxContentCustomHostRenderResult[];
 }
 
 if (import.meta.vitest != null) {
@@ -178,13 +188,13 @@ if (import.meta.vitest != null) {
 
 	test('labels a zero-minute estimate as under a minute', () => {
 		const [article] = createArticlePageFiles({ ...examplePost, readingTime: 0 }, assets);
-		expect(article.content).toContain('Under a minute');
-		expect(article.content).not.toContain('0 min read');
+		expect(article.body).toContain('Under a minute');
+		expect(article.body).not.toContain('0 min read');
 	});
 
 	test('places the Markdown alternate in the document head', () => {
 		const [article] = createArticlePageFiles(examplePost, assets);
-		const [head, body] = article.content.split('</head>');
+		const [head, body] = article.body.split('</head>');
 
 		expect(head).toContain('href="/blog/example-article.md"');
 		expect(head).toContain('title="Markdown source"');
@@ -197,8 +207,8 @@ if (import.meta.vitest != null) {
 			assets,
 		);
 
-		expect(article.sourcePaths).toContain('/content/example-article');
-		expect(article.sourcePaths).not.toContain('/content/example-article/index.mdx');
+		expect(article.lastUpdatedPaths).toContain('/content/example-article');
+		expect(article.lastUpdatedPaths).not.toContain('/content/example-article/index.mdx');
 	});
 
 	test('derives an article description from the first prose paragraph', () => {
@@ -210,7 +220,7 @@ if (import.meta.vitest != null) {
 			},
 			assets,
 		);
-		expect(article.content).toContain('content="A useful fallback paragraph with a link."');
+		expect(article.body).toContain('content="A useful fallback paragraph with a link."');
 	});
 
 	test('resolves the first rendered article image against the article URL', () => {
@@ -222,7 +232,7 @@ if (import.meta.vitest != null) {
 			},
 			assets,
 		);
-		const jsonLd = article.content.match(
+		const jsonLd = article.body.match(
 			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
 		)?.[1];
 		assert.isDefined(jsonLd);
@@ -233,7 +243,7 @@ if (import.meta.vitest != null) {
 
 	test('builds article schema from the resolved metadata', () => {
 		const [article] = createArticlePageFiles(examplePost, assets);
-		const jsonLd = article.content.match(
+		const jsonLd = article.body.match(
 			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
 		)?.[1];
 		assert.isDefined(jsonLd);
@@ -258,9 +268,8 @@ if (import.meta.vitest != null) {
 			assets,
 		);
 		const jsonLd =
-			article?.content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ??
-			'';
-		const visibleTitle = article?.content.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
+			article?.body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? '';
+		const visibleTitle = article?.body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
 
 		expect(jsonLd).toContain('\\u003c/script\\u003e');
 		expect(jsonLd).not.toContain('</script><script>');
