@@ -1,11 +1,13 @@
 import type { BlogPost } from './blog/data.ts';
+import type { MarkdownRenderer } from './markdown.ts';
+import type { SiteContentAssetManifest } from './content-assets.ts';
 import type { ShowcaseProject } from './works/showcase/data.ts';
 import type { OxContentCustomHostRoute } from '@ox-content/vite-plugin/custom-host';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { rewriteCollectionAssetUrls } from '@ox-content/vite-plugin';
 import { fetchDotfilesReadme } from '@/pages/dotfiles/data.ts';
 import { createPageRoutes } from '@/pages/route.ts';
-import { collectionAssetUrls, planSiteContentAssets } from './content-assets.ts';
+import { collectionAssetUrls } from './content-assets.ts';
 import type { PostListItem } from '@/pages/post-list.ts';
 import { createPageContext } from '@/pages/context.ts';
 
@@ -15,6 +17,8 @@ type PrerenderPagesOptions = {
 	showcase: ShowcaseProject[];
 	externalMedia: PostListItem[];
 	root: string;
+	contentAssets: SiteContentAssetManifest;
+	renderContent: MarkdownRenderer;
 };
 
 /**
@@ -25,6 +29,8 @@ type PrerenderPagesOptions = {
  * @param showcase - Prebuilt showcase entries.
  * @param externalMedia - Curated media shared with the media feed.
  * @param root - Repository root used for source loading and Git metadata.
+ * @param contentAssets - The native host's shared publication snapshot.
+ * @param renderContent - The native host renderer for page data loaders.
  * @returns Pages and plain-text files for the framework host writer.
  */
 export async function prerenderPages({
@@ -33,12 +39,10 @@ export async function prerenderPages({
 	showcase,
 	externalMedia,
 	root,
+	contentAssets,
+	renderContent,
 }: PrerenderPagesOptions): Promise<OxContentCustomHostRoute[]> {
 	const dotfiles = await fetchDotfilesReadme(fetch);
-	const contentAssets = await planSiteContentAssets(
-		root,
-		new Set(posts.filter((post) => post.isPublished === true).map((post) => post.filename)),
-	);
 	const assetUrls = collectionAssetUrls(contentAssets);
 	const renderedPosts = posts.map((post) => ({
 		...post,
@@ -58,20 +62,17 @@ export async function prerenderPages({
 	}));
 	const publishedPosts = renderedPosts.filter((post) => post.isPublished);
 	return Promise.all(
-		createPageRoutes({ posts: publishedPosts, dotfiles })
-			.filter((route) => !route.devOnly)
-			.map(async (route) => {
-				const result = await route.render({
-					...createPageContext(root, assets),
-					loadBlogPost: async (slug) =>
-						publishedPosts.find((post) => post.filename === slug) ?? null,
-					loadBlogPostMetadata: async () => publishedPosts,
-					loadBlogPostSource: async (slug) =>
-						publishedPosts.find((post) => post.filename === slug)?.source ?? null,
-					loadExternalMedia: async () => externalMedia,
-					loadShowcase: async () => renderedShowcase,
-				});
-				return { path: route.path, render: () => result } satisfies OxContentCustomHostRoute;
-			}),
+		createPageRoutes({ posts: publishedPosts, dotfiles }).map(async (route) => {
+			const result = await route.render({
+				...createPageContext(root, assets, renderContent),
+				loadBlogPost: async (slug) => publishedPosts.find((post) => post.filename === slug) ?? null,
+				loadBlogPostMetadata: async () => publishedPosts,
+				loadBlogPostSource: async (slug) =>
+					publishedPosts.find((post) => post.filename === slug)?.source ?? null,
+				loadExternalMedia: async () => externalMedia,
+				loadShowcase: async () => renderedShowcase,
+			});
+			return { path: route.path, render: () => result } satisfies OxContentCustomHostRoute;
+		}),
 	);
 }

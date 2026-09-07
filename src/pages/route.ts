@@ -5,7 +5,6 @@ import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/cu
 /** One lazily rendered output, shared by development and prerendering. */
 export type PageRoute = {
 	path: string;
-	devOnly?: boolean;
 	render: (context: PageContext) => Promise<GeneratedFile | null>;
 };
 
@@ -20,7 +19,6 @@ export function createPageRoutes(catalogue: PageCatalogue) {
 		.flatMap((module) => module.routes(catalogue))
 		.map((route) => ({
 			path: route.path,
-			devOnly: route.devOnly,
 			async render(context: PageContext) {
 				const file = await route.render(context);
 				if (file == null) return undefined;

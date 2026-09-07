@@ -1,50 +1,32 @@
 import { kanagawaDragon } from '@ox-content/theme-color-kanagawa';
 import { oxContent } from '@ox-content/vite-plugin';
-import { createMarkdownDevPlugin } from './src/ox-content/dev-plugin.ts';
 import {
 	createOxContentCustomHostPlugin,
 	type OxContentCustomHostOptions,
 } from '@ox-content/vite-plugin/custom-host';
 import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
-import path from 'node:path';
 import solid from '@solidjs/vite-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
-import { ssrStylesPlugin } from './src/ox-content/ssr-styles-plugin.ts';
-import { loadIslandDocuments } from './src/pages/blog/island-documents.ts';
 import { planSiteContentAssets } from './src/pages/content-assets.ts';
-
-type BlogCatalogueModule = {
-	loadBlogPostMetadata: () => Promise<Array<{ filename: string; isPublished: boolean }>>;
-};
+import { BLOG_ISLAND_DOCUMENTS } from './src/pages/blog/island-documents.ts';
+import { ssrStylesPlugin } from './src/ox-content/ssr-styles-plugin.ts';
 
 export default defineConfig(({ command, mode }) => {
 	const hostOptions = {
 		dev: {
 			enabled: mode !== 'test',
+			feedOutputs: true,
 			routeDependencies: [
 				{ path: 'src/content/blog', kind: 'directory' },
 				{ path: 'src/pages', kind: 'directory' },
 			],
 		},
 		collectionAssets: {
-			async manifest(context) {
-				const publishedPosts =
-					context.mode === 'serve'
-						? undefined
-						: new Set(
-								(
-									await (
-										(await context.loadModule('/src/pages/blog/data.ts')) as BlogCatalogueModule
-									).loadBlogPostMetadata()
-								)
-									.filter(({ isPublished }) => isPublished)
-									.map(({ filename }) => filename),
-							);
-				return planSiteContentAssets(context.root, publishedPosts);
-			},
+			manifest: ({ root, mode }) =>
+				planSiteContentAssets(root, mode === 'serve' ? 'serve' : 'build'),
 			watch: [
 				{ path: 'src/content/blog', kind: 'directory' },
 				{ path: 'src/content/works/showcase', kind: 'directory' },
@@ -79,11 +61,7 @@ export default defineConfig(({ command, mode }) => {
 			ssrStylesPlugin({ pages: 'src/pages', layout: 'src/components/SiteLayout/index.tsx' }),
 			createSolidHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
-				watch: ['src/content/blog'],
-				documents: ({ root, command }) =>
-					loadIslandDocuments(path.join(root, 'src/content/blog'), {
-						includeDrafts: command === 'serve',
-					}),
+				collectionDocuments: BLOG_ISLAND_DOCUMENTS,
 			}).plugin,
 			solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 			...oxContent({
@@ -91,14 +69,10 @@ export default defineConfig(({ command, mode }) => {
 				icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
 				ssg: mode === 'test' ? false : { ...OX_CONTENT_BUILD_OPTIONS.ssg, enabled: false },
 			}),
-			command === 'serve'
-				? createMarkdownDevPlugin({
-						...hostOptions,
-						host: '/src/pages/dev.ts',
-						markdownModule: '/src/ox-content/markdown.ts',
-						islandRendererModule: '/src/ox-content/island-renderer.ts',
-					})
-				: createOxContentCustomHostPlugin({ ...hostOptions, host: '/src/pages/build.ts' }),
+			createOxContentCustomHostPlugin({
+				...hostOptions,
+				host: command === 'serve' ? '/src/pages/dev.ts' : '/src/pages/build.ts',
+			}),
 		] satisfies PluginOption[],
 		build: {
 			cssMinify: true,

@@ -4,7 +4,7 @@ import type { PostListItem } from '@/pages/post-list.ts';
 import type { OssProject } from './works/oss/data.ts';
 import type { Talk } from './works/talks/data.ts';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
-import type { MarkdownRenderer } from '@/ox-content/markdown.ts';
+import type { MarkdownRenderer } from './markdown.ts';
 import { loadBlogPost, loadBlogPostMetadata, loadBlogPostSource } from '@/pages/blog/data.ts';
 import { loadExternalMedia } from './works/media/data.ts';
 import { loadExternalPosts } from './blog/external.ts';
@@ -37,7 +37,7 @@ export type PageCatalogue = {
 export function createPageContext(
 	root: string,
 	assets: SiteAssets,
-	renderContent?: MarkdownRenderer,
+	renderContent: MarkdownRenderer,
 ): PageContext {
 	return {
 		assets,

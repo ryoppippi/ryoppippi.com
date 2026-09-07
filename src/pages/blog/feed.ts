@@ -1,8 +1,6 @@
 import type { BlogPostMetadata } from '@/pages/blog/data.ts';
 import type { FeedChannelOptions, FeedItemInput } from '@ox-content/vite-plugin';
-import type { PageRoute } from '../route.ts';
 import { SITE_COPYRIGHT, SITE_NAME, SITE_SOCIAL_IMAGE_URL } from '../../config/site.ts';
-import { renderRssFeed } from '../feed.ts';
 
 export const BLOG_FEED_OPTIONS = {
 	collection: 'blog',
@@ -27,11 +25,3 @@ export function blogFeedItems(posts: readonly BlogPostMetadata[]): FeedItemInput
 		draft: !post.isPublished,
 	}));
 }
-
-/** Development endpoint; production uses the same options/items via coordinated outputs. */
-export const blogFeedRoute = {
-	path: '/feed.xml',
-	devOnly: true,
-	render: async ({ loadBlogPostMetadata }) =>
-		renderRssFeed(BLOG_FEED_OPTIONS, blogFeedItems(await loadBlogPostMetadata()), 'feed.xml'),
-} satisfies PageRoute;

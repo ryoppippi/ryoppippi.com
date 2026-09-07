@@ -2,8 +2,7 @@ import type { OxContentCustomHostRoutesContext } from '@ox-content/vite-plugin/c
 import type { OxContentCustomHostModule } from '@ox-content/vite-plugin/custom-host';
 import { loadBlogPosts } from '@/pages/blog/data.ts';
 import { loadShowcase } from '@/pages/works/showcase/data.ts';
-import { renderMarkdown, type MarkdownRenderer } from '@/ox-content/markdown.ts';
-import { createIslandRenderer } from '@/ox-content/island-renderer.ts';
+import { createPageMarkdownRenderer } from './markdown.ts';
 import { loadExternalMedia } from '@/pages/works/media/data.ts';
 import { resolveSiteAssets } from '@/components/SiteLayout/assets.ts';
 import { inlineBuiltHomeStyles } from '@/pages/home/styles.ts';
@@ -11,13 +10,9 @@ import { blogFeedItems } from '@/pages/blog/feed.ts';
 import { mediaFeedItems } from '@/pages/works/media/feed.ts';
 import { prerenderPages } from '@/pages/prerender.ts';
 
-type HostContentContext = Pick<OxContentCustomHostRoutesContext, 'loadModule' | 'memo' | 'root'>;
-
-function loadHostContent(context: HostContentContext) {
+function loadHostContent(context: OxContentCustomHostRoutesContext) {
 	return context.memo('site-content', async () => {
-		const renderIsland = createIslandRenderer((id) => context.loadModule(id));
-		const renderContent = ((content, options) =>
-			renderMarkdown(content, { ...options, renderIsland })) satisfies MarkdownRenderer;
+		const renderContent = createPageMarkdownRenderer(context);
 		const [posts, showcase, externalMedia] = await Promise.all([
 			loadBlogPosts(renderContent),
 			loadShowcase(renderContent),
@@ -29,8 +24,10 @@ function loadHostContent(context: HostContentContext) {
 
 const host = {
 	async routes(context) {
-		const { outDir, root } = context;
+		const { root } = context;
 		const { posts, showcase, externalMedia } = await loadHostContent(context);
+		const contentAssets = await context.assets.collectionManifest();
+		if (contentAssets == null) throw new Error('The site requires a collection asset snapshot');
 		const islandModules = [
 			...new Set(
 				posts
@@ -39,7 +36,12 @@ const host = {
 			),
 		];
 		return prerenderPages({
-			assets: await inlineBuiltHomeStyles(outDir, resolveSiteAssets(context.assets, islandModules)),
+			renderContent: createPageMarkdownRenderer(context),
+			contentAssets,
+			assets: await inlineBuiltHomeStyles(
+				context.assets,
+				resolveSiteAssets(context.assets, islandModules),
+			),
 			posts,
 			showcase,
 			externalMedia,

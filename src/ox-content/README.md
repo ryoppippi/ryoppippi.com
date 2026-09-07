@@ -1,66 +1,56 @@
 # Ox Content integration boundary
 
-This directory contains adapters that can shrink when supported upstream APIs
-are released. It is not a home for site data, layout, or page policy.
+The site uses the public Ox Content 3.0.0 release. This directory now contains
+only the temporary SSR CSS discovery plugin and its local virtual declaration.
 
 ## Ownership
 
-- `content/`: authored Markdown/MDX, JSON, media, and post-local components.
-- `pages/`: discovered endpoint definitions, page UI, and page-specific data loaders.
-- `components/SiteLayout/`: shared document structure, head values, and asset selection.
-- `config/`: site configuration, source selection, and Markdown options.
-- `pages/prerender.ts`: site-owned production route preparation.
-- `pages/dev.ts`: development route/data composition and site-specific 404 policy.
-- `ox-content/`: generic plugin/rendering adapters and the virtual-module type shim.
+- `content/`: authored Markdown/MDX, JSON, media and post-local components.
+- `pages/`: endpoint definitions, page UI, data loading and publication policy.
+- `components/SiteLayout/`: document structure, head values and asset selection.
+- `config/`: shared content root, collection selection and Markdown options.
+- `pages/markdown.ts`: page-level composition of native Markdown rendering and
+  the native Solid renderer, returning the article's client modules and selecting
+  their styles. It does not parse Markdown, run embed transforms, discover MDX
+  imports or implement the Solid renderer lifecycle.
+- `pages/home/styles.ts`: homepage-only inlining using native artifact contents.
+- `pages/content-assets.ts`: selected document references and explicit showcase
+  covers/legacy aliases, not an extension allowlist or recursive asset scanner.
 
-Post-local components remain beside their articles. Site build assembly, shared RSS
-handling, content asset policy and blog island-document selection live under `pages/`.
-Feed options, item mapping and the development endpoint live in each page's `feed.ts`.
-Upstream ownership of a future API does not make today's site-specific caller a
-framework module. Publication and route policy stay with their pages after adoption.
-Page endpoint URLs remain explicit; file discovery does not infer URL semantics.
+All collections are rooted at `src/content`; blog and showcase source patterns
+stay inside that common root. Production requires explicit `isPublished: true`
+for blog assets and client islands; development permits draft previews.
 
-`dev-plugin.ts` is a local proof of the plugin interface requested in #1320.
-It supplies request-local Markdown/Solid rendering and island styles to the site
-host while the native plugin still owns middleware, caching, loading and watchers.
-The old `dev-server/` directory is deleted, but this generic bridge remains local
-until a released upstream interface replaces it. Renderer module paths are a
-temporary adapter boundary, not a proposed requirement for the final upstream API.
+## Adopted in 3.0.0
 
-## Release/adoption ledger
+| Issue | Adoption                                                                                     |
+| ----- | -------------------------------------------------------------------------------------------- |
+| #1315 | Native custom-host context types; root barrel regression tracked below.                      |
+| #1316 | `planCollectionAssetsFromDocuments`; removed extension allowlist and asset globs.            |
+| #1317 | `createSolidHtmlHostRenderer`; deleted `island-renderer.ts`.                                 |
+| #1318 | `assets.collectionManifest()`; removed the prerender planning pass.                          |
+| #1319 | `dev.feedOutputs` and `outputs()`; deleted generic/feed-route adapters.                      |
+| #1320 | `context.markdown.render()`; deleted Markdown pipeline and dev plugin.                       |
+| #1321 | Published collection virtual types; removed the downstream collection declaration.           |
+| #1322 | Configured collection documents and site selection; removed glob/read/frontmatter discovery. |
+| #1323 | `assets.stylesheetContent()`; removed CSS URL-to-filesystem reconstruction.                  |
 
-All issue numbers below belong to <https://github.com/ubugeeei-prod/ox-content>.
+## Active release gates
 
-| Issue                                                            | Downstream deletion target                                                                       |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [#1315](https://github.com/ubugeeei-prod/ox-content/issues/1315) | Workarounds for missing public custom-host declaration exports.                                  |
-| [#1316](https://github.com/ubugeeei-prod/ox-content/issues/1316) | Extension/discovery policy in `pages/content-assets.ts`.                                         |
-| [#1317](https://github.com/ubugeeei-prod/ox-content/issues/1317) | Renderer factory glue in `ox-content/island-renderer.ts`.                                        |
-| [#1318](https://github.com/ubugeeei-prod/ox-content/issues/1318) | Repeated collection asset planning in production generation.                                     |
-| [#1319](https://github.com/ubugeeei-prod/ox-content/issues/1319) | `pages/feed.ts` and dev-only feed response adapters.                                             |
-| [#1320](https://github.com/ubugeeei-prod/ox-content/issues/1320) | Markdown pipeline composition and its dev-host connection.                                       |
-| [#1321](https://github.com/ubugeeei-prod/ox-content/issues/1321) | `ox-content/virtual.d.ts`.                                                                       |
-| [#1322](https://github.com/ubugeeei-prod/ox-content/issues/1322) | Repeated glob/read/frontmatter discovery in `pages/blog/island-documents.ts`.                    |
-| [#1323](https://github.com/ubugeeei-prod/ox-content/issues/1323) | CSS href-to-filesystem reconstruction in `pages/home/styles.ts`.                                 |
-| [#1328](https://github.com/ubugeeei-prod/ox-content/issues/1328) | Local `ssr-styles-plugin.ts` dependency discovery/emission and its virtual metadata declaration. |
+All issues are in <https://github.com/ubugeeei-prod/ox-content>.
 
-`ssr-styles-plugin.ts` now prototypes #1328 locally. It discovers `pages/**/page.tsx`
-and an explicit shared layout root, follows Vite's resolved static imports, and emits
-only discovered CSS as client build entries. `client/page-style-registry.ts` is deleted;
-works pages select their own dependency set rather than loading all sibling-page CSS.
-Raw Markdown CSS is imported by its owning component, not maintained in another list.
-This is working local machinery, not upstream adoption: replace the plugin and its
-integration test after a supported release. It supports local static component imports
-and direct CSS imports; external package JS is not traversed, and dynamic local SSR
-imports fail explicitly. Shared/global CSS and home-only inlining remain site choices.
-The earlier #1284 contract accepted declared CSS groups; #1328 extends that scope.
+- [#1347](https://github.com/ubugeeei-prod/ox-content/issues/1347): #1328's SSR
+  stylesheet discovery was trialled in 3.0.0. Its raw CSS concatenation leaves
+  local/package `@import` unresolved and bypasses Vite CSS minification.
+  Retain `ssr-styles-plugin.ts`, its generic integration test and
+  `virtual:site/ssr-styles` until the released implementation runs the Vite CSS
+  pipeline. The filename registry remains deleted; discovery is automatic.
+- [#1351](https://github.com/ubugeeei-prod/ox-content/issues/1351): the root
+  declaration barrel still imports minified aliases removed by custom-host export
+  stabilisation. Replace `SiteContentAssetManifest` with the repaired public
+  `CollectionAssetManifest` export after release. The temporary alias derives
+  from the native context return type; no copied structural interface is used.
 
-Feed development output and stylesheet-content access are enhancement requests,
-not claims that their current documented contracts are broken. Publication
-selection, curated data, routes, layout, and homepage critical-CSS policy remain
-site-owned even if upstream supplies their mechanics.
-
-For each issue: verify a public package release, adopt the supported interface,
-delete replaced implementation and redundant generic tests, verify site behaviour,
-and update the PR. Issue closure alone does not complete adoption. Keep meaningful
-site-policy and integration coverage rather than duplicating upstream unit tests.
+Keep the PR Draft. For each installable compatible release, adopt the fix, delete
+its fallback and redundant tests, verify dev/SSG/browser behaviour, push and audit
+the remaining site/framework boundary again. Closed issues are not completion.

@@ -1,33 +1,15 @@
 import path from 'node:path';
-import { readFile } from 'node:fs/promises';
-import { matter } from 'gray-matter-es';
-import { glob } from 'tinyglobby';
+import {
+	resolveSolidHtmlHostCollectionDocuments,
+	type SolidHtmlHostCollectionDocumentsOptions,
+} from '@ox-content/vite-plugin-solid';
 import { BLOG_SOURCE_PATTERNS } from '../../config/content.ts';
 
-/**
- * Selects documents whose islands may enter the client graph.
- * @param directory - Blog source directory.
- * @param options - Whether the development preview includes unpublished documents.
- * @returns Documents permitted by the site's publication policy.
- */
-export async function loadIslandDocuments(
-	directory: string,
-	options: { includeDrafts?: boolean } = {},
-) {
-	const files = await glob(BLOG_SOURCE_PATTERNS, {
-		cwd: directory,
-		absolute: true,
-	});
-	const documents = await Promise.all(
-		files.map(async (documentPath) => ({
-			documentPath,
-			source: await readFile(documentPath, 'utf8'),
-		})),
-	);
-	return documents.filter(
-		({ source }) => options.includeDrafts === true || matter(source).data.isPublished === true,
-	);
-}
+/** Production islands require explicit publication; development previews include drafts. */
+export const BLOG_ISLAND_DOCUMENTS = {
+	collections: ['blog'],
+	select: ({ frontmatter }, { command }) => command === 'serve' || frontmatter.isPublished === true,
+} satisfies SolidHtmlHostCollectionDocumentsOptions;
 
 if (import.meta.vitest != null) {
 	test.each([
@@ -46,7 +28,18 @@ if (import.meta.vitest != null) {
 				'unspecified/index.mdx': '---\ntitle: Unspecified\n---\nUnspecified',
 			});
 			expect(
-				(await loadIslandDocuments(fixture.path, { includeDrafts }))
+				(
+					await resolveSolidHtmlHostCollectionDocuments(
+						{
+							...BLOG_ISLAND_DOCUMENTS,
+							oxContent: {
+								srcDir: fixture.path,
+								collections: { blog: { source: BLOG_SOURCE_PATTERNS } },
+							},
+						},
+						{ root: fixture.path, mode: 'test', command: includeDrafts ? 'serve' : 'build' },
+					)
+				)
 					.map(({ documentPath }) => path.relative(fixture.path, documentPath))
 					.sort(),
 			).toEqual(expected);

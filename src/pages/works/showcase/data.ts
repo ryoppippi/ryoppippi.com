@@ -1,6 +1,7 @@
 import path from 'node:path';
 import type { CollectionEntry } from '@ox-content/vite-plugin';
-import { renderMarkdown, type MarkdownRenderer } from '../../../ox-content/markdown.ts';
+import type { MarkdownRenderer } from '../../markdown.ts';
+import { CONTENT_DIRECTORY, SHOWCASE_DIRECTORY } from '@/config/content.ts';
 
 export type ShowcaseProject = {
 	title: string;
@@ -12,7 +13,7 @@ export type ShowcaseProject = {
 };
 
 export async function loadShowcase(
-	renderContent: MarkdownRenderer = renderMarkdown,
+	renderContent: MarkdownRenderer,
 	entries?: readonly CollectionEntry[],
 ): Promise<ShowcaseProject[]> {
 	const collection =
@@ -28,7 +29,10 @@ export async function loadShowcase(
 				typeof data.image === 'string'
 					? `/works/showcase/assets/${path.basename(data.image)}`
 					: undefined;
-			const rendered = await renderContent(entry.body);
+			const rendered = await renderContent(entry.body, {
+				documentPath: path.resolve(CONTENT_DIRECTORY, entry.source),
+				contentRoot: SHOWCASE_DIRECTORY,
+			});
 			return {
 				title: String(data.title),
 				link: String(data.link),

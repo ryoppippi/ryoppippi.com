@@ -4,9 +4,8 @@ import { definePage } from '@/pages/page.ts';
 import BlogListPage from './page.tsx';
 import type { PageRoutes } from '../route.ts';
 import { postListItems } from './external.ts';
-import { blogFeedRoute } from './feed.ts';
 
-/** Blog page and development feed; production feeds are emitted by Ox Content. */
+/** Blog index; feeds are emitted by Ox Content in development and production. */
 export const routes = (() => [
 	{
 		path: '/blog/',
@@ -21,7 +20,6 @@ export const routes = (() => [
 			);
 		},
 	},
-	blogFeedRoute,
 ]) satisfies PageRoutes;
 
 /**

@@ -2,6 +2,7 @@ import type { OxContentOptions } from '@ox-content/vite-plugin';
 import { SITE_NAME, SITE_ORIGIN } from './site.ts';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
+import { OX_MARKDOWN_OPTIONS, twitterCacheDirectory, twitterMediaDirectory } from './markdown.ts';
 import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from './content.ts';
 import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
 import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
@@ -13,12 +14,14 @@ const redirects = [...REDIRECT_ROUTES, { from: '/works', to: '/works/oss', statu
 const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to]));
 
 export const OX_CONTENT_BUILD_OPTIONS = {
+	...OX_MARKDOWN_OPTIONS,
+	frontmatter: true,
 	attrs: true,
 	budoux: true,
-	srcDir: 'src/content/blog',
+	srcDir: 'src/content',
 	outDir: 'dist',
 	collections: {
-		blog: { source: BLOG_SOURCE_PATTERNS, include: ['body'] },
+		blog: { source: BLOG_SOURCE_PATTERNS.map((pattern) => `blog/${pattern}`), include: ['body'] },
 		showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
 	},
 	docs: false,
@@ -26,7 +29,18 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		include: ['src/**/*.{css,json,md,mdx,ts,tsx}'],
 	},
 	embeds: {
+		bluesky: true,
+		github: false,
 		openGraph: OPEN_GRAPH_OPTIONS,
+		twitter: {
+			appearance: 'full',
+			cacheDir: twitterCacheDirectory,
+			downloadVideo: true,
+			fetch: true,
+			mediaOutputDir: twitterMediaDirectory,
+			mediaPublicPath: '/ox-content/twitter',
+			timeZone: 'Europe/London',
+		},
 	},
 	feeds: {
 		blog: BLOG_FEED_OPTIONS,
@@ -41,6 +55,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		provider: 'cloudflare',
 	},
 	ssg: {
+		readerChrome: { backToTop: false, copy: true, externalLinks: false },
 		bare: true,
 		markdownSource: { alternate: true },
 		minifyHtml: true,

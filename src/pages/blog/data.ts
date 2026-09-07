@@ -1,11 +1,15 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { matter } from 'gray-matter-es';
-import { readingTimeMinutes, type CollectionEntry } from '@ox-content/vite-plugin';
+import {
+	createMarkdownProcessor,
+	readingTimeMinutes,
+	type CollectionEntry,
+} from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
-import type { MarkdownRenderer } from '../../ox-content/markdown.ts';
+import type { MarkdownRenderer } from '../markdown.ts';
 import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
-import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY } from '../../config/content.ts';
+import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '../../config/content.ts';
 
 /**
  * SEO metadata that can be declared in an article's frontmatter.
@@ -94,13 +98,6 @@ function filenameFor(filepath: string): string {
 		: path.basename(filepath, path.extname(filepath));
 }
 
-function loadRenderOptions(filepath: string, directory: string) {
-	if (path.extname(filepath).toLowerCase() !== '.mdx') {
-		return undefined;
-	}
-	return { contentRoot: directory, documentPath: filepath, mdx: true };
-}
-
 async function loadBlogCollection(): Promise<CollectionEntry[]> {
 	return (await import('virtual:ox-content/collections')).queryCollection('blog').all();
 }
@@ -118,12 +115,12 @@ async function findBlogPostSource(slug: string, directory: string) {
 	}
 	if (path.resolve(directory) === BLOG_DIRECTORY) {
 		const entry = (await loadBlogCollection()).find(
-			(candidate) => filenameFor(path.join(directory, candidate.source)) === slug,
+			(candidate) => filenameFor(path.join(CONTENT_DIRECTORY, candidate.source)) === slug,
 		);
 		if (entry == null) {
 			return null;
 		}
-		const filepath = path.join(directory, entry.source);
+		const filepath = path.join(CONTENT_DIRECTORY, entry.source);
 		return {
 			filepath,
 			source: await readFile(filepath, 'utf8'),
@@ -163,13 +160,13 @@ export async function loadBlogPostSource(
  * Loads and renders one article by its safe URL slug.
  *
  * @param slug - Article filename or directory slug.
- * @param renderContent - Optional Markdown renderer used by tests and callers.
+ * @param renderContent - Host-supplied Markdown renderer.
  * @param directory - Blog source directory.
  * @returns The rendered article, or `null` when the slug does not exist.
  */
 export async function loadBlogPost(
 	slug: string,
-	renderContent?: MarkdownRenderer,
+	renderContent: MarkdownRenderer,
 	directory = BLOG_DIRECTORY,
 ): Promise<BlogPost | null> {
 	const entry = await findBlogPostSource(slug, directory);
@@ -177,12 +174,10 @@ export async function loadBlogPost(
 		return null;
 	}
 
-	const render = renderContent ?? (await import('../../ox-content/markdown.ts')).renderMarkdown;
-	const renderOptions = loadRenderOptions(entry.filepath, directory);
-	const rendered =
-		renderOptions == null
-			? await render(entry.content)
-			: await render(entry.content, renderOptions);
+	const rendered = await renderContent(entry.content, {
+		documentPath: entry.filepath,
+		contentRoot: directory,
+	});
 	return {
 		...parseArticleMetadata(entry.data),
 		title: String(entry.data.title),
@@ -207,10 +202,10 @@ export async function loadBlogPost(
  * @returns Metadata sorted from newest publication date to oldest.
  */
 export async function loadBlogPostMetadata(
-	directory = BLOG_DIRECTORY,
+	directory = CONTENT_DIRECTORY,
 	entries?: readonly CollectionEntry[],
 ): Promise<BlogPostMetadata[]> {
-	if (entries == null && path.resolve(directory) !== BLOG_DIRECTORY) {
+	if (entries == null && path.resolve(directory) !== CONTENT_DIRECTORY) {
 		throw new Error('A custom blog directory requires explicit collection entries');
 	}
 	const collection = entries ?? (await loadBlogCollection());
@@ -235,23 +230,23 @@ export async function loadBlogPostMetadata(
 /**
  * Loads and renders every article in the configured blog directory.
  *
- * @param renderContent - Optional Markdown renderer used by tests and callers.
+ * @param renderContent - Host-supplied Markdown renderer.
  * @returns Rendered articles sorted from newest publication date to oldest.
  */
-export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<BlogPost[]> {
-	const render = renderContent ?? (await import('../../ox-content/markdown.ts')).renderMarkdown;
+export async function loadBlogPosts(renderContent: MarkdownRenderer): Promise<BlogPost[]> {
 	const blogDir = BLOG_DIRECTORY;
 	const entries = await loadBlogCollection();
 	const posts = await Promise.all(
 		entries.map(async (entry) => {
-			const filepath = path.join(blogDir, entry.source);
+			const filepath = path.join(CONTENT_DIRECTORY, entry.source);
 			const source = await readFile(filepath, 'utf8');
 			const data = entry.frontmatter;
 			const content = collectionEntryBody(entry);
 			const filename = filenameFor(filepath);
-			const renderOptions = loadRenderOptions(filepath, blogDir);
-			const rendered =
-				renderOptions == null ? await render(content) : await render(content, renderOptions);
+			const rendered = await renderContent(content, {
+				documentPath: filepath,
+				contentRoot: blogDir,
+			});
 			return {
 				...parseArticleMetadata(data),
 				title: String(data.title),
@@ -273,6 +268,11 @@ export async function loadBlogPosts(renderContent?: MarkdownRenderer): Promise<B
 }
 
 if (import.meta.vitest != null) {
+	const processor = createMarkdownProcessor({ highlight: false, embeds: false });
+	const renderFixture = (async (source, options) => ({
+		...(await processor.render(source, options.documentPath)),
+		clientModules: [],
+	})) satisfies MarkdownRenderer;
 	test('rejects custom directories without their own collection entries', async () => {
 		await expect(loadBlogPostMetadata('/different-content')).rejects.toThrow(
 			'A custom blog directory requires explicit collection entries',
@@ -310,7 +310,7 @@ if (import.meta.vitest != null) {
 			content: {},
 		});
 		await expect(
-			loadBlogPost('../secret', undefined, fixture.getPath('content')),
+			loadBlogPost('../secret', renderFixture, fixture.getPath('content')),
 		).resolves.toBeNull();
 	});
 
@@ -321,7 +321,7 @@ if (import.meta.vitest != null) {
 			'second/index.md':
 				'---\ntitle: Second\ndate: 2026-06-22\nisPublished: true\n---\nSecond body',
 		});
-		const post = await loadBlogPost('second', undefined, fixture.getPath());
+		const post = await loadBlogPost('second', renderFixture, fixture.getPath());
 
 		assert.isNotNull(post);
 		expect(post.html).toContain('<p>Second body</p>');
@@ -332,8 +332,7 @@ if (import.meta.vitest != null) {
 	test('loads an MDX post with its document-local islands enabled', async () => {
 		const { createFixture } = await import('fs-fixture');
 		const { pathToFileURL } = await import('node:url');
-		const { renderMarkdown } = await import('../../ox-content/markdown.ts');
-		const { createIslandRenderer } = await import('../../ox-content/island-renderer.ts');
+		const { createSolidHtmlHostRenderer } = await import('@ox-content/vite-plugin-solid');
 		await using fixture = await createFixture({
 			'component/index.mdx': [
 				'---',
@@ -348,14 +347,17 @@ if (import.meta.vitest != null) {
 			].join('\n'),
 			'component/Chart.mjs': 'export default () => "Fixture chart"',
 		});
-		const renderIsland = createIslandRenderer(
-			(moduleId) => import(/* @vite-ignore */ pathToFileURL(moduleId).href),
-			fixture.path,
-		);
+		const renderIsland = createSolidHtmlHostRenderer({
+			loadModule: (moduleId) => import(/* @vite-ignore */ pathToFileURL(moduleId).href),
+			root: fixture.path,
+		});
 
 		const post = await loadBlogPost(
 			'component',
-			(content, options) => renderMarkdown(content, { ...options, renderIsland }),
+			async (source, options) => {
+				const transformed = await processor.render(source, options.documentPath);
+				return renderIsland(transformed.html, { ...options, imports: transformed.imports });
+			},
 			fixture.path,
 		);
 
@@ -469,7 +471,7 @@ if (import.meta.vitest != null) {
 				'Article body',
 			].join('\n'),
 		});
-		await expect(loadBlogPost('article', undefined, fixture.getPath())).resolves.toEqual(
+		await expect(loadBlogPost('article', renderFixture, fixture.getPath())).resolves.toEqual(
 			expect.objectContaining({
 				description: 'A useful article summary.',
 				image: '/images/article-cover.jpg',

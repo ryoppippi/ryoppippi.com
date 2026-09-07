@@ -1,93 +1,62 @@
-import type { CollectionAssetInput, CollectionAssetManifest } from '@ox-content/vite-plugin';
-import { planCollectionAssets } from '@ox-content/vite-plugin';
+import { planCollectionAssetsFromDocuments, type OxContentOptions } from '@ox-content/vite-plugin';
+import { resolveSolidHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
-import { glob } from 'tinyglobby';
-import { BLOG_DIRECTORY, SHOWCASE_DIRECTORY } from '../config/content.ts';
+import { OX_CONTENT_BUILD_OPTIONS } from '../config/ox-content.ts';
+import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
 
-const PUBLISHABLE_CONTENT_ASSET_EXTENSIONS = new Set([
-	'.avif',
-	'.gif',
-	'.ico',
-	'.jpeg',
-	'.jpg',
-	'.m4a',
-	'.mp3',
-	'.mp4',
-	'.ogg',
-	'.pdf',
-	'.png',
-	'.svg',
-	'.wav',
-	'.webm',
-	'.webp',
-]);
-
-function publicUrl(...parts: string[]): string {
-	return `/${parts
-		.flatMap((part) => part.split('/'))
-		.map(encodeURIComponent)
-		.join('/')}`;
-}
-
-function isPublishableContentAsset(file: string): boolean {
-	return PUBLISHABLE_CONTENT_ASSET_EXTENSIONS.has(path.extname(file).toLowerCase());
-}
+/** Native snapshot type, pending repair of the root package's declaration re-exports. */
+export type SiteContentAssetManifest = NonNullable<
+	Awaited<ReturnType<OxContentCustomHostAssetsContext['collectionManifest']>>
+>;
 
 /**
- * Discovers non-Markdown assets and assigns the public aliases owned by this site.
- *
- * @param blogDir - Directory containing blog posts and their local assets.
- * @param showcaseDir - Directory containing showcase entries and images.
- * @param publishedPosts - Optional production allowlist; development can serve draft attachments.
- * @returns Explicit source-to-public mappings for Ox Content.
- */
-export async function discoverSiteContentAssets(
-	blogDir: string,
-	showcaseDir: string,
-	publishedPosts?: ReadonlySet<string>,
-): Promise<CollectionAssetInput[]> {
-	const [blogAssets, showcaseAssets] = await Promise.all([
-		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/*.generated.json', '!**/index.html'], {
-			cwd: blogDir,
-			onlyFiles: true,
-		}),
-		glob(['**/*', '!**/*.md', '!**/*.mdx', '!**/index.ts'], {
-			cwd: showcaseDir,
-			onlyFiles: true,
-		}),
-	]);
-
-	return [
-		...blogAssets
-			.filter((asset) => asset.includes('/'))
-			.filter(isPublishableContentAsset)
-			.filter((asset) => publishedPosts == null || publishedPosts.has(asset.split('/')[0]))
-			.map((asset) => ({
-				sourcePath: path.join(blogDir, asset),
-				publicPath: publicUrl('blog', asset),
-			})),
-		...showcaseAssets.filter(isPublishableContentAsset).map((asset) => ({
-			sourcePath: path.join(showcaseDir, asset),
-			publicPath: publicUrl('works', 'showcase', 'assets', asset),
-		})),
-	];
-}
-
-/**
- * Plans the site's content-addressed asset targets and legacy public aliases.
- *
- * @param root - Vite project root containing every asset source.
- * @param publishedPosts - Published article filenames allowed to expose attachments.
- * @returns An Ox Content manifest shared by build and development serving.
+ * Publishes only selected documents' references and explicitly declared showcase covers.
+ * @param root - Vite project root.
+ * @param command - Development allows draft previews; builds require explicit publication.
+ * @param oxContent - Configured collections, or isolated fixture collections in tests.
+ * @returns The shared content-addressed asset plan and legacy page aliases.
  */
 export async function planSiteContentAssets(
 	root: string,
-	publishedPosts?: ReadonlySet<string>,
-): Promise<CollectionAssetManifest> {
-	return planCollectionAssets({
+	command: 'build' | 'serve',
+	oxContent: OxContentOptions = OX_CONTENT_BUILD_OPTIONS,
+): Promise<SiteContentAssetManifest> {
+	const documents = await resolveSolidHtmlHostCollectionDocuments(
+		{
+			oxContent,
+			collections: ['blog', 'showcase'],
+			select: ({ collection, frontmatter }, context) =>
+				collection === 'showcase' ||
+				context.command === 'serve' ||
+				frontmatter.isPublished === true,
+		},
+		{ root, command, mode: command === 'serve' ? 'development' : 'production' },
+	);
+	const result = await planCollectionAssetsFromDocuments({
 		root,
-		assets: await discoverSiteContentAssets(BLOG_DIRECTORY, SHOWCASE_DIRECTORY, publishedPosts),
+		contentRoot: path.resolve(root, oxContent.srcDir ?? 'content'),
+		documents: documents.map((document) => ({
+			documentPath: document.documentPath,
+			source: document.source,
+			pagePath:
+				document.collection === 'showcase'
+					? '/works/showcase/assets/'
+					: `/blog/${/^index\.mdx?$/.test(path.basename(document.documentPath)) ? path.basename(path.dirname(document.documentPath)) : path.basename(document.documentPath, path.extname(document.documentPath))}/`,
+		})),
+		extraAssets: documents.flatMap(({ collection, documentPath, frontmatter }) =>
+			collection === 'showcase' && typeof frontmatter.image === 'string'
+				? [
+						{
+							sourcePath: path.resolve(path.dirname(documentPath), frontmatter.image),
+							publicPath: `/works/showcase/assets/${encodeURIComponent(path.basename(frontmatter.image))}`,
+						},
+					]
+				: [],
+		),
 	});
+	if (result.diagnostics.length > 0)
+		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
+	return result.manifest;
 }
 
 /**
@@ -97,7 +66,7 @@ export async function planSiteContentAssets(
  * @returns Public alias to content target mappings used while rendering HTML.
  */
 export function collectionAssetUrls(
-	manifest: CollectionAssetManifest,
+	manifest: SiteContentAssetManifest,
 ): ReadonlyMap<string, string> {
 	const urls = new Map<string, string>();
 	for (const asset of manifest.assets) {
@@ -109,67 +78,39 @@ export function collectionAssetUrls(
 }
 
 if (import.meta.vitest != null) {
-	test('content asset discovery excludes posts outside the publication allowlist', async () => {
-		const { createFixture } = await import('fs-fixture');
-		await using fixture = await createFixture({
-			'blog/published/image.png': 'public',
-			'blog/draft/image.png': 'private',
-			'blog/missing-publication/image.png': 'private',
-			'showcase/cover.png': 'public',
-		});
-		const assets = await discoverSiteContentAssets(
-			fixture.getPath('blog'),
-			fixture.getPath('showcase'),
-			new Set(['published']),
-		);
-		expect(assets.map(({ publicPath }) => publicPath)).toEqual([
-			'/blog/published/image.png',
-			'/works/showcase/assets/cover.png',
-		]);
-	});
-	test('content asset discovery lists non-Markdown assets with encoded aliases', async () => {
-		const { createFixture } = await import('fs-fixture');
-		await using fixture = await createFixture({
-			'blog/post/index.md': '# Post',
-			'blog/post/index.html': '<p>Generated elsewhere</p>',
-			'blog/post/component.mdx': '<Component />',
-			'blog/post/component.tsx': 'export default () => null',
-			'blog/post/data.json': '{"private":true}',
-			'blog/post/styles.css': '.private {}',
-			'blog/post/image one.png': 'image',
-			'showcase/project.md': '# Project',
-			'showcase/project cover.jpg': 'cover',
-			'showcase/index.ts': 'export {}',
-		});
-
-		expect(
-			await discoverSiteContentAssets(fixture.getPath('blog'), fixture.getPath('showcase')),
-		).toEqual([
-			{
-				sourcePath: fixture.getPath('blog/post/image one.png'),
-				publicPath: '/blog/post/image%20one.png',
-			},
-			{
-				sourcePath: fixture.getPath('showcase/project cover.jpg'),
-				publicPath: '/works/showcase/assets/project%20cover.jpg',
-			},
-		]);
-	});
-
-	test('collection asset URLs map every alias to its content-addressed target', () => {
-		const urls = collectionAssetUrls({
-			assets: [
-				{
-					sourcePath: '/workspace/image.png',
-					publicPaths: ['/blog/post/image.png', '/legacy/image.png'],
-					contentPath: '/assets/content/digest.png',
-				},
+	test.each([
+		{
+			command: 'build',
+			expected: ['/blog/public/image%20one.png', '/works/showcase/assets/cover.png'],
+		},
+		{
+			command: 'serve',
+			expected: [
+				'/blog/draft/image.png',
+				'/blog/public/image%20one.png',
+				'/blog/unspecified/image.png',
+				'/works/showcase/assets/cover.png',
 			],
+		},
+	] as const)('publishes only selected references in $command', async ({ command, expected }) => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'blog/public/index.md': '---\nisPublished: true\n---\n![image](./image%20one.png)',
+			'blog/public/image one.png': 'public',
+			'blog/public/unreferenced.png': 'not referenced',
+			'blog/public/component.tsx': 'export default () => null',
+			'blog/public/data.json': '{"private":true}',
+			'blog/draft/index.md': '---\nisPublished: false\n---\n![image](./image.png)',
+			'blog/draft/image.png': 'draft',
+			'blog/unspecified/index.md': '# Missing publication\n![image](./image.png)',
+			'blog/unspecified/image.png': 'unspecified',
+			'showcase/project.md': '---\nimage: ./cover.png\n---\nProject',
+			'showcase/cover.png': 'cover',
 		});
-
-		expect([...urls]).toEqual([
-			['/blog/post/image.png', '/assets/content/digest.png'],
-			['/legacy/image.png', '/assets/content/digest.png'],
-		]);
+		const manifest = await planSiteContentAssets(fixture.path, command, {
+			srcDir: '.',
+			collections: { blog: { source: 'blog/*/index.md' }, showcase: { source: 'showcase/*.md' } },
+		});
+		expect(manifest.assets.flatMap(({ publicPaths }) => publicPaths).sort()).toEqual(expected);
 	});
 }

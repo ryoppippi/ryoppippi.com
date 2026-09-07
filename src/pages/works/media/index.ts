@@ -3,16 +3,14 @@ import type { PostListItem } from '@/pages/post-list.ts';
 import { definePage } from '@/pages/page.ts';
 import MediaPage from './page.tsx';
 import type { PageRoutes } from '../../route.ts';
-import { mediaFeedRoute } from './feed.ts';
 
-/** Media page and development feed; production feeds are emitted by Ox Content. */
+/** Media index; feeds are emitted by Ox Content in development and production. */
 export const routes = (() => [
 	{
 		path: '/works/media/',
 		render: async ({ assets, loadExternalMedia }) =>
 			createMediaPageFile(await loadExternalMedia(), assets),
 	},
-	mediaFeedRoute,
 ]) satisfies PageRoutes;
 
 /**

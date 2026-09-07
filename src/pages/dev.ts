@@ -1,12 +1,26 @@
-import type { MarkdownDevHost, MarkdownDevRoute } from '@/ox-content/dev-plugin.ts';
+import type {
+	OxContentCustomHostModule,
+	OxContentCustomHostRoute,
+} from '@ox-content/vite-plugin/custom-host';
+import { createPageMarkdownRenderer } from './markdown.ts';
 import { resolveDevSiteAssets } from '@/components/SiteLayout/assets.ts';
 import { loadBlogPostMetadata } from './blog/data.ts';
 import { fetchDotfilesReadme } from './dotfiles/data.ts';
 import { createPageRoutes } from './route.ts';
 import { createPageContext } from './context.ts';
 import { createErrorPageFile } from './error/index.ts';
+import { loadExternalMedia } from './works/media/data.ts';
+import { blogFeedItems } from './blog/feed.ts';
+import { mediaFeedItems } from './works/media/feed.ts';
 
 const host = {
+	async outputs(context) {
+		const [posts, media] = await Promise.all([
+			loadBlogPostMetadata(),
+			loadExternalMedia(context.root),
+		]);
+		return { collections: { blog: blogFeedItems(posts), media: mediaFeedItems(media) } };
+	},
 	async routes() {
 		const [posts, dotfiles] = await Promise.all([
 			loadBlogPostMetadata(),
@@ -18,10 +32,11 @@ const host = {
 					...route,
 					render(context) {
 						const assets = resolveDevSiteAssets(context.assets);
-						assets.islands = context.islandStylesheets;
-						return route.render(createPageContext(context.root, assets, context.renderMarkdown));
+						return route.render(
+							createPageContext(context.root, assets, createPageMarkdownRenderer(context, assets)),
+						);
 					},
-				}) satisfies MarkdownDevRoute,
+				}) satisfies OxContentCustomHostRoute,
 		);
 	},
 	notFound(context) {
@@ -39,6 +54,6 @@ const host = {
 			return new Response(null, { status: 404 });
 		}
 	},
-} satisfies MarkdownDevHost;
+} satisfies OxContentCustomHostModule;
 
 export default host;
