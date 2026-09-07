@@ -57,8 +57,6 @@
         in
         {
           ci = pkgs.mkShellNoCC {
-            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-
             buildInputs = baseBuildInputs ++ [ pkgs.pnpm ];
           };
 
@@ -67,11 +65,6 @@
               agentSkills = agentSkillsFor system;
             in
             pkgs.mkShellNoCC {
-              # Browser binaries remain available for optional regression tests.
-              # When adding a JS driver, match its revision to this nixpkgs input.
-              PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
-              PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-
               buildInputs = baseBuildInputs ++ [ nix-vite-plus.packages.${system}.vp ] ++ (with pkgs; [
                 nushell
                 nufmt
