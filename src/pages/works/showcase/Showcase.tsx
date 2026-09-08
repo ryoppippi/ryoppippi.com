@@ -3,7 +3,7 @@ import { formatDate } from '@/lib/date.ts';
 import WorksNav from '@/components/WorksNav/index.tsx';
 import styles from './Showcase.module.css';
 
-type ShowcasePageProps = {
+type ShowcaseProps = {
 	projects: ShowcaseProject[];
 };
 
@@ -13,7 +13,7 @@ type ShowcasePageProps = {
  * @param props - Showcase projects to display.
  * @returns The project showcase fragment.
  */
-export default function ShowcasePage({ projects }: ShowcasePageProps) {
+export default function Showcase({ projects }: ShowcaseProps) {
 	return (
 		<>
 			<WorksNav active="showcase" />

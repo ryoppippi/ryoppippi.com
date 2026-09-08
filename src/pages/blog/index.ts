@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import type { PostListItem } from '@/lib/post-list.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import BlogListPage from './page.tsx';
+import BlogList from './BlogList.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 import { loadExternalPosts, postListItems } from './external.ts';
 
@@ -32,7 +32,7 @@ export const routes = (() => [
 export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets) {
 	const sorted = items.toSorted((a, b) => b.pubDate.localeCompare(a.pubDate));
 	return definePage({
-		component: BlogListPage,
+		component: BlogList,
 		componentProps: { items: sorted },
 		outputPath: 'blog/index.html',
 		sourcePaths: [
@@ -47,6 +47,7 @@ export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets
 		description:
 			'Technical articles by @ryoppippi about software engineering, developer tooling, open source, and AI.',
 		assets,
+		pageModule: '/src/pages/blog/BlogList.tsx',
 		style: 'blog',
 	});
 }

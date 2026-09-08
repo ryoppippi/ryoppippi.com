@@ -5,7 +5,7 @@ import styles from './Sponsors.module.css';
  *
  * @returns The sponsors page fragment.
  */
-export default function SponsorsPage() {
+export default function Sponsors() {
 	return (
 		<div class={styles.sponsorsPage}>
 			<h1 class={`${styles.sponsorsTitle} ${styles.visuallyHidden}`}>Sponsors</h1>

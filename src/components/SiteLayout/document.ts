@@ -19,6 +19,7 @@ type HtmlDocumentOptions = {
 	islands?: string[];
 	links?: readonly DocumentLinkInput[];
 	pathname: string;
+	pageModule: string;
 	style: string;
 	title: string;
 	structuredData?: StructuredData;
@@ -45,6 +46,7 @@ export function renderHtmlDocument({
 	assets,
 	islands = [],
 	links = [],
+	pageModule,
 	style,
 	structuredData,
 }: HtmlDocumentOptions): string {
@@ -64,7 +66,7 @@ export function renderHtmlDocument({
 		}),
 		JAVASCRIPT_CLASS_SCRIPT,
 		renderThemeBootstrapScript(),
-		renderAssetTags(assets, style, islands, links),
+		renderAssetTags(assets, style, pageModule, islands, links),
 	].join('');
 
 	return [

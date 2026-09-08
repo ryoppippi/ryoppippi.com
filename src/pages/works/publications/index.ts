@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import PublicationsPage from './page.tsx';
+import Publications from './Publications.tsx';
 import { loadPublications } from './data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
@@ -27,7 +27,7 @@ export function createPublicationsPageFile(
 	assets: SiteAssets,
 ) {
 	return definePage({
-		component: PublicationsPage,
+		component: Publications,
 		componentProps: { publications },
 		outputPath: 'works/publications/index.html',
 		sourcePaths: [
@@ -43,6 +43,7 @@ export function createPublicationsPageFile(
 		description:
 			'Research papers and technical publications authored or co-authored by @ryoppippi.',
 		assets,
+		pageModule: '/src/pages/works/publications/Publications.tsx',
 		style: 'works/publications',
 	});
 }

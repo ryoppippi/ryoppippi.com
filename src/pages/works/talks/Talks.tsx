@@ -4,7 +4,7 @@ import WorksSection, { WorksList } from '@/components/WorksSection/index.tsx';
 import type { Talk } from './data.ts';
 import styles from './Talks.module.css';
 
-type TalksPageProps = {
+type TalksProps = {
 	talks: Talk[];
 };
 
@@ -14,7 +14,7 @@ type TalksPageProps = {
  * @param props - Talks to group and display.
  * @returns The talks page fragment.
  */
-export default function TalksPage({ talks }: TalksPageProps) {
+export default function Talks({ talks }: TalksProps) {
 	const byYear = [
 		...Map.groupBy(talks, (talk) => new Date(talk.date).getFullYear()).entries(),
 	].sort(([a], [b]) => b - a);

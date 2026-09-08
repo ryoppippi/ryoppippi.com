@@ -69,9 +69,10 @@ The official npm beta includes the fixes from
   chunks. Deleted the 180-line SSR stylesheet plugin, its virtual declaration and
   its generic integration test. Stylesheet discovery, CSS Modules, artifact
   traversal and shared-style deduplication now belong to Ox Content.
-- Page assets request `/src/pages/<style>/page.tsx` from `assets.ssrStylesheets()`
-  on demand. Vite config declares one root-relative `src/pages/**/page.tsx` glob
-  and the shared layout root; there is no second scanner or CSS filename registry.
+- Page assets request each page component module (for example,
+  `/src/pages/about/About.tsx`) from `assets.ssrStylesheets()` on demand. Vite
+  config declares one root-relative `src/pages/**/*.tsx` glob and the shared
+  layout root; there is no second scanner or CSS filename registry.
 - Homepage inlining uses the same native SSR results and `stylesheetContent()`;
   browser island assets continue to use the browser stylesheet resolver.
 - Verification: 37 tests in 12 files, formatting/lint/types, typos and 428 SSG

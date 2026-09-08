@@ -4,7 +4,7 @@ import WorksNav from '@/components/WorksNav/index.tsx';
 import WorksSection, { WorksList } from '@/components/WorksSection/index.tsx';
 import styles from './Media.module.css';
 
-type MediaPageProps = {
+type MediaProps = {
 	items: PostListItem[];
 };
 
@@ -20,7 +20,7 @@ const kindDetails = {
  * @param props - Curated media entries to display.
  * @returns The media page fragment.
  */
-export default function MediaPage({ items }: MediaPageProps) {
+export default function Media({ items }: MediaProps) {
 	const playlist = items.find((item) => item.playlist === true);
 	const mediaItems = items.filter((item) => item.playlist !== true);
 	const byYear = [

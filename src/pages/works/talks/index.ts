@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { loadTalks, type Talk } from './data.ts';
-import TalksPage from './page.tsx';
+import Talks from './Talks.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Talks endpoint shared by dev and SSG. */
@@ -21,7 +21,7 @@ export const routes = (() => [
  */
 export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 	return definePage({
-		component: TalksPage,
+		component: Talks,
 		componentProps: { talks },
 		outputPath: 'works/talks/index.html',
 		sourcePaths: [
@@ -36,6 +36,7 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		description:
 			'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 		assets,
+		pageModule: '/src/pages/works/talks/Talks.tsx',
 		style: 'works/talks',
 	});
 }

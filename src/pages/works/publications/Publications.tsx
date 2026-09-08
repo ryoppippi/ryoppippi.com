@@ -9,7 +9,7 @@ type Publication = {
 	title: string;
 };
 
-type PublicationsPageProps = {
+type PublicationsProps = {
 	publications: Record<string, Publication[]>;
 };
 
@@ -19,7 +19,7 @@ type PublicationsPageProps = {
  * @param props - Publications keyed by year.
  * @returns The publications page fragment.
  */
-export default function PublicationsPage({ publications }: PublicationsPageProps) {
+export default function Publications({ publications }: PublicationsProps) {
 	const years = Object.entries(publications).sort(([a], [b]) => Number(b) - Number(a));
 
 	return (

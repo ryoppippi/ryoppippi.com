@@ -15,7 +15,7 @@ import { BLOG_ISLAND_DOCUMENTS } from './src/pages/blog/island-documents.ts';
 export default defineConfig(({ command, mode }) => {
 	const hostOptions = {
 		ssrStylesheets: {
-			modules: ['src/pages/**/page.tsx', '/src/components/SiteLayout/index.tsx'],
+			modules: ['src/pages/**/*.tsx', '/src/components/SiteLayout/index.tsx'],
 		},
 		dev: {
 			enabled: mode !== 'test',
