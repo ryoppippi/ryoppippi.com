@@ -114,6 +114,22 @@ generated files are byte-for-byte identical to the pre-audit build. Remaining
 adapters are site composition, not reproduced framework machinery; this audit
 did not uncover a new upstream public-contract gap requiring an issue.
 
+## Pending: island discovery embed rendering
+
+[#1370](https://github.com/ubugeeei-prod/ox-content/issues/1370) tracks full embed
+rendering during Solid client-island discovery. The registry alone overrides
+`embeds: false`; the custom host retains the shared embed settings for page output.
+
+On 2026-09-08, Vite's reported client build fell from 10.75 s initially
+(1.47 s on a later warm run) to 692 ms / 674 ms with the override. These timings
+exclude the full CLI/SSG wall time. The generated output trees were byte-identical;
+428 custom-host outputs and the same client island were preserved. A build before
+the page-component rename also took 10.61 s with the same dependencies.
+
+Adopt an official upstream release when discovery no longer needs this override,
+remove it, and recheck build timing, generated output and client island behaviour.
+Issue closure alone is not proof that the fix has shipped.
+
 ## Remaining boundary
 
 All previously filed adoption gates are released and adopted. Site-owned

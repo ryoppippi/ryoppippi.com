@@ -60,7 +60,8 @@ export default defineConfig(({ command, mode }) => {
 		},
 		plugins: [
 			createSolidHtmlHostIslandRegistry({
-				oxContent: OX_CONTENT_BUILD_OPTIONS,
+				// Island discovery needs component bindings, not remote embed rendering.
+				oxContent: { ...OX_CONTENT_BUILD_OPTIONS, embeds: false },
 				collectionDocuments: BLOG_ISLAND_DOCUMENTS,
 			}).plugin,
 			solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
