@@ -81,6 +81,38 @@ The official npm beta includes the fixes from
   remains and no SSR stylesheet-entry JavaScript is linked by the documents.
   Fresh development HTML, Markdown and RSS responses and browser layout pass.
 
+## Shared SSG audit (2026-09-08)
+
+All eight modules under `src/utils/ssg` were checked against the installed public
+APIs, including their callers in pages and Vite configuration.
+
+| Module              | Removed or delegated                                                                                                     | Remaining site responsibility                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| `build.ts`          | Reuses the memoised Markdown renderer instead of creating another.                                                       | Composes published posts, showcase and feed data.                                       |
+| `dev.ts`            | Shares blog metadata through native `context.memo`; no local 404 handler.                                                | Supplies page assets and source data to the native host.                                |
+| `context.ts`        | Removes four single-page loader adapters; accepts native `MaybePromise`.                                                 | Shares loaders whose preloaded build data differs from development.                     |
+| `route.ts`          | Allows synchronous renderers with native `MaybePromise`.                                                                 | Discovers page modules and combines static/content-derived URLs.                        |
+| `prerender.ts`      | Leaves route execution to the native host instead of eagerly rendering and wrapping results; creates one shared context. | Selects published posts and rewrites article asset URLs before head/JSON-LD generation. |
+| `content-assets.ts` | Uses the planner's content-root boundary for showcase covers.                                                            | Chooses publishable documents, cover references and legacy URL aliases.                 |
+| `markdown.ts`       | Removes redundant conditional checks.                                                                                    | Connects the public Markdown and Solid renderers and selects article island styles.     |
+| `home-styles.ts`    | Already reads native stylesheet artefacts; no scanner remains.                                                           | Chooses the homepage's critical inline CSS.                                             |
+
+Single-page loaders now live at their page call sites, and duplicated Markdown
+options were removed from the build configuration. Two configuration bugs were
+reproduced and fixed without introducing a plugin or custom validation:
+
+- The native dev dependency watcher now covers all of `src/content`, not just
+  blog posts. A media JSON edit and its restoration update both the media page
+  and RSS output without restarting the server.
+- Explicit showcase covers could previously publish a file outside `src/content`
+  but inside the repository. Setting the planner's `root` to the content directory
+  rejects that reference; a real filesystem regression test verifies the boundary.
+
+Verification: 38 tests in 12 files pass, with 428 custom-host outputs. All 601
+generated files are byte-for-byte identical to the pre-audit build. Remaining
+adapters are site composition, not reproduced framework machinery; this audit
+did not uncover a new upstream public-contract gap requiring an issue.
+
 ## Remaining boundary
 
 All previously filed adoption gates are released and adopted. Site-owned
@@ -92,6 +124,6 @@ Production 404 routing belongs to Wrangler's `assets.not_found_handling` setting
 Development uses Vite's `appType: 'mpa'` and standard 404 response, without a custom
 `notFound` callback. The generated error document can be inspected at `/404.html`.
 
-Keep the PR Draft and unmerged while checking the pushed CI/review state and
+Keep the PR unmerged while checking the pushed CI/review state and
 remaining integration boundary. File a new issue only for a reproduced public
 contract gap, then continue the release/adopt/delete/verify cycle.
