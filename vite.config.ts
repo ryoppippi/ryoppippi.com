@@ -11,10 +11,12 @@ import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { planSiteContentAssets } from './src/utils/ssg/content-assets.ts';
 import { BLOG_ISLAND_DOCUMENTS } from './src/pages/blog/island-documents.ts';
-import { ssrStylesPlugin } from './src/ox-content/ssr-styles-plugin.ts';
 
 export default defineConfig(({ command, mode }) => {
 	const hostOptions = {
+		ssrStylesheets: {
+			modules: ['src/pages/**/page.tsx', '/src/components/SiteLayout/index.tsx'],
+		},
 		dev: {
 			enabled: mode !== 'test',
 			feedOutputs: true,
@@ -41,10 +43,8 @@ export default defineConfig(({ command, mode }) => {
 		build: { transformHtml: false },
 		oxContent: {
 			...OX_CONTENT_BUILD_OPTIONS,
-			feeds: OX_CONTENT_BUILD_OPTIONS.feeds,
 			siteMaps: { robots: false, llms: false },
 			resources: false,
-			redirects: OX_CONTENT_BUILD_OPTIONS.redirects,
 		},
 	} satisfies Omit<OxContentCustomHostOptions, 'host'>;
 	return {
@@ -58,7 +58,6 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
-			ssrStylesPlugin({ pages: 'src/pages', layout: 'src/components/SiteLayout/index.tsx' }),
 			createSolidHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				collectionDocuments: BLOG_ISLAND_DOCUMENTS,

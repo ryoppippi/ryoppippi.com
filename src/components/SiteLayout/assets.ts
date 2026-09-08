@@ -1,3 +1,4 @@
+import path from 'node:path';
 import {
 	type DocumentScriptInput,
 	type DocumentSelfHostedAssets,
@@ -6,8 +7,10 @@ import {
 	type DocumentStylesheetInput,
 	renderDocumentAssets,
 } from '@ox-content/vite-plugin/document-assets';
-import type { OxContentCustomHostAssetsContext } from '@ox-content/vite-plugin/custom-host';
-import discoveredStyles from 'virtual:site/ssr-styles';
+import type {
+	OxContentCustomHostAssetsContext,
+	OxContentCustomHostStylesheetsResult,
+} from '@ox-content/vite-plugin/custom-host';
 
 /** Structured assets selected by the site before final document-level composition. */
 export type SiteAssets = {
@@ -27,7 +30,7 @@ export type SiteAssets = {
 	 * that share a chunk, and the duplicates have to be dropped at render time.
 	 */
 	islands: Record<string, readonly DocumentStylesheetInput[]>;
-	pageStyles: Record<string, readonly DocumentStylesheetInput[]>;
+	pageStyles: (style: string) => readonly DocumentStylesheetInput[];
 };
 
 // In development the client entry also imports the site stylesheets as JS
@@ -37,7 +40,7 @@ export type SiteAssets = {
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
 type SiteAssetResolver = Pick<
 	OxContentCustomHostAssetsContext,
-	'document' | 'selfHosted' | 'stylesheets' | 'themeTokens'
+	'document' | 'selfHosted' | 'stylesheets' | 'ssrStylesheets' | 'themeTokens'
 >;
 
 /**
@@ -48,20 +51,22 @@ type SiteAssetResolver = Pick<
  */
 export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 	return {
-		sharedStyles: ['/src/styles/global.css', ...discoveredStyles.sharedStyles],
+		sharedStyles: [
+			'/src/styles/global.css',
+			...moduleStyles(assets.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] })),
+		],
 		scripts: ['/src/client/index.ts'],
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
-		pageStyles: discoveredStyles.pageStyles,
+		pageStyles: (style) =>
+			moduleStyles(
+				assets.ssrStylesheets({ modules: [path.posix.join('/src/pages', style, 'page.tsx')] }),
+			),
 		islands: {},
 	};
 }
 
-function moduleStyles(
-	assets: SiteAssetResolver,
-	modules: readonly string[],
-): DocumentStyleDescriptor[] {
-	const result = assets.stylesheets({ modules });
+function moduleStyles(result: OxContentCustomHostStylesheetsResult): DocumentStyleDescriptor[] {
 	if (result.diagnostics.length > 0) {
 		throw new Error(result.diagnostics.map(({ message }) => message).join('\n'));
 	}
@@ -84,21 +89,25 @@ export function resolveSiteAssets(
 ): SiteAssets {
 	const entry = assets.document({ clientEntries: ['index.html'], crossorigin: true });
 	const islands = Object.fromEntries(
-		islandModules.map((moduleId) => [moduleId, moduleStyles(assets, [moduleId])]),
+		islandModules.map((moduleId) => [
+			moduleId,
+			moduleStyles(assets.stylesheets({ modules: [moduleId] })),
+		]),
 	);
 
 	return {
-		sharedStyles: [...entry.styles, ...moduleStyles(assets, discoveredStyles.sharedStyles)],
+		sharedStyles: [
+			...entry.styles,
+			...moduleStyles(assets.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] })),
+		],
 		scripts: entry.scripts,
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
-		pageStyles: Object.fromEntries(
-			Object.entries(discoveredStyles.pageStyles).map(([page, modules]) => [
-				page,
-				moduleStyles(assets, modules),
-			]),
-		),
+		pageStyles: (style) =>
+			moduleStyles(
+				assets.ssrStylesheets({ modules: [path.posix.join('/src/pages', style, 'page.tsx')] }),
+			),
 	};
 }
 
@@ -156,7 +165,7 @@ export function renderAssetTags(
 		selfHostedAssets: assets.selfHosted,
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
-			...(inline?.pageStyles ?? assets.pageStyles[style]),
+			...(inline?.pageStyles ?? assets.pageStyles(style)),
 			...(style === 'blog/[slug]' && assets.syntaxThemeHref != null
 				? [assets.syntaxThemeHref]
 				: []),
@@ -168,6 +177,11 @@ export function renderAssetTags(
 
 if (import.meta.vitest != null) {
 	const testSelfHosted = { stylesheets: [], preloads: [], headTags: '' };
+	const pageStyles: Record<string, string[]> = {
+		'blog/[slug]': ['/article.css'],
+		blog: ['/blog.css'],
+		'.': ['/home.css'],
+	};
 	const assets = {
 		sharedStyles: ['/base.css'],
 		scripts: ['/client.js'],
@@ -180,15 +194,7 @@ if (import.meta.vitest != null) {
 			],
 			'/src/content/blog/post/Table.tsx': [{ href: 'assets/Legend.css', crossorigin: true }],
 		},
-		pageStyles: {
-			about: ['/about-page.css'],
-			'blog/[slug]': ['/article.css'],
-			blog: ['/blog.css'],
-			error: ['/error.css'],
-			'.': ['/home.css'],
-			sponsors: ['/sponsors.css'],
-			works: ['/works.css'],
-		},
+		pageStyles: (style) => pageStyles[style],
 	} as const satisfies SiteAssets;
 
 	test('article documents include syntax and selected island styles but home does not', async () => {

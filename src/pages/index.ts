@@ -88,15 +88,7 @@ if (import.meta.vitest != null) {
 			scripts: [],
 			islands: {},
 			selfHosted: {},
-			pageStyles: {
-				about: [],
-				article: [],
-				blog: [],
-				error: [],
-				'.': [],
-				sponsors: [],
-				works: [],
-			},
+			pageStyles: () => [],
 		});
 		const jsonLd = page.body.match(
 			/<script type="application\/ld\+json">([\s\S]*?)<\/script>/,

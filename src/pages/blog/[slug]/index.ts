@@ -162,7 +162,7 @@ if (import.meta.vitest != null) {
 		scripts: [],
 		islands: {},
 		selfHosted: {},
-		pageStyles: { 'blog/[slug]': [] },
+		pageStyles: () => [],
 	} as const satisfies SiteAssets;
 
 	const examplePost = {
