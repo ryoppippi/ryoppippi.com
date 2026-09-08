@@ -5,7 +5,7 @@ import styles from './Error.module.css';
  *
  * @returns The not-found page content.
  */
-export default function ErrorPage() {
+export default function Error() {
 	return (
 		<div class={styles.errorPage}>
 			<h1 class={styles.errorCode}>404</h1>

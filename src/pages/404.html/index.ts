@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import ErrorPage from './page.tsx';
+import Error from './Error.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Prerendered error document. */
@@ -16,7 +16,7 @@ export const routes = (() => [
  */
 export function createErrorPageFile(assets: SiteAssets) {
 	return definePage({
-		component: ErrorPage,
+		component: Error,
 		componentProps: {},
 		outputPath: '404.html',
 		sourcePaths: ['src/pages/404.html'],
@@ -25,6 +25,7 @@ export function createErrorPageFile(assets: SiteAssets) {
 		description: 'The requested page could not be found.',
 		indexable: false,
 		assets,
+		pageModule: '/src/pages/404.html/Error.tsx',
 		style: '404.html',
 	});
 }

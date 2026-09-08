@@ -1,4 +1,3 @@
-import path from 'node:path';
 import {
 	type DocumentScriptInput,
 	type DocumentSelfHostedAssets,
@@ -30,7 +29,7 @@ export type SiteAssets = {
 	 * that share a chunk, and the duplicates have to be dropped at render time.
 	 */
 	islands: Record<string, readonly DocumentStylesheetInput[]>;
-	pageStyles: (style: string) => readonly DocumentStylesheetInput[];
+	pageStyles: (module: string) => readonly DocumentStylesheetInput[];
 };
 
 // In development the client entry also imports the site stylesheets as JS
@@ -58,10 +57,7 @@ export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 		scripts: ['/src/client/index.ts'],
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
-		pageStyles: (style) =>
-			moduleStyles(
-				assets.ssrStylesheets({ modules: [path.posix.join('/src/pages', style, 'page.tsx')] }),
-			),
+		pageStyles: (module) => moduleStyles(assets.ssrStylesheets({ modules: [module] })),
 		islands: {},
 	};
 }
@@ -104,10 +100,7 @@ export function resolveSiteAssets(
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
-		pageStyles: (style) =>
-			moduleStyles(
-				assets.ssrStylesheets({ modules: [path.posix.join('/src/pages', style, 'page.tsx')] }),
-			),
+		pageStyles: (module) => moduleStyles(assets.ssrStylesheets({ modules: [module] })),
 	};
 }
 
@@ -149,6 +142,7 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
  *
  * @param assets - Resolved shared, route, island, and client assets.
  * @param style - Site-owned page style selection.
+ * @param pageModule - Source module id for the named page component.
  * @param islands - Client module ids mounted by the rendered page.
  * @param links - Additional links selected by the rendered page.
  * @returns Head tags in document order with duplicate assets removed.
@@ -156,6 +150,7 @@ export function inlineHomeStyles(assets: SiteAssets, base: string, page: string)
 export function renderAssetTags(
 	assets: SiteAssets,
 	style: string,
+	pageModule: string,
 	islands: string[] = [],
 	links: readonly DocumentLinkInput[] = [],
 ): string {
@@ -165,7 +160,7 @@ export function renderAssetTags(
 		selfHostedAssets: assets.selfHosted,
 		sharedStyles: inline?.sharedStyles ?? assets.sharedStyles,
 		pageStyles: [
-			...(inline?.pageStyles ?? assets.pageStyles(style)),
+			...(inline?.pageStyles ?? assets.pageStyles(pageModule)),
 			...(style === 'blog/[slug]' && assets.syntaxThemeHref != null
 				? [assets.syntaxThemeHref]
 				: []),
@@ -178,9 +173,9 @@ export function renderAssetTags(
 if (import.meta.vitest != null) {
 	const testSelfHosted = { stylesheets: [], preloads: [], headTags: '' };
 	const pageStyles: Record<string, string[]> = {
-		'blog/[slug]': ['/article.css'],
-		blog: ['/blog.css'],
-		'.': ['/home.css'],
+		'/src/pages/blog/[slug]/Article.tsx': ['/article.css'],
+		'/src/pages/blog/BlogList.tsx': ['/blog.css'],
+		'/src/pages/Home.tsx': ['/home.css'],
 	};
 	const assets = {
 		sharedStyles: ['/base.css'],
@@ -194,13 +189,14 @@ if (import.meta.vitest != null) {
 			],
 			'/src/content/blog/post/Table.tsx': [{ href: 'assets/Legend.css', crossorigin: true }],
 		},
-		pageStyles: (style) => pageStyles[style],
+		pageStyles: (module) => pageStyles[module],
 	} as const satisfies SiteAssets;
 
 	test('article documents include syntax and selected island styles but home does not', async () => {
 		const { renderHtmlDocument } = await import('./document.ts');
 		const article = renderHtmlDocument({
 			assets,
+			pageModule: '/src/pages/blog/[slug]/Article.tsx',
 			style: 'blog/[slug]',
 			title: 'Article',
 			pathname: '/blog/post/',
@@ -209,6 +205,7 @@ if (import.meta.vitest != null) {
 		});
 		const home = renderHtmlDocument({
 			assets,
+			pageModule: '/src/pages/Home.tsx',
 			style: '.',
 			title: '',
 			pathname: '/',
@@ -227,6 +224,7 @@ if (import.meta.vitest != null) {
 		const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
 		const home = renderHtmlDocument({
 			assets: inlined,
+			pageModule: '/src/pages/Home.tsx',
 			style: '.',
 			title: '',
 			pathname: '/',
@@ -234,6 +232,7 @@ if (import.meta.vitest != null) {
 		});
 		const blog = renderHtmlDocument({
 			assets: inlined,
+			pageModule: '/src/pages/blog/BlogList.tsx',
 			style: 'blog',
 			title: 'Blog',
 			pathname: '/blog/',

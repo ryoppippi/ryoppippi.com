@@ -3,7 +3,7 @@ import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
-import AboutPage from './page.tsx';
+import About from './About.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Profile endpoint shared by dev and SSG. */
@@ -25,7 +25,7 @@ const ABOUT_DESCRIPTION =
 export function createAboutPageFile(assets: SiteAssets) {
 	const url = ufo.joinURL(SITE_ORIGIN, ABOUT_PATHNAME);
 	return definePage({
-		component: AboutPage,
+		component: About,
 		componentProps: {},
 		outputPath: 'about/index.html',
 		sourcePaths: ['src/config/site-owner.ts', 'src/pages/about'],
@@ -33,6 +33,7 @@ export function createAboutPageFile(assets: SiteAssets) {
 		pathname: ABOUT_PATHNAME,
 		description: ABOUT_DESCRIPTION,
 		assets,
+		pageModule: '/src/pages/about/About.tsx',
 		style: 'about',
 		structuredData: {
 			'@context': 'https://schema.org',

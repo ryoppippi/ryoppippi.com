@@ -16,7 +16,7 @@ const socials = [
  *
  * @returns The home page fragment.
  */
-export default function HomePage() {
+export default function Home() {
 	return (
 		<>
 			<article class={styles.homeIntro}>

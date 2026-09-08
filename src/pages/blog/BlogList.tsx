@@ -2,7 +2,7 @@ import { formatDate } from '@/lib/date.ts';
 import type { PostListItem } from '@/lib/post-list.ts';
 import styles from './BlogList.module.css';
 
-type BlogListPageProps = {
+type BlogListProps = {
 	items: PostListItem[];
 };
 
@@ -24,7 +24,7 @@ const externalKindLabels = {
  * @param props - Local and external posts to display.
  * @returns The blog list fragment.
  */
-export default function BlogListPage({ items }: BlogListPageProps) {
+export default function BlogList({ items }: BlogListProps) {
 	return (
 		<>
 			<h1 class={styles.visuallyHidden}>Blog</h1>

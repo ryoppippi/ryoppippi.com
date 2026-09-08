@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '@/config/site.ts'
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
-import HomePage from './page.tsx';
+import Home from './Home.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
@@ -63,19 +63,20 @@ function homeStructuredData() {
  */
 export function createHomePageFile(assets: SiteAssets) {
 	return definePage({
-		component: HomePage,
+		component: Home,
 		componentProps: {},
 		outputPath: 'index.html',
 		sourcePaths: [
 			SITE_OWNER_SOURCE_PATH,
 			'src/pages/index.ts',
-			'src/pages/page.tsx',
+			'src/pages/Home.tsx',
 			'src/pages/Home.module.css',
 		],
 		title: '',
 		pathname: '/',
 		description: HOME_DESCRIPTION,
 		assets,
+		pageModule: '/src/pages/Home.tsx',
 		style: '.',
 		structuredData: homeStructuredData(),
 	});

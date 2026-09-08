@@ -4,7 +4,7 @@ import WorksSection from '@/components/WorksSection/index.tsx';
 import type { OssProject, OssProjectKind } from './data.ts';
 import styles from './Oss.module.css';
 
-type OssPageProps = {
+type OssProps = {
 	projects: OssProject[];
 };
 
@@ -26,7 +26,7 @@ function formatStars(stars: number): string {
  * @param props - Projects to group and display.
  * @returns The OSS page fragment.
  */
-export default function OssPage({ projects }: OssPageProps) {
+export default function Oss({ projects }: OssProps) {
 	return (
 		<>
 			<WorksNav active="oss" />

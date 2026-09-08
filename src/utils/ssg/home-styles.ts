@@ -28,7 +28,7 @@ export async function inlineBuiltHomeStyles(
 			resolver.stylesheets({ modules: ['index.html'] }),
 			resolver.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] }),
 		]),
-		content([resolver.ssrStylesheets({ modules: ['/src/pages/page.tsx'] })]),
+		content([resolver.ssrStylesheets({ modules: ['/src/pages/Home.tsx'] })]),
 	]);
 	return inlineHomeStyles(assets, base, home);
 }

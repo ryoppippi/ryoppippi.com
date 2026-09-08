@@ -17,7 +17,7 @@ const links = [
  *
  * @returns The profile page fragment.
  */
-export default function AboutPage() {
+export default function About() {
 	return (
 		<article class={styles.page}>
 			<section class={styles.profileCard}>
