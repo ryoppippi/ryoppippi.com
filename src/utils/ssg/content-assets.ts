@@ -5,6 +5,7 @@ import {
 } from '@ox-content/vite-plugin';
 import { resolveSolidHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-solid';
 import path from 'node:path';
+import { createFixture } from 'fs-fixture';
 import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
 
 /**
@@ -31,8 +32,7 @@ export async function planSiteContentAssets(
 		{ root, command, mode: command === 'serve' ? 'development' : 'production' },
 	);
 	const result = await planCollectionAssetsFromDocuments({
-		root,
-		contentRoot: path.resolve(root, oxContent.srcDir ?? 'content'),
+		root: path.resolve(root, oxContent.srcDir ?? 'content'),
 		documents: documents.map((document) => ({
 			documentPath: document.documentPath,
 			source: document.source,
@@ -91,7 +91,6 @@ if (import.meta.vitest != null) {
 			],
 		},
 	] as const)('publishes only selected references in $command', async ({ command, expected }) => {
-		const { createFixture } = await import('fs-fixture');
 		await using fixture = await createFixture({
 			'blog/public/index.md': '---\nisPublished: true\n---\n![image](./image%20one.png)',
 			'blog/public/image one.png': 'public',
@@ -110,5 +109,19 @@ if (import.meta.vitest != null) {
 			collections: { blog: { source: 'blog/*/index.md' }, showcase: { source: 'showcase/*.md' } },
 		});
 		expect(manifest.assets.flatMap(({ publicPaths }) => publicPaths).sort()).toEqual(expected);
+	});
+
+	test('rejects a showcase cover outside the content root', async () => {
+		await using fixture = await createFixture({
+			'content/blog/post/index.md': '---\nisPublished: true\n---\nPost',
+			'content/showcase/project.md': '---\nimage: ../../private.png\n---\nProject',
+			'private.png': 'not public content',
+		});
+		await expect(
+			planSiteContentAssets(fixture.path, 'build', {
+				srcDir: 'content',
+				collections: { blog: { source: 'blog/*/index.md' }, showcase: { source: 'showcase/*.md' } },
+			}),
+		).rejects.toThrow('must stay within root');
 	});
 }
