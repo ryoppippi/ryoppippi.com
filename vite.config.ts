@@ -48,6 +48,7 @@ export default defineConfig(({ command, mode }) => {
 		},
 	} satisfies Omit<OxContentCustomHostOptions, 'host'>;
 	return {
+		appType: 'mpa',
 		envPrefix: ['PUBLIC_', 'VITE_'],
 		resolve: {
 			tsconfigPaths: true,

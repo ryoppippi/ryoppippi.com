@@ -88,6 +88,10 @@ publication/legacy URL policy, data loading, layout/head values, page enumeratio
 and homepage critical-CSS selection remain local. They compose supported host
 APIs rather than implementing a dev server, Markdown renderer or asset pipeline.
 
+Production 404 routing belongs to Wrangler's `assets.not_found_handling` setting.
+Development uses Vite's `appType: 'mpa'` and standard 404 response, without a custom
+`notFound` callback. The generated error document can be inspected at `/404.html`.
+
 Keep the PR Draft and unmerged while checking the pushed CI/review state and
 remaining integration boundary. File a new issue only for a reproduced public
 contract gap, then continue the release/adopt/delete/verify cycle.
