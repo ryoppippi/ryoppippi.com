@@ -18,14 +18,14 @@ function loadHostContent(context: OxContentCustomHostRoutesContext) {
 			loadShowcase(renderContent),
 			loadExternalMedia(context.root),
 		]);
-		return { posts, showcase, externalMedia };
+		return { posts, showcase, externalMedia, renderContent };
 	});
 }
 
 const host = {
 	async routes(context) {
 		const { root } = context;
-		const { posts, showcase, externalMedia } = await loadHostContent(context);
+		const { posts, showcase, externalMedia, renderContent } = await loadHostContent(context);
 		const contentAssets = await context.assets.collectionManifest();
 		if (contentAssets == null) throw new Error('The site requires a collection asset snapshot');
 		const islandModules = [
@@ -36,7 +36,7 @@ const host = {
 			),
 		];
 		return prerenderPages({
-			renderContent: createPageMarkdownRenderer(context),
+			renderContent,
 			contentAssets,
 			assets: await inlineBuiltHomeStyles(
 				context.assets,

@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import type { Talk } from './data.ts';
+import { loadTalks, type Talk } from './data.ts';
 import TalksPage from './page.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
@@ -8,7 +8,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 export const routes = (() => [
 	{
 		path: '/works/talks/',
-		render: async ({ assets, loadTalks }) => createTalksPageFile(await loadTalks(), assets),
+		render: async ({ assets }) => createTalksPageFile(await loadTalks(), assets),
 	},
 ]) satisfies PageRoutes;
 

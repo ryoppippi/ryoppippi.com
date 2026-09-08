@@ -1,14 +1,15 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import PublicationsPage from './page.tsx';
+import { loadPublications } from './data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Publications endpoint shared by dev and SSG. */
 export const routes = (() => [
 	{
 		path: '/works/publications/',
-		render: async ({ assets, loadPublications }) =>
-			createPublicationsPageFile(await loadPublications(), assets),
+		render: async ({ root, assets }) =>
+			createPublicationsPageFile(await loadPublications(root), assets),
 	},
 ]) satisfies PageRoutes;
 

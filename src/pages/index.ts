@@ -8,7 +8,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
 export const routes = (() => [
-	{ path: '/', render: async ({ assets }) => createHomePageFile(assets) },
+	{ path: '/', render: ({ assets }) => createHomePageFile(assets) },
 ]) satisfies PageRoutes;
 
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';

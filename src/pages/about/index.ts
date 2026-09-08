@@ -8,7 +8,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Profile endpoint shared by dev and SSG. */
 export const routes = (() => [
-	{ path: '/about/', render: async ({ assets }) => createAboutPageFile(assets) },
+	{ path: '/about/', render: ({ assets }) => createAboutPageFile(assets) },
 ]) satisfies PageRoutes;
 
 const ABOUT_PATHNAME = '/about/';

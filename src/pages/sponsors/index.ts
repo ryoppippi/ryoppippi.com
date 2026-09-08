@@ -5,7 +5,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Sponsors endpoint shared by dev and SSG. */
 export const routes = (() => [
-	{ path: '/sponsors/', render: async ({ assets }) => createSponsorsPageFile(assets) },
+	{ path: '/sponsors/', render: ({ assets }) => createSponsorsPageFile(assets) },
 ]) satisfies PageRoutes;
 
 /**

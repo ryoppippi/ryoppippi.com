@@ -1,10 +1,13 @@
 import type { PageCatalogue, PageContext } from './context.ts';
-import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
+import type {
+	MaybePromise,
+	OxContentCustomHostRenderResult,
+} from '@ox-content/vite-plugin/custom-host';
 
 /** One lazily rendered output, shared by development and prerendering. */
 export type PageRoute = {
 	path: string;
-	render: (context: PageContext) => Promise<OxContentCustomHostRenderResult | undefined>;
+	render: (context: PageContext) => MaybePromise<OxContentCustomHostRenderResult | undefined>;
 };
 
 /** A colocated page module enumerates its own static or content-derived outputs. */

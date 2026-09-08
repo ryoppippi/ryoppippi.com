@@ -3,16 +3,16 @@ import type { PostListItem } from '@/lib/post-list.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import BlogListPage from './page.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
-import { postListItems } from './external.ts';
+import { loadExternalPosts, postListItems } from './external.ts';
 
 /** Blog index; feeds are emitted by Ox Content in development and production. */
 export const routes = (() => [
 	{
 		path: '/blog/',
-		render: async ({ assets, loadBlogPostMetadata, loadExternalPosts }) => {
+		render: async ({ root, assets, loadBlogPostMetadata }) => {
 			const [posts, externalPosts] = await Promise.all([
 				loadBlogPostMetadata(),
-				loadExternalPosts(),
+				loadExternalPosts(root),
 			]);
 			return createBlogListPageFile(
 				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],

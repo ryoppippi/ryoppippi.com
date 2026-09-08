@@ -9,7 +9,7 @@ import { fetchDotfilesReadme } from '@/pages/dotfiles/data.ts';
 import { createPageRoutes } from '@/utils/ssg/route.ts';
 import { collectionAssetUrls } from './content-assets.ts';
 import type { PostListItem } from '@/lib/post-list.ts';
-import { createPageContext } from '@/utils/ssg/context.ts';
+import { createPageContext, type PageContext } from '@/utils/ssg/context.ts';
 
 type PrerenderPagesOptions = {
 	assets: SiteAssets;
@@ -61,18 +61,20 @@ export async function prerenderPages({
 					project.image),
 	}));
 	const publishedPosts = renderedPosts.filter((post) => post.isPublished);
-	return Promise.all(
-		createPageRoutes({ posts: publishedPosts, dotfiles }).map(async (route) => {
-			const result = await route.render({
-				...createPageContext(root, assets, renderContent),
-				loadBlogPost: async (slug) => publishedPosts.find((post) => post.filename === slug) ?? null,
-				loadBlogPostMetadata: async () => publishedPosts,
-				loadBlogPostSource: async (slug) =>
-					publishedPosts.find((post) => post.filename === slug)?.source ?? null,
-				loadExternalMedia: async () => externalMedia,
-				loadShowcase: async () => renderedShowcase,
-			});
-			return { path: route.path, render: () => result } satisfies OxContentCustomHostRoute;
-		}),
+	const context = {
+		...createPageContext(root, assets, renderContent),
+		loadBlogPost: (slug) => publishedPosts.find((post) => post.filename === slug) ?? null,
+		loadBlogPostMetadata: () => publishedPosts,
+		loadBlogPostSource: (slug) =>
+			publishedPosts.find((post) => post.filename === slug)?.source ?? null,
+		loadExternalMedia: () => externalMedia,
+		loadShowcase: () => renderedShowcase,
+	} satisfies PageContext;
+	return createPageRoutes({ posts: publishedPosts, dotfiles }).map(
+		(route) =>
+			({
+				path: route.path,
+				render: () => route.render(context),
+			}) satisfies OxContentCustomHostRoute,
 	);
 }

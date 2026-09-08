@@ -6,7 +6,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 export const routes = (({ dotfiles }) =>
 	createDotfilesPageFiles(dotfiles).map((file) => ({
 		path: `/${file.outputPath}`,
-		render: async () => file,
+		render: () => file,
 	}))) satisfies PageRoutes;
 
 /**

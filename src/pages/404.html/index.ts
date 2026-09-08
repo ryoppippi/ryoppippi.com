@@ -5,7 +5,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Prerendered error document. */
 export const routes = (() => [
-	{ path: '/404.html', render: async ({ assets }) => createErrorPageFile(assets) },
+	{ path: '/404.html', render: ({ assets }) => createErrorPageFile(assets) },
 ]) satisfies PageRoutes;
 
 /**

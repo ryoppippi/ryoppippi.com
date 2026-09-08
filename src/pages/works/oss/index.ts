@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import type { OssProject } from './data.ts';
+import { loadOssProjects, type OssProject } from './data.ts';
 import OssPage from './page.tsx';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
@@ -8,8 +8,7 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 export const routes = (() => [
 	{
 		path: '/works/oss/',
-		render: async ({ assets, loadOssProjects }) =>
-			createOssPageFile(await loadOssProjects(), assets),
+		render: async ({ root, assets }) => createOssPageFile(await loadOssProjects(root), assets),
 	},
 ]) satisfies PageRoutes;
 

@@ -15,14 +15,14 @@ import { mediaFeedItems } from '@/pages/works/media/feed.ts';
 const host = {
 	async outputs(context) {
 		const [posts, media] = await Promise.all([
-			loadBlogPostMetadata(),
+			context.memo('blog-metadata', loadBlogPostMetadata),
 			loadExternalMedia(context.root),
 		]);
 		return { collections: { blog: blogFeedItems(posts), media: mediaFeedItems(media) } };
 	},
-	async routes() {
+	async routes(context) {
 		const [posts, dotfiles] = await Promise.all([
-			loadBlogPostMetadata(),
+			context.memo('blog-metadata', loadBlogPostMetadata),
 			fetchDotfilesReadme(fetch),
 		]);
 		return createPageRoutes({ posts, dotfiles }).map(
@@ -31,9 +31,14 @@ const host = {
 					...route,
 					render(context) {
 						const assets = resolveDevSiteAssets(context.assets);
-						return route.render(
-							createPageContext(context.root, assets, createPageMarkdownRenderer(context, assets)),
-						);
+						return route.render({
+							...createPageContext(
+								context.root,
+								assets,
+								createPageMarkdownRenderer(context, assets),
+							),
+							loadBlogPostMetadata: () => posts,
+						});
 					},
 				}) satisfies OxContentCustomHostRoute,
 		);

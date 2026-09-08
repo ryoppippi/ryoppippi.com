@@ -16,8 +16,6 @@ const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to
 export const OX_CONTENT_BUILD_OPTIONS = {
 	...OX_MARKDOWN_OPTIONS,
 	frontmatter: true,
-	attrs: true,
-	budoux: true,
 	srcDir: 'src/content',
 	outDir: 'dist',
 	collections: {
@@ -97,7 +95,6 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 			},
 		},
 	},
-	search: false,
 } as const satisfies OxContentOptions;
 
 if (import.meta.vitest != null) {

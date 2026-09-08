@@ -32,11 +32,13 @@ export function createPageMarkdownRenderer(
 			convertMdLinks: false,
 			async renderHtml({ html, transform }) {
 				const rendered = await renderSolid(html, { ...options, imports: transform.imports });
-				for (const { moduleId } of assets == null ? [] : rendered.clientModules) {
-					const styles = context.assets.stylesheets({ modules: [moduleId] });
-					if (styles.diagnostics.length > 0)
-						throw new Error(styles.diagnostics.map(({ message }) => message).join('\n'));
-					if (assets != null) assets.islands[moduleId] = styles.stylesheets;
+				if (assets != null) {
+					for (const { moduleId } of rendered.clientModules) {
+						const styles = context.assets.stylesheets({ modules: [moduleId] });
+						if (styles.diagnostics.length > 0)
+							throw new Error(styles.diagnostics.map(({ message }) => message).join('\n'));
+						assets.islands[moduleId] = styles.stylesheets;
+					}
 				}
 				return { html: rendered.html, metadata: rendered.clientModules };
 			},
