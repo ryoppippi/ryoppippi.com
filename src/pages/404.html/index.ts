@@ -20,7 +20,7 @@ export function createErrorPageFile(assets: SiteAssets) {
 		componentProps: {},
 		outputPath: '404.html',
 		sourcePaths: ['src/pages/404.html'],
-		title: 'Page not found',
+		title: 'page not found',
 		pathname: '/404',
 		description: 'The requested page could not be found.',
 		indexable: false,

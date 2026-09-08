@@ -7,7 +7,7 @@ export const MEDIA_FEED_OPTIONS = {
 	formats: ['rss'],
 	limit: 1_000,
 	path: '/works/media',
-	title: `Media | ${SITE_NAME}`,
+	title: `media | ${SITE_NAME}`,
 	description: `Media appearances by ${SITE_NAME}`,
 	language: 'ja',
 	image: SITE_SOCIAL_IMAGE_URL,

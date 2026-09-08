@@ -12,7 +12,8 @@ export const routes = (() => [
 ]) satisfies PageRoutes;
 
 const ABOUT_PATHNAME = '/about/';
-const ABOUT_TITLE = 'ryoppippi (Ryotaro Kimura)';
+const ABOUT_TITLE = 'about';
+const ABOUT_PROFILE_NAME = 'ryoppippi (Ryotaro Kimura)';
 const ABOUT_DESCRIPTION =
 	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.';
 
@@ -39,7 +40,7 @@ export function createAboutPageFile(assets: SiteAssets) {
 			'@type': 'ProfilePage',
 			'@id': ufo.withFragment(url, 'profile'),
 			url,
-			name: ABOUT_TITLE,
+			name: ABOUT_PROFILE_NAME,
 			description: ABOUT_DESCRIPTION,
 			mainEntity: {
 				'@type': 'Person',

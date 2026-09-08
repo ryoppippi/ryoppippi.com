@@ -31,7 +31,7 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/talks',
 		],
-		title: 'Talks',
+		title: 'talks',
 		pathname: '/works/talks/',
 		description:
 			'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',

@@ -34,7 +34,7 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 			'src/pages/works/media',
 			'src/content/works/media/list.json',
 		],
-		title: 'Media',
+		title: 'media',
 		pathname: '/works/media/',
 		description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 		assets,

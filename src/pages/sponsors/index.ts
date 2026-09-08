@@ -20,7 +20,7 @@ export function createSponsorsPageFile(assets: SiteAssets) {
 		componentProps: {},
 		outputPath: 'sponsors/index.html',
 		sourcePaths: ['src/pages/sponsors'],
-		title: 'Sponsors',
+		title: 'sponsors',
 		pathname: '/sponsors/',
 		description:
 			"Support @ryoppippi's open-source projects, technical writing, and talks through GitHub Sponsors.",

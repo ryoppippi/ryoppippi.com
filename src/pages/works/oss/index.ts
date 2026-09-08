@@ -33,7 +33,7 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 			'src/content/works/oss/list.json',
 			'src/content/works/oss/stars.json',
 		],
-		title: 'Open-source projects',
+		title: 'open-source projects',
 		pathname: '/works/oss/',
 		description:
 			'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',

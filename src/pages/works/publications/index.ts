@@ -38,7 +38,7 @@ export function createPublicationsPageFile(
 			'src/pages/works/publications',
 			'src/content/works/publications/list.json',
 		],
-		title: 'Publications',
+		title: 'publications',
 		pathname: '/works/publications/',
 		description:
 			'Research papers and technical publications authored or co-authored by @ryoppippi.',

@@ -42,7 +42,7 @@ export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets
 			'src/content/blog/external/rss.json',
 			'src/content/blog/external/posts.json',
 		],
-		title: 'Blog',
+		title: 'blog',
 		pathname: '/blog/',
 		description:
 			'Technical articles by @ryoppippi about software engineering, developer tooling, open source, and AI.',
