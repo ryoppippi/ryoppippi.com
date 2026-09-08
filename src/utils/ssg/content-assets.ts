@@ -101,12 +101,15 @@ if (import.meta.vitest != null) {
 			'blog/draft/image.png': 'draft',
 			'blog/unspecified/index.md': '# Missing publication\n![image](./image.png)',
 			'blog/unspecified/image.png': 'unspecified',
-			'showcase/project.md': '---\nimage: ./cover.png\n---\nProject',
-			'showcase/cover.png': 'cover',
+			'showcase/project/index.md': '---\nimage: ./cover.png\n---\nProject',
+			'showcase/project/cover.png': 'cover',
 		});
 		const manifest = await planSiteContentAssets(fixture.path, command, {
 			srcDir: '.',
-			collections: { blog: { source: 'blog/*/index.md' }, showcase: { source: 'showcase/*.md' } },
+			collections: {
+				blog: { source: 'blog/*/index.md' },
+				showcase: { source: 'showcase/*/index.md' },
+			},
 		});
 		expect(manifest.assets.flatMap(({ publicPaths }) => publicPaths).sort()).toEqual(expected);
 	});
@@ -114,13 +117,16 @@ if (import.meta.vitest != null) {
 	test('rejects a showcase cover outside the content root', async () => {
 		await using fixture = await createFixture({
 			'content/blog/post/index.md': '---\nisPublished: true\n---\nPost',
-			'content/showcase/project.md': '---\nimage: ../../private.png\n---\nProject',
+			'content/showcase/project/index.md': '---\nimage: ../../../private.png\n---\nProject',
 			'private.png': 'not public content',
 		});
 		await expect(
 			planSiteContentAssets(fixture.path, 'build', {
 				srcDir: 'content',
-				collections: { blog: { source: 'blog/*/index.md' }, showcase: { source: 'showcase/*.md' } },
+				collections: {
+					blog: { source: 'blog/*/index.md' },
+					showcase: { source: 'showcase/*/index.md' },
+				},
 			}),
 		).rejects.toThrow('must stay within root');
 	});
