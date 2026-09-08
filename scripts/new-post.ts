@@ -35,7 +35,7 @@ p.log.message('Creating post...');
 const blogDir = BLOG_DIRECTORY;
 const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}-${lang}`;
 const postDir = join(blogDir, slug);
-const md = join(postDir, 'index.md');
+const mdx = join(postDir, 'index.mdx');
 const frontMatter = stringify('', {
 	title,
 	date,
@@ -44,16 +44,16 @@ const frontMatter = stringify('', {
 });
 
 await fs.ensureDir(postDir);
-await fs.writeFile(md, frontMatter);
+await fs.writeFile(mdx, frontMatter);
 
-p.log.success(`Post created at ${md}`);
+p.log.success(`Post created at ${mdx}`);
 
 const isOpen = await p.confirm({
 	message: 'Do you want to open the editor?',
 	initialValue: true,
 });
 if (isOpen === true) {
-	await openEditor([{ file: md }]);
+	await openEditor([{ file: mdx }]);
 }
 
 p.outro('Done!');
