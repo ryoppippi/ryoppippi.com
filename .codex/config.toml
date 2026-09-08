@@ -1,4 +1,0 @@
-experimental_use_rmcp_client = true
-
-[mcp_servers.svelte]
-url = "https://mcp.svelte.dev/mcp"
