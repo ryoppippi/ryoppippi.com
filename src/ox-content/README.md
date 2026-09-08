@@ -1,6 +1,6 @@
 # Ox Content integration boundary
 
-The site uses the public Ox Content 3.1.0 release. This directory now contains
+The site uses the public Ox Content 3.1.1-beta.0 prerelease. This directory contains
 only the temporary SSR CSS discovery plugin and its local virtual declaration.
 
 ## Ownership
@@ -45,27 +45,35 @@ for blog assets and client islands; development permits draft previews.
   imports now run through Vite, but the released adoption exposed the CSS Modules
   regression below. The local CSS plugin cannot yet be deleted.
 
-## Active release gates
+## Verified in 3.1.1-beta.0
 
-All issues are in <https://github.com/ubugeeei-prod/ox-content>.
+The official npm beta includes the fixes from
+[#1366](https://github.com/ubugeeei-prod/ox-content/pull/1366).
 
-- [#1359](https://github.com/ubugeeei-prod/ox-content/issues/1359): 3.1.0's native
-  SSR stylesheet bundles flatten `.module.css` as ordinary CSS. SSR class names
-  are scoped, but built selectors are not and `:global(...)` remains unprocessed.
-  Retain `ssr-styles-plugin.ts`, its generic integration test and
-  `virtual:site/ssr-styles` until a released fix preserves CSS Module identity,
-  local/package imports, URLs and minification. Check actual selector matches and
-  browser appearance, not just build success. Discovery remains automatic.
-- [#1360](https://github.com/ubugeeei-prod/ox-content/issues/1360): a multi-root
-  development `assets.ssrStylesheets()` call omits shared CSS from later roots'
-  descriptors. Each descriptor must contain its complete root styles; only the
-  aggregate list should deduplicate across roots. Verify dev/build parity before
-  adopting native per-page grouping.
-- [#1361](https://github.com/ubugeeei-prod/ox-content/issues/1361): watched page
-  additions/deletions leave the eager-glob dev route catalogue stale in 3.1.0,
-  despite SSR reload logs. A new route remains 404; a deleted route keeps its old
-  200 response. Restarting picks up the current files. Verify real dev add/remove
-  behaviour after a public fix; do not introduce a downstream cache/HMR plugin.
+- [#1359](https://github.com/ubugeeei-prod/ox-content/issues/1359): native SSR
+  CSS Module class names now match the HTML and `:global(...)` is transformed.
+  Production migration still exposes the separate shared-artifact gap below.
+- [#1360](https://github.com/ubugeeei-prod/ox-content/issues/1360): shared dev CSS
+  remains in each root descriptor for A+B, B+A and B alone, while the aggregate
+  list deduplicates. Verified through the public custom-host asset context.
+- [#1361](https://github.com/ubugeeei-prod/ox-content/issues/1361): adding a page
+  to the running eager-glob route catalogue makes it available; deleting it
+  returns 404 without a restart. No downstream HMR/cache workaround is needed.
+
+## Active release gate
+
+- [#1367](https://github.com/ubugeeei-prod/ox-content/issues/1367): native build
+  results return only the root entry's first CSS artifact, omitting styles on
+  shared imported chunks. Works pages lose WorksNav/WorksSection styling despite
+  a successful build and correctly hashed selectors. Retain the existing
+  `ssr-styles-plugin.ts`, virtual declaration and generic integration test until
+  a public fix returns the complete ordered CSS graph. Verify shared/nested CSS
+  is linked or inlined, not merely that returned hrefs exist. Do not add a second
+  manifest walker or manual CSS registry downstream.
+
+The attempted native adapter used the existing page style identity to request
+`/src/pages/<style>/page.tsx` on demand, with a root-relative
+`src/pages/**/page.tsx` build glob; no new page scanner is required when retrying.
 
 Keep the PR Draft. For each installable compatible release, adopt the fix, delete
 its fallback and redundant tests, verify dev/SSG/browser behaviour, push and audit
