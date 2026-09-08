@@ -33,7 +33,7 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 			'src/pages/works/showcase/data.ts',
 			'src/content/works/showcase',
 		],
-		title: 'Project showcase',
+		title: 'project showcase',
 		pathname: '/works/showcase/',
 		description:
 			'Selected projects and experiments by @ryoppippi, with demos, source links, and implementation notes.',
