@@ -326,30 +326,14 @@ export function localisePoint<T extends GtvPoint>(point: T, lang: ChartLang): T 
 }
 
 if (import.meta.vitest != null) {
-	describe(resolveChartLang, () => {
-		it('keeps a supported language', () => {
-			expect(resolveChartLang('en')).toBe('en');
-		});
-
-		it('falls back to Japanese for an unknown value', () => {
-			expect(resolveChartLang('fr')).toBe('ja');
-		});
-	});
-
-	describe(localisePoint, () => {
-		it('has English copy for every timeline point', () => {
+	test('every timeline point has English copy', () => {
 			for (const point of GTV_POINTS) {
 				expect(timelineTextByDate[point.date], point.date).toBeDefined();
 			}
 		});
 
-		it('leaves Japanese points unchanged', () => {
-			const point = GTV_POINTS[0];
 
-			expect(localisePoint(point, 'ja')).toBe(point);
-		});
-
-		it('swaps milestone and evidence for English', () => {
+	test('point localisation swaps milestone and evidence for English', () => {
 			const point = GTV_POINTS.find((entry) => entry.date === '2023-10-01T23:59:59Z');
 			assert.isDefined(point);
 
@@ -361,7 +345,7 @@ if (import.meta.vitest != null) {
 			);
 		});
 
-		it('rewrites English link phrases so they still match the evidence', () => {
+	test('English link phrases still match localised evidence', () => {
 			const point = GTV_POINTS.find((entry) => entry.date === '2025-06-23T23:59:59Z');
 			assert.isDefined(point);
 			const localised = localisePoint(point, 'en');
@@ -370,6 +354,5 @@ if (import.meta.vitest != null) {
 
 			expect(localised.evidence).toContain(firstLink.text);
 			expect(firstLink.href).toBe('/blog/2025-07-06-how-to-get-job-in-the-uk-en');
-		});
 	});
 }

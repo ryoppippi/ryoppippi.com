@@ -1,7 +1,17 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import MediaPage from './page.tsx';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+
+/** Media index; feeds are emitted by Ox Content in development and production. */
+export const routes = (() => [
+	{
+		path: '/works/media/',
+		render: async ({ assets, loadExternalMedia }) =>
+			createMediaPageFile(await loadExternalMedia(), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the podcasts and videos page.
@@ -17,16 +27,17 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 		componentProps: { items: sorted },
 		outputPath: 'works/media/index.html',
 		sourcePaths: [
-			'src/contents/external-content.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/lib/post-list.ts',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/media',
-			'src/contents/external-rss/media.json',
+			'src/content/works/media/list.json',
 		],
 		title: 'Media',
 		pathname: '/works/media/',
 		description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 		assets,
-		style: 'works',
+		style: 'works/media',
 	});
 }

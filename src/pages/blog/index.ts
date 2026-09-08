@@ -1,7 +1,26 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import BlogListPage from './page.tsx';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+import { loadExternalPosts, postListItems } from './external.ts';
+
+/** Blog index; feeds are emitted by Ox Content in development and production. */
+export const routes = (() => [
+	{
+		path: '/blog/',
+		render: async ({ root, assets, loadBlogPostMetadata }) => {
+			const [posts, externalPosts] = await Promise.all([
+				loadBlogPostMetadata(),
+				loadExternalPosts(root),
+			]);
+			return createBlogListPageFile(
+				[...externalPosts, ...postListItems(posts, { includeDrafts: true })],
+				assets,
+			);
+		},
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the blog index page.
@@ -17,11 +36,11 @@ export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets
 		componentProps: { items: sorted },
 		outputPath: 'blog/index.html',
 		sourcePaths: [
-			'src/contents/external-content.ts',
+			'src/pages/blog/external.ts',
 			'src/pages/blog',
 			'src/content/blog',
-			'src/contents/external-rss/rss.json',
-			'src/contents/external-rss/posts.json',
+			'src/content/blog/external/rss.json',
+			'src/content/blog/external/posts.json',
 		],
 		title: 'Blog',
 		pathname: '/blog/',

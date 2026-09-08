@@ -1,7 +1,16 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
-import type { OssProject } from '@/contents/works-data.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
+import { loadOssProjects, type OssProject } from './data.ts';
 import OssPage from './page.tsx';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+
+/** OSS endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/oss/',
+		render: async ({ root, assets }) => createOssPageFile(await loadOssProjects(root), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the open-source projects page.
@@ -16,18 +25,19 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		componentProps: { projects },
 		outputPath: 'works/oss/index.html',
 		sourcePaths: [
-			'src/contents/works-data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/pages/works/oss/data.ts',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/oss',
-			'src/contents/works/oss/list.json',
-			'src/contents/works/oss/stars.json',
+			'src/content/works/oss/list.json',
+			'src/content/works/oss/stars.json',
 		],
 		title: 'Open-source projects',
 		pathname: '/works/oss/',
 		description:
 			'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
 		assets,
-		style: 'works',
+		style: 'works/oss',
 	});
 }

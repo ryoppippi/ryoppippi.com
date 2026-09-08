@@ -1,6 +1,17 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import PublicationsPage from './page.tsx';
+import { loadPublications } from './data.ts';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+
+/** Publications endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/publications/',
+		render: async ({ root, assets }) =>
+			createPublicationsPageFile(await loadPublications(root), assets),
+	},
+]) satisfies PageRoutes;
 
 type Publication = { title: string; link: string; authors: string; publisher: string };
 
@@ -20,17 +31,18 @@ export function createPublicationsPageFile(
 		componentProps: { publications },
 		outputPath: 'works/publications/index.html',
 		sourcePaths: [
-			'src/contents/works-data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/pages/works/publications/data.ts',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/publications',
-			'src/contents/publication.json',
+			'src/content/works/publications/list.json',
 		],
 		title: 'Publications',
 		pathname: '/works/publications/',
 		description:
 			'Research papers and technical publications authored or co-authored by @ryoppippi.',
 		assets,
-		style: 'works',
+		style: 'works/publications',
 	});
 }

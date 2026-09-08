@@ -1,31 +1,49 @@
-import {
-	planSsgOutputs,
-	resolveSelfHostedAssetManifest,
-	type OxContentOptions,
-} from '@ox-content/vite-plugin';
+import type { OxContentOptions } from '@ox-content/vite-plugin';
+import { SITE_NAME, SITE_ORIGIN } from './site.ts';
 import { REDIRECT_ROUTES } from './redirects.ts';
-import { OPEN_GRAPH_OPTIONS } from '../content/markdown/open-graph.ts';
-import { BLOG_FEED_OPTIONS } from '../generation/feeds.ts';
+import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
+import { OX_MARKDOWN_OPTIONS, twitterCacheDirectory, twitterMediaDirectory } from './markdown.ts';
+import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from './content.ts';
+import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
+import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
 
-export const BLOG_COLLECTION_PATTERNS = ['*.md', '*.mdx', '*/index.md', '*/index.mdx'] as const;
+/** Public stylesheet shared by the custom host's dev server and build writer. */
+export const SYNTAX_THEME_HREF = '/__ox_theme_tokens__/syntax.css';
 
 const redirects = [...REDIRECT_ROUTES, { from: '/works', to: '/works/oss', status: 301 }] as const;
 const redirectMap = Object.fromEntries(redirects.map(({ from, to }) => [from, to]));
 
 export const OX_CONTENT_BUILD_OPTIONS = {
-	attrs: true,
-	budoux: true,
-	srcDir: 'src/content/blog',
+	...OX_MARKDOWN_OPTIONS,
+	frontmatter: true,
+	srcDir: 'src/content',
 	outDir: 'dist',
-	collections: { blog: BLOG_COLLECTION_PATTERNS },
+	collections: {
+		blog: { source: BLOG_SOURCE_PATTERNS.map((pattern) => `blog/${pattern}`), include: ['body'] },
+		showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
+	},
 	docs: false,
 	icons: {
 		include: ['src/**/*.{css,json,md,mdx,ts,tsx}'],
 	},
 	embeds: {
+		bluesky: true,
+		github: false,
 		openGraph: OPEN_GRAPH_OPTIONS,
+		twitter: {
+			appearance: 'full',
+			cacheDir: twitterCacheDirectory,
+			downloadVideo: true,
+			fetch: true,
+			mediaOutputDir: twitterMediaDirectory,
+			mediaPublicPath: '/ox-content/twitter',
+			timeZone: 'Europe/London',
+		},
 	},
-	feeds: BLOG_FEED_OPTIONS,
+	feeds: {
+		blog: BLOG_FEED_OPTIONS,
+		media: MEDIA_FEED_OPTIONS,
+	},
 	permalinks: true,
 	notByAi: true,
 	redirects: {
@@ -35,10 +53,12 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		provider: 'cloudflare',
 	},
 	ssg: {
+		readerChrome: { backToTop: false, copy: true, externalLinks: false },
 		bare: true,
 		markdownSource: { alternate: true },
-		siteName: 'blog | ryoppippi.com',
-		siteUrl: 'https://ryoppippi.com',
+		minifyHtml: true,
+		siteName: `blog | ${SITE_NAME}`,
+		siteUrl: SITE_ORIGIN,
 		transformConcurrency: 4,
 		theme: {
 			fonts: {
@@ -75,17 +95,23 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 			},
 		},
 	},
-	search: false,
 } as const satisfies OxContentOptions;
 
-const oxContentOutputPlan = planSsgOutputs({
-	outDir: OX_CONTENT_BUILD_OPTIONS.outDir,
-	root: process.cwd(),
-	srcDir: OX_CONTENT_BUILD_OPTIONS.srcDir,
-	options: OX_CONTENT_BUILD_OPTIONS,
-	pages: [],
-});
+if (import.meta.vitest != null) {
+	test('mounts every blog source below the public blog route', async () => {
+		const [fs, path, tinyglobby] = await Promise.all([
+			import('node:fs/promises'),
+			import('node:path'),
+			import('tinyglobby'),
+		]);
+		const root = path.join(process.cwd(), 'src/content/blog');
+		const files = await tinyglobby.glob(BLOG_SOURCE_PATTERNS, { cwd: root });
 
-export const OX_CONTENT_ASSET_MANIFEST = resolveSelfHostedAssetManifest(
-	oxContentOutputPlan.selfHostedAssets.options,
-);
+		for (const file of files) {
+			const slug = path.dirname(file);
+			expect(await fs.readFile(path.join(root, file), 'utf8')).toMatch(
+				new RegExp(`^---\\npermalink: /blog/${slug}\\n`),
+			);
+		}
+	});
+}

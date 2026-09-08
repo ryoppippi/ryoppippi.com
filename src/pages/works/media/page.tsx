@@ -1,7 +1,7 @@
-import { formatDate } from '@/lib/util.ts';
-import type { PostListItem } from '@/contents/external-content.ts';
-import WorksNav from '@/pages/works/_components/WorksNav';
-import WorksSection, { WorksList } from '@/pages/works/_components/WorksSection';
+import { formatDate } from '@/lib/date.ts';
+import type { PostListItem } from '@/lib/post-list.ts';
+import WorksNav from '@/components/WorksNav/index.tsx';
+import WorksSection, { WorksList } from '@/components/WorksSection/index.tsx';
 import styles from './Media.module.css';
 
 type MediaPageProps = {

@@ -1,6 +1,12 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
 import SponsorsPage from './page.tsx';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+
+/** Sponsors endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{ path: '/sponsors/', render: ({ assets }) => createSponsorsPageFile(assets) },
+]) satisfies PageRoutes;
 
 /**
  * Renders the sponsors page.

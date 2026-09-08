@@ -21,6 +21,12 @@ pnpm test
 pnpm build
 ```
 
+For test ownership, browser verification and adding browser regression tests, see
+the [project testing skill](.agents/skills/ryoppippi-com-testing/SKILL.md).
+
+For framework ownership and the upstream adoption record, see
+the [Ox Content integration boundary](docs/ox-content.md).
+
 ## Licence
 
 Code is under [MIT](./LICENSE).

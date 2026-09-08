@@ -1,7 +1,16 @@
-import type { SiteAssets } from '@/rendering/site-assets.ts';
-import { definePage } from '@/generation/define-page.ts';
-import type { Talk } from '@/contents/works-data.ts';
+import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
+import { definePage } from '@/components/SiteLayout/page.ts';
+import { loadTalks, type Talk } from './data.ts';
 import TalksPage from './page.tsx';
+import type { PageRoutes } from '@/utils/ssg/route.ts';
+
+/** Talks endpoint shared by dev and SSG. */
+export const routes = (() => [
+	{
+		path: '/works/talks/',
+		render: async ({ assets }) => createTalksPageFile(await loadTalks(), assets),
+	},
+]) satisfies PageRoutes;
 
 /**
  * Renders the talks page.
@@ -16,9 +25,10 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		componentProps: { talks },
 		outputPath: 'works/talks/index.html',
 		sourcePaths: [
-			'src/contents/works-data.ts',
-			'src/pages/works/_components',
-			'src/pages/works/WorksProse.css',
+			'src/pages/works/talks/data.ts',
+			'src/components/WorksNav',
+			'src/components/WorksSection',
+			'src/components/WorksNav/WorksProse.css',
 			'src/pages/works/talks',
 		],
 		title: 'Talks',
@@ -26,6 +36,6 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		description:
 			'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 		assets,
-		style: 'works',
+		style: 'works/talks',
 	});
 }

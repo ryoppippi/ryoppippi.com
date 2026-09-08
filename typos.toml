@@ -8,6 +8,9 @@ extend-ignore-re = [
 	"(?m)^.*<!--\\s*spellchecker:disable-line\\s*-->\\n.*$",
 ]
 
+[default.extend-identifiers]
+normalizePath = "normalizePath"
+
 [default.extend-words]
 Artifact = "Artifact"
 Edn = "Edn"
