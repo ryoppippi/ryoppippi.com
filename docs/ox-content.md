@@ -130,6 +130,22 @@ Adopt an official upstream release when discovery no longer needs this override,
 remove it, and recheck build timing, generated output and client island behaviour.
 Issue closure alone is not proof that the fix has shipped.
 
+## Pending: custom-host output performance
+
+[#1371](https://github.com/ubugeeei-prod/ox-content/issues/1371) tracks production
+HTML minification performance. Warm diagnostic runs on 2026-09-08 measured route
+preparation at 1.42-1.56 s (blog rendering about 1.25 s), page rendering at
+0.17-0.25 s, output planning at 0.16 s and loader shutdown at 0.25-0.37 s.
+HTML minification plus writes took 0.57 s. Temporarily disabling only host HTML
+minification reduced coordinated output writing from 0.97 s to 0.39 s and CLI
+wall time from 4.90 s to 4.12 s. These are diagnostic samples, not a controlled
+benchmark; production minification remains enabled.
+
+Monitor and adopt supported upstream improvements while retaining HTML,
+hydration, inline CSS/JS and compression semantics. Measure total CLI/SSG time
+as well as Vite's client timing; do not equate client completion with full build
+completion.
+
 ## Remaining boundary
 
 All previously filed adoption gates are released and adopted. Site-owned
