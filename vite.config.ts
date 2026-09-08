@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => {
 			enabled: mode !== 'test',
 			feedOutputs: true,
 			routeDependencies: [
-				{ path: 'src/content/blog', kind: 'directory' },
+				{ path: 'src/content', kind: 'directory' },
 				{ path: 'src/pages', kind: 'directory' },
 				{ path: 'src/utils/ssg', kind: 'directory' },
 			],
