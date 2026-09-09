@@ -6,6 +6,7 @@ import {
 } from '@ox-content/vite-plugin/custom-host';
 import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
 import solid from '@solidjs/vite-plugin';
+import { svelte } from '@rsvelte/vite-plugin-svelte';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
@@ -59,6 +60,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
+			svelte({ configFile: false }),
 			createSolidHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				collectionDocuments: BLOG_ISLAND_DOCUMENTS,
@@ -139,6 +141,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		staged: {
+			'*.svelte': 'prettier --write',
 			'*.{css,js,json,ts,tsx,yaml,yml}': 'vp check --fix',
 			// gitleaks scans the whole staged diff itself, so no file arguments
 			'*': () => 'gitleaks protect --staged --config .gitleaks.toml',

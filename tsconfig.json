@@ -1,8 +1,10 @@
 {
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
 		"jsx": "preserve",
 		"jsxImportSource": "@solidjs/web"
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "scripts/**/*.ts", "*.ts"]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.svelte", "scripts/**/*.ts", "*.ts"]
 }
