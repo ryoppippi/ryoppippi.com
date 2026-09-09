@@ -7,7 +7,7 @@ import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/cu
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import path from 'node:path';
-import Article from './Article.tsx';
+import Article from './Article.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Article endpoints follow the existing content catalogue, without a second routes tree. */
@@ -135,7 +135,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets) {
 			lang: post.lang,
 			alternates: metadata.alternates,
 			assets,
-			pageModule: '/src/pages/blog/[slug]/Article.tsx',
+			pageModule: '/src/pages/blog/[slug]/Article.svelte',
 			article: true,
 			islands: post.clientModules.map(({ moduleId }) => moduleId),
 			links: [

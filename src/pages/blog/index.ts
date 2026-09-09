@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import type { PostListItem } from '@/lib/post-list.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import BlogList from './BlogList.tsx';
+import BlogList from './BlogList.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 import { loadExternalPosts, postListItems } from './external.ts';
 
@@ -47,7 +47,7 @@ export function createBlogListPageFile(items: PostListItem[], assets: SiteAssets
 		description:
 			'Technical articles by @ryoppippi about software engineering, developer tooling, open source, and AI.',
 		assets,
-		pageModule: '/src/pages/blog/BlogList.tsx',
+		pageModule: '/src/pages/blog/BlogList.svelte',
 		style: 'blog',
 	});
 }

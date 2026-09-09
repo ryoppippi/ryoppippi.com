@@ -29,15 +29,23 @@ export function createScrollReveal(options: ScrollRevealOptions = {}): ScrollRev
 		if (box.top < window.innerHeight && box.bottom > 0) return;
 
 		revealed = false;
-		const observer = new IntersectionObserver((entries) => {
-			if (entries.some((entry) => entry.isIntersecting)) {
-				revealed = true;
-				observer.disconnect();
-			}
-		}, { rootMargin });
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((entry) => entry.isIntersecting)) {
+					revealed = true;
+					observer.disconnect();
+				}
+			},
+			{ rootMargin },
+		);
 		observer.observe(node);
 		return () => observer.disconnect();
 	}
 
-	return { get revealed() { return revealed; }, attach };
+	return {
+		get revealed() {
+			return revealed;
+		},
+		attach,
+	};
 }

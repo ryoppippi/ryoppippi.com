@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import Publications from './Publications.tsx';
+import Publications from './Publications.svelte';
 import { loadPublications } from './data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
@@ -43,7 +43,7 @@ export function createPublicationsPageFile(
 		description:
 			'Research papers and technical publications authored or co-authored by @ryoppippi.',
 		assets,
-		pageModule: '/src/pages/works/publications/Publications.tsx',
+		pageModule: '/src/pages/works/publications/Publications.svelte',
 		style: 'works/publications',
 	});
 }

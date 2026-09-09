@@ -39,7 +39,7 @@ export type SiteAssets = {
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
 type SiteAssetResolver = Pick<
 	OxContentCustomHostAssetsContext,
-	'document' | 'selfHosted' | 'stylesheets' | 'ssrStylesheets' | 'themeTokens'
+	'document' | 'selfHosted' | 'stylesheets' | 'themeTokens'
 >;
 
 /**
@@ -50,14 +50,12 @@ type SiteAssetResolver = Pick<
  */
 export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 	return {
-		sharedStyles: [
-			'/src/styles/global.css',
-			...moduleStyles(assets.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] })),
-		],
+		sharedStyles: ['/src/styles/global.css'],
 		scripts: ['/src/client/index.ts'],
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
-		pageStyles: (module) => moduleStyles(assets.ssrStylesheets({ modules: [module] })),
+		pageStyles: (module) =>
+			module.endsWith('/Article.svelte') ? ['/src/pages/blog/[slug]/ArticleContent.css'] : [],
 		islands: {},
 	};
 }
@@ -92,15 +90,17 @@ export function resolveSiteAssets(
 	);
 
 	return {
-		sharedStyles: [
-			...entry.styles,
-			...moduleStyles(assets.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] })),
-		],
+		sharedStyles: entry.styles,
 		scripts: entry.scripts,
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
-		pageStyles: (module) => moduleStyles(assets.ssrStylesheets({ modules: [module] })),
+		pageStyles: (module) =>
+			module.endsWith('/Article.svelte')
+				? moduleStyles(
+						assets.stylesheets({ modules: ['/src/pages/blog/[slug]/ArticleContent.css'] }),
+					)
+				: [],
 	};
 }
 
@@ -173,9 +173,9 @@ export function renderAssetTags(
 if (import.meta.vitest != null) {
 	const testSelfHosted = { stylesheets: [], preloads: [], headTags: '' };
 	const pageStyles: Record<string, string[]> = {
-		'/src/pages/blog/[slug]/Article.tsx': ['/article.css'],
-		'/src/pages/blog/BlogList.tsx': ['/blog.css'],
-		'/src/pages/Home.tsx': ['/home.css'],
+		'/src/pages/blog/[slug]/Article.svelte': ['/article.css'],
+		'/src/pages/blog/BlogList.svelte': ['/blog.css'],
+		'/src/pages/Home.svelte': ['/home.css'],
 	};
 	const assets = {
 		sharedStyles: ['/base.css'],
@@ -183,11 +183,11 @@ if (import.meta.vitest != null) {
 		selfHosted: testSelfHosted,
 		syntaxThemeHref: '/__ox_theme_tokens__/syntax.css',
 		islands: {
-			'/src/content/blog/post/Chart.tsx': [
+			'/src/content/blog/post/Chart.svelte': [
 				{ href: 'assets/Chart.css', crossorigin: true },
 				{ href: 'assets/Legend.css', crossorigin: true },
 			],
-			'/src/content/blog/post/Table.tsx': [{ href: 'assets/Legend.css', crossorigin: true }],
+			'/src/content/blog/post/Table.svelte': [{ href: 'assets/Legend.css', crossorigin: true }],
 		},
 		pageStyles: (module) => pageStyles[module],
 	} as const satisfies SiteAssets;
@@ -196,16 +196,16 @@ if (import.meta.vitest != null) {
 		const { renderHtmlDocument } = await import('./document.ts');
 		const article = renderHtmlDocument({
 			assets,
-			pageModule: '/src/pages/blog/[slug]/Article.tsx',
+			pageModule: '/src/pages/blog/[slug]/Article.svelte',
 			style: 'blog/[slug]',
 			title: 'Article',
 			pathname: '/blog/post/',
 			content: '',
-			islands: ['/src/content/blog/post/Chart.tsx'],
+			islands: ['/src/content/blog/post/Chart.svelte'],
 		});
 		const home = renderHtmlDocument({
 			assets,
-			pageModule: '/src/pages/Home.tsx',
+			pageModule: '/src/pages/Home.svelte',
 			style: '.',
 			title: '',
 			pathname: '/',
@@ -224,7 +224,7 @@ if (import.meta.vitest != null) {
 		const inlined = inlineHomeStyles(assets, 'body { color: red }', '.home { color: blue }');
 		const home = renderHtmlDocument({
 			assets: inlined,
-			pageModule: '/src/pages/Home.tsx',
+			pageModule: '/src/pages/Home.svelte',
 			style: '.',
 			title: '',
 			pathname: '/',
@@ -232,7 +232,7 @@ if (import.meta.vitest != null) {
 		});
 		const blog = renderHtmlDocument({
 			assets: inlined,
-			pageModule: '/src/pages/blog/BlogList.tsx',
+			pageModule: '/src/pages/blog/BlogList.svelte',
 			style: 'blog',
 			title: 'Blog',
 			pathname: '/blog/',

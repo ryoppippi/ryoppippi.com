@@ -37,10 +37,7 @@ type GtvPoint = ChartPoint<GtvDatum, Date | number, number>;
  * @param x - Scene x coordinate to resolve against.
  * @returns The row-mark points at the nearest row, or an empty list.
  */
-function rowPointsNearestX(
-	points: readonly GtvPoint[],
-	x: number,
-): readonly GtvPoint[] {
+function rowPointsNearestX(points: readonly GtvPoint[], x: number): readonly GtvPoint[] {
 	const candidates = points.filter((point) => isRowMark(point.markId));
 	if (candidates.length === 0) {
 		return [];
@@ -64,9 +61,7 @@ export const focusByX = {
 		focused,
 		...points.filter(
 			(point) =>
-				point !== focused &&
-				isRowMark(point.markId) &&
-				point.datumIndex === focused.datumIndex,
+				point !== focused && isRowMark(point.markId) && point.datumIndex === focused.datumIndex,
 		),
 	],
 	// One stop per row, keyed by datumIndex so star-only rows stay reachable.

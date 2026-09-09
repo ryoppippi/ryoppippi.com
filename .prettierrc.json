@@ -1,6 +1,0 @@
-{
-	"plugins": ["prettier-plugin-svelte"],
-	"singleQuote": true,
-	"useTabs": true,
-	"printWidth": 100
-}

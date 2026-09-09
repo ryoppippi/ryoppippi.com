@@ -1,6 +1,6 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import Error from './Error.tsx';
+import Error from './Error.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Prerendered error document. */
@@ -25,7 +25,7 @@ export function createErrorPageFile(assets: SiteAssets) {
 		description: 'The requested page could not be found.',
 		indexable: false,
 		assets,
-		pageModule: '/src/pages/404.html/Error.tsx',
+		pageModule: '/src/pages/404.html/Error.svelte',
 		style: '404.html',
 	});
 }

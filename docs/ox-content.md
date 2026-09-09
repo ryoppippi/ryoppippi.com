@@ -1,8 +1,10 @@
 # Ox Content integration boundary
 
-The site uses the public Ox Content 3.1.2 release. Native custom-host stylesheet
-discovery replaces the last local Vite plugin; no implementation or ambient
-declaration remains under `src/ox-content`.
+The site uses public Ox Content 3.1.2 with Svelte components compiled by rsvelte.
+Svelte SSR supplies scoped CSS through `render().head`; the custom host still
+owns global CSS, article CSS and island asset URLs. See [rsvelte-migration.md](./rsvelte-migration.md)
+for the current integration and upstream follow-ups. The adoption history below
+describes the earlier Solid implementation where explicitly named.
 
 ## Ownership
 
@@ -12,16 +14,19 @@ declaration remains under `src/ox-content`.
 - `components/SiteLayout/`: document structure, head values and asset selection.
 - `config/`: shared content root, collection selection and Markdown options.
 - `utils/ssg/markdown.ts`: page-level composition of native Markdown rendering and
-  the native Solid renderer, returning the article's client modules and selecting
-  their styles. It does not parse Markdown, run embed transforms, discover MDX
-  imports or implement the Solid renderer lifecycle.
+  Svelte SSR, returning the article's client modules, head and styles.
+- `utils/ssg/svelte-islands.ts`: connects public import resolution and island SSR
+  hooks to Svelte rendering; Ox Content still parses Markdown and island payloads.
+- `client/islands.ts`: an explicit lazy map of published Svelte islands, hydrated
+  through Svelte with Ox Content's framework-neutral load strategies.
 - `utils/ssg/home-styles.ts`: homepage-only inlining using native artifact contents.
 - `utils/ssg/content-assets.ts`: selected document references and explicit showcase
   covers/legacy aliases, not an extension allowlist or recursive asset scanner.
 
 All collections are rooted at `src/content`; blog and showcase source patterns
 stay inside that common root. Production requires explicit `isPublished: true`
-for blog assets and client islands; development permits draft previews.
+for blog assets; development permits draft previews. Only explicitly registered
+public components enter the client bundle.
 
 ## Adopted in 3.0.0
 

@@ -8,7 +8,7 @@ import {
 } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from '@/utils/ssg/markdown.ts';
-import type { SolidHtmlHostClientModule } from '@ox-content/vite-plugin-solid';
+import type { SvelteIslandModule } from '@/utils/ssg/svelte-islands.ts';
 import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/config/content.ts';
 
 /**
@@ -40,7 +40,8 @@ export type BlogPost = ArticleMetadata & {
 	source: string;
 	content: string;
 	html: string;
-	clientModules: readonly SolidHtmlHostClientModule[];
+	clientModules: readonly SvelteIslandModule[];
+	componentHead?: string;
 	pubDate: string;
 	lang: string;
 	isPublished: boolean;
@@ -186,6 +187,7 @@ export async function loadBlogPost(
 		source: entry.source,
 		content: entry.content,
 		html: rendered.html,
+		componentHead: rendered.head,
 		clientModules: rendered.clientModules,
 		pubDate: new Date(String(entry.data.date)).toJSON(),
 		lang: typeof entry.data.lang === 'string' ? entry.data.lang : 'ja',
@@ -255,6 +257,7 @@ export async function loadBlogPosts(renderContent: MarkdownRenderer): Promise<Bl
 				source,
 				content,
 				html: rendered.html,
+				componentHead: rendered.head,
 				clientModules: rendered.clientModules,
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
@@ -331,8 +334,8 @@ if (import.meta.vitest != null) {
 
 	test('loads an MDX post with its document-local islands enabled', async () => {
 		const { createFixture } = await import('fs-fixture');
-		const { pathToFileURL } = await import('node:url');
-		const { createSolidHtmlHostRenderer } = await import('@ox-content/vite-plugin-solid');
+		const { default: FixtureChart } = await import('../404.html/Error.svelte');
+		const { createSvelteIslandRenderer } = await import('@/utils/ssg/svelte-islands.ts');
 		await using fixture = await createFixture({
 			'component/index.mdx': [
 				'---',
@@ -341,14 +344,17 @@ if (import.meta.vitest != null) {
 				'isPublished: true',
 				'---',
 				'',
-				"import Chart from './Chart.mjs'",
+				"import Chart from './Chart.svelte'",
 				'',
 				'<Chart />',
 			].join('\n'),
-			'component/Chart.mjs': 'export default () => "Fixture chart"',
+			'component/Chart.svelte': '<p>Fixture chart</p>',
 		});
-		const renderIsland = createSolidHtmlHostRenderer({
-			loadModule: (moduleId) => import(/* @vite-ignore */ pathToFileURL(moduleId).href),
+		const renderIsland = createSvelteIslandRenderer({
+			loadModule: async (moduleId) => {
+				expect(moduleId).toBe(fixture.getPath('component/Chart.svelte'));
+				return { default: FixtureChart };
+			},
 			root: fixture.path,
 		});
 
@@ -368,14 +374,15 @@ if (import.meta.vitest != null) {
 				clientModules: [
 					{
 						name: 'Chart',
-						moduleId: '/component/Chart.mjs',
+						moduleId: '/component/Chart.svelte',
 						exportName: 'default',
 					},
 				],
 			}),
 		);
 		assert.isNotNull(post);
-		expect(post.html).toContain('Fixture chart');
+		expect(post.html).toContain('Page not found');
+		expect(post.componentHead).toContain('<style');
 		expect(post.html).toContain('data-ox-ssr="true"');
 	});
 

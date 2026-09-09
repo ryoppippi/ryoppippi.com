@@ -4,14 +4,7 @@ import { curveMonotoneX, curveStepAfter } from 'd3-shape';
 import type { ChartLang } from './copy.ts';
 import { uiCopy } from './copy.ts';
 import { focusByX } from './focus.ts';
-import {
-	firstAt,
-	lastAt,
-	rows,
-	starsAfterSubmission,
-	starsAssessed,
-	starTicks,
-} from './rows.ts';
+import { firstAt, lastAt, rows, starsAfterSubmission, starsAssessed, starTicks } from './rows.ts';
 
 /**
  * Builds the timeline chart definition for a given focus state.

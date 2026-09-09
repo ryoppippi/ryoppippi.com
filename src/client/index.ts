@@ -1,6 +1,4 @@
-import { initIslands } from '@ox-content/islands';
-import { initSolidHtmlHost } from '@ox-content/vite-plugin-solid/html-host/client';
-import solidIslandLoaders from 'virtual:ox-content-solid/html-host/modules';
+import { initialiseSvelteIslands } from './islands.ts';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -142,10 +140,8 @@ function initialisePageInteractions(): void {
 	initialiseTalkFilter();
 	initialiseMediaFilter();
 	initialiseSponsorViewToggle();
-	initSolidHtmlHost({
-		initIslands,
-		modules: solidIslandLoaders,
-		mount: { mode: 'render' },
+	void initialiseSvelteIslands().catch((error) => {
+		console.error('Unable to initialise Svelte islands', error);
 	});
 	initReaderChrome(document);
 	initTweetCards(document);

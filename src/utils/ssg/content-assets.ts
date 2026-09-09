@@ -3,7 +3,7 @@ import {
 	type CollectionAssetManifest,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
-import { resolveSolidHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-solid';
+import { resolveSiteCollectionDocuments } from './collection-documents.ts';
 import path from 'node:path';
 import { createFixture } from 'fs-fixture';
 import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
@@ -20,7 +20,7 @@ export async function planSiteContentAssets(
 	command: 'build' | 'serve',
 	oxContent: OxContentOptions = OX_CONTENT_BUILD_OPTIONS,
 ): Promise<CollectionAssetManifest> {
-	const documents = await resolveSolidHtmlHostCollectionDocuments(
+	const documents = await resolveSiteCollectionDocuments(
 		{
 			oxContent,
 			collections: ['blog', 'showcase'],
@@ -95,7 +95,7 @@ if (import.meta.vitest != null) {
 			'blog/public/index.md': '---\nisPublished: true\n---\n![image](./image%20one.png)',
 			'blog/public/image one.png': 'public',
 			'blog/public/unreferenced.png': 'not referenced',
-			'blog/public/component.tsx': 'export default () => null',
+			'blog/public/component.svelte': '<p>Private component</p>',
 			'blog/public/data.json': '{"private":true}',
 			'blog/draft/index.md': '---\nisPublished: false\n---\n![image](./image.png)',
 			'blog/draft/image.png': 'draft',
