@@ -1,5 +1,8 @@
 # Framework benchmark — 2026-09-09
 
+Historical full-command measurements. The [evening Vite build comparison](./vite-build-2026-09-09.md)
+uses the requested direct `vpr` command and separates Vite's log timer from wall time.
+
 All three configurations generated 428 outputs and 81 HTML files. Browser checks found one hydrated GTV chart, one SVG and 18 evidence rows in each, with the same keyboard/live-readout response.
 
 | Configuration   | Cold SSG median (range), s | Warm SSG median (range), s | JS files | JS raw / gzip / Brotli, bytes | CSS raw / gzip / Brotli, bytes | HTML raw / gzip / Brotli, bytes |
