@@ -2,8 +2,8 @@
 
 The site uses public Ox Content 3.1.3 with Svelte components compiled by rsvelte.
 Page/layout Svelte SSR supplies scoped CSS through `render().head`; the custom host still
-owns global CSS, article CSS and island asset URLs. See [rsvelte-migration.md](./rsvelte-migration.md)
-for the current integration and upstream follow-ups. The adoption history below
+owns global CSS, article CSS and island asset URLs. See [migration PR #2140](https://github.com/ryoppippi/ryoppippi.com/pull/2140)
+for the migration results and upstream follow-ups. The adoption history below
 describes the earlier Solid implementation where explicitly named.
 
 The upstream island renderer does not return head metadata. The current GTV island
