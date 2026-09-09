@@ -1,6 +1,6 @@
 # Ox Content integration boundary
 
-The site uses the public Ox Content 3.1.1 release. Native custom-host stylesheet
+The site uses the public Ox Content 3.1.2 release. Native custom-host stylesheet
 discovery replaces the last local Vite plugin; no implementation or ambient
 declaration remains under `src/ox-content`.
 
@@ -114,37 +114,43 @@ generated files are byte-for-byte identical to the pre-audit build. Remaining
 adapters are site composition, not reproduced framework machinery; this audit
 did not uncover a new upstream public-contract gap requiring an issue.
 
-## Pending: island discovery embed rendering
+## Adopted in 3.1.2
 
-[#1370](https://github.com/ubugeeei-prod/ox-content/issues/1370) tracks full embed
-rendering during Solid client-island discovery. The registry alone overrides
-`embeds: false`; the custom host retains the shared embed settings for page output.
+- [#1370](https://github.com/ubugeeei-prod/ox-content/issues/1370), fixed by
+  [#1373](https://github.com/ubugeeei-prod/ox-content/pull/1373): island discovery
+  disables embeds internally. Removed the registry-only `embeds: false` override;
+  actual page rendering retains the shared embed settings.
+- [#1371](https://github.com/ubugeeei-prod/ox-content/issues/1371), fixed by
+  [#1372](https://github.com/ubugeeei-prod/ox-content/pull/1372): custom-host output
+  shares a per-build cache for identical inline JS/CSS minification. HTML
+  compression remains enabled, including hydration-comment preservation.
 
-On 2026-09-08, Vite's reported client build fell from 10.75 s initially
-(1.47 s on a later warm run) to 692 ms / 674 ms with the override. These timings
-exclude the full CLI/SSG wall time. The generated output trees were byte-identical;
-428 custom-host outputs and the same client island were preserved. A build before
-the page-component rename also took 10.61 s with the same dependencies.
+Verification on 2026-09-09: check and all 38 tests in 12 files passed. All generated
+files were byte-identical to the pre-update 3.1.1 build, with 428 custom-host
+outputs. Browser verification covered production GtvChart rendering and arrow-key
+selection, article link previews, and Tweet text/images on a fresh dev server.
+A source audit found no reproduced regression in the changed discovery/cache
+paths; CSS cache keys distinguish context and JS keys distinguish inline scripts.
 
-Adopt an official upstream release when discovery no longer needs this override,
-remove it, and recheck build timing, generated output and client island behaviour.
-Issue closure alone is not proof that the fix has shipped.
+| Measurement | 3.1.2 |
+| --- | --- |
+| First build after dependency update, CLI wall | 3.97 s |
+| Subsequent warm build, CLI wall | 3.91 s |
+| Empty Vite cache, CLI wall | 4.08 s |
+| Vite-reported client build | 0.64-0.67 s |
+| Profiled HTML minification and writes | 0.24 s |
+| Profiled coordinated output writer | 0.57 s |
 
-## Pending: custom-host output performance
+The Vite-cache-cold run retained the existing Ox Content embed cache; it is not
+a fully network-cold build. The previous 3.1.1 diagnostic samples measured
+minification/writes at 0.57 s, output writer at 0.97 s and CLI wall at 4.90 s.
+The immediate pre-update CLI sample was 7.58 s, illustrating run-to-run variance.
+These are diagnostic samples, not controlled benchmark guarantees.
 
-[#1371](https://github.com/ubugeeei-prod/ox-content/issues/1371) tracks production
-HTML minification performance. Warm diagnostic runs on 2026-09-08 measured route
-preparation at 1.42-1.56 s (blog rendering about 1.25 s), page rendering at
-0.17-0.25 s, output planning at 0.16 s and loader shutdown at 0.25-0.37 s.
-HTML minification plus writes took 0.57 s. Temporarily disabling only host HTML
-minification reduced coordinated output writing from 0.97 s to 0.39 s and CLI
-wall time from 4.90 s to 4.12 s. These are diagnostic samples, not a controlled
-benchmark; production minification remains enabled.
-
-Monitor and adopt supported upstream improvements while retaining HTML,
-hydration, inline CSS/JS and compression semantics. Measure total CLI/SSG time
-as well as Vite's client timing; do not equate client completion with full build
-completion.
+Continue monitoring and repeating release/adopt/remove/verify/re-audit within
+build performance and the related island/embed scope. Both initial issues are
+released and adopted; this checkpoint does not stop the monitor or authorise
+marking the Draft PR ready or merging it.
 
 ## Remaining boundary
 

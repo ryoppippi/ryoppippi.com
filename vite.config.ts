@@ -60,7 +60,7 @@ export default defineConfig(({ command, mode }) => {
 		},
 		plugins: [
 			createSolidHtmlHostIslandRegistry({
-				oxContent: { ...OX_CONTENT_BUILD_OPTIONS, embeds: false },
+				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				collectionDocuments: BLOG_ISLAND_DOCUMENTS,
 			}).plugin,
 			solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
