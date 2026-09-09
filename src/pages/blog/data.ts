@@ -8,7 +8,7 @@ import {
 } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from '@/utils/ssg/markdown.ts';
-import type { SvelteIslandModule } from '@/utils/ssg/svelte-islands.ts';
+import type { SvelteHtmlHostClientModule } from '@ox-content/vite-plugin-svelte';
 import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/config/content.ts';
 
 /**
@@ -40,8 +40,7 @@ export type BlogPost = ArticleMetadata & {
 	source: string;
 	content: string;
 	html: string;
-	clientModules: readonly SvelteIslandModule[];
-	componentHead?: string;
+	clientModules: readonly SvelteHtmlHostClientModule[];
 	pubDate: string;
 	lang: string;
 	isPublished: boolean;
@@ -187,7 +186,6 @@ export async function loadBlogPost(
 		source: entry.source,
 		content: entry.content,
 		html: rendered.html,
-		componentHead: rendered.head,
 		clientModules: rendered.clientModules,
 		pubDate: new Date(String(entry.data.date)).toJSON(),
 		lang: typeof entry.data.lang === 'string' ? entry.data.lang : 'ja',
@@ -257,7 +255,6 @@ export async function loadBlogPosts(renderContent: MarkdownRenderer): Promise<Bl
 				source,
 				content,
 				html: rendered.html,
-				componentHead: rendered.head,
 				clientModules: rendered.clientModules,
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
@@ -335,7 +332,7 @@ if (import.meta.vitest != null) {
 	test('loads an MDX post with its document-local islands enabled', async () => {
 		const { createFixture } = await import('fs-fixture');
 		const { default: FixtureChart } = await import('../404.html/Error.svelte');
-		const { createSvelteIslandRenderer } = await import('@/utils/ssg/svelte-islands.ts');
+		const { createSvelteHtmlHostRenderer } = await import('@ox-content/vite-plugin-svelte');
 		await using fixture = await createFixture({
 			'component/index.mdx': [
 				'---',
@@ -350,7 +347,7 @@ if (import.meta.vitest != null) {
 			].join('\n'),
 			'component/Chart.svelte': '<p>Fixture chart</p>',
 		});
-		const renderIsland = createSvelteIslandRenderer({
+		const renderIsland = createSvelteHtmlHostRenderer({
 			loadModule: async (moduleId) => {
 				expect(moduleId).toBe(fixture.getPath('component/Chart.svelte'));
 				return { default: FixtureChart };
@@ -382,7 +379,6 @@ if (import.meta.vitest != null) {
 		);
 		assert.isNotNull(post);
 		expect(post.html).toContain('Page not found');
-		expect(post.componentHead).toContain('<style');
 		expect(post.html).toContain('data-ox-ssr="true"');
 	});
 

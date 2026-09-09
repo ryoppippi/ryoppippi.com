@@ -30,6 +30,7 @@
 		"@ox-content/islands": "catalog:",
 		"@ox-content/theme-color-kanagawa": "catalog:",
 		"@ox-content/vite-plugin": "catalog:",
+		"@ox-content/vite-plugin-svelte": "catalog:",
 		"@rsvelte/vite-plugin-svelte": "catalog:",
 		"@tanstack/charts": "catalog:",
 		"@types/bun": "catalog:",

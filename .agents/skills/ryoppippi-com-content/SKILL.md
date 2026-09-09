@@ -23,8 +23,8 @@ For discovering and updating external articles, podcasts, or YouTube appearances
 ## Post-local islands
 
 - Put Svelte components beside the post inside the blog tree. A supported island import is a capitalised default import from a relative `.svelte` path, such as `import Chart from './Chart.svelte'`, outside fenced code.
-- Register published browser components in `src/client/islands.ts`; the explicit lazy import map currently contains the shared GTV chart. Do not glob every draft component into the production bundle. Upstream automatic Svelte registry support is tracked in ox-content #1377.
-- Use scoped `<style>` blocks and format with `pnpm format` (Oxfmt through Vite+). Do not add a separate Prettier configuration.
+- The upstream Svelte registry discovers article imports using the publication filter in `vite.config.ts`. Do not maintain a manual browser module map or include draft components in production.
+- Page/layout components use scoped `<style>` blocks. Post-local islands currently use imported ordinary CSS: upstream #1389 tracks scoped CSS delivery for the HTML host. Format with `pnpm format` (Oxfmt through Vite+); do not add a separate Prettier configuration.
 - Use the import binding as the component tag, such as `<Chart />`. Props use Ox Content syntax: quoted strings, JSON in braces, or bare boolean attributes.
 - Resolved imports are removed from rendered Markdown; missing imports and unknown tags remain visible, so fix the path instead of hiding the error.
 - When the accepted syntax, path resolution, or SSR boundary is unclear, inspect the current blog rendering implementation and its tests instead of relying on fixed internal paths.

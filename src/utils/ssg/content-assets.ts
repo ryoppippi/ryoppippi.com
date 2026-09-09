@@ -3,7 +3,7 @@ import {
 	type CollectionAssetManifest,
 	type OxContentOptions,
 } from '@ox-content/vite-plugin';
-import { resolveSiteCollectionDocuments } from './collection-documents.ts';
+import { resolveSvelteHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-svelte';
 import path from 'node:path';
 import { createFixture } from 'fs-fixture';
 import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
@@ -20,7 +20,7 @@ export async function planSiteContentAssets(
 	command: 'build' | 'serve',
 	oxContent: OxContentOptions = OX_CONTENT_BUILD_OPTIONS,
 ): Promise<CollectionAssetManifest> {
-	const documents = await resolveSiteCollectionDocuments(
+	const documents = await resolveSvelteHtmlHostCollectionDocuments(
 		{
 			oxContent,
 			collections: ['blog', 'showcase'],

@@ -32,8 +32,6 @@
 	);
 </script>
 
-<svelte:head>{@html post.componentHead ?? ''}</svelte:head>
-
 <div class="articlePage">
 	{#if !post.isPublished}<p class="articleUnpublished">This article is not published yet.</p>{/if}
 	<hgroup class="articleHeading">

@@ -1,0 +1,921 @@
+{
+	"measuredAt": "2026-09-09",
+	"configurations": [
+		{
+			"label": "solid-v2",
+			"pnpm": "11.20.0",
+			"machine": {
+				"model": "Apple M5 Max",
+				"arch": "arm64",
+				"cpus": 18,
+				"os": "25.6.0"
+			},
+			"command": "PUBLIC_ORIGIN=https://ryoppippi.com CI=false pnpm exec vp build",
+			"cachePolicy": "Cold: remove dist, node_modules/.vite and node_modules/.vite-temp. Warm: retain Vite cache from preceding cold run; remove dist. Retain identical .cache/ox-content remote-content cache and OS filesystem cache; dependencies already installed. No Vite+ task result cache.",
+			"runs": [
+				{
+					"cache": "cold",
+					"repetition": 1,
+					"seconds": 6.663605333,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 1,
+					"seconds": 3.8183272499999994,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 2,
+					"seconds": 3.88416475,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 2,
+					"seconds": 3.7562079159999993,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 3,
+					"seconds": 3.6803992499999985,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 3,
+					"seconds": 3.662704417000001,
+					"outputs": 428
+				}
+			],
+			"assets": {
+				"js": {
+					"count": 18,
+					"raw": 312183,
+					"gzip": 109042,
+					"brotli": 96340
+				},
+				"css": {
+					"count": 19,
+					"raw": 158476,
+					"gzip": 32476,
+					"brotli": 27452
+				},
+				"html": {
+					"count": 81,
+					"raw": 3580114,
+					"gzip": 691804,
+					"brotli": 561588
+				}
+			},
+			"pages": {
+				"index.html": {
+					"document": {
+						"count": 1,
+						"raw": 16657,
+						"gzip": 4652,
+						"brotli": 3891
+					},
+					"initialReferencedAssets": {
+						"count": 3,
+						"raw": 100963,
+						"gzip": 19020,
+						"brotli": 16436
+					},
+					"files": ["__ox_icons__/icons.css", "__ox_fonts__/fonts.css", "assets/index-CKIuZWHR.js"],
+					"islands": 0
+				},
+				"about/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 9588,
+						"gzip": 2681,
+						"brotli": 2202
+					},
+					"initialReferencedAssets": {
+						"count": 6,
+						"raw": 110348,
+						"gzip": 22317,
+						"brotli": 19180
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/src-components-SiteLayout-index-CYbCK2yD.css",
+						"assets/src-pages-about-About-D1i_yszw.css",
+						"assets/index-CKIuZWHR.js"
+					],
+					"islands": 0
+				},
+				"blog/2026-08-15-uk-gtv-en/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 106945,
+						"gzip": 28458,
+						"brotli": 22205
+					},
+					"initialReferencedAssets": {
+						"count": 8,
+						"raw": 157405,
+						"gzip": 31459,
+						"brotli": 27261
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/src-components-SiteLayout-index-CYbCK2yD.css",
+						"assets/src-pages-blog--slug--Article-uDXdRrsT.css",
+						"__ox_theme_tokens__/syntax.css",
+						"assets/GtvChart-CIG3nGWD.css",
+						"assets/index-CKIuZWHR.js"
+					],
+					"islands": 1
+				}
+			},
+			"manifest": {
+				"_WorksNav-FgoaDnrv.css": {
+					"file": "assets/WorksNav-FgoaDnrv.css",
+					"src": "_WorksNav-FgoaDnrv.css"
+				},
+				"_WorksNav.module-B6tG1sFl.js": {
+					"file": "assets/WorksNav.module-B6tG1sFl.js",
+					"name": "WorksNav.module",
+					"css": ["assets/WorksNav-FgoaDnrv.css"]
+				},
+				"_WorksSection-CpmalST-.css": {
+					"file": "assets/WorksSection-CpmalST-.css",
+					"src": "_WorksSection-CpmalST-.css"
+				},
+				"_WorksSection.module-CSqB1fTq.js": {
+					"file": "assets/WorksSection.module-CSqB1fTq.js",
+					"name": "WorksSection.module",
+					"css": ["assets/WorksSection-CpmalST-.css"]
+				},
+				"index.html": {
+					"file": "assets/index-CKIuZWHR.js",
+					"name": "index",
+					"src": "index.html",
+					"isEntry": true,
+					"dynamicImports": [
+						"node_modules/.pnpm/@solidjs+web@2.0.0-rc.4_solid-js@2.0.0-rc.4/node_modules/@solidjs/web/dist/web.js",
+						"node_modules/.pnpm/solid-js@2.0.0-rc.4/node_modules/solid-js/dist/solid.js",
+						"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx"
+					],
+					"css": ["assets/index-CHBaQFEJ.css"]
+				},
+				"node_modules/.pnpm/@solidjs+web@2.0.0-rc.4_solid-js@2.0.0-rc.4/node_modules/@solidjs/web/dist/web.js": {
+					"file": "assets/web-CjDKaYuf.js",
+					"name": "web",
+					"src": "node_modules/.pnpm/@solidjs+web@2.0.0-rc.4_solid-js@2.0.0-rc.4/node_modules/@solidjs/web/dist/web.js",
+					"isDynamicEntry": true,
+					"imports": [
+						"index.html",
+						"node_modules/.pnpm/solid-js@2.0.0-rc.4/node_modules/solid-js/dist/solid.js"
+					]
+				},
+				"node_modules/.pnpm/solid-js@2.0.0-rc.4/node_modules/solid-js/dist/solid.js": {
+					"file": "assets/solid-CdzGmqyH.js",
+					"name": "solid",
+					"src": "node_modules/.pnpm/solid-js@2.0.0-rc.4/node_modules/solid-js/dist/solid.js",
+					"isDynamicEntry": true
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-components-SiteLayout-index.js": {
+					"file": "assets/src-components-SiteLayout-index-B2eDeNQ0.js",
+					"name": "src-components-SiteLayout-index",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-components-SiteLayout-index.js",
+					"isEntry": true,
+					"css": ["assets/src-components-SiteLayout-index-CYbCK2yD.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-404-html-Error.js": {
+					"file": "assets/src-pages-404-html-Error-BQw0iVZ0.js",
+					"name": "src-pages-404-html-Error",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-404-html-Error.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-404-html-Error-vKzlgQ8v.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-Home.js": {
+					"file": "assets/src-pages-Home-Bzdps4sY.js",
+					"name": "src-pages-Home",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-Home.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-Home-BJ8zd8n_.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-about-About.js": {
+					"file": "assets/src-pages-about-About-UXAPlWYx.js",
+					"name": "src-pages-about-About",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-about-About.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-about-About-D1i_yszw.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-blog--slug--Article.js": {
+					"file": "assets/src-pages-blog--slug--Article-CpB5UAb2.js",
+					"name": "src-pages-blog--slug--Article",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-blog--slug--Article.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-blog--slug--Article-uDXdRrsT.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-blog-BlogList.js": {
+					"file": "assets/src-pages-blog-BlogList-BK4kgW7s.js",
+					"name": "src-pages-blog-BlogList",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-blog-BlogList.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-blog-BlogList-BSeIENpk.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-sponsors-Sponsors.js": {
+					"file": "assets/src-pages-sponsors-Sponsors-t4rrcZLy.js",
+					"name": "src-pages-sponsors-Sponsors",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-sponsors-Sponsors.js",
+					"isEntry": true,
+					"css": ["assets/src-pages-sponsors-Sponsors-6AwMZphX.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-works-media-Media.js": {
+					"file": "assets/src-pages-works-media-Media-BPJuxdIB.js",
+					"name": "src-pages-works-media-Media",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-works-media-Media.js",
+					"isEntry": true,
+					"imports": ["_WorksNav.module-B6tG1sFl.js", "_WorksSection.module-CSqB1fTq.js"],
+					"css": ["assets/src-pages-works-media-Media-B7EUvYSm.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-works-oss-Oss.js": {
+					"file": "assets/src-pages-works-oss-Oss-vEmtgAda.js",
+					"name": "src-pages-works-oss-Oss",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-works-oss-Oss.js",
+					"isEntry": true,
+					"imports": ["_WorksNav.module-B6tG1sFl.js", "_WorksSection.module-CSqB1fTq.js"],
+					"css": ["assets/src-pages-works-oss-Oss-B2TZBh7P.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-works-publications-Publications.js": {
+					"file": "assets/src-pages-works-publications-Publications-qw5cuJHv.js",
+					"name": "src-pages-works-publications-Publications",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-works-publications-Publications.js",
+					"isEntry": true,
+					"imports": ["_WorksNav.module-B6tG1sFl.js", "_WorksSection.module-CSqB1fTq.js"],
+					"css": ["assets/src-pages-works-publications-Publications-CVXhRh4T.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-works-showcase-Showcase.js": {
+					"file": "assets/src-pages-works-showcase-Showcase-CqtcuL8z.js",
+					"name": "src-pages-works-showcase-Showcase",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-works-showcase-Showcase.js",
+					"isEntry": true,
+					"imports": ["_WorksNav.module-B6tG1sFl.js"],
+					"css": ["assets/src-pages-works-showcase-Showcase-w7jx4z5d.css"]
+				},
+				"ox-content:custom-host-ssr-stylesheet:src-pages-works-talks-Talks.js": {
+					"file": "assets/src-pages-works-talks-Talks-BmIfpveg.js",
+					"name": "src-pages-works-talks-Talks",
+					"src": "ox-content:custom-host-ssr-stylesheet:src-pages-works-talks-Talks.js",
+					"isEntry": true,
+					"imports": ["_WorksNav.module-B6tG1sFl.js", "_WorksSection.module-CSqB1fTq.js"],
+					"css": ["assets/src-pages-works-talks-Talks-DAAZmp-E.css"]
+				},
+				"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx": {
+					"file": "assets/GtvChart-DthgKvaz.js",
+					"name": "GtvChart",
+					"src": "src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.tsx",
+					"isDynamicEntry": true,
+					"imports": [
+						"node_modules/.pnpm/solid-js@2.0.0-rc.4/node_modules/solid-js/dist/solid.js",
+						"node_modules/.pnpm/@solidjs+web@2.0.0-rc.4_solid-js@2.0.0-rc.4/node_modules/@solidjs/web/dist/web.js"
+					],
+					"css": ["assets/GtvChart-CIG3nGWD.css"]
+				}
+			},
+			"harnessNode": "v24.19.0",
+			"buildNode": "v24.20.0",
+			"measurementBaseCommit": "3a06e10c9f46be13c67deead742c8da79b08c290",
+			"config": {
+				"oxContent": "3.1.3",
+				"runtime": "solid-js 2.0.0-rc.4",
+				"plugin": "@solidjs/vite-plugin 3.0.0-next.36",
+				"compiler": "@solidjs/compiler 2.0.0-rc.4 (native)",
+				"css": "external CSS Modules"
+			},
+			"summary": {
+				"cold": {
+					"median": 3.88416475,
+					"min": 3.6803992499999985,
+					"max": 6.663605333
+				},
+				"warm": {
+					"median": 3.7562079159999993,
+					"min": 3.662704417000001,
+					"max": 3.8183272499999994
+				}
+			},
+			"browserObservedArticleLazyJs": [
+				"web-CjDKaYuf.js",
+				"solid-CdzGmqyH.js",
+				"GtvChart-DthgKvaz.js"
+			],
+			"articleLazyJs": {
+				"count": 3,
+				"raw": 285406,
+				"gzip": 99123,
+				"brotli": 87660
+			},
+			"articleJsCssAfterHydration": {
+				"count": 11,
+				"raw": 442811,
+				"gzip": 130582,
+				"brotli": 114921
+			}
+		},
+		{
+			"label": "svelte-official",
+			"pnpm": "11.20.0",
+			"machine": {
+				"model": "Apple M5 Max",
+				"arch": "arm64",
+				"cpus": 18,
+				"os": "25.6.0"
+			},
+			"command": "PUBLIC_ORIGIN=https://ryoppippi.com CI=false pnpm exec vp build",
+			"cachePolicy": "Cold: remove dist, node_modules/.vite and node_modules/.vite-temp. Warm: retain Vite cache from preceding cold run; remove dist. Retain identical .cache/ox-content remote-content cache and OS filesystem cache; dependencies already installed. No Vite+ task result cache.",
+			"runs": [
+				{
+					"cache": "cold",
+					"repetition": 1,
+					"seconds": 4.9504684580000005,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 1,
+					"seconds": 4.534969459,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 2,
+					"seconds": 4.641394208000001,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 2,
+					"seconds": 4.614615415999999,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 3,
+					"seconds": 4.928618333000002,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 3,
+					"seconds": 5.2205327499999985,
+					"outputs": 428
+				}
+			],
+			"assets": {
+				"js": {
+					"count": 3,
+					"raw": 211563,
+					"gzip": 74875,
+					"brotli": 65732
+				},
+				"css": {
+					"count": 6,
+					"raw": 132938,
+					"gzip": 23084,
+					"brotli": 19802
+				},
+				"html": {
+					"count": 81,
+					"raw": 3979785,
+					"gzip": 792825,
+					"brotli": 646835
+				}
+			},
+			"pages": {
+				"index.html": {
+					"document": {
+						"count": 1,
+						"raw": 17615,
+						"gzip": 4727,
+						"brotli": 3968
+					},
+					"initialReferencedAssets": {
+						"count": 3,
+						"raw": 100827,
+						"gzip": 18956,
+						"brotli": 16398
+					},
+					"files": ["__ox_icons__/icons.css", "__ox_fonts__/fonts.css", "assets/index-Dn7EHh8c.js"],
+					"islands": 0
+				},
+				"about/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 16989,
+						"gzip": 4340,
+						"brotli": 3613
+					},
+					"initialReferencedAssets": {
+						"count": 4,
+						"raw": 103535,
+						"gzip": 19995,
+						"brotli": 17265
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/index-Dn7EHh8c.js"
+					],
+					"islands": 0
+				},
+				"blog/2026-08-15-uk-gtv-en/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 111826,
+						"gzip": 29676,
+						"brotli": 23376
+					},
+					"initialReferencedAssets": {
+						"count": 7,
+						"raw": 152979,
+						"gzip": 29969,
+						"brotli": 25996
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/ArticleContent-CThYk4uX.css",
+						"__ox_theme_tokens__/syntax.css",
+						"assets/GtvChart-CIG3nGWD.css",
+						"assets/index-Dn7EHh8c.js"
+					],
+					"islands": 1
+				}
+			},
+			"manifest": {
+				"index.html": {
+					"file": "assets/index-Dn7EHh8c.js",
+					"name": "index",
+					"src": "index.html",
+					"isEntry": true,
+					"dynamicImports": [
+						"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js",
+						"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte"
+					],
+					"css": ["assets/index-CHBaQFEJ.css"]
+				},
+				"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js": {
+					"file": "assets/index-client-CZlFzupm.js",
+					"name": "index-client",
+					"src": "node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js",
+					"isDynamicEntry": true
+				},
+				"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte": {
+					"file": "assets/GtvChart-m8ajg7sd.js",
+					"name": "GtvChart",
+					"src": "src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte",
+					"isDynamicEntry": true,
+					"imports": ["node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js"],
+					"css": ["assets/GtvChart-CIG3nGWD.css"]
+				},
+				"src/pages/blog/[slug]/ArticleContent.css": {
+					"file": "assets/ArticleContent-CThYk4uX.css",
+					"name": "ArticleContent",
+					"names": ["ArticleContent.css"],
+					"src": "src/pages/blog/[slug]/ArticleContent.css",
+					"isEntry": true
+				}
+			},
+			"harnessNode": "v24.19.0",
+			"buildNode": "v24.20.0",
+			"measurementBaseCommit": "f1b744f3595ee5f06a04d015e9fec200d699b074",
+			"config": {
+				"oxContent": "3.1.3",
+				"runtime": "svelte 5.57.0",
+				"plugin": "@sveltejs/vite-plugin-svelte 7.2.0",
+				"compiler": "svelte/compiler 5.57.0",
+				"css": "native injected scoped CSS; shared article CSS external"
+			},
+			"summary": {
+				"cold": {
+					"median": 4.928618333000002,
+					"min": 4.641394208000001,
+					"max": 4.9504684580000005
+				},
+				"warm": {
+					"median": 4.614615415999999,
+					"min": 4.534969459,
+					"max": 5.2205327499999985
+				}
+			},
+			"browserObservedArticleLazyJs": ["index-client-CZlFzupm.js", "GtvChart-m8ajg7sd.js"],
+			"articleLazyJs": {
+				"count": 2,
+				"raw": 191522,
+				"gzip": 67990,
+				"brotli": 59538
+			},
+			"articleJsCssAfterHydration": {
+				"count": 9,
+				"raw": 344501,
+				"gzip": 97959,
+				"brotli": 85534
+			}
+		},
+		{
+			"label": "rsvelte",
+			"pnpm": "11.20.0",
+			"machine": {
+				"model": "Apple M5 Max",
+				"arch": "arm64",
+				"cpus": 18,
+				"os": "25.6.0"
+			},
+			"command": "PUBLIC_ORIGIN=https://ryoppippi.com CI=false pnpm exec vp build",
+			"cachePolicy": "Cold: remove dist, node_modules/.vite and node_modules/.vite-temp. Warm: retain Vite cache from preceding cold run; remove dist. Retain identical .cache/ox-content remote-content cache and OS filesystem cache; dependencies already installed. No Vite+ task result cache.",
+			"runs": [
+				{
+					"cache": "cold",
+					"repetition": 1,
+					"seconds": 4.404816875000001,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 1,
+					"seconds": 4.440636667,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 2,
+					"seconds": 4.311090333,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 2,
+					"seconds": 4.707455041999999,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 3,
+					"seconds": 4.6076276249999975,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 3,
+					"seconds": 4.201288250000001,
+					"outputs": 428
+				}
+			],
+			"assets": {
+				"js": {
+					"count": 3,
+					"raw": 211603,
+					"gzip": 74900,
+					"brotli": 65792
+				},
+				"css": {
+					"count": 6,
+					"raw": 132938,
+					"gzip": 23084,
+					"brotli": 19802
+				},
+				"html": {
+					"count": 81,
+					"raw": 3979785,
+					"gzip": 792873,
+					"brotli": 647001
+				}
+			},
+			"pages": {
+				"index.html": {
+					"document": {
+						"count": 1,
+						"raw": 17615,
+						"gzip": 4729,
+						"brotli": 3972
+					},
+					"initialReferencedAssets": {
+						"count": 3,
+						"raw": 100827,
+						"gzip": 18958,
+						"brotli": 16393
+					},
+					"files": ["__ox_icons__/icons.css", "__ox_fonts__/fonts.css", "assets/index-DcZhZ37x.js"],
+					"islands": 0
+				},
+				"about/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 16989,
+						"gzip": 4341,
+						"brotli": 3628
+					},
+					"initialReferencedAssets": {
+						"count": 4,
+						"raw": 103535,
+						"gzip": 19997,
+						"brotli": 17260
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/index-DcZhZ37x.js"
+					],
+					"islands": 0
+				},
+				"blog/2026-08-15-uk-gtv-en/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 111826,
+						"gzip": 29676,
+						"brotli": 23382
+					},
+					"initialReferencedAssets": {
+						"count": 7,
+						"raw": 152979,
+						"gzip": 29971,
+						"brotli": 25991
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/ArticleContent-CThYk4uX.css",
+						"__ox_theme_tokens__/syntax.css",
+						"assets/GtvChart-CIG3nGWD.css",
+						"assets/index-DcZhZ37x.js"
+					],
+					"islands": 1
+				}
+			},
+			"manifest": {
+				"index.html": {
+					"file": "assets/index-DcZhZ37x.js",
+					"name": "index",
+					"src": "index.html",
+					"isEntry": true,
+					"dynamicImports": [
+						"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js",
+						"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte"
+					],
+					"css": ["assets/index-CHBaQFEJ.css"]
+				},
+				"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js": {
+					"file": "assets/index-client-K1Pg8Xh4.js",
+					"name": "index-client",
+					"src": "node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js",
+					"isDynamicEntry": true
+				},
+				"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte": {
+					"file": "assets/GtvChart-BiyLAEbx.js",
+					"name": "GtvChart",
+					"src": "src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte",
+					"isDynamicEntry": true,
+					"imports": ["node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js"],
+					"css": ["assets/GtvChart-CIG3nGWD.css"]
+				},
+				"src/pages/blog/[slug]/ArticleContent.css": {
+					"file": "assets/ArticleContent-CThYk4uX.css",
+					"name": "ArticleContent",
+					"names": ["ArticleContent.css"],
+					"src": "src/pages/blog/[slug]/ArticleContent.css",
+					"isEntry": true
+				}
+			},
+			"harnessNode": "v24.19.0",
+			"buildNode": "v24.20.0",
+			"measurementBaseCommit": "f1b744f3595ee5f06a04d015e9fec200d699b074",
+			"config": {
+				"oxContent": "3.1.3",
+				"runtime": "svelte 5.57.0",
+				"plugin": "@rsvelte/vite-plugin-svelte 0.5.2",
+				"compiler": "@rsvelte/vite-plugin-svelte-native 0.3.12",
+				"css": "native injected scoped CSS; shared article CSS external"
+			},
+			"summary": {
+				"cold": {
+					"median": 4.404816875000001,
+					"min": 4.311090333,
+					"max": 4.6076276249999975
+				},
+				"warm": {
+					"median": 4.440636667,
+					"min": 4.201288250000001,
+					"max": 4.707455041999999
+				}
+			},
+			"browserObservedArticleLazyJs": ["index-client-K1Pg8Xh4.js", "GtvChart-BiyLAEbx.js"],
+			"articleLazyJs": {
+				"count": 2,
+				"raw": 191562,
+				"gzip": 68013,
+				"brotli": 59603
+			},
+			"articleJsCssAfterHydration": {
+				"count": 9,
+				"raw": 344541,
+				"gzip": 97984,
+				"brotli": 85594
+			}
+		},
+		{
+			"label": "pre-adoption-rsvelte",
+			"pnpm": "11.20.0",
+			"machine": {
+				"model": "Apple M5 Max",
+				"arch": "arm64",
+				"cpus": 18,
+				"os": "25.6.0"
+			},
+			"command": "PUBLIC_ORIGIN=https://ryoppippi.com CI=false pnpm exec vp build",
+			"cachePolicy": "Cold: remove dist, node_modules/.vite and node_modules/.vite-temp. Warm: retain Vite cache from preceding cold run; remove dist. Retain identical .cache/ox-content remote-content cache and OS filesystem cache; dependencies already installed. No Vite+ task result cache.",
+			"runs": [
+				{
+					"cache": "cold",
+					"repetition": 1,
+					"seconds": 6.705573208,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 1,
+					"seconds": 3.5698562090000006,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 2,
+					"seconds": 3.7211484580000014,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 2,
+					"seconds": 3.652603624999998,
+					"outputs": 428
+				},
+				{
+					"cache": "cold",
+					"repetition": 3,
+					"seconds": 3.714269167000002,
+					"outputs": 428
+				},
+				{
+					"cache": "warm",
+					"repetition": 3,
+					"seconds": 3.6544474999999985,
+					"outputs": 428
+				}
+			],
+			"assets": {
+				"js": {
+					"count": 3,
+					"raw": 208310,
+					"gzip": 73944,
+					"brotli": 64886
+				},
+				"css": {
+					"count": 6,
+					"raw": 132938,
+					"gzip": 23084,
+					"brotli": 19802
+				},
+				"html": {
+					"count": 81,
+					"raw": 3979785,
+					"gzip": 792865,
+					"brotli": 646761
+				}
+			},
+			"pages": {
+				"index.html": {
+					"document": {
+						"count": 1,
+						"raw": 17615,
+						"gzip": 4729,
+						"brotli": 3969
+					},
+					"initialReferencedAssets": {
+						"count": 3,
+						"raw": 97534,
+						"gzip": 18002,
+						"brotli": 15487
+					},
+					"files": ["__ox_icons__/icons.css", "__ox_fonts__/fonts.css", "assets/index-DiS-EFhX.js"],
+					"islands": 0
+				},
+				"about/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 16989,
+						"gzip": 4341,
+						"brotli": 3630
+					},
+					"initialReferencedAssets": {
+						"count": 4,
+						"raw": 100242,
+						"gzip": 19041,
+						"brotli": 16354
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/index-DiS-EFhX.js"
+					],
+					"islands": 0
+				},
+				"blog/2026-08-15-uk-gtv-en/index.html": {
+					"document": {
+						"count": 1,
+						"raw": 111826,
+						"gzip": 29676,
+						"brotli": 23363
+					},
+					"initialReferencedAssets": {
+						"count": 7,
+						"raw": 149686,
+						"gzip": 29015,
+						"brotli": 25085
+					},
+					"files": [
+						"__ox_icons__/icons.css",
+						"__ox_fonts__/fonts.css",
+						"assets/index-CHBaQFEJ.css",
+						"assets/ArticleContent-CThYk4uX.css",
+						"__ox_theme_tokens__/syntax.css",
+						"assets/GtvChart-CIG3nGWD.css",
+						"assets/index-DiS-EFhX.js"
+					],
+					"islands": 1
+				}
+			},
+			"manifest": {
+				"index.html": {
+					"file": "assets/index-DiS-EFhX.js",
+					"name": "index",
+					"src": "index.html",
+					"isEntry": true,
+					"dynamicImports": [
+						"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte",
+						"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js"
+					],
+					"css": ["assets/index-CHBaQFEJ.css"]
+				},
+				"node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js": {
+					"file": "assets/index-client-K1Pg8Xh4.js",
+					"name": "index-client",
+					"src": "node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js",
+					"isDynamicEntry": true
+				},
+				"src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte": {
+					"file": "assets/GtvChart-BiyLAEbx.js",
+					"name": "GtvChart",
+					"src": "src/content/blog/2026-07-30-uk-gtv-ja/gtv-chart/GtvChart.svelte",
+					"isDynamicEntry": true,
+					"imports": ["node_modules/.pnpm/svelte@5.57.0/node_modules/svelte/src/index-client.js"],
+					"css": ["assets/GtvChart-CIG3nGWD.css"]
+				},
+				"src/pages/blog/[slug]/ArticleContent.css": {
+					"file": "assets/ArticleContent-CThYk4uX.css",
+					"name": "ArticleContent",
+					"names": ["ArticleContent.css"],
+					"src": "src/pages/blog/[slug]/ArticleContent.css",
+					"isEntry": true
+				}
+			},
+			"harnessNode": "v24.19.0",
+			"buildNode": "v24.20.0",
+			"measurementBaseCommit": "f1b744f3595ee5f06a04d015e9fec200d699b074",
+			"config": {
+				"oxContent": "3.1.2",
+				"runtime": "svelte 5.57.0",
+				"plugin": "@rsvelte/vite-plugin-svelte 0.5.2",
+				"compiler": "@rsvelte/vite-plugin-svelte-native 0.3.12",
+				"css": "native injected scoped CSS; shared article CSS external"
+			},
+			"summary": {
+				"cold": {
+					"median": 3.7211484580000014,
+					"min": 3.714269167000002,
+					"max": 6.705573208
+				},
+				"warm": {
+					"median": 3.652603624999998,
+					"min": 3.5698562090000006,
+					"max": 3.6544474999999985
+				}
+			}
+		}
+	]
+}
