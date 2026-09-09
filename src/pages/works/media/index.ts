@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import type { PostListItem } from '@/lib/post-list.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import Media from './Media.tsx';
+import Media from './Media.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Media index; feeds are emitted by Ox Content in development and production. */
@@ -38,7 +38,7 @@ export function createMediaPageFile(items: PostListItem[], assets: SiteAssets) {
 		pathname: '/works/media/',
 		description: 'Podcasts, interviews, and videos featuring @ryoppippi.',
 		assets,
-		pageModule: '/src/pages/works/media/Media.tsx',
+		pageModule: '/src/pages/works/media/Media.svelte',
 		style: 'works/media',
 	});
 }

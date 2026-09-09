@@ -268,7 +268,8 @@ export const timelineEn = {
 	},
 	'2026-08-09T23:59:59Z': {
 		milestone: 'Now',
-		evidence: '+4.9K from about 12.9K at submission. The increase is post-submission context, not part of the estimate',
+		evidence:
+			'+4.9K from about 12.9K at submission. The increase is post-submission context, not part of the estimate',
 	},
 } as const satisfies Record<string, TimelineText>;
 
@@ -327,32 +328,31 @@ export function localisePoint<T extends GtvPoint>(point: T, lang: ChartLang): T 
 
 if (import.meta.vitest != null) {
 	test('every timeline point has English copy', () => {
-			for (const point of GTV_POINTS) {
-				expect(timelineTextByDate[point.date], point.date).toBeDefined();
-			}
-		});
-
+		for (const point of GTV_POINTS) {
+			expect(timelineTextByDate[point.date], point.date).toBeDefined();
+		}
+	});
 
 	test('point localisation swaps milestone and evidence for English', () => {
-			const point = GTV_POINTS.find((entry) => entry.date === '2023-10-01T23:59:59Z');
-			assert.isDefined(point);
+		const point = GTV_POINTS.find((entry) => entry.date === '2023-10-01T23:59:59Z');
+		assert.isDefined(point);
 
-			expect(localisePoint(point, 'en')).toEqual(
-				expect.objectContaining({
-					milestone: 'Over 5 years of experience',
-					evidence: expect.stringContaining('Over 5 years'),
-				}),
-			);
-		});
+		expect(localisePoint(point, 'en')).toEqual(
+			expect.objectContaining({
+				milestone: 'Over 5 years of experience',
+				evidence: expect.stringContaining('Over 5 years'),
+			}),
+		);
+	});
 
 	test('English link phrases still match localised evidence', () => {
-			const point = GTV_POINTS.find((entry) => entry.date === '2025-06-23T23:59:59Z');
-			assert.isDefined(point);
-			const localised = localisePoint(point, 'en');
-			const firstLink = localised.links?.[0];
-			assert.isDefined(firstLink);
+		const point = GTV_POINTS.find((entry) => entry.date === '2025-06-23T23:59:59Z');
+		assert.isDefined(point);
+		const localised = localisePoint(point, 'en');
+		const firstLink = localised.links?.[0];
+		assert.isDefined(firstLink);
 
-			expect(localised.evidence).toContain(firstLink.text);
-			expect(firstLink.href).toBe('/blog/2025-07-06-how-to-get-job-in-the-uk-en');
+		expect(localised.evidence).toContain(firstLink.text);
+		expect(firstLink.href).toBe('/blog/2025-07-06-how-to-get-job-in-the-uk-en');
 	});
 }

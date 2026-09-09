@@ -23,12 +23,6 @@ export async function inlineBuiltHomeStyles(
 			throw new Error('Missing CSS assets for inline home styles');
 		return result.stylesheets.map(({ content }) => content).join('\n');
 	}
-	const [base, home] = await Promise.all([
-		content([
-			resolver.stylesheets({ modules: ['index.html'] }),
-			resolver.ssrStylesheets({ modules: ['/src/components/SiteLayout/index.tsx'] }),
-		]),
-		content([resolver.ssrStylesheets({ modules: ['/src/pages/Home.tsx'] })]),
-	]);
-	return inlineHomeStyles(assets, base, home);
+	const base = await content([resolver.stylesheets({ modules: ['index.html'] })]);
+	return inlineHomeStyles(assets, base, '');
 }

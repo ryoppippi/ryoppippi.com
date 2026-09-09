@@ -1,7 +1,7 @@
 import type { ShowcaseProject } from '@/pages/works/showcase/data.ts';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
-import Showcase from './Showcase.tsx';
+import Showcase from './Showcase.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Showcase endpoint shared by dev and SSG. */
@@ -38,7 +38,7 @@ export function createShowcasePageFile(projects: ShowcaseProject[], assets: Site
 		description:
 			'Selected projects and experiments by @ryoppippi, with demos, source links, and implementation notes.',
 		assets,
-		pageModule: '/src/pages/works/showcase/Showcase.tsx',
+		pageModule: '/src/pages/works/showcase/Showcase.svelte',
 		style: 'works/showcase',
 	});
 }

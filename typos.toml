@@ -9,6 +9,7 @@ extend-ignore-re = [
 ]
 
 [default.extend-identifiers]
+normalizeMarkdownExtensions = "normalizeMarkdownExtensions"
 normalizePath = "normalizePath"
 
 [default.extend-words]

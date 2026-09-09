@@ -24,7 +24,7 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	},
 	docs: false,
 	icons: {
-		include: ['src/**/*.{css,json,md,mdx,ts,tsx}'],
+		include: ['src/**/*.{css,json,md,mdx,ts,svelte}'],
 	},
 	embeds: {
 		bluesky: true,

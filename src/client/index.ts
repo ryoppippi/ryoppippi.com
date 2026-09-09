@@ -1,6 +1,6 @@
 import { initIslands } from '@ox-content/islands';
-import { initSolidHtmlHost } from '@ox-content/vite-plugin-solid/html-host/client';
-import solidIslandLoaders from 'virtual:ox-content-solid/html-host/modules';
+import { createSvelteHtmlHostLazyHydrate } from '@ox-content/vite-plugin-svelte/html-host/client';
+import svelteIslandLoaders from 'virtual:ox-content-svelte/html-host/modules';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -142,10 +142,14 @@ function initialisePageInteractions(): void {
 	initialiseTalkFilter();
 	initialiseMediaFilter();
 	initialiseSponsorViewToggle();
-	initSolidHtmlHost({
-		initIslands,
-		modules: solidIslandLoaders,
-		mount: { mode: 'render' },
+	const controller = initIslands(
+		createSvelteHtmlHostLazyHydrate({
+			modules: svelteIslandLoaders,
+			mount: { mode: 'hydrate' },
+		}),
+	);
+	window.addEventListener('pagehide', (event) => {
+		if (!event.persisted) controller.destroy();
 	});
 	initReaderChrome(document);
 	initTweetCards(document);

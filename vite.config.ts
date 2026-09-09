@@ -4,19 +4,15 @@ import {
 	createOxContentCustomHostPlugin,
 	type OxContentCustomHostOptions,
 } from '@ox-content/vite-plugin/custom-host';
-import { createSolidHtmlHostIslandRegistry } from '@ox-content/vite-plugin-solid';
-import solid from '@solidjs/vite-plugin';
+import { createSvelteHtmlHostIslandRegistry } from '@ox-content/vite-plugin-svelte';
+import { svelte } from '@rsvelte/vite-plugin-svelte';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { planSiteContentAssets } from './src/utils/ssg/content-assets.ts';
-import { BLOG_ISLAND_DOCUMENTS } from './src/pages/blog/island-documents.ts';
 
 export default defineConfig(({ command, mode }) => {
 	const hostOptions = {
-		ssrStylesheets: {
-			modules: ['src/pages/**/*.tsx', '/src/components/SiteLayout/index.tsx'],
-		},
 		dev: {
 			enabled: mode !== 'test',
 			feedOutputs: true,
@@ -49,6 +45,8 @@ export default defineConfig(({ command, mode }) => {
 	} satisfies Omit<OxContentCustomHostOptions, 'host'>;
 	return {
 		appType: 'mpa',
+		// The renderer and compiled components must share Svelte's SSR runtime state.
+		ssr: { noExternal: ['@ox-content/vite-plugin-svelte'] },
 		envPrefix: ['PUBLIC_', 'VITE_'],
 		resolve: {
 			tsconfigPaths: true,
@@ -59,11 +57,15 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
-			createSolidHtmlHostIslandRegistry({
+			svelte({ configFile: false, emitCss: false, compilerOptions: { css: 'injected' } }),
+			createSvelteHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
-				collectionDocuments: BLOG_ISLAND_DOCUMENTS,
+				collectionDocuments: {
+					collections: ['blog'],
+					select: ({ frontmatter }, { command }) =>
+						command === 'serve' || frontmatter.isPublished === true,
+				},
 			}).plugin,
-			solid({ compiler: 'native', ssr: command === 'serve', solid: { hydratable: false } }),
 			...oxContent({
 				...OX_CONTENT_BUILD_OPTIONS,
 				icons: mode === 'test' ? false : OX_CONTENT_BUILD_OPTIONS.icons,
@@ -79,7 +81,7 @@ export default defineConfig(({ command, mode }) => {
 			outDir: 'dist',
 			emptyOutDir: true,
 			minify: true,
-			rollupOptions: { input: ['index.html'] },
+			rollupOptions: { input: ['index.html', 'src/pages/blog/[slug]/ArticleContent.css'] },
 		},
 		run: {
 			tasks: {
@@ -106,6 +108,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		fmt: {
+			svelte: true,
 			ignorePatterns: [
 				'.cache/**',
 				'.claude/**',
@@ -113,7 +116,10 @@ export default defineConfig(({ command, mode }) => {
 				'.direnv/**',
 				'dist/**',
 				'node_modules/**',
-				'src/content/blog/**',
+				'src/content/blog/**/*.md',
+				'src/content/blog/**/*.mdx',
+				'src/content/blog/**/*.json',
+				'src/content/blog/**/*.css',
 				'src/content/works/**',
 				'public/**',
 			],
@@ -139,6 +145,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		staged: {
+			'*.svelte': 'vp check --fix',
 			'*.{css,js,json,ts,tsx,yaml,yml}': 'vp check --fix',
 			// gitleaks scans the whole staged diff itself, so no file arguments
 			'*': () => 'gitleaks protect --staged --config .gitleaks.toml',

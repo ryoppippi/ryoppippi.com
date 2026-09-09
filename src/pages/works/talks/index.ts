@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { loadTalks, type Talk } from './data.ts';
-import Talks from './Talks.tsx';
+import Talks from './Talks.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Talks endpoint shared by dev and SSG. */
@@ -36,7 +36,7 @@ export function createTalksPageFile(talks: Talk[], assets: SiteAssets) {
 		description:
 			'Conference talks and presentations by @ryoppippi, with event links, slides, and videos.',
 		assets,
-		pageModule: '/src/pages/works/talks/Talks.tsx',
+		pageModule: '/src/pages/works/talks/Talks.svelte',
 		style: 'works/talks',
 	});
 }

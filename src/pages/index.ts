@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_ORIGIN, SITE_SOCIAL_IMAGE_URL } from '@/config/site.ts'
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
-import Home from './Home.tsx';
+import Home from './Home.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
@@ -66,17 +66,12 @@ export function createHomePageFile(assets: SiteAssets) {
 		component: Home,
 		componentProps: {},
 		outputPath: 'index.html',
-		sourcePaths: [
-			SITE_OWNER_SOURCE_PATH,
-			'src/pages/index.ts',
-			'src/pages/Home.tsx',
-			'src/pages/Home.module.css',
-		],
+		sourcePaths: [SITE_OWNER_SOURCE_PATH, 'src/pages/index.ts', 'src/pages/Home.svelte'],
 		title: '',
 		pathname: '/',
 		description: HOME_DESCRIPTION,
 		assets,
-		pageModule: '/src/pages/Home.tsx',
+		pageModule: '/src/pages/Home.svelte',
 		style: '.',
 		structuredData: homeStructuredData(),
 	});

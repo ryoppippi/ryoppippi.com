@@ -3,7 +3,7 @@ import { SITE_ORIGIN } from '@/config/site.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
-import About from './About.tsx';
+import About from './About.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Profile endpoint shared by dev and SSG. */
@@ -34,7 +34,7 @@ export function createAboutPageFile(assets: SiteAssets) {
 		pathname: ABOUT_PATHNAME,
 		description: ABOUT_DESCRIPTION,
 		assets,
-		pageModule: '/src/pages/about/About.tsx',
+		pageModule: '/src/pages/about/About.svelte',
 		style: 'about',
 		structuredData: {
 			'@context': 'https://schema.org',

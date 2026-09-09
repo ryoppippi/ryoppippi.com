@@ -1,6 +1,6 @@
-import type { Component } from 'solid-js';
+import type { Component } from 'svelte';
 import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
-import { renderToString } from '@solidjs/web';
+import { render } from 'svelte/server';
 import { renderHtmlDocument } from '@/components/SiteLayout/document.ts';
 
 type HtmlDocumentOptions = Parameters<typeof renderHtmlDocument>[0];
@@ -13,7 +13,7 @@ type DefinePageOptions<Props extends object> = Omit<HtmlDocumentOptions, 'conten
 };
 
 /**
- * Defines a generated HTML page from a Solid component and its document metadata.
+ * Defines a generated HTML page from a Svelte component and its document metadata.
  *
  * @param options - Component, output location, metadata, and assets for the page.
  * @returns The generated HTML file.
@@ -26,6 +26,7 @@ export function definePage<Props extends object>({
 	...documentOptions
 }: DefinePageOptions<Props>) {
 	const [inputPath, ...lastUpdatedPaths] = sourcePaths ?? [];
+	const rendered = render(component, { props: componentProps });
 	return {
 		outputPath,
 		inputPath,
@@ -34,7 +35,8 @@ export function definePage<Props extends object>({
 		unlisted: documentOptions.indexable === false,
 		body: renderHtmlDocument({
 			...documentOptions,
-			content: renderToString(() => component(componentProps)),
+			content: rendered.body,
+			componentHead: rendered.head,
 		}),
 	} satisfies OxContentCustomHostRenderResult;
 }

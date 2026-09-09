@@ -1,17 +1,18 @@
 import type { DocumentLinkInput } from '@ox-content/vite-plugin/document-assets';
 import type { SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
-import { escape, renderToString } from '@solidjs/web';
+import { render } from 'svelte/server';
 import { renderThemeBootstrapScript } from '@ox-content/vite-plugin/theme-bootstrap';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
-import SiteLayout from '@/components/SiteLayout';
+import SiteLayout from './index.svelte';
 
 type HtmlDocumentOptions = {
 	article?: boolean;
 	alternates?: Readonly<Record<string, string>>;
 	assets: SiteAssets;
 	content: string;
+	componentHead?: string;
 	datePublished?: string;
 	description?: string;
 	indexable?: boolean;
@@ -37,6 +38,7 @@ export function renderHtmlDocument({
 	title,
 	pathname,
 	content,
+	componentHead = '',
 	description = 'Portfolio of @ryoppippi',
 	datePublished,
 	indexable = true,
@@ -51,7 +53,7 @@ export function renderHtmlDocument({
 	structuredData,
 }: HtmlDocumentOptions): string {
 	const documentLanguage = lang.trim() || 'en';
-	const body = renderToString(() => SiteLayout({ content, pathname }));
+	const layout = render(SiteLayout, { props: { content, pathname } });
 	const head = [
 		renderPageHead({
 			article,
@@ -67,13 +69,19 @@ export function renderHtmlDocument({
 		JAVASCRIPT_CLASS_SCRIPT,
 		renderThemeBootstrapScript(),
 		renderAssetTags(assets, style, pageModule, islands, links),
+		layout.head,
+		componentHead,
 	].join('');
 
 	return [
 		'<!doctype html>',
-		`<html lang="${escape(documentLanguage, true)}">`,
+		`<html lang="${escapeAttribute(documentLanguage)}">`,
 		`<head>${head}</head>`,
-		`<body data-page-style="${escape(style, true)}">${body}</body>`,
+		`<body data-page-style="${escapeAttribute(style)}">${layout.body}</body>`,
 		'</html>',
 	].join('');
+}
+
+function escapeAttribute(value: string): string {
+	return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 }

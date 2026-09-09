@@ -1,7 +1,7 @@
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 import { definePage } from '@/components/SiteLayout/page.ts';
 import { loadOssProjects, type OssProject } from './data.ts';
-import Oss from './Oss.tsx';
+import Oss from './Oss.svelte';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** OSS endpoint shared by dev and SSG. */
@@ -38,7 +38,7 @@ export function createOssPageFile(projects: OssProject[], assets: SiteAssets) {
 		description:
 			'Open-source projects by @ryoppippi across AI tools, Nix, TypeScript, Svelte, Vim, Zig, and shell configuration.',
 		assets,
-		pageModule: '/src/pages/works/oss/Oss.tsx',
+		pageModule: '/src/pages/works/oss/Oss.svelte',
 		style: 'works/oss',
 	});
 }

@@ -6,8 +6,8 @@ and their Markdown companions. Brackets document a dynamic segment; route
 modules still enumerate outputs from the content catalogue, not directory names.
 
 Keep each endpoint's `index.ts`, named page component, styles and data loaders
-together. Page components use the same basename as their CSS Module, such as
-`Home.tsx` with `Home.module.css`.
+together. Page components are Svelte files with scoped `<style>` blocks, such as
+`Home.svelte`. rsvelte compiles them; their SSR head includes styles before scripts run.
 Feed item mapping stays with the blog or media data it publishes; Ox Content writes feeds.
 
 Shared build/dev lifecycle code belongs in `src/utils/ssg`, reusable UI in

@@ -1,8 +1,13 @@
 # Ox Content integration boundary
 
-The site uses the public Ox Content 3.1.2 release. Native custom-host stylesheet
-discovery replaces the last local Vite plugin; no implementation or ambient
-declaration remains under `src/ox-content`.
+The site uses public Ox Content 3.1.3 with Svelte components compiled by rsvelte.
+Page/layout Svelte SSR supplies scoped CSS through `render().head`; the custom host still
+owns global CSS, article CSS and island asset URLs. See [rsvelte-migration.md](./rsvelte-migration.md)
+for the current integration and upstream follow-ups. The adoption history below
+describes the earlier Solid implementation where explicitly named.
+
+The upstream island renderer does not return head metadata. The current GTV island
+uses ordinary imported CSS; arbitrary scoped island styles remain subject to #1389.
 
 ## Ownership
 
@@ -11,17 +16,20 @@ declaration remains under `src/ox-content`.
 - `utils/ssg/`: shared build/dev host composition, route collection and output preparation.
 - `components/SiteLayout/`: document structure, head values and asset selection.
 - `config/`: shared content root, collection selection and Markdown options.
-- `utils/ssg/markdown.ts`: page-level composition of native Markdown rendering and
-  the native Solid renderer, returning the article's client modules and selecting
-  their styles. It does not parse Markdown, run embed transforms, discover MDX
-  imports or implement the Solid renderer lifecycle.
+- `utils/ssg/markdown.ts`: composes native Markdown rendering with the public Svelte
+  HTML-host renderer and selects returned browser modules' stylesheet assets.
+- `vite.config.ts`: supplies the publication policy to the upstream Svelte island
+  registry; the plugin owns discovery, watching and virtual browser modules.
+- `client/index.ts`: connects the public lazy Svelte hydration adapter to the shared
+  island scheduler and destroys the controller on permanent page exit.
 - `utils/ssg/home-styles.ts`: homepage-only inlining using native artifact contents.
 - `utils/ssg/content-assets.ts`: selected document references and explicit showcase
   covers/legacy aliases, not an extension allowlist or recursive asset scanner.
 
 All collections are rooted at `src/content`; blog and showcase source patterns
 stay inside that common root. Production requires explicit `isPublished: true`
-for blog assets and client islands; development permits draft previews.
+for blog assets; development permits draft previews. Only components selected from published blog documents enter the production
+client registry.
 
 ## Adopted in 3.0.0
 
