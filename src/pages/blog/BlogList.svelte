@@ -24,19 +24,22 @@
 
 <h1 class="visuallyHidden">Blog</h1>
 <div class="blogFilters">
-	<button class="blogFilter" aria-pressed="false" data-filter="english" type="button"
-		><span class="icon-[carbon--checkbox]" aria-hidden="true"></span>English Only</button
-	><button class="blogFilter" aria-pressed="false" data-filter="local" type="button"
-		><span class="icon-[carbon--checkbox]" aria-hidden="true"></span>ryoppippi.com exclusive</button
-	>
+	<button class="blogFilter" aria-pressed="false" data-filter="english" type="button">
+		<span class="icon-[carbon--checkbox]" aria-hidden="true"></span>
+		English Only
+	</button>
+	<button class="blogFilter" aria-pressed="false" data-filter="local" type="button">
+		<span class="icon-[carbon--checkbox]" aria-hidden="true"></span>
+		ryoppippi.com exclusive
+	</button>
 </div>
-<span class="visuallyHidden" id="blog-filter-status" aria-atomic="true" aria-live="polite"
-	>Showing all blog posts</span
->
+<span class="visuallyHidden" id="blog-filter-status" aria-atomic="true" aria-live="polite">
+	Showing all blog posts
+</span>
 <div class="blogList">
 	{#each items as item}
-		{@const kind = item.kind ?? 'article'}
-		{@const external = item.external === true}
+		{const kind = $derived(item.kind ?? 'article')}
+		{const external = $derived(item.external === true)}
 		<div
 			class="blogItem"
 			data-blog-item
@@ -49,20 +52,26 @@
 				href={item.link}
 				rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
 				target={item.link.startsWith('http') ? '_blank' : undefined}
-				><div class="blogEntryContent">
+			>
+				<div class="blogEntryContent">
 					<span
-						class={`${external ? externalKindIcons[kind] : 'icon-[simple-icons--markdown]'} blogEntryIcon`}
+						class={[
+							external ? externalKindIcons[kind] : 'icon-[simple-icons--markdown]',
+							'blogEntryIcon',
+						]}
 						title={external ? externalKindLabels[kind] : undefined}
 						aria-hidden="true"
 					></span>
 					<p class="blogEntryTitle" style={`view-transition-name:blog-${item.slug}`}>
-						{#if item.draft === true}<span class="blogEntryDraft">(draft)</span
-							>{/if}{' '}{item.title}<span class="blogEntryDate"
-							>{formatDate(new Date(item.pubDate))}</span
-						>
+						{#if item.draft === true}
+							<span class="blogEntryDraft">(draft)</span>
+						{/if}
+						{item.title}<span class="blogEntryDate">
+							{formatDate(new Date(item.pubDate))}
+						</span>
 					</p>
-				</div></a
-			>
+				</div>
+			</a>
 		</div>
 	{/each}
 </div>

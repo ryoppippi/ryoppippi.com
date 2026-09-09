@@ -9,7 +9,9 @@
 	let { content, pathname }: SiteLayoutProps = $props();
 </script>
 
-<span data-nosnippet><a class="skipLink" href="#main-content">Skip to content</a></span>
+<span data-nosnippet>
+	<a class="skipLink" href="#main-content">Skip to content</a>
+</span>
 <div class="siteLayout">
 	<SiteHeader {pathname}></SiteHeader>
 	<main id="main-content" tabindex="-1">{@html content}</main>

@@ -19,19 +19,25 @@
 <div class="worksNavigationHeader">
 	<h1 class="worksTitle">Works</h1>
 	<p class="worksTagline">
-		<span class="worksNowrap">... that</span> <span class="worksNowrap">I</span>{' '}<span
-			class="worksNowrap">(&rsquo;m working | &rsquo;ve worked)</span
-		>{' '}<span class="worksNowrap">on</span>
+		<span class="worksNowrap">... that</span>
+		<span class="worksNowrap">I</span>
+		<span class="worksNowrap">(&rsquo;m working | &rsquo;ve worked)</span>
+		<span class="worksNowrap">on</span>
 	</p>
 	<nav class="worksSections" aria-label="Works sections">
 		{#each sections as item}
 			<a
-				class={`worksSectionLink${item === active ? ` worksSectionLinkActive` : ''}`}
+				class={['worksSectionLink', item === active && 'worksSectionLinkActive']}
 				aria-current={item === active ? 'page' : undefined}
 				href={`/works/${item}/`}
 				style={`view-transition-name:works-nav-${item}`}
-				>{#if item === 'oss'}{'OSS'}{:else}{item[0].toUpperCase() + item.slice(1)}{/if}</a
 			>
+				{#if item === 'oss'}
+					OSS
+				{:else}
+					{item[0].toUpperCase() + item.slice(1)}
+				{/if}
+			</a>
 		{/each}
 	</nav>
 </div>

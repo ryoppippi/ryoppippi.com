@@ -33,40 +33,48 @@
 </script>
 
 <div class="articlePage">
-	{#if !post.isPublished}<p class="articleUnpublished">This article is not published yet.</p>{/if}
+	{#if !post.isPublished}
+		<p class="articleUnpublished">This article is not published yet.</p>
+	{/if}
 	<hgroup class="articleHeading">
 		<h1 class="articleTitle" style={`view-transition-name:blog-${post.filename}`}>{title}</h1>
 		<p class="articleMeta">
-			{date} ・ {#if post.readingTime < 1}{'Under a minute'}{:else}{`${post.readingTime} min read`}{/if}
-			・{' '}<a
+			{date} ・
+			{#if post.readingTime < 1}
+				Under a minute
+			{:else}
+				{`${post.readingTime} min read`}
+			{/if}
+			・
+			<a
 				class="articleSourceLink"
 				aria-label="Markdown source"
 				href={markdownPath}
 				rel="noopener noreferrer"
 				target="_blank"
-				><span class={`icon-[ri--markdown-line] articleSourceIcon`} aria-hidden="true"></span></a
 			>
+				<span class={['icon-[ri--markdown-line]', 'articleSourceIcon']} aria-hidden="true"></span>
+			</a>
 		</p>
 	</hgroup>
-	<div class="articleDivider"><hr /></div>
-	<article class={`content articleContent articleBody prose`}>{@html post.html}</article>
+	<div class="articleDivider">
+		<hr />
+	</div>
+	<article class={['content', 'articleContent', 'articleBody', 'prose']}>{@html post.html}</article>
 	<div class="articleFooterBlock">
-		<span class="articleFooterLabel">comment on</span>{' '}<a
-			href={blueskyUrl}
-			rel="noopener noreferrer"
-			target="_blank">bluesky</a
-		><span class="articleFooterSeparator"> / </span><a
-			href={tweetUrl}
-			rel="noopener noreferrer"
-			target="_blank">twitter</a
-		>
+		<span class="articleFooterLabel">comment on</span>
+		<a href={blueskyUrl} rel="noopener noreferrer" target="_blank">bluesky</a>
+		<span class="articleFooterSeparator">/</span>
+		<a href={tweetUrl} rel="noopener noreferrer" target="_blank">twitter</a>
 	</div>
 	<div class="articleFooterBlock">
 		<a
 			href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
 			rel="noopener noreferrer"
-			target="_blank">{SITE_COPYRIGHT}</a
+			target="_blank"
 		>
+			{SITE_COPYRIGHT}
+		</a>
 	</div>
 </div>
 

@@ -31,46 +31,59 @@
 <div class="ossIntro">
 	<div class="ossActions">
 		<a
-			class={`ossAction ossActionGreen`}
+			class={['ossAction', 'ossActionGreen']}
 			href={`${SITE_ORIGIN}/pr`}
 			rel="noopener noreferrer"
 			target="_blank"
-			><span class="icon-[ph--git-pull-request-duotone]" aria-hidden="true"></span>My Recent PRs</a
-		><a
-			class={`ossAction ossActionBlue`}
+		>
+			<span class="icon-[ph--git-pull-request-duotone]" aria-hidden="true"></span>
+			My Recent PRs
+		</a>
+		<a
+			class={['ossAction', 'ossActionBlue']}
 			href={`${SITE_ORIGIN}/gh`}
 			rel="noopener noreferrer"
 			target="_blank"
-			><span class="icon-[ph--github-logo-duotone]" aria-hidden="true"></span>GitHub</a
-		><a
-			class={`ossAction ossActionPink`}
+		>
+			<span class="icon-[ph--github-logo-duotone]" aria-hidden="true"></span>
+			GitHub
+		</a>
+		<a
+			class={['ossAction', 'ossActionPink']}
 			href={`${SITE_ORIGIN}/gh-by-stars`}
 			rel="noopener noreferrer"
-			target="_blank"><span class="icon-[ph--star]" aria-hidden="true"></span>Sort by Stars</a
+			target="_blank"
 		>
+			<span class="icon-[ph--star]" aria-hidden="true"></span>
+			Sort by Stars
+		</a>
 	</div>
 	<p class="ossUpdatedNote">GitHub star counts for my repositories are refreshed daily.</p>
 </div>
 <div class="ossGroups">
 	{#each projectGroups as group}
-		{@const groupProjects = projects.filter((project) => project.kind === group.kind)}
-		{#if groupProjects.length > 0}<WorksSection title={group.title}
-				><div class="ossProjectGrid">
+		{const groupProjects = $derived(projects.filter((project) => project.kind === group.kind))}
+		{#if groupProjects.length > 0}
+			<WorksSection title={group.title}>
+				<div class="ossProjectGrid">
 					{#each groupProjects as project}
-						<a class="ossProject" href={project.link} rel="noopener noreferrer" target="_blank"
-							><div class="ossProjectIcon">
-								<span class={`${project.icon} ossProjectIconGlyph`} aria-hidden="true"></span>
+						<a class="ossProject" href={project.link} rel="noopener noreferrer" target="_blank">
+							<div class="ossProjectIcon">
+								<span class={[project.icon, 'ossProjectIconGlyph']} aria-hidden="true"></span>
 							</div>
 							<div class="ossProjectBody">
 								<div class="ossProjectHeading">
 									<div class="ossProjectName">{project.name}</div>
-									{#if project.stars != null}<span
+									{#if project.stars != null}
+										<span
 											class="ossProjectStars"
 											aria-label={`${project.stars.toLocaleString('en-US')} GitHub stars`}
 											title={`${project.stars.toLocaleString('en-US')} GitHub stars`}
-											><span class={`icon-[ph--star] ossStarIcon`} aria-hidden="true"
-											></span>{formatStars(project.stars)}</span
-										>{/if}
+										>
+											<span class={['icon-[ph--star]', 'ossStarIcon']} aria-hidden="true"></span>
+											{formatStars(project.stars)}
+										</span>
+									{/if}
 								</div>
 								<p class="ossProjectDescription">{project.description ?? ''}</p>
 								<div class="ossProjectTags">
@@ -78,11 +91,12 @@
 										<span class="ossProjectTag">{tag}</span>
 									{/each}
 								</div>
-							</div></a
-						>
+							</div>
+						</a>
 					{/each}
-				</div></WorksSection
-			>{:else}{/if}
+				</div>
+			</WorksSection>
+		{/if}
 	{/each}
 </div>
 

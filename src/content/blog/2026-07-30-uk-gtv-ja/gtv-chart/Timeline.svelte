@@ -49,7 +49,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div onpointerleave={() => onFocusedChange(null)}>
 	<div
-		class="ts-chart-host canvas"
+		class={['ts-chart-host', 'canvas']}
 		style:position="relative"
 		style:width="100%"
 		style:aspect-ratio={ASPECT_RATIO}

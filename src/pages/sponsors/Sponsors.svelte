@@ -1,5 +1,5 @@
 <div class="sponsorsPage">
-	<h1 class={`sponsorsTitle visuallyHidden`}>Sponsors</h1>
+	<h1 class={['sponsorsTitle', 'visuallyHidden']}>Sponsors</h1>
 	<p class="sponsorsMessage">
 		Thank you to everyone supporting my work—it keeps the OSS, blog, and talks alive.
 	</p>
@@ -8,18 +8,24 @@
 			class="sponsorsLink"
 			href="https://github.com/sponsors/ryoppippi"
 			rel="noreferrer"
-			target="_blank"><span class="icon-[ph--heart]" aria-hidden="true"></span>GitHub Sponsors</a
+			target="_blank"
 		>
+			<span class="icon-[ph--heart]" aria-hidden="true"></span>
+			GitHub Sponsors
+		</a>
 	</p>
 	<button
 		class="sponsorsToggle"
 		aria-controls="sponsor-image"
 		aria-describedby="sponsor-view-status"
 		data-sponsor-view="circles"
-		type="button">Show Sponsor Tiers</button
-	><span id="sponsor-view-status" class="visuallyHidden" aria-live="polite"
-		>Showing Sponsor Circles</span
+		type="button"
 	>
+		Show Sponsor Tiers
+	</button>
+	<span id="sponsor-view-status" class="visuallyHidden" aria-live="polite">
+		Showing Sponsor Circles
+	</span>
 	<div class="sponsorsImageFrame">
 		<img
 			id="sponsor-image"

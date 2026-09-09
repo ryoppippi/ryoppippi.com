@@ -19,7 +19,8 @@
 	</div>
 	<div class="homeHeading">
 		<h1 class="homeTitle" style="view-transition-name:title-ryoppippi">
-			<span class="homeHandle">@ryoppippi</span>{' '}<span class="homeRole">Engineer</span>
+			<span class="homeHandle">@ryoppippi</span>
+			<span class="homeRole">Engineer</span>
 		</h1>
 	</div>
 </article>
@@ -31,8 +32,10 @@
 					aria-label={label}
 					href={`${SITE_ORIGIN}${href}`}
 					rel="noopener noreferrer"
-					target="_blank"><span class={`${icon} homeSocialIcon`} aria-hidden="true"></span></a
+					target="_blank"
 				>
+					<span class={[icon, 'homeSocialIcon']} aria-hidden="true"></span>
+				</a>
 			</div>
 		{/each}
 	</article>

@@ -9,13 +9,16 @@
 </script>
 
 <header class="siteHeader">
-	<div data-nosnippet class={`siteBrandSlot${isHome ? ` siteBrandSlotHome` : ''}`}>
-		{#if !isHome}<a class="siteBrand" aria-label="Home" href="/"
-				><span style="view-transition-name:title-ryoppippi">@ryoppippi</span></a
-			>{/if}
+	<div data-nosnippet class={['siteBrandSlot', isHome && 'siteBrandSlotHome']}>
+		{#if !isHome}
+			<a class="siteBrand" aria-label="Home" href="/">
+				<span style="view-transition-name:title-ryoppippi">@ryoppippi</span>
+			</a>
+		{/if}
 	</div>
 	<nav class="siteNavigation" aria-label="Primary navigation">
-		<NavigationLinks {pathname}></NavigationLinks><NavigationActions></NavigationActions>
+		<NavigationLinks {pathname}></NavigationLinks>
+		<NavigationActions></NavigationActions>
 	</nav>
 </header>
 
