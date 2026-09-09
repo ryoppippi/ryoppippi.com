@@ -1,6 +1,6 @@
 # Ox Content integration boundary
 
-The site uses the public Ox Content 3.1.1 release. Native custom-host stylesheet
+The site uses the public Ox Content 3.1.2 release. Native custom-host stylesheet
 discovery replaces the last local Vite plugin; no implementation or ambient
 declaration remains under `src/ox-content`.
 
@@ -113,6 +113,44 @@ Verification: 38 tests in 12 files pass, with 428 custom-host outputs. All 601
 generated files are byte-for-byte identical to the pre-audit build. Remaining
 adapters are site composition, not reproduced framework machinery; this audit
 did not uncover a new upstream public-contract gap requiring an issue.
+
+## Adopted in 3.1.2
+
+- [#1370](https://github.com/ubugeeei-prod/ox-content/issues/1370), fixed by
+  [#1373](https://github.com/ubugeeei-prod/ox-content/pull/1373): island discovery
+  disables embeds internally. Removed the registry-only `embeds: false` override;
+  actual page rendering retains the shared embed settings.
+- [#1371](https://github.com/ubugeeei-prod/ox-content/issues/1371), fixed by
+  [#1372](https://github.com/ubugeeei-prod/ox-content/pull/1372): custom-host output
+  shares a per-build cache for identical inline JS/CSS minification. HTML
+  compression remains enabled, including hydration-comment preservation.
+
+Verification on 2026-09-09: check and all 38 tests in 12 files passed. All generated
+files were byte-identical to the pre-update 3.1.1 build, with 428 custom-host
+outputs. Browser verification covered production GtvChart rendering and arrow-key
+selection, article link previews, and Tweet text/images on a fresh dev server.
+A source audit found no reproduced regression in the changed discovery/cache
+paths; CSS cache keys distinguish context and JS keys distinguish inline scripts.
+
+| Measurement                                   | 3.1.2       |
+| --------------------------------------------- | ----------- |
+| First build after dependency update, CLI wall | 3.97 s      |
+| Subsequent warm build, CLI wall               | 3.91 s      |
+| Empty Vite cache, CLI wall                    | 4.08 s      |
+| Vite-reported client build                    | 0.64-0.67 s |
+| Profiled HTML minification and writes         | 0.24 s      |
+| Profiled coordinated output writer            | 0.57 s      |
+
+The Vite-cache-cold run retained the existing Ox Content embed cache; it is not
+a fully network-cold build. The previous 3.1.1 diagnostic samples measured
+minification/writes at 0.57 s, output writer at 0.97 s and CLI wall at 4.90 s.
+The immediate pre-update CLI sample was 7.58 s, illustrating run-to-run variance.
+These are diagnostic samples, not controlled benchmark guarantees.
+
+Continue monitoring and repeating release/adopt/remove/verify/re-audit within
+build performance and the related island/embed scope. Both initial issues are
+released and adopted; this checkpoint does not stop the monitor or authorise
+marking the Draft PR ready or merging it.
 
 ## Remaining boundary
 
