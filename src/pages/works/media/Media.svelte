@@ -38,38 +38,44 @@
 		href="/works/media/feed.xml"
 		rel="alternate"
 		target="_blank"
-		type="application/rss+xml"><span class="icon-[line-md--rss]" aria-hidden="true"></span>Feed</a
-	>{#if playlist != null}<a
-			class="mediaControlLink"
-			href={playlist.link}
-			rel="noopener noreferrer"
-			target="_blank"
-			><span class="icon-[ri--youtube-line]" aria-hidden="true"></span>Watch all videos on YouTube</a
-		>{/if}<button class="mediaFilter" aria-pressed="false" data-media-filter="english" type="button"
-		><span class="icon-[carbon--checkbox]" aria-hidden="true"></span>English Only</button
+		type="application/rss+xml"
 	>
+		<span class="icon-[line-md--rss]" aria-hidden="true"></span>
+		Feed
+	</a>
+	{#if playlist != null}
+		<a class="mediaControlLink" href={playlist.link} rel="noopener noreferrer" target="_blank">
+			<span class="icon-[ri--youtube-line]" aria-hidden="true"></span>
+			Watch all videos on YouTube
+		</a>
+	{/if}
+	<button class="mediaFilter" aria-pressed="false" data-media-filter="english" type="button">
+		<span class="icon-[carbon--checkbox]" aria-hidden="true"></span>
+		English Only
+	</button>
 </div>
 {#each byYear as [year, yearItems]}
-	<WorksSection title={year} filter="media"
-		><WorksList
-			>{#each yearItems as item}
-				{@const details = kindDetails[item.kind ?? 'podcast']}
+	<WorksSection title={year} filter="media">
+		<WorksList>
+			{#each yearItems as item}
+				{const details = $derived(kindDetails[item.kind ?? 'podcast'])}
 				<li class="mediaItem" data-media-item data-lang={item.lang ?? 'ja'}>
 					<h3 class="mediaTitle">
-						<a class="mediaLink" href={item.link} rel="noopener noreferrer" target="_blank"
-							>{item.title}</a
-						>
+						<a class="mediaLink" href={item.link} rel="noopener noreferrer" target="_blank">
+							{item.title}
+						</a>
 					</h3>
 					<p class="mediaMeta">
-						<span class={`${details.icon} mediaKindIcon`} aria-hidden="true"
-						></span>{details.label}<time class="mediaDate" datetime={item.pubDate}
-							>{formatDate(new Date(item.pubDate))}</time
-						>
+						<span class={[details.icon, 'mediaKindIcon']} aria-hidden="true"></span>
+						{details.label}
+						<time class="mediaDate" datetime={item.pubDate}>
+							{formatDate(new Date(item.pubDate))}
+						</time>
 					</p>
 				</li>
-			{/each}</WorksList
-		></WorksSection
-	>
+			{/each}
+		</WorksList>
+	</WorksSection>
 {/each}
 
 <style>

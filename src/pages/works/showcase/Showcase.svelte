@@ -15,26 +15,27 @@
 <WorksNav active="showcase"></WorksNav>
 <div class="showcaseGrid">
 	{#each projects as project}
-		{@const external = project.link.startsWith('http')}
+		{const external = $derived(project.link.startsWith('http'))}
 		<article class="showcaseCard">
 			<a
 				class="showcaseImageLink"
 				href={project.link}
 				rel={external ? 'noopener noreferrer' : undefined}
 				target={external ? '_blank' : undefined}
-				>{#if project.image != null}<img
-						class="showcaseImage"
-						alt={project.title}
-						src={project.image}
-					/>{/if}</a
 			>
+				{#if project.image != null}
+					<img class="showcaseImage" alt={project.title} src={project.image} />
+				{/if}
+			</a>
 			<div class="showcaseDetails">
 				<h2 class="showcaseTitle">
 					<a
 						href={project.link}
 						rel={external ? 'noopener noreferrer' : undefined}
-						target={external ? '_blank' : undefined}>{project.title}</a
+						target={external ? '_blank' : undefined}
 					>
+						{project.title}
+					</a>
 				</h2>
 				<div class="prose">{@html project.html}</div>
 				<p class="showcaseDate">{formatDate(new Date(project.pubDate))}</p>

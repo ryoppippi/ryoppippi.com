@@ -21,19 +21,20 @@
 </script>
 
 <div class="publicationsPage">
-	<WorksNav active="publications"></WorksNav>{#each years as [year, items]}
-		<WorksSection title={year}
-			><WorksList
-				>{#each items as item}
+	<WorksNav active="publications"></WorksNav>
+	{#each years as [year, items]}
+		<WorksSection title={year}>
+			<WorksList>
+				{#each items as item}
 					<li class="publicationItem">
-						<a class="publicationLink" href={item.link} rel="noopener noreferrer" target="_blank"
-							>{item.title}</a
-						>
+						<a class="publicationLink" href={item.link} rel="noopener noreferrer" target="_blank">
+							{item.title}
+						</a>
 						<p class="publicationPublisher">{item.publisher}</p>
 					</li>
-				{/each}</WorksList
-			></WorksSection
-		>
+				{/each}
+			</WorksList>
+		</WorksSection>
 	{/each}
 </div>
 

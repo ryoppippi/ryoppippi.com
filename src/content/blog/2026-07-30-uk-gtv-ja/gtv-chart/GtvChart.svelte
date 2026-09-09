@@ -25,7 +25,7 @@
 <figure class="gtv-chart" data-testid="gtv-chart" bind:this={figure}>
 	<Legend {lang} />
 	<p aria-atomic="true" aria-live="polite" class="readout">{readout || '\u00a0'}</p>
-	<div class="wipe" class:revealed={scrollReveal.revealed}>
+	<div class={['wipe', scrollReveal.revealed && 'revealed']}>
 		<Timeline {focused} {lang} onFocusedChange={(value) => (focused = value)} />
 	</div>
 	<EvidenceTable {focused} {lang} onFocusedChange={(value) => (focused = value)} />

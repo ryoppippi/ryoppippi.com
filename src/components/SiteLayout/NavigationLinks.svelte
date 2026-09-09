@@ -17,12 +17,13 @@
 
 <div data-nosnippet class="siteNavigationLinks">
 	{#each navigationLinks as link}
-		{@const active = pathname.startsWith('activePrefix' in link ? link.activePrefix : link.href)}
-		<a class="siteNavigationLink" aria-current={active ? 'page' : undefined} href={link.href}
-			><span>{link.label}</span><span
-				class={`siteNavigationMarker${active ? ` siteNavigationMarkerActive` : ''}`}
-			></span></a
-		>
+		{const active = $derived(
+			pathname.startsWith('activePrefix' in link ? link.activePrefix : link.href),
+		)}
+		<a class="siteNavigationLink" aria-current={active ? 'page' : undefined} href={link.href}>
+			<span>{link.label}</span>
+			<span class={['siteNavigationMarker', active && 'siteNavigationMarkerActive']}></span>
+		</a>
 	{/each}
 </div>
 
