@@ -4,20 +4,13 @@
 
 	let { lang }: { lang?: ChartLang } = $props();
 	const copy = $derived(uiCopy[resolveChartLang(lang)].legend);
-	const items = [
-		'mid',
-		'high',
-		'low',
-		'stars',
-		'after',
-	] as const satisfies readonly (keyof typeof copy)[];
 </script>
 
 <ul class="legend">
-	{#each items as item}
+	{#each Object.entries(copy) as [key, label]}
 		<li>
-			<span aria-hidden="true" class={['swatch', `swatch--${item}`]}></span>
-			{copy[item]}
+			<span aria-hidden="true" class={['swatch', `swatch--${key}`]}></span>
+			{label}
 		</li>
 	{/each}
 </ul>
