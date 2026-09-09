@@ -41,7 +41,7 @@ different compression settings used by Vite's console size summary.
 
 These are cold-cache payload estimates, excluding image/font binaries, HTTP
 headers and transport overhead. Previously observed browser requests establish
-the lazy import set; this run verifies unchanged artifacts rather than repeating
+the lazy import set; this run verifies unchanged artefacts rather than repeating
 browser interaction tests.
 
 The chart chunks are nearly equal. Almost all the JS difference is in the emitted

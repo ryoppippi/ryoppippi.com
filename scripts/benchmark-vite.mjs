@@ -49,7 +49,7 @@ const report = {
 const save = () =>
 	fs.writeFileSync(path.join(output, 'timings.json'), JSON.stringify(report, null, 2) + '\n');
 
-// Keep the previous artifacts and rotate configuration order to limit order bias.
+// Keep the previous artefacts and rotate configuration order to limit order bias.
 for (const configuration of configurations) {
 	fs.cpSync(
 		path.join(configuration.root, 'dist'),
