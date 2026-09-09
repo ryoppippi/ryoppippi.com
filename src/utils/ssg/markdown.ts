@@ -1,15 +1,13 @@
 import type { OxContentCustomHostBaseContext } from '@ox-content/vite-plugin/custom-host';
-import {
-	createSvelteHtmlHostRenderer,
-	type SvelteHtmlHostClientModule,
-} from '@ox-content/vite-plugin-svelte';
+import { createSvelteHtmlHostRenderer } from '@ox-content/vite-plugin-svelte';
+import type { HtmlHostClientModule } from '@ox-content/vite-plugin/html-host';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 
 /** Article body and browser modules selected by the upstream Svelte renderer. */
 export type MarkdownRenderer = (
 	source: string,
 	options: { documentPath: string; contentRoot?: string },
-) => Promise<{ html: string; clientModules: readonly SvelteHtmlHostClientModule[] }>;
+) => Promise<{ html: string; clientModules: readonly HtmlHostClientModule[] }>;
 
 /**
  * Supplies site article metadata through the native Markdown and Svelte SSR interfaces.
@@ -27,7 +25,7 @@ export function createPageMarkdownRenderer(
 	});
 	return async (source, options) => {
 		const result = await context.markdown.render<{
-			clientModules: readonly SvelteHtmlHostClientModule[];
+			clientModules: readonly HtmlHostClientModule[];
 		}>({
 			source,
 			documentPath: options.documentPath,

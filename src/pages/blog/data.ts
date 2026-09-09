@@ -8,7 +8,7 @@ import {
 } from '@ox-content/vite-plugin';
 import { glob } from 'tinyglobby';
 import type { MarkdownRenderer } from '@/utils/ssg/markdown.ts';
-import type { SvelteHtmlHostClientModule } from '@ox-content/vite-plugin-svelte';
+import type { HtmlHostClientModule } from '@ox-content/vite-plugin/html-host';
 import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/config/content.ts';
 
 /**
@@ -40,7 +40,7 @@ export type BlogPost = ArticleMetadata & {
 	source: string;
 	content: string;
 	html: string;
-	clientModules: readonly SvelteHtmlHostClientModule[];
+	clientModules: readonly HtmlHostClientModule[];
 	pubDate: string;
 	lang: string;
 	isPublished: boolean;
@@ -347,11 +347,13 @@ if (import.meta.vitest != null) {
 			].join('\n'),
 			'component/Chart.svelte': '<p>Fixture chart</p>',
 		});
+		const modules = new Map<string, unknown>([
+			[fixture.getPath('component/Chart.svelte'), { default: FixtureChart }],
+			['svelte/server', await import('svelte/server')],
+			['svelte', await import('svelte')],
+		]);
 		const renderIsland = createSvelteHtmlHostRenderer({
-			loadModule: async (moduleId) => {
-				expect(moduleId).toBe(fixture.getPath('component/Chart.svelte'));
-				return { default: FixtureChart };
-			},
+			loadModule: async (moduleId) => modules.get(moduleId),
 			root: fixture.path,
 		});
 

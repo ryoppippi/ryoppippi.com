@@ -1,13 +1,18 @@
 # Ox Content integration boundary
 
-The site uses public Ox Content 3.1.3 with Svelte components compiled by rsvelte.
-Page/layout Svelte SSR supplies scoped CSS through `render().head`; the custom host still
-owns global CSS, article CSS and island asset URLs. See [migration PR #2140](https://github.com/ryoppippi/ryoppippi.com/pull/2140)
+The site uses public Ox Content 3.1.4 with Svelte components compiled by rsvelte.
+The shared HTML-host registry, collection helpers and lazy hydration pipeline use
+Svelte's SSR and DOM adapters. Page/layout scoped CSS still uses `render().head`;
+the custom host selects global CSS, article CSS and island asset URLs. See
+[migration PR #2140](https://github.com/ryoppippi/ryoppippi.com/pull/2140)
 for the migration results and upstream follow-ups. The adoption history below
 describes the earlier Solid implementation where explicitly named.
 
-The upstream island renderer does not return head metadata. The current GTV island
-uses ordinary imported CSS; arbitrary scoped island styles remain subject to #1389.
+The upstream island renderer does not return head metadata, so island
+`<svelte:head>` and injected scoped styles remain unsupported. The current GTV
+island uses ordinary imported CSS. The injected page/layout CSS configuration is
+retained because external extraction still loses SSR-only styles in this site's
+production build with 3.1.4.
 
 ## Ownership
 
