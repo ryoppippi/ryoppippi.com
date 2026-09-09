@@ -132,14 +132,14 @@ selection, article link previews, and Tweet text/images on a fresh dev server.
 A source audit found no reproduced regression in the changed discovery/cache
 paths; CSS cache keys distinguish context and JS keys distinguish inline scripts.
 
-| Measurement | 3.1.2 |
-| --- | --- |
-| First build after dependency update, CLI wall | 3.97 s |
-| Subsequent warm build, CLI wall | 3.91 s |
-| Empty Vite cache, CLI wall | 4.08 s |
-| Vite-reported client build | 0.64-0.67 s |
-| Profiled HTML minification and writes | 0.24 s |
-| Profiled coordinated output writer | 0.57 s |
+| Measurement                                   | 3.1.2       |
+| --------------------------------------------- | ----------- |
+| First build after dependency update, CLI wall | 3.97 s      |
+| Subsequent warm build, CLI wall               | 3.91 s      |
+| Empty Vite cache, CLI wall                    | 4.08 s      |
+| Vite-reported client build                    | 0.64-0.67 s |
+| Profiled HTML minification and writes         | 0.24 s      |
+| Profiled coordinated output writer            | 0.57 s      |
 
 The Vite-cache-cold run retained the existing Ox Content embed cache; it is not
 a fully network-cold build. The previous 3.1.1 diagnostic samples measured
