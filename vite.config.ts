@@ -37,6 +37,9 @@ export default defineConfig(({ command, mode }) => {
 			href: SYNTAX_THEME_HREF,
 		},
 		build: { transformHtml: false },
+		ssrStylesheets: {
+			modules: ['src/pages/**/*.svelte', 'src/components/SiteLayout/index.svelte'],
+		},
 		oxContent: {
 			...OX_CONTENT_BUILD_OPTIONS,
 			siteMaps: { robots: false, llms: false },
@@ -55,7 +58,11 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
-			svelte({ configFile: false, emitCss: false, compilerOptions: { css: 'injected' } }),
+			svelte({
+				configFile: false,
+				emitCss: command === 'build',
+				compilerOptions: { css: command === 'build' ? 'external' : 'injected' },
+			}),
 			createHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				collectionDocuments: {
@@ -79,7 +86,7 @@ export default defineConfig(({ command, mode }) => {
 			outDir: 'dist',
 			emptyOutDir: true,
 			minify: true,
-			rollupOptions: { input: ['index.html', 'src/pages/blog/[slug]/ArticleContent.css'] },
+			rollupOptions: { input: 'index.html' },
 		},
 		run: {
 			tasks: {

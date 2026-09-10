@@ -383,7 +383,6 @@ if (import.meta.vitest != null) {
 			}),
 		);
 		assert.isNotNull(post);
-		expect(post.headHtml).toContain('<style');
 		expect(post.html).toContain('Page not found');
 		expect(post.html).toContain('data-ox-ssr="true"');
 	});

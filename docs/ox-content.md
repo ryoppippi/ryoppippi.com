@@ -1,9 +1,9 @@
 # Ox Content integration boundary
 
-The site uses public Ox Content 3.1.5 with Svelte components compiled by rsvelte.
+The site uses public Ox Content 3.1.6 with Svelte components compiled by rsvelte.
 The shared HTML-host registry, collection helpers and lazy hydration pipeline use
-Svelte's SSR and DOM adapters. Page/layout scoped CSS still uses `render().head`;
-the custom host selects global CSS, article CSS and island asset URLs. See
+Svelte's SSR and DOM adapters. The custom host discovers page/layout scoped CSS
+through `ssrStylesheets` and selects global, route and island asset URLs. See
 [migration PR #2140](https://github.com/ryoppippi/ryoppippi.com/pull/2140)
 for the migration results and upstream follow-ups. The adoption history below
 describes the earlier Solid implementation where explicitly named.
@@ -11,10 +11,15 @@ describes the earlier Solid implementation where explicitly named.
 The upstream `renderHtmlHostMarkdown` helper resolves islands and stylesheet
 metadata; island head contributions now reach the complete article document.
 Virtual module declarations and HTML-host client types come from the package.
-The current GTV island continues to use ordinary imported CSS. Injected
-page/layout CSS remains necessary: testing 3.1.5 with `ssrStylesheets` and
-external CSS emitted no scoped header/About rules despite a successful build.
-See [upstream #1389](https://github.com/ubugeeei-prod/ox-content/issues/1389).
+The current GTV island continues to use ordinary imported CSS. Production page/layout
+styles use external CSS with upstream SSR stylesheet roots; the production injected-CSS
+configuration and manual article CSS build input are removed. Home critical CSS
+is still inlined from the upstream global and SSR stylesheet descriptors.
+[Upstream #1404](https://github.com/ubugeeei-prod/ox-content/pull/1404), released
+in 3.1.6, fixes the missing scoped styles reproduced in 3.1.5.
+Development keeps injected scoped CSS: the upstream static SSR stylesheet
+resolver cannot resolve this site's `@/` imports, so using it for dev pages
+currently returns HTTP 500. Track [upstream #1405](https://github.com/ubugeeei-prod/ox-content/issues/1405).
 
 ## Ownership
 
