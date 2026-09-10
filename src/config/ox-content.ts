@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_ORIGIN } from './site.ts';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 import { OX_MARKDOWN_OPTIONS, twitterCacheDirectory, twitterMediaDirectory } from './markdown.ts';
-import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN } from './content.ts';
+import { BLOG_SOURCE_PATTERNS, blogPermalink, SHOWCASE_SOURCE_PATTERN } from './content.ts';
 import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
 import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
 
@@ -110,7 +110,7 @@ if (import.meta.vitest != null) {
 		for (const file of files) {
 			const slug = path.dirname(file);
 			expect(await fs.readFile(path.join(root, file), 'utf8')).toMatch(
-				new RegExp(`^---\\npermalink: /blog/${slug}\\n`),
+				new RegExp(`^---\\npermalink: ${blogPermalink(slug)}\\n`),
 			);
 		}
 	});
