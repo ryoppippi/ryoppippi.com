@@ -14,3 +14,19 @@ export const BLOG_DIRECTORY = path.join(CONTENT_DIRECTORY, 'blog');
 
 /** Canonical authored showcase directory. */
 export const SHOWCASE_DIRECTORY = path.join(CONTENT_DIRECTORY, 'works/showcase');
+
+/**
+ * Public route of a blog post, used as the `permalink` front matter value.
+ *
+ * The blog collection is mounted below `/blog`, so every source must declare
+ * the route explicitly; keeping the shape here stops the new-post command and
+ * the collection test from drifting apart.
+ *
+ * @param slug - Directory name of the post, e.g. `2026-09-09-revenge-ja`.
+ * @returns The permalink, e.g. `/blog/2026-09-09-revenge-ja`.
+ * @example
+ * blogPermalink('2026-09-09-revenge-ja'); // '/blog/2026-09-09-revenge-ja'
+ */
+export function blogPermalink(slug: string): string {
+	return `/blog/${slug}`;
+}
