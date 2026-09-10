@@ -110,7 +110,7 @@ if (import.meta.vitest != null) {
 		for (const file of files) {
 			const slug = path.dirname(file);
 			expect(await fs.readFile(path.join(root, file), 'utf8')).toMatch(
-				new RegExp(`^---\\npermalink: ${blogPermalink(slug)}\\n`),
+				`---\npermalink: ${blogPermalink(slug)}\n`,
 			);
 		}
 	});
