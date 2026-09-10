@@ -83,12 +83,6 @@
 	border-left: 0.25rem solid var(--prose-quote-borders, #7d7d7d4d);
 	padding-left: 1em;
 	color: var(--prose-quotes, #0f0f0f);
-	font-style: italic;
-}
-
-.prose blockquote p:first-of-type::before,
-.prose blockquote p:last-of-type::after {
-	content: '"';
 }
 
 .prose hr {

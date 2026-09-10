@@ -6,17 +6,6 @@
 	border-left: 0.25em solid var(--callout-color);
 }
 
-/* Prose blockquotes are quotations (italics plus inserted quotation marks);
-   a callout is not a quotation, so undo both. */
-.prose .ox-callout {
-	font-style: normal;
-}
-
-.prose .ox-callout p:first-of-type::before,
-.prose .ox-callout p:last-of-type::after {
-	content: none;
-}
-
 .prose .ox-callout > :first-child {
 	margin-top: 0;
 }
