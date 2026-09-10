@@ -107,6 +107,7 @@ export default defineConfig(({ command, mode }) => {
 		},
 		fmt: {
 			svelte: true,
+			overrides: [{ files: ['**/*.svelte'], options: { htmlWhitespaceSensitivity: 'css' } }],
 			ignorePatterns: [
 				'.cache/**',
 				'.claude/**',

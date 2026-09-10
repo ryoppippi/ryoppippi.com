@@ -1,28 +1,25 @@
 <div data-nosnippet class="siteNavigationActions">
-	<a class="siteCvLink" href="/cv" rel="noopener noreferrer" target="_blank"
-		><span class="siteCvLabel"
-			>cv{' '}<span class={`icon-[line-md--download-outline] siteCvIcon`} aria-hidden="true"
-			></span></span
-		></a
-	>
+	<a class="siteCvLink" href="/cv" rel="noopener noreferrer" target="_blank">
+		<span class="siteCvLabel">
+			cv <span class={['icon-[line-md--download-outline]', 'siteCvIcon']} aria-hidden="true"></span>
+		</span>
+	</a>
 	<div class="siteTools">
-		<span class="siteThemeControl" data-dark-mode></span><a
-			class="siteToolLink"
-			aria-label="RSS feed"
-			href="/feed.xml"
-			><span class="icon-[line-md--rss]" aria-hidden="true"></span><span class="visuallyHidden"
-				>RSS feed</span
-			></a
-		><a
+		<span class="siteThemeControl" data-dark-mode></span>
+		<a class="siteToolLink" aria-label="RSS feed" href="/feed.xml">
+			<span class="icon-[line-md--rss]" aria-hidden="true"></span>
+			<span class="visuallyHidden">RSS feed</span>
+		</a>
+		<a
 			class="siteToolLink"
 			aria-label="Source code on GitHub"
 			href="https://github.com/ryoppippi/ryoppippi.com"
 			rel="noopener noreferrer"
 			target="_blank"
-			><span class="icon-[teenyicons--github-solid]" aria-hidden="true"></span><span
-				class="visuallyHidden">Source code</span
-			></a
 		>
+			<span class="icon-[teenyicons--github-solid]" aria-hidden="true"></span>
+			<span class="visuallyHidden">Source code</span>
+		</a>
 	</div>
 </div>
 

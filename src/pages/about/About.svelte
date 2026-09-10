@@ -20,7 +20,9 @@
 		<div class="cardRule" aria-hidden="true"></div>
 		<div class="cardContent">
 			<div class="visuals">
-				<figure class="portrait"><ProfileImage class="profileImage"></ProfileImage></figure>
+				<figure class="portrait">
+					<ProfileImage class="profileImage"></ProfileImage>
+				</figure>
 				<figure class="mascot">
 					<img
 						class="mascotImage"
@@ -36,30 +38,37 @@
 			</div>
 			<div class="copy">
 				<h1 class="heading">ryoppippi</h1>
-				<p class="kicker"><em>... coder without ai</em></p>
+				<p class="kicker">
+					<em>... coder without ai</em>
+				</p>
 				<p class="description">
-					<strong class="name">{SITE_OWNER.handle.slice(1)}</strong>{' '}<span class="alias"
-						>({SITE_OWNER.name} / <span lang="ja">{SITE_OWNER.japaneseName}</span>)</span
-					>{' '}builds coding agents, developer tools, and human-centred AI products. Maintains{' '}<a
+					<strong class="name">{SITE_OWNER.handle.slice(1)}</strong>
+					<span class="alias">
+						({SITE_OWNER.name} / <span lang="ja">{SITE_OWNER.japaneseName}</span>)
+					</span>
+					builds coding agents, developer tools, and human-centred AI products. Maintains
+					<a
 						class="inlineLink"
 						href="https://ccusage.com/gh"
 						rel="noopener noreferrer"
-						target="_blank">ccusage</a
-					>{' '}and{' '}<a class="inlineLink" href="/works/oss/">multiple OSS projects</a>.
+						target="_blank"
+					>
+						ccusage
+					</a>
+					and <a class="inlineLink" href="/works/oss/">multiple OSS projects</a>.
 					<span class="role">Founding Engineer</span>
-					at{' '}<a
-						class="inlineLink"
-						href="https://rork.com/"
-						rel="noopener noreferrer"
-						target="_blank">Rork</a
-					>.
+					at
+					<a class="inlineLink" href="https://rork.com/" rel="noopener noreferrer" target="_blank">
+						Rork
+					</a>.
 				</p>
 				<ul class="links">
 					{#each links as [label, href]}
 						<li class="linkItem">
-							<a class="link" {href} rel="noopener noreferrer" target="_blank"
-								><span>{label}</span><span class="linkArrow" aria-hidden="true">↗</span></a
-							>
+							<a class="link" {href} rel="noopener noreferrer" target="_blank">
+								<span>{label}</span>
+								<span class="linkArrow" aria-hidden="true">↗</span>
+							</a>
 						</li>
 					{/each}
 				</ul>

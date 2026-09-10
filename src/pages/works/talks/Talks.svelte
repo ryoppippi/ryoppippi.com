@@ -28,47 +28,57 @@
 			class="talksControlLink"
 			href="https://talks.ryoppippi.com/feed.xml"
 			rel="noopener noreferrer"
-			target="_blank"><span class="icon-[line-md--rss]" aria-hidden="true"></span>Feed</a
-		><a class="talksControlLink" href="/yt-talks" rel="noopener noreferrer" target="_blank"
-			><span class="icon-[ri--youtube-line]" aria-hidden="true"></span>Watch all talks on YouTube</a
-		><button class="talksFilter" aria-pressed="false" data-talk-filter="english" type="button"
-			><span class="icon-[carbon--checkbox]" aria-hidden="true"></span>English Only</button
+			target="_blank"
 		>
+			<span class="icon-[line-md--rss]" aria-hidden="true"></span>
+			Feed
+		</a>
+		<a class="talksControlLink" href="/yt-talks" rel="noopener noreferrer" target="_blank">
+			<span class="icon-[ri--youtube-line]" aria-hidden="true"></span>
+			Watch all talks on YouTube
+		</a>
+		<button class="talksFilter" aria-pressed="false" data-talk-filter="english" type="button">
+			<span class="icon-[carbon--checkbox]" aria-hidden="true"></span>
+			English Only
+		</button>
 	</div>
 	{#each byYear as [year, items]}
-		<WorksSection title={year} filter="talk"
-			><WorksList
-				>{#each items as talk}
-					{@const link = talk.links.at(0)}
-					{@const event = talk.event === 'テックワールド' ? 'TECH WORLD' : talk.event}
+		<WorksSection title={year} filter="talk">
+			<WorksList>
+				{#each items as talk}
+					{const link = $derived(talk.links.at(0))}
+					{const event = $derived(talk.event === 'テックワールド' ? 'TECH WORLD' : talk.event)}
 					<li class="talkItem" data-talk-item data-lang={talk.lang ?? 'en'}>
 						<h3 class="talkTitle">
-							{#if link == null}{talk.title}{:else}<a
-									class="talkLink"
-									href={link}
-									rel="noopener noreferrer"
-									target="_blank">{talk.title}</a
-								>{/if}
+							{#if link == null}
+								{talk.title}
+							{:else}
+								<a class="talkLink" href={link} rel="noopener noreferrer" target="_blank">
+									{talk.title}
+								</a>
+							{/if}
 						</h3>
 						<p class="talkMeta">
-							{#if talk.eventLink == null}{event}{:else}<a
-									class="talkLink"
-									href={talk.eventLink}
-									rel="noopener noreferrer"
-									target="_blank">{event}</a
-								>{/if}<time class="talkDate" datetime={talk.date}
-								>{formatDate(new Date(talk.date))}</time
-							>
+							{#if talk.eventLink == null}
+								{event}
+							{:else}
+								<a class="talkLink" href={talk.eventLink} rel="noopener noreferrer" target="_blank">
+									{event}
+								</a>
+							{/if}
+							<time class="talkDate" datetime={talk.date}>{formatDate(new Date(talk.date))}</time>
 						</p>
-						{#if talk.videoLink != null}<p class="talkVideo">
-								<a class="talkLink" href={talk.videoLink} rel="noopener noreferrer" target="_blank"
-									>Watch the video</a
-								>
-							</p>{/if}
+						{#if talk.videoLink != null}
+							<p class="talkVideo">
+								<a class="talkLink" href={talk.videoLink} rel="noopener noreferrer" target="_blank">
+									Watch the video
+								</a>
+							</p>
+						{/if}
 					</li>
-				{/each}</WorksList
-			></WorksSection
-		>
+				{/each}
+			</WorksList>
+		</WorksSection>
 	{/each}
 </div>
 

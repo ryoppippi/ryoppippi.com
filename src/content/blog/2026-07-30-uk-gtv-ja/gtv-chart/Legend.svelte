@@ -7,9 +7,10 @@
 </script>
 
 <ul class="legend">
-	<li><span aria-hidden="true" class="swatch swatch--mid"></span>{copy.mid}</li>
-	<li><span aria-hidden="true" class="swatch swatch--high"></span>{copy.high}</li>
-	<li><span aria-hidden="true" class="swatch swatch--low"></span>{copy.low}</li>
-	<li><span aria-hidden="true" class="swatch swatch--stars"></span>{copy.stars}</li>
-	<li><span aria-hidden="true" class="swatch swatch--after"></span>{copy.after}</li>
+	{#each Object.entries(copy) as [key, label]}
+		<li>
+			<span aria-hidden="true" class={['swatch', `swatch--${key}`]}></span>
+			{label}
+		</li>
+	{/each}
 </ul>

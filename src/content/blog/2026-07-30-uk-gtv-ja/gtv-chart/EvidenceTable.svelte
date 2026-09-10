@@ -52,9 +52,9 @@
 		</thead>
 		<tbody>
 			{#each rows as row, index}
-				{@const localised = localisePoint(row, lang)}
+				{const localised = $derived(localisePoint(row, lang))}
 				<tr
-					class:focused={focused === index}
+					class={[focused === index && 'focused']}
 					data-testid="gtv-row"
 					onfocusin={() => onFocusedChange(index)}
 					onfocusout={() => onFocusedChange(null)}
@@ -64,9 +64,9 @@
 					<th scope="row">
 						{localised.label}{copy.headingOpen}
 						{#if localised.milestoneHref}
-							<a href={localised.milestoneHref} rel="noopener noreferrer" target="_blank"
-								>{localised.milestone}</a
-							>
+							<a href={localised.milestoneHref} rel="noopener noreferrer" target="_blank">
+								{localised.milestone}
+							</a>
 						{:else}
 							{localised.milestone}
 						{/if}
@@ -84,8 +84,10 @@
 								<a
 									href={part.href}
 									rel={part.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-									target={part.href.startsWith('http') ? '_blank' : undefined}>{part.text}</a
+									target={part.href.startsWith('http') ? '_blank' : undefined}
 								>
+									{part.text}
+								</a>
 							{/if}
 						{/each}
 					</td>
