@@ -40,6 +40,7 @@ export type BlogPost = ArticleMetadata & {
 	source: string;
 	content: string;
 	html: string;
+	headHtml?: string;
 	clientModules: readonly HtmlHostClientModule[];
 	pubDate: string;
 	lang: string;
@@ -186,6 +187,7 @@ export async function loadBlogPost(
 		source: entry.source,
 		content: entry.content,
 		html: rendered.html,
+		headHtml: rendered.headHtml,
 		clientModules: rendered.clientModules,
 		pubDate: new Date(String(entry.data.date)).toJSON(),
 		lang: typeof entry.data.lang === 'string' ? entry.data.lang : 'ja',
@@ -255,6 +257,7 @@ export async function loadBlogPosts(renderContent: MarkdownRenderer): Promise<Bl
 				source,
 				content,
 				html: rendered.html,
+				headHtml: rendered.headHtml,
 				clientModules: rendered.clientModules,
 				pubDate: new Date(String(data.date)).toJSON(),
 				lang: typeof data.lang === 'string' ? data.lang : 'ja',
@@ -380,6 +383,7 @@ if (import.meta.vitest != null) {
 			}),
 		);
 		assert.isNotNull(post);
+		expect(post.headHtml).toContain('<style');
 		expect(post.html).toContain('Page not found');
 		expect(post.html).toContain('data-ox-ssr="true"');
 	});

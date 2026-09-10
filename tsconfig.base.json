@@ -9,6 +9,7 @@
 		"paths": { "@/*": ["./src/*"] },
 		"resolveJsonModule": true,
 		"types": [
+			"@ox-content/vite-plugin",
 			"node",
 			"svelte",
 			"vite/client",

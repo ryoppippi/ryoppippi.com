@@ -137,6 +137,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets) {
 			assets,
 			pageModule: '/src/pages/blog/[slug]/Article.svelte',
 			article: true,
+			componentHead: post.headHtml,
 			islands: post.clientModules.map(({ moduleId }) => moduleId),
 			links: [
 				{
@@ -191,6 +192,14 @@ if (import.meta.vitest != null) {
 		const [article] = createArticlePageFiles({ ...examplePost, readingTime: 0 }, assets);
 		expect(article.body).toContain('Under a minute');
 		expect(article.body).not.toContain('0 min read');
+	});
+
+	test('preserves island head contributions in the complete article head', () => {
+		const marker = '<meta name="island-fixture" content="preserved">';
+		const [page] = createArticlePageFiles({ ...examplePost, headHtml: marker }, assets);
+		const [head, body] = String(page.body).split('</head>');
+		expect(head).toContain(marker);
+		expect(body).not.toContain(marker);
 	});
 
 	test('places the Markdown alternate in the document head', () => {

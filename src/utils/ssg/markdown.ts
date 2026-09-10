@@ -1,13 +1,17 @@
 import type { OxContentCustomHostBaseContext } from '@ox-content/vite-plugin/custom-host';
 import { createSvelteHtmlHostRenderer } from '@ox-content/vite-plugin-svelte';
-import type { HtmlHostClientModule } from '@ox-content/vite-plugin/html-host';
+import {
+	renderHtmlHostMarkdown,
+	type HtmlHostClientModule,
+	type HtmlHostMarkdownMetadata,
+} from '@ox-content/vite-plugin/html-host';
 import type { SiteAssets } from '@/components/SiteLayout/assets.ts';
 
 /** Article body and browser modules selected by the upstream Svelte renderer. */
 export type MarkdownRenderer = (
 	source: string,
 	options: { documentPath: string; contentRoot?: string },
-) => Promise<{ html: string; clientModules: readonly HtmlHostClientModule[] }>;
+) => Promise<{ html: string; headHtml?: string; clientModules: readonly HtmlHostClientModule[] }>;
 
 /**
  * Supplies site article metadata through the native Markdown and Svelte SSR interfaces.
@@ -24,30 +28,31 @@ export function createPageMarkdownRenderer(
 		loadModule: (id) => context.loadModule(id),
 	});
 	return async (source, options) => {
-		const result = await context.markdown.render<{
-			clientModules: readonly HtmlHostClientModule[];
-		}>({
+		const result = await context.markdown.render<HtmlHostMarkdownMetadata>({
 			source,
 			documentPath: options.documentPath,
 			convertMdLinks: false,
-			async renderHtml({ html, transform }) {
-				const rendered = await renderSvelte(html, { ...options, imports: transform.imports });
-				if (assets != null) {
-					for (const { moduleId } of rendered.clientModules) {
-						const styles = context.assets.stylesheets({ modules: [moduleId] });
-						if (styles.diagnostics.length > 0)
-							throw new Error(styles.diagnostics.map(({ message }) => message).join('\n'));
-						assets.islands[moduleId] = styles.stylesheets;
-					}
-				}
-				return {
-					html: rendered.html,
-					metadata: { clientModules: rendered.clientModules },
-				};
-			},
+			renderHtml: (context) =>
+				renderHtmlHostMarkdown({
+					context: { ...context, contentRoot: options.contentRoot ?? context.contentRoot },
+					renderIslands: renderSvelte,
+					documentAssets: false,
+				}),
 		});
+		const metadata = result.metadata;
+		if (metadata != null && metadata.islandStyleDiagnostics.length > 0) {
+			throw new Error(metadata.islandStyleDiagnostics.map(({ message }) => message).join('\n'));
+		}
+		if (assets != null && metadata != null) {
+			for (const { moduleId } of metadata.clientModules) {
+				assets.islands[moduleId] = metadata.islandStyles.filter(
+					(style) => style.moduleId === moduleId,
+				);
+			}
+		}
 		return {
 			html: result.html,
+			headHtml: metadata?.headHtml,
 			clientModules: result.metadata?.clientModules ?? [],
 		};
 	};

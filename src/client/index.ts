@@ -1,4 +1,5 @@
-import { createHtmlHostLazyHydrate, initIslands } from '@ox-content/islands';
+import { initIslands } from '@ox-content/islands';
+import { createHtmlHostLazyHydrate } from '@ox-content/islands/html-host';
 import {
 	createSvelteHtmlHostDomRenderer,
 	loadSvelteHtmlHostDomRuntime,
