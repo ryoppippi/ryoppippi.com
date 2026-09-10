@@ -6,6 +6,7 @@ import {
 import { resolveSvelteHtmlHostCollectionDocuments } from '@ox-content/vite-plugin-svelte';
 import path from 'node:path';
 import { createFixture } from 'fs-fixture';
+import { blogPermalink, blogSlug } from '../../config/content.ts';
 import { OX_CONTENT_BUILD_OPTIONS } from '../../config/ox-content.ts';
 
 /**
@@ -39,7 +40,7 @@ export async function planSiteContentAssets(
 			pagePath:
 				document.collection === 'showcase'
 					? '/works/showcase/assets/'
-					: `/blog/${/^index\.mdx?$/.test(path.basename(document.documentPath)) ? path.basename(path.dirname(document.documentPath)) : path.basename(document.documentPath, path.extname(document.documentPath))}/`,
+					: `${blogPermalink(blogSlug(document.documentPath))}/`,
 		})),
 		extraAssets: documents.flatMap(({ collection, documentPath, frontmatter }) =>
 			collection === 'showcase' && typeof frontmatter.image === 'string'

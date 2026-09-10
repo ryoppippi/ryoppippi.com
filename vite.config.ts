@@ -10,6 +10,7 @@ import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
 import { OX_CONTENT_BUILD_OPTIONS, SYNTAX_THEME_HREF } from './src/config/ox-content.ts';
 import { planSiteContentAssets } from './src/utils/ssg/content-assets.ts';
+import { validateBlogPermalinks } from './src/utils/ssg/blog-permalinks.ts';
 
 export default defineConfig(({ command, mode }) => {
 	const hostOptions = {
@@ -57,6 +58,7 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
+			validateBlogPermalinks(),
 			svelte({ configFile: false, emitCss: false, compilerOptions: { css: 'injected' } }),
 			createSvelteHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,

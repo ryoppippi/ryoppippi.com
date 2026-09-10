@@ -30,3 +30,22 @@ export const SHOWCASE_DIRECTORY = path.join(CONTENT_DIRECTORY, 'works/showcase')
 export function blogPermalink(slug: string): string {
 	return `/blog/${slug}`;
 }
+
+/**
+ * Slug of a blog source, derived from where the file sits in the collection.
+ *
+ * A post either owns a directory as `<slug>/index.md` or is a flat `<slug>.md`,
+ * so both layouts have to collapse to the same name.
+ *
+ * @param documentPath - Path to the source, absolute or relative to the collection.
+ * @returns The slug, e.g. `2026-09-09-revenge-ja`.
+ * @example
+ * blogSlug('2026-09-09-revenge-ja/index.mdx'); // '2026-09-09-revenge-ja'
+ * blogSlug('2026-09-09-revenge-ja.md'); // '2026-09-09-revenge-ja'
+ */
+export function blogSlug(documentPath: string): string {
+	const base = path.basename(documentPath);
+	return /^index\.mdx?$/.test(base)
+		? path.basename(path.dirname(documentPath))
+		: path.basename(base, path.extname(base));
+}
