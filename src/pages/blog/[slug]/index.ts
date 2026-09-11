@@ -134,6 +134,7 @@ export function createArticlePageFiles(post: BlogPost, assets: SiteAssets) {
 			datePublished: post.pubDate,
 			lang: post.lang,
 			alternates: metadata.alternates,
+			hatenaBookmarkComments: post.hatenaBookmarkComments,
 			assets,
 			pageModule: '/src/pages/blog/[slug]/Article.svelte',
 			article: true,
@@ -200,6 +201,14 @@ if (import.meta.vitest != null) {
 		const [head, body] = String(page.body).split('</head>');
 		expect(head).toContain(marker);
 		expect(body).not.toContain(marker);
+	});
+
+	test('hides Hatena Bookmark comments unless the article opts in', () => {
+		const [quiet] = createArticlePageFiles(examplePost, assets);
+		const [open] = createArticlePageFiles({ ...examplePost, hatenaBookmarkComments: true }, assets);
+
+		expect(quiet.body).toMatch(/<meta name="Hatena::Bookmark" content="nocomment">/);
+		expect(open.body).not.toContain('Hatena::Bookmark');
 	});
 
 	test('places the Markdown alternate in the document head', () => {

@@ -15,6 +15,7 @@ type HtmlDocumentOptions = {
 	componentHead?: string;
 	datePublished?: string;
 	description?: string;
+	hatenaBookmarkComments?: boolean;
 	indexable?: boolean;
 	lang?: string;
 	islands?: string[];
@@ -41,6 +42,7 @@ export function renderHtmlDocument({
 	componentHead = '',
 	description = 'Portfolio of @ryoppippi',
 	datePublished,
+	hatenaBookmarkComments = false,
 	indexable = true,
 	lang = 'en',
 	alternates,
@@ -60,6 +62,7 @@ export function renderHtmlDocument({
 			alternates,
 			datePublished,
 			description,
+			hatenaBookmarkComments,
 			indexable,
 			lang: documentLanguage,
 			pathname,

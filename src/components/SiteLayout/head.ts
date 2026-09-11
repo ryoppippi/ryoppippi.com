@@ -28,6 +28,7 @@ export function renderPageHead({
 	alternates,
 	datePublished,
 	description,
+	hatenaBookmarkComments = false,
 	indexable = true,
 	lang,
 	pathname,
@@ -38,6 +39,7 @@ export function renderPageHead({
 	alternates?: Readonly<Record<string, string>>;
 	datePublished?: string;
 	description: string;
+	hatenaBookmarkComments?: boolean;
 	indexable?: boolean;
 	lang: string;
 	pathname: string;
@@ -70,7 +72,9 @@ export function renderPageHead({
 				: [],
 		metas: indexable
 			? [
-					{ name: 'Hatena::Bookmark', content: 'nocomment' },
+					// Hatena Bookmark hides its comment list on pages carrying this meta. Comments stay
+					// hidden site-wide; an article opts back in through `hatenaBookmarkComments`.
+					...(hatenaBookmarkComments ? [] : [{ name: 'Hatena::Bookmark', content: 'nocomment' }]),
 					{ property: 'og:image:type', content: 'image/jpeg' },
 					{ property: 'og:image:width', content: '400' },
 					{ property: 'og:image:height', content: '400' },

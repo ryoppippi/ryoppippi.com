@@ -12,7 +12,7 @@ import type { HtmlHostClientModule } from '@ox-content/vite-plugin/html-host';
 import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/config/content.ts';
 
 /**
- * SEO metadata that can be declared in an article's frontmatter.
+ * SEO and sharing metadata that can be declared in an article's frontmatter.
  *
  * @example
  * ```yaml
@@ -22,12 +22,15 @@ import { BLOG_SOURCE_PATTERNS, BLOG_DIRECTORY, CONTENT_DIRECTORY } from '@/confi
  *   en: https://example.com/en/
  *   ja: https://example.com/ja/
  *   x-default: https://example.com/en/
+ * hatenaBookmarkComments: true
  * ```
  */
 export type ArticleMetadata = {
 	description?: string;
 	image?: string;
 	alternates?: Readonly<Record<string, string>>;
+	/** Shows Hatena Bookmark comments for this article; they are hidden site-wide by default. */
+	hatenaBookmarkComments?: boolean;
 };
 
 /**
@@ -90,7 +93,12 @@ function parseArticleMetadata(data: Record<string, unknown>): ArticleMetadata {
 			: undefined;
 	const image =
 		typeof data.image === 'string' && data.image.trim().length > 0 ? data.image.trim() : undefined;
-	return { description, image, alternates: parseAlternates(data.alternates) };
+	return {
+		description,
+		image,
+		alternates: parseAlternates(data.alternates),
+		hatenaBookmarkComments: data.hatenaBookmarkComments === true,
+	};
 }
 
 function filenameFor(filepath: string): string {
@@ -474,6 +482,7 @@ if (import.meta.vitest != null) {
 				'  ja: https://example.com/ja/',
 				'  x-default: https://example.com/en/',
 				'  empty: "  "',
+				'hatenaBookmarkComments: true',
 				'---',
 				'',
 				'Article body',
@@ -488,7 +497,31 @@ if (import.meta.vitest != null) {
 					ja: 'https://example.com/ja/',
 					'x-default': 'https://example.com/en/',
 				},
+				hatenaBookmarkComments: true,
 			}),
 		);
+	});
+
+	test('keeps Hatena Bookmark comments hidden unless frontmatter opts in with a boolean', async () => {
+		const { createFixture } = await import('fs-fixture');
+		await using fixture = await createFixture({
+			'quiet.md': '---\ntitle: Quiet\ndate: 2026-06-22\nisPublished: true\n---\nBody',
+			'stringy.md': [
+				'---',
+				'title: Stringy',
+				'date: 2026-06-22',
+				'isPublished: true',
+				'hatenaBookmarkComments: "true"',
+				'---',
+				'Body',
+			].join('\n'),
+		});
+
+		await expect(loadBlogPost('quiet', renderFixture, fixture.getPath())).resolves.toMatchObject({
+			hatenaBookmarkComments: false,
+		});
+		await expect(loadBlogPost('stringy', renderFixture, fixture.getPath())).resolves.toMatchObject({
+			hatenaBookmarkComments: false,
+		});
 	});
 }

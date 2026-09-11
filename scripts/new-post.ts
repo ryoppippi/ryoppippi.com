@@ -30,6 +30,16 @@ if (p.isCancel(lang)) {
 	process.exit(1);
 }
 
+// Hatena Bookmark comments are hidden site-wide; only a post that asks for them opts in.
+const hatenaBookmarkComments = await p.confirm({
+	message: 'Allow Hatena Bookmark comments on this post?',
+	initialValue: false,
+});
+if (p.isCancel(hatenaBookmarkComments)) {
+	p.log.error('Hatena Bookmark comment choice is required');
+	process.exit(1);
+}
+
 p.log.message('Creating post...');
 
 const blogDir = BLOG_DIRECTORY;
@@ -42,6 +52,7 @@ const frontMatter = stringify('', {
 	date,
 	isPublished: false,
 	lang,
+	...(hatenaBookmarkComments ? { hatenaBookmarkComments: true } : {}),
 });
 
 await fs.ensureDir(postDir);
