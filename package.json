@@ -7,7 +7,7 @@
 		"build": "vp run site-build",
 		"check": "vp check && pnpm run check:svelte",
 		"check:svelte": "svelte-check --tsconfig ./tsconfig.json",
-		"deploy": "wrangler deploy",
+		"deploy": "pnpm run build && wrangler deploy",
 		"deploy:non-production": "wrangler versions upload",
 		"dev": "vp dev",
 		"format": "vp check --fix",
