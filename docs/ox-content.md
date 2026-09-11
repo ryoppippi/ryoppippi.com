@@ -1,6 +1,6 @@
 # Ox Content integration boundary
 
-The site uses public Ox Content 3.1.7 with Svelte components compiled by rsvelte.
+The site uses public Ox Content 3.1.8 with Svelte components compiled by rsvelte.
 The shared HTML-host registry, collection helpers and lazy hydration pipeline use
 Svelte's SSR and DOM adapters. The custom host discovers page/layout scoped CSS
 through `ssrStylesheets` and selects global, route and island asset URLs. See
@@ -11,17 +11,16 @@ describes the earlier Solid implementation where explicitly named.
 The upstream `renderHtmlHostMarkdown` helper resolves islands and stylesheet
 metadata; island head contributions now reach the complete article document.
 Virtual module declarations and HTML-host client types come from the package.
-The current GTV island continues to use ordinary imported CSS. Production page/layout
-styles use external CSS with upstream SSR stylesheet roots; the production injected-CSS
-configuration and manual article CSS build input are removed. Home critical CSS
+The current GTV island continues to use ordinary imported CSS. Page/layout
+styles use external CSS with upstream SSR stylesheet discovery in development and
+production; the injected-CSS configuration and manual article CSS build input are removed. Home critical CSS
 is still inlined from the upstream global and SSR stylesheet descriptors.
 [Upstream #1404](https://github.com/ubugeeei-prod/ox-content/pull/1404), released
 in 3.1.6, fixes the missing scoped styles reproduced in 3.1.5.
-Development keeps injected scoped CSS. The 3.1.7 resolver reads `paths` directly
-from `tsconfig.json`, but this site inherits them from `tsconfig.base.json` through
-`extends`. Resolving dev page styles through it still returns HTTP 500 for `@/`
-imports. Track [upstream #1405](https://github.com/ubugeeei-prod/ox-content/issues/1405);
-its initial fix in #1407 does not cover inherited path mappings.
+[Upstream #1408](https://github.com/ubugeeei-prod/ox-content/pull/1408), released
+in 3.1.8, resolves the site's path mappings inherited through tsconfig `extends`.
+Development now uses `assets.ssrStylesheets()` for page and layout styles, including
+the article's imported CSS, without the previous injected-CSS fallback.
 
 ## Ownership
 

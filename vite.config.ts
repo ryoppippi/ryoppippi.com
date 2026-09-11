@@ -60,8 +60,6 @@ export default defineConfig(({ command, mode }) => {
 		plugins: [
 			svelte({
 				configFile: false,
-				emitCss: command === 'build',
-				compilerOptions: { css: command === 'build' ? 'external' : 'injected' },
 			}),
 			createHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,

@@ -55,7 +55,9 @@ export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		pageStyles: (module) =>
-			module.endsWith('/Article.svelte') ? ['/src/pages/blog/[slug]/ArticleContent.css'] : [],
+			moduleStyles(
+				assets.ssrStylesheets({ modules: [module, '/src/components/SiteLayout/index.svelte'] }),
+			),
 		islands: {},
 	};
 }
