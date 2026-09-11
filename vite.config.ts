@@ -4,7 +4,7 @@ import {
 	createOxContentCustomHostPlugin,
 	type OxContentCustomHostOptions,
 } from '@ox-content/vite-plugin/custom-host';
-import { createSvelteHtmlHostIslandRegistry } from '@ox-content/vite-plugin-svelte';
+import { createHtmlHostIslandRegistry } from '@ox-content/vite-plugin/html-host';
 import { svelte } from '@rsvelte/vite-plugin-svelte';
 import { configDefaults } from 'vitest/config';
 import { defineConfig, type PluginOption } from 'vite-plus';
@@ -37,6 +37,9 @@ export default defineConfig(({ command, mode }) => {
 			href: SYNTAX_THEME_HREF,
 		},
 		build: { transformHtml: false },
+		ssrStylesheets: {
+			modules: ['src/pages/**/*.svelte', 'src/components/SiteLayout/index.svelte'],
+		},
 		oxContent: {
 			...OX_CONTENT_BUILD_OPTIONS,
 			siteMaps: { robots: false, llms: false },
@@ -45,8 +48,6 @@ export default defineConfig(({ command, mode }) => {
 	} satisfies Omit<OxContentCustomHostOptions, 'host'>;
 	return {
 		appType: 'mpa',
-		// The renderer and compiled components must share Svelte's SSR runtime state.
-		ssr: { noExternal: ['@ox-content/vite-plugin-svelte'] },
 		envPrefix: ['PUBLIC_', 'VITE_'],
 		resolve: {
 			tsconfigPaths: true,
@@ -57,8 +58,10 @@ export default defineConfig(({ command, mode }) => {
 			},
 		},
 		plugins: [
-			svelte({ configFile: false, emitCss: false, compilerOptions: { css: 'injected' } }),
-			createSvelteHtmlHostIslandRegistry({
+			svelte({
+				configFile: false,
+			}),
+			createHtmlHostIslandRegistry({
 				oxContent: OX_CONTENT_BUILD_OPTIONS,
 				collectionDocuments: {
 					collections: ['blog'],
@@ -81,7 +84,7 @@ export default defineConfig(({ command, mode }) => {
 			outDir: 'dist',
 			emptyOutDir: true,
 			minify: true,
-			rollupOptions: { input: ['index.html', 'src/pages/blog/[slug]/ArticleContent.css'] },
+			rollupOptions: { input: 'index.html' },
 		},
 		run: {
 			tasks: {

@@ -39,7 +39,7 @@ export type SiteAssets = {
 // CSS sources directly because stylesheet requests carry `Accept: text/css`.
 type SiteAssetResolver = Pick<
 	OxContentCustomHostAssetsContext,
-	'document' | 'selfHosted' | 'stylesheets' | 'themeTokens'
+	'document' | 'selfHosted' | 'stylesheets' | 'ssrStylesheets' | 'themeTokens'
 >;
 
 /**
@@ -55,7 +55,9 @@ export function resolveDevSiteAssets(assets: SiteAssetResolver): SiteAssets {
 		selfHosted: assets.selfHosted,
 		syntaxThemeHref: assets.themeTokens?.href,
 		pageStyles: (module) =>
-			module.endsWith('/Article.svelte') ? ['/src/pages/blog/[slug]/ArticleContent.css'] : [],
+			moduleStyles(
+				assets.ssrStylesheets({ modules: [module, '/src/components/SiteLayout/index.svelte'] }),
+			),
 		islands: {},
 	};
 }
@@ -96,11 +98,9 @@ export function resolveSiteAssets(
 		syntaxThemeHref: assets.themeTokens?.href,
 		islands,
 		pageStyles: (module) =>
-			module.endsWith('/Article.svelte')
-				? moduleStyles(
-						assets.stylesheets({ modules: ['/src/pages/blog/[slug]/ArticleContent.css'] }),
-					)
-				: [],
+			moduleStyles(
+				assets.ssrStylesheets({ modules: [module, '/src/components/SiteLayout/index.svelte'] }),
+			),
 	};
 }
 

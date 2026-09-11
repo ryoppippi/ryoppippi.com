@@ -36,7 +36,7 @@ export function definePage<Props extends object>({
 		body: renderHtmlDocument({
 			...documentOptions,
 			content: rendered.body,
-			componentHead: rendered.head,
+			componentHead: [rendered.head, documentOptions.componentHead].filter(Boolean).join(''),
 		}),
 	} satisfies OxContentCustomHostRenderResult;
 }

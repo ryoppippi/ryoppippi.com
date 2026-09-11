@@ -1,6 +1,10 @@
 import { initIslands } from '@ox-content/islands';
-import { createSvelteHtmlHostLazyHydrate } from '@ox-content/vite-plugin-svelte/html-host/client';
-import svelteIslandLoaders from 'virtual:ox-content-svelte/html-host/modules';
+import { createHtmlHostLazyHydrate } from '@ox-content/islands/html-host';
+import {
+	createSvelteHtmlHostDomRenderer,
+	loadSvelteHtmlHostDomRuntime,
+} from '@ox-content/vite-plugin-svelte/html-host/client';
+import islandLoaders from 'virtual:ox-content/html-host/modules';
 import { enhanceMarkdownTables } from '@ox-content/vite-plugin/markdown-tables';
 import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
@@ -143,9 +147,15 @@ function initialisePageInteractions(): void {
 	initialiseMediaFilter();
 	initialiseSponsorViewToggle();
 	const controller = initIslands(
-		createSvelteHtmlHostLazyHydrate({
-			modules: svelteIslandLoaders,
-			mount: { mode: 'hydrate' },
+		createHtmlHostLazyHydrate({
+			modules: islandLoaders,
+			adapter: {
+				frameworkName: 'Svelte',
+				eventName: 'ox-content-svelte-html-host:error',
+				loadRuntime: loadSvelteHtmlHostDomRuntime,
+				render: createSvelteHtmlHostDomRenderer({ mode: 'hydrate' }),
+				preserveElementContents: true,
+			},
 		}),
 	);
 	window.addEventListener('pagehide', (event) => {

@@ -24,5 +24,10 @@ export async function inlineBuiltHomeStyles(
 		return result.stylesheets.map(({ content }) => content).join('\n');
 	}
 	const base = await content([resolver.stylesheets({ modules: ['index.html'] })]);
-	return inlineHomeStyles(assets, base, '');
+	const page = await content([
+		resolver.ssrStylesheets({
+			modules: ['/src/pages/Home.svelte', '/src/components/SiteLayout/index.svelte'],
+		}),
+	]);
+	return inlineHomeStyles(assets, base, page);
 }
