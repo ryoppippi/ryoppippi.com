@@ -28,3 +28,5 @@ jobs:
             run: pnpm run check
           - name: Run Tests
             run: pnpm run test
+          - name: Validate Content
+            run: pnpm run validate:content
