@@ -3,7 +3,7 @@ import { SITE_NAME, SITE_ORIGIN } from './site.ts';
 import { REDIRECT_ROUTES } from './redirects.ts';
 import { OPEN_GRAPH_OPTIONS } from './open-graph.ts';
 import { OX_MARKDOWN_OPTIONS, twitterCacheDirectory, twitterMediaDirectory } from './markdown.ts';
-import { BLOG_SOURCE_PATTERNS, blogPermalink, SHOWCASE_SOURCE_PATTERN } from './content.ts';
+import { BLOG_SOURCE_PATTERNS, SHOWCASE_SOURCE_PATTERN, validateBlogPermalink } from './content.ts';
 import { BLOG_FEED_OPTIONS } from '../pages/blog/feed.ts';
 import { MEDIA_FEED_OPTIONS } from '../pages/works/media/feed.ts';
 
@@ -19,7 +19,11 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 	srcDir: 'src/content',
 	outDir: 'dist',
 	collections: {
-		blog: { source: BLOG_SOURCE_PATTERNS.map((pattern) => `blog/${pattern}`), include: ['body'] },
+		blog: {
+			source: BLOG_SOURCE_PATTERNS.map((pattern) => `blog/${pattern}`),
+			include: ['body'],
+			validate: validateBlogPermalink,
+		},
 		showcase: { source: SHOWCASE_SOURCE_PATTERN, include: ['body'] },
 	},
 	docs: false,
@@ -96,22 +100,3 @@ export const OX_CONTENT_BUILD_OPTIONS = {
 		},
 	},
 } as const satisfies OxContentOptions;
-
-if (import.meta.vitest != null) {
-	test('mounts every blog source below the public blog route', async () => {
-		const [fs, path, tinyglobby] = await Promise.all([
-			import('node:fs/promises'),
-			import('node:path'),
-			import('tinyglobby'),
-		]);
-		const root = path.join(process.cwd(), 'src/content/blog');
-		const files = await tinyglobby.glob(BLOG_SOURCE_PATTERNS, { cwd: root });
-
-		for (const file of files) {
-			const slug = path.dirname(file);
-			expect(await fs.readFile(path.join(root, file), 'utf8')).toMatch(
-				`---\npermalink: ${blogPermalink(slug)}\n`,
-			);
-		}
-	});
-}
