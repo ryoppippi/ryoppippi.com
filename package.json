@@ -18,7 +18,8 @@
 		"preview": "vp preview",
 		"test": "vp test --run",
 		"typos": "typos --force-exclude",
-		"update:oss-stars": "./.github/update-oss-stars.nu"
+		"update:oss-stars": "./.github/update-oss-stars.nu",
+		"validate:content": "oxct validate"
 	},
 	"devDependencies": {
 		"@clack/prompts": "catalog:",
