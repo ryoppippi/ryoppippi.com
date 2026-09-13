@@ -2,10 +2,10 @@
 
 import { join } from 'node:path';
 import process from 'node:process';
+import { stringifyFrontmatter } from '@ox-content/napi';
 import * as p from '@clack/prompts';
 import * as d from 'date-fns';
 import fs from 'fs-extra';
-import { stringify } from 'gray-matter-es';
 import openEditor from 'open-editor';
 import { BLOG_DIRECTORY, blogPermalink } from '../src/config/content.ts';
 
@@ -46,14 +46,17 @@ const blogDir = BLOG_DIRECTORY;
 const slug = `${date}-${title.toLowerCase().replace(/ /g, '-')}-${lang}`;
 const postDir = join(blogDir, slug);
 const mdx = join(postDir, 'index.mdx');
-const frontMatter = stringify('', {
-	permalink: blogPermalink(slug),
-	title,
-	date,
-	isPublished: false,
-	lang,
-	...(hatenaBookmarkComments ? { hatenaBookmarkComments: true } : {}),
-});
+const frontMatter = stringifyFrontmatter(
+	{
+		permalink: blogPermalink(slug),
+		title,
+		date,
+		isPublished: false,
+		lang,
+		...(hatenaBookmarkComments ? { hatenaBookmarkComments: true } : {}),
+	},
+	'',
+);
 
 await fs.ensureDir(postDir);
 await fs.writeFile(mdx, frontMatter);
