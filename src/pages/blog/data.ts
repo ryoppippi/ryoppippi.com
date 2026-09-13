@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { matter } from 'gray-matter-es';
+import { parseFrontmatter } from '@ox-content/napi';
 import {
 	createMarkdownProcessor,
 	readingTimeMinutes,
@@ -146,7 +146,7 @@ async function findBlogPostSource(slug: string, directory: string) {
 	]) {
 		try {
 			const source = await readFile(filepath, 'utf8');
-			const { data, content } = matter(source);
+			const { frontmatter: data, content } = parseFrontmatter(source);
 			return { filepath, source, data, content };
 		} catch (error) {
 			if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) {
