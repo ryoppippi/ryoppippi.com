@@ -14,6 +14,7 @@ export const routes = (() => [
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';
 const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle} (pronounced ${SITE_OWNER.handleReading}), featuring open-source projects, talks, publications, and software engineering articles.`;
 
+/** Builds the JSON-LD graph linking the website, its profile page, and the owner. */
 function homeStructuredData() {
 	return {
 		'@context': 'https://schema.org',

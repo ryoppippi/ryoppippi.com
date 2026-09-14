@@ -76,6 +76,7 @@ function articleImageUrl(html: string, articleUrl: string): string | undefined {
 			).href;
 }
 
+/** Builds the BlogPosting JSON-LD for one article, attributing it to the site owner. */
 function articleStructuredData(
 	post: BlogPost,
 	description: string,
