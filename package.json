@@ -5,8 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "vp run site-build",
-		"check": "vp check && pnpm run check:svelte",
-		"check:svelte": "svelte-check --tsconfig ./tsconfig.json",
+		"check": "vp run static-check",
+		"check:svelte": "vp run svelte-check",
 		"deploy": "pnpm run build && wrangler deploy",
 		"deploy:non-production": "wrangler versions upload",
 		"dev": "vp dev",
