@@ -4,10 +4,10 @@ import { join } from 'node:path';
 import process from 'node:process';
 import { stringifyFrontmatter } from '@ox-content/napi';
 import * as p from '@clack/prompts';
-import * as d from 'date-fns';
 import fs from 'fs-extra';
 import openEditor from 'open-editor';
 import { BLOG_DIRECTORY, blogPermalink } from '../src/config/content.ts';
+import { formatLocalIsoDate } from '../src/lib/date.ts';
 
 p.intro('Create a new blog post');
 
@@ -19,7 +19,7 @@ if (p.isCancel(title)) {
 	process.exit(1);
 }
 
-const date = d.format(new Date(), 'yyyy-MM-dd');
+const date = formatLocalIsoDate(new Date());
 const lang = await p.select({
 	message: 'Select the language of the post',
 	options: [{ value: 'ja' }, { value: 'en' }],
