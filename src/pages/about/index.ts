@@ -14,8 +14,7 @@ export const routes = (() => [
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'about';
 const ABOUT_PROFILE_NAME = 'ryoppippi (Ryotaro Kimura)';
-const ABOUT_DESCRIPTION =
-	'Ryotaro Kimura (木村亮太朗), known as ryoppippi, builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.';
+const ABOUT_DESCRIPTION = `${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ryoppippi (pronounced ${SITE_OWNER.handleReading}), builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.`;
 
 /**
  * Renders the site owner's profile page.
@@ -59,6 +58,8 @@ export function createAboutPageFile(assets: SiteAssets) {
 					SITE_OWNER.formerName,
 					SITE_OWNER.formerJapaneseName,
 					SITE_OWNER.handle,
+					SITE_OWNER.handleReading,
+					SITE_OWNER.handleReadingKatakana,
 				],
 				url: SITE_OWNER.url,
 				image: ufo.joinURL(SITE_ORIGIN, 'ryoppippi.avif'),

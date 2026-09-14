@@ -12,8 +12,9 @@ export const routes = (() => [
 ]) satisfies PageRoutes;
 
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';
-const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle}, featuring open-source projects, talks, publications, and software engineering articles.`;
+const HOME_DESCRIPTION = `Portfolio and technical blog of ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ${SITE_OWNER.handle} (pronounced ${SITE_OWNER.handleReading}), featuring open-source projects, talks, publications, and software engineering articles.`;
 
+/** Builds the JSON-LD graph linking the website, its profile page, and the owner. */
 function homeStructuredData() {
 	return {
 		'@context': 'https://schema.org',
@@ -46,6 +47,8 @@ function homeStructuredData() {
 					SITE_OWNER.formerJapaneseName,
 					SITE_OWNER.handle,
 					'ryoppippi',
+					SITE_OWNER.handleReading,
+					SITE_OWNER.handleReadingKatakana,
 				],
 				url: SITE_OWNER.url,
 				image: SITE_SOCIAL_IMAGE_URL,
@@ -100,6 +103,10 @@ if (import.meta.vitest != null) {
 					'@type': 'Person',
 					'@id': SITE_OWNER.id,
 					name: SITE_OWNER.name,
+					alternateName: expect.arrayContaining([
+						SITE_OWNER.handleReading,
+						SITE_OWNER.handleReadingKatakana,
+					]),
 					sameAs: SITE_OWNER.sameAs,
 				}),
 			]),
