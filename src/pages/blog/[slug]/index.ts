@@ -93,7 +93,12 @@ function articleStructuredData(
 			'@type': 'Person',
 			'@id': SITE_OWNER.id,
 			name: SITE_OWNER.name,
-			alternateName: [SITE_OWNER.japaneseName, SITE_OWNER.handle, SITE_OWNER.handleReading],
+			alternateName: [
+				SITE_OWNER.japaneseName,
+				SITE_OWNER.handle,
+				SITE_OWNER.handleReading,
+				SITE_OWNER.handleReadingKatakana,
+			],
 			url: SITE_OWNER.url,
 		},
 		datePublished: post.pubDate,
