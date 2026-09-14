@@ -8,6 +8,8 @@ type SiteOwnerIdentity = {
 	formerName: string;
 	formerJapaneseName: string;
 	handle: string;
+	handleReading: string;
+	handleReadingKatakana: string;
 	url: string;
 	sameAs: readonly string[];
 };
@@ -20,6 +22,10 @@ export const SITE_OWNER = {
 	formerName: 'Ryotaro Miura',
 	formerJapaneseName: '三浦亮太朗',
 	handle: '@ryoppippi',
+	// The haichu logo carries the katakana reading only as pixels, so both Japanese forms live
+	// here as text for screen readers, search engines, and LLM crawlers.
+	handleReading: 'りょっぴっぴ',
+	handleReadingKatakana: 'リョッピッピ',
 	url: new URL('/', SITE_ORIGIN).href,
 	sameAs: [
 		'https://github.com/ryoppippi',

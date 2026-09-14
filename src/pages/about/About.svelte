@@ -26,7 +26,7 @@
 				<figure class="mascot">
 					<img
 						class="mascotImage"
-						alt="haichu"
+						alt={`ryoppippi logo with the katakana reading ${SITE_OWNER.handleReadingKatakana}, styled after the haichu wordmark`}
 						decoding="async"
 						height="529"
 						loading="eager"
@@ -37,12 +37,17 @@
 				</figure>
 			</div>
 			<div class="copy">
-				<h1 class="heading">ryoppippi</h1>
+				<h1 class="heading">ryoppippi (<span lang="ja">{SITE_OWNER.handleReading}</span>)</h1>
 				<p class="kicker">
 					<em>... coder without ai</em>
 				</p>
 				<p class="description">
-					<strong class="name">{SITE_OWNER.handle.slice(1)}</strong>
+					<strong class="name">
+						<ruby
+							>{SITE_OWNER.handle.slice(1)}<rp>(</rp><rt lang="ja">{SITE_OWNER.handleReading}</rt
+							><rp>)</rp></ruby
+						>
+					</strong>
 					<span class="alias">
 						({SITE_OWNER.name} / <span lang="ja">{SITE_OWNER.japaneseName}</span>)
 					</span>
