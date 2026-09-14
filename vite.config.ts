@@ -93,6 +93,12 @@ export default defineConfig(({ command, mode }) => {
 						'sh -c \'if [ "$CI" = true ] && [ "$(git rev-parse --is-shallow-repository 2>/dev/null || echo false)" = true ]; then git fetch --unshallow origin; fi\'',
 					cache: false,
 				},
+				'svelte-check': 'svelte-check --tsconfig ./tsconfig.json',
+				'static-check': {
+					command: ['vp check', 'vp run svelte-check'],
+					// vp check walks the nix-direnv nixpkgs link only to skip it
+					input: [{ auto: true }, '!.direnv/**'],
+				},
 				'site-build': {
 					command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
 					dependsOn: ['git-history'],
