@@ -57,7 +57,7 @@
         in
         {
           ci = pkgs.mkShellNoCC {
-            buildInputs = baseBuildInputs ++ [ pkgs.pnpm ];
+            buildInputs = baseBuildInputs ++ [ pkgs.pnpm_12 ];
           };
 
           default =
@@ -66,6 +66,7 @@
             in
             pkgs.mkShellNoCC {
               buildInputs = baseBuildInputs ++ [ nix-vite-plus.packages.${system}.vp ] ++ (with pkgs; [
+                pnpm_12
                 nushell
                 nufmt
                 typos-lsp
