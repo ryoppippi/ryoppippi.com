@@ -65,5 +65,5 @@
 			}
 		]
 	},
-	"packageManager": "pnpm@12.4.2+sha512.CK3GYTGAJ1x8ntraOdzwjJxhrU5+rzMKTzRh8QKw+QdCNFTRF/mOctR/7wYWBwZE17/8lzpqV/UJCm18NosHyQ=="
+	"packageManager": "pnpm@12.4.2"
 }
