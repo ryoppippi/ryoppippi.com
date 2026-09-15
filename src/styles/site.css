@@ -31,6 +31,8 @@
 }
 
 html {
+	/* The navigation overlay must match the page canvas to avoid bright gaps. */
+	--ox-content-mpa-navigation-bg: #ffffff;
 	-webkit-text-size-adjust: 100%;
 	tab-size: 4;
 	font-family: var(--font-sans);
@@ -133,6 +135,10 @@ pre {
 			color 1s cubic-bezier(0.4, 0, 0.2, 1),
 			background-color 1s cubic-bezier(0.4, 0, 0.2, 1);
 	}
+}
+
+html.dark {
+	--ox-content-mpa-navigation-bg: var(--color-bg-base);
 }
 
 html.dark body {

@@ -2,7 +2,11 @@ import type { DocumentLinkInput } from '@ox-content/vite-plugin/document-assets'
 import type { SiteAssets } from './assets.ts';
 import type { StructuredData } from './head.ts';
 import { render } from 'svelte/server';
-import { renderThemeBootstrapScript } from '@ox-content/vite-plugin/theme-bootstrap';
+import {
+	renderThemeBootstrapDocumentColors,
+	renderThemeBootstrapScript,
+} from '@ox-content/vite-plugin/theme-bootstrap';
+import { THEME_BOOTSTRAP_OPTIONS } from '@/config/theme.ts';
 import { renderAssetTags } from './assets.ts';
 import { renderPageHead } from './head.ts';
 import SiteLayout from './index.svelte';
@@ -28,12 +32,6 @@ type HtmlDocumentOptions = {
 };
 
 const JAVASCRIPT_CLASS_SCRIPT = "<script>document.documentElement.classList.add('js')</script>";
-// The canvas and navigation overlay must share a background before external CSS loads.
-const INITIAL_THEME_STYLE =
-	'<style>html{--ox-content-mpa-navigation-bg:#fff;background-color:var(--ox-content-mpa-navigation-bg);color-scheme:light}html.dark{--ox-content-mpa-navigation-bg:#0f0f0f;color-scheme:dark}</style>';
-// Browser chrome must match the saved theme before the client bundle loads.
-const INITIAL_THEME_COLOR_SCRIPT =
-	'<script>document.querySelector(\'meta[name="theme-color"]\').content=getComputedStyle(document.documentElement).backgroundColor</script>';
 
 /**
  * Renders a complete static HTML document with shared metadata and assets.
@@ -76,9 +74,8 @@ export function renderHtmlDocument({
 			title,
 		}),
 		JAVASCRIPT_CLASS_SCRIPT,
-		renderThemeBootstrapScript({ defaultPreference: 'dark' }),
-		INITIAL_THEME_STYLE,
-		INITIAL_THEME_COLOR_SCRIPT,
+		renderThemeBootstrapDocumentColors(THEME_BOOTSTRAP_OPTIONS),
+		renderThemeBootstrapScript(THEME_BOOTSTRAP_OPTIONS),
 		renderAssetTags(assets, style, pageModule, islands, links),
 		layout.head,
 		componentHead,

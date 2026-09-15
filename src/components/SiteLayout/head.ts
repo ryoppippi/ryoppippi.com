@@ -9,7 +9,6 @@ const fixedHead = [
 	'<meta charset="utf-8">',
 	'<meta name="viewport" content="width=device-width, initial-scale=1">',
 	'<meta name="color-scheme" content="dark light">',
-	'<meta name="theme-color" content="#0f0f0f">',
 	'<link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/">',
 	'<link rel="icon" type="image/x-icon" href="/favicons/favicon.ico">',
 	'<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">',

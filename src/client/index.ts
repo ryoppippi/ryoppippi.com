@@ -10,6 +10,7 @@ import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
+import { THEME_BOOTSTRAP_OPTIONS } from '@/config/theme.ts';
 import '@/styles/global.css';
 
 function initialiseThemeToggle(): void {
@@ -26,9 +27,6 @@ function initialiseThemeToggle(): void {
 
 	const render = () => {
 		const dark = document.documentElement.classList.contains('dark');
-		document
-			.querySelector('meta[name="theme-color"]')
-			?.setAttribute('content', getComputedStyle(document.documentElement).backgroundColor);
 		button.ariaLabel = dark ? 'Switch to light mode' : 'Switch to dark mode';
 		icon.className = dark
 			? 'icon-[line-md--sunny-filled-loop-to-moon-filled-transition]'
@@ -40,7 +38,7 @@ function initialiseThemeToggle(): void {
 			event,
 			nextTheme: dark ? 'dark' : 'light',
 			apply: () => {
-				setThemeBootstrapPreference(dark ? 'dark' : 'light');
+				setThemeBootstrapPreference(dark ? 'dark' : 'light', THEME_BOOTSTRAP_OPTIONS);
 				render();
 			},
 		});
