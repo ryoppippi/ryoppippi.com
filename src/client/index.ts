@@ -10,6 +10,7 @@ import { initReaderChrome } from '@ox-content/vite-plugin/reader-chrome/client';
 import { setThemeBootstrapPreference } from '@ox-content/vite-plugin/theme-bootstrap';
 import { applyThemeTransition } from '@ox-content/vite-plugin/theme-transition/client';
 import { initTweetCards } from '@ox-content/vite-plugin/twitter/client';
+import { THEME_BOOTSTRAP_OPTIONS } from '@/config/theme.ts';
 import '@/styles/global.css';
 
 function initialiseThemeToggle(): void {
@@ -37,7 +38,7 @@ function initialiseThemeToggle(): void {
 			event,
 			nextTheme: dark ? 'dark' : 'light',
 			apply: () => {
-				setThemeBootstrapPreference(dark ? 'dark' : 'light');
+				setThemeBootstrapPreference(dark ? 'dark' : 'light', THEME_BOOTSTRAP_OPTIONS);
 				render();
 			},
 		});

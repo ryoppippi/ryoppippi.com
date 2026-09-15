@@ -1,6 +1,3 @@
 @import './site.css';
 @import '@ox-content/vite-plugin/styles/theme-transition.css';
-
-@view-transition {
-	navigation: auto;
-}
+@import '@ox-content/vite-plugin/styles/mpa-navigation.css';
