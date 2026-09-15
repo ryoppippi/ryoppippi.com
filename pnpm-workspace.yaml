@@ -7,11 +7,11 @@ catalog:
   '@fontsource/jetbrains-mono': ^5.3.0
   '@fontsource/roboto-condensed': ^5.3.0
   '@iconify/json': ^2.2.510
-  '@ox-content/islands': 3.2.3
-  '@ox-content/napi': 3.2.3
-  '@ox-content/theme-color-kanagawa': 3.2.3
-  '@ox-content/vite-plugin': 3.2.3
-  '@ox-content/vite-plugin-svelte': 3.2.3
+  '@ox-content/islands': 3.2.5
+  '@ox-content/napi': 3.2.5
+  '@ox-content/theme-color-kanagawa': 3.2.5
+  '@ox-content/vite-plugin': 3.2.5
+  '@ox-content/vite-plugin-svelte': 3.2.5
   '@rsvelte/vite-plugin-svelte': 0.5.2
   '@tanstack/charts': 0.14.0
   '@types/d3-scale': ^4.0.9
