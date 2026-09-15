@@ -9,8 +9,10 @@ extend-ignore-re = [
 ]
 
 [default.extend-identifiers]
+documentColors = "documentColors"
 normalizeMarkdownExtensions = "normalizeMarkdownExtensions"
 normalizePath = "normalizePath"
+renderThemeBootstrapDocumentColors = "renderThemeBootstrapDocumentColors"
 
 [default.extend-words]
 Artifact = "Artifact"
