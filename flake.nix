@@ -66,6 +66,7 @@
             in
             pkgs.mkShellNoCC {
               buildInputs = baseBuildInputs ++ [ nix-vite-plus.packages.${system}.vp ] ++ (with pkgs; [
+                pnpm_12
                 nushell
                 nufmt
                 typos-lsp
