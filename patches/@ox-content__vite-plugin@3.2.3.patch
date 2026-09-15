@@ -1,0 +1,56 @@
+diff --git a/dist/custom-host2.cjs b/dist/custom-host2.cjs
+index 72013c5de32423085e64e03f6c53ed34ab550d86..762c061270366396f5020e1884615dd63557e96d 100644
+--- a/dist/custom-host2.cjs
++++ b/dist/custom-host2.cjs
+@@ -653,7 +653,8 @@ function visitDevModule$1(node, requestedBy, base, root, seenNodes, seenCss, sty
+ 	for (const imported of node.importedModules ?? []) visitImport(imported);
+ 	for (const imported of node.ssrImportedModules ?? []) visitImport(imported);
+ 	const frameworkCss = devFrameworkCssContent(node);
+-	if (!frameworkCss && isDevFrameworkStyleModule(node)) return;
++	// Vite+ (rolldown) does not expose plugin meta on module nodes, so the parent .svelte node
++	// cannot supply its CSS; let the emitted style module fall through to devCssHref instead.
+ 	const href = frameworkCss ? devFrameworkCssHref(node, base, root) : devCssHref(node, base, root);
+ 	if (href) addDevStylesheet(seenCss, stylesheets, {
+ 		kind: "style",
+@@ -677,6 +678,13 @@ function devEntry$1(moduleGraph, moduleId, root) {
+ 		const direct = moduleGraph.getModuleById(id);
+ 		if (direct) return direct;
+ 	}
++	// Vite keys source modules by absolute file path. getModulesByFile also returns the
++	// component's `?direct` CSS request nodes once a browser has fetched its stylesheet, and
++	// taking the first of those would replace the component as the walk root.
++	for (const file of moduleFileCandidates$1(moduleId, root)) {
++		const byId = moduleGraph.getModuleById(file);
++		if (byId) return byId;
++	}
+ 	for (const file of moduleFileCandidates$1(moduleId, root)) {
+ 		const byFile = first$1(moduleGraph.getModulesByFile?.(file));
+ 		if (byFile) return byFile;
+diff --git a/dist/custom-host2.mjs b/dist/custom-host2.mjs
+index 00e38e54090a2dc0378068b63cab2bff49695550..0a01385c6247d53578fcbdffc9fc7ceb39cf27d6 100644
+--- a/dist/custom-host2.mjs
++++ b/dist/custom-host2.mjs
+@@ -648,7 +648,8 @@ function visitDevModule$1(node, requestedBy, base, root, seenNodes, seenCss, sty
+ 	for (const imported of node.importedModules ?? []) visitImport(imported);
+ 	for (const imported of node.ssrImportedModules ?? []) visitImport(imported);
+ 	const frameworkCss = devFrameworkCssContent(node);
+-	if (!frameworkCss && isDevFrameworkStyleModule(node)) return;
++	// Vite+ (rolldown) does not expose plugin meta on module nodes, so the parent .svelte node
++	// cannot supply its CSS; let the emitted style module fall through to devCssHref instead.
+ 	const href = frameworkCss ? devFrameworkCssHref(node, base, root) : devCssHref(node, base, root);
+ 	if (href) addDevStylesheet(seenCss, stylesheets, {
+ 		kind: "style",
+@@ -672,6 +673,13 @@ function devEntry$1(moduleGraph, moduleId, root) {
+ 		const direct = moduleGraph.getModuleById(id);
+ 		if (direct) return direct;
+ 	}
++	// Vite keys source modules by absolute file path. getModulesByFile also returns the
++	// component's `?direct` CSS request nodes once a browser has fetched its stylesheet, and
++	// taking the first of those would replace the component as the walk root.
++	for (const file of moduleFileCandidates$1(moduleId, root)) {
++		const byId = moduleGraph.getModuleById(file);
++		if (byId) return byId;
++	}
+ 	for (const file of moduleFileCandidates$1(moduleId, root)) {
+ 		const byFile = first$1(moduleGraph.getModulesByFile?.(file));
+ 		if (byFile) return byFile;

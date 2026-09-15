@@ -109,6 +109,9 @@ catalogs:
 overrides:
   sharp: ^0.35.3
 
+patchedDependencies:
+  '@ox-content/vite-plugin@3.2.3': b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2
+
 importers:
 
   .:
@@ -139,10 +142,10 @@ importers:
         version: 3.2.3
       '@ox-content/theme-color-kanagawa':
         specifier: 'catalog:'
-        version: 3.2.3(@ox-content/vite-plugin@3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3))
+        version: 3.2.3(@ox-content/vite-plugin@3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3))
       '@ox-content/vite-plugin':
         specifier: 'catalog:'
-        version: 3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
+        version: 3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
       '@ox-content/vite-plugin-svelte':
         specifier: 'catalog:'
         version: 3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
@@ -4744,14 +4747,14 @@ snapshots:
       '@ox-content/binding-linux-x64-musl': 3.2.3
       '@ox-content/binding-win32-x64-msvc': 3.2.3
 
-  '@ox-content/theme-color-kanagawa@3.2.3(@ox-content/vite-plugin@3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3))':
+  '@ox-content/theme-color-kanagawa@3.2.3(@ox-content/vite-plugin@3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3))':
     optionalDependencies:
-      '@ox-content/vite-plugin': 3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
+      '@ox-content/vite-plugin': 3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
 
   '@ox-content/vite-plugin-svelte@3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)':
     dependencies:
       '@ox-content/islands': 3.2.3
-      '@ox-content/vite-plugin': 3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
+      '@ox-content/vite-plugin': 3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)
       svelte: 5.57.0
       vite: '@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0)'
     transitivePeerDependencies:
@@ -4771,7 +4774,7 @@ snapshots:
       - vue
       - yauzl
 
-  '@ox-content/vite-plugin@3.2.3(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)':
+  '@ox-content/vite-plugin@3.2.3(patch_hash=b837229e49f6ae160b9e4ba91d8dae9ea8a6f8e023fca008d1fe676babf654f2)(@babel/core@7.29.7)(@babel/template@7.29.7)(@voidzero-dev/vite-plus-core@0.3.0(@types/node@24.13.3)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(budoux@0.9.0)(katex@0.16.47)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)(tailwindcss@4.3.3)':
     dependencies:
       '@cspell/dict-de-de': 4.1.2
       '@cspell/dict-en_us': 4.4.37

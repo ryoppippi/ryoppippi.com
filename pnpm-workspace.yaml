@@ -76,3 +76,9 @@ trustPolicyExclude:
   # date-based check reads as a downgrade. 6.3.1 is the long-standing Babel
   # dependency.
   - semver@6.3.1
+
+# Dev-only: ox-content cannot see rsvelte scoped CSS in the Vite+ module graph and skips its
+# static fallback once a plain .css import is found, so article and works pages lose every
+# Svelte <style> block. Remove once https://github.com/ubugeeei-prod/ox-content/issues/1424 ships.
+patchedDependencies:
+  '@ox-content/vite-plugin@3.2.3': patches/@ox-content__vite-plugin@3.2.3.patch
