@@ -26,6 +26,9 @@ function initialiseThemeToggle(): void {
 
 	const render = () => {
 		const dark = document.documentElement.classList.contains('dark');
+		document
+			.querySelector('meta[name="theme-color"]')
+			?.setAttribute('content', getComputedStyle(document.documentElement).backgroundColor);
 		button.ariaLabel = dark ? 'Switch to light mode' : 'Switch to dark mode';
 		icon.className = dark
 			? 'icon-[line-md--sunny-filled-loop-to-moon-filled-transition]'
