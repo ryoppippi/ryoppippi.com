@@ -57,7 +57,7 @@
         in
         {
           ci = pkgs.mkShellNoCC {
-            buildInputs = baseBuildInputs ++ [ pkgs.pnpm ];
+            buildInputs = baseBuildInputs ++ [ pkgs.pnpm_12 ];
           };
 
           default =
