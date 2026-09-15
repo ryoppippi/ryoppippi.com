@@ -28,6 +28,9 @@ type HtmlDocumentOptions = {
 };
 
 const JAVASCRIPT_CLASS_SCRIPT = "<script>document.documentElement.classList.add('js')</script>";
+// The canvas and navigation overlay must share a background before external CSS loads.
+const INITIAL_THEME_STYLE =
+	'<style>html{--ox-content-mpa-navigation-bg:#fff;background-color:var(--ox-content-mpa-navigation-bg);color-scheme:light}html.dark{--ox-content-mpa-navigation-bg:#0f0f0f;color-scheme:dark}</style>';
 
 /**
  * Renders a complete static HTML document with shared metadata and assets.
@@ -70,7 +73,8 @@ export function renderHtmlDocument({
 			title,
 		}),
 		JAVASCRIPT_CLASS_SCRIPT,
-		renderThemeBootstrapScript(),
+		renderThemeBootstrapScript({ defaultPreference: 'dark' }),
+		INITIAL_THEME_STYLE,
 		renderAssetTags(assets, style, pageModule, islands, links),
 		layout.head,
 		componentHead,
@@ -78,7 +82,7 @@ export function renderHtmlDocument({
 
 	return [
 		'<!doctype html>',
-		`<html lang="${escapeAttribute(documentLanguage)}">`,
+		`<html lang="${escapeAttribute(documentLanguage)}" class="dark" data-theme="dark">`,
 		`<head>${head}</head>`,
 		`<body data-page-style="${escapeAttribute(style)}">${layout.body}</body>`,
 		'</html>',

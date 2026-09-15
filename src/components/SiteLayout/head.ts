@@ -8,6 +8,7 @@ export type StructuredData = Readonly<Record<string, unknown>>;
 const fixedHead = [
 	'<meta charset="utf-8">',
 	'<meta name="viewport" content="width=device-width, initial-scale=1">',
+	'<meta name="color-scheme" content="dark light">',
 	'<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">',
 	'<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">',
 	'<link rel="author" href="https://www.hatena.ne.jp/ryoppippi-2/">',
