@@ -180,7 +180,7 @@ publication/legacy URL policy, data loading, layout/head values, page enumeratio
 and homepage critical-CSS selection remain local. They compose supported host
 APIs rather than implementing a dev server, Markdown renderer or asset pipeline.
 
-Production 404 routing belongs to Wrangler's `assets.not_found_handling` setting.
+Production 404 routing belongs to `worker.assets.notFoundHandling` in `cloudflare/cloudflare.config.ts`.
 Development uses Vite's `appType: 'mpa'` and standard 404 response, without a custom
 `notFound` callback. The generated error document can be inspected at `/404.html`.
 

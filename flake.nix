@@ -72,7 +72,6 @@
                 typos-lsp
                 yaml-language-server
                 gh
-                wrangler
               ]);
 
               shellHook = ''

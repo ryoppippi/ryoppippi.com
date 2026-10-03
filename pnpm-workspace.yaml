@@ -1,4 +1,5 @@
-packages: []
+packages:
+  - cloudflare
 
 catalog:
   '@clack/prompts': ^1.7.0

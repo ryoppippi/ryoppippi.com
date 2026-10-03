@@ -1,0 +1,9 @@
+{
+	"name": "@ryoppippi/cloudflare-deploy",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"cf": "1.0.0-beta.10",
+		"wrangler": "^4.146.0"
+	}
+}

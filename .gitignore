@@ -27,4 +27,6 @@ vite.config.ts.timestamp-*
 /_redirects
 /.cloudflare
 /.wrangler
+/cloudflare/.cloudflare
+/cloudflare/.wrangler
 !.envrc
