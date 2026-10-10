@@ -60,10 +60,10 @@
 		"runtime": [
 			{
 				"name": "node",
-				"version": "^24.14.0",
+				"version": "^24.21.0",
 				"onFail": "download"
 			}
 		]
 	},
-	"packageManager": "pnpm@12.4.1"
+	"packageManager": "pnpm@12.10.1"
 }
