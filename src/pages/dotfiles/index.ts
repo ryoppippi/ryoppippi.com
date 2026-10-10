@@ -1,5 +1,5 @@
 import type { OxContentCustomHostRenderResult } from '@ox-content/vite-plugin/custom-host';
-import { extractInstallSection, extractSection, parseStepCommands } from './data.ts';
+import { extractInstallCommands, extractSection } from './data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Installation endpoints derived once from the README for both hosts. */
@@ -27,16 +27,16 @@ export function createDotfilesPageFiles(readme: string) {
 			body: extractSection(readme, 'Setup'),
 			contentType: 'text/plain; charset=utf-8',
 		},
-		...osSections.flatMap(([slug, heading]) => {
-			const section = extractInstallSection(readme, heading);
+		...osSections.flatMap(([slug, os]) => {
+			const commands = extractInstallCommands(readme, os);
 			return [
 				{
 					outputPath: `dotfiles/${slug}.html`,
-					body: section,
+					body: commands.join('\n\n'),
 					contentType: 'text/plain; charset=utf-8',
 				},
-				...parseStepCommands(section).map(({ step, command }) => ({
-					outputPath: `dotfiles/${slug}/${step}`,
+				...commands.map((command, index) => ({
+					outputPath: `dotfiles/${slug}/${index + 1}`,
 					body: command,
 					contentType: 'text/plain; charset=utf-8',
 				})),

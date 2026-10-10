@@ -29,6 +29,50 @@ export async function fetchDotfilesReadme(fetch: typeof globalThis.fetch): Promi
 }
 
 /**
+ * Match an ATX heading line, capturing its `#` run so we know its level.
+ * The text group starts with a non-space character so the `\s+` separator
+ * cannot overlap with it (avoids super-linear regex backtracking).
+ */
+const HEADING_PATTERN = /^(#{1,6})\s+(\S.*)$/;
+
+/**
+ * Whether a line opens or closes a fenced code block. A fence may be indented
+ * because it can live inside a list item.
+ */
+function isFence(line: string): boolean {
+	return line.trimStart().startsWith('```');
+}
+
+/**
+ * Find the markdown headings of a document, ignoring lines inside fenced code
+ * blocks, where `# comment` lines of shell snippets would otherwise look like
+ * level-1 headings.
+ *
+ * @param lines - The document split into lines.
+ * @returns Each heading's line index, level and trimmed text, in order.
+ */
+function findHeadings(lines: string[]): { index: number; level: number; text: string }[] {
+	const headings: { index: number; level: number; text: string }[] = [];
+	let insideFence = false;
+
+	for (const [index, line] of lines.entries()) {
+		if (isFence(line)) {
+			insideFence = !insideFence;
+			continue;
+		}
+		if (insideFence) {
+			continue;
+		}
+		const match = HEADING_PATTERN.exec(line);
+		if (match != null) {
+			headings.push({ index, level: match[1].length, text: match[2].trim() });
+		}
+	}
+
+	return headings;
+}
+
+/**
  * Extract a single markdown section (a heading and its body) by heading text.
  *
  * The section starts at the matched heading and ends just before the next
@@ -46,40 +90,21 @@ export async function fetchDotfilesReadme(fetch: typeof globalThis.fetch): Promi
 export function extractSection(markdown: string, heading: string): string {
 	const lines = markdown.split('\n');
 	const target = heading.trim().toLowerCase();
+	const headings = findHeadings(lines);
 
-	// Match an ATX heading line, capturing its `#` run so we know its level.
-	// The text group starts with a non-space character so the `\s+` separator
-	// cannot overlap with it (avoids super-linear regex backtracking).
-	const headingPattern = /^(#{1,6})\s+(\S.*)$/;
-
-	// Locate the requested heading and remember its level.
-	let startIndex = -1;
-	let startLevel = 0;
-	for (let i = 0; i < lines.length; i++) {
-		const match = headingPattern.exec(lines[i]);
-		if (match != null && match[2].trim().toLowerCase() === target) {
-			startIndex = i;
-			startLevel = match[1].length;
-			break;
-		}
-	}
-
-	if (startIndex === -1) {
+	const start = headings.find((h) => h.text.toLowerCase() === target);
+	if (start == null) {
 		throw new Error(`Section not found: ${heading}`);
 	}
 
-	// Walk forward until the next heading at the same or a higher level (smaller
-	// or equal `#` count); everything before it belongs to this section.
-	let endIndex = lines.length;
-	for (let i = startIndex + 1; i < lines.length; i++) {
-		const match = headingPattern.exec(lines[i]);
-		if (match != null && match[1].length <= startLevel) {
-			endIndex = i;
-			break;
-		}
-	}
+	// The section ends at the next heading at the same or a higher level
+	// (smaller or equal `#` count); everything before it belongs to it.
+	const end = headings.find((h) => h.index > start.index && h.level <= start.level);
 
-	return lines.slice(startIndex, endIndex).join('\n').trim();
+	return lines
+		.slice(start.index, end?.index ?? lines.length)
+		.join('\n')
+		.trim();
 }
 
 /**
@@ -88,125 +113,100 @@ export function extractSection(markdown: string, heading: string): string {
 const INSTALL_HEADING = 'Setup';
 
 /**
- * Extract the install steps for a single operating system from the README.
+ * Collect the contents of every fenced code block in a block of lines.
  *
- * The lookup is scoped to the `Setup` section first, so OS sub-headings
- * that appear elsewhere in the README (e.g. under "Available Nix Apps") are
- * never matched by mistake.
+ * @param lines - The lines to scan.
+ * @returns Each code block's lines, in document order.
+ */
+function fencedCodeBlocks(lines: string[]): string[][] {
+	const blocks: string[][] = [];
+	let current: string[] | null = null;
+
+	for (const line of lines) {
+		if (isFence(line)) {
+			// An opening marker starts collecting; the matching one closes the block.
+			if (current == null) {
+				current = [];
+			} else {
+				blocks.push(current);
+				current = null;
+			}
+			continue;
+		}
+		current?.push(line);
+	}
+
+	return blocks;
+}
+
+/**
+ * Pick the commands for one OS out of a code block.
+ *
+ * A block whose commands are grouped under `# <OS>` comment lines is
+ * platform-specific: only the group labelled `os` is returned. A block without
+ * such labels applies to every platform and is returned whole.
+ *
+ * @param block - The code block's lines.
+ * @param os - The OS label to select (compared case-insensitively).
+ * @returns The selected commands, or `null` if the block has groups but none for `os`.
+ */
+function selectOsCommands(block: string[], os: string): string | null {
+	const target = os.toLowerCase();
+	const groups = new Map<string, string[]>();
+	let current: string[] | null = null;
+
+	for (const line of block) {
+		// A bare `# Label` comment line opens a new platform group.
+		const label = /^#\s+(\S.*)$/.exec(line.trim());
+		if (label != null) {
+			current = [];
+			groups.set(label[1].trim().toLowerCase(), current);
+			continue;
+		}
+		current?.push(line);
+	}
+
+	if (groups.size === 0) {
+		return block.join('\n').trim();
+	}
+
+	const selected = groups.get(target);
+	return selected == null ? null : selected.join('\n').trim();
+}
+
+/**
+ * Extract the install commands for a single operating system from the README.
+ *
+ * Only the code blocks in the body of the `Setup` section are considered, not
+ * those under its sub-headings (e.g. "Applying later changes"), which are not
+ * part of a fresh install.
  *
  * @param readme - The full dotfiles README markdown.
- * @param os - The OS sub-heading to extract (e.g. `macOS`, `Linux`).
- * @returns The OS-specific install section as markdown text.
- * @throws If the install section or the OS sub-heading is missing.
+ * @param os - The OS label used in the README's code blocks (e.g. `macOS`, `Linux`).
+ * @returns The commands to run in order, one entry per step.
+ * @throws If the install section is missing or has no commands for `os`.
  * @example
  * ```ts
- * const mac = extractInstallSection(readme, 'macOS');
+ * const steps = extractInstallCommands(readme, 'macOS');
+ * // ['curl -sSfL ... | sh ...', 'nix run --accept-flake-config github:ryoppippi/dotfiles']
  * ```
  */
-export function extractInstallSection(readme: string, os: string): string {
-	const install = extractSection(readme, INSTALL_HEADING);
-	return extractSection(install, os);
-}
+export function extractInstallCommands(readme: string, os: string): string[] {
+	const lines = extractSection(readme, INSTALL_HEADING).split('\n');
 
-/**
- * Remove the shared leading indentation from a block of lines.
- *
- * @param lines - The lines to dedent.
- * @returns The lines joined back together with the common indent stripped.
- */
-function dedent(lines: string[]): string {
-	// Measure indentation only on non-blank lines so blank lines do not force
-	// the common indent down to zero.
-	const indents = lines
-		.filter((line) => line.trim() !== '')
-		.map((line) => line.length - line.trimStart().length);
-	const min = indents.length > 0 ? Math.min(...indents) : 0;
-	return lines.map((line) => line.slice(min)).join('\n');
-}
+	// Drop the `Setup` heading itself and stop at its first sub-heading.
+	const firstSubHeading = findHeadings(lines).find((h) => h.index > 0);
+	const body = lines.slice(1, firstSubHeading?.index ?? lines.length);
 
-/**
- * Extract the contents of the first fenced code block in a block of lines.
- *
- * @param lines - The lines to scan (typically the body of one list item).
- * @returns The dedented, trimmed code, or `null` if there is no code block.
- */
-function firstFencedCode(lines: string[]): string | null {
-	const collected: string[] = [];
-	let insideFence = false;
+	const commands = fencedCodeBlocks(body)
+		.map((block) => selectOsCommands(block, os))
+		.filter((command): command is string => command != null && command !== '');
 
-	for (const line of lines) {
-		// A fence marker may be indented because it lives inside a list item.
-		const isFence = line.trimStart().startsWith('```');
-
-		if (isFence) {
-			// First marker opens the block; the next one closes it, so we stop.
-			if (!insideFence) {
-				insideFence = true;
-				continue;
-			}
-			break;
-		}
-
-		if (insideFence) {
-			collected.push(line);
-		}
+	if (commands.length === 0) {
+		throw new Error(`No install commands found for: ${os}`);
 	}
 
-	if (collected.length === 0) {
-		return null;
-	}
-
-	return dedent(collected).trim();
-}
-
-/**
- * Parse the numbered steps of an install section into their shell commands.
- *
- * Only steps that contain a fenced code block are returned, so prose-only
- * steps are skipped. The step number is taken from the markdown ordered list.
- *
- * @param section - An OS install section (e.g. the result of {@link extractInstallSection}).
- * @returns The steps that carry a command, in document order.
- * @example
- * ```ts
- * const steps = parseStepCommands(extractInstallSection(readme, 'macOS'));
- * // [{ step: 1, command: 'curl -sSfL ... | sh ...' }, ...]
- * ```
- */
-export function parseStepCommands(section: string): { step: number; command: string }[] {
-	const lines = section.split('\n');
-	const steps: { step: number; lines: string[] }[] = [];
-	let current: { step: number; lines: string[] } | null = null;
-
-	for (const line of lines) {
-		// A top-level ordered-list item starts a new step: a number, a dot and
-		// whitespace with no leading indentation (indented lines belong to the
-		// current step's body, including its code fences and notes).
-		const match = /^(\d+)\.\s/.exec(line);
-
-		if (match != null) {
-			if (current != null) {
-				steps.push(current);
-			}
-			current = { step: Number(match[1]), lines: [] };
-		} else if (current != null) {
-			current.lines.push(line);
-		}
-	}
-
-	if (current != null) {
-		steps.push(current);
-	}
-
-	const result: { step: number; command: string }[] = [];
-	for (const { step, lines: body } of steps) {
-		const command = firstFencedCode(body);
-		if (command != null && command !== '') {
-			result.push({ step, command });
-		}
-	}
-
-	return result;
+	return commands;
 }
 
 if (import.meta.vitest != null) {
@@ -243,77 +243,59 @@ if (import.meta.vitest != null) {
 	});
 
 	const readme = [
-		'## Nix Configuration',
+		'# dotfiles',
 		'',
-		'### Setup',
+		'## Setup',
 		'',
-		'#### macOS',
+		'Pick the installer:',
 		'',
-		'mac steps',
+		'```sh',
+		'# macOS',
+		'curl -sSfL https://example.com/mac | sh',
 		'',
-		'#### Linux',
+		'# Linux',
+		'curl -sSfL https://example.com/linux | sh',
+		'```',
 		'',
-		'linux steps',
+		'Then:',
 		'',
-		'### Available Nix Apps',
+		'```sh',
+		'nix run github:example/dotfiles',
+		'```',
 		'',
-		'#### macOS',
+		'### Applying later changes',
 		'',
-		'mac apps',
+		'```sh',
+		'nix run .#switch',
+		'```',
+		'',
+		'## Daily Usage',
+		'',
+		'use it',
 	].join('\n');
 
-	test('install section extraction stays scoped to Setup', () => {
-		expect(extractInstallSection(readme, 'macOS')).toBe('#### macOS\n\nmac steps');
+	test('section extraction ignores comment lines inside code fences', () => {
+		const setup = extractSection(readme, 'Setup');
+		expect(setup).toContain('### Applying later changes');
+		expect(setup).not.toContain('## Daily Usage');
+		expect(() => extractSection(readme, 'macOS')).toThrow('Section not found');
 	});
 
-	test('install section extraction handles the last Setup section', () => {
-		expect(extractInstallSection(readme, 'Linux')).toBe('#### Linux\n\nlinux steps');
-	});
-
-	const macSection = [
-		'#### macOS',
-		'',
-		'1. Install Nix:',
-		'',
-		'   ```sh',
-		'    curl -sSfL https://example.com/install | sh',
-		'   ```',
-		'',
-		'2. Clone:',
-		'',
-		'   ```sh',
-		'   git clone https://example.com/repo',
-		'   cd repo',
-		'   ```',
-		'',
-		'3. Sign in:',
-		'',
-		'   ```sh',
-		'   open -a "App Store"',
-		'   ```',
-		'',
-		'   > [!NOTE]',
-		'   > Do it manually.',
-	].join('\n');
-
-	test('step parsing returns one command per numbered step', () => {
-		expect(parseStepCommands(macSection)).toEqual([
-			{ step: 1, command: 'curl -sSfL https://example.com/install | sh' },
-			{ step: 2, command: 'git clone https://example.com/repo\ncd repo' },
-			{ step: 3, command: 'open -a "App Store"' },
+	test('install commands pick the labelled group for the OS', () => {
+		expect(extractInstallCommands(readme, 'macOS')).toEqual([
+			'curl -sSfL https://example.com/mac | sh',
+			'nix run github:example/dotfiles',
+		]);
+		expect(extractInstallCommands(readme, 'Linux')).toEqual([
+			'curl -sSfL https://example.com/linux | sh',
+			'nix run github:example/dotfiles',
 		]);
 	});
 
-	test('step parsing skips steps without a code block', () => {
-		const section = [
-			'1. Just read this.',
-			'',
-			'2. Run:',
-			'',
-			'   ```sh',
-			'   echo hi',
-			'   ```',
-		].join('\n');
-		expect(parseStepCommands(section)).toEqual([{ step: 2, command: 'echo hi' }]);
+	test('install commands throw when the OS has none', () => {
+		const labelledOnly = readme.replace('nix run github:example/dotfiles', '');
+		expect(() => extractInstallCommands(labelledOnly, 'Windows')).toThrow(
+			'No install commands found',
+		);
 	});
 }
