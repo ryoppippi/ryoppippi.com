@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T00:08:47Z",
+  "updatedAt": "2026-10-12T00:08:39Z",
   "projects": [
     {
       "repo": "ryoppippi/bad-apple",
@@ -8,7 +8,7 @@
     },
     {
       "repo": "ryoppippi/ccusage",
-      "stars": 18952,
+      "stars": 18970,
       "primaryLanguage": "Rust"
     },
     {
