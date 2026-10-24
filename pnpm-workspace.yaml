@@ -13,7 +13,7 @@ catalog:
   '@ox-content/vite-plugin': 3.2.6
   '@ox-content/vite-plugin-svelte': 3.2.6
   '@rsvelte/vite-plugin-svelte': 0.5.2
-  '@tanstack/charts': 0.14.0
+  '@tanstack/charts': 1.1.0
   '@types/d3-scale': ^4.0.9
   '@types/d3-shape': ^3.1.8
   '@types/fs-extra': ^11.0.4
