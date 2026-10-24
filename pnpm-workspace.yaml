@@ -23,7 +23,7 @@ catalog:
   d3-shape: ^3.2.0
   fs-extra: ^11.4.0
   fs-fixture: ^2.14.0
-  msw: ^2.15.0
+  msw: ^3.0.3
   only-allow: ^1.2.2
   open-editor: ^6.0.0
   svelte: 5.57.0
