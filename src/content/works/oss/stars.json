@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-10-26T00:07:25Z",
+  "updatedAt": "2026-10-27T00:06:21Z",
   "projects": [
     {
       "repo": "ryoppippi/bad-apple",
-      "stars": 24,
+      "stars": 23,
       "primaryLanguage": "TypeScript"
     },
     {
       "repo": "ryoppippi/ccusage",
-      "stars": 19174,
+      "stars": 19185,
       "primaryLanguage": "Rust"
     },
     {
