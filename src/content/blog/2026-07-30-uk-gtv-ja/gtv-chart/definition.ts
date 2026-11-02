@@ -136,24 +136,26 @@ export function buildChartDefinition(focused: number | null, lang: ChartLang = '
 				dx: 10,
 			}),
 		],
-		x: {
-			// A factory, so the domain is inferred: it is already [firstAt, lastAt].
-			scale: scaleUtc,
-			grid: false,
-			axis: {
-				ticks: {
-					count: 6,
-					format: (value: Date) => axisDate.format(value),
+		scales: {
+			x: {
+				// A factory, so the domain is inferred: it is already [firstAt, lastAt].
+				scale: scaleUtc,
+				grid: false,
+				axis: {
+					ticks: {
+						count: 6,
+						format: (value: Date) => axisDate.format(value),
+					},
 				},
 			},
-		},
-		y: {
-			scale: scaleLinear().domain([0, 100]),
-			grid: true,
-			axis: {
-				ticks: {
-					count: 5,
-					format: (value: number) => `${value}%`,
+			y: {
+				scale: scaleLinear().domain([0, 100]),
+				grid: true,
+				axis: {
+					ticks: {
+						count: 5,
+						format: (value: number) => `${value}%`,
+					},
 				},
 			},
 		},
@@ -161,6 +163,6 @@ export function buildChartDefinition(focused: number | null, lang: ChartLang = '
 		margin: { top: 16, right: 52, bottom: 32, left: 44 },
 		focus: focusByX,
 		focusRing: false,
-		animate: false,
+		svgAnimation: false,
 	});
 }
