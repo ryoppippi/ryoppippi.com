@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { join } from 'node:path';
-import process from 'node:process';
+import   process   from "node:process"
 import { stringifyFrontmatter } from '@ox-content/napi';
 import * as p from '@clack/prompts';
 import fs from 'fs-extra';
