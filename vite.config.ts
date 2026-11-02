@@ -96,23 +96,27 @@ export default defineConfig(({ command, mode }) => {
 				'svelte-check': 'svelte-check --tsconfig ./tsconfig.json --tsgo',
 				'static-check': {
 					command: ['vp check', 'vp run svelte-check'],
-					// vp check walks the nix-direnv nixpkgs link only to skip it
-					input: [{ auto: true }, '!.direnv/**'],
+					cache: {
+						// vp check walks the nix-direnv nixpkgs link only to skip it
+						input: [{ auto: true }, '!.direnv/**'],
+					},
 				},
 				'site-build': {
 					command: 'PUBLIC_ORIGIN="${PUBLIC_ORIGIN:-https://ryoppippi.com}" vp build',
 					dependsOn: ['git-history'],
-					env: ['PUBLIC_ORIGIN', 'CI'],
-					input: [
-						'package.json',
-						'pnpm-lock.yaml',
-						'tsconfig.json',
-						'vite.config.ts',
-						'src/**',
-						{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
-						'public/**',
-					],
-					output: ['dist/**'],
+					cache: {
+						env: ['PUBLIC_ORIGIN', 'CI'],
+						input: [
+							'package.json',
+							'pnpm-lock.yaml',
+							'tsconfig.json',
+							'vite.config.ts',
+							'src/**',
+							{ pattern: '.cache/ox-content/twitter/**', base: 'workspace' },
+							'public/**',
+						],
+						output: ['dist/**'],
+					},
 				},
 			},
 		},
