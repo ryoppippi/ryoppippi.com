@@ -1,5 +1,9 @@
 name: Setup Nix
 description: Install Nix and load the CI development environment
+inputs:
+  frozen-lockfile:
+    description: Fail instead of updating pnpm-lock.yaml when it is out of date
+    default: 'true'
 runs:
   using: composite
   steps:
@@ -12,8 +16,10 @@ runs:
 
     - name: Load CI tools and install JavaScript dependencies
       shell: bash
+      env:
+        FROZEN_LOCKFILE: ${{ inputs.frozen-lockfile }}
       run: |
         nix develop .#ci --command bash -c '
-          pnpm install --frozen-lockfile
+          pnpm install --frozen-lockfile="$FROZEN_LOCKFILE"
           printf "%s\\n" "$PATH" | tr ":" "\\n" >> "$GITHUB_PATH"
         '
