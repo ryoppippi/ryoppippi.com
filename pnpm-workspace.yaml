@@ -76,3 +76,8 @@ trustPolicyExclude:
   # date-based check reads as a downgrade. 6.3.1 is the long-standing Babel
   # dependency.
   - semver@6.3.1
+  # chromium-bidi's Chromium-numbered builds are published by Google's
+  # chrome-devtools-npm maintainer without provenance, while its semver releases
+  # use GitHub OIDC, so the check reads them as a downgrade. puppeteer-core pins
+  # this exact build.
+  - chromium-bidi@157.0.8090-0
