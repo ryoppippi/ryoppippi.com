@@ -10,5 +10,12 @@
 	},
 	"automerge": true,
 	"platformAutomerge": false,
-	"gitIgnoredAuthors": ["114827586+autofix-ci[bot]@users.noreply.github.com"]
+	"gitIgnoredAuthors": ["114827586+autofix-ci[bot]@users.noreply.github.com"],
+	"packageRules": [
+		{
+			"description": "svelte-check only peers on TypeScript 5/6 and runs TypeScript 7 through the @typescript/native alias with --tsgo, so keep the plain typescript dependency on 6.",
+			"matchDepNames": ["typescript"],
+			"allowedVersions": "<7"
+		}
+	]
 }
