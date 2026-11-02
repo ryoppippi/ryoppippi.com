@@ -38,6 +38,7 @@
 		"@types/d3-shape": "catalog:",
 		"@types/fs-extra": "catalog:",
 		"@types/node": "catalog:",
+		"@typescript/native": "catalog:",
 		"budoux": "catalog:",
 		"d3-scale": "catalog:",
 		"d3-shape": "catalog:",
