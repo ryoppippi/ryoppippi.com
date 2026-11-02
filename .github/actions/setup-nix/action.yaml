@@ -19,7 +19,12 @@ runs:
       env:
         FROZEN_LOCKFILE: ${{ inputs.frozen-lockfile }}
       run: |
-        nix develop .#ci --command bash -c '
-          pnpm install --frozen-lockfile="$FROZEN_LOCKFILE"
+        if [ "$FROZEN_LOCKFILE" = true ]; then
+          lockfile_flag=--frozen-lockfile
+        else
+          lockfile_flag=--no-frozen-lockfile
+        fi
+        nix develop .#ci --command bash -euo pipefail -c '
+          pnpm install "$1"
           printf "%s\\n" "$PATH" | tr ":" "\\n" >> "$GITHUB_PATH"
-        '
+        ' bash "$lockfile_flag"
