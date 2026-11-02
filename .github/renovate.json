@@ -9,5 +9,6 @@
 		"automerge": true
 	},
 	"automerge": true,
-	"platformAutomerge": false
+	"platformAutomerge": false,
+	"gitIgnoredAuthors": ["114827586+autofix-ci[bot]@users.noreply.github.com"]
 }
