@@ -18,6 +18,7 @@ vite.config.ts.timestamp-*
 /public/_redirects
 /src/lib/assets/favicons.html
 /.vite-inspect
+/.svelte-check
 /.vite-hooks/
 /.eslintrc-components.json
 

@@ -215,6 +215,9 @@ catalogs:
     '@types/node':
       specifier: ^26.6.6
       version: 26.6.6
+    '@typescript/native':
+      specifier: npm:typescript@^7.0.2
+      version: 7.0.2
     budoux:
       specifier: ^0.9.0
       version: 0.9.0
@@ -319,6 +322,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
+      '@typescript/native':
+        specifier: 'catalog:'
+        version: typescript@7.0.2
       budoux:
         specifier: 'catalog:'
         version: 0.9.0
