@@ -201,8 +201,8 @@ catalogs:
       specifier: 0.5.2
       version: 0.5.2
     '@tanstack/charts':
-      specifier: 0.14.0
-      version: 0.14.0
+      specifier: 1.1.0
+      version: 1.1.0
     '@types/d3-scale':
       specifier: ^4.0.9
       version: 4.0.9
@@ -306,7 +306,7 @@ importers:
         version: 0.5.2(@sveltejs/vite-plugin-svelte@6.2.4(@voidzero-dev/vite-plus-core@0.3.0(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(svelte@5.57.0))(@voidzero-dev/vite-plus-core@0.3.0(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(typescript@6.0.3)(yaml@2.9.0))(svelte@5.57.0)
       '@tanstack/charts':
         specifier: 'catalog:'
-        version: 0.14.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)
+        version: 1.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)
       '@types/d3-scale':
         specifier: 'catalog:'
         version: 4.0.9
@@ -1606,8 +1606,8 @@ packages:
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
 
-  '@tanstack/charts@0.14.0':
-    resolution: {integrity: sha512-HYFJ+k5BsW4Lkpnfw+qVrObR8hiozApdu+eBD5qaVMd0b8l0NgwlJFGxjo32xUjJBve6Id3oJIo+3h+NMyULbQ==}
+  '@tanstack/charts@1.1.0':
+    resolution: {integrity: sha512-0mb05yZMrBUzjHBohcKtK1XcTKJH9b8LS2uT0iYjDiLU+QR2jo0hrUJramAgg/AfBLMu2DY5fOgKe5bsqd6z4Q==}
     peerDependencies:
       '@angular/core': '>=19'
       '@angular/platform-browser': '>=19'
@@ -1615,8 +1615,8 @@ packages:
       lit: '>=3.1.3'
       octane: ^0.1.13
       preact: '>=10'
-      react: ^19.0.0
-      react-dom: ^19.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
       react-native: ^0.86.0
       react-native-svg: '>=15.15.4 <16'
       solid-js: '>=1.8'
@@ -5319,7 +5319,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@tanstack/charts@0.14.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)':
+  '@tanstack/charts@1.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(svelte@5.57.0)':
     dependencies:
       '@types/d3-force': 3.0.10
       '@types/d3-geo': 3.1.1
