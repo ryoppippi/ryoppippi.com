@@ -99,7 +99,7 @@ if (import.meta.vitest != null) {
 			HttpResponse.json({ repo: { description: 'External project' } }),
 		),
 	);
-	beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+	beforeAll(() => server.listen({ onUnhandledFrame: 'error' }));
 	afterAll(() => server.close());
 
 	test('uses the GitHub primary language for opted-in OSS projects', async () => {
