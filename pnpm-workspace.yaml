@@ -31,8 +31,8 @@ catalog:
   typescript: ^6.0.0
   tinyglobby: ^0.2.17
   ufo: ^1.6.4
-  vite: npm:@voidzero-dev/vite-plus-core@0.3.0
-  vite-plus: 0.3.0
+  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
+  vite-plus: 1.4.0
   vitest: ^5.0.0
 
 minimumReleaseAge: 1440
