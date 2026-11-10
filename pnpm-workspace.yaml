@@ -6,35 +6,35 @@ catalog:
   '@fontsource/inter': ^5.3.0
   '@fontsource/jetbrains-mono': ^5.3.0
   '@fontsource/roboto-condensed': ^5.3.0
-  '@iconify/json': ^2.2.550
-  '@ox-content/islands': 3.5.0
-  '@ox-content/napi': 3.5.0
-  '@ox-content/theme-color-kanagawa': 3.5.0
-  '@ox-content/vite-plugin': 3.5.0
-  '@ox-content/vite-plugin-svelte': 3.5.0
+  '@iconify/json': ^2.2.553
+  '@ox-content/islands': 3.8.2
+  '@ox-content/napi': 3.8.2
+  '@ox-content/theme-color-kanagawa': 3.8.2
+  '@ox-content/vite-plugin': 3.8.2
+  '@ox-content/vite-plugin-svelte': 3.8.2
   '@rsvelte/vite-plugin-svelte': 0.5.3
-  '@tanstack/charts': 1.1.0
+  '@tanstack/charts': 1.4.0
   '@types/d3-scale': ^4.0.9
   '@types/d3-shape': ^3.2.0
   '@types/fs-extra': ^11.0.4
   '@types/node': ^26.6.6
   '@typescript/native': npm:typescript@^7.0.2
-  budoux: ^0.10.2
-  d3-scale: ^4.0.2
-  d3-shape: ^3.2.0
+  budoux: ^0.10.3
+  d3-scale: ^4.0.3
+  d3-shape: ^3.2.1
   fs-extra: ^11.4.1
-  fs-fixture: ^2.16.0
-  msw: ^3.0.3
+  fs-fixture: ^2.16.2
+  msw: ^3.0.4
   only-allow: ^1.2.2
   open-editor: ^6.0.0
   svelte: 5.57.3
-  svelte-check: 4.7.7
+  svelte-check: 4.7.8
   typescript: ^6.0.3
   tinyglobby: ^0.2.17
   ufo: ^1.6.4
-  vite: npm:@voidzero-dev/vite-plus-core@1.4.0
-  vite-plus: 1.4.0
-  vitest: ^5.0.5
+  vite: npm:@voidzero-dev/vite-plus-core@1.5.0
+  vite-plus: 1.5.0
+  vitest: ^5.1.0
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
