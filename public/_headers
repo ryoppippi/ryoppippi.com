@@ -1,3 +1,6 @@
+/
+  Link: </llms.txt>; rel="describedby"; type="text/plain", </index.md>; rel="alternate"; type="text/markdown", </sitemap.xml>; rel="sitemap"; type="application/xml", </feed.xml>; rel="alternate"; type="application/rss+xml"
+
 /blog/*.md
   Content-Type: text/plain; charset=utf-8
   X-Robots-Tag: noindex
