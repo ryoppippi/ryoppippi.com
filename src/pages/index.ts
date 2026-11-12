@@ -4,11 +4,21 @@ import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import Home from './Home.svelte';
+import { createSiteIndexMarkdown } from '@/pages/llms.txt/index.ts';
+import { loadOssProjects } from '@/pages/works/oss/data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
-export const routes = (() => [
+export const routes = (({ posts }) => [
 	{ path: '/', render: ({ assets }) => createHomePageFile(assets) },
+	{
+		path: '/index.md',
+		render: async ({ root }) => ({
+			outputPath: 'index.md',
+			body: createSiteIndexMarkdown({ posts, projects: await loadOssProjects(root) }),
+			contentType: 'text/markdown; charset=utf-8',
+		}),
+	},
 ]) satisfies PageRoutes;
 
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';

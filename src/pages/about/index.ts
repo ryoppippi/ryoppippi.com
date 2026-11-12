@@ -9,12 +9,37 @@ import type { PageRoutes } from '@/utils/ssg/route.ts';
 /** Profile endpoint shared by dev and SSG. */
 export const routes = (() => [
 	{ path: '/about/', render: ({ assets }) => createAboutPageFile(assets) },
+	{
+		path: '/about.md',
+		render: () => ({
+			outputPath: 'about.md',
+			body: createAboutMarkdown(),
+			contentType: 'text/markdown; charset=utf-8',
+		}),
+	},
 ]) satisfies PageRoutes;
 
 const ABOUT_PATHNAME = '/about/';
 const ABOUT_TITLE = 'about';
 const ABOUT_PROFILE_NAME = 'ryoppippi (Ryotaro Kimura)';
 const ABOUT_DESCRIPTION = `${SITE_OWNER.name} (${SITE_OWNER.japaneseName}), known as ryoppippi (pronounced ${SITE_OWNER.handleReading}), builds developer tools, maintains ccusage and open-source projects, and is a Founding Engineer at Rork.`;
+
+/** Renders the profile as Markdown for agents that negotiate `Accept: text/markdown`. */
+export function createAboutMarkdown(): string {
+	return `# ${ABOUT_PROFILE_NAME}
+
+${ABOUT_DESCRIPTION}
+
+- Name: ${SITE_OWNER.name} (${SITE_OWNER.japaneseName}); formerly ${SITE_OWNER.formerName} (${SITE_OWNER.formerJapaneseName})
+- Handle: ${SITE_OWNER.handle}, pronounced ${SITE_OWNER.handleReading} (${SITE_OWNER.handleReadingKatakana})
+- Role: ${SITE_OWNER.jobTitle} at [${SITE_OWNER.worksFor.name}](${SITE_OWNER.worksFor.url})
+- Open-source projects: ${ufo.joinURL(SITE_ORIGIN, '/works/oss/')}
+
+## Profiles
+
+${SITE_OWNER.sameAs.map((link) => `- ${link}`).join('\n')}
+`;
+}
 
 /**
  * Renders the site owner's profile page.
