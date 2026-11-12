@@ -47,12 +47,8 @@ export function createAboutPageFile(assets: SiteAssets) {
 				'@id': SITE_OWNER.id,
 				name: SITE_OWNER.name,
 				description: ABOUT_DESCRIPTION,
-				jobTitle: 'Founding Engineer',
-				worksFor: {
-					'@type': 'Organization',
-					name: 'Rork',
-					url: 'https://rork.com/',
-				},
+				jobTitle: SITE_OWNER.jobTitle,
+				worksFor: { '@type': 'Organization', ...SITE_OWNER.worksFor },
 				alternateName: [
 					SITE_OWNER.japaneseName,
 					SITE_OWNER.formerName,

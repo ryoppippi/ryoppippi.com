@@ -11,6 +11,8 @@ type SiteOwnerIdentity = {
 	handleReading: string;
 	handleReadingKatakana: string;
 	url: string;
+	jobTitle: string;
+	worksFor: { name: string; url: string };
 	sameAs: readonly string[];
 };
 
@@ -27,6 +29,8 @@ export const SITE_OWNER = {
 	handleReading: 'りょっぴっぴ',
 	handleReadingKatakana: 'リョッピッピ',
 	url: new URL('/', SITE_ORIGIN).href,
+	jobTitle: 'Founding Engineer',
+	worksFor: { name: 'Rork', url: 'https://rork.com/' },
 	sameAs: [
 		'https://github.com/ryoppippi',
 		'https://www.linkedin.com/in/ryoppippi/',
