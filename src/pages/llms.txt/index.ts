@@ -58,7 +58,7 @@ export function createSiteIndexMarkdown({
 
 ## How to read this site
 
-- Every blog post has a Markdown source at \`/blog/<slug>.md\`.
+- Send \`Accept: text/markdown\` to get Markdown instead of HTML for the homepage, [about](${url('/about/')}), and every blog post. Each post's Markdown source is also at \`/blog/<slug>.md\`.
 - Feeds: [blog RSS](${url('/feed.xml')}), [media RSS](${url('/works/media/feed.xml')}). All pages: [sitemap](${url('/sitemap.xml')}).
 - Blog content is licensed CC BY-NC-SA 4.0. Training on it is opted out via Content-Signal in [robots.txt](${url('/robots.txt')}).
 
