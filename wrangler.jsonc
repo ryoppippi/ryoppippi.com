@@ -1,10 +1,22 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ryoppippi-com",
+	"main": "src/worker/index.ts",
 	"compatibility_date": "2025-06-19",
 	"assets": {
 		"directory": "dist",
+		"binding": "ASSETS",
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page",
+		// Fingerprinted and binary assets never have a Markdown variant, so they skip the Worker.
+		"run_worker_first": [
+			"/*",
+			"!/assets/*",
+			"!/__ox_fonts__/*",
+			"!/__ox_icons__/*",
+			"!/__ox_theme_tokens__/*",
+			"!/ox-content/*",
+			"!/favicons/*",
+		],
 	},
 }
