@@ -12,7 +12,7 @@ description: Guides test selection and browser verification for ryoppippi.com. U
 
 ## Browser verification
 
-- For one-off UI verification in Codex Desktop, use the installed Browser plugin with the in-app browser. No project Playwright dependency is needed for that.
+- For one-off UI verification, drive the dev server with the agent's browser. No project Playwright dependency is needed for that.
 - Use a fresh dev server after changing host/configuration boundaries. Verify actual rendered content and interactions, not only an HTTP 200; check non-HTML endpoints' Content-Type separately.
 - Add a persistent browser test only for a site-owned regression that needs real DOM layout, CSS, or browser interaction. Name it `*.browser.test.ts` beside the owning feature; keep it out of the Node project.
 
@@ -20,7 +20,7 @@ description: Guides test selection and browser verification for ryoppippi.com. U
 
 - Do not keep an empty browser project or unused direct Playwright dependency. Introduce the runner with the first meaningful regression test.
 - Add `@vitest/browser-playwright` and its required Playwright driver through `pnpm-workspace.yaml`'s catalogue; keep package entries as `catalog:`. Match the provider to the installed Vitest version and consult installed package documentation first, then https://vitest.dev/guide/browser/ if needed.
-- Configure a separate headless Chromium browser project in `vite.config.ts`; include it in the normal test command and exclude `*.browser.test.ts` from Node collection. Use the `vitest-testing` skill for test structure.
+- Configure a separate headless Chromium browser project in `vite.config.ts`; include it in the normal test command and exclude `*.browser.test.ts` from Node collection. Use the `vitest` skill for test structure.
 - Neither Nix shell provisions Playwright browsers while there are no browser tests. With the first browser test, add local browser provisioning through `pkgs.playwright-driver.browsers` and `PLAYWRIGHT_BROWSERS_PATH`. These supply executables, not an importable JS package; match the driver's expected browser revision to the pinned Nix input. Do not download replacement browsers into the local Nix environment.
 - Provision compatible Linux browsers and system libraries for the separate CI shell in the same change. Consult the driver's installed CLI help and https://playwright.dev/docs/ci rather than assuming the default dev shell covers CI.
 - Run the new browser test, the full suite and a production build. When the final browser test is removed, remove its project, direct dependencies, Nix browser provisioning/environment variables and CI browser-install step together.
