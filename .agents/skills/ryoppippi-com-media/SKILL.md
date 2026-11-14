@@ -43,7 +43,7 @@ Media records use this shape:
 }
 ```
 
-Use `"kind": "video"` for YouTube videos. Mark the playlist record with `"playlist": true`; it is rendered as the YouTube link above the chronological list and must not be treated as a dated appearance. Do not add low-view playlist entries when the user asks for only high-view videos.
+Use `"kind": "video"` for YouTube videos. Mark the playlist record with `"playlist": true`; it is rendered as the YouTube link above the chronological list and must not be treated as a dated appearance.
 
 Before finishing, check for duplicate canonical URLs, invalid dates, missing titles, and media records accidentally added to Blog. Keep the direct link and source title stable unless the canonical source has changed.
 
