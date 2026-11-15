@@ -1,5 +1,5 @@
 name: Setup Nix
-description: Install Nix and load the CI development environment
+description: Install Nix with the Hestia binary cache and load the CI development environment
 inputs:
   frozen-lockfile:
     description: Fail instead of updating pnpm-lock.yaml when it is out of date
@@ -8,11 +8,26 @@ runs:
   using: composite
   steps:
     - name: Install Nix
-      uses: nixbuild/nix-quick-install-action@9f63be77f412a248c9d9a65a4c82cf066cdf8f0c # v35
+      uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # v1.0.0
       with:
-        github_access_token: ${{ github.token }}
-        nix_conf: |
+        installer-version: 2.35.4
+        extra-conf: |
           max-jobs = auto
+
+    - name: Configure GitHub authentication for Nix
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        nix_conf_dir="${XDG_CONFIG_HOME:-$HOME/.config}/nix"
+        mkdir -p "$nix_conf_dir"
+        umask 077
+        printf 'access-tokens = github.com=%s\n' "$GH_TOKEN" >> "$nix_conf_dir/nix.conf"
+
+    - name: Start Hestia binary cache
+      uses: Mic92/hestia@dfed9ced335d28978ba74e513939a10db1f71025 # v3.1.0
+      with:
+        version: v3.1.0
 
     - name: Load CI tools and install JavaScript dependencies
       shell: bash
