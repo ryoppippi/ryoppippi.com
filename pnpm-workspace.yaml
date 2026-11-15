@@ -82,3 +82,26 @@ trustPolicyExclude:
   # use GitHub OIDC, so the check reads them as a downgrade. puppeteer-core pins
   # this exact build.
   - chromium-bidi@157.0.8090-0
+permissions:
+  '@tanstack/charts':
+    skills:
+      [
+        build-chart-interactions,
+        compose-marks-and-views,
+        configure-scales-guides-color,
+        coordinate-charts-with-tanstack,
+        debug-and-verify-charts,
+        design-a-chart,
+        design-responsive-charts,
+        extend-tanstack-charts,
+        migrate-to-tanstack-charts,
+        prepare-chart-data,
+        ship-accessible-charts,
+        update-and-animate-charts,
+      ]
+  fs-fixture:
+    skills: true
+skills:
+  dirs:
+    - .agents/skills
+    - .claude/skills
