@@ -84,7 +84,21 @@ trustPolicyExclude:
   - chromium-bidi@157.0.8090-0
 permissions:
   '@tanstack/charts':
-    skills: [build-chart-interactions, compose-marks-and-views, configure-scales-guides-color, coordinate-charts-with-tanstack, debug-and-verify-charts, design-a-chart, design-responsive-charts, extend-tanstack-charts, migrate-to-tanstack-charts, prepare-chart-data, ship-accessible-charts, update-and-animate-charts]
+    skills:
+      [
+        build-chart-interactions,
+        compose-marks-and-views,
+        configure-scales-guides-color,
+        coordinate-charts-with-tanstack,
+        debug-and-verify-charts,
+        design-a-chart,
+        design-responsive-charts,
+        extend-tanstack-charts,
+        migrate-to-tanstack-charts,
+        prepare-chart-data,
+        ship-accessible-charts,
+        update-and-animate-charts,
+      ]
   fs-fixture:
     skills: true
 skills:
