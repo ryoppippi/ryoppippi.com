@@ -11,8 +11,6 @@ runs:
       uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # v1.0.0
       with:
         installer-version: 2.35.4
-        extra-conf: |
-          max-jobs = auto
 
     - name: Configure GitHub authentication for Nix
       shell: bash
