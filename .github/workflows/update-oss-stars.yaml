@@ -26,6 +26,9 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
+      - name: Setup pnpm
+        uses: ./.github/actions/setup-pnpm
+
       - name: Update repository metadata snapshot
         run: ./.github/update-oss-stars.nu
         env:

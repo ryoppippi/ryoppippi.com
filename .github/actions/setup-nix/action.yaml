@@ -1,9 +1,5 @@
 name: Setup Nix
 description: Install Nix with the Hestia binary cache and load the CI development environment
-inputs:
-  frozen-lockfile:
-    description: Fail instead of updating pnpm-lock.yaml when it is out of date
-    default: 'true'
 runs:
   using: composite
   steps:
@@ -29,17 +25,9 @@ runs:
       with:
         version: v3.1.0
 
-    - name: Load CI tools and install JavaScript dependencies
+    - name: Load CI tools
       shell: bash
-      env:
-        FROZEN_LOCKFILE: ${{ inputs.frozen-lockfile }}
       run: |
-        if [ "$FROZEN_LOCKFILE" = true ]; then
-          lockfile_flag=--frozen-lockfile
-        else
-          lockfile_flag=--no-frozen-lockfile
-        fi
         nix develop .#ci --command bash -euo pipefail -c '
-          pnpm install "$1"
           printf "%s\\n" "$PATH" | tr ":" "\\n" >> "$GITHUB_PATH"
-        ' bash "$lockfile_flag"
+        '

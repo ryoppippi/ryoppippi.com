@@ -1,0 +1,35 @@
+name: Setup pnpm
+description: Cache the pnpm store and install JavaScript dependencies using the available pnpm
+inputs:
+  frozen-lockfile:
+    description: Fail instead of updating pnpm-lock.yaml when it is out of date
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - name: Get pnpm store directory
+      id: pnpm-store
+      shell: bash
+      run: |
+        pnpm_store_path="$(pnpm store path --silent)"
+        printf 'path=%s\n' "$pnpm_store_path" >> "$GITHUB_OUTPUT"
+
+    - name: Cache pnpm store
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: ${{ runner.os }}-${{ runner.arch }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ runner.arch }}-pnpm-store-
+
+    - name: Install JavaScript dependencies
+      shell: bash
+      env:
+        FROZEN_LOCKFILE: ${{ inputs.frozen-lockfile }}
+      run: |
+        if [ "$FROZEN_LOCKFILE" = true ]; then
+          lockfile_flag=--frozen-lockfile
+        else
+          lockfile_flag=--no-frozen-lockfile
+        fi
+        pnpm install "$lockfile_flag"

@@ -21,8 +21,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
-      - name: Setup Nix and refresh the lockfile
+      - name: Setup Nix
         uses: ./.github/actions/setup-nix
+
+      - name: Setup pnpm and refresh the lockfile
+        uses: ./.github/actions/setup-pnpm
         with:
           frozen-lockfile: 'false'
 

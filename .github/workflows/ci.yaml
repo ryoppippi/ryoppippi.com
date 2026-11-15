@@ -20,6 +20,9 @@ jobs:
       - name: Setup Nix
         uses: ./.github/actions/setup-nix
 
+      - name: Setup pnpm
+        uses: ./.github/actions/setup-pnpm
+
       - parallel:
           - name: Run Gitleaks
             run: gitleaks detect --source . --config .gitleaks.toml
