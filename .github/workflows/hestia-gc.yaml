@@ -6,42 +6,17 @@ on:
   workflow_dispatch:
     inputs:
       dry-run:
-        description: Plan only; do not repack, touch, or delete anything.
+        description: Plan without changing or deleting cached data
         type: boolean
-        default: false
+        default: true
 
 permissions: {}
 
-# A second GC's repack reads race the first one's pack deletes.
-concurrency:
-  group: hestia-gc
-  cancel-in-progress: false
-
 jobs:
   gc:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-slim
-    timeout-minutes: 15
     permissions:
-      # Cache deletes go through the REST API.
       actions: write
       contents: read
-    steps:
-      - name: Install Nix
-        uses: NixOS/nix-installer-action@62c1943b776c509394b550f3f983adc14e9212d6 # v1.0.0
-        with:
-          installer-version: 2.35.4
-      - uses: Mic92/hestia@dfed9ced335d28978ba74e513939a10db1f71025 # v3.1.0
-        with:
-          version: v3.1.0
-          read-only: true
-      - name: Collect garbage
-        env:
-          DRY_RUN: ${{ inputs.dry-run }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          if [ "$DRY_RUN" = true ]; then
-            "$HESTIA_BIN" gc --dry-run
-          else
-            "$HESTIA_BIN" gc
-          fi
+    uses: x-ryoppippi/setup-nix/.github/workflows/gc.yaml@7f7ff26554cbbf09c1ce4f3369ca8fd2120a42d1
+    with:
+      dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
