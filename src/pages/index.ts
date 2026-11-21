@@ -4,11 +4,21 @@ import { definePage } from '@/components/SiteLayout/page.ts';
 import { SITE_OWNER } from '@/config/site-owner.ts';
 import * as ufo from 'ufo';
 import Home from './Home.svelte';
+import { createSiteIndexMarkdown } from '@/pages/llms.txt/index.ts';
+import { loadOssProjects } from '@/pages/works/oss/data.ts';
 import type { PageRoutes } from '@/utils/ssg/route.ts';
 
 /** Home endpoint shared by dev and SSG. */
-export const routes = (() => [
+export const routes = (({ posts }) => [
 	{ path: '/', render: ({ assets }) => createHomePageFile(assets) },
+	{
+		path: '/index.md',
+		render: async ({ root }) => ({
+			outputPath: 'index.md',
+			body: createSiteIndexMarkdown({ posts, projects: await loadOssProjects(root) }),
+			contentType: 'text/markdown; charset=utf-8',
+		}),
+	},
 ]) satisfies PageRoutes;
 
 const SITE_OWNER_SOURCE_PATH = 'src/config/site-owner.ts';
@@ -32,27 +42,30 @@ function homeStructuredData() {
 				'@type': 'ProfilePage',
 				'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'profile'),
 				url: SITE_OWNER.url,
+				name: `${SITE_OWNER.name} (${SITE_OWNER.handle})`,
+				description: HOME_DESCRIPTION,
 				isPartOf: {
 					'@id': ufo.withFragment(ufo.withTrailingSlash(SITE_ORIGIN), 'website'),
 				},
-				mainEntity: { '@id': SITE_OWNER.id },
-			},
-			{
-				'@type': 'Person',
-				'@id': SITE_OWNER.id,
-				name: SITE_OWNER.name,
-				alternateName: [
-					SITE_OWNER.japaneseName,
-					SITE_OWNER.formerName,
-					SITE_OWNER.formerJapaneseName,
-					SITE_OWNER.handle,
-					'ryoppippi',
-					SITE_OWNER.handleReading,
-					SITE_OWNER.handleReadingKatakana,
-				],
-				url: SITE_OWNER.url,
-				image: SITE_SOCIAL_IMAGE_URL,
-				sameAs: [...SITE_OWNER.sameAs],
+				mainEntity: {
+					'@type': 'Person',
+					'@id': SITE_OWNER.id,
+					name: SITE_OWNER.name,
+					alternateName: [
+						SITE_OWNER.japaneseName,
+						SITE_OWNER.formerName,
+						SITE_OWNER.formerJapaneseName,
+						SITE_OWNER.handle,
+						'ryoppippi',
+						SITE_OWNER.handleReading,
+						SITE_OWNER.handleReadingKatakana,
+					],
+					url: SITE_OWNER.url,
+					image: SITE_SOCIAL_IMAGE_URL,
+					jobTitle: SITE_OWNER.jobTitle,
+					worksFor: { '@type': 'Organization', ...SITE_OWNER.worksFor },
+					sameAs: [...SITE_OWNER.sameAs],
+				},
 			},
 		],
 	};
@@ -97,17 +110,19 @@ if (import.meta.vitest != null) {
 			'@graph': expect.arrayContaining([
 				expect.objectContaining({
 					'@type': 'ProfilePage',
-					mainEntity: { '@id': SITE_OWNER.id },
-				}),
-				expect.objectContaining({
-					'@type': 'Person',
-					'@id': SITE_OWNER.id,
-					name: SITE_OWNER.name,
-					alternateName: expect.arrayContaining([
-						SITE_OWNER.handleReading,
-						SITE_OWNER.handleReadingKatakana,
-					]),
-					sameAs: SITE_OWNER.sameAs,
+					name: expect.any(String),
+					description: expect.any(String),
+					mainEntity: expect.objectContaining({
+						'@type': 'Person',
+						'@id': SITE_OWNER.id,
+						name: SITE_OWNER.name,
+						alternateName: expect.arrayContaining([
+							SITE_OWNER.handleReading,
+							SITE_OWNER.handleReadingKatakana,
+						]),
+						jobTitle: SITE_OWNER.jobTitle,
+						sameAs: SITE_OWNER.sameAs,
+					}),
 				}),
 			]),
 		});
